@@ -1,6 +1,5 @@
 import { generateText } from "ai";
 
-export const runtime = "nodejs";
 
 export async function GET() {
   try {
