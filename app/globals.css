@@ -1,26 +1,26 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+:root { --background: #0b1220; --foreground: #edf0f8; color-scheme: dark; }
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Arial, "Noto Sans JP", sans-serif;
+  --font-mono: "Courier New", monospace;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body { background: radial-gradient(ellipse at 45% 0%, #18223b 0%, #0b1220 60%); color: var(--foreground); font-family: Arial, "Noto Sans JP", sans-serif; }
+@layer components {
+  .panel { @apply min-w-0 rounded-2xl border border-slate-700/60 bg-[#172235]/80 p-6; }
+  .label { @apply mb-3 block text-sm font-medium text-slate-300; }
+  .eyebrow { @apply text-xs font-semibold tracking-[0.18em] text-indigo-300; }
+  .badge { @apply rounded border border-slate-500/40 px-2 py-0.5 text-xs text-slate-400; }
+  input, select { @apply w-full min-w-0 rounded-lg border border-slate-600 bg-[#0f192a] px-4 py-3 text-base text-slate-100; }
+  .primary { @apply inline-flex items-center justify-center gap-3 rounded-xl bg-indigo-400 px-6 py-4 font-semibold text-slate-950 transition-colors hover:bg-indigo-300; }
+  .secondary { @apply inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 px-4 py-2.5 text-sm text-slate-300 transition-colors hover:border-indigo-300 hover:text-white; }
+  .icon-button { @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-700 hover:text-white; }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+button, a, input, select { outline-offset: 4px; }
+:focus-visible { outline: 2px solid #a5b4fc; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .35; }
+.intervention-dialog { margin: auto; width: min(850px, calc(100% - 32px)); max-height: 90vh; border: 1px solid #818cf8; border-radius: 24px; background: #172235; color: #edf0f8; box-shadow: 0 0 100px #6366f125; }
+.intervention-dialog::backdrop { background: #060d1dd9; backdrop-filter: blur(8px); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
