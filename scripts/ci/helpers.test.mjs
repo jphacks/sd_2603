@@ -5,6 +5,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
+import { previewHost } from './preview-host.mjs';
+import { assignPreview } from './assign-preview.mjs';
 
 const prepare = fileURLToPath(new URL('./prepare-vercel-env.mjs', import.meta.url));
 const report = fileURLToPath(new URL('./report-deployment.mjs', import.meta.url));
@@ -45,11 +47,13 @@ test('deployment URLs are reported for nested and flat CLI responses', t => {
   ]) {
     writeFileSync(file, JSON.stringify(result));
     execFileSync(process.execPath, [report, file], {
-      env: { ...process.env, GITHUB_STEP_SUMMARY: summary },
+      env: { ...process.env, GITHUB_STEP_SUMMARY: summary, GITHUB_OUTPUT: join(dir, 'outputs') },
     });
   }
   assert.match(readFileSync(summary, 'utf8'), /https:\/\/demo-preview\.vercel\.app/);
   assert.match(readFileSync(summary, 'utf8'), /https:\/\/demo\.vercel\.app/);
+  assert.match(readFileSync(join(dir, 'outputs'), 'utf8'), /^deployment_url=https:\/\/demo-preview\.vercel\.app\/$/m);
+  assert.doesNotMatch(readFileSync(join(dir, 'outputs'), 'utf8'), /deployment_url=https:\/\/demo\.vercel\.app/);
 });
 
 test('missing or unexpected deployment URLs fail instead of reporting success', t => {
@@ -59,5 +63,54 @@ test('missing or unexpected deployment URLs fail instead of reporting success', 
     writeFileSync(file, JSON.stringify(result));
     const run = spawnSync(process.execPath, [report, file]);
     assert.notEqual(run.status, 0);
+  }
+});
+
+test('branch URLs are stable, distinct and valid DNS labels', () => {
+  const branches = ['staging', 'feature/focus-ui', 'feature/a/b', 'feature/a-b', 'feature/A-B', `feature/${'very-long-name-'.repeat(20)}`, 'feature/日本語'];
+  const hosts = branches.map(branch => previewHost('jphacks/sd_2603', branch));
+  assert.equal(new Set(hosts).size, hosts.length);
+  for (const [i, host] of hosts.entries()) {
+    assert.equal(host, previewHost('jphacks/sd_2603', branches[i]));
+    const label = host.split('.')[0];
+    assert.ok(label.length <= 63);
+    assert.match(label, /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/);
+  }
+  assert.notEqual(previewHost('other/repository', 'feature/focus-ui'), hosts[1]);
+});
+
+test('Production and PR refs cannot get a branch Preview alias', () => {
+  for (const branch of ['main', 'refs/pull/1/merge', 'bugfix/example', '']) {
+    assert.throws(() => previewHost('jphacks/sd_2603', branch));
+  }
+  assert.throws(() => previewHost('', 'staging'));
+});
+
+test('Preview alias assignment targets the team API and exact branch host', async () => {
+  const input = { repository: 'jphacks/sd_2603', branch: 'feature/focus-ui', deploymentUrl: 'https://demo-deployment.vercel.app/', teamId: 'team_fixture', token: 'fixture-token' };
+  const expected = previewHost(input.repository, input.branch);
+  const url = await assignPreview({ ...input, request: async (endpoint, options) => {
+    assert.equal(endpoint.origin, 'https://api.vercel.com');
+    assert.equal(endpoint.pathname, '/v2/deployments/demo-deployment.vercel.app/aliases');
+    assert.equal(endpoint.searchParams.get('teamId'), 'team_fixture');
+    assert.equal(options.headers.Authorization, 'Bearer fixture-token');
+    assert.deepEqual(JSON.parse(options.body), { alias: expected });
+    return Response.json({ alias: expected });
+  } });
+  assert.equal(url, `https://${expected}`);
+});
+
+test('alias errors do not expose credentials or report success', async () => {
+  const input = { repository: 'jphacks/sd_2603', branch: 'staging', deploymentUrl: 'https://demo.vercel.app', teamId: 'team_fixture', token: 'fixture-token' };
+  await assert.rejects(assignPreview({ ...input, request: async () => Response.json({ secret: 'fixture-token' }, { status: 403 }) }), /^Error: Preview alias assignment failed \(HTTP 403\)$/);
+  await assert.rejects(assignPreview({ ...input, request: async () => Response.json({ alias: 'other.vercel.app' }) }), /unexpected Preview alias/);
+});
+
+test('invalid alias targets and missing credentials never make network calls', async () => {
+  const input = { repository: 'jphacks/sd_2603', branch: 'staging', deploymentUrl: 'https://demo.vercel.app', teamId: 'team_fixture', token: 'fixture-token' };
+  for (const invalid of [{ branch: 'main' }, { deploymentUrl: 'https://example.com' }, { teamId: '' }, { token: '' }]) {
+    let calls = 0;
+    await assert.rejects(assignPreview({ ...input, ...invalid, request: async () => { calls++; return Response.json({}); } }));
+    assert.equal(calls, 0);
   }
 });

@@ -20,7 +20,7 @@ env:
   AI_PROVIDER: mock
   ALLOW_PAID_AI: 'false'
   # PRs and manual runs always validate without deployment credentials.
-  DEPLOY_TARGET: ${{ github.event_name == 'push' && github.ref == 'refs/heads/staging' && vars.ENABLE_PREVIEW_DEPLOYMENT == 'true' && 'preview' || github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ENABLE_PRODUCTION_DEPLOYMENT == 'true' && 'production' || '' }}
+  DEPLOY_TARGET: ${{ github.event_name == 'push' && ((github.ref == 'refs/heads/staging' && vars.ENABLE_PREVIEW_DEPLOYMENT == 'true') || (startsWith(github.ref, 'refs/heads/feature/') && vars.ENABLE_FEATURE_PREVIEW_DEPLOYMENT == 'true')) && 'preview' || github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ENABLE_PRODUCTION_DEPLOYMENT == 'true' && 'production' || '' }}
 
 jobs:
   check-and-deploy:
@@ -77,7 +77,11 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          vercel pull --yes --environment="$DEPLOY_TARGET" --token="$VERCEL_TOKEN"
+          pull_args=()
+          if [ "$DEPLOY_TARGET" = preview ]; then
+            pull_args+=(--git-branch="$GITHUB_REF_NAME")
+          fi
+          vercel pull --yes --environment="$DEPLOY_TARGET" "${pull_args[@]}" --token="$VERCEL_TOKEN"
           node scripts/ci/prepare-vercel-env.mjs "$DEPLOY_TARGET"
           build_args=()
           if [ "$DEPLOY_TARGET" = production ]; then
@@ -89,6 +93,7 @@ jobs:
         run: node scripts/ci/smoke-test.mjs
 
       - name: Deploy the tested artifact
+        id: deployment
         if: env.DEPLOY_TARGET != ''
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -103,6 +108,14 @@ jobs:
             --env AI_PROVIDER=mock --env ALLOW_PAID_AI=false \
             --token="$VERCEL_TOKEN" > "$RUNNER_TEMP/vercel-deployment.json"
           node scripts/ci/report-deployment.mjs "$RUNNER_TEMP/vercel-deployment.json"
+
+      - name: Update branch Preview URL
+        if: env.DEPLOY_TARGET == 'preview'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          DEPLOYMENT_URL: ${{ steps.deployment.outputs.deployment_url }}
+        run: node scripts/ci/assign-preview.mjs
 
       - name: Report CI-only result
         if: env.DEPLOY_TARGET == ''
