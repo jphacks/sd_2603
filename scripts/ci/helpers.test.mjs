@@ -47,7 +47,7 @@ test('deployment URLs are reported for nested and flat CLI responses', t => {
   ]) {
     writeFileSync(file, JSON.stringify(result));
     execFileSync(process.execPath, [report, file], {
-      env: { ...process.env, GITHUB_STEP_SUMMARY: summary, GITHUB_OUTPUT: join(dir, 'outputs') },
+      env: { ...process.env, DEPLOY_TARGET: result.deployment?.productionUrl ? 'production' : 'preview', GITHUB_STEP_SUMMARY: summary, GITHUB_OUTPUT: join(dir, 'outputs') },
     });
   }
   assert.match(readFileSync(summary, 'utf8'), /https:\/\/demo-preview\.vercel\.app/);
