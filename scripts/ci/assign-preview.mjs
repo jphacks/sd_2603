@@ -35,6 +35,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   });
   console.log(`Branch Preview: ${url}`);
   if (process.env.GITHUB_STEP_SUMMARY) {
-    await appendFile(process.env.GITHUB_STEP_SUMMARY, `\n### Branch Preview\n${url}\n`);
+    await appendFile(process.env.GITHUB_STEP_SUMMARY, `\n## ブランチ別Preview\n\n### [このブランチの最新版を開く](${url})\n\n固定URL：${url}\n`);
   }
 }
