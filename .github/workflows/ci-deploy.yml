@@ -54,7 +54,6 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          VERCEL_TEAM_SLUG: ${{ vars.VERCEL_TEAM_SLUG }}
         run: |
           for variable in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
             if [ -z "${!variable}" ]; then
@@ -62,10 +61,6 @@ jobs:
               exit 1
             fi
           done
-          if [ "$DEPLOY_TARGET" = preview ] && [ -z "$VERCEL_TEAM_SLUG" ]; then
-            echo '::error::VERCEL_TEAM_SLUG variable is missing. See docs/DEPLOYMENT_CI.md.'
-            exit 1
-          fi
 
       - name: Build and check TypeScript (CI only)
         if: env.DEPLOY_TARGET == ''
@@ -118,15 +113,9 @@ jobs:
         if: env.DEPLOY_TARGET == 'preview'
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_TEAM_SLUG: ${{ vars.VERCEL_TEAM_SLUG }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           DEPLOYMENT_URL: ${{ steps.deployment.outputs.deployment_url }}
-        run: |
-          preview_host=$(node scripts/ci/preview-host.mjs)
-          vercel alias set "$DEPLOYMENT_URL" "$preview_host" \
-            --scope="$VERCEL_TEAM_SLUG" --token="$VERCEL_TOKEN"
-          echo "Branch Preview: https://$preview_host"
-          echo "### Branch Preview" >> "$GITHUB_STEP_SUMMARY"
-          echo "https://$preview_host" >> "$GITHUB_STEP_SUMMARY"
+        run: node scripts/ci/assign-preview.mjs
 
       - name: Report CI-only result
         if: env.DEPLOY_TARGET == ''

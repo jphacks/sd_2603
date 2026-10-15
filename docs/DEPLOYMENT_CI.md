@@ -24,7 +24,7 @@ Featureとstagingには別々の固定URLを割り当てます。同じブラン
 - 識別子はリポジトリ名と元のブランチ名から計算します。`feature/a/b`と`feature/a-b`、大文字・小文字、長い名前の切り詰めによる重複を避けます。
 - Vercelの自動生成URLも保持します。どちらもActions実行画面のSummaryに表示します。
 - Vercelの認証保護は維持します。ログインやCLIの`vercel curl`でアクセスしてください。
-- 固定URLの割り当てにはRepository variable `VERCEL_TEAM_SLUG=fu-10` を使います。チームIDではなくslugを指定してください。
+- 固定URLはVercel公式のAlias APIで割り当てます。既存のチームID・トークンを使い、追加のSecret・Variableは不要です。
 - 独自ドメイン・追加の料金プランは使いません。Pushごとにビルドするため、利用量は増えます。
 - ビルドやMock検証が失敗した場合、固定URLは前の成功版のままです。エイリアス更新で失敗した場合はActionsが失敗し、自動生成URLをログで確認できます。
 - ブランチ削除時のPreview・URL自動削除は今回の対象外です。
@@ -83,7 +83,7 @@ Featureとstagingには別々の固定URLを割り当てます。同じブラン
 
 ### 4-2. FeatureのPreviewを有効にする
 
-1. 上記Variables画面で `VERCEL_TEAM_SLUG` が `fu-10` であることを確認し、`ENABLE_FEATURE_PREVIEW_DEPLOYMENT` を `true` にします。どちらもCodexで設定できます。
+1. 上記Variables画面で `ENABLE_FEATURE_PREVIEW_DEPLOYMENT` を `true` にします。Codexで設定できます。
 2. Featureブランチにこのワークフローが含まれている必要があります。既存ブランチには、最新stagingを取り込んでからPushします。
 
 ```bash
@@ -156,7 +156,8 @@ timeout 30s vercel curl /api/judge --deployment "$PREVIEW_URL" -- \
 - `scripts/ci/helpers.test.mjs`：Mock設定の強制、秘密情報の非出力、デプロイ結果のURL検証をテスト。
 - `scripts/ci/smoke-test.mjs`：ビルド済みアプリを一時起動し、トップ画面、Judgeの3判定、有料AIテストの403を確認。
 - `scripts/ci/report-deployment.mjs`：デプロイ結果のURLをActions Summaryと後続ステップへ渡す。
-- `scripts/ci/preview-host.mjs`：ブランチ別Previewの固定ホスト名を計算。公開後にVercel CLIでエイリアスを割り当て。
+- `scripts/ci/preview-host.mjs`：ブランチ別Previewの固定ホスト名を計算。固定URLのホスト名を生成。
+- `scripts/ci/assign-preview.mjs`：チームIDを指定したVercel公式APIで固定URLを割り当て、成功時だけSummaryへ表示。
 - `app/api/test-ai/route.ts`：有料AIの実行ガード。UIは変更しません。
 
 GitHub公式ActionsはコミットSHA、Node.jsは24、Vercel CLIはローカルで利用実績がある63.1.2に固定しています。
@@ -174,6 +175,6 @@ GitHub公式ActionsはコミットSHA、Node.jsは24、Vercel CLIはローカル
 ## 参考
 
 - https://vercel.com/kb/guide/how-can-i-use-github-actions-with-vercel
-- https://vercel.com/docs/cli/alias
+- https://vercel.com/docs/rest-api/aliases/assign-an-alias
 - https://vercel.com/docs/git
 - https://docs.github.com/en/actions/reference/security/secure-use

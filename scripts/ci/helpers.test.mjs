@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import { previewHost } from './preview-host.mjs';
+import { assignPreview } from './assign-preview.mjs';
 
 const prepare = fileURLToPath(new URL('./prepare-vercel-env.mjs', import.meta.url));
 const report = fileURLToPath(new URL('./report-deployment.mjs', import.meta.url));
@@ -83,4 +84,33 @@ test('Production and PR refs cannot get a branch Preview alias', () => {
     assert.throws(() => previewHost('jphacks/sd_2603', branch));
   }
   assert.throws(() => previewHost('', 'staging'));
+});
+
+test('Preview alias assignment targets the team API and exact branch host', async () => {
+  const input = { repository: 'jphacks/sd_2603', branch: 'feature/focus-ui', deploymentUrl: 'https://demo-deployment.vercel.app/', teamId: 'team_fixture', token: 'fixture-token' };
+  const expected = previewHost(input.repository, input.branch);
+  const url = await assignPreview({ ...input, request: async (endpoint, options) => {
+    assert.equal(endpoint.origin, 'https://api.vercel.com');
+    assert.equal(endpoint.pathname, '/v2/deployments/demo-deployment.vercel.app/aliases');
+    assert.equal(endpoint.searchParams.get('teamId'), 'team_fixture');
+    assert.equal(options.headers.Authorization, 'Bearer fixture-token');
+    assert.deepEqual(JSON.parse(options.body), { alias: expected });
+    return Response.json({ alias: expected });
+  } });
+  assert.equal(url, `https://${expected}`);
+});
+
+test('alias errors do not expose credentials or report success', async () => {
+  const input = { repository: 'jphacks/sd_2603', branch: 'staging', deploymentUrl: 'https://demo.vercel.app', teamId: 'team_fixture', token: 'fixture-token' };
+  await assert.rejects(assignPreview({ ...input, request: async () => Response.json({ secret: 'fixture-token' }, { status: 403 }) }), /^Error: Preview alias assignment failed \(HTTP 403\)$/);
+  await assert.rejects(assignPreview({ ...input, request: async () => Response.json({ alias: 'other.vercel.app' }) }), /unexpected Preview alias/);
+});
+
+test('invalid alias targets and missing credentials never make network calls', async () => {
+  const input = { repository: 'jphacks/sd_2603', branch: 'staging', deploymentUrl: 'https://demo.vercel.app', teamId: 'team_fixture', token: 'fixture-token' };
+  for (const invalid of [{ branch: 'main' }, { deploymentUrl: 'https://example.com' }, { teamId: '' }, { token: '' }]) {
+    let calls = 0;
+    await assert.rejects(assignPreview({ ...input, ...invalid, request: async () => { calls++; return Response.json({}); } }));
+    assert.equal(calls, 0);
+  }
 });
