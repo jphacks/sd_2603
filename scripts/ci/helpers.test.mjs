@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
+import { previewHost } from './preview-host.mjs';
 
 const prepare = fileURLToPath(new URL('./prepare-vercel-env.mjs', import.meta.url));
 const report = fileURLToPath(new URL('./report-deployment.mjs', import.meta.url));
@@ -45,11 +46,13 @@ test('deployment URLs are reported for nested and flat CLI responses', t => {
   ]) {
     writeFileSync(file, JSON.stringify(result));
     execFileSync(process.execPath, [report, file], {
-      env: { ...process.env, GITHUB_STEP_SUMMARY: summary },
+      env: { ...process.env, GITHUB_STEP_SUMMARY: summary, GITHUB_OUTPUT: join(dir, 'outputs') },
     });
   }
   assert.match(readFileSync(summary, 'utf8'), /https:\/\/demo-preview\.vercel\.app/);
   assert.match(readFileSync(summary, 'utf8'), /https:\/\/demo\.vercel\.app/);
+  assert.match(readFileSync(join(dir, 'outputs'), 'utf8'), /^deployment_url=https:\/\/demo-preview\.vercel\.app\/$/m);
+  assert.doesNotMatch(readFileSync(join(dir, 'outputs'), 'utf8'), /deployment_url=https:\/\/demo\.vercel\.app/);
 });
 
 test('missing or unexpected deployment URLs fail instead of reporting success', t => {
@@ -60,4 +63,24 @@ test('missing or unexpected deployment URLs fail instead of reporting success', 
     const run = spawnSync(process.execPath, [report, file]);
     assert.notEqual(run.status, 0);
   }
+});
+
+test('branch URLs are stable, distinct and valid DNS labels', () => {
+  const branches = ['staging', 'feature/focus-ui', 'feature/a/b', 'feature/a-b', 'feature/A-B', `feature/${'very-long-name-'.repeat(20)}`, 'feature/日本語'];
+  const hosts = branches.map(branch => previewHost('jphacks/sd_2603', branch));
+  assert.equal(new Set(hosts).size, hosts.length);
+  for (const [i, host] of hosts.entries()) {
+    assert.equal(host, previewHost('jphacks/sd_2603', branches[i]));
+    const label = host.split('.')[0];
+    assert.ok(label.length <= 63);
+    assert.match(label, /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/);
+  }
+  assert.notEqual(previewHost('other/repository', 'feature/focus-ui'), hosts[1]);
+});
+
+test('Production and PR refs cannot get a branch Preview alias', () => {
+  for (const branch of ['main', 'refs/pull/1/merge', 'bugfix/example', '']) {
+    assert.throws(() => previewHost('jphacks/sd_2603', branch));
+  }
+  assert.throws(() => previewHost('', 'staging'));
 });
