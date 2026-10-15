@@ -2,6 +2,12 @@ import { generateText } from "ai";
 
 
 export async function GET() {
+  if (process.env.AI_PROVIDER !== "jev" || process.env.ALLOW_PAID_AI !== "true") {
+    return Response.json(
+      { success: false, error: "有料AIのテストは無効です" },
+      { status: 403 }
+    );
+  }
   try {
     const { text } = await generateText({
       model:
