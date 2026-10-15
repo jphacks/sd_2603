@@ -92,7 +92,7 @@ jobs:
       - name: Smoke test built app and Mock Judge
         run: node scripts/ci/smoke-test.mjs
 
-      - name: Deploy the tested artifact
+      - name: Deploy the tested artifact (links in Summary)
         id: deployment
         if: env.DEPLOY_TARGET != ''
         env:
@@ -109,7 +109,7 @@ jobs:
             --token="$VERCEL_TOKEN" > "$RUNNER_TEMP/vercel-deployment.json"
           node scripts/ci/report-deployment.mjs "$RUNNER_TEMP/vercel-deployment.json"
 
-      - name: Update branch Preview URL
+      - name: Update branch Preview URL (link in Summary)
         if: env.DEPLOY_TARGET == 'preview'
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
