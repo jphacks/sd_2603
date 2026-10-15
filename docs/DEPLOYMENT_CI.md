@@ -24,6 +24,7 @@ Featureとstagingには別々の固定URLを割り当てます。同じブラン
 - 識別子はリポジトリ名と元のブランチ名から計算します。`feature/a/b`と`feature/a-b`、大文字・小文字、長い名前の切り詰めによる重複を避けます。
 - Vercelの自動生成URLも保持します。どちらもActions実行画面のSummaryに表示します。
 - Vercelの認証保護は維持します。ログインやCLIの`vercel curl`でアクセスしてください。
+- 固定URLの割り当てにはRepository variable `VERCEL_TEAM_SLUG=fu-10` を使います。チームIDではなくslugを指定してください。
 - 独自ドメイン・追加の料金プランは使いません。Pushごとにビルドするため、利用量は増えます。
 - ビルドやMock検証が失敗した場合、固定URLは前の成功版のままです。エイリアス更新で失敗した場合はActionsが失敗し、自動生成URLをログで確認できます。
 - ブランチ削除時のPreview・URL自動削除は今回の対象外です。
@@ -82,7 +83,7 @@ Featureとstagingには別々の固定URLを割り当てます。同じブラン
 
 ### 4-2. FeatureのPreviewを有効にする
 
-1. 上記Variables画面で `ENABLE_FEATURE_PREVIEW_DEPLOYMENT` を `true` にします。
+1. 上記Variables画面で `VERCEL_TEAM_SLUG` が `fu-10` であることを確認し、`ENABLE_FEATURE_PREVIEW_DEPLOYMENT` を `true` にします。どちらもCodexで設定できます。
 2. Featureブランチにこのワークフローが含まれている必要があります。既存ブランチには、最新stagingを取り込んでからPushします。
 
 ```bash
@@ -106,6 +107,35 @@ git push -u origin feature/your-feature
 ```
 
 手動の **Run workflow** はCIのみです。Run workflowボタンは、このワークフローがデフォルトブランチ（main）へ入った後に利用できます。初回確認にはPushイベントを利用します。
+
+### 4-3. ブラウザとターミナルで確認する
+
+1. GitHubのActions一覧で、対象ブランチのPush実行が緑になったことを確認します。
+2. 実行画面のSummaryから **Branch Preview** のURLを開きます。Vercelログインを求められた場合は、アクセス権のあるアカウントでログインしてください。
+3. 同じブランチの次のPushでも、この固定URLを開けば最新の成功版を確認できます。キャッシュが疑わしい場合は再読み込みしてください。
+4. Vercel CLIを使う場合は、プロジェクトルートで以下を実行します。URLはSummaryの実際の値へ置き換えてください。
+
+```bash
+# 未ログインの場合のみ実行
+vercel login
+
+PREVIEW_URL="https://Summaryに表示された固定URL"
+timeout 30s vercel curl / --deployment "$PREVIEW_URL" -- \
+  --show-error --connect-timeout 10 --max-time 15 \
+  --output /dev/null --write-out '\nHTTP %{http_code}\n'
+```
+
+トップ画面の期待値はHTTP 200です。Focus UIではルートが設定画面へリダイレクトするため、`/setup`を指定して200を確認します。
+
+```bash
+timeout 30s vercel curl /api/judge --deployment "$PREVIEW_URL" -- \
+  --silent --show-error --connect-timeout 10 --max-time 15 \
+  --request POST --header 'Content-Type: application/json' \
+  --data '{"agenda":"確認","transcript":["a","b","c"],"secondsSinceLastIntervention":60}' \
+  --write-out '\nHTTP %{http_code}\n'
+```
+
+期待値は `INTERVENE` とHTTP 200です。Vercel CLIの起動表示だけで止まる場合は認証・通信の待機が考えられます。`timeout 20s vercel whoami`で認証を確認します。外側のタイムアウトの終了コードは124です。
 
 ### 5. Productionを有効にする
 
