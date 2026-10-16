@@ -171,7 +171,9 @@ timeout 30s vercel curl /api/judge --deployment "$PREVIEW_URL" -- \
 - `scripts/ci/assign-preview.mjs`：チームIDを指定したVercel公式APIで固定URLを割り当て、成功時だけSummaryへ表示。
 - `app/api/test-ai/route.ts`：有料AIの実行ガード。UIは変更しません。
 
-GitHub公式ActionsはコミットSHA、Node.jsは24、Vercel CLIはローカルで利用実績がある63.1.2に固定しています。
+GitHub公式ActionsはコミットSHA、開発・CIのNode.jsは `.nvmrc` の24.22.0（最新LTS確認日：2026-10-16）、Vercel CLIは63.1.2を使用します。ローカルではプロジェクトルートで `nvm install` → `nvm use` を実行してください。
+
+`package.json` の `engines.node` は `24.x` としてVercelのメジャーバージョンを揃えています。Vercel内のマイナー・パッチ版はプラットフォーム側の自動更新です。CIのログにNode.js・npmのバージョンを出力し、Vercel Buildのログでも利用バージョンを確認できます。
 
 ## トラブル時
 
