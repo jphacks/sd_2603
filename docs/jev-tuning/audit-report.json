@@ -1,0 +1,181 @@
+{
+  "type": "data_audit_not_model_evaluation",
+  "real_windows": 100,
+  "independent_series": 20,
+  "distinct_original_segments": 98,
+  "synthetic_train": 36,
+  "rubric_counts": {
+    "D": 32,
+    "S": 32,
+    "T": 32
+  },
+  "source_json_exact_range_checks": 100,
+  "official_lexical_utterances": 1932,
+  "official_punctuation_only_utterances": 4,
+  "official_membership_mismatches": 0,
+  "series_split_leaks": 0,
+  "exact_text_split_leaks": 0,
+  "synthetic_heldout_ancestor_count": 0,
+  "same_split_overlapping_windows": [
+    [
+      "ami-TS3008c_008",
+      "ami-TS3008c_008-u0-109"
+    ],
+    [
+      "ami-TS3010b_002",
+      "ami-TS3010b_002-u0-23"
+    ]
+  ],
+  "source_order_backward_start_cases": [
+    "ami-ES2003d_016",
+    "ami-ES2007d_015",
+    "ami-ES2012d_007",
+    "ami-ES2014a_002",
+    "ami-ES2014a_003",
+    "ami-ES2014a_007",
+    "ami-IS1002d_003",
+    "ami-IS1002d_008",
+    "ami-IS1005a_013",
+    "ami-IS1006d_003",
+    "ami-IS1006d_006",
+    "ami-IS1006d_010",
+    "ami-IS1007d_019",
+    "ami-TS3005d_017-u0-28",
+    "ami-TS3005d_024",
+    "ami-TS3007a_009",
+    "ami-TS3007a_013",
+    "ami-TS3008c_004",
+    "ami-TS3008c_008",
+    "ami-TS3008c_008-u0-109",
+    "ami-TS3009b_004",
+    "ami-TS3009d_021-u0-35",
+    "ami-TS3012c_005"
+  ],
+  "timestamp_gap_over_120s_case_ids": [
+    "ami-TS3012c_005"
+  ],
+  "subsets": {
+    "real_all": {
+      "n": 100,
+      "label_counts": {
+        "OK": 95,
+        "INTERVENE_STALLED": 4,
+        "INTERVENE_DRIFT": 1
+      },
+      "uncertain": 20,
+      "majority_baseline_label_rate": 0.95,
+      "missing_classes": []
+    },
+    "real_train": {
+      "n": 60,
+      "label_counts": {
+        "OK": 58,
+        "INTERVENE_DRIFT": 1,
+        "INTERVENE_STALLED": 1
+      },
+      "uncertain": 11,
+      "majority_baseline_label_rate": 0.9666666666666667,
+      "missing_classes": []
+    },
+    "real_validation": {
+      "n": 20,
+      "label_counts": {
+        "OK": 18,
+        "INTERVENE_STALLED": 2
+      },
+      "uncertain": 3,
+      "majority_baseline_label_rate": 0.9,
+      "missing_classes": [
+        "INTERVENE_DRIFT"
+      ]
+    },
+    "real_test": {
+      "n": 20,
+      "label_counts": {
+        "OK": 19,
+        "INTERVENE_STALLED": 1
+      },
+      "uncertain": 6,
+      "majority_baseline_label_rate": 0.95,
+      "missing_classes": [
+        "INTERVENE_DRIFT"
+      ]
+    },
+    "real_broad": {
+      "n": 90,
+      "label_counts": {
+        "OK": 90
+      },
+      "uncertain": 11,
+      "majority_baseline_label_rate": 1.0,
+      "missing_classes": [
+        "INTERVENE_DRIFT",
+        "INTERVENE_STALLED"
+      ]
+    },
+    "real_targeted": {
+      "n": 10,
+      "label_counts": {
+        "OK": 5,
+        "INTERVENE_STALLED": 4,
+        "INTERVENE_DRIFT": 1
+      },
+      "uncertain": 9,
+      "majority_baseline_label_rate": 0.5,
+      "missing_classes": []
+    },
+    "synthetic_train": {
+      "n": 36,
+      "label_counts": {
+        "INTERVENE_STALLED": 12,
+        "INTERVENE_DRIFT": 12,
+        "OK": 12
+      },
+      "uncertain": 1,
+      "majority_baseline_label_rate": 0.3333333333333333,
+      "missing_classes": []
+    }
+  },
+  "second_pass_independent_cases": 46,
+  "total_re_reviewed_cases": 57,
+  "review_disagreement_ids": [
+    "ami-ES2007d_000",
+    "ami-TS3008c_008-u0-109",
+    "ami-TS3009d_021-u0-35",
+    "ami-TS3011c_000"
+  ],
+  "data_file_sha256": {
+    "data/adjudication.jsonl": "ab0c05f26f919de9dcc42fdb3d6e20a46c59502bab32e4acd860dcf3d1cd5981",
+    "data/blind-boundary.jsonl": "01b199c404352ca979a8e97f3781dd1124ac046f51d9d6b1a4e74fe0fac786c8",
+    "data/blind-challenge.jsonl": "e7deeec7dc075bebf1b1cbbea363b5863bb6903161a9bcc26a8a26f77d820f4f",
+    "data/blind-heldout.jsonl": "3b807e0dba3a6bdfa1197a0f64a0f6185dc9451e324a0f23058d277da4b32d4a",
+    "data/blind-synthetic.jsonl": "b8b469785aac8509b1f11779069a9469aa0a9df4d03c18a4200fabdfac80ad20",
+    "data/blind-train.jsonl": "d45f4a7358adb49dce06310cdc989ca1f201d93b76586e58893ab9a739fe2bbe",
+    "data/final/blind-real-test.jsonl": "a5259de9219c8067aa292b7efd5b7435c106313ee3f2df86c7b62522b6e29b11",
+    "data/final/blind-real-train.jsonl": "2469ee09d4c0afbbec5ddf358bea80b6dfdd6fadb4df0cb901df6432c93a7ee8",
+    "data/final/blind-real-validation.jsonl": "e7077ae470aa4c62c6b2a46455b3b19c423bddafca3a8ec40d03df9479d9bc59",
+    "data/final/real-test.jsonl": "d2ba6985915f02a08a72f0e43cbaca9fb8ce58c6cbde63d6774fee92227230e6",
+    "data/final/real-train.jsonl": "2be14c6789f1ce3d0a3665c7e0678e18b3df2b7c693bb83135189151ea58eab2",
+    "data/final/real-validation.jsonl": "7857ac67b122a00925dc4e849848291c1e0d2f83333b907f2a6e3b19646e9fde",
+    "data/final/synthetic-train.jsonl": "ae458168d71612a24de840ba926fbf01bfd7389a31b3ff78e7bc51d9cf9866da",
+    "data/generation-intent.jsonl": "9dd4d401ac7a9c4a8b8d8bb7d0348383208b9d04bd0c3681a4420db3a7594452",
+    "data/labels-challenge.jsonl": "d202a9f8ac5b86f566b1bc27003fd314bed15be3addf2bd2c0e6b908481ce8c7",
+    "data/labels-final.jsonl": "8fa896ad475f904df2400e969f516faa7d3518eda37ea0f60cc1c9f53fdf0853",
+    "data/labels-heldout.jsonl": "2714932b29993af77372bc40483d228293a94eaee38a8a0413ac42ac973008f1",
+    "data/labels-synthetic.jsonl": "4ca60a8f041d4e5e6c2ac43f79bd566c73296cb533502dee1a945b4447a04ee0",
+    "data/labels-train.jsonl": "aa987c3c9ab49a2e9f14c30833d0e27dcf46be1c3bf7fdb3304451394d75fa36",
+    "data/real-cases.jsonl": "af589864fcbdcf8837f1be814c75bc7427c3779aaa0f12dfde1be0ee42a7a7fc",
+    "data/review-boundary.jsonl": "3b5f0a5fe89c157c99a784de9ff4ac059c08c4c8dfc3d6ed15559eaf8c4b5603",
+    "data/review-independent.jsonl": "d14ad0d8848e6ed4c2cae123b743a79f37660f3c1c1da43ea8e96ad8607b238b",
+    "data/review-temporal.jsonl": "c56b6ed80f1b96f8eaad435a11f6bee916d5a92000c277ee9bbb7a9f3a355030",
+    "data/synthetic-train.jsonl": "401844ca37d635af6a6bd7e457e5785f34e6b457ef45d3598e7206e4bec0b970"
+  },
+  "limitations": [
+    "Labels are provisional LLM judgments; no human adjudication or Jev accuracy measured.",
+    "Targeted windows were selected after initial OK-only labels; this is dataset construction, not a pristine confirmatory benchmark. Freeze now before model selection.",
+    "Shared speakers across different AMI series were not audited; split guarantees series separation only.",
+    "100 windows are clustered into 20 series and include two same-split overlapping pairs; do not claim 100 independent meetings.",
+    "English recorded role-play and Japanese synthetic conversations do not establish Japanese live meeting performance.",
+    "Source utterance order retained even where start times go backwards; no silence inference from metadata gaps."
+  ]
+}

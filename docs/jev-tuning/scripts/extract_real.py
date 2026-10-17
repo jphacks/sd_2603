@@ -47,7 +47,7 @@ def main():
                 rt=set(tokens(' '.join(t for _,t in ref))); ts=tokens(u['text']);cov=sum(t in rt for t in ts)/len(ts) if ts else None
                 matches.append({'case_id':cid,'utterance_index':i,'official_word_file':f'words/{mid}.{u["speaker"]}.words.xml','window_start':u['start']-1.1,'window_end':u['end']+1.1,'token_membership_coverage':round(cov,4) if cov is not None else None,'note':'punctuation-only utterance' if cov is None else 'lexical membership only; not full alignment'})
     cases.sort(key=lambda c:c['id']);dump(ROOT/'data/real-cases.jsonl',cases)
-    dump(ROOT/'sources/word-checks.jsonl',matches)
+    dump(ROOT/'sources/word-checks-baseline.jsonl',matches)
     manifest={'ami_me_url':URL,'ami_me_sha256':sha(raw),'ami_manual_url':'https://groups.inf.ed.ac.uk/ami/AMICorpusAnnotations/ami_public_manual_1.6.2.zip','ami_manual_sha256':sha(a.manual_zip.read_bytes()),'source_license':'CC-BY-4.0','split_algorithm':'sha256(jev-split-v1:+series); first 20 eligible series; meeting chosen by sha256(jev-meeting-v1:+meeting); 12 train/4 validation/4 test; 5 segments per series','series_splits':assignment,'counts':{s:sum(c['split']==s for c in cases) for s in ['train','validation','test']},'minimum_token_membership_coverage':min(m['token_membership_coverage'] for m in matches if m['token_membership_coverage'] is not None),'warning':'Membership coverage is a coarse cross-check, not an exact textual alignment; manually review low coverage.'}
     (ROOT/'sources/manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     (ROOT/'sources/AMI-LICENCE.txt').write_bytes(z.read('LICENCE.txt'))
