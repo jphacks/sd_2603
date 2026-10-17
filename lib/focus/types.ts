@@ -1,3 +1,5 @@
+import type { MeetChatMessage } from "@/lib/recall/chat";
+
 export type FocusProposal = {
   id: string;
   message: string;
@@ -21,6 +23,8 @@ export type FocusSession = {
   lastSharedAt?: number | null;
   closed: boolean;
   expiresAt: number;
+  recallBotId?: string | null;
+  meetChat?: MeetChatMessage[];
 };
 
 export type FocusCredentials = {
@@ -36,4 +40,5 @@ export type FocusAction =
   | { action: "note"; text: string; agenda?: string }
   | { action: "propose"; message: string }
   | { action: "share" | "defer"; proposalId: string }
-  | { action: "clear" | "close" };
+  | { action: "clear" | "close" }
+  | { action: "bindBot"; botId: string };

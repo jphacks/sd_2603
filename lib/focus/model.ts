@@ -35,6 +35,7 @@ export function applyAction(session: FocusSession, action: FocusAction): FocusSe
       break;
     case "clear": next.sharedMessage = null; break;
     case "close": next.closed = true; next.sharedMessage = null; break;
+    case "bindBot": next.recallBotId = action.botId; break;
   }
   return next;
 }

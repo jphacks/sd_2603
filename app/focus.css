@@ -79,6 +79,17 @@
 .focus-notes-content > p { border-bottom: 1px solid #e6e7ea; padding: 10px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .focus-deferred { margin-top: 16px; padding: 12px; background: #f1f3f9; border-radius: 9px; }
 .focus-detail-panel { overflow-y: auto; }
+.focus-meet-inbox { padding: 22px 20px; }
+.focus-meet-inbox h2 { font-size: 16px; }
+.focus-inbox-help, .focus-inbox-empty { font-size: 12px; color: #7b8290; line-height: 1.9; margin: 12px 0; }
+.focus-inbox-messages { display: grid; gap: 14px; margin-top: 20px; }
+.focus-inbox-messages article { background: #f1f4fa; border-radius: 12px; padding: 14px; }
+.focus-inbox-messages article header { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; color: #747e91; }
+.focus-inbox-messages article p { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; line-height: 1.9; margin: 12px 0; }
+.focus-inbox-file { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid #dfe4ee; margin-top: 10px; }
+.focus-inbox-file a { font-size: 12px; color: #4674ba; }
+.focus-connection-info { font-size: 12px; line-height: 1.9; border: 1px solid #e0e5ed; padding: 12px; border-radius: 9px; }
+.focus-meet-connection form { margin-top: 12px; }
 .focus-settings { padding: 10px 22px 25px; display: grid; gap: 32px; }
 .focus-settings :is(section,form) { display: grid; gap: 10px; }
 .focus-settings h2 { font-size: 16px; }

@@ -3,6 +3,7 @@ import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { FocusCredentials, FocusSession } from "./types";
 import { FocusError } from "./model";
+import type { MeetChatMessage } from "@/lib/recall/chat";
 
 type StoredSession = FocusSession & { controlToken: string; cameraToken: string };
 const TTL = 12 * 60 * 60;
@@ -109,5 +110,21 @@ export async function updateSession(id: string, token: string, revision: number,
   });
   locks.set(id, task);
   try { return await task; }
+  finally { if (locks.get(id) === task) locks.delete(id); }
+}
+
+/** Only call after validating the raw Recall webhook signature. */
+export async function receiveMeetChat(id: string, botId: string, message: MeetChatMessage) {
+  const previousLock = locks.get(id) ?? Promise.resolve();
+  const task = previousLock.catch(() => {}).then(async () => {
+    const previous = await read(id);
+    if (previous.closed) return;
+    if (!previous.recallBotId || previous.recallBotId !== botId) throw new FocusError("Bot IDがこの会議に登録されていません。", 409);
+    if (previous.meetChat?.some(item => item.id === message.id)) return;
+    const next = { ...previous, revision: previous.revision + 1, meetChat: [...(previous.meetChat ?? []), message].slice(-100) };
+    await persist(next, previous);
+  });
+  locks.set(id, task);
+  try { await task; }
   finally { if (locks.get(id) === task) locks.delete(id); }
 }

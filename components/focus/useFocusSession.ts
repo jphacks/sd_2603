@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { FocusAction, FocusCredentials, FocusSession } from "@/lib/focus/types";
+import type { MeetChatInfo } from "./MeetChatConnection";
 
 const storageKey = "focus-control-session-v1";
 async function json(response: Response) {
@@ -98,6 +99,19 @@ export function useFocusSession() {
       return result;
     });
   }
+  async function importAgenda(messageId: string, link?: string) {
+    if (!credentials) return null;
+    return run(async () => {
+      const result = await json(await fetch(`/api/focus/sessions/${credentials.id}/import`, {
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${credentials.controlToken}` }, body: JSON.stringify({ messageId, link }),
+      })) as { session: FocusSession; message: string };
+      accept(result.session); return result;
+    });
+  }
+  async function chatInfo() {
+    if (!credentials) return null;
+    return run(async () => json(await fetch(`/api/focus/sessions/${credentials.id}/chat`, { headers: { Authorization: `Bearer ${credentials.controlToken}` }, cache: "no-store" })) as Promise<MeetChatInfo>);
+  }
   const cameraPath = credentials ? `/focus/camera/${credentials.id}#${new URLSearchParams({ token: credentials.cameraToken })}` : null;
-  return { session, busy, error, dismissError: () => setError(""), create, change, connectBot, requestJudge, cameraPath };
+  return { session, busy, error, dismissError: () => setError(""), create, change, connectBot, requestJudge, importAgenda, chatInfo, cameraPath };
 }

@@ -9,7 +9,7 @@
 - 「提案を入力する」または接続設定の「提案の表示を試す」で提案を作成。準備した提案は操作パネルだけに表示されます。
 - 「あとで」で保留。メモ欄から再提案できます。「会議に共有」でカメラ表示を更新します。
 - 「カメラの提案を閉じる」で待機表示へ戻ります。「サポート終了」で共有を消し、カメラ側も終了表示になります。Recallボットの退出は既存CLIで別途行います。
-- チャットはプライベートなメモとしてサーバーに保存。UTF-8のTXT/MD/CSV添付はアジェンダへ取り込みます。各ファイル1MB・3件まで、アジェンダ全体20000文字以内、メモ4000文字・50件までです。
+- アジェンダはGoogle Meetのチャットに投稿したDriveファイルリンクから取り込みます。PDF／DOCX（5MB・PDF100ページ・本文20000文字以内）に対応。旧DOCと画像だけのPDF（OCR）は未対応です。受信履歴は直近100件を保存し、取り込みは操作パネルで明示的に選択します。
 - 「メモをもとに判定する」は既存Judgeを利用。`INTERVENE`でも提案は自分だけに表示し、共有には操作が必要です。共有後60秒のクールダウンを維持します。
 
 画像の会議アプリ全体を置き換えるものではありません。会議の参加者映像はMeet等で表示し、Focusの専用ページをボットカメラに映します。Next.jsの操作パネルをMeet内の右サイドバーに直接入れるアドオン・拡張機能は含みません。操作パネルは別ウィンドウで会議と並べて使えます。
@@ -77,7 +77,30 @@ Redisは12時間のTTLと比較更新で同期します。この実装作業で�
 
 `CameraView` は再生可能なURLまたは `MediaStream` を受け取れます。現在の操作パネルでは「会議映像（任意）」に映像URLを指定すると、ボットプレビューと並べて表示します。Recallの `output_media.camera.config.url` は映像受信用URLではなく、ボットが開くWebページです。
 
-`ChatPanel` は履歴・Enter送信・Shift+Enter改行・IME送信抑止・添付検証を提供します。チャット内容はプライベートメモになり、Meetの会議チャットへ自動送信しません。画面はCSSとTailwindの既存構成を利用し、狭い画面では縦並びにします。
+旧 `ChatPanel` は互換部品として残していますが、画面には組み込みません。`MeetAgendaPanel` はMeetから受信した履歴と取り込み操作だけを提供します。アプリ独自の送信フォーム・添付欄ではありません。画面はCSSとTailwindの既存構成を利用し、狭い画面では縦並びにします。
+
+## MeetチャットからPDF／Wordを取り込む
+
+Recallのチャットイベントはファイル本体ではなくテキストを返すため、MeetチャットからGoogle DriveのPDF／DOCX共有リンクを送ります。既存のアクセス権を維持し、公開設定への変更は不要です。
+
+1. `.env.local` に `RECALL_API_KEY`、利用リージョンの `RECALL_REGION`、`RECALL_WORKSPACE_VERIFICATION_SECRET`（`whsec_...`）、`FOCUS_PUBLIC_BASE_URL` を設定します。ブラウザでRecallにログインしただけではサーバーへキーは設定されません。キーは画面／Git／チャットへ貼らないでください。
+2. `/meeting` の接続設定で「Meetチャット接続情報」を取得し、このセッションのWebhook URLを確認します。
+3. 新しいBotを作成する前に、下記CLIへURLを指定します。CLIには同じ環境変数を渡します（既存CLIのenv読み込み方法は `docs/recall-cli.md` 参照）。
+
+   ```bash
+   npm run recall -- join --url https://meet.google.com/xxx-yyyy-zzz --chat-webhook https://your-app/api/recall/chat/session-id
+   ```
+
+4. 返されたBot IDを「Meetチャット受信Bot ID」に登録します。登録後のメッセージが対象です。既に入室済みのBotにはこの設定を後付けしません。カメラ出力にも同じBot IDを指定します。
+5. Meetのチャットへファイルリンクを投稿し、操作パネルの「会議のアジェンダ」で「PDF／DOCXを取り込む」を選びます。本文だけを取り込むこともできます。現在のアジェンダは置き換わります。取り込んだ内容が自動で会議に公開されたりAIへ送信されたりはしません。
+
+`--chat-webhook` または `RECALL_CHAT_WEBHOOK_URL` を指定した場合だけチャット受信を有効化します。公式のチャット専用設定（participant_events、retention:null）を使い、音声／映像の録画項目は追加しません。未指定時は従来の `recording_config:null` のままです。参加者にはチャット受信と保存について事前に説明してください。
+
+Webhookは生本文のHMAC署名、5分以内のタイムスタンプ、登録済みBot IDを検証し、同じイベントIDの重複を除きます。ファイル取得やAI処理はWebhook応答の中では行いません。受信履歴もカメラ用APIには含めません。
+
+非公開Driveファイルは、閲覧権限のあるGoogleユーザーのOAuthアクセストークン `GOOGLE_DRIVE_ACCESS_TOKEN` が別途必要です。これは開発用の短期トークン設定で、Googleログイン画面や自動更新は未実装です。権限は対象ファイルを読める範囲に限定し、有効期限後は更新してください。トークンはGoogle Drive APIにだけ送信します。未設定でも既存の共有権限で取得できるファイルは取り込めます。Google以外のファイルURLは取得しません。
+
+実会議／実キー／Google認証付きファイルでの確認は未実施です。公開環境では上記の操作キー・Redis設定も必要です。
 
 ## 検証
 
@@ -94,5 +117,7 @@ npm run build
 参照：
 
 - [Recall Output Media](https://docs.recall.ai/docs/stream-media)
+- [Recall Receiving Chat Messages](https://docs.recall.ai/docs/receiving-chat-messages)
+- [Recall Webhook Authentication](https://docs.recall.ai/docs/authenticating-requests-from-recallai)
 - [Upstash REST API](https://upstash.com/docs/redis/features/restapi)
 - `docs/product-context.md`（Notion同期済み仕様）

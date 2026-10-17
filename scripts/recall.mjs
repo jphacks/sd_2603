@@ -6,7 +6,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STATE_PATH = path.join(ROOT, '.recall', 'current.json');
 const USAGE = `使い方:
-  npm run recall -- join --url https://meet.google.com/abc-defg-hij
+  npm run recall -- join --url https://meet.google.com/abc-defg-hij [--chat-webhook <https-url>]
   npm run recall -- status
   npm run recall -- leave [--id <bot-uuid>]`;
 
@@ -41,11 +41,11 @@ function loadEnvFile(file) {
 
 function parseArgs(argv) {
   const positional = [];
-  /** @type {{ url?: string, id?: string }} */
+  /** @type {{ url?: string, id?: string, 'chat-webhook'?: string }} */
   const flags = {};
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
-    if (arg === '--url' || arg === '--id') {
+    if (arg === '--url' || arg === '--id' || arg === '--chat-webhook') {
       const value = argv[i + 1];
       if (!value || value.startsWith('--')) {
         return { error: `${arg} には値が必要です` };
@@ -254,6 +254,20 @@ async function join(flags, io) {
     return 2;
   }
 
+  const webhook = flags['chat-webhook'] || io.env.RECALL_CHAT_WEBHOOK_URL;
+  let chatConfig = null;
+  if (webhook) {
+    try {
+      const endpoint = new URL(webhook);
+      if (endpoint.protocol !== 'https:' || endpoint.username || endpoint.password || endpoint.hash || endpoint.search) throw new Error();
+      if (!io.env.RECALL_WORKSPACE_VERIFICATION_SECRET?.startsWith('whsec_')) throw new Error();
+      chatConfig = { participant_events: {}, retention: null, realtime_endpoints: [{ type: 'webhook', url: endpoint.href, events: ['participant_events.chat_message'] }] };
+    } catch {
+      io.stderr('チャット受信にはHTTPSのWebhook URLとRECALL_WORKSPACE_VERIFICATION_SECRETが必要です。');
+      return 2;
+    }
+  }
+
   const existing = await readState(io);
   if (existing) {
     try {
@@ -312,7 +326,7 @@ async function join(flags, io) {
       body: {
         meeting_url: meetingUrl,
         bot_name: 'MTG Lab',
-        recording_config: null,
+        recording_config: chatConfig,
         automatic_leave: {
           waiting_room_timeout: 540,
           noone_joined_timeout: 300,
@@ -357,7 +371,7 @@ async function join(flags, io) {
 }
 
 async function status(flags, io) {
-  if (flags.url || flags.id) {
+  if (flags.url || flags.id || flags['chat-webhook']) {
     io.stderr(USAGE);
     return 2;
   }
@@ -377,7 +391,7 @@ async function status(flags, io) {
 }
 
 async function leave(flags, io) {
-  if (flags.url) {
+  if (flags.url || flags['chat-webhook']) {
     io.stderr(USAGE);
     return 2;
   }

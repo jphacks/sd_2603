@@ -70,6 +70,25 @@ test('status and leave without a bot exit 1', async () => {
   }
 });
 
+test('chat is opt-in and configures only participant events without media recording', async () => {
+  const box = fixture();
+  try {
+    let body;
+    const cap = capture({ statePath: box.statePath, env: { RECALL_WORKSPACE_VERIFICATION_SECRET: 'whsec_test' }, fetch: async (url, options) => {
+      if (options?.method === 'POST') { body = JSON.parse(options.body); return jsonResponse(200, { id: 'bot-chat' }); }
+      return jsonResponse(200, { status_changes: [{ code: 'in_call_not_recording', created_at: '2026-01-01T00:00:00Z' }] });
+    } });
+    assert.equal(await run(['join', '--url', 'https://meet.google.com/abc-defg-hij', '--chat-webhook', 'https://app.example/api/recall/chat/test'], cap.io), 0);
+    assert.deepEqual(body.recording_config, { participant_events: {}, retention: null, realtime_endpoints: [{ type: 'webhook', url: 'https://app.example/api/recall/chat/test', events: ['participant_events.chat_message'] }] });
+  } finally { box.cleanup(); }
+});
+test('chat webhook refuses unsafe URL or missing verification key before network access', async () => {
+  for (const url of ['http://localhost/test', 'https://app.example/webhook']) {
+    const cap = capture({ fetch: async () => { assert.fail('network must not be called'); } });
+    assert.equal(await run(['join', '--url', 'https://meet.google.com/abc-defg-hij', '--chat-webhook', url], cap.io), 2);
+  }
+});
+
 test('join waits until the bot is in the call and stores its id', async () => {
   const box = fixture();
   const posts = [];

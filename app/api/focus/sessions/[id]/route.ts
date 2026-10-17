@@ -9,6 +9,7 @@ const action = z.discriminatedUnion("action", [
   z.object({ action: z.literal("propose"), message: z.string().trim().min(1).max(500) }),
   z.object({ action: z.enum(["share", "defer"]), proposalId: z.string().uuid() }),
   z.object({ action: z.enum(["clear", "close"]) }),
+  z.object({ action: z.literal("bindBot"), botId: z.string().uuid() }),
 ]);
 
 type Context = { params: Promise<{ id: string }> };
