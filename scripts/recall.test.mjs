@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { run } from './recall.mjs';
+import { run, removeBot, sendBot } from './recall.mjs';
 
 function fixture() {
   const dir = mkdtempSync(path.join(tmpdir(), 'recall-cli-'));
@@ -196,7 +196,7 @@ test('leave removes the bot and deletes the state file', async () => {
   try {
     const cap = capture({
       statePath: box.statePath,
-      fetch: async (url, options) => {
+      fetch: async (url) => {
         if (String(url).endsWith('/leave_call/')) return jsonResponse(200, {});
         return jsonResponse(200, {
           status_changes: [
@@ -263,6 +263,60 @@ test('Ctrl+C during join requests leave once', async () => {
   }
 });
 
+test('sendBot creates one silent bot and does not wait for admission', async () => {
+  const box = fixture();
+  const calls = [];
+  try {
+    const io = capture({
+      statePath: box.statePath,
+      fetch: async (url, options) => {
+        calls.push({ url, method: options?.method ?? 'GET' });
+        if (options?.method === 'POST') return jsonResponse(200, { id: 'bot-sent' });
+        return jsonResponse(200, { status_changes: [] });
+      },
+    }).io;
+    const sent = await sendBot('https://meet.google.com/abc-defg-hij', io);
+    assert.deepEqual(sent, {
+      id: 'bot-sent',
+      region: 'ap-northeast-1',
+      meetingUrl: 'https://meet.google.com/abc-defg-hij',
+    });
+    assert.equal(calls.length, 1);
+    assert.match(calls[0].url, /\/bot\/$/);
+    const state = JSON.parse(readFileSync(box.statePath, 'utf8'));
+    assert.equal(state.id, 'bot-sent');
+    await assert.rejects(
+      () => sendBot('http://meet.google.com/abc', io),
+      (error) => error.status === 400,
+    );
+  } finally {
+    box.cleanup();
+  }
+});
+
+test('removeBot asks the bot to leave and deletes the state file', async () => {
+  const box = fixture();
+  mkdirSync(box.dir, { recursive: true });
+  writeFileSync(box.statePath, JSON.stringify({ id: 'bot-1' }));
+  try {
+    const io = capture({
+      statePath: box.statePath,
+      fetch: async (url) => {
+        if (String(url).endsWith('/leave_call/')) return jsonResponse(200, {});
+        return jsonResponse(200, {
+          status_changes: [{ code: 'call_ended', created_at: '2026-10-17T00:00:03Z' }],
+        });
+      },
+    }).io;
+    const result = await removeBot(io, 'bot-1');
+    assert.equal(result.left, true);
+    assert.equal(result.code, 'call_ended');
+    assert.equal(exists(box.statePath), false);
+  } finally {
+    box.cleanup();
+  }
+});
+
 function exists(file) {
   try {
     readFileSync(file);
@@ -272,3 +326,49 @@ function exists(file) {
     throw error;
   }
 }
+
+test('audio opt-in uses one UI-owned bot with mixed-audio websocket and explicit agenda', async () => {
+  const box = fixture();
+  const requests = [];
+  try {
+    const cap = capture({
+      statePath: box.statePath,
+      env: {
+        ENABLE_REALTIME_TRANSCRIPTION: 'true', AI_PROVIDER: 'jev', ALLOW_PAID_AI: 'true', AI_GATEWAY_API_KEY: 'test-only',
+        RECALL_CONTROL_TOKEN: 'c'.repeat(40), RECALL_AUDIO_TOKEN: 'a'.repeat(40),
+        RECALL_AUDIO_PUBLIC_URL: 'wss://example.test', RECALL_AUDIO_PORT: '8787',
+      },
+      fetch: async (url, options) => {
+        requests.push({ url: String(url), options });
+        if (String(url).endsWith('/health')) return { ok: true };
+        return jsonResponse(200, { id: 'bot-audio' });
+      },
+    });
+    const sent = await sendBot('https://meet.google.com/abc-defg-hij', cap.io, 'Release plan');
+    assert.equal(sent.id, 'bot-audio');
+    assert.equal(requests.length, 2);
+    const body = JSON.parse(requests[1].options.body);
+    assert.deepEqual(body.recording_config.realtime_endpoints[0].events, ['audio_mixed_raw.data']);
+    assert.equal(body.recording_config.audio_mixed_raw !== undefined, true);
+    const state = JSON.parse(readFileSync(box.statePath, 'utf8'));
+    assert.equal(state.agenda, 'Release plan');
+  } finally { box.cleanup(); }
+});
+
+test('audio mode fails before creating a bot when worker is unavailable', async () => {
+  const box = fixture();
+  let botPosts = 0;
+  try {
+    const cap = capture({
+      statePath: box.statePath,
+      env: {
+        ENABLE_REALTIME_TRANSCRIPTION: 'true', AI_PROVIDER: 'jev', ALLOW_PAID_AI: 'true', AI_GATEWAY_API_KEY: 'test-only',
+        RECALL_CONTROL_TOKEN: 'c'.repeat(40), RECALL_AUDIO_TOKEN: 'a'.repeat(40),
+        RECALL_AUDIO_PUBLIC_URL: 'wss://example.test',
+      },
+      fetch: async (url) => { if (String(url).includes('/bot/')) botPosts++; throw new Error('Worker offline'); },
+    });
+    await assert.rejects(sendBot('https://meet.google.com/abc-defg-hij', cap.io, 'Release plan'), error => error.status === 503);
+    assert.equal(botPosts, 0);
+  } finally { box.cleanup(); }
+});

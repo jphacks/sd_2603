@@ -1,5 +1,5 @@
-import { MeetingRoom } from "./meeting-room";
+import { JoinForm } from "./join-form";
 
 export default function Home() {
-  return <MeetingRoom />;
+  return <JoinForm />;
 }

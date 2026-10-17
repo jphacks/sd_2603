@@ -2,15 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import {
-  createBot,
-  latestStatusChange,
-  leaveCall,
-  recallRegion,
-  retrieveBot,
-  sortedStatusChanges,
-} from '../lib/recall/client.mjs';
-import { silentJoinBody } from '../lib/recall/meeting.mjs';
+import { recordingConfig } from './transcription/audio.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STATE_PATH = path.join(ROOT, '.recall', 'current.json');
@@ -69,6 +61,22 @@ function parseArgs(argv) {
   return { command: positional[0], extra: positional.slice(1), flags };
 }
 
+function regionOf(env) {
+  return (env.RECALL_REGION || 'ap-northeast-1').trim();
+}
+
+function formatHttpError(status, body) {
+  if (status === 401) {
+    return '401: API キーと RECALL_REGION が同じリージョンか確認してください。';
+  }
+  if (status === 507) {
+    return '507: アドホック枠が足りません。待って 1 回だけ再実行してください。';
+  }
+  const detail = body?.detail || body?.message || body?.error || '';
+  const text = typeof detail === 'string' ? detail : JSON.stringify(detail);
+  return `Recall API ${status}${text ? `: ${text}` : ''}`;
+}
+
 function hintFor(change) {
   const sub = change?.sub_code;
   if (
@@ -89,10 +97,54 @@ function hintFor(change) {
   return '';
 }
 
+function sortedChanges(bot) {
+  const changes = Array.isArray(bot?.status_changes) ? [...bot.status_changes] : [];
+  changes.sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
+  return changes;
+}
+
 function formatChange(change) {
   const sub = change.sub_code ? `  ${change.sub_code}` : '';
   const message = change.message ? `  ${change.message}` : '';
   return `${change.created_at ?? ''}  ${change.code}${sub}${message}`.trim();
+}
+
+function latestChange(bot) {
+  return sortedChanges(bot).at(-1) ?? null;
+}
+
+async function recallFetch(io, pathName, options = {}) {
+  const key = String(io.env.RECALL_API_KEY || '').trim();
+  if (!key) {
+    const error = new Error('RECALL_API_KEY がありません。sd_2603/.env に入れてください。');
+    error.status = 0;
+    throw error;
+  }
+  const response = await io.fetch(`https://${regionOf(io.env)}.recall.ai/api/v1${pathName}`, {
+    method: options.method ?? 'GET',
+    headers: {
+      Authorization: `Token ${key}`,
+      Accept: 'application/json',
+      ...(options.body !== undefined ? { 'Content-Type': 'application/json' } : {}),
+    },
+    body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
+  });
+  const text = await response.text();
+  let body = null;
+  if (text) {
+    try {
+      body = JSON.parse(text);
+    } catch {
+      body = { raw: text };
+    }
+  }
+  if (!response.ok) {
+    const error = new Error(formatHttpError(response.status, body));
+    error.status = response.status;
+    error.body = body;
+    throw error;
+  }
+  return body ?? {};
 }
 
 async function readState(io) {
@@ -151,8 +203,8 @@ async function poll(io, id, { timeoutMs, succeed, fail, signal }) {
   let latest = null;
   while (io.now() - started < timeoutMs) {
     if (signal?.aborted) return { aborted: true, latest };
-    const bot = await retrieveBot(io, id);
-    const changes = sortedStatusChanges(bot);
+    const bot = await recallFetch(io, `/bot/${id}/`);
+    const changes = sortedChanges(bot);
     printChanges(io, changes, seen, waitingHint);
     latest = changes.at(-1) ?? null;
     if (signal?.aborted) return { aborted: true, latest };
@@ -162,6 +214,115 @@ async function poll(io, id, { timeoutMs, succeed, fail, signal }) {
     if (signal?.aborted) return { aborted: true, latest };
   }
   return { ok: false, timeout: true, latest };
+}
+
+export class RecallCliError extends Error {
+  /**
+   * @param {string} message
+   * @param {{ status?: number, exitCode?: number }} [detail]
+   */
+  constructor(message, detail = {}) {
+    super(message);
+    this.name = 'RecallCliError';
+    this.status = detail.status ?? 400;
+    this.exitCode = detail.exitCode ?? 1;
+  }
+}
+
+export async function sendBot(meetingUrl, io, agenda) {
+  if (!/^https:\/\/.+/i.test(String(meetingUrl ?? ''))) {
+    throw new RecallCliError('会議 URL は https:// で始めてください。', { status: 400, exitCode: 2 });
+  }
+
+  const audioEnabled = io.env.ENABLE_REALTIME_TRANSCRIPTION === 'true';
+  let audioConfig = null;
+  if (audioEnabled) {
+    if (!agenda || !agenda.trim() || agenda.trim().length > 500 || io.env.AI_PROVIDER !== 'jev' || io.env.ALLOW_PAID_AI !== 'true' || !io.env.AI_GATEWAY_API_KEY || !io.env.RECALL_CONTROL_TOKEN || io.env.RECALL_CONTROL_TOKEN.length < 32) {
+      throw new RecallCliError('Audio mode requires an agenda, paid-AI opt-in, Gateway key and control token', { status: 503 });
+    }
+    try {
+      audioConfig = recordingConfig(io.env.RECALL_AUDIO_PUBLIC_URL, io.env.RECALL_AUDIO_TOKEN);
+      const port = Number(io.env.RECALL_AUDIO_PORT ?? 8787);
+      if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid audio port');
+      const health = await io.fetch(`http://127.0.0.1:${port}/health`, { signal: AbortSignal.timeout(1500) });
+      if (!health.ok) throw new Error('Worker unavailable');
+    } catch {
+      throw new RecallCliError('Audio worker is not ready; bot was not created', { status: 503 });
+    }
+  }
+
+  const existing = await readState(io);
+  if (existing) {
+    try {
+      const bot = await recallFetch(io, `/bot/${existing.id}/`);
+      const code = latestChange(bot)?.code ?? 'unknown';
+      if (LIVE.has(code)) {
+        throw new RecallCliError(
+          `すでにボットが会議にいます (${existing.id}, ${code})。leave してから再実行してください。`,
+          { status: 409 },
+        );
+      }
+      if (code === 'done' || code === 'fatal' || code === 'call_ended') {
+        await clearState(io, existing.id);
+      } else {
+        throw new RecallCliError(
+          `状態 ${code} のボットが残っています (${existing.id})。leave を試してください。`,
+          { status: 409 },
+        );
+      }
+    } catch (error) {
+      if (error instanceof RecallCliError) throw error;
+      if (error.status !== 404) throw error;
+      await clearState(io, existing.id);
+    }
+  }
+
+  const created = await recallFetch(io, '/bot/', {
+    method: 'POST',
+    body: {
+      meeting_url: meetingUrl,
+      bot_name: 'MTG Lab',
+      recording_config: audioConfig,
+      automatic_leave: {
+        waiting_room_timeout: 540,
+        noone_joined_timeout: 300,
+      },
+    },
+  });
+  const botId = created.id;
+  if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
+  await writeState(io, {
+    id: botId,
+    region: regionOf(io.env),
+    meetingUrl,
+    ...(audioEnabled ? { agenda: agenda.trim(), audioEnabled: true } : {}),
+    createdAt: new Date(io.now()).toISOString(),
+  });
+  return { id: botId, region: regionOf(io.env), meetingUrl };
+}
+
+export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch) {
+  return {
+    env,
+    fetch: fetchImpl,
+    statePath: STATE_PATH,
+    now: () => Date.now(),
+    sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
+    pollMs: 3000,
+    leaveTimeoutMs: 60_000,
+  };
+}
+
+async function requestLeave(io, id) {
+  try {
+    await recallFetch(io, `/bot/${id}/leave_call/`, { method: 'POST' });
+    return { alreadyGone: false };
+  } catch (error) {
+    if (error.status === 400 || error.status === 404) {
+      return { alreadyGone: true, status: error.status };
+    }
+    throw error;
+  }
 }
 
 function installSignals(onSignal) {
@@ -191,29 +352,6 @@ async function join(flags, io) {
     return 2;
   }
 
-  const existing = await readState(io);
-  if (existing) {
-    try {
-      const bot = await retrieveBot(io, existing.id);
-      const code = latestStatusChange(bot)?.code ?? 'unknown';
-      if (LIVE.has(code)) {
-        io.stderr(
-          `すでにボットが会議にいます (${existing.id}, ${code})。leave してから再実行してください。`,
-        );
-        return 1;
-      }
-      if (code === 'done' || code === 'fatal' || code === 'call_ended') {
-        await clearState(io, existing.id);
-      } else {
-        io.stderr(`状態 ${code} のボットが残っています (${existing.id})。leave を試してください。`);
-        return 1;
-      }
-    } catch (error) {
-      if (error.status !== 404) throw error;
-      await clearState(io, existing.id);
-    }
-  }
-
   const signal = { aborted: false };
   let botId = null;
   /** @type {Promise<number> | null} */
@@ -226,7 +364,7 @@ async function join(flags, io) {
         leaveTask = (async () => {
           if (!botId) return 1;
           try {
-            const result = await leaveCall(io, botId);
+            const result = await requestLeave(io, botId);
             io.stdout(
               result.alreadyGone
                 ? result.status === 404
@@ -244,15 +382,17 @@ async function join(flags, io) {
     : () => {};
 
   try {
-    const created = await createBot(io, silentJoinBody(meetingUrl));
-    botId = created.id;
-    if (!botId) throw new Error('bot id が返りませんでした');
-    await writeState(io, {
-      id: botId,
-      region: recallRegion(io.env),
-      meetingUrl,
-      createdAt: new Date(io.now()).toISOString(),
-    });
+    let sent;
+    try {
+      sent = await sendBot(meetingUrl, io, io.env.MEETING_AGENDA);
+    } catch (error) {
+      if (error instanceof RecallCliError) {
+        io.stderr(error.message);
+        return error.exitCode;
+      }
+      throw error;
+    }
+    botId = sent.id;
     io.stdout(`ボットを送信しました ${botId}`);
     if (signal.aborted) return (await leaveTask) ?? 1;
 
@@ -292,14 +432,38 @@ async function status(flags, io) {
     io.stderr('状態ファイルがありません。');
     return 1;
   }
-  const bot = await retrieveBot(io, state.id);
-  const changes = sortedStatusChanges(bot);
+  const bot = await recallFetch(io, `/bot/${state.id}/`);
+  const changes = sortedChanges(bot);
   if (changes.length === 0) {
     io.stdout(`${state.id}  状態なし`);
     return 0;
   }
   for (const change of changes) io.stdout(formatChange(change));
   return 0;
+}
+
+export async function removeBot(io, id) {
+  const result = await requestLeave(io, id);
+  if (result.alreadyGone) {
+    await clearState(io, id);
+    return { id, left: true, alreadyGone: true, status: result.status ?? null, code: null };
+  }
+  const polled = await poll(io, id, {
+    timeoutMs: io.leaveTimeoutMs,
+    succeed: (change) => change.code === 'call_ended' || change.code === 'done',
+    fail: (change) => change.code === 'fatal',
+  });
+  if (polled.ok) {
+    await clearState(io, id);
+    return { id, left: true, alreadyGone: false, status: null, code: polled.latest.code };
+  }
+  return {
+    id,
+    left: false,
+    alreadyGone: false,
+    timeout: Boolean(polled.timeout),
+    latest: polled.latest ?? null,
+  };
 }
 
 async function leave(flags, io) {
@@ -313,31 +477,24 @@ async function leave(flags, io) {
     io.stderr('退出するボットがありません。');
     return 1;
   }
-  const result = await leaveCall(io, id);
+  const result = await removeBot(io, id);
   if (result.alreadyGone) {
     io.stdout(
       result.status === 404
         ? 'ボットは見つかりません。状態ファイルを消しました。'
         : 'すでに退出しています',
     );
-    await clearState(io, id);
     return 0;
   }
-  const polled = await poll(io, id, {
-    timeoutMs: io.leaveTimeoutMs,
-    succeed: (change) => change.code === 'call_ended' || change.code === 'done',
-    fail: (change) => change.code === 'fatal',
-  });
-  if (polled.ok) {
-    io.stdout(`退出しました (${polled.latest.code})`);
-    await clearState(io, id);
+  if (result.left) {
+    io.stdout(`退出しました (${result.code})`);
     return 0;
   }
-  if (polled.timeout) {
+  if (result.timeout) {
     io.stderr('60秒以内に call_ended / done になりませんでした');
     return 1;
   }
-  printFailure(io, polled.latest);
+  printFailure(io, result.latest);
   return 1;
 }
 

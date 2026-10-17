@@ -1,177 +1,179 @@
 import { createServer } from 'node:http';
-import { timingSafeEqual } from 'node:crypto';
-import { loadEnvFile } from 'node:process';
+import { timingSafeEqual, randomUUID } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { mkdir, writeFile, rm } from 'node:fs/promises';
+import { loadEnvFile } from 'node:process';
 import { WebSocketServer } from 'ws';
-import { createResampler, readRecallAudio, recordingConfig } from './transcription/audio.mjs';
-import { createMeetingPipeline, transcribeTurn } from './transcription/pipeline.mjs';
+import { audioJoinTimedOut, createResampler, readRecallAudio } from './transcription/audio.mjs';
+import { createInterventionGate, streamMeetingAudio } from './transcription/pipeline.mjs';
 
-// Never evaluate downloaded settings as shell code. Existing env wins.
-for (const file of ['.env.local', '.env', '.env.download', 'env.download']) {
-  if (existsSync(file)) loadEnvFile(file);
-}
+for (const file of ['.env.local', '.env']) if (existsSync(file)) loadEnvFile(file);
 const env = process.env;
-const agenda = env.MEETING_AGENDA?.trim();
-let botId = env.RECALL_BOT_ID?.trim();
-const joinUrl = process.argv[2] === '--join' ? process.argv[3] : undefined;
-let ownedBot = false;
 const token = env.RECALL_AUDIO_TOKEN;
+const controlToken = env.RECALL_CONTROL_TOKEN;
 const port = Number(env.RECALL_AUDIO_PORT ?? 8787);
-const provider = env.AI_PROVIDER ?? 'mock';
-if (process.argv.includes('--recording-config')) {
-  // Contains the receiver secret; redirect this output to an ignored local file.
-  console.log(JSON.stringify(recordingConfig(env.RECALL_AUDIO_PUBLIC_URL, token), null, 2));
-  process.exit(0);
+const controlUrl = new URL(env.VIDEO_CONTROL_URL ?? 'http://127.0.0.1:3000/api/recall/video');
+if (env.ENABLE_REALTIME_TRANSCRIPTION !== 'true' || env.AI_PROVIDER !== 'jev' || env.ALLOW_PAID_AI !== 'true' || !env.AI_GATEWAY_API_KEY || !token || token.length < 32 || !controlToken || controlToken.length < 32 || !Number.isInteger(port) || port < 1 || port > 65535) {
+  throw new Error('Audio worker requires paid-AI opt-in, Gateway key, control token, audio token, and valid port');
 }
-if (!agenda || agenda.length > 500 || (!botId && !joinUrl && !env.TRANSCRIPTION_INGEST_URL) || !token || token.length < 32 || !Number.isInteger(port) || port < 1 || port > 65535) {
-  throw new Error('Set MEETING_AGENDA (1–500 characters), RECALL_BOT_ID, RECALL_AUDIO_TOKEN (32+ characters), and a valid RECALL_AUDIO_PORT');
-}
-if (!['mock', 'jev'].includes(provider)) throw new Error('AI_PROVIDER must be mock or jev');
-if (env.ALLOW_PAID_AI !== 'true' || env.ENABLE_REALTIME_TRANSCRIPTION !== 'true' || !env.AI_GATEWAY_API_KEY) {
-  throw new Error('Transcription requires ENABLE_REALTIME_TRANSCRIPTION=true, ALLOW_PAID_AI=true and AI_GATEWAY_API_KEY');
+if (controlUrl.protocol !== 'http:' || !['localhost', '127.0.0.1'].includes(controlUrl.hostname) || controlUrl.pathname !== '/api/recall/video' || controlUrl.username || controlUrl.password) {
+  throw new Error('VIDEO_CONTROL_URL must be the local /api/recall/video endpoint');
 }
 
-if (joinUrl && (!env.RECALL_API_KEY || !env.RECALL_AUDIO_PUBLIC_URL || !/^https:\/\//.test(joinUrl))) throw new Error('Joining requires an https meeting URL, RECALL_API_KEY and RECALL_AUDIO_PUBLIC_URL');
-const recallBase = `https://${env.RECALL_REGION ?? 'ap-northeast-1'}.recall.ai/api/v1`;
-if (!['ap-northeast-1', 'us-west-2', 'us-east-1', 'eu-central-1'].includes(env.RECALL_REGION ?? 'ap-northeast-1')) throw new Error('Invalid RECALL_REGION');
-async function recallRequest(path, body) {
-  const response = await fetch(recallBase + path, {
+async function readSession(id) {
+  for (let attempt = 0; attempt < 20; attempt++) {
+    try {
+      const state = JSON.parse(await readFile('.recall/current.json', 'utf8'));
+      if (state.id === id && typeof state.agenda === 'string' && state.agenda.trim() && state.agenda.length <= 500) return state;
+    } catch { /* Bot creation may not have written state yet. */ }
+    await new Promise(resolve => setTimeout(resolve, 250));
+  }
+  throw new Error('Audio connection does not belong to the current bot');
+}
+
+async function videoRequest(body) {
+  const response = await fetch(controlUrl, {
     method: 'POST',
-    headers: { Authorization: `Token ${env.RECALL_API_KEY}`, 'Content-Type': 'application/json' },
-    body: body ? JSON.stringify(body) : undefined,
-    signal: AbortSignal.timeout(15000),
+    headers: { Authorization: `Bearer ${controlToken}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(15_000),
   });
-  if (!response.ok) throw new Error(`Recall HTTP ${response.status}`);
-  return response.status === 204 ? null : response.json();
+  if (body.mode === 'display' && response.status === 409) return { cancelled: true };
+  if (!response.ok) throw new Error(`Video control HTTP ${response.status}`);
+  return response.json();
 }
-if (env.TRANSCRIPTION_INGEST_URL) {
-  const target = new URL(env.TRANSCRIPTION_INGEST_URL);
-  if (target.username || target.password || (target.protocol !== 'https:' && !(target.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(target.hostname)))) throw new Error('Ingest URL must use HTTPS or localhost HTTP');
-}
-const pipeline = createMeetingPipeline({ agenda, provider, onResult: (result) => console.log(JSON.stringify(result)) });
+
+let active;
+let activeGate;
+let activeBotId;
+let halted = false;
 const server = createServer((request, response) => {
-  response.writeHead(request.url === '/health' ? 200 : 404, { 'Content-Type': 'application/json' });
-  response.end(JSON.stringify({ status: request.url === '/health' ? 'ok' : 'not_found' }));
+  if (request.url === '/health') {
+    const healthy = !halted && !active;
+    response.writeHead(healthy ? 200 : 503, { 'Content-Type': 'application/json' });
+    response.end(JSON.stringify({ status: healthy ? 'ready' : 'unavailable' }));
+    return;
+  }
+  if (request.url === '/quiet' && request.method === 'POST') {
+    const actual = Buffer.from(request.headers.authorization?.match(/^Bearer ([^ ]+)$/)?.[1] ?? '');
+    const expected = Buffer.from(token);
+    if (actual.length !== expected.length || !timingSafeEqual(actual, expected)) { response.writeHead(401); response.end(); return; }
+    let body = '';
+    request.on('data', chunk => { body += chunk; if (body.length > 1000) request.destroy(); });
+    request.on('end', () => {
+      try {
+        const { botId, generation } = JSON.parse(body);
+        const quiet = !halted && activeBotId === botId && activeGate?.isQuiet(generation);
+        response.writeHead(quiet ? 200 : 409, { 'Content-Type': 'application/json' });
+        response.end(JSON.stringify({ quiet: Boolean(quiet) }));
+      } catch { response.writeHead(400); response.end(); }
+    });
+    return;
+  }
+  response.writeHead(404); response.end();
 });
 const wss = new WebSocketServer({ noServer: true, maxPayload: 128000 });
-let active;
-let cancelActive = () => {};
-let shuttingDown = false;
-let halted = false;
 server.on('upgrade', (request, socket, head) => {
   const url = new URL(request.url, 'http://localhost');
   const actual = Buffer.from(url.searchParams.get('token') ?? '');
   const expected = Buffer.from(token);
-  if (shuttingDown || halted || active || url.pathname !== '/recall/audio/' || actual.length !== expected.length || !timingSafeEqual(actual, expected)) {
+  if (halted || active || url.pathname !== '/recall/audio/' || actual.length !== expected.length || !timingSafeEqual(actual, expected)) {
     socket.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n');
     return;
   }
-  wss.handleUpgrade(request, socket, head, (ws) => { active = ws; wss.emit('connection', ws); });
-});
-wss.on('connection', (socket) => {
-  const resample = createResampler();
-  let sessionBotId = botId;
-  let pendingStart = null;
-  let packets = [];
-  let bytes = 0;
-  let queued = 0;
-  let sequence = Promise.resolve();
-  let failed = false;
-  const abort = new AbortController();
-  cancelActive = () => { failed = true; abort.abort(); };
-  const reportFailure = () => {
-    if (failed) return;
-    failed = true;
-    halted = true;
-    abort.abort();
-    console.error('Audio pipeline stopped. Check Gateway access, limits and Recall payload. No automatic paid retry was attempted.');
-    socket.close(1011, 'Audio processing failed');
-  };
-  const flush = () => {
-    if (!bytes || failed || shuttingDown) return;
-    const pcm = Buffer.concat(packets);
-    const start = pendingStart ?? Date.now() / 1000;
-    pendingStart = null;
-    packets = []; bytes = 0;
-    // Silence-only turns often produce invented text; skip near-silent audio.
-    let energy = 0;
-    for (let i = 0; i < pcm.length; i += 2) energy += pcm.readInt16LE(i) ** 2;
-    if (Math.sqrt(energy / (pcm.length / 2)) < 30) return;
-    if (++queued > 3) { reportFailure(); return; }
-    sequence = sequence.then(async () => {
-      if (failed) return;
-      const text = await transcribeTurn(resample(pcm), {
-        apiKey: env.AI_GATEWAY_API_KEY,
-        signal: AbortSignal.any([abort.signal, AbortSignal.timeout(30000)]),
-      });
-      if (!failed && text) {
-        if (env.TRANSCRIPTION_INGEST_URL) {
-          const response = await fetch(env.TRANSCRIPTION_INGEST_URL, {
-            method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ botId: sessionBotId, text, start }),
-            signal: AbortSignal.timeout(15000),
-          });
-          if (!response.ok) throw new Error('Could not deliver confirmed transcript');
-        } else await pipeline(text);
-      }
-    }).catch(reportFailure).finally(() => { queued--; });
-  };
-  socket.on('message', (message, binary) => {
-    try {
-      if (binary) throw new Error('Expected Recall JSON');
-      const raw = message.toString();
-      // A connection possessing the receiver secret may select one bot, then stays pinned.
-      if (!sessionBotId) {
-        const payload = JSON.parse(raw);
-        if (payload.event !== 'audio_mixed_raw.data') return;
-        sessionBotId = payload.data?.bot?.id;
-        if (typeof sessionBotId !== 'string' || !sessionBotId) throw new Error('Missing bot id');
-      }
-      const pcm = readRecallAudio(raw, sessionBotId);
-      if (!pcm?.length || failed) return;
-      if (!bytes) pendingStart = JSON.parse(raw).data?.data?.timestamp?.relative ?? Date.now() / 1000;
-      packets.push(pcm); bytes += pcm.length;
-      // Five seconds of 16 kHz PCM. Serialized turns preserve transcript order.
-      if (bytes >= 160000) flush();
-    } catch { reportFailure(); }
-  });
-  socket.on('error', reportFailure);
-  socket.on('close', () => {
-    flush();
-    void sequence.finally(() => { if (active === socket) active = undefined; });
-  });
-  const ping = setInterval(() => { if (socket.readyState === socket.OPEN) socket.ping(); }, 25000);
-  socket.once('close', () => clearInterval(ping));
-});
-await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, '127.0.0.1', resolve); });
-console.log(`Recall audio receiver listening on 127.0.0.1:${port}; provider=${provider}`);
-for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => {
-  if (shuttingDown) return;
-  shuttingDown = true;
-  cancelActive();
-  if (ownedBot && botId) void recallRequest(`/bot/${botId}/leave_call/`).then(() => rm('.recall/transcription.json', { force: true })).catch(() => console.error('Recall leave failed; leave the bot manually using its saved id.'));
-  active?.close(1000, 'Receiver stopping');
-  server.close();
-  setTimeout(() => { wss.clients.forEach((socket) => socket.terminate()); process.exit(0); }, 16000).unref();
+  wss.handleUpgrade(request, socket, head, ws => { active = ws; wss.emit('connection', ws); });
 });
 
-if (joinUrl) {
+wss.on('connection', socket => {
+  const abort = new AbortController();
+  const resample = createResampler();
+  let controller;
+  const audio = new ReadableStream({ start(value) { controller = value; } }, { highWaterMark: 32 });
+  let session;
+  let gate;
+  let queued = 0;
+  let sequence = Promise.resolve();
+  let lastNonemptyAudioAt = Date.now();
+  let ended = false;
+  const fail = () => {
+    if (ended) return;
+    ended = true;
+    halted = true;
+    gate?.stop();
+    abort.abort();
+    socket.close(1011, 'Audio processing stopped');
+    console.error('Audio processing stopped; leave the bot via the app before retrying. No paid retry was attempted.');
+  };
+  const enqueue = pcm => {
+    if (controller.desiredSize !== null && controller.desiredSize <= 0) throw new Error('Audio backpressure limit');
+    controller.enqueue(new Uint8Array(resample(pcm)));
+  };
+  const silence = setInterval(() => {
+    if (!ended && session && Date.now() - lastNonemptyAudioAt > 250) {
+      try { enqueue(Buffer.alloc(6400)); } catch { fail(); }
+    }
+  }, 200);
+  const timeout = setTimeout(fail, 90 * 60_000);
+  const processMessage = async raw => {
+    const payload = JSON.parse(raw);
+    if (payload.event !== 'audio_mixed_raw.data') return;
+    const id = payload.data?.bot?.id;
+    if (typeof id !== 'string' || !id) throw new Error('Missing bot id');
+    if (!session) {
+      session = await readSession(id);
+      gate = createInterventionGate({
+        botId: id,
+        agenda: session.agenda,
+        decide: input => videoRequest({ mode: 'evaluate', ...input }),
+        display: ({ botId, agenda, result, generation }) => videoRequest({ mode: 'display', botId, agenda, result, generation, requestId: randomUUID() }),
+        onError: fail,
+      });
+      activeGate = gate;
+      activeBotId = id;
+      void streamMeetingAudio(audio, { apiKey: env.AI_GATEWAY_API_KEY, signal: abort.signal, onPart: part => gate.onPart(part) }).then(() => { if (!ended) fail(); }, fail);
+    }
+    if (session.id !== id) throw new Error('Bot changed on audio stream');
+    const pcm = readRecallAudio(raw, id);
+    if (!pcm?.length) return;
+    lastNonemptyAudioAt = Date.now();
+    gate.onAudio(pcm);
+    enqueue(pcm);
+  };
+  socket.on('message', (message, binary) => {
+    if (binary || ++queued > 50) { fail(); return; }
+    sequence = sequence.then(() => processMessage(message.toString())).catch(fail).finally(() => { queued--; });
+  });
+  socket.on('error', fail);
+  socket.on('close', () => {
+    ended = true;
+    clearInterval(silence);
+    clearTimeout(timeout);
+    gate?.stop();
+    activeGate = undefined;
+    activeBotId = undefined;
+    abort.abort();
+    try { controller.close(); } catch { /* Already closed by abort. */ }
+    active = undefined;
+    halted = true;
+  });
+});
+
+await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, '127.0.0.1', resolve); });
+console.log(`Recall audio worker ready on 127.0.0.1:${port}. Start the app, then join from the UI.`);
+const joinWatchdog = setInterval(async () => {
+  if (halted || active) return;
   try {
-    if (existsSync('.recall/transcription.json')) throw new Error('Previous transcription bot state exists; leave that bot and remove the state before joining again');
-    const config = recordingConfig(env.RECALL_AUDIO_PUBLIC_URL, token);
-    const bot = await recallRequest('/bot/', { meeting_url: joinUrl, bot_name: 'MTG Lab', recording_config: config, automatic_leave: { waiting_room_timeout: 540, noone_joined_timeout: 300 } });
-    botId = bot.id;
-    if (!botId) throw new Error('Recall did not return a bot id');
-    ownedBot = true;
-    if (shuttingDown) { await recallRequest(`/bot/${botId}/leave_call/`); process.exit(0); }
-    await mkdir('.recall', { recursive: true });
-    await writeFile('.recall/transcription.json', JSON.stringify({ id: botId, region: env.RECALL_REGION ?? 'ap-northeast-1' }), { mode: 0o600 });
-    console.log(`Bot created: ${botId}. Admit MTG Lab in the meeting. Ctrl+C requests leave.`);
-  } catch {
-    if (ownedBot && botId) await recallRequest(`/bot/${botId}/leave_call/`).catch(() => console.error(`Manual Recall leave required for bot ${botId}`));
-    console.error('Could not create or save Recall bot. Check Recall configuration and .recall/transcription.json.');
-    server.close();
-    process.exitCode = 1;
-  }
-}
+    const state = JSON.parse(await readFile('.recall/current.json', 'utf8'));
+    if (audioJoinTimedOut(state)) {
+      halted = true;
+      console.error('No audio connection arrived after join; leave the bot via the app before retrying.');
+    }
+  } catch { /* No active bot state yet. */ }
+}, 5_000);
+joinWatchdog.unref();
+for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => {
+  halted = true;
+  clearInterval(joinWatchdog);
+  active?.close(1000, 'Worker stopping');
+  server.close();
+});

@@ -50,7 +50,7 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Test CI, Recall and transcription
+      - name: Test CI, Recall, decision/video controls and transcription
         run: npm test
 
       - name: Validate deployment configuration

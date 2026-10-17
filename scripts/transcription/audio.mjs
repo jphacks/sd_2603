@@ -43,3 +43,9 @@ export function recordingConfig(endpoint, token) {
   url.searchParams.set('token', token);
   return { audio_mixed_raw: {}, realtime_endpoints: [{ type: 'websocket', url: url.href, events: ['audio_mixed_raw.data'] }] };
 }
+
+export function audioJoinTimedOut(state, now = Date.now(), timeoutMs = 660_000) {
+  if (state?.audioEnabled !== true || typeof state.createdAt !== 'string') return false;
+  const joined = Date.parse(state.createdAt);
+  return Number.isFinite(joined) && now - joined >= timeoutMs;
+}

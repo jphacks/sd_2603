@@ -1,0 +1,182 @@
+[
+  {
+    "id": "release-progress-1",
+    "group": "progress",
+    "agenda": "次のリリースで提供する機能を決める",
+    "transcript": ["今回は候補を三つに絞りましょう", "検索機能は利用者からの要望が最も多いです", "ただし実装は二週間ほど必要です"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "新しい選択肢と工数が出ている"
+  },
+  {
+    "id": "release-progress-2",
+    "group": "progress",
+    "agenda": "次のリリースで提供する機能を決める",
+    "transcript": ["今回は候補を三つに絞りましょう", "検索機能は利用者からの要望が最も多いです", "ただし実装は二週間ほど必要です", "では検索機能を第一候補にして、残りと比較しましょう"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "決定に向けて進んでいる"
+  },
+  {
+    "id": "release-useful-detour-1",
+    "group": "useful_detour",
+    "agenda": "次のリリースで提供する機能を決める",
+    "transcript": ["検索機能を出したいです", "先月の障害を先に確認できますか", "同じ検索基盤に負荷がかかっていました"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "候補機能のリスク確認であり有益な寄り道"
+  },
+  {
+    "id": "release-useful-detour-2",
+    "group": "useful_detour",
+    "agenda": "次のリリースで提供する機能を決める",
+    "transcript": ["検索機能を出したいです", "先月の障害を先に確認できますか", "同じ検索基盤に負荷がかかっていました", "負荷試験が終わるまで公開を遅らせる必要があります"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "リリース可否に直結する制約が明らかになった"
+  },
+  {
+    "id": "release-drift-1",
+    "group": "drift",
+    "agenda": "次のリリースで提供する機能を決める",
+    "transcript": ["候補は検索と通知ですね", "ところで週末の旅行先は決まりましたか", "温泉に行くつもりです"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "WAIT",
+    "rationale": "短い脱線が始まったばかりで、自然に戻る余地がある"
+  },
+  {
+    "id": "release-drift-2",
+    "group": "drift",
+    "agenda": "次のリリースで提供する機能を決める",
+    "transcript": ["候補は検索と通知ですね", "ところで週末の旅行先は決まりましたか", "温泉に行くつもりです", "私は海の近くがいいです", "宿の予約はどうしましょう"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "INTERVENE",
+    "rationale": "議題と無関係な話が複数ターン続いた"
+  },
+  {
+    "id": "budget-useful-detour",
+    "group": "useful_detour",
+    "agenda": "新サービスの予算上限を決める",
+    "transcript": ["月額三十万円が候補です", "その前に法務審査の費用を確認したいです", "外部委託なら五万円ほど追加です", "それも含めて上限を決めましょう"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "予算の判断材料を確認している"
+  },
+  {
+    "id": "budget-drift",
+    "group": "drift",
+    "agenda": "新サービスの予算上限を決める",
+    "transcript": ["予算上限について話しましょう", "昨日見た映画が面白かったです", "主演の演技がよかったですね", "次はその監督の作品を見たいです"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "INTERVENE",
+    "rationale": "判断材料にならない話が続いている"
+  },
+  {
+    "id": "budget-stall-1",
+    "group": "stall",
+    "agenda": "新サービスの予算上限を決める",
+    "transcript": ["三十万円が妥当だと思います", "私は少し高いと思います", "やはり三十万円がいいです"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "WAIT",
+    "rationale": "反対意見が出た段階で、まだ説明の機会がある"
+  },
+  {
+    "id": "budget-stall-2",
+    "group": "stall",
+    "agenda": "新サービスの予算上限を決める",
+    "transcript": ["三十万円が妥当だと思います", "私は少し高いと思います", "やはり三十万円がいいです", "高いという意見は変わりません", "三十万円にしたいです", "それには賛成できません"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "INTERVENE",
+    "rationale": "根拠や代案のない応酬が続いている"
+  },
+  {
+    "id": "design-progress",
+    "group": "progress",
+    "agenda": "新しい登録画面のデザインを決める",
+    "transcript": ["入力項目を減らした案Aを見せます", "案Bは説明文が丁寧ですね", "初回登録率を測って選びましょう"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "比較基準が提示されている"
+  },
+  {
+    "id": "design-useful-detour",
+    "group": "useful_detour",
+    "agenda": "新しい登録画面のデザインを決める",
+    "transcript": ["案Aのほうがシンプルです", "アクセシビリティの基準も確認しましょう", "キーボード操作だと案Bに問題があります", "その修正工数を見てから選びたいです"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "デザイン選択に必要な品質と工数の確認"
+  },
+  {
+    "id": "design-drift",
+    "group": "drift",
+    "agenda": "新しい登録画面のデザインを決める",
+    "transcript": ["画面案を見比べましょう", "オフィスの観葉植物を増やしたいですね", "窓際に置くといいと思います", "水やり担当は誰にしますか"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "INTERVENE",
+    "rationale": "デザイン判断に無関係な話が続いている"
+  },
+  {
+    "id": "design-stall",
+    "group": "stall",
+    "agenda": "新しい登録画面のデザインを決める",
+    "transcript": ["私は案Aが好きです", "私は案Bが好きです", "やっぱり案Aが好きです", "好みは案Bです", "案Aのほうが好きです"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "INTERVENE",
+    "rationale": "好みの反復だけで比較基準が出ていない"
+  },
+  {
+    "id": "decision-complete",
+    "group": "progress",
+    "agenda": "次のリリースで提供する機能を決める",
+    "transcript": ["検索機能を優先することでいいですか", "賛成です", "決まりました。次は担当者を決めましょう"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "議題の決定が済み、自然に次の作業へ進んでいる"
+  },
+  {
+    "id": "summary-request",
+    "group": "progress",
+    "agenda": "次のリリースで提供する機能を決める",
+    "transcript": ["検索機能を優先しましょう", "通知機能は次回に回します", "決まった内容を整理してもらえますか"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "参加者が自発的に整理を求めている"
+  },
+  {
+    "id": "productive-disagreement",
+    "group": "progress",
+    "agenda": "新サービスの予算上限を決める",
+    "transcript": ["三十万円が妥当だと思います", "私は二十五万円がいいです", "では五万円の差になる運用費を確認しましょう", "外部委託費が月四万円です"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "意見は対立しているが新しい判断材料が出ている"
+  },
+  {
+    "id": "stt-noise-recovery",
+    "group": "stt_noise",
+    "agenda": "次のリリースで提供する機能を決める",
+    "transcript": ["検索のきのう を先に、えー、出しますか", "通知は、あの、後でも大丈夫です", "利用者の要望は検索が多いですね"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "SILENCE",
+    "rationale": "軽い文字起こしノイズがあっても議題は進んでいる"
+  },
+  {
+    "id": "cooldown-drift",
+    "group": "cooldown",
+    "agenda": "新サービスの予算上限を決める",
+    "transcript": ["予算の話に戻りましょう", "週末は何をしましたか", "映画を見ました", "私も見ました"],
+    "secondsSinceLastIntervention": 30,
+    "expectedAction": "SILENCE",
+    "rationale": "直前に介入したので再介入を抑制する"
+  },
+  {
+    "id": "insufficient-context",
+    "group": "insufficient",
+    "agenda": "新サービスの予算上限を決める",
+    "transcript": ["まず費用を確認しましょう", "はい"],
+    "secondsSinceLastIntervention": 120,
+    "expectedAction": "WAIT",
+    "rationale": "判断に必要な発言数に満たない"
+  }
+]
