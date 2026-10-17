@@ -40,7 +40,7 @@ async function setup(transcripts, action = 'WAIT') {
       requests.push(input);
       response.writeHead(200, { 'Content-Type': 'application/json' });
       response.end(JSON.stringify(input.mode === 'idle' ? { video: 'idle' }
-        : { action, reason: 'local integration', message: null, ...(input.mode === 'display' ? { video: 'off_agenda' } : {}) }));
+        : { action, reason: 'Discussion appears off agenda', message: null, ...(input.mode === 'display' ? { video: 'off_agenda' } : {}) }));
     });
   });
   await new Promise(resolve => control.listen(0, '127.0.0.1', resolve));
@@ -116,13 +116,16 @@ test('empty finish is isolated and next utterance still reaches the local WAIT A
   } finally { await trial.cleanup(); }
 });
 
-test('real worker automatically restores idle after a successful intervention without another evaluation', { timeout: 20000 }, async () => {
-  const trial = await setup(['synthetic intervention'], 'INTERVENE');
+test('real worker confirms off-agenda on new finals then automatically restores idle without another evaluation', { timeout: 20000 }, async () => {
+  const trial = await setup(['synthetic first detour', 'synthetic continuing detour'], 'INTERVENE');
   try {
+    trial.utterance();
+    await waitFor(() => trial.requests.length === 1 || trial.socket.readyState !== WebSocket.OPEN, 'No first off-agenda recommendation');
+    assert.deepEqual(trial.requests.map(request => request.mode), ['evaluate']);
     trial.utterance();
     await waitFor(() => trial.requests.some(request => request.mode === 'idle') || trial.socket.readyState !== WebSocket.OPEN,
       'No automatic idle after the intervention', 14000);
-    assert.deepEqual(trial.requests.map(request => request.mode), ['evaluate', 'display', 'idle'], trial.output());
+    assert.deepEqual(trial.requests.map(request => request.mode), ['evaluate', 'evaluate', 'display', 'idle'], trial.output());
     assert.equal(trial.requests.at(-1).botId, botId);
     assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());
     assert.equal(trial.output().includes('Audio processing stopped'), false);

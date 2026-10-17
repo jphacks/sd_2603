@@ -73,12 +73,15 @@ export function createInterventionGate({ agenda, botId, decide, display, restore
   let pendingAudio = false;
   let idleTimer;
   let displayEpoch = 0;
+  let finalRevision = 0;
+  let offAgendaCandidate;
   let videoQueue = Promise.resolve();
   const videoAbort = new AbortController();
 
   const stop = () => {
     stopped = true;
     displayEpoch++;
+    offAgendaCandidate = undefined;
     for (const timer of [decisionTimer, speakingTimer, idleTimer]) if (timer !== undefined) unschedule(timer);
     decisionTimer = speakingTimer = idleTimer = undefined;
     videoAbort.abort();
@@ -109,6 +112,18 @@ export function createInterventionGate({ agenda, botId, decide, display, restore
     }, displayMs);
   };
   const canDisplay = value => !stopped && !pendingAudio && !speaking && generation === value && now() - lastVoice >= quietMs;
+  // A model recommendation is not a display instruction. Off-agenda cards need
+  // confirmation on a later final revision; repeating the same context cannot vote twice.
+  const confirmsDisplay = (result, revision) => {
+    if (result.reason === 'Discussion appears stalled') {
+      offAgendaCandidate = undefined;
+      return true;
+    }
+    const previous = offAgendaCandidate;
+    if (previous && previous.reason === result.reason) return revision > previous.revision;
+    offAgendaCandidate = { reason: result.reason, revision };
+    return false;
+  };
 
   const run = async () => {
     decisionTimer = undefined;
@@ -118,15 +133,19 @@ export function createInterventionGate({ agenda, botId, decide, display, restore
     const next = [...transcript, ...batch].slice(-30);
     while (next.length > 1 && Buffer.byteLength(JSON.stringify(next)) > 8_000) next.shift();
     const currentGeneration = generation;
+    const currentRevision = finalRevision;
     try {
       const result = await decide({ botId, agenda, transcript: next, secondsSinceLastIntervention: Number.isFinite(lastIntervention) ? Math.max(0, (now() - lastIntervention) / 1000) : 60 });
       transcript.splice(0, transcript.length, ...next);
       if (generation === currentGeneration && !finalQueue.length) hasSpeech = false;
-      if (result.action === 'INTERVENE' && canDisplay(currentGeneration)) {
+      if (canDisplay(currentGeneration) && result.action !== 'INTERVENE') {
+        offAgendaCandidate = undefined;
+      } else if (canDisplay(currentGeneration) && confirmsDisplay(result, currentRevision)) {
         await changeVideo(async () => {
           if (!canDisplay(currentGeneration)) return { cancelled: true };
           const displayed = await display({ botId, agenda, result, generation: currentGeneration, signal: videoAbort.signal });
           if (!stopped && !displayed?.cancelled) {
+            offAgendaCandidate = undefined;
             lastIntervention = now();
             armIdle();
           }
@@ -174,6 +193,7 @@ export function createInterventionGate({ agenda, botId, decide, display, restore
       partial = '';
       const text = part.text?.trim();
       if (!text || !hasSpeech) return;
+      finalRevision++;
       finalQueue.push(text.slice(0, 1000));
       if (finalQueue.length > 30) finalQueue = finalQueue.slice(-30);
       arm();

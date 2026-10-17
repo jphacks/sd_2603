@@ -74,7 +74,7 @@ test('speech longer than five seconds and a short pause never trigger mid-speech
   const clock = fakeClock();
   const decisions = [];
   const displays = [];
-  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock, decide: async input => { decisions.push(input); return { action: 'INTERVENE', reason: 'drift', message: 'return' }; }, display: async input => displays.push(input) });
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock, decide: async input => { decisions.push(input); return { action: 'INTERVENE', reason: 'Discussion appears stalled', message: 'return' }; }, display: async input => displays.push(input) });
   assert.equal(isVoicedPcm(silent), false);
   assert.equal(isVoicedPcm(voiced), true);
   gate.onPart({ type: 'transcript-final', text: 'silence hallucination' });
@@ -156,7 +156,7 @@ test('decision failure stops the gate and reports degradation', async () => {
   assert.equal(errors, 1);
 });
 
-const intervention = { action: 'INTERVENE', reason: 'drift', message: 'return' };
+const intervention = { action: 'INTERVENE', reason: 'Discussion appears stalled', message: 'return' };
 const tick = () => new Promise(resolve => setImmediate(resolve));
 function utterance(gate, text = 'confirmed') {
   gate.onAudio(voiced);
@@ -373,5 +373,124 @@ test('speech resuming while display waits behind idle is checked again before di
   finishIdle();
   await tick();
   assert.equal(displays, 1);
+  gate.stop();
+});
+
+// This score still recommends action in Jev v2. The worker must hold the first
+// off-agenda recommendation rather than pretend the model became more accurate.
+const offAgenda = { action: 'INTERVENE', reason: 'Discussion appears off agenda', message: 'return',
+  diagnostic: { drifted: 0.95, stalled: 0.1, tangentIsRelevant: 0.1, interveneNow: 0.73 } };
+
+test('a brief aside followed by on-track conversation is held and clears confirmation', async () => {
+  const clock = fakeClock();
+  const recommendations = [offAgenda, { action: 'SILENCE', reason: 'Conversation is progressing' }, offAgenda];
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => recommendations.shift(), display: async () => { displays++; },
+  });
+  for (const text of ['brief aside', 'back to agenda', 'another single aside']) {
+    utterance(gate, text);
+    await clock.advance(1500);
+  }
+  assert.equal(displays, 0);
+  assert.equal(offAgenda.action, 'INTERVENE', 'the model recommendation is not rewritten');
+  gate.stop();
+});
+
+test('new final confirms off-agenda across voiced and pending audio, then success resets confirmation', async () => {
+  const clock = fakeClock();
+  const inputs = [];
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async input => { inputs.push(input); return offAgenda; }, display: async () => { displays++; },
+  });
+  utterance(gate, 'first detour');
+  await clock.advance(1500);
+  assert.equal(displays, 0);
+  gate.onAudio(voiced);
+  gate.setPendingAudio(true);
+  await clock.advance(2000);
+  assert.equal(inputs.length, 1, 'starting audio and waiting for STT cannot count as confirmation');
+  gate.onPart({ type: 'transcript-final', text: 'continuing detour' });
+  gate.setPendingAudio(false);
+  await clock.advance(0);
+  assert.equal(displays, 1);
+  assert.deepEqual(inputs[1].transcript, ['first detour', 'continuing detour']);
+  assert.equal(inputs[1].secondsSinceLastIntervention, 60, 'a held card must not start cooldown');
+  utterance(gate, 'another final after display');
+  await clock.advance(1500);
+  assert.equal(displays, 1, 'successful display clears the old candidate');
+  assert.equal(inputs[2].secondsSinceLastIntervention, 1.5);
+  gate.stop();
+});
+
+test('same-context repeats, duplicate final without new speech, and audio alone never confirm', async () => {
+  const clock = fakeClock();
+  let decisions = 0;
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => { decisions++; return offAgenda; }, display: async () => { displays++; },
+  });
+  utterance(gate, 'first detour');
+  await clock.advance(1500);
+  gate.onPart({ type: 'transcript-final', text: 'first detour' });
+  for (let i = 0; i < 3; i++) { gate.setPendingAudio(false); await clock.advance(1500); }
+  gate.onAudio(voiced);
+  await clock.advance(1500);
+  assert.equal(decisions, 1);
+  assert.equal(displays, 0);
+  gate.stop();
+  utterance(gate, 'after stop');
+  await clock.advance(1500);
+  assert.equal(decisions, 1);
+});
+
+test('stale off-agenda recommendation is not counted; two later valid finals are required', async () => {
+  const clock = fakeClock();
+  let finishFirst;
+  let decisions = 0;
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: () => ++decisions === 1 ? new Promise(resolve => { finishFirst = resolve; }) : Promise.resolve(offAgenda),
+    display: async () => { displays++; },
+  });
+  utterance(gate, 'old context');
+  await clock.advance(1500);
+  utterance(gate, 'new context while deciding');
+  finishFirst(offAgenda);
+  await tick();
+  await clock.advance(1500);
+  assert.equal(decisions, 2);
+  assert.equal(displays, 0);
+  utterance(gate, 'continued detour');
+  await clock.advance(1500);
+  assert.equal(displays, 1);
+  gate.stop();
+});
+
+test('valid WAIT and changed reasons reset off-agenda confirmation', async () => {
+  const clock = fakeClock();
+  const results = [offAgenda, { action: 'WAIT' }, offAgenda,
+    { ...offAgenda, reason: 'different off-agenda reason' }, offAgenda, offAgenda];
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => results.shift(), display: async () => { displays++; },
+  });
+  for (let i = 0; i < 5; i++) { utterance(gate, `final ${i}`); await clock.advance(1500); assert.equal(displays, 0); }
+  utterance(gate, 'sixth final');
+  await clock.advance(1500);
+  assert.equal(displays, 1);
+  gate.stop();
+});
+
+test('stalled recommendation displays immediately and is not an off-agenda confirmation', async () => {
+  const clock = fakeClock();
+  const results = [offAgenda, intervention, offAgenda];
+  const displayedReasons = [];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => results.shift(), display: async input => { displayedReasons.push(input.result.reason); },
+  });
+  for (let i = 0; i < 3; i++) { utterance(gate, `final ${i}`); await clock.advance(1500); }
+  assert.deepEqual(displayedReasons, ['Discussion appears stalled']);
   gate.stop();
 });
