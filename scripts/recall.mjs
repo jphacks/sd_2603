@@ -19,6 +19,7 @@ const LIVE = new Set([
 ]);
 const JOIN_OK = new Set(['in_call_not_recording', 'in_call_recording']);
 const JOIN_FAIL = new Set(['fatal', 'call_ended', 'done']);
+const FINISHED = new Set(['done', 'fatal', 'call_ended', 'media_expired']);
 
 function loadEnvFile(file) {
   if (!existsSync(file)) return;
@@ -229,6 +230,59 @@ export class RecallCliError extends Error {
   }
 }
 
+export const BOT_NAME = 'MTG Lab';
+export const AGENDA_CHAT_PROMPT =
+  'アジェンダ: のあとに今日決めることを書くか、リンクを知っている全員が開ける Google ドキュメントの URL を貼ってください。';
+
+export function chatRecordingConfig(env) {
+  const webhookUrl = String(env?.RECALL_CHAT_WEBHOOK_URL || '').trim();
+  if (!webhookUrl) return null;
+  if (!/^https:\/\/.+/i.test(webhookUrl)) {
+    throw new RecallCliError('RECALL_CHAT_WEBHOOK_URL は https:// で始めてください。', {
+      status: 400,
+      exitCode: 2,
+    });
+  }
+  return {
+    participant_events: {},
+    retention: null,
+    realtime_endpoints: [
+      {
+        type: 'webhook',
+        url: webhookUrl,
+        events: ['participant_events.chat_message'],
+      },
+    ],
+  };
+}
+
+function createBotBody(meetingUrl, env, audioConfig = null) {
+  const chatConfig = chatRecordingConfig(env);
+  const recording = audioConfig && chatConfig
+    ? { ...audioConfig, ...chatConfig, realtime_endpoints: [...audioConfig.realtime_endpoints, ...chatConfig.realtime_endpoints] }
+    : audioConfig ?? chatConfig;
+  return {
+    meeting_url: meetingUrl,
+    bot_name: BOT_NAME,
+    recording_config: recording,
+    ...(chatConfig
+      ? {
+          chat: {
+            on_bot_join: {
+              send_to: 'everyone',
+              message: AGENDA_CHAT_PROMPT,
+              pin: true,
+            },
+          },
+        }
+      : {}),
+    automatic_leave: {
+      waiting_room_timeout: 540,
+      noone_joined_timeout: 300,
+    },
+  };
+}
+
 export async function sendBot(meetingUrl, io, agenda) {
   if (!/^https:\/\/.+/i.test(String(meetingUrl ?? ''))) {
     throw new RecallCliError('会議 URL は https:// で始めてください。', { status: 400, exitCode: 2 });
@@ -262,7 +316,7 @@ export async function sendBot(meetingUrl, io, agenda) {
           { status: 409 },
         );
       }
-      if (code === 'done' || code === 'fatal' || code === 'call_ended') {
+      if (FINISHED.has(code)) {
         await clearState(io, existing.id);
       } else {
         throw new RecallCliError(
@@ -279,15 +333,7 @@ export async function sendBot(meetingUrl, io, agenda) {
 
   const created = await recallFetch(io, '/bot/', {
     method: 'POST',
-    body: {
-      meeting_url: meetingUrl,
-      bot_name: 'MTG Lab',
-      recording_config: audioConfig,
-      automatic_leave: {
-        waiting_room_timeout: 540,
-        noone_joined_timeout: 300,
-      },
-    },
+    body: createBotBody(meetingUrl, io.env, audioConfig),
   });
   const botId = created.id;
   if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
@@ -450,7 +496,7 @@ export async function removeBot(io, id) {
   }
   const polled = await poll(io, id, {
     timeoutMs: io.leaveTimeoutMs,
-    succeed: (change) => change.code === 'call_ended' || change.code === 'done',
+    succeed: (change) => FINISHED.has(change.code) && change.code !== 'fatal',
     fail: (change) => change.code === 'fatal',
   });
   if (polled.ok) {

@@ -1,5 +1,7 @@
 import { z } from "zod";
-import { judge } from "@/lib/judge";
+import { AGENDA_CHAR_LIMIT, agendaForJudge } from "@/lib/agenda/agenda";
+import { monitoredJudge } from "@/lib/monitor/judge";
+import { monitorStore } from "@/lib/monitor/store";
 import { JevError } from "@/lib/judge/jev";
 import { applyVideoDecision, authorizedControl, displayVideoResult, restoreIdleVideo } from "@/lib/recall/controller";
 import { outputVideo, RecallVideoError, renderVideoJpeg } from "@/lib/recall/video";
@@ -9,7 +11,7 @@ const BotIdSchema = z.string().uuid();
 const JudgeRequestSchema = z.object({
   mode: z.literal("judge"),
   botId: BotIdSchema,
-  agenda: z.string().trim().min(1).max(500),
+  agenda: z.string().trim().min(1).max(AGENDA_CHAR_LIMIT),
   transcript: z.array(z.string().trim().min(1).max(1000)).min(1).max(30),
   secondsSinceLastIntervention: z.number().finite().min(0),
 });
@@ -79,10 +81,16 @@ export async function POST(request: Request) {
   try {
     const input = InputSchema.parse(await readBoundedJson(request));
     if (input.mode === "judge") {
-      return Response.json(await applyVideoDecision(input, { judge, ...videoDependencies }));
+      const agenda = agendaForJudge(input.botId, input.agenda);
+      const result = await applyVideoDecision({ ...input, agenda }, {
+        judge: (value) => monitoredJudge(input.botId, value),
+        ...videoDependencies,
+        onIntervened: (id) => monitorStore.intervened(id),
+      });
+      return Response.json({ ...result, agenda });
     }
     if (input.mode === "evaluate") {
-      return Response.json(await judge(input));
+      return Response.json(await monitoredJudge(input.botId, input));
     }
     if (input.mode === "display") {
       const key = `${input.botId}:${input.requestId}`;
@@ -91,7 +99,11 @@ export async function POST(request: Request) {
         await displaying.get(key);
         return Response.json({ video: "unchanged", duplicate: true });
       }
-      const task = displayVideoResult(input, { ...videoDependencies, guard: () => confirmQuiet(input.botId, input.generation) });
+      const task = displayVideoResult(input, {
+        ...videoDependencies,
+        guard: () => confirmQuiet(input.botId, input.generation),
+        onIntervened: (id) => monitorStore.intervened(id),
+      });
       displaying.set(key, task);
       let result;
       try { result = await task; } finally { displaying.delete(key); }

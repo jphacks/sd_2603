@@ -107,6 +107,38 @@ test('join waits until the bot is in the call and stores its id', async () => {
   }
 });
 
+test('join replaces a bot whose media has expired', async () => {
+  const box = fixture();
+  mkdirSync(box.dir, { recursive: true });
+  writeFileSync(box.statePath, JSON.stringify({ id: 'bot-old', region: 'ap-northeast-1' }));
+  const posts = [];
+  try {
+    const cap = capture({
+      statePath: box.statePath,
+      fetch: async (url, options) => {
+        if (options?.method === 'POST' && String(url).endsWith('/bot/')) {
+          posts.push(JSON.parse(options.body));
+          return jsonResponse(200, { id: 'bot-new' });
+        }
+        if (String(url).endsWith('/bot/bot-old/')) {
+          return jsonResponse(200, {
+            status_changes: [{ code: 'media_expired', created_at: '2026-10-17T00:00:00Z' }],
+          });
+        }
+        return jsonResponse(200, {
+          status_changes: [{ code: 'in_call_not_recording', created_at: '2026-10-17T00:00:02Z' }],
+        });
+      },
+    });
+    assert.equal(await run(['join', '--url', 'https://meet.google.com/abc-defg-hij'], cap.io), 0);
+    assert.equal(posts.length, 1);
+    assert.equal(JSON.parse(readFileSync(box.statePath, 'utf8')).id, 'bot-new');
+    assert.equal(cap.stderr.join('\n').includes('leave を試してください'), false);
+  } finally {
+    box.cleanup();
+  }
+});
+
 test('join refuses while a bot is still in the call', async () => {
   const box = fixture();
   mkdirSync(box.dir, { recursive: true });
@@ -294,6 +326,29 @@ test('sendBot creates one silent bot and does not wait for admission', async () 
   }
 });
 
+test('removeBot treats media_expired as left', async () => {
+  const box = fixture();
+  mkdirSync(box.dir, { recursive: true });
+  writeFileSync(box.statePath, JSON.stringify({ id: 'bot-1' }));
+  try {
+    const io = capture({
+      statePath: box.statePath,
+      fetch: async (url) => {
+        if (String(url).endsWith('/leave_call/')) return jsonResponse(200, {});
+        return jsonResponse(200, {
+          status_changes: [{ code: 'media_expired', created_at: '2026-10-17T00:00:03Z' }],
+        });
+      },
+    }).io;
+    const result = await removeBot(io, 'bot-1');
+    assert.equal(result.left, true);
+    assert.equal(result.code, 'media_expired');
+    assert.equal(exists(box.statePath), false);
+  } finally {
+    box.cleanup();
+  }
+});
+
 test('removeBot asks the bot to leave and deletes the state file', async () => {
   const box = fixture();
   mkdirSync(box.dir, { recursive: true });
@@ -317,6 +372,59 @@ test('removeBot asks the bot to leave and deletes the state file', async () => {
   }
 });
 
+test('join keeps recording disabled unless a chat webhook URL is configured', async () => {
+  const box = fixture();
+  const posts = [];
+  try {
+    const cap = capture({
+      statePath: box.statePath,
+      env: { RECALL_CHAT_WEBHOOK_URL: 'https://demo.example/api/recall/chat' },
+      fetch: async (url, options) => {
+        if (options?.method === 'POST') {
+          posts.push(JSON.parse(options.body));
+          return jsonResponse(200, { id: 'bot-chat' });
+        }
+        return jsonResponse(200, {
+          status_changes: [{ code: 'in_call_not_recording', created_at: '2026-10-17T00:00:02Z' }],
+        });
+      },
+    });
+    assert.equal(await run(['join', '--url', 'https://meet.google.com/abc-defg-hij'], cap.io), 0);
+    assert.equal(posts[0].recording_config.retention, null);
+    assert.deepEqual(posts[0].recording_config.participant_events, {});
+    assert.deepEqual(posts[0].recording_config.realtime_endpoints, [{
+      type: 'webhook',
+      url: 'https://demo.example/api/recall/chat',
+      events: ['participant_events.chat_message'],
+    }]);
+    assert.equal(posts[0].chat.on_bot_join.send_to, 'everyone');
+    assert.equal(posts[0].chat.on_bot_join.pin, true);
+    assert.match(posts[0].chat.on_bot_join.message, /アジェンダ:/);
+  } finally {
+    box.cleanup();
+  }
+});
+
+test('join rejects a chat webhook URL that is not https', async () => {
+  const box = fixture();
+  let posts = 0;
+  try {
+    const cap = capture({
+      statePath: box.statePath,
+      env: { RECALL_CHAT_WEBHOOK_URL: 'http://demo.example/api/recall/chat' },
+      fetch: async () => {
+        posts += 1;
+        return jsonResponse(200, { id: 'bot-chat' });
+      },
+    });
+    assert.equal(await run(['join', '--url', 'https://meet.google.com/abc-defg-hij'], cap.io), 2);
+    assert.equal(posts, 0);
+    assert.match(cap.stderr.join('\n'), /RECALL_CHAT_WEBHOOK_URL/);
+  } finally {
+    box.cleanup();
+  }
+});
+
 function exists(file) {
   try {
     readFileSync(file);
@@ -327,7 +435,7 @@ function exists(file) {
   }
 }
 
-test('audio opt-in uses one UI-owned bot with mixed-audio websocket and explicit agenda', async () => {
+for (const withChat of [false, true]) test(`audio opt-in uses one UI-owned bot with explicit agenda${withChat ? ' and chat webhook' : ''}`, async () => {
   const box = fixture();
   const requests = [];
   try {
@@ -337,6 +445,7 @@ test('audio opt-in uses one UI-owned bot with mixed-audio websocket and explicit
         ENABLE_REALTIME_TRANSCRIPTION: 'true', AI_PROVIDER: 'jev', ALLOW_PAID_AI: 'true', AI_GATEWAY_API_KEY: 'test-only',
         RECALL_CONTROL_TOKEN: 'c'.repeat(40), RECALL_AUDIO_TOKEN: 'a'.repeat(40),
         RECALL_AUDIO_PUBLIC_URL: 'wss://example.test', RECALL_AUDIO_PORT: '8787',
+        ...(withChat ? { RECALL_CHAT_WEBHOOK_URL: 'https://example.test/api/recall/chat' } : {}),
       },
       fetch: async (url, options) => {
         requests.push({ url: String(url), options });
@@ -350,6 +459,14 @@ test('audio opt-in uses one UI-owned bot with mixed-audio websocket and explicit
     const body = JSON.parse(requests[1].options.body);
     assert.deepEqual(body.recording_config.realtime_endpoints[0].events, ['audio_mixed_raw.data']);
     assert.equal(body.recording_config.audio_mixed_raw !== undefined, true);
+    assert.equal(body.recording_config.realtime_endpoints.length, withChat ? 2 : 1);
+    if (withChat) {
+      assert.deepEqual(body.recording_config.realtime_endpoints[1], {
+        type: 'webhook', url: 'https://example.test/api/recall/chat', events: ['participant_events.chat_message'],
+      });
+      assert.equal(body.recording_config.retention, null);
+      assert.equal(body.chat.on_bot_join.pin, true);
+    }
     const state = JSON.parse(readFileSync(box.statePath, 'utf8'));
     assert.equal(state.agenda, 'Release plan');
   } finally { box.cleanup(); }
