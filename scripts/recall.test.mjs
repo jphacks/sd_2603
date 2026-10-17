@@ -107,6 +107,38 @@ test('join waits until the bot is in the call and stores its id', async () => {
   }
 });
 
+test('join replaces a bot whose media has expired', async () => {
+  const box = fixture();
+  mkdirSync(box.dir, { recursive: true });
+  writeFileSync(box.statePath, JSON.stringify({ id: 'bot-old', region: 'ap-northeast-1' }));
+  const posts = [];
+  try {
+    const cap = capture({
+      statePath: box.statePath,
+      fetch: async (url, options) => {
+        if (options?.method === 'POST' && String(url).endsWith('/bot/')) {
+          posts.push(JSON.parse(options.body));
+          return jsonResponse(200, { id: 'bot-new' });
+        }
+        if (String(url).endsWith('/bot/bot-old/')) {
+          return jsonResponse(200, {
+            status_changes: [{ code: 'media_expired', created_at: '2026-10-17T00:00:00Z' }],
+          });
+        }
+        return jsonResponse(200, {
+          status_changes: [{ code: 'in_call_not_recording', created_at: '2026-10-17T00:00:02Z' }],
+        });
+      },
+    });
+    assert.equal(await run(['join', '--url', 'https://meet.google.com/abc-defg-hij'], cap.io), 0);
+    assert.equal(posts.length, 1);
+    assert.equal(JSON.parse(readFileSync(box.statePath, 'utf8')).id, 'bot-new');
+    assert.equal(cap.stderr.join('\n').includes('leave を試してください'), false);
+  } finally {
+    box.cleanup();
+  }
+});
+
 test('join refuses while a bot is still in the call', async () => {
   const box = fixture();
   mkdirSync(box.dir, { recursive: true });
@@ -289,6 +321,29 @@ test('sendBot creates one silent bot and does not wait for admission', async () 
       () => sendBot('http://meet.google.com/abc', io),
       (error) => error.status === 400,
     );
+  } finally {
+    box.cleanup();
+  }
+});
+
+test('removeBot treats media_expired as left', async () => {
+  const box = fixture();
+  mkdirSync(box.dir, { recursive: true });
+  writeFileSync(box.statePath, JSON.stringify({ id: 'bot-1' }));
+  try {
+    const io = capture({
+      statePath: box.statePath,
+      fetch: async (url) => {
+        if (String(url).endsWith('/leave_call/')) return jsonResponse(200, {});
+        return jsonResponse(200, {
+          status_changes: [{ code: 'media_expired', created_at: '2026-10-17T00:00:03Z' }],
+        });
+      },
+    }).io;
+    const result = await removeBot(io, 'bot-1');
+    assert.equal(result.left, true);
+    assert.equal(result.code, 'media_expired');
+    assert.equal(exists(box.statePath), false);
   } finally {
     box.cleanup();
   }

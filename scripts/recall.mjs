@@ -18,6 +18,7 @@ const LIVE = new Set([
 ]);
 const JOIN_OK = new Set(['in_call_not_recording', 'in_call_recording']);
 const JOIN_FAIL = new Set(['fatal', 'call_ended', 'done']);
+const FINISHED = new Set(['done', 'fatal', 'call_ended', 'media_expired']);
 
 function loadEnvFile(file) {
   if (!existsSync(file)) return;
@@ -294,7 +295,7 @@ export async function sendBot(meetingUrl, io) {
           { status: 409 },
         );
       }
-      if (code === 'done' || code === 'fatal' || code === 'call_ended') {
+      if (FINISHED.has(code)) {
         await clearState(io, existing.id);
       } else {
         throw new RecallCliError(
@@ -473,7 +474,7 @@ export async function removeBot(io, id) {
   }
   const polled = await poll(io, id, {
     timeoutMs: io.leaveTimeoutMs,
-    succeed: (change) => change.code === 'call_ended' || change.code === 'done',
+    succeed: (change) => FINISHED.has(change.code) && change.code !== 'fatal',
     fail: (change) => change.code === 'fatal',
   });
   if (polled.ok) {
