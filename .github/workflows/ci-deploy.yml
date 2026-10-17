@@ -51,7 +51,7 @@ jobs:
         run: npm run lint
 
       - name: Test CI helpers and decision/video controls
-        run: node --test scripts/ci/helpers.test.mjs scripts/recall.test.mjs lib/judge/jev.test.mjs lib/recall/controller.test.mjs lib/recall/video.test.mjs lib/agenda/agenda.test.mjs
+        run: node --test scripts/ci/helpers.test.mjs scripts/recall.test.mjs lib/judge/jev.test.mjs lib/recall/controller.test.mjs lib/recall/video.test.mjs lib/agenda/agenda.test.mjs lib/monitor/*.test.mjs
 
       - name: Validate deployment configuration
         if: env.DEPLOY_TARGET != ''
