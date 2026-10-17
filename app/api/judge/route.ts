@@ -1,8 +1,9 @@
 import { z } from "zod";
-import { judge } from "@/lib/judge";
+import { monitoredJudge } from "@/lib/monitor/judge";
 import { JevError } from "@/lib/judge/jev";
 
 const InputSchema = z.object({
+  sessionId: z.string().regex(/^[A-Za-z0-9_-]{1,128}$/).optional(),
   agenda: z.string().trim().min(1).max(500),
   transcript: z.array(z.string().trim().min(1).max(1000)).max(30),
   secondsSinceLastIntervention: z.number().finite().min(0),
@@ -11,7 +12,7 @@ const InputSchema = z.object({
 export async function POST(request: Request) {
   try {
     const input = InputSchema.parse(await request.json());
-    const result = await judge(input);
+    const result = await monitoredJudge(input.sessionId ?? "judge", input);
 
     return Response.json(result);
   } catch (error) {

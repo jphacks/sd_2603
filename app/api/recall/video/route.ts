@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { judge } from "@/lib/judge";
+import { monitoredJudge } from "@/lib/monitor/judge";
+import { monitorStore } from "@/lib/monitor/store";
 import { JevError } from "@/lib/judge/jev";
 import { applyVideoDecision, authorizedControl, restoreIdleVideo } from "@/lib/recall/controller";
 import { outputVideo, RecallVideoError, renderVideoJpeg } from "@/lib/recall/video";
@@ -49,7 +50,12 @@ export async function POST(request: Request) {
   try {
     const input = InputSchema.parse(await readBoundedJson(request));
     if (input.mode === "judge") {
-      return Response.json(await applyVideoDecision(input, { judge, ...videoDependencies }));
+      const result = await applyVideoDecision(input, {
+        judge: (value) => monitoredJudge(input.botId, value),
+        ...videoDependencies,
+        onIntervened: (id) => monitorStore.intervened(id),
+      });
+      return Response.json(result);
     }
     return Response.json(await restoreIdleVideo(input.botId, videoDependencies));
   } catch (error) {

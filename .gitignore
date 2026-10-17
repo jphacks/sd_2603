@@ -43,3 +43,8 @@ next-env.d.ts
 
 # Recall CLI bot id. Do not commit.
 .recall/
+
+# Downloaded local settings
+env.download
+env.download:Zone.Identifier
+*Zone.Identifier

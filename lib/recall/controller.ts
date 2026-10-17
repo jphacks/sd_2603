@@ -15,6 +15,7 @@ type Dependencies = {
   judge: (input: JudgeInput) => Promise<JudgeResult>;
   render: (view: VideoView) => Promise<Buffer>;
   output: (botId: string, jpeg: Buffer) => Promise<void>;
+  onIntervened?: (botId: string) => void;
 };
 
 export async function applyVideoDecision(
@@ -29,6 +30,7 @@ export async function applyVideoDecision(
     ? { kind: "stalled" }
     : { kind: "off_agenda", agenda: input.agenda };
   await dependencies.output(input.botId, await dependencies.render(view));
+  dependencies.onIntervened?.(input.botId);
   return { ...result, video: view.kind };
 }
 
