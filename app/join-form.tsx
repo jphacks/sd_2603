@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 
 type MaterialItem = { name: string; saved: boolean; message: string | null };
@@ -117,6 +118,11 @@ export function JoinForm() {
         <h1 className="text-2xl font-semibold">会議へ参加</h1>
         <p className="mt-2 text-sm text-zinc-600">
           会議 URL を渡すと、MTG Lab が録画せずに入室します。Meet の参加申請を許可してください。テキストの議案書も一緒に渡すと、そのファイルを読んでアジェンダにします。
+        </p>
+        <p className="mt-2 text-sm">
+          <Link className="text-[#2c628e] underline underline-offset-4" href="/about">
+            AIDA の振る舞いと使い方
+          </Link>
         </p>
       </header>
       <form

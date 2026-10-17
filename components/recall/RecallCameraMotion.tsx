@@ -37,10 +37,16 @@ const presentations: Record<CameraMotionMode, CameraPresentation> = {
   },
 };
 
+export type CameraMotionRequest = { mode: CameraMotionMode; id: number };
+
 type RecallCameraMotionProps = {
   initialMode?: CameraMotionMode;
   embedded?: boolean;
   autoplay?: boolean;
+  /** Renders only the camera frame inside another page, without the preview controls. */
+  inline?: boolean;
+  /** Switches the mode from outside; a new id replays the same transition as the preview buttons. */
+  request?: CameraMotionRequest;
 };
 
 type MotionPhase = "calm" | "attention" | "settling" | "message" | "returning";
@@ -49,6 +55,8 @@ export function RecallCameraMotion({
   initialMode = "on-track",
   embedded = false,
   autoplay = false,
+  inline = false,
+  request,
 }: RecallCameraMotionProps) {
   const [mode, setMode] = useState<CameraMotionMode>(initialMode);
   const [phase, setPhase] = useState<MotionPhase>(
@@ -60,6 +68,29 @@ export function RecallCameraMotion({
   const visualPresentation = phase === "returning" && returnPresentation
     ? returnPresentation
     : presentation;
+
+  const chooseMode = (nextMode: CameraMotionMode) => {
+    setMotionId((value) => value + 1);
+    if (nextMode === "on-track") {
+      if (mode === "on-track") {
+        setPhase("calm");
+        return;
+      }
+      setReturnPresentation(presentations[mode]);
+      setMode("on-track");
+      setPhase("returning");
+      return;
+    }
+    setReturnPresentation(null);
+    setMode(nextMode);
+    setPhase("attention");
+  };
+
+  const [handledRequestId, setHandledRequestId] = useState(request?.id);
+  if (request && request.id !== handledRequestId) {
+    setHandledRequestId(request.id);
+    chooseMode(request.mode);
+  }
 
   const playAttention = useCallback(() => {
     if (mode === "on-track") return;
@@ -90,23 +121,6 @@ export function RecallCameraMotion({
     return () => clearInterval(repeatingPreview);
   }, [autoplay, mode, playAttention]);
 
-  const chooseMode = (nextMode: CameraMotionMode) => {
-    setMotionId((value) => value + 1);
-    if (nextMode === "on-track") {
-      if (mode === "on-track") {
-        setPhase("calm");
-        return;
-      }
-      setReturnPresentation(presentations[mode]);
-      setMode("on-track");
-      setPhase("returning");
-      return;
-    }
-    setReturnPresentation(null);
-    setMode(nextMode);
-    setPhase("attention");
-  };
-
   const stageStyle = {
     "--target-background": `url("${visualPresentation.background}")`,
     "--orb-rgb": visualPresentation.orbRgb,
@@ -123,8 +137,13 @@ export function RecallCameraMotion({
         ? styles.returning
       : "";
 
+  const Root = inline ? "div" : "main";
+
   return (
-    <main className={`${styles.page} ${embedded ? styles.embedded : ""}`} style={stageStyle}>
+    <Root
+      className={`${styles.page} ${embedded ? styles.embedded : ""} ${inline ? styles.inline : ""}`}
+      style={stageStyle}
+    >
       <section className={styles.cameraFrame} aria-label="FocusのRecallカメラ出力">
         <div className={styles.stage}>
           <div className={styles.baseBackground} aria-hidden="true" />
@@ -174,7 +193,7 @@ export function RecallCameraMotion({
         </div>
       </section>
 
-      {!embedded && (
+      {!embedded && !inline && (
         <section className={styles.controls} aria-label="カメラモーションの表示確認">
           <div>
             <p className={styles.controlEyebrow}>CAMERA MOTION PREVIEW</p>
@@ -205,6 +224,6 @@ export function RecallCameraMotion({
           </div>
         </section>
       )}
-    </main>
+    </Root>
   );
 }
