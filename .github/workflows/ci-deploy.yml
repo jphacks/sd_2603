@@ -51,7 +51,7 @@ jobs:
         run: npm run lint
 
       - name: Test CI helpers
-        run: node --test scripts/ci/helpers.test.mjs
+        run: node --test scripts/ci/helpers.test.mjs lib/judge/jev.test.mjs
 
       - name: Validate deployment configuration
         if: env.DEPLOY_TARGET != ''
