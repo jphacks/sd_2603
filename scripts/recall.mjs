@@ -2,15 +2,6 @@ import { existsSync, readFileSync } from 'node:fs';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import {
-  createBot,
-  latestStatusChange,
-  leaveCall,
-  recallRegion,
-  retrieveBot,
-  sortedStatusChanges,
-} from '../lib/recall/client.mjs';
-import { silentJoinBody } from '../lib/recall/meeting.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STATE_PATH = path.join(ROOT, '.recall', 'current.json');
@@ -69,6 +60,22 @@ function parseArgs(argv) {
   return { command: positional[0], extra: positional.slice(1), flags };
 }
 
+function regionOf(env) {
+  return (env.RECALL_REGION || 'ap-northeast-1').trim();
+}
+
+function formatHttpError(status, body) {
+  if (status === 401) {
+    return '401: API キーと RECALL_REGION が同じリージョンか確認してください。';
+  }
+  if (status === 507) {
+    return '507: アドホック枠が足りません。待って 1 回だけ再実行してください。';
+  }
+  const detail = body?.detail || body?.message || body?.error || '';
+  const text = typeof detail === 'string' ? detail : JSON.stringify(detail);
+  return `Recall API ${status}${text ? `: ${text}` : ''}`;
+}
+
 function hintFor(change) {
   const sub = change?.sub_code;
   if (
@@ -89,10 +96,54 @@ function hintFor(change) {
   return '';
 }
 
+function sortedChanges(bot) {
+  const changes = Array.isArray(bot?.status_changes) ? [...bot.status_changes] : [];
+  changes.sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
+  return changes;
+}
+
 function formatChange(change) {
   const sub = change.sub_code ? `  ${change.sub_code}` : '';
   const message = change.message ? `  ${change.message}` : '';
   return `${change.created_at ?? ''}  ${change.code}${sub}${message}`.trim();
+}
+
+function latestChange(bot) {
+  return sortedChanges(bot).at(-1) ?? null;
+}
+
+async function recallFetch(io, pathName, options = {}) {
+  const key = String(io.env.RECALL_API_KEY || '').trim();
+  if (!key) {
+    const error = new Error('RECALL_API_KEY がありません。sd_2603/.env に入れてください。');
+    error.status = 0;
+    throw error;
+  }
+  const response = await io.fetch(`https://${regionOf(io.env)}.recall.ai/api/v1${pathName}`, {
+    method: options.method ?? 'GET',
+    headers: {
+      Authorization: `Token ${key}`,
+      Accept: 'application/json',
+      ...(options.body !== undefined ? { 'Content-Type': 'application/json' } : {}),
+    },
+    body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
+  });
+  const text = await response.text();
+  let body = null;
+  if (text) {
+    try {
+      body = JSON.parse(text);
+    } catch {
+      body = { raw: text };
+    }
+  }
+  if (!response.ok) {
+    const error = new Error(formatHttpError(response.status, body));
+    error.status = response.status;
+    error.body = body;
+    throw error;
+  }
+  return body ?? {};
 }
 
 async function readState(io) {
@@ -151,8 +202,8 @@ async function poll(io, id, { timeoutMs, succeed, fail, signal }) {
   let latest = null;
   while (io.now() - started < timeoutMs) {
     if (signal?.aborted) return { aborted: true, latest };
-    const bot = await retrieveBot(io, id);
-    const changes = sortedStatusChanges(bot);
+    const bot = await recallFetch(io, `/bot/${id}/`);
+    const changes = sortedChanges(bot);
     printChanges(io, changes, seen, waitingHint);
     latest = changes.at(-1) ?? null;
     if (signal?.aborted) return { aborted: true, latest };
@@ -162,6 +213,18 @@ async function poll(io, id, { timeoutMs, succeed, fail, signal }) {
     if (signal?.aborted) return { aborted: true, latest };
   }
   return { ok: false, timeout: true, latest };
+}
+
+async function requestLeave(io, id) {
+  try {
+    await recallFetch(io, `/bot/${id}/leave_call/`, { method: 'POST' });
+    return { alreadyGone: false };
+  } catch (error) {
+    if (error.status === 400 || error.status === 404) {
+      return { alreadyGone: true, status: error.status };
+    }
+    throw error;
+  }
 }
 
 function installSignals(onSignal) {
@@ -194,8 +257,8 @@ async function join(flags, io) {
   const existing = await readState(io);
   if (existing) {
     try {
-      const bot = await retrieveBot(io, existing.id);
-      const code = latestStatusChange(bot)?.code ?? 'unknown';
+      const bot = await recallFetch(io, `/bot/${existing.id}/`);
+      const code = latestChange(bot)?.code ?? 'unknown';
       if (LIVE.has(code)) {
         io.stderr(
           `すでにボットが会議にいます (${existing.id}, ${code})。leave してから再実行してください。`,
@@ -226,7 +289,7 @@ async function join(flags, io) {
         leaveTask = (async () => {
           if (!botId) return 1;
           try {
-            const result = await leaveCall(io, botId);
+            const result = await requestLeave(io, botId);
             io.stdout(
               result.alreadyGone
                 ? result.status === 404
@@ -244,12 +307,23 @@ async function join(flags, io) {
     : () => {};
 
   try {
-    const created = await createBot(io, silentJoinBody(meetingUrl));
+    const created = await recallFetch(io, '/bot/', {
+      method: 'POST',
+      body: {
+        meeting_url: meetingUrl,
+        bot_name: 'MTG Lab',
+        recording_config: null,
+        automatic_leave: {
+          waiting_room_timeout: 540,
+          noone_joined_timeout: 300,
+        },
+      },
+    });
     botId = created.id;
     if (!botId) throw new Error('bot id が返りませんでした');
     await writeState(io, {
       id: botId,
-      region: recallRegion(io.env),
+      region: regionOf(io.env),
       meetingUrl,
       createdAt: new Date(io.now()).toISOString(),
     });
@@ -292,8 +366,8 @@ async function status(flags, io) {
     io.stderr('状態ファイルがありません。');
     return 1;
   }
-  const bot = await retrieveBot(io, state.id);
-  const changes = sortedStatusChanges(bot);
+  const bot = await recallFetch(io, `/bot/${state.id}/`);
+  const changes = sortedChanges(bot);
   if (changes.length === 0) {
     io.stdout(`${state.id}  状態なし`);
     return 0;
@@ -313,7 +387,7 @@ async function leave(flags, io) {
     io.stderr('退出するボットがありません。');
     return 1;
   }
-  const result = await leaveCall(io, id);
+  const result = await requestLeave(io, id);
   if (result.alreadyGone) {
     io.stdout(
       result.status === 404
