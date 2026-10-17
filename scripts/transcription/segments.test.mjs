@@ -76,7 +76,7 @@ test('pending audio holds both evaluation and quiet-display check until all fina
     onPart: part => gate.onPart(part), onPendingChange: value => gate.setPendingAudio(value),
     transcribe: async (audio, { onPart }) => {
       const index = releases.length;
-      for await (const _ of audio) { /* Consume the input stream. */ }
+      for await (const chunk of audio) { void chunk; /* Consume the input stream. */ }
       await new Promise(resolve => { releases[index] = resolve; });
       onPart({ type: 'transcript-final', text: `final-${index}` });
     },
@@ -111,7 +111,7 @@ test('bounded audio and missing final fail closed without retry', async () => {
   assert.equal(segments.pending, false);
 
   const noFinal = createSegmentedTranscriber({ onPart: () => {}, onError: error => failures.push(error.message),
-    transcribe: async audio => { for await (const _ of audio) { /* Consume the input stream. */ } } });
+    transcribe: async audio => { for await (const chunk of audio) { void chunk; /* Consume the input stream. */ } } });
   noFinal.push(voiced); closeUtterance(noFinal);
   await until(() => failures.length === 2);
   assert.equal(failures[1], 'STT ended without a completed utterance');
@@ -125,7 +125,7 @@ test('a confirmed empty segment is skipped and the next segment still completes'
     onPart: part => events.push(part),
     onError: error => failures.push(error),
     transcribe: async (audio, { onPart }) => {
-      for await (const _ of audio) { /* Consume the closed utterance. */ }
+      for await (const chunk of audio) { void chunk; /* Consume the closed utterance. */ }
       if (++calls === 1) {
         onPart({ type: 'transcript-empty' });
         return { skippedEmpty: true };

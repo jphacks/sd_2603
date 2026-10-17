@@ -31,7 +31,7 @@ const segments = createSegmentedTranscriber({
     if (counters.segmentsStarted > (accuracy ? 6 : 2)) throw new Error('Replay exceeded the STT segment limit');
     if (live) return streamMeetingAudio(audio, { apiKey: process.env.AI_GATEWAY_API_KEY, signal, onPart });
     return (async () => {
-      for await (const _ of audio) { /* Consume the same live-input path without an API call. */ }
+      for await (const chunk of audio) { void chunk; /* Consume the same live-input path without an API call. */ }
       onPart({ type: 'transcript-final', text: `synthetic turn ${counters.segmentsStarted}` });
     })();
   },
