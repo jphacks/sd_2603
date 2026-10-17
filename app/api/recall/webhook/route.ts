@@ -1,3 +1,5 @@
+import { judge } from "@/lib/judge";
+import { meetingFeed } from "@/lib/recall/feed.mjs";
 import { ingestTranscript, transcriptStore } from "@/lib/recall/transcript.mjs";
 
 export async function POST(request: Request) {
@@ -13,6 +15,13 @@ export async function POST(request: Request) {
       headers,
       rawBody,
     });
+    if (result.stored && result.line) {
+      try {
+        await meetingFeed(judge).afterLine(result.line);
+      } catch (error) {
+        console.error("Judge feed error:", error);
+      }
+    }
     return Response.json({ ok: true, stored: result.stored });
   } catch (error) {
     const status =
