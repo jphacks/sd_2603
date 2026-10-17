@@ -215,6 +215,85 @@ async function poll(io, id, { timeoutMs, succeed, fail, signal }) {
   return { ok: false, timeout: true, latest };
 }
 
+export class RecallCliError extends Error {
+  /**
+   * @param {string} message
+   * @param {{ status?: number, exitCode?: number }} [detail]
+   */
+  constructor(message, detail = {}) {
+    super(message);
+    this.name = 'RecallCliError';
+    this.status = detail.status ?? 400;
+    this.exitCode = detail.exitCode ?? 1;
+  }
+}
+
+export async function sendBot(meetingUrl, io) {
+  if (!/^https:\/\/.+/i.test(String(meetingUrl ?? ''))) {
+    throw new RecallCliError('会議 URL は https:// で始めてください。', { status: 400, exitCode: 2 });
+  }
+
+  const existing = await readState(io);
+  if (existing) {
+    try {
+      const bot = await recallFetch(io, `/bot/${existing.id}/`);
+      const code = latestChange(bot)?.code ?? 'unknown';
+      if (LIVE.has(code)) {
+        throw new RecallCliError(
+          `すでにボットが会議にいます (${existing.id}, ${code})。leave してから再実行してください。`,
+          { status: 409 },
+        );
+      }
+      if (code === 'done' || code === 'fatal' || code === 'call_ended') {
+        await clearState(io, existing.id);
+      } else {
+        throw new RecallCliError(
+          `状態 ${code} のボットが残っています (${existing.id})。leave を試してください。`,
+          { status: 409 },
+        );
+      }
+    } catch (error) {
+      if (error instanceof RecallCliError) throw error;
+      if (error.status !== 404) throw error;
+      await clearState(io, existing.id);
+    }
+  }
+
+  const created = await recallFetch(io, '/bot/', {
+    method: 'POST',
+    body: {
+      meeting_url: meetingUrl,
+      bot_name: 'MTG Lab',
+      recording_config: null,
+      automatic_leave: {
+        waiting_room_timeout: 540,
+        noone_joined_timeout: 300,
+      },
+    },
+  });
+  const botId = created.id;
+  if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
+  await writeState(io, {
+    id: botId,
+    region: regionOf(io.env),
+    meetingUrl,
+    createdAt: new Date(io.now()).toISOString(),
+  });
+  return { id: botId, region: regionOf(io.env), meetingUrl };
+}
+
+export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch) {
+  return {
+    env,
+    fetch: fetchImpl,
+    statePath: STATE_PATH,
+    now: () => Date.now(),
+    sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
+    pollMs: 3000,
+    leaveTimeoutMs: 60_000,
+  };
+}
+
 async function requestLeave(io, id) {
   try {
     await recallFetch(io, `/bot/${id}/leave_call/`, { method: 'POST' });
@@ -254,29 +333,6 @@ async function join(flags, io) {
     return 2;
   }
 
-  const existing = await readState(io);
-  if (existing) {
-    try {
-      const bot = await recallFetch(io, `/bot/${existing.id}/`);
-      const code = latestChange(bot)?.code ?? 'unknown';
-      if (LIVE.has(code)) {
-        io.stderr(
-          `すでにボットが会議にいます (${existing.id}, ${code})。leave してから再実行してください。`,
-        );
-        return 1;
-      }
-      if (code === 'done' || code === 'fatal' || code === 'call_ended') {
-        await clearState(io, existing.id);
-      } else {
-        io.stderr(`状態 ${code} のボットが残っています (${existing.id})。leave を試してください。`);
-        return 1;
-      }
-    } catch (error) {
-      if (error.status !== 404) throw error;
-      await clearState(io, existing.id);
-    }
-  }
-
   const signal = { aborted: false };
   let botId = null;
   /** @type {Promise<number> | null} */
@@ -307,26 +363,17 @@ async function join(flags, io) {
     : () => {};
 
   try {
-    const created = await recallFetch(io, '/bot/', {
-      method: 'POST',
-      body: {
-        meeting_url: meetingUrl,
-        bot_name: 'MTG Lab',
-        recording_config: null,
-        automatic_leave: {
-          waiting_room_timeout: 540,
-          noone_joined_timeout: 300,
-        },
-      },
-    });
-    botId = created.id;
-    if (!botId) throw new Error('bot id が返りませんでした');
-    await writeState(io, {
-      id: botId,
-      region: regionOf(io.env),
-      meetingUrl,
-      createdAt: new Date(io.now()).toISOString(),
-    });
+    let sent;
+    try {
+      sent = await sendBot(meetingUrl, io);
+    } catch (error) {
+      if (error instanceof RecallCliError) {
+        io.stderr(error.message);
+        return error.exitCode;
+      }
+      throw error;
+    }
+    botId = sent.id;
     io.stdout(`ボットを送信しました ${botId}`);
     if (signal.aborted) return (await leaveTask) ?? 1;
 
@@ -376,6 +423,30 @@ async function status(flags, io) {
   return 0;
 }
 
+export async function removeBot(io, id) {
+  const result = await requestLeave(io, id);
+  if (result.alreadyGone) {
+    await clearState(io, id);
+    return { id, left: true, alreadyGone: true, status: result.status ?? null, code: null };
+  }
+  const polled = await poll(io, id, {
+    timeoutMs: io.leaveTimeoutMs,
+    succeed: (change) => change.code === 'call_ended' || change.code === 'done',
+    fail: (change) => change.code === 'fatal',
+  });
+  if (polled.ok) {
+    await clearState(io, id);
+    return { id, left: true, alreadyGone: false, status: null, code: polled.latest.code };
+  }
+  return {
+    id,
+    left: false,
+    alreadyGone: false,
+    timeout: Boolean(polled.timeout),
+    latest: polled.latest ?? null,
+  };
+}
+
 async function leave(flags, io) {
   if (flags.url) {
     io.stderr(USAGE);
@@ -387,31 +458,24 @@ async function leave(flags, io) {
     io.stderr('退出するボットがありません。');
     return 1;
   }
-  const result = await requestLeave(io, id);
+  const result = await removeBot(io, id);
   if (result.alreadyGone) {
     io.stdout(
       result.status === 404
         ? 'ボットは見つかりません。状態ファイルを消しました。'
         : 'すでに退出しています',
     );
-    await clearState(io, id);
     return 0;
   }
-  const polled = await poll(io, id, {
-    timeoutMs: io.leaveTimeoutMs,
-    succeed: (change) => change.code === 'call_ended' || change.code === 'done',
-    fail: (change) => change.code === 'fatal',
-  });
-  if (polled.ok) {
-    io.stdout(`退出しました (${polled.latest.code})`);
-    await clearState(io, id);
+  if (result.left) {
+    io.stdout(`退出しました (${result.code})`);
     return 0;
   }
-  if (polled.timeout) {
+  if (result.timeout) {
     io.stderr('60秒以内に call_ended / done になりませんでした');
     return 1;
   }
-  printFailure(io, polled.latest);
+  printFailure(io, result.latest);
   return 1;
 }
 
