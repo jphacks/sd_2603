@@ -1,4 +1,5 @@
 import { FocusError } from "./model";
+import { hasSameOrigin } from "./origin";
 
 export function bearer(request: Request) {
   return request.headers.get("authorization")?.replace(/^Bearer /, "") ?? "";
@@ -9,8 +10,7 @@ export function privateJson(body: unknown, status = 200) {
 }
 
 export async function input(request: Request) {
-  const origin = request.headers.get("origin");
-  if (origin && origin !== new URL(request.url).origin) throw new FocusError("送信元を確認できません。", 403);
+  if (!hasSameOrigin(request)) throw new FocusError("送信元を確認できません。", 403);
   const text = await request.text();
   if (text.length > 150_000) throw new FocusError("入力が大きすぎます。", 413);
   try { return JSON.parse(text) as unknown; }

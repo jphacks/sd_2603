@@ -29,5 +29,5 @@ export function CameraOutput({ sessionId }: { sessionId: string }) {
     return () => { active = false; abort.abort(); clearTimeout(timer); };
   }, [sessionId]);
 
-  return <main className="focus-output"><FocusCameraCard message={state?.sharedMessage ?? null} closed={state?.closed} connected={connected} />{error && <p role="status" className="focus-output-error">{error}</p>}</main>;
+  return <main className="focus-output"><FocusCameraCard message={state?.sharedMessage ?? null} demoMode={state?.cameraDemoMode} closed={state?.closed} connected={connected} />{error && <p role="status" className="focus-output-error">{error}</p>}</main>;
 }

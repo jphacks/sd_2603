@@ -8,7 +8,7 @@ export class FocusError extends Error {
 export function cameraState(session: FocusSession): FocusCameraState {
   return {
     title: session.title, sharedMessage: session.closed ? null : session.sharedMessage,
-    closed: session.closed, revision: session.revision,
+    closed: session.closed, revision: session.revision, cameraDemoMode: session.cameraDemoMode ?? null,
   };
 }
 
@@ -33,7 +33,8 @@ export function applyAction(session: FocusSession, action: FocusAction): FocusSe
       next.proposal = { ...session.proposal, state: action.action === "share" ? "shared" : "deferred" };
       if (action.action === "share") { next.sharedMessage = session.proposal.message; next.lastSharedAt = Date.now(); }
       break;
-    case "clear": next.sharedMessage = null; break;
+    case "cameraDemo": next.cameraDemoMode = action.mode; next.sharedMessage = null; break;
+    case "clear": next.sharedMessage = null; next.cameraDemoMode = null; break;
     case "close": next.closed = true; next.sharedMessage = null; break;
     case "bindBot": next.recallBotId = action.botId; break;
   }

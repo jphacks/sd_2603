@@ -10,6 +10,7 @@ const action = z.discriminatedUnion("action", [
   z.object({ action: z.enum(["share", "defer"]), proposalId: z.string().uuid() }),
   z.object({ action: z.enum(["clear", "close"]) }),
   z.object({ action: z.literal("bindBot"), botId: z.string().uuid() }),
+  z.object({ action: z.literal("cameraDemo"), mode: z.enum(["off-track", "silence", "on-track"]) }),
 ]);
 
 type Context = { params: Promise<{ id: string }> };

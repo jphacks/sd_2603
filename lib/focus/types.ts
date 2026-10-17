@@ -1,4 +1,5 @@
 import type { MeetChatMessage } from "@/lib/recall/chat";
+import type { CameraDemoMode } from "./camera-demo";
 
 export type FocusProposal = {
   id: string;
@@ -20,11 +21,19 @@ export type FocusSession = {
   notes: FocusNote[];
   proposal: FocusProposal | null;
   sharedMessage: string | null;
+  cameraDemoMode?: CameraDemoMode | null;
   lastSharedAt?: number | null;
   closed: boolean;
   expiresAt: number;
   recallBotId?: string | null;
   meetChat?: MeetChatMessage[];
+  agendaImport?: {
+    messageId: string;
+    state: "processing" | "ready" | "error";
+    startedAt: number;
+    attemptId: string;
+    error?: string;
+  };
 };
 
 export type FocusCredentials = {
@@ -33,7 +42,7 @@ export type FocusCredentials = {
   cameraToken: string;
 };
 
-export type FocusCameraState = Pick<FocusSession, "title" | "sharedMessage" | "closed" | "revision">;
+export type FocusCameraState = Pick<FocusSession, "title" | "sharedMessage" | "closed" | "revision" | "cameraDemoMode">;
 
 export type FocusAction =
   | { action: "agenda"; agenda: string }
@@ -41,4 +50,5 @@ export type FocusAction =
   | { action: "propose"; message: string }
   | { action: "share" | "defer"; proposalId: string }
   | { action: "clear" | "close" }
-  | { action: "bindBot"; botId: string };
+  | { action: "bindBot"; botId: string }
+  | { action: "cameraDemo"; mode: CameraDemoMode };

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { FocusAction, FocusCredentials, FocusSession } from "@/lib/focus/types";
 import type { MeetChatInfo } from "./MeetChatConnection";
+import { needsAgendaImport } from "@/lib/focus/agenda";
 
 const storageKey = "focus-control-session-v1";
 async function json(response: Response) {
@@ -50,6 +51,13 @@ export function useFocusSession() {
       try {
         const data = await json(await fetch(`/api/focus/sessions/${credentials!.id}`, { headers: { Authorization: `Bearer ${credentials!.controlToken}` }, cache: "no-store", signal: abort.signal }));
         if (active) accept(data);
+        if (active && needsAgendaImport(data)) {
+          const synced = await json(await fetch(`/api/focus/sessions/${credentials!.id}/agenda/sync`, {
+            method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${credentials!.controlToken}` },
+            body: "{}", cache: "no-store", signal: abort.signal,
+          }));
+          if (active) accept(synced);
+        }
       } catch { /* Keep unsent edits when polling fails. */ }
       finally { if (active) timer = setTimeout(refresh, 2000); }
     }

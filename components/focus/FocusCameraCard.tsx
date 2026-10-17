@@ -1,18 +1,20 @@
 import { FocusMark } from "./FocusMark";
+import { cameraDemos, type CameraDemoMode } from "@/lib/focus/camera-demo";
 
 export type FocusCameraCardProps = {
   message: string | null;
   closed?: boolean;
   connected?: boolean;
+  demoMode?: CameraDemoMode | null;
 };
 
-export function FocusCameraCard({ message, closed = false, connected = true }: FocusCameraCardProps) {
-  return <section aria-label="Focusのカメラ表示" className="focus-camera-card">
+export function FocusCameraCard({ message, closed = false, connected = true, demoMode = null }: FocusCameraCardProps) {
+  const demo = cameraDemos[demoMode ?? "on-track"];
+  return <section aria-label="Focusのカメラ表示" className="focus-camera-card" style={{ backgroundImage: `url("${demo.background}")` }}>
     <div className="focus-camera-center">
-      <div className={`focus-orb ${message ? "focus-orb-speaking" : ""}`} aria-hidden><span /></div>
-      <h1>{closed ? "会議、おつかれさまでした。" : message || "会話に、集中しよう。"}</h1>
-      <p>{closed ? "Focusの進行サポートを終了しました" : !connected ? "接続を確認しています" : message ? "進行をサポートする提案です" : "必要なときだけ、そっとサポートします"}</p>
+      <span className="focus-camera-state-label">{closed ? "終了" : !connected ? "接続待機" : message ? "Focus" : demo.label}</span>
+      <h1 className={message ? "focus-camera-custom-message" : undefined}>{closed ? "おつかれ\nさまでした" : !connected ? "接続を\n確認しています" : message || demo.message}</h1>
     </div>
-    <div className="focus-camera-footer"><span><FocusMark /> Focus · 進行サポート</span><span className="focus-camera-status"><i className={connected ? "" : "offline"} />{closed ? "終了" : connected ? "待機中" : "接続待機"}</span></div>
+    <div className="focus-camera-footer"><span><FocusMark /> Focus</span><span className="focus-camera-status"><i className={connected ? "" : "offline"} />{closed ? "終了" : !connected ? "接続待機" : message ? "表示中" : "デモ表示"}</span></div>
   </section>;
 }
