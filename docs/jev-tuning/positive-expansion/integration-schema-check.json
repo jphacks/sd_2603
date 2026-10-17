@@ -1,0 +1,9 @@
+{
+  "n": 111,
+  "generalSemanticSchemaPassed": true,
+  "provenanceCompatibility": "requires_explicit_synthetic_holdout_support",
+  "detail": "Synthetic case outside train: positive-0284a6d648b5",
+  "modelCalls": 0,
+  "coreSha256": "5e392771014c6b067e71f665d48d66b0b2a44611d0c303129b70fa5cf4dca718",
+  "provenanceValidatorSha256": "afbaca394fc4e789f019dbff8a06aceae0ab81252b46586c3c0b56e5a584bb0d"
+}

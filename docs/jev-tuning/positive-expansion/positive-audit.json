@@ -1,0 +1,83 @@
+{
+  "version": "positive-authored-v2",
+  "research_total_records": 155,
+  "unique_publications_or_datasets": 28,
+  "duplicate_publication_aliases": {
+    "ST06": "DR12",
+    "ST14": "DR02"
+  },
+  "actual_human_chatbot_breakdown_cases": 125,
+  "observed_cross_domain_barrier_support": {
+    "irrelevant_response": 64,
+    "unintelligible_or_incoherent": 38,
+    "repetition_loop": 8,
+    "contradiction_or_grounding_failure": 10,
+    "context_insufficient": 5
+  },
+  "negotiation_candidates": 2,
+  "authored_scripts": 112,
+  "independently_positive_scripts": 112,
+  "unambiguous_primary_positive_scripts": 111,
+  "primary_split_support": {
+    "validation": {
+      "INTERVENE_STALLED": 27,
+      "INTERVENE_DRIFT": 28
+    },
+    "test": {
+      "INTERVENE_STALLED": 28,
+      "INTERVENE_DRIFT": 28
+    }
+  },
+  "generation_families": 28,
+  "body_exact_duplicates": 0,
+  "body_5gram_pairs_above_065": [],
+  "prior_dataset_normalized_exact_matches": 0,
+  "split_support": {
+    "validation": {
+      "INTERVENE_STALLED": 28,
+      "INTERVENE_DRIFT": 28
+    },
+    "test": {
+      "INTERVENE_STALLED": 28,
+      "INTERVENE_DRIFT": 28
+    }
+  },
+  "uncertain": 1,
+  "real_meeting_transcript_claim": false,
+  "importer_status": "Existing integration assertProvenance intentionally rejects synthetic holdouts; needs explicit authored evaluation support. Not bypassed.",
+  "Jev_accuracy_measured": false,
+  "research_sha256": {
+    "research-barriers-a.jsonl": "1e1ca4864fc48f5c2d06dbe67c67b25c2bec93a9e07e27ee02170ae15e4e6bd9",
+    "research-barriers-b.jsonl": "f549c303837958e4ee023accac0103f5aa569876f78fdb1eff7401e69cdd4085",
+    "research-barriers-final.jsonl": "099299dc5437763b1179353f32a4bf9e3ec4da2bb0f81ab02bb54ff6ef6fd640",
+    "research-blind-barriers-a.jsonl": "d555449dfed504c3ba57b4dfdb98df5676b0fc969d0d9b65d2e93e3c2ed72520",
+    "research-blind-barriers-b.jsonl": "fefa81576792e7c493d399649e899b5bf10949fb1829900ba92f6a34ba0f029b",
+    "research-casino-stall-candidates.jsonl": "e48cc1c92c61d96fe62eedd22b418294bb2d07a98d1aa03757903d7381bdb2c8",
+    "research-dbdc3-real-breakdown-cases.jsonl": "4f50e8353728172e1823d72e78d70d05cbf1eef4c5dea66fe463006de496e0f2",
+    "research-drift.jsonl": "eacb7b2ae66cd0a58b956f2e50771cb92f6c36586198462638a948915d7d978f",
+    "research-ledger.jsonl": "68655faf349db2b5be647565d93bd34c31a905f4eff66aeb38591a5316ff25e3",
+    "research-stalled.jsonl": "8b75947f0cb1156ebf14c84c915dd7a10c62b0430074fb2dcbaea3562c139dd6"
+  },
+  "data_sha256": {
+    "authored-cases.jsonl": "ad8f52afec4de9198a8b5644c387e3e7c8b32227908977b1942ea430c436caaa",
+    "authored-v2-a.jsonl": "2a6d0fd4ba23070d288fc766096a24e4798180730fb9206867eedfac1527d560",
+    "authored-v2-b.jsonl": "5af9be61f04ac6e80c6357c062ee03586c13bb2f22aaf6674abf8e4055bd5c0a",
+    "authored-v2.jsonl": "8f03946d73c52360f938f03ac0f7811f85fa4542098dec4609823a0a34708be7",
+    "blind-authored-a.jsonl": "8cba5609fdfadac1764b9e2059b5e8fd201dd2fa87a9e45e9386a6ec32a665c3",
+    "blind-authored-b.jsonl": "267d416b8730919711264bc48cb0137f34dd7c3dc1cfd6e38dd95d982b57cd0a",
+    "blind-authored-v2.jsonl": "52cffc0a50fa834cf1fd5fb1d938fc7ed1f4d5896a47f390f44036bc13b17672",
+    "generation-intent.jsonl": "870ca9d6912cbb751b090c716dc5b1ad029a75a21d6bf3897b5d863037f2d9e6",
+    "intent-v2-a.jsonl": "442fd19dd1b00cb9cb3f1c2f41bd7a89ba0e4c1e340f1877d15a397e776188df",
+    "intent-v2-b.jsonl": "6fc3210f10f7840814f3c259f7e1168e055bdb544264c16a88c6a17603460f89",
+    "labels-authored-a.jsonl": "daeb0e3284f274a4eb8e94e14113c66e577e14fd548de7bd19ff36064d6ea1a4",
+    "labels-authored-b.jsonl": "3bc50409a25e8244b5c27243b60d86eb7d8aa32b95eeaa51826ff2f9d3d0271c",
+    "labels-authored-v2.jsonl": "6cf80f6e4faf970d620e8f2b03d0e303e7b9cc09a0c0854652ff5b1fe6ffb481",
+    "positive-cases.jsonl": "440d7d9d14effe6e11cfb5ced116bf8b9e565693f5de0f91a4194e4567f1be70",
+    "positive-test.jsonl": "5e879dbbf3b4d6862576f78967cbc2f59d344d8f1d814c6083d41e9d3ce731ee",
+    "positive-validation.jsonl": "e04676f6699cdf1e890429ea645ede622bdfbdc1a2ac3f8b43d02bbd3bf9483e",
+    "primary-positive-cases.jsonl": "c51cf0b452323d2308de8617e6e676ef2f23eed01e2107715e2e590ec77465a4",
+    "primary-positive-test.jsonl": "5e879dbbf3b4d6862576f78967cbc2f59d344d8f1d814c6083d41e9d3ce731ee",
+    "primary-positive-validation.jsonl": "054a01461ec469168192a81debe8307c2fb4eb0580dd1e79f4a7ccf0a606118e",
+    "uncertain-cases.jsonl": "fac9459feb9c7e1c1af31a9848f0aabdce5a287632c4fe4423172a6fb33f4c5c"
+  }
+}

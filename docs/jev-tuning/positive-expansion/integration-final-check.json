@@ -1,0 +1,19 @@
+{
+  "branch": "codex/jev-tuning-implementation",
+  "local_head": "7f66361c96c995b3aa1edc4f1154fff6bde7e172",
+  "source_snapshot_head": "3167b9b21326b58d13790ca3deea5acee9f407bf",
+  "changed_since_initial_snapshot": [
+    "lib/judge/jev.ts",
+    "lib/judge/jev-policy.json",
+    "evals/tuning/import-pro.mjs"
+  ],
+  "current_file_sha256": {
+    "lib/judge/jev.ts": "5bf4ab3facff3bfef1ef0f2a6471a3df3db7fb91523b3ae4a6b8c0e524063efd",
+    "lib/judge/jev-policy.json": "0df6aff905f51e6798995f6673f609d201658a73a5bae1db7707fcbda1f25f04",
+    "lib/judge/types.ts": "1640aac5d7ffe6d9e0b616904a16be8e6316ff52ff2a3b91beb78af5bd80e330",
+    "evals/tuning/core.mjs": "5e392771014c6b067e71f665d48d66b0b2a44611d0c303129b70fa5cf4dca718",
+    "evals/tuning/data.mjs": "afbaca394fc4e789f019dbff8a06aceae0ab81252b46586c3c0b56e5a584bb0d",
+    "evals/tuning/import-pro.mjs": "7ac40392c509e952a89f9a27f0f7b58b7fd00bbf621d49a50020ed6ef7a9a2e2"
+  },
+  "prediction_outputs_read": false
+}

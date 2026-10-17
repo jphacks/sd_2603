@@ -12,7 +12,7 @@
 
 ## 現行実装との関係
 
-production policy は questionVersion=v1、stall>=0.6優先、drift>=0.6かつrelevance<0.6で介入、uncertain>=0.4でWAIT。v2/v3候補はdriftの話題距離と有用性を分離し、phaseとlatest stateを明示する。v1では有益な寄り道がdrift定義自体から除かれる違いがある。本追加セットはどちらでも一貫する『無益な逸脱』と『観測可能な無進展反復』を正例にし、望ましいdefinitionを閾値やJev出力に合わせて変更しない。
+初回読取時のproduction policy は questionVersion=v1、stall>=0.6優先、drift>=0.6かつrelevance<0.6で介入、uncertain>=0.4でWAIT。v2/v3候補はdriftの話題距離と有用性を分離し、phaseとlatest stateを明示する。v1では有益な寄り道がdrift定義自体から除かれる違いがある。本追加セットはどちらでも一貫する『無益な逸脱』と『観測可能な無進展反復』を正例にし、望ましいdefinitionを閾値やJev出力に合わせて変更しない。
 
 ## 評価範囲
 
@@ -25,3 +25,7 @@ Validation/Testへの追加は別バージョンのデータ構築。旧TestのJ
 統合側 `evals/tuning/data.mjs::assertProvenance` は dataKind=synthetic ならsplit=trainと同じTrain parentを必須とする。この既存制約は旧データに適したものだが、ユーザーが今回明示依頼した『研究定義から作成したValidation/Test』を許可しない。新規会話をreal-roleplayなどに偽装して回避しない。出力はdataKind=syntheticのままにし、取り込み前に統合側が authored evaluation 専用の明示的な分岐・freeze・系列検証を追加する必要がある。アプリ/インポータの変更は本担当では行わない。
 
 新規生成時には統合側のv1/v2/v3質問仕様を閲覧したが、Jev予測・score cacheは閲覧していない。従ってこれは明示されたbehavior contractの診断セットであり、質問設計から独立な外部ベンチマークではない。同一メカニズムの4例は必ず同split。既存Trainとの完全一致と文字列近傍を監査し、共通の概念・定義まで独立であるとは主張しない。
+
+## 統合側の再確認
+
+データ作成中に統合側HEADは7f66361へ進んだ。差分を読み、model IDがtypesafe-ai/jev-1.14.0へ固定、policy questionVersionがv3になったことを確認。v3質問の定義・decideFromScoresの優先順・0.6閾値自体は初回読取時から不変。import-proは最終labelパケットを読むよう更新されたが、data.mjsのsynthetic-Train限定は不変。integration-final-check.jsonにhashを記録。モデル予測・score cacheは読んでおらず、これに合わせたgold再設計はしていない。

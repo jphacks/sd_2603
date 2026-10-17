@@ -58,3 +58,5 @@ python3 docs/jev-tuning/positive-expansion/verify_dbdc3_research_cases.py --arch
 著者: https://stanfordnlp.github.io/cocoa/ 、https://github.com/stanfordnlp/cocoa 。repoのMIT本文はsoftwareを対象とする一方、外部配布会話データへの明示適用を今回確認できていない。コードlicenseを原文会話へ流用しないため抽出・再配布なし。交渉不成立だけを停滞の証明としない点はCaSiNoと同じ。
 
 配布READMEとLICENSEは内容を変えず、Gitで扱うため改行をLF・行末空白なしに正規化した。元バイト列は固定ZIP内に残る。
+
+CaSiNo root LICENSEの固定版コピーを `CaSiNo-LICENSE.txt` に保存。主催者のDBDC3ライセンスと混ぜず、各行のlicenseとsourceを保持する。
