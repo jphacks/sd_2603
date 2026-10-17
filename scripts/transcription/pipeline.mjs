@@ -56,7 +56,8 @@ export function isVoicedPcm(pcm, threshold = 300) {
 }
 
 /** Final-only transcripts are considered for intervention after a quiet window. */
-export function createInterventionGate({ agenda, botId, decide, display, onError = () => {}, now = Date.now, schedule = setTimeout, unschedule = clearTimeout, quietMs = 1500 }) {
+export function createInterventionGate({ agenda, botId, decide, display, restoreIdle, onError = () => {}, now = Date.now, schedule = setTimeout, unschedule = clearTimeout, quietMs = 1500, displayMs = 8000 }) {
+  if (!Number.isFinite(displayMs) || displayMs <= 0) throw new RangeError('Invalid intervention display duration');
   const transcript = [];
   let finalQueue = [];
   let speaking = false;
@@ -70,6 +71,44 @@ export function createInterventionGate({ agenda, botId, decide, display, onError
   let hasSpeech = false;
   let partial = '';
   let pendingAudio = false;
+  let idleTimer;
+  let displayEpoch = 0;
+  let videoQueue = Promise.resolve();
+  const videoAbort = new AbortController();
+
+  const stop = () => {
+    stopped = true;
+    displayEpoch++;
+    for (const timer of [decisionTimer, speakingTimer, idleTimer]) if (timer !== undefined) unschedule(timer);
+    decisionTimer = speakingTimer = idleTimer = undefined;
+    videoAbort.abort();
+  };
+  const fail = error => {
+    if (stopped) return;
+    stop();
+    onError(error);
+  };
+  // A restore already in flight must finish before a newer card is sent. Checking
+  // its epoch inside this queue also discards a restore waiting behind a new card.
+  const changeVideo = operation => {
+    const task = videoQueue.then(() => stopped ? { cancelled: true } : operation());
+    videoQueue = task.catch(() => {});
+    return task;
+  };
+  const armIdle = () => {
+    const epoch = ++displayEpoch;
+    if (idleTimer !== undefined) unschedule(idleTimer);
+    if (!restoreIdle) return;
+    idleTimer = schedule(() => {
+      if (stopped || epoch !== displayEpoch) return;
+      idleTimer = undefined;
+      void changeVideo(async () => {
+        if (epoch !== displayEpoch) return;
+        await restoreIdle({ botId, signal: videoAbort.signal });
+      }).catch(fail);
+    }, displayMs);
+  };
+  const canDisplay = value => !stopped && !pendingAudio && !speaking && generation === value && now() - lastVoice >= quietMs;
 
   const run = async () => {
     decisionTimer = undefined;
@@ -83,14 +122,20 @@ export function createInterventionGate({ agenda, botId, decide, display, onError
       const result = await decide({ botId, agenda, transcript: next, secondsSinceLastIntervention: Number.isFinite(lastIntervention) ? Math.max(0, (now() - lastIntervention) / 1000) : 60 });
       transcript.splice(0, transcript.length, ...next);
       if (generation === currentGeneration && !finalQueue.length) hasSpeech = false;
-      if (result.action === 'INTERVENE' && !pendingAudio && !speaking && generation === currentGeneration && now() - lastVoice >= quietMs) {
-        const displayed = await display({ botId, agenda, result, generation: currentGeneration });
-        if (!displayed?.cancelled) lastIntervention = now();
+      if (result.action === 'INTERVENE' && canDisplay(currentGeneration)) {
+        await changeVideo(async () => {
+          if (!canDisplay(currentGeneration)) return { cancelled: true };
+          const displayed = await display({ botId, agenda, result, generation: currentGeneration, signal: videoAbort.signal });
+          if (!stopped && !displayed?.cancelled) {
+            lastIntervention = now();
+            armIdle();
+          }
+          return displayed;
+        });
       }
     } catch (error) {
       // Never retry an ambiguous display result: duplicate camera changes are worse than one missed intervention.
-      stopped = true;
-      onError(error);
+      fail(error);
       throw error;
     } finally {
       processing = false;
@@ -137,10 +182,6 @@ export function createInterventionGate({ agenda, botId, decide, display, onError
     get transcript() { return [...transcript]; },
     get partial() { return partial; },
     isQuiet(value) { return !stopped && !pendingAudio && !speaking && generation === value && now() - lastVoice >= quietMs; },
-    stop() {
-      stopped = true;
-      if (decisionTimer !== undefined) unschedule(decisionTimer);
-      if (speakingTimer !== undefined) unschedule(speakingTimer);
-    },
+    stop,
   };
 }

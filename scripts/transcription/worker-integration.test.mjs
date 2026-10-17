@@ -26,7 +26,7 @@ async function waitFor(predicate, message, ms = 8000) {
   }
 }
 
-async function setup(transcripts) {
+async function setup(transcripts, action = 'WAIT') {
   const directory = await mkdtemp(join(tmpdir(), 'meeting-worker-test-'));
   await mkdir(join(directory, '.recall'));
   await writeFile(join(directory, '.recall/current.json'), JSON.stringify({ id: botId, agenda: 'Synthetic integration agenda', audioEnabled: true, createdAt: new Date().toISOString() }));
@@ -36,9 +36,11 @@ async function setup(transcripts) {
     let body = '';
     request.on('data', chunk => { body += chunk; });
     request.on('end', () => {
-      requests.push(JSON.parse(body));
+      const input = JSON.parse(body);
+      requests.push(input);
       response.writeHead(200, { 'Content-Type': 'application/json' });
-      response.end(JSON.stringify({ action: 'WAIT', reason: 'local integration', message: null }));
+      response.end(JSON.stringify(input.mode === 'idle' ? { video: 'idle' }
+        : { action, reason: 'local integration', message: null, ...(input.mode === 'display' ? { video: 'off_agenda' } : {}) }));
     });
   });
   await new Promise(resolve => control.listen(0, '127.0.0.1', resolve));
@@ -110,6 +112,19 @@ test('empty finish is isolated and next utterance still reaches the local WAIT A
     await waitFor(() => trial.requests.length === 1 || trial.socket.readyState !== WebSocket.OPEN, 'No WAIT evaluation after the second utterance');
     assert.equal(trial.requests.length, 1, trial.output());
     assert.deepEqual(trial.requests[0].transcript, ['synthetic after empty']);
+    assert.equal(trial.output().includes('Audio processing stopped'), false);
+  } finally { await trial.cleanup(); }
+});
+
+test('real worker automatically restores idle after a successful intervention without another evaluation', { timeout: 20000 }, async () => {
+  const trial = await setup(['synthetic intervention'], 'INTERVENE');
+  try {
+    trial.utterance();
+    await waitFor(() => trial.requests.some(request => request.mode === 'idle') || trial.socket.readyState !== WebSocket.OPEN,
+      'No automatic idle after the intervention', 14000);
+    assert.deepEqual(trial.requests.map(request => request.mode), ['evaluate', 'display', 'idle'], trial.output());
+    assert.equal(trial.requests.at(-1).botId, botId);
+    assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());
     assert.equal(trial.output().includes('Audio processing stopped'), false);
   } finally { await trial.cleanup(); }
 });

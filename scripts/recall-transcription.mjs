@@ -37,12 +37,12 @@ async function readSession(id) {
   throw new Error('Audio connection does not belong to the current bot');
 }
 
-async function videoRequest(body) {
+async function videoRequest(body, signal) {
   const response = await fetch(controlUrl, {
     method: 'POST',
     headers: { Authorization: `Bearer ${controlToken}`, 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
-    signal: AbortSignal.timeout(15_000),
+    signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(15_000)]) : AbortSignal.timeout(15_000),
   });
   if (body.mode === 'display' && response.status === 409) return { cancelled: true };
   if (!response.ok) throw new Error(`Video control HTTP ${response.status}`);
@@ -91,7 +91,7 @@ server.on('upgrade', (request, socket, head) => {
 });
 
 wss.on('connection', socket => {
-  const counts = { rawFrames: 0, pcmBytes: 0, voicedFrames: 0, sttDelta: 0, sttPartial: 0, sttFinal: 0, sttSkippedEmpty: 0, evaluations: 0, displayAttempts: 0 };
+  const counts = { rawFrames: 0, pcmBytes: 0, voicedFrames: 0, sttDelta: 0, sttPartial: 0, sttFinal: 0, sttSkippedEmpty: 0, evaluations: 0, displayAttempts: 0, idleAttempts: 0 };
   const report = () => console.log(`Audio worker telemetry ${JSON.stringify(counts)}`);
   console.log('Audio worker websocket connected');
   const telemetry = setInterval(report, 10_000);
@@ -140,9 +140,13 @@ wss.on('connection', socket => {
         botId: id,
         agenda: session.agenda,
         decide: input => { counts.evaluations++; return videoRequest({ mode: 'evaluate', ...input }); },
-        display: ({ botId, agenda, result, generation }) => {
+        display: ({ botId, agenda, result, generation, signal }) => {
           counts.displayAttempts++;
-          return videoRequest({ mode: 'display', botId, agenda, result, generation, requestId: randomUUID() });
+          return videoRequest({ mode: 'display', botId, agenda, result, generation, requestId: randomUUID() }, signal);
+        },
+        restoreIdle: ({ botId, signal }) => {
+          counts.idleAttempts++;
+          return videoRequest({ mode: 'idle', botId }, signal);
         },
         onError: error => fail(error, 'decision'),
       });
@@ -214,12 +218,14 @@ joinWatchdog.unref();
 if (handleSignals) for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => {
   halted = true;
   clearInterval(joinWatchdog);
+  activeGate?.stop();
   active?.close(1000, 'Worker stopping');
   server.close();
 });
 return { server, close: async () => {
   halted = true;
   clearInterval(joinWatchdog);
+  activeGate?.stop();
   active?.close(1000, 'Worker stopping');
   await new Promise(resolve => server.close(resolve));
 } };

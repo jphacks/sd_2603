@@ -155,3 +155,223 @@ test('decision failure stops the gate and reports degradation', async () => {
   assert.equal(gate.stopped, true);
   assert.equal(errors, 1);
 });
+
+const intervention = { action: 'INTERVENE', reason: 'drift', message: 'return' };
+const tick = () => new Promise(resolve => setImmediate(resolve));
+function utterance(gate, text = 'confirmed') {
+  gate.onAudio(voiced);
+  gate.onPart({ type: 'transcript-final', text });
+}
+
+test('successful intervention restores idle after eight seconds, including while speech resumes', async () => {
+  const clock = fakeClock();
+  const calls = [];
+  const decisions = [];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async input => { decisions.push(input); return intervention; },
+    display: async input => { calls.push(['display', input.botId]); },
+    restoreIdle: async input => { calls.push(['idle', input.botId]); },
+  });
+  utterance(gate);
+  await clock.advance(1500);
+  gate.onAudio(voiced);
+  await clock.advance(7999);
+  assert.deepEqual(calls, [['display', 'bot']]);
+  gate.onAudio(voiced);
+  await clock.advance(1);
+  assert.deepEqual(calls, [['display', 'bot'], ['idle', 'bot']]);
+  assert.equal(decisions.length, 1, 'restoring the image must not call the judge');
+  await clock.advance(8000);
+  assert.equal(calls.length, 2, 'the restore is one-shot');
+  gate.stop();
+});
+
+test('a newer card replaces the old restore timer; WAIT never erases the card', async () => {
+  const clock = fakeClock();
+  const calls = [];
+  let decisions = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => ++decisions === 3 ? { action: 'WAIT' } : intervention,
+    display: async () => { calls.push('display'); }, restoreIdle: async () => { calls.push('idle'); },
+  });
+  utterance(gate, 'first');
+  await clock.advance(1500);
+  await clock.advance(500);
+  utterance(gate, 'second');
+  await clock.advance(1500);
+  utterance(gate, 'third');
+  await clock.advance(1500);
+  await clock.advance(4500); // The first card's old deadline.
+  assert.deepEqual(calls, ['display', 'display']);
+  await clock.advance(2000);
+  assert.deepEqual(calls, ['display', 'display', 'idle']);
+  gate.stop();
+});
+
+test('a cancelled display preserves the previous card restore deadline', async () => {
+  const clock = fakeClock();
+  let displays = 0;
+  let restores = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => intervention, display: async () => ({ cancelled: ++displays === 2 }),
+    restoreIdle: async () => { restores++; },
+  });
+  utterance(gate);
+  await clock.advance(1500);
+  utterance(gate);
+  await clock.advance(1500);
+  await clock.advance(6500);
+  assert.equal(restores, 1);
+  gate.stop();
+});
+
+test('a restore queued behind a newer in-flight display cannot erase its result', async () => {
+  const clock = fakeClock();
+  let finishDisplay;
+  let displays = 0;
+  let restores = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => intervention,
+    display: async () => { if (++displays === 2) await new Promise(resolve => { finishDisplay = resolve; }); },
+    restoreIdle: async () => { restores++; },
+  });
+  utterance(gate);
+  await clock.advance(1500);
+  utterance(gate);
+  await clock.advance(1500);
+  await clock.advance(6500);
+  assert.equal(restores, 0);
+  finishDisplay();
+  await tick();
+  assert.equal(restores, 0, 'the expired old epoch must be skipped inside the video queue');
+  await clock.advance(7999);
+  assert.equal(restores, 0);
+  await clock.advance(1);
+  assert.equal(restores, 1);
+  gate.stop();
+});
+
+test('a newer display waits for an already in-flight restore and remains visible afterwards', async () => {
+  const clock = fakeClock();
+  let finishIdle;
+  const calls = [];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => intervention,
+    display: async () => { calls.push('display'); },
+    restoreIdle: async () => { calls.push('idle-start'); await new Promise(resolve => { finishIdle = resolve; }); calls.push('idle-end'); },
+  });
+  utterance(gate);
+  await clock.advance(1500);
+  await clock.advance(8000);
+  utterance(gate);
+  await clock.advance(1500);
+  assert.deepEqual(calls, ['display', 'idle-start']);
+  finishIdle();
+  await tick();
+  assert.deepEqual(calls, ['display', 'idle-start', 'idle-end', 'display']);
+  gate.stop();
+});
+
+test('stop invalidates the timer and aborts an in-flight video request without degradation', async () => {
+  const clock = fakeClock();
+  let requestSignal;
+  let finishIdle;
+  let errors = 0;
+  let restores = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'old-bot', ...clock,
+    decide: async () => intervention, display: async () => {},
+    restoreIdle: ({ signal }) => { restores++; requestSignal = signal; return new Promise((resolve, reject) => {
+      finishIdle = resolve;
+      signal.addEventListener('abort', () => reject(new Error('aborted')), { once: true });
+    }); },
+    onError: () => { errors++; },
+  });
+  utterance(gate);
+  await clock.advance(1500);
+  await clock.advance(8000);
+  gate.stop();
+  assert.equal(requestSignal.aborted, true);
+  finishIdle();
+  await tick();
+  await clock.advance(30000);
+  assert.equal(errors, 0);
+  assert.equal(restores, 1);
+  assert.equal(gate.stopped, true);
+});
+
+test('stopping an old meeting cancels its pending timer without affecting another gate', async () => {
+  const clock = fakeClock();
+  const restoredBots = [];
+  const make = botId => createInterventionGate({ agenda: 'agenda', botId, ...clock,
+    decide: async () => intervention, display: async () => {},
+    restoreIdle: async input => { restoredBots.push(input.botId); },
+  });
+  const oldGate = make('old');
+  utterance(oldGate);
+  await clock.advance(1500);
+  oldGate.stop();
+  const newGate = make('new');
+  utterance(newGate);
+  await clock.advance(1500);
+  await clock.advance(8000);
+  assert.deepEqual(restoredBots, ['new']);
+  newGate.stop();
+});
+
+test('restore failure stops the gate once, with no retry or additional decision', async () => {
+  const clock = fakeClock();
+  let restores = 0;
+  const errors = [];
+  const failure = new Error('local idle failure');
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => intervention, display: async () => {},
+    restoreIdle: async () => { restores++; throw failure; }, onError: error => { errors.push(error); },
+  });
+  utterance(gate);
+  await clock.advance(1500);
+  await clock.advance(8000);
+  assert.equal(gate.stopped, true);
+  assert.deepEqual(errors, [failure]);
+  await clock.advance(30000);
+  assert.equal(restores, 1);
+});
+
+test('stop during display ignores its late success and never schedules a restore', async () => {
+  const clock = fakeClock();
+  let finishDisplay;
+  let restores = 0;
+  let requestSignal;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => intervention,
+    display: ({ signal }) => { requestSignal = signal; return new Promise(resolve => { finishDisplay = resolve; }); },
+    restoreIdle: async () => { restores++; },
+  });
+  utterance(gate);
+  await clock.advance(1500);
+  gate.stop();
+  assert.equal(requestSignal.aborted, true);
+  finishDisplay();
+  await tick();
+  await clock.advance(30000);
+  assert.equal(restores, 0);
+});
+
+test('speech resuming while display waits behind idle is checked again before display', async () => {
+  const clock = fakeClock();
+  let finishIdle;
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => intervention, display: async () => { displays++; },
+    restoreIdle: () => new Promise(resolve => { finishIdle = resolve; }),
+  });
+  utterance(gate);
+  await clock.advance(1500);
+  await clock.advance(8000);
+  utterance(gate);
+  await clock.advance(1500);
+  gate.onAudio(voiced);
+  finishIdle();
+  await tick();
+  assert.equal(displays, 1);
+  gate.stop();
+});
