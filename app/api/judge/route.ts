@@ -1,10 +1,11 @@
 import { z } from "zod";
 import { judge } from "@/lib/judge";
+import { JevError } from "@/lib/judge/jev";
 
 const InputSchema = z.object({
-  agenda: z.string().min(1),
-  transcript: z.array(z.string()),
-  secondsSinceLastIntervention: z.number().min(0),
+  agenda: z.string().trim().min(1).max(500),
+  transcript: z.array(z.string().trim().min(1).max(1000)).max(30),
+  secondsSinceLastIntervention: z.number().finite().min(0),
 });
 
 export async function POST(request: Request) {
@@ -14,6 +15,14 @@ export async function POST(request: Request) {
 
     return Response.json(result);
   } catch (error) {
+    if (error instanceof z.ZodError || error instanceof SyntaxError) {
+      return Response.json({ error: "入力が正しくありません" }, { status: 400 });
+    }
+    if (error instanceof JevError) {
+      const status = error.kind === "rate_limit" ? 429 : error.kind === "timeout" ? 504 : 502;
+      console.error("Judge API error:", error.kind);
+      return Response.json({ error: "判定処理に失敗しました", kind: error.kind }, { status });
+    }
     console.error("Judge API error:", error);
 
     return Response.json(
