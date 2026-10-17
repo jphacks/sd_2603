@@ -1,0 +1,130 @@
+.focus-workspace, .focus-setup, .focus-output { font-family: Arial, "Noto Sans JP", sans-serif; }
+.focus-workspace { display: flex; min-height: 100dvh; background: #191c20; color: #f3f4f6; }
+.focus-workspace button, .focus-setup button { cursor: pointer; }
+.focus-workspace button:disabled, .focus-setup button:disabled { cursor: wait; opacity: .45; }
+.focus-workspace :is(button,a,input,textarea):focus-visible, .focus-setup :is(button,input,summary):focus-visible { outline: 3px solid #7c9fff; outline-offset: 3px; }
+.focus-mark { display: inline-block; width: 28px; height: 30px; position: relative; flex: 0 0 auto; }
+.focus-mark span { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: #427cf1; }
+.focus-mark span:nth-child(1) { left: 9px; top: 1px; }
+.focus-mark span:nth-child(2) { left: 0; top: 11px; }
+.focus-mark span:nth-child(3) { left: 9px; top: 21px; }
+.focus-mark span:nth-child(4) { left: 18px; top: 11px; background: #f2cf95; }
+.focus-mark-large { transform: scale(1.5); margin: 14px; }
+.focus-meeting { min-width: 0; flex: 1; display: flex; flex-direction: column; height: 100dvh; }
+.focus-meeting-header { height: 64px; display: flex; align-items: center; gap: 16px; padding: 0 24px; flex-shrink: 0; }
+.focus-meeting-header > span { font-size: 25px; color: #bfc2cb; }
+.focus-meeting-header h1 { font-size: 20px; font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.focus-dark-button { background: #272b31; padding: 7px 14px; border: 1px solid #3b4049; border-radius: 9px; font-size: 13px; }
+.focus-stage { min-height: 0; flex: 1; display: grid; gap: 10px; padding: 8px 12px; position: relative; background: #191c20; }
+.focus-stage:has(.focus-video) { grid-template-columns: minmax(0,2fr) minmax(220px,1fr); }
+.focus-stage:fullscreen { padding: 12px; }
+.focus-bot-tile { min-width: 0; min-height: 220px; overflow: hidden; border-radius: 12px; position: relative; }
+.focus-camera-card { background: radial-gradient(ellipse at 50% 40%, #fafafa, #dedfdf 85%); color: #24282e; width: 100%; height: 100%; position: relative; container-type: inline-size; overflow: hidden; }
+.focus-camera-center { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: clamp(15px,3cqw,36px); text-align: center; padding: 8% 10%; }
+.focus-camera-center h1 { font-size: clamp(20px,3.6cqw,52px); font-weight: 500; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; max-width: 26em; }
+.focus-camera-center p { font-size: clamp(12px,1.6cqw,23px); color: #80858a; line-height: 1.6; }
+.focus-orb { width: clamp(68px,12cqw,155px); aspect-ratio: 1; border-radius: 50%; background: #e9e9f3; display: grid; place-items: center; box-shadow: 0 0 60px #b4c9fa30; }
+.focus-orb > span { width: 58%; height: 58%; border-radius: 50%; background: linear-gradient(140deg,#c0d7fb,#747ee4); }
+.focus-orb-speaking { animation: focus-breathe 3s ease-in-out infinite; }
+.focus-camera-footer { position: absolute; left: 18px; right: 18px; bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: clamp(11px,1.4cqw,18px); }
+.focus-camera-footer > span:first-child { display: flex; align-items: center; gap: 9px; padding: 8px 11px; border-radius: 8px; background: #33373caa; color: white; }
+.focus-camera-footer .focus-mark { transform: scale(.65); width: 23px; height: 22px; }
+.focus-camera-status { display: flex; align-items: center; gap: 6px; color: #555d65; }
+.focus-camera-status i, .focus-watching i, .focus-status-pill i { background: #5abb71; width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.focus-camera-status i.offline { background: #9b9fa8; }
+.focus-preview-label { position: absolute; left: 18px; top: 18px; color: #727982; font-size: 12px; background: #fff9; border-radius: 20px; padding: 5px 12px; }
+.focus-video { min-width: 0; min-height: 0; display: flex; align-items: center; }
+.focus-video > section { width: 100%; }
+.focus-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 92px; padding: 14px 22px; flex-shrink: 0; }
+.focus-toolbar > div { display: flex; align-items: center; gap: 16px; }
+.focus-tool { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: #dddfe5; min-width: 54px; }
+.focus-tool > span { font-size: 27px; height: 34px; }
+.focus-status-pill { display: flex; align-items: center; gap: 14px; border: 1px solid #414650; border-radius: 32px; padding: 7px 22px; text-align: left; }
+.focus-status-pill > span:last-child { font-size: 17px; }
+.focus-status-pill small { display: flex; align-items: center; gap: 7px; font-size: 11px; color: #a8acb6; }
+.focus-leave { border-radius: 30px; background: #d94646; padding: 14px 22px; font-size: 13px; }
+.focus-support { width: 338px; flex: 0 0 338px; height: 100dvh; background: #fcfbf9; color: #252a34; border-left: 1px solid #d7d8db; display: flex; flex-direction: column; }
+.focus-support-header { display: flex; align-items: center; justify-content: space-between; padding: 22px 20px; gap: 8px; flex-shrink: 0; }
+.focus-support-header > span, .focus-support-header > div { display: flex; align-items: center; gap: 15px; }
+.focus-support-header strong { font-size: 20px; font-weight: 600; }
+.focus-support-header button { padding: 2px 6px; min-width: 28px; font-size: 24px; line-height: 28px; border-radius: 6px; }
+.focus-support-header button:hover { background: #eaeaf0; }
+.focus-support-body { display: flex; flex-direction: column; flex: 1; min-height: 0; padding: 24px 20px 28px; overflow-y: auto; }
+.focus-support h2 { font-size: 20px; font-weight: 600; }
+.focus-watching { display: flex; align-items: center; gap: 9px; color: #8a8c93; font-size: 14px; margin-top: 8px; }
+.focus-suggestion-area { margin-top: clamp(48px,12vh,125px); }
+.focus-suggestion { padding: 19px 18px; background: white; border: 1px solid #e6e4e5; border-radius: 13px; box-shadow: 0 3px 10px #11182704; }
+.focus-lightbulb { display: grid; place-items: center; border-radius: 50%; background: #fff5df; width: 28px; height: 28px; color: #d99b24; margin-bottom: 12px; font-size: 24px; }
+.focus-suggestion p { line-height: 1.8; font-size: 17px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.focus-private { color: #909197; margin-top: 10px; font-size: 12px; }
+.focus-suggestion-actions { display: flex; gap: 10px; margin-top: 24px; }
+.focus-button { display: inline-flex; justify-content: center; align-items: center; border: 1px solid #d4d4d8; border-radius: 9px; padding: 10px 15px; font-size: 13px; font-weight: 500; line-height: 1.5; text-align: center; color: #313744; background: transparent; }
+.focus-button:hover { background: #f0f1f5; }
+.focus-primary { border-color: #2e6de6; background: #2e6de6; color: white; }
+.focus-primary:hover { background: #255dca; }
+.focus-suggestion-actions > button { flex: 1; padding: 11px 8px; }
+.focus-empty-suggestion { color: #6e7581; text-align: center; padding: 22px 4px; }
+.focus-empty-suggestion p { font-size: 14px; margin: 22px 0 10px; line-height: 1.8; }
+.focus-empty-suggestion > span:last-child { font-size: 12px; line-height: 1.8; }
+.focus-clear { margin-top: 18px; color: #4474bd; font-size: 12px; text-decoration: underline; }
+.focus-manual { margin-top: 30px; margin-bottom: 24px; }
+.focus-text-button { font-size: 12px; color: #5e72a0; padding: 6px 0; }
+.focus-manual form { margin-top: 10px; display: grid; gap: 10px; }
+.focus-manual form p { font-size: 11px; color: #888d98; line-height: 1.8; }
+.focus-support :is(textarea,input), .focus-setup input { border: 1px solid #dadce1; border-radius: 9px; background: white; color: #252a34; width: 100%; padding: 10px 12px; font-size: 13px; line-height: 1.8; }
+.focus-support textarea { resize: vertical; }
+.focus-notes { margin-top: auto; }
+.focus-notes-toggle { display: flex; width: 100%; align-items: center; justify-content: space-between; padding: 15px; border: 1px solid #dedee2; border-radius: 12px; font-size: 13px; color: #777a85; }
+.focus-notes-content { max-height: 230px; overflow: auto; padding: 12px 0; font-size: 12px; line-height: 1.8; }
+.focus-notes-content > p { border-bottom: 1px solid #e6e7ea; padding: 10px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.focus-deferred { margin-top: 16px; padding: 12px; background: #f1f3f9; border-radius: 9px; }
+.focus-detail-panel { overflow-y: auto; }
+.focus-settings { padding: 10px 22px 25px; display: grid; gap: 32px; }
+.focus-settings :is(section,form) { display: grid; gap: 10px; }
+.focus-settings h2 { font-size: 16px; }
+.focus-settings p { font-size: 12px; line-height: 1.8; color: #838795; }
+.focus-settings label, .focus-agenda-editor label { font-size: 12px; color: #646a76; }
+.focus-agenda-editor { display: grid; gap: 9px; padding: 12px 20px 18px; border-bottom: 1px solid #e4e5eb; }
+.focus-chat { flex: 1; min-height: 450px; }
+.focus-chat > section { height: 100%; min-height: 450px; max-height: 700px; border: 0; border-radius: 0; background: #fcfbf9; }
+.focus-chat :is(header,form) { border-color: #e2e4e9; }
+.focus-chat :is(p,span,time) { color: inherit; }
+.focus-chat header p, .focus-chat form > p { color: #858c9a; }
+.focus-chat article { background: #edf2fb; color: #283b5c; }
+.focus-chat textarea { background: white; color: #252a34; }
+.focus-chat .bg-slate-800 { background: #edf0f6; color: #364254; }
+.focus-chat button { border-color: #d9dce3; }
+.focus-chat button[type=button] { color: #5f6a7e; }
+.focus-toast { position: fixed; left: 24px; bottom: 100px; max-width: min(560px,calc(100vw - 48px)); background: #f6f8fe; border: 1px solid #c4d6f4; color: #30496f; padding: 15px 18px; border-radius: 12px; box-shadow: 0 5px 24px #0002; font-size: 13px; display: flex; align-items: center; gap: 20px; z-index: 10; }
+.focus-toast button { padding: 3px; font-size: 20px; }
+.focus-toast-error, .focus-error { color: #9b3d36; }
+.focus-setup { min-height: 100dvh; display: grid; place-items: center; padding: 28px; background: #f7f8fa; color: #282c35; }
+.focus-setup-card { max-width: 470px; width: 100%; text-align: center; padding: 35px; background: white; border: 1px solid #e6e7ee; border-radius: 24px; box-shadow: 0 20px 60px #1b2c4b08; }
+.focus-eyebrow { font-size: 10px; letter-spacing: .23em; color: #8791a7; margin: 23px 0 16px; }
+.focus-setup h1 { font-size: 28px; font-weight: 600; }
+.focus-setup h1 + p { color: #9397a1; font-size: 13px; margin-top: 20px; line-height: 2; }
+.focus-setup form { display: grid; gap: 12px; text-align: left; margin-top: 30px; }
+.focus-setup label { font-size: 12px; color: #747b88; }
+.focus-setup details { color: #969ba5; font-size: 11px; margin: 8px 0; }
+.focus-setup details input { margin: 10px 0; }
+.focus-setup .focus-error { font-size: 12px; line-height: 1.8; margin-top: 15px; }
+.focus-output { width: 100vw; height: 100dvh; overflow: hidden; background: #e9e9eb; }
+.focus-output-error { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); width: max-content; max-width: 80vw; background: #ffffffde; color: #777b85; border-radius: 12px; padding: 8px 15px; font-size: 12px; text-align: center; }
+@keyframes focus-breathe { 50% { transform: scale(1.04); box-shadow: 0 0 75px #a9c4fa70; } }
+@media (prefers-reduced-motion: reduce) { .focus-orb-speaking { animation: none; } }
+@media (min-width:1600px) { .focus-support { width: 360px; flex-basis: 360px; } }
+@media (max-width:850px) {
+  .focus-workspace { flex-direction: column; }
+  .focus-meeting { height: auto; min-height: 65dvh; }
+  .focus-stage { min-height: 360px; }
+  .focus-support { width: 100%; flex: auto; height: auto; min-height: 60dvh; border-left: 0; }
+  .focus-suggestion-area { margin-top: 38px; }
+  .focus-notes { margin-top: 35px; }
+  .focus-toolbar { padding: 12px; gap: 6px; flex-wrap: wrap; }
+  .focus-toolbar > div { gap: 10px; }
+  .focus-status-pill { padding: 7px 14px; }
+  .focus-leave { padding: 12px 16px; }
+  .focus-stage:has(.focus-video) { grid-template-columns: 1fr; }
+  .focus-bot-small { aspect-ratio: 16/9; }
+  .focus-bot-tile { min-height: 300px; }
+}

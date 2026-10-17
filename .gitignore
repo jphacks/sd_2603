@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Recall CLI bot id. Do not commit.
 .recall/
+
+# Local Focus sessions contain private agenda and access tokens.
+.focus/

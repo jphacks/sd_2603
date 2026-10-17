@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./focus.css";
 
 :root {
   --background: #ffffff;
