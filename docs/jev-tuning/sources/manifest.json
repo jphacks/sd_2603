@@ -1,0 +1,37 @@
+{
+  "ami_me_url": "https://raw.githubusercontent.com/ku-nlp/AMI-ME/c04006257be6ba5cfdb570449a1d064d5e609671/AMI_ME.json",
+  "ami_me_sha256": "8689d47989414f0c83a03f1c5de85ba09187b8c0238c6a5e0eeaaa09efc1412f",
+  "ami_manual_url": "https://groups.inf.ed.ac.uk/ami/AMICorpusAnnotations/ami_public_manual_1.6.2.zip",
+  "ami_manual_sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+  "source_license": "CC-BY-4.0",
+  "split_algorithm": "sha256(jev-split-v1:+series); first 20 eligible series; meeting chosen by sha256(jev-meeting-v1:+meeting); 12 train/4 validation/4 test; 5 segments per series",
+  "series_splits": {
+    "ES2012": "train",
+    "TS3010": "train",
+    "ES2002": "train",
+    "ES2003": "train",
+    "ES2008": "train",
+    "ES2010": "train",
+    "TS3012": "train",
+    "IS1005": "train",
+    "IS1007": "train",
+    "IS1006": "train",
+    "TS3009": "train",
+    "IS1009": "train",
+    "ES2014": "validation",
+    "TS3005": "validation",
+    "TS3007": "validation",
+    "IS1002": "validation",
+    "TS3011": "test",
+    "ES2007": "test",
+    "TS3008": "test",
+    "TS3003": "test"
+  },
+  "counts": {
+    "train": 60,
+    "validation": 20,
+    "test": 20
+  },
+  "minimum_token_membership_coverage": 1.0,
+  "warning": "Membership coverage is a coarse cross-check, not an exact textual alignment; manually review low coverage."
+}
