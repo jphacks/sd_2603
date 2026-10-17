@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { run } from './recall.mjs';
+import { run, removeBot, sendBot } from './recall.mjs';
 
 function fixture() {
   const dir = mkdtempSync(path.join(tmpdir(), 'recall-cli-'));
@@ -258,6 +258,60 @@ test('Ctrl+C during join requests leave once', async () => {
     assert.equal(leaves, 1);
     assert.match(cap.stderr.join('\n'), /SIGINT/);
     assert.match(cap.stdout.join('\n'), /退出を要求しました bot-int/);
+  } finally {
+    box.cleanup();
+  }
+});
+
+test('sendBot creates one silent bot and does not wait for admission', async () => {
+  const box = fixture();
+  const calls = [];
+  try {
+    const io = capture({
+      statePath: box.statePath,
+      fetch: async (url, options) => {
+        calls.push({ url, method: options?.method ?? 'GET' });
+        if (options?.method === 'POST') return jsonResponse(200, { id: 'bot-sent' });
+        return jsonResponse(200, { status_changes: [] });
+      },
+    }).io;
+    const sent = await sendBot('https://meet.google.com/abc-defg-hij', io);
+    assert.deepEqual(sent, {
+      id: 'bot-sent',
+      region: 'ap-northeast-1',
+      meetingUrl: 'https://meet.google.com/abc-defg-hij',
+    });
+    assert.equal(calls.length, 1);
+    assert.match(calls[0].url, /\/bot\/$/);
+    const state = JSON.parse(readFileSync(box.statePath, 'utf8'));
+    assert.equal(state.id, 'bot-sent');
+    await assert.rejects(
+      () => sendBot('http://meet.google.com/abc', io),
+      (error) => error.status === 400,
+    );
+  } finally {
+    box.cleanup();
+  }
+});
+
+test('removeBot asks the bot to leave and deletes the state file', async () => {
+  const box = fixture();
+  mkdirSync(box.dir, { recursive: true });
+  writeFileSync(box.statePath, JSON.stringify({ id: 'bot-1' }));
+  try {
+    const io = capture({
+      statePath: box.statePath,
+      fetch: async (url) => {
+        if (String(url).endsWith('/leave_call/')) return jsonResponse(200, {});
+        return jsonResponse(200, {
+          status_changes: [{ code: 'call_ended', created_at: '2026-10-17T00:00:03Z' }],
+        });
+      },
+    }).io;
+    const result = await removeBot(io, 'bot-1');
+    assert.equal(result.left, true);
+    assert.equal(result.code, 'call_ended');
+    assert.equal(exists(box.statePath), false);
   } finally {
     box.cleanup();
   }
