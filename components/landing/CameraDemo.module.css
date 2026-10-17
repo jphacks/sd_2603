@@ -5,19 +5,9 @@
   align-items: start;
 }
 
-.screen {
-  margin: 0;
-}
-
 .screen > div {
+  /* Camera component root */
   border: 1px solid #e3e8ed;
-}
-
-.caption {
-  margin-top: 12px;
-  color: #526171;
-  font-size: 14px;
-  line-height: 1.7;
 }
 
 .panel {

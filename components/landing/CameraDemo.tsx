@@ -36,12 +36,9 @@ export function CameraDemo() {
 
   return (
     <div className={styles.demo}>
-      <figure className={styles.screen}>
+      <div className={styles.screen}>
         <RecallCameraMotion inline request={request} />
-        <figcaption className={styles.caption}>
-          実装中のカメラ表示コンポーネントを、このページでそのまま動かしています。画面内の「Focus」は開発中の旧表記です。
-        </figcaption>
-      </figure>
+      </div>
 
       <div className={styles.panel}>
         <p className={styles.panelLabel} id="camera-demo-label">表示する状態</p>

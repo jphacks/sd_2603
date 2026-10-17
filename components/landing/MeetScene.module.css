@@ -1,0 +1,148 @@
+.scene {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  aspect-ratio: 16 / 9.5;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #202124;
+  color: #e8eaed;
+  font-family: Arial, var(--font-noto-sans-jp), sans-serif;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  min-height: 0;
+  padding: 14px 14px 0;
+}
+
+.tile {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #303134;
+  container-type: size;
+}
+
+/* AIDA is pinned large, the way Meet shows a spotlighted participant. */
+.aidaTile {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+/* The 2x2 source is 1672x941; cover each tile without stretching the photo. */
+.photo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100cqw, 177.68cqh);
+  aspect-ratio: 1672 / 941;
+  background-image: url("/lp/meeting-participants.jpg");
+  background-repeat: no-repeat;
+  background-size: 200% 200%;
+  transform: translate(-50%, -50%);
+}
+
+.aidaTile > div {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #f8fbfd;
+}
+
+/* Fit the whole 16:9 camera output so the message is never cropped. */
+.aidaTile.aidaTile > div > section {
+  width: 100cqw;
+}
+
+/* Meet's own name tag labels the tile, so the camera's footer chips are hidden here. */
+.aidaTile footer {
+  display: none;
+}
+
+.nameTag {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  z-index: 4;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgb(32 33 36 / 45%);
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.aidaTile .nameTag {
+  background: rgb(23 38 56 / 72%);
+}
+
+.muted {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgb(32 33 36 / 65%);
+}
+
+.muted svg {
+  width: 14px;
+  height: 14px;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px 14px;
+  font-size: 13px;
+}
+
+.meetingName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tools {
+  display: flex;
+  gap: 8px;
+}
+
+.tool {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #3c4043;
+}
+
+.leave {
+  width: 54px;
+  border-radius: 999px;
+  background: #ea4335;
+  color: #ffffff;
+}
+
+.count {
+  justify-self: end;
+  color: #bdc1c6;
+}
+
+@media (max-width: 640px) {
+  .tool:nth-child(3),
+  .tool:nth-child(4) {
+    display: none;
+  }
+}

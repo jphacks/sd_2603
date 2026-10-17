@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Noto_Sans_JP } from "next/font/google";
 import { CameraDemo } from "@/components/landing/CameraDemo";
+import { MeetScene } from "@/components/landing/MeetScene";
 import logo from "@/public/brand/aida-selected/aida-wordmark-v1.png";
 import cameraOnTrack from "@/public/lp/camera-on-track.jpg";
 import cameraOffTrack from "@/public/lp/camera-off-track.jpg";
@@ -70,20 +71,20 @@ const conditions = [
 const steps = [
   {
     number: "STEP 01",
-    title: "会議URLを渡す",
-    body: "参加画面に Google Meet の会議URLを入力すると、AIDAのボットが1体入室します。Meet側で参加リクエストを許可してください。退出も同じ画面から行えます。",
+    title: "会議へ招待",
+    body: "Google Meet の会議URLを自動で取得し、AIDAが会議に入室します。Meet側で参加リクエストを許可してください。",
     note: null,
   },
   {
     number: "STEP 02",
     title: "議題を共有する",
-    body: "参加時に .txt / .md の議案書を最大5件添付すると、本文からアジェンダを作ります。会議中のチャットに「アジェンダ」を含むメッセージや、リンクを知っている全員が開ける Google ドキュメントのURLを送る方法もあります。",
-    note: "チャットからの取り込みは、受信用の Webhook を設定した環境でのみ動作します。Meetに添付したPDFや画像の中身は読み取りません。",
+    body: "Google Meet のチャット欄に、アジェンダをテキストで入力します。AIDAはその内容を、今日の会議で決めることとして読み取ります。",
+    note: null,
   },
   {
     number: "STEP 03",
     title: "必要なときに介入",
-    body: "議題と直近の発言をもとに、見守るか介入するかを判断します。介入するときだけ、AIDAのカメラ枠の表示が変わります。",
+    body: "議題と直近の発言をもとに、見守るか介入するかを判断します。介入するときだけ、AIDAのカメラ表示が変わります。",
     note: null,
   },
 ];
@@ -132,7 +133,7 @@ export default function AboutPage() {
               会議の流れを捉え、脱線や沈黙が続く場面で介入する。必要なひとことで、議論を前へ進める AI ファシリテーターです。
             </p>
             <p className={styles.heroSub}>
-              Google Meet に参加し、順調なあいだは見守ります。議題から外れたときや議論が止まったときだけ、カメラ枠に短い一言を表示します。
+              Google Meet に参加し、順調なあいだは見守ります。議題から外れたときや議論が止まったときだけ、カメラ表示で短い一言を伝えます。
             </p>
             <div className={styles.ctaRow}>
               <a className={styles.primaryCta} href="#demo">
@@ -168,7 +169,7 @@ export default function AboutPage() {
                 alt="ノートパソコンの前で、頬杖をついて会議の話に耳を傾ける人。"
                 sizes="(max-width: 960px) 92vw, 480px"
               />
-              <figcaption className={styles.figcaption}>利用シーンのイメージ（生成画像）</figcaption>
+              <figcaption className={styles.figcaption}>利用シーンのイメージ</figcaption>
             </figure>
             <div>
               <p className={styles.eyebrow}>課題</p>
@@ -195,6 +196,26 @@ export default function AboutPage() {
                 AIDAは会議に参加する第三者として、その一言を引き受けます。特定の参加者に進行の負担を寄せず、全員が議論に集中できるようにします。
               </p>
             </div>
+          </div>
+        </section>
+
+        <section className={styles.section} aria-labelledby="meet-title">
+          <div className={styles.meet}>
+            <div className={styles.meetText}>
+              <p className={styles.eyebrow}>Google Meet の中で</p>
+              <h2 id="meet-title" className={styles.h2}>
+                参加者のひとりとして、
+                <br />
+                会議に入る。
+              </h2>
+              <p className={styles.sectionLead}>
+                AIDAは Google Meet に参加者として入室し、自分のカメラ表示で会議の状態を伝えます。画面を切り替えたり、別のツールを開いたりする必要はありません。
+              </p>
+            </div>
+            <figure className={styles.meetFigure}>
+              <MeetScene />
+              <figcaption className={styles.figcaption}>Google Meet での表示イメージ</figcaption>
+            </figure>
           </div>
         </section>
 
@@ -272,7 +293,7 @@ export default function AboutPage() {
               カメラ表示を、ここで試す。
             </h2>
             <p className={styles.sectionLead}>
-              状態を選ぶと、AIDAがカメラ枠に出す動きを再生します。
+              状態を選ぶと、AIDAのカメラ表示の動きを再生します。
             </p>
           </div>
           <CameraDemo />
@@ -284,7 +305,7 @@ export default function AboutPage() {
               実際の会議で試す
             </h2>
             <p className={styles.closingBody}>
-              参加画面で Google Meet の会議URLを渡すと、AIDAが入室します。利用には Recall.ai のAPIキーなど、サーバー側の設定が必要です。
+              AIDAを会議に参加させて、実際の議論の中で見守る・介入するの振る舞いを確かめられます。
             </p>
           </div>
           <Link className={styles.primaryCta} href="/">

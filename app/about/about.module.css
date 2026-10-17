@@ -78,8 +78,12 @@
 
 .headerLogo {
   display: block;
-  width: 112px;
+  width: 136px;
   flex: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  /* Same neutral as the logo PNG, so the pale blue strokes stay visible. */
+  background: #eeeff1;
 }
 
 /* Shows the wordmark without the PNG's outer margin; the image itself is unchanged. */
@@ -96,12 +100,6 @@
   left: -16.67%;
   width: 133.8%;
   max-width: none;
-}
-
-/* The source PNG sits on #EEEFF1; lift it to the white page without altering the artwork. */
-.logoCrop img,
-.heroLogo img {
-  filter: brightness(1.072);
 }
 
 .nav {
@@ -218,9 +216,13 @@
   scroll-margin-top: 72px;
 }
 
+/* The logo PNG is drawn on #EEEFF1; a matching panel keeps its pale blue strokes legible. */
 .heroLogo {
-  width: min(360px, 100%);
-  margin: 0 0 24px -8px;
+  width: min(400px, 100%);
+  margin-bottom: 32px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #eeeff1;
 }
 
 .heroTitle {
@@ -360,6 +362,15 @@
   margin-top: 40px;
 }
 
+/* Meet */
+
+.meet {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: 64px;
+  align-items: center;
+}
+
 /* Behaviors */
 
 .behaviors {
@@ -368,14 +379,17 @@
   gap: 32px;
 }
 
+/* Subgrid keeps titles, images and text on shared rows even when a title wraps. */
 .behavior {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
 }
 
 .behaviorTitle {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   gap: 12px;
   margin-bottom: 16px;
   font-size: 20px;
@@ -402,8 +416,8 @@
 
 .quote {
   display: grid;
+  align-content: start;
   gap: 2px;
-  margin-top: auto;
   padding-top: 16px;
   font-size: 16px;
   font-weight: 500;
@@ -586,7 +600,8 @@
   }
 
   .hero,
-  .problem {
+  .problem,
+  .meet {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -596,6 +611,11 @@
 
   .section {
     padding: 80px 0;
+  }
+
+  .behavior {
+    grid-row: auto;
+    grid-template-rows: none;
   }
 
   .behaviors,
