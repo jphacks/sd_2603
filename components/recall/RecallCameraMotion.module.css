@@ -1,0 +1,413 @@
+.page {
+  --target-background: none;
+  --orb-rgb: 129 205 157;
+  --strong-rgb: 59 181 111;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  gap: 24px;
+  padding: 28px;
+  background: #eef2f6;
+  color: #25364a;
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.cameraFrame {
+  width: min(100%, calc(78svh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgb(48 67 91 / 18%);
+  container-type: inline-size;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background: #f8fbfd;
+}
+
+.baseBackground,
+.targetBackground,
+.alertBackground {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.baseBackground {
+  background-image: url("/focus-states/state-on-track-green-centered-pale.png");
+}
+
+.targetBackground {
+  background-image: var(--target-background);
+  opacity: 0;
+}
+
+.targetBackground.attention {
+  animation: stateColorIn 2s ease-in-out both;
+}
+
+.targetBackground.settling,
+.targetBackground.messageVisible {
+  opacity: 1;
+}
+
+.targetBackground.returning {
+  animation: stateColorOut 2s ease-in-out both;
+}
+
+.alertBackground {
+  z-index: -1;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgb(255 255 255 / 8%) 0 7%,
+      rgb(var(--strong-rgb) / 92%) 25%,
+      rgb(var(--strong-rgb) / 72%) 48%,
+      rgb(var(--strong-rgb) / 18%) 78%,
+      rgb(var(--strong-rgb) / 0%) 100%);
+}
+
+.alertBackground.attention {
+  animation: alertColorIn 2s ease-in-out both;
+}
+
+.alertBackground.settling {
+  animation: alertColorOut 2s ease-in-out both;
+}
+
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 49%, rgb(255 255 255 / 0%) 12%, rgb(255 255 255 / 35%) 70%);
+}
+
+.motionLayer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.orbMotion {
+  position: absolute;
+  width: 42cqw;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  animation: calmBreathing 5.8s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform, filter;
+}
+
+.orb {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgb(255 255 255 / 92%) 0 6%,
+      rgb(var(--orb-rgb) / 62%) 23%,
+      rgb(var(--orb-rgb) / 28%) 49%,
+      rgb(var(--orb-rgb) / 0%) 72%);
+  box-shadow:
+    0 0 6cqw rgb(var(--orb-rgb) / 18%),
+    inset 0 0 4cqw rgb(255 255 255 / 40%);
+  will-change: opacity;
+}
+
+.orb::before,
+.orb::after {
+  content: "";
+  position: absolute;
+  border: max(1px, .12cqw) solid rgb(255 255 255 / 38%);
+  border-radius: inherit;
+}
+
+.orb::before { inset: 9%; }
+.orb::after { inset: 25%; }
+
+.baseOrb {
+  --orb-rgb: 129 205 157;
+}
+
+.targetOrb {
+  opacity: 0;
+}
+
+.alertOrb {
+  --orb-rgb: var(--strong-rgb);
+  opacity: 0;
+}
+
+.attention .targetOrb,
+.attention .alertOrb {
+  animation: stateColorIn 2s ease-in-out both;
+}
+
+.settling .targetOrb,
+.messageVisible .baseOrb { opacity: 0; }
+.settling .targetOrb,
+.messageVisible .targetOrb { opacity: 1; }
+
+.settling .baseOrb { opacity: 0; }
+.settling .alertOrb { animation: stateColorOut 2s ease-in-out both; }
+.returning .targetOrb { animation: stateColorOut 2s ease-in-out both; }
+
+.orbCore {
+  position: absolute;
+  inset: 42%;
+  border-radius: inherit;
+  background: rgb(255 255 255 / 92%);
+  box-shadow: 0 0 2.8cqw rgb(255 255 255 / 90%);
+}
+
+.message {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 2.2cqw;
+  width: 74%;
+  opacity: 0;
+  color: #33465b;
+  text-align: center;
+  text-shadow: 0 2px 12px rgb(255 255 255 / 88%);
+  pointer-events: none;
+}
+
+.stateLabel {
+  color: #586779;
+  font-size: clamp(12px, 2.35cqw, 34px);
+  font-weight: 500;
+  letter-spacing: .18em;
+}
+
+.message p {
+  display: grid;
+  gap: .2cqw;
+  margin: 0;
+  font-size: clamp(24px, 5.6cqw, 76px);
+  font-weight: 600;
+  letter-spacing: .025em;
+  line-height: 1.34;
+}
+
+.attention .orbMotion {
+  animation: attentionPulse 4s cubic-bezier(.36, .08, .22, 1) both;
+}
+
+.settling .message,
+.messageVisible .message {
+  animation: messageAfterMotion 520ms ease-out both;
+}
+
+.cameraFooter {
+  position: absolute;
+  right: 2.7cqw;
+  bottom: 2.2cqw;
+  left: 2.7cqw;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #526274;
+  font-size: clamp(10px, 1.7cqw, 24px);
+  font-weight: 500;
+}
+
+.brand,
+.liveState {
+  display: inline-flex;
+  align-items: center;
+  gap: .7cqw;
+  padding: .65cqw 1.15cqw;
+  border: 1px solid rgb(255 255 255 / 65%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 62%);
+  box-shadow: 0 4px 20px rgb(69 88 112 / 8%);
+  backdrop-filter: blur(8px);
+}
+
+.brand i,
+.liveState i {
+  width: .75cqw;
+  min-width: 7px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgb(var(--orb-rgb));
+  box-shadow: 0 0 1cqw rgb(var(--orb-rgb) / 65%);
+}
+
+.controls {
+  width: min(1120px, 100%);
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 22px 24px;
+  border: 1px solid #dce3eb;
+  border-radius: 18px;
+  background: rgb(255 255 255 / 88%);
+  box-shadow: 0 12px 40px rgb(48 67 91 / 8%);
+}
+
+.controlEyebrow {
+  margin: 0 0 7px;
+  color: #7c8999;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+
+.controls h1 {
+  margin: 0 0 6px;
+  font-size: 22px;
+}
+
+.controls p:last-child {
+  margin: 0;
+  color: #667487;
+  font-size: 14px;
+}
+
+.controlActions {
+  display: grid;
+  gap: 10px;
+  min-width: 330px;
+}
+
+.modeButtons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.modeButtons button,
+.replayButton {
+  min-height: 42px;
+  border: 1px solid #d7dfe8;
+  border-radius: 11px;
+  background: #fff;
+  color: #3b4d62;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.replayButton:disabled {
+  border-color: #d7dfe8;
+  background: #edf1f5;
+  color: #8591a0;
+  cursor: default;
+  transform: none;
+}
+
+.modeButtons button:hover,
+.replayButton:hover { transform: translateY(-1px); }
+
+.modeButtons button[aria-pressed="true"] {
+  border-color: rgb(var(--orb-rgb) / 80%);
+  background: rgb(var(--orb-rgb) / 15%);
+}
+
+.replayButton {
+  border-color: #395d88;
+  background: #395d88;
+  color: white;
+}
+
+.embedded {
+  min-height: 100vh;
+  padding: 0;
+  background: #f8fbfd;
+}
+
+.embedded .cameraFrame {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@keyframes calmBreathing {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(.96); filter: saturate(.95); }
+  35% { transform: translate3d(0, -1.1cqw, 0) scale(1.045); filter: saturate(1.04); }
+  65% { transform: translate3d(.7cqw, .5cqw, 0) scale(1.01); filter: saturate(1); }
+}
+
+@keyframes attentionPulse {
+  0% { transform: scale(.96); filter: saturate(.96); }
+  11% { transform: scale(1.34); filter: saturate(1.12); }
+  23% { transform: scale(.82); filter: saturate(.98); }
+  38% { transform: scale(1.48); filter: saturate(1.2); }
+  53% { transform: scale(.88); filter: saturate(1); }
+  68% { transform: scale(1.36); filter: saturate(1.15); }
+  82% { transform: scale(.94); filter: saturate(1.03); }
+  100% { transform: scale(1); filter: saturate(1); }
+}
+
+@keyframes stateColorIn {
+  0%, 8% { opacity: 0; }
+  45% { opacity: .45; }
+  100% { opacity: 1; }
+}
+
+@keyframes stateColorOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes alertColorIn {
+  0%, 8% { opacity: 0; }
+  55% { opacity: .7; }
+  100% { opacity: 1; }
+}
+
+@keyframes alertColorOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes messageAfterMotion {
+  from { opacity: 0; transform: translateY(1.2cqw) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 800px) {
+  .page { padding: 14px; }
+  .controls { align-items: stretch; flex-direction: column; }
+  .controlActions { min-width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbMotion { animation: none; }
+  .attention .orbMotion { animation: none; transform: scale(1.08); }
+  .targetBackground.attention,
+  .targetBackground.returning,
+  .alertBackground.attention,
+  .alertBackground.settling,
+  .attention .targetOrb,
+  .attention .alertOrb,
+  .settling .alertOrb,
+  .returning .targetOrb { animation: none; }
+  .targetBackground.attention,
+  .attention .targetOrb,
+  .attention .alertOrb { opacity: 1; }
+  .targetBackground.returning,
+  .returning .targetOrb,
+  .settling .alertOrb { opacity: 0; }
+  .settling .message,
+  .messageVisible .message { animation: none; opacity: 1; }
+}
