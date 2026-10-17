@@ -2,6 +2,8 @@ import { z } from "zod";
 import { AGENDA_CHAR_LIMIT, agendaForJudge } from "@/lib/agenda/agenda";
 import { monitoredJudge } from "@/lib/monitor/judge";
 import { monitorStore } from "@/lib/monitor/store";
+import { withDeviceControls } from "@/lib/device/judge";
+import { deviceStore } from "@/lib/device/state";
 import { JevError } from "@/lib/judge/jev";
 import { applyVideoDecision, authorizedControl, restoreIdleVideo } from "@/lib/recall/controller";
 import { outputVideo, RecallVideoError, renderVideoJpeg } from "@/lib/recall/video";
@@ -53,9 +55,12 @@ export async function POST(request: Request) {
     if (input.mode === "judge") {
       const agenda = agendaForJudge(input.botId, input.agenda);
       const result = await applyVideoDecision({ ...input, agenda }, {
-        judge: (value) => monitoredJudge(input.botId, value),
+        judge: withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value)),
         ...videoDependencies,
-        onIntervened: (id) => monitorStore.intervened(id),
+        onIntervened: (id, kind) => {
+          monitorStore.intervened(id);
+          deviceStore.intervened(id, kind);
+        },
       });
       return Response.json({ ...result, agenda });
     }
