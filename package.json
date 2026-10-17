@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "recall": "node scripts/recall.mjs",
-    "test": "node --test scripts/recall.test.mjs scripts/ci/helpers.test.mjs lib/recall/client.test.mjs lib/recall/meeting.test.mjs lib/recall/transcript.test.mjs lib/recall/feed.test.mjs"
+    "lint": "eslint"
   },
   "dependencies": {
     "ai": "^7.0.138",
