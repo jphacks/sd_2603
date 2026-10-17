@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { AGENDA_CHAR_LIMIT, agendaForJudge } from "@/lib/agenda/agenda";
+import { AGENDA_CHAR_LIMIT, AgendaChangedError, assertAgendaSnapshot, getAgendaSnapshot, withAgendaSnapshot } from "@/lib/agenda/agenda";
 import { monitoredJudge } from "@/lib/monitor/judge";
 import { monitorStore } from "@/lib/monitor/store";
 import { JevError } from "@/lib/judge/jev";
@@ -15,11 +15,14 @@ const JudgeRequestSchema = z.object({
   transcript: z.array(z.string().trim().min(1).max(1000)).min(1).max(30),
   secondsSinceLastIntervention: z.number().finite().min(0),
 });
-const EvaluateRequestSchema = JudgeRequestSchema.extend({ mode: z.literal("evaluate") });
+const AgendaVersionSchema = z.string().min(1).max(128);
+const EvaluateRequestSchema = JudgeRequestSchema.extend({ mode: z.literal("evaluate"), agendaVersion: AgendaVersionSchema });
+const AgendaRequestSchema = z.object({ mode: z.literal("agenda"), botId: BotIdSchema, agenda: z.string().trim().min(1).max(AGENDA_CHAR_LIMIT) });
 const DisplayRequestSchema = z.object({
   mode: z.literal("display"),
   botId: BotIdSchema,
-  agenda: z.string().trim().min(1).max(500),
+  agenda: z.string().trim().min(1).max(AGENDA_CHAR_LIMIT),
+  agendaVersion: AgendaVersionSchema,
   requestId: z.string().uuid(),
   generation: z.number().int().min(0),
   result: z.object({
@@ -29,7 +32,7 @@ const DisplayRequestSchema = z.object({
   }),
 });
 const ResetRequestSchema = z.object({ mode: z.literal("idle"), botId: BotIdSchema });
-const InputSchema = z.discriminatedUnion("mode", [JudgeRequestSchema, EvaluateRequestSchema, DisplayRequestSchema, ResetRequestSchema]);
+const InputSchema = z.discriminatedUnion("mode", [JudgeRequestSchema, EvaluateRequestSchema, DisplayRequestSchema, ResetRequestSchema, AgendaRequestSchema]);
 const videoDependencies = { render: renderVideoJpeg, output: outputVideo };
 const displayed = new Set<string>();
 const displaying = new Map<string, Promise<unknown>>();
@@ -80,17 +83,22 @@ export async function POST(request: Request) {
 
   try {
     const input = InputSchema.parse(await readBoundedJson(request));
+    if (input.mode === "agenda") {
+      return Response.json(getAgendaSnapshot(input.botId, input.agenda));
+    }
     if (input.mode === "judge") {
-      const agenda = agendaForJudge(input.botId, input.agenda);
+      const { agenda, agendaVersion } = getAgendaSnapshot(input.botId, input.agenda);
+      const validate = () => assertAgendaSnapshot(input.botId, agenda, agendaVersion);
       const result = await applyVideoDecision({ ...input, agenda }, {
-        judge: (value) => monitoredJudge(input.botId, value),
+        judge: (value) => monitoredJudge(input.botId, value, validate),
         ...videoDependencies,
+        guard: async () => validate(),
         onIntervened: (id) => monitorStore.intervened(id),
       });
       return Response.json({ ...result, agenda });
     }
     if (input.mode === "evaluate") {
-      return Response.json(await monitoredJudge(input.botId, input));
+      return Response.json(await monitoredJudge(input.botId, input, () => assertAgendaSnapshot(input.botId, input.agenda, input.agendaVersion)));
     }
     if (input.mode === "display") {
       const key = `${input.botId}:${input.requestId}`;
@@ -101,7 +109,7 @@ export async function POST(request: Request) {
       }
       const task = displayVideoResult(input, {
         ...videoDependencies,
-        guard: () => confirmQuiet(input.botId, input.generation),
+        guard: () => withAgendaSnapshot(input, () => confirmQuiet(input.botId, input.generation)),
         onIntervened: (id) => monitorStore.intervened(id),
       });
       displaying.set(key, task);
@@ -113,6 +121,9 @@ export async function POST(request: Request) {
     }
     return Response.json(await restoreIdleVideo(input.botId, videoDependencies));
   } catch (error) {
+    if (error instanceof AgendaChangedError) {
+      return Response.json({ error: "Agenda changed or updating; recommendation cancelled", cancelled: true }, { status: 409 });
+    }
     if (error instanceof z.ZodError || error instanceof SyntaxError || error instanceof TypeError) {
       return Response.json({ error: "Invalid request" }, { status: 400 });
     }

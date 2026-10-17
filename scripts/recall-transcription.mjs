@@ -44,7 +44,7 @@ async function videoRequest(body, signal) {
     body: JSON.stringify(body),
     signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(15_000)]) : AbortSignal.timeout(15_000),
   });
-  if (body.mode === 'display' && response.status === 409) return { cancelled: true };
+  if (['agenda', 'evaluate', 'display'].includes(body.mode) && response.status === 409) return { cancelled: true };
   if (!response.ok) throw new Error(`Video control HTTP ${response.status}`);
   return response.json();
 }
@@ -139,10 +139,11 @@ wss.on('connection', socket => {
       gate = createInterventionGate({
         botId: id,
         agenda: session.agenda,
+        resolveAgenda: ({ botId, agenda, signal }) => videoRequest({ mode: 'agenda', botId, agenda }, signal),
         decide: input => { counts.evaluations++; return videoRequest({ mode: 'evaluate', ...input }); },
-        display: ({ botId, agenda, result, generation, signal }) => {
+        display: ({ botId, agenda, agendaVersion, result, generation, signal }) => {
           counts.displayAttempts++;
-          return videoRequest({ mode: 'display', botId, agenda, result, generation, requestId: randomUUID() }, signal);
+          return videoRequest({ mode: 'display', botId, agenda, agendaVersion, result, generation, requestId: randomUUID() }, signal);
         },
         restoreIdle: ({ botId, signal }) => {
           counts.idleAttempts++;

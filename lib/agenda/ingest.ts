@@ -2,6 +2,7 @@ import { AGENDA_CHAT_PROMPT, BOT_NAME } from "../../scripts/recall.mjs";
 import {
   SOURCE_CHAR_LIMIT,
   agendaSource,
+  beginAgendaUpdate,
   getAgenda,
   saveAgenda,
   type MeetingAgenda,
@@ -33,6 +34,7 @@ export async function ingestChatMessage(
   }
   const source = agendaSource(text);
   if (!source) return { updated: false, agenda: previous, reason: "ignored" };
+  const finishUpdate = beginAgendaUpdate(input.botId);
   try {
     const raw = source.kind === "text"
       ? source.text
@@ -42,5 +44,7 @@ export async function ingestChatMessage(
   } catch (error) {
     console.error("Agenda ingest skipped:", error instanceof Error ? error.name : "error");
     return { updated: false, agenda: previous, reason: "kept" };
+  } finally {
+    finishUpdate();
   }
 }

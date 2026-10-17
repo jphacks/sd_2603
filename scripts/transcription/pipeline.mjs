@@ -56,7 +56,7 @@ export function isVoicedPcm(pcm, threshold = 300) {
 }
 
 /** Final-only transcripts are considered for intervention after a quiet window. */
-export function createInterventionGate({ agenda, botId, decide, display, restoreIdle, onError = () => {}, now = Date.now, schedule = setTimeout, unschedule = clearTimeout, quietMs = 1500, displayMs = 8000 }) {
+export function createInterventionGate({ agenda, botId, resolveAgenda, decide, display, restoreIdle, onError = () => {}, now = Date.now, schedule = setTimeout, unschedule = clearTimeout, quietMs = 1500, displayMs = 8000 }) {
   if (!Number.isFinite(displayMs) || displayMs <= 0) throw new RangeError('Invalid intervention display duration');
   const transcript = [];
   let finalQueue = [];
@@ -75,6 +75,7 @@ export function createInterventionGate({ agenda, botId, decide, display, restore
   let displayEpoch = 0;
   let finalRevision = 0;
   let offAgendaCandidate;
+  let agendaVersion;
   let videoQueue = Promise.resolve();
   const videoAbort = new AbortController();
 
@@ -132,18 +133,42 @@ export function createInterventionGate({ agenda, botId, decide, display, restore
     const batch = finalQueue.splice(0);
     const next = [...transcript, ...batch].slice(-30);
     while (next.length > 1 && Buffer.byteLength(JSON.stringify(next)) > 8_000) next.shift();
-    const currentGeneration = generation;
+    let currentGeneration = generation;
     const currentRevision = finalRevision;
+    transcript.splice(0, transcript.length, ...next);
     try {
-      const result = await decide({ botId, agenda, transcript: next, secondsSinceLastIntervention: Number.isFinite(lastIntervention) ? Math.max(0, (now() - lastIntervention) / 1000) : 60 });
+      if (resolveAgenda) {
+        const snapshot = await resolveAgenda({ botId, agenda, signal: videoAbort.signal });
+        if (snapshot?.cancelled) {
+          offAgendaCandidate = undefined;
+          if (generation === currentGeneration && !finalQueue.length) hasSpeech = false;
+          return;
+        }
+        if (!snapshot || typeof snapshot.agenda !== 'string' || !snapshot.agenda.trim() || snapshot.agenda.length > 2000 || typeof snapshot.agendaVersion !== 'string' || !snapshot.agendaVersion || snapshot.agendaVersion.length > 128) throw new Error('Invalid agenda snapshot');
+        if (stopped || generation !== currentGeneration) { offAgendaCandidate = undefined; return; }
+        if (agendaVersion !== snapshot.agendaVersion || agenda !== snapshot.agenda) {
+          offAgendaCandidate = undefined;
+          agenda = snapshot.agenda;
+          agendaVersion = snapshot.agendaVersion;
+          currentGeneration = ++generation;
+        }
+      }
+      const currentAgenda = agenda;
+      const currentAgendaVersion = agendaVersion;
+      const transcriptBudget = Math.min(8_000, 10_000 - Buffer.byteLength(JSON.stringify(currentAgenda)));
+      while (next.length > 1 && Buffer.byteLength(JSON.stringify(next)) > transcriptBudget) next.shift();
       transcript.splice(0, transcript.length, ...next);
+      const result = await decide({ botId, agenda: currentAgenda, agendaVersion: currentAgendaVersion, transcript: next, secondsSinceLastIntervention: Number.isFinite(lastIntervention) ? Math.max(0, (now() - lastIntervention) / 1000) : 60 });
       if (generation === currentGeneration && !finalQueue.length) hasSpeech = false;
-      if (canDisplay(currentGeneration) && result.action !== 'INTERVENE') {
+      if (result?.cancelled) {
+        offAgendaCandidate = undefined;
+      } else if (canDisplay(currentGeneration) && result.action !== 'INTERVENE') {
         offAgendaCandidate = undefined;
       } else if (canDisplay(currentGeneration) && confirmsDisplay(result, currentRevision)) {
         await changeVideo(async () => {
           if (!canDisplay(currentGeneration)) return { cancelled: true };
-          const displayed = await display({ botId, agenda, result, generation: currentGeneration, signal: videoAbort.signal });
+          const displayed = await display({ botId, agenda: currentAgenda, agendaVersion: currentAgendaVersion, result, generation: currentGeneration, signal: videoAbort.signal });
+          if (displayed?.cancelled) offAgendaCandidate = undefined;
           if (!stopped && !displayed?.cancelled) {
             offAgendaCandidate = undefined;
             lastIntervention = now();

@@ -31,6 +31,7 @@ async function setup(transcripts, action = 'WAIT') {
   await mkdir(join(directory, '.recall'));
   await writeFile(join(directory, '.recall/current.json'), JSON.stringify({ id: botId, agenda: 'Synthetic integration agenda', audioEnabled: true, createdAt: new Date().toISOString() }));
   const requests = [];
+  let agendaSnapshot;
   const control = createServer((request, response) => {
     if (request.url !== '/api/recall/video' || request.headers.authorization !== `Bearer ${controlToken}`) { response.writeHead(401); response.end(); return; }
     let body = '';
@@ -39,7 +40,7 @@ async function setup(transcripts, action = 'WAIT') {
       const input = JSON.parse(body);
       requests.push(input);
       response.writeHead(200, { 'Content-Type': 'application/json' });
-      response.end(JSON.stringify(input.mode === 'idle' ? { video: 'idle' }
+      response.end(JSON.stringify(input.mode === 'agenda' ? agendaSnapshot ?? { agenda: input.agenda, agendaVersion: 'test-v1' } : input.mode === 'idle' ? { video: 'idle' }
         : { action, reason: 'Discussion appears off agenda', message: null, ...(input.mode === 'display' ? { video: 'off_agenda' } : {}) }));
     });
   });
@@ -84,7 +85,7 @@ async function setup(transcripts, action = 'WAIT') {
     socket.on('error', () => {});
     await once(socket, 'open');
     const push = pcm => socket.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id: botId }, data: { buffer: pcm.toString('base64') } } }));
-    return { requests, socket, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
+    return { requests, socket, setAgenda(value) { agendaSnapshot = value; }, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
   } catch (error) { await cleanup(); throw error; }
 }
 
@@ -92,10 +93,10 @@ test('real worker routes Recall PCM through SDK final and quiet gate to local WA
   const trial = await setup(['synthetic first utterance']);
   try {
     trial.utterance();
-    await waitFor(() => trial.requests.length === 1 || trial.socket.readyState !== WebSocket.OPEN, 'No WAIT evaluation after final');
-    assert.equal(trial.requests.length, 1, trial.output());
-    assert.equal(trial.requests[0].mode, 'evaluate');
-    assert.deepEqual(trial.requests[0].transcript, ['synthetic first utterance']);
+    await waitFor(() => trial.requests.some(request => request.mode === 'evaluate') || trial.socket.readyState !== WebSocket.OPEN, 'No WAIT evaluation after final');
+    assert.deepEqual(trial.requests.map(request => request.mode), ['agenda', 'evaluate'], trial.output());
+    assert.deepEqual(trial.requests[1].transcript, ['synthetic first utterance']);
+    assert.equal(trial.requests[1].agendaVersion, 'test-v1');
     assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());
     assert.equal(trial.output().includes('Audio processing stopped'), false);
   } finally { await trial.cleanup(); }
@@ -109,9 +110,9 @@ test('empty finish is isolated and next utterance still reaches the local WAIT A
     assert.equal(trial.requests.length, 0);
     assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());
     trial.utterance();
-    await waitFor(() => trial.requests.length === 1 || trial.socket.readyState !== WebSocket.OPEN, 'No WAIT evaluation after the second utterance');
-    assert.equal(trial.requests.length, 1, trial.output());
-    assert.deepEqual(trial.requests[0].transcript, ['synthetic after empty']);
+    await waitFor(() => trial.requests.some(request => request.mode === 'evaluate') || trial.socket.readyState !== WebSocket.OPEN, 'No WAIT evaluation after the second utterance');
+    assert.equal(trial.requests.length, 2, trial.output());
+    assert.deepEqual(trial.requests[1].transcript, ['synthetic after empty']);
     assert.equal(trial.output().includes('Audio processing stopped'), false);
   } finally { await trial.cleanup(); }
 });
@@ -120,14 +121,32 @@ test('real worker confirms off-agenda on new finals then automatically restores 
   const trial = await setup(['synthetic first detour', 'synthetic continuing detour'], 'INTERVENE');
   try {
     trial.utterance();
-    await waitFor(() => trial.requests.length === 1 || trial.socket.readyState !== WebSocket.OPEN, 'No first off-agenda recommendation');
-    assert.deepEqual(trial.requests.map(request => request.mode), ['evaluate']);
+    await waitFor(() => trial.requests.some(request => request.mode === 'evaluate') || trial.socket.readyState !== WebSocket.OPEN, 'No first off-agenda recommendation');
+    assert.deepEqual(trial.requests.map(request => request.mode), ['agenda', 'evaluate']);
     trial.utterance();
     await waitFor(() => trial.requests.some(request => request.mode === 'idle') || trial.socket.readyState !== WebSocket.OPEN,
       'No automatic idle after the intervention', 14000);
-    assert.deepEqual(trial.requests.map(request => request.mode), ['evaluate', 'evaluate', 'display', 'idle'], trial.output());
+    assert.deepEqual(trial.requests.map(request => request.mode), ['agenda', 'evaluate', 'agenda', 'evaluate', 'display', 'idle'], trial.output());
     assert.equal(trial.requests.at(-1).botId, botId);
     assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());
     assert.equal(trial.output().includes('Audio processing stopped'), false);
+  } finally { await trial.cleanup(); }
+});
+
+test('real worker refreshes agenda and cannot confirm the old agenda recommendation', { timeout: 15000 }, async () => {
+  const trial = await setup(['old agenda detour', 'new agenda first detour', 'new agenda continuing detour'], 'INTERVENE');
+  try {
+    trial.utterance();
+    await waitFor(() => trial.requests.filter(request => request.mode === 'evaluate').length === 1, 'No old agenda evaluation');
+    trial.setAgenda({ agenda: 'Updated integration agenda', agendaVersion: 'test-v2' });
+    trial.utterance();
+    await waitFor(() => trial.requests.filter(request => request.mode === 'evaluate').length === 2, 'No new agenda evaluation');
+    assert.equal(trial.requests.some(request => request.mode === 'display'), false);
+    trial.utterance();
+    await waitFor(() => trial.requests.some(request => request.mode === 'display'), 'No new agenda confirmation');
+    const display = trial.requests.find(request => request.mode === 'display');
+    assert.equal(display.agenda, 'Updated integration agenda');
+    assert.equal(display.agendaVersion, 'test-v2');
+    assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());
   } finally { await trial.cleanup(); }
 });

@@ -494,3 +494,96 @@ test('stalled recommendation displays immediately and is not an off-agenda confi
   assert.deepEqual(displayedReasons, ['Discussion appears stalled']);
   gate.stop();
 });
+
+test('dynamic agenda changes discard the previous off-agenda vote and bind judge and display', async () => {
+  const clock = fakeClock();
+  let snapshot = { agenda: 'first agenda', agendaVersion: 'v1' };
+  const decisions = [];
+  const displays = [];
+  const gate = createInterventionGate({ agenda: 'initial', botId: 'bot', ...clock,
+    resolveAgenda: async () => snapshot,
+    decide: async input => { decisions.push(input); return offAgenda; }, display: async input => { displays.push(input); },
+  });
+  utterance(gate, 'first detour'); await clock.advance(1500);
+  snapshot = { agenda: 'second agenda', agendaVersion: 'v2' };
+  utterance(gate, 'new agenda detour'); await clock.advance(1500);
+  assert.equal(displays.length, 0, 'the old agenda cannot supply the first confirmation');
+  utterance(gate, 'continued new agenda detour'); await clock.advance(1500);
+  assert.equal(displays.length, 1);
+  assert.equal(decisions[1].agenda, snapshot.agenda);
+  assert.equal(displays[0].agenda, snapshot.agenda);
+  assert.equal(displays[0].agendaVersion, 'v2');
+  snapshot = { ...snapshot, agendaVersion: 'v3' };
+  utterance(gate, 'same text new generation'); await clock.advance(1500);
+  assert.equal(displays.length, 1);
+  gate.stop();
+});
+
+test('a full-length dynamic agenda leaves room for bounded transcript in the 12KB request', async () => {
+  const clock = fakeClock();
+  const inputs = [];
+  const gate = createInterventionGate({ agenda: 'initial', botId: '00000000-0000-4000-8000-000000000001', ...clock,
+    resolveAgenda: async () => ({ agenda: '議'.repeat(2000), agendaVersion: 'a'.repeat(64) }),
+    decide: async input => { inputs.push(input); return { action: 'WAIT' }; }, display: async () => {},
+  });
+  for (let i = 0; i < 5; i++) { utterance(gate, '話'.repeat(1000)); await clock.advance(1500); }
+  for (const input of inputs) assert.ok(Buffer.byteLength(JSON.stringify({ mode: 'evaluate', ...input })) < 12000);
+  gate.stop();
+});
+
+test('agenda updates during a model request or guarded display cancel and clear confirmation', async () => {
+  for (const stage of ['decide', 'display']) {
+    const clock = fakeClock();
+    let rejectOnce = true;
+    let displays = 0;
+    const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+      resolveAgenda: async () => ({ agenda: 'agenda', agendaVersion: 'v1' }),
+      decide: async () => stage === 'decide' && rejectOnce ? (rejectOnce = false, { cancelled: true }) : offAgenda,
+      display: async () => { displays++; if (rejectOnce) { rejectOnce = false; return { cancelled: true }; } },
+    });
+    const initialFinals = stage === 'decide' ? 1 : 2;
+    for (let i = 0; i < initialFinals; i++) { utterance(gate, `old ${i}`); await clock.advance(1500); }
+    const attempts = displays;
+    utterance(gate, 'new first vote'); await clock.advance(1500);
+    assert.equal(displays, attempts, `${stage} cancellation must erase the candidate`);
+    utterance(gate, 'new second vote'); await clock.advance(1500);
+    assert.equal(displays, attempts + 1);
+    assert.equal(gate.stopped, false);
+    gate.stop();
+  }
+});
+
+test('agenda lookup pending holds safely, lookup failure stops, and resumed speech cancels stale lookup', async () => {
+  const clock = fakeClock();
+  let snapshot = { cancelled: true };
+  let decisions = 0;
+  const histories = [];
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    resolveAgenda: async () => snapshot,
+    decide: async input => { decisions++; histories.push(input.transcript); return offAgenda; }, display: async () => { displays++; },
+  });
+  utterance(gate, 'pending source'); await clock.advance(1500);
+  assert.equal(decisions, 0);
+  snapshot = { agenda: 'new agenda', agendaVersion: 'v2' };
+  utterance(gate, 'first valid new agenda'); await clock.advance(1500);
+  assert.equal(displays, 0);
+  assert.deepEqual(histories, [['pending source', 'first valid new agenda']]);
+  gate.stop();
+  let errors = 0;
+  const failed = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    resolveAgenda: async () => { throw new Error('unavailable'); }, decide: async () => { throw new Error('must not judge'); }, display: async () => {}, onError: () => { errors++; },
+  });
+  utterance(failed); await clock.advance(1500);
+  assert.equal(failed.stopped, true);
+  assert.equal(errors, 1);
+  let finish;
+  const resumed = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    resolveAgenda: () => new Promise(resolve => { finish = resolve; }), decide: async () => { decisions++; return offAgenda; }, display: async () => { displays++; },
+  });
+  utterance(resumed); await clock.advance(1500);
+  resumed.onAudio(voiced);
+  finish(snapshot); await tick();
+  assert.equal(decisions, 1);
+  resumed.stop();
+});

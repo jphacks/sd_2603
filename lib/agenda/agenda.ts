@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { createHash, randomUUID } from "node:crypto";
 
 export const AGENDA_BLOCK_LIMIT = 900;
 export const AGENDA_CHAR_LIMIT = 2000;
@@ -71,13 +72,68 @@ export function renderAgendas(agendas: MeetingAgenda[]): string {
   return body.length <= AGENDA_CHAR_LIMIT ? body : body.slice(0, AGENDA_CHAR_LIMIT);
 }
 
-const storeHost = globalThis as typeof globalThis & { __meetingAgendas?: Map<string, MeetingAgenda[]> };
+const storeHost = globalThis as typeof globalThis & {
+  __meetingAgendas?: Map<string, MeetingAgenda[]>;
+  __meetingAgendaVersions?: Map<string, { version: string; pending: Set<string> }>;
+};
 const agendas = storeHost.__meetingAgendas ?? new Map<string, MeetingAgenda[]>();
 storeHost.__meetingAgendas = agendas;
+const versions = storeHost.__meetingAgendaVersions ??= new Map();
+
+export class AgendaChangedError extends Error {}
+
+function revision(botId: string) {
+  let value = versions.get(botId);
+  if (!value) {
+    value = { version: randomUUID(), pending: new Set() };
+    versions.set(botId, value);
+  }
+  return value;
+}
+
+// Invalidate recommendations as soon as an accepted source starts organizing,
+// not only after its asynchronous model/document request has finished.
+export function beginAgendaUpdate(botId: string): () => void {
+  const state = revision(botId);
+  const token = randomUUID();
+  state.pending.add(token);
+  state.version = randomUUID();
+  return () => {
+    if (state.pending.delete(token)) state.version = randomUUID();
+  };
+}
+
+export function getAgendaSnapshot(botId: string, fallback: string) {
+  const state = versions.get(botId);
+  if (state?.pending.size) throw new AgendaChangedError("Agenda update pending");
+  const agenda = getAgenda(botId) ?? fallback;
+  // The fallback is bound to its content and bot, so a restarted server cannot
+  // accidentally accept a previously organized agenda as the initial agenda.
+  const agendaVersion = createHash("sha256").update(`${state?.version ?? ""}\0${botId}\0${agenda}`).digest("hex");
+  return { agenda, agendaVersion };
+}
+
+export function assertAgendaSnapshot(botId: string, agenda: string, agendaVersion: string) {
+  const current = getAgendaSnapshot(botId, agenda);
+  if (current.agendaVersion !== agendaVersion || current.agenda !== agenda) {
+    throw new AgendaChangedError("Agenda changed");
+  }
+}
+
+export async function withAgendaSnapshot<T>(
+  input: { botId: string; agenda: string; agendaVersion: string },
+  operation: () => Promise<T>,
+): Promise<T> {
+  assertAgendaSnapshot(input.botId, input.agenda, input.agendaVersion);
+  const result = await operation();
+  assertAgendaSnapshot(input.botId, input.agenda, input.agendaVersion);
+  return result;
+}
 
 export function saveAgenda(botId: string, agenda: MeetingAgenda): string {
   const next = [...(agendas.get(botId) ?? []), MeetingAgendaSchema.parse(agenda)].slice(-MAX_AGENDAS);
   agendas.set(botId, next);
+  revision(botId).version = randomUUID();
   return renderAgendas(next);
 }
 
@@ -93,4 +149,5 @@ export function agendaForJudge(botId: string, requested: string): string {
 
 export function clearAgendas() {
   agendas.clear();
+  versions.clear();
 }

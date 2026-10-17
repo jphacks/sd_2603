@@ -147,7 +147,7 @@ export function JoinForm() {
           />
         </label>
         <p className="text-xs text-zinc-600">
-          音声モードでは上に入力したアジェンダを使います。議案書やMeetチャットから取り込んだ内容は、音声モードの判定には反映されません。
+          最初は上のアジェンダを使い、議案書やMeetチャットから取り込んだアジェンダも次の音声判定に反映します。更新中は介入を保留します。
         </p>
         <label className="grid gap-1 text-sm">
           操作トークン
