@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "check:runtime": "node scripts/ci/check-runtime.mjs",
+    "predev": "npm run check:runtime",
+    "prebuild": "npm run check:runtime",
+    "prestart": "npm run check:runtime",
+    "prelint": "npm run check:runtime",
+    "pretest": "npm run check:runtime",
+    "prerecall": "npm run check:runtime",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "recall": "node scripts/recall.mjs",
-    "test": "node --test scripts/recall.test.mjs scripts/ci/helpers.test.mjs lib/judge/jev.test.mjs lib/recall/controller.test.mjs lib/recall/video.test.mjs scripts/transcription/*.test.mjs lib/agenda/agenda.test.mjs lib/agenda/materials.test.mjs lib/monitor/*.test.mjs"
+    "test": "node --test scripts/recall.test.mjs scripts/ci/*.test.mjs lib/judge/jev.test.mjs lib/recall/controller.test.mjs lib/recall/video.test.mjs scripts/transcription/*.test.mjs lib/agenda/agenda.test.mjs lib/agenda/materials.test.mjs lib/monitor/*.test.mjs"
   },
   "dependencies": {
     "ai": "^7.0.138",
@@ -21,7 +28,7 @@
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
-    "@types/node": "^20",
+    "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/ws": "^8.18.2",

@@ -47,6 +47,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate Node.js runtime alignment
+        run: npm run check:runtime
+
       - name: Lint
         run: npm run lint
 

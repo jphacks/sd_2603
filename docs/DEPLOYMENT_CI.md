@@ -175,6 +175,9 @@ GitHub公式ActionsはコミットSHA、開発・CIのNode.jsは `.nvmrc` の24.
 
 `package.json` の `engines.node` は `24.x` としてVercelのメジャーバージョンを揃えています。Vercel内のマイナー・パッチ版はプラットフォーム側の自動更新です。CIのログにNode.js・npmのバージョンを出力し、Vercel Buildのログでも利用バージョンを確認できます。
 
+`.node-version` も `.nvmrc` と同じ値に揃え、`@types/node` は24系を使います。Windowsのnvm-windowsでは `nvm install 24.22.0` → `nvm use 24.22.0` を実行し、新しいターミナルで `node --version` と `npm run check:runtime` を確認してください。常駐ワーカーも切り替えたNodeで再起動が必要です。npmの開発・ビルド・起動・Lint・テストは24系以外で早期停止します。OS全体のNodeを自動で入れ替える処理はありません。
+
+
 ## トラブル時
 
 - **Secrets missing**：Secretsの名前、登録先（チームリポジトリ）、トークンの有効期限・Scopeを確認します。
