@@ -1,0 +1,10 @@
+---
+description: プロダクト仕様は docs/product-context.md を手で更新した内容に従う
+alwaysApply: true
+---
+
+# 仕様の正本
+
+プロダクトのゴール、デモ、実装範囲は `docs/product-context.md` に従う。README や会話の記憶と食い違ったら、このファイルを優先する。
+
+仕様を変えるときは、そのファイルを手で更新する。Notion からの自動取得はしない。
