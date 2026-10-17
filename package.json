@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "recall": "node scripts/recall.mjs",
-    "test": "node --test scripts/recall.test.mjs scripts/ci/helpers.test.mjs lib/judge/jev.test.mjs lib/recall/controller.test.mjs lib/recall/video.test.mjs lib/agenda/agenda.test.mjs lib/agenda/materials.test.mjs lib/monitor/*.test.mjs"
+    "test": "node --test scripts/recall.test.mjs scripts/ci/helpers.test.mjs lib/judge/jev.test.mjs lib/recall/controller.test.mjs lib/recall/video.test.mjs lib/agenda/agenda.test.mjs lib/agenda/materials.test.mjs lib/monitor/*.test.mjs evals/tuning/*.test.mjs",
+    "eval:jev": "node evals/tuning/run.mjs",
+    "test:jev-tuning": "node --test evals/tuning/*.test.mjs"
   },
   "dependencies": {
     "ai": "^7.0.138",
