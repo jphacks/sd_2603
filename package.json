@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "recall": "node scripts/recall.mjs",
-    "test": "node --test scripts/recall.test.mjs scripts/ci/helpers.test.mjs"
+    "test": "node --test scripts/recall.test.mjs scripts/ci/helpers.test.mjs lib/judge/jev.test.mjs lib/recall/controller.test.mjs lib/recall/video.test.mjs scripts/transcription/*.test.mjs"
   },
   "dependencies": {
     "ai": "^7.0.138",
@@ -16,6 +16,7 @@
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "sharp": "0.35.5",
+    "ws": "^8.22.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -23,6 +24,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/ws": "^8.18.2",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
     "tailwindcss": "^4",

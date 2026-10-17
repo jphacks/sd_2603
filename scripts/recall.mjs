@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
+import { recordingConfig } from './transcription/audio.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STATE_PATH = path.join(ROOT, '.recall', 'current.json');
@@ -228,9 +229,26 @@ export class RecallCliError extends Error {
   }
 }
 
-export async function sendBot(meetingUrl, io) {
+export async function sendBot(meetingUrl, io, agenda) {
   if (!/^https:\/\/.+/i.test(String(meetingUrl ?? ''))) {
     throw new RecallCliError('会議 URL は https:// で始めてください。', { status: 400, exitCode: 2 });
+  }
+
+  const audioEnabled = io.env.ENABLE_REALTIME_TRANSCRIPTION === 'true';
+  let audioConfig = null;
+  if (audioEnabled) {
+    if (!agenda || !agenda.trim() || agenda.trim().length > 500 || io.env.AI_PROVIDER !== 'jev' || io.env.ALLOW_PAID_AI !== 'true' || !io.env.AI_GATEWAY_API_KEY || !io.env.RECALL_CONTROL_TOKEN || io.env.RECALL_CONTROL_TOKEN.length < 32) {
+      throw new RecallCliError('Audio mode requires an agenda, paid-AI opt-in, Gateway key and control token', { status: 503 });
+    }
+    try {
+      audioConfig = recordingConfig(io.env.RECALL_AUDIO_PUBLIC_URL, io.env.RECALL_AUDIO_TOKEN);
+      const port = Number(io.env.RECALL_AUDIO_PORT ?? 8787);
+      if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid audio port');
+      const health = await io.fetch(`http://127.0.0.1:${port}/health`, { signal: AbortSignal.timeout(1500) });
+      if (!health.ok) throw new Error('Worker unavailable');
+    } catch {
+      throw new RecallCliError('Audio worker is not ready; bot was not created', { status: 503 });
+    }
   }
 
   const existing = await readState(io);
@@ -264,7 +282,7 @@ export async function sendBot(meetingUrl, io) {
     body: {
       meeting_url: meetingUrl,
       bot_name: 'MTG Lab',
-      recording_config: null,
+      recording_config: audioConfig,
       automatic_leave: {
         waiting_room_timeout: 540,
         noone_joined_timeout: 300,
@@ -277,6 +295,7 @@ export async function sendBot(meetingUrl, io) {
     id: botId,
     region: regionOf(io.env),
     meetingUrl,
+    ...(audioEnabled ? { agenda: agenda.trim(), audioEnabled: true } : {}),
     createdAt: new Date(io.now()).toISOString(),
   });
   return { id: botId, region: regionOf(io.env), meetingUrl };
@@ -365,7 +384,7 @@ async function join(flags, io) {
   try {
     let sent;
     try {
-      sent = await sendBot(meetingUrl, io);
+      sent = await sendBot(meetingUrl, io, io.env.MEETING_AGENDA);
     } catch (error) {
       if (error instanceof RecallCliError) {
         io.stderr(error.message);

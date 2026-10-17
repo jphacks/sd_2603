@@ -1,18 +1,24 @@
 import { RecallCliError, localRecallIo, sendBot } from "@/scripts/recall.mjs";
+import { authorizedControl } from "@/lib/recall/controller";
 
 export async function POST(request: Request) {
+  if (!authorizedControl(request, process.env.RECALL_CONTROL_TOKEN)) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
   let meetingUrl = "";
+  let agenda = "";
   try {
     const payload: unknown = await request.json();
     if (payload && typeof payload === "object" && "meetingUrl" in payload) {
       meetingUrl = String(payload.meetingUrl ?? "");
+      if ("agenda" in payload) agenda = String(payload.agenda ?? "");
     }
   } catch {
     return Response.json({ error: "会議 URL は https:// で始めてください。" }, { status: 400 });
   }
 
   try {
-    const sent = await sendBot(meetingUrl, localRecallIo());
+    const sent = await sendBot(meetingUrl, localRecallIo(), agenda);
     return Response.json(sent);
   } catch (error) {
     if (error instanceof RecallCliError) {
