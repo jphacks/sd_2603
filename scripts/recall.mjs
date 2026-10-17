@@ -10,6 +10,7 @@ import {
   retrieveBot,
   sortedStatusChanges,
 } from '../lib/recall/client.mjs';
+import { silentJoinBody } from '../lib/recall/meeting.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STATE_PATH = path.join(ROOT, '.recall', 'current.json');
@@ -243,15 +244,7 @@ async function join(flags, io) {
     : () => {};
 
   try {
-    const created = await createBot(io, {
-      meeting_url: meetingUrl,
-      bot_name: 'MTG Lab',
-      recording_config: null,
-      automatic_leave: {
-        waiting_room_timeout: 540,
-        noone_joined_timeout: 300,
-      },
-    });
+    const created = await createBot(io, silentJoinBody(meetingUrl));
     botId = created.id;
     if (!botId) throw new Error('bot id が返りませんでした');
     await writeState(io, {
