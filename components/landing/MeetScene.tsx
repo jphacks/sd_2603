@@ -1,4 +1,4 @@
-import { RecallCameraMotion } from "@/components/recall/RecallCameraMotion";
+import { ScaledCamera } from "./ScaledCamera";
 import styles from "./MeetScene.module.css";
 
 const participants = [
@@ -25,19 +25,15 @@ const icons = {
   phone: "M4 14c4-4 12-4 16 0l-2 3-3-1v-2a10 10 0 0 0-6 0v2l-3 1z",
 };
 
-/** Google Meet-style illustration: stock participant photos plus the real AIDA camera component. */
+/** Google Meet-style illustration: participants fill the grid, AIDA takes the last tile at the edge. */
 export function MeetScene() {
   return (
     <div
       className={styles.scene}
       role="img"
-      aria-label="Google Meet の会議画面のイメージ。4人の参加者と並んでAIDAのタイルがあり、AIDAのカメラ表示に「議題に戻ってみませんか」と表示されている。"
+      aria-label="Google Meet の会議画面のイメージ。4人の参加者が大きく映り、右下の端にAIDAのタイルがあり、AIDAのカメラ表示に「議題に戻ってみませんか」と表示されている。"
     >
       <div className={styles.grid}>
-        <div className={`${styles.tile} ${styles.aidaTile}`}>
-          <RecallCameraMotion inline initialMode="off-track" />
-          <span className={styles.nameTag}>AIDA</span>
-        </div>
         {participants.map((participant) => (
           <div key={participant.name} className={styles.tile}>
             <div className={styles.photo} style={{ backgroundPosition: participant.position }} />
@@ -49,6 +45,10 @@ export function MeetScene() {
             ) : null}
           </div>
         ))}
+        <div className={`${styles.tile} ${styles.aidaTile}`}>
+          <ScaledCamera mode="off-track" />
+          <span className={styles.nameTag}>AIDA</span>
+        </div>
       </div>
       <div className={styles.toolbar}>
         <span className={styles.meetingName}>プロダクト定例</span>

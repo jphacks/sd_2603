@@ -78,12 +78,13 @@
 
 .headerLogo {
   display: block;
-  width: 136px;
+  width: 120px;
   flex: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  /* Same neutral as the logo PNG, so the pale blue strokes stay visible. */
-  background: #eeeff1;
+}
+
+/* The PNG is drawn on #EEEFF1; a slight lift blends it into the white header. */
+.logoCrop img {
+  filter: brightness(1.072);
 }
 
 /* Shows the wordmark without the PNG's outer margin; the image itself is unchanged. */
@@ -242,13 +243,6 @@
   font-size: 18px;
 }
 
-.heroSub {
-  max-width: 36em;
-  margin-top: 16px;
-  color: var(--muted);
-  font-size: 16px;
-}
-
 .ctaRow {
   display: flex;
   flex-wrap: wrap;
@@ -389,7 +383,7 @@
 
 .behaviorTitle {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   gap: 12px;
   margin-bottom: 16px;
   font-size: 20px;
@@ -503,6 +497,7 @@
 /* Closing */
 
 .closing {
+  margin-bottom: 96px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -527,14 +522,6 @@
 
 .closing .primaryCta {
   flex: none;
-}
-
-.status {
-  max-width: 56em;
-  padding: 24px 0 96px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.75;
 }
 
 /* Footer */
@@ -564,13 +551,6 @@
   justify-content: flex-end;
   gap: 8px 28px;
   font-size: 15px;
-}
-
-.footerNote {
-  grid-column: 1 / -1;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.75;
 }
 
 /* Narrow browsers: keep text and navigation readable; no new mobile product UI. */

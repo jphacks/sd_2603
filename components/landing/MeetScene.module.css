@@ -1,7 +1,7 @@
 .scene {
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
-  aspect-ratio: 16 / 9.5;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: 12px;
   background: #202124;
@@ -11,7 +11,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 8px;
   min-height: 0;
@@ -28,11 +28,6 @@
   container-type: size;
 }
 
-/* AIDA is pinned large, the way Meet shows a spotlighted participant. */
-.aidaTile {
-  grid-column: 1;
-  grid-row: 1 / span 2;
-}
 
 /* The 2x2 source is 1672x941; cover each tile without stretching the photo. */
 .photo {
@@ -47,17 +42,18 @@
   transform: translate(-50%, -50%);
 }
 
-.aidaTile > div {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background: #f8fbfd;
+/* Participants take the main tiles; AIDA sits in the last tile at the bottom-right edge. */
+.tile:nth-child(1),
+.tile:nth-child(2) {
+  grid-column: span 3;
 }
 
-/* Fit the whole 16:9 camera output so the message is never cropped. */
-.aidaTile.aidaTile > div > section {
-  width: 100cqw;
+.tile:nth-child(n + 3) {
+  grid-column: span 2;
+}
+
+.aidaTile {
+  background: #f8fbfd;
 }
 
 /* Meet's own name tag labels the tile, so the camera's footer chips are hidden here. */

@@ -132,9 +132,6 @@ export default function AboutPage() {
             <p className={styles.heroLead}>
               会議の流れを捉え、脱線や沈黙が続く場面で介入する。必要なひとことで、議論を前へ進める AI ファシリテーターです。
             </p>
-            <p className={styles.heroSub}>
-              Google Meet に参加し、順調なあいだは見守ります。議題から外れたときや議論が止まったときだけ、カメラ表示で短い一言を伝えます。
-            </p>
             <div className={styles.ctaRow}>
               <a className={styles.primaryCta} href="#demo">
                 デモを見る
@@ -169,7 +166,6 @@ export default function AboutPage() {
                 alt="ノートパソコンの前で、頬杖をついて会議の話に耳を傾ける人。"
                 sizes="(max-width: 960px) 92vw, 480px"
               />
-              <figcaption className={styles.figcaption}>利用シーンのイメージ</figcaption>
             </figure>
             <div>
               <p className={styles.eyebrow}>課題</p>
@@ -312,10 +308,6 @@ export default function AboutPage() {
             会議に参加させる
           </Link>
         </section>
-
-        <p className={styles.status}>
-          開発状況：判定、カメラ表示、Meetへの映像出力の各部分を実装しています。会話の文字起こしから判定・表示までの自動連動と、このモーション表示をMeetへ出す経路は開発中です。
-        </p>
       </main>
 
       <footer className={styles.footer}>
@@ -327,9 +319,6 @@ export default function AboutPage() {
             <a href="#demo">デモ</a>
             <Link href="/">参加画面</Link>
           </nav>
-          <p className={styles.footerNote}>
-            カメラ画面はローカル実装の表示記録です。画面内の「Focus」は開発中の旧表記です。人物写真は利用シーンのイメージです。
-          </p>
         </div>
       </footer>
     </div>
