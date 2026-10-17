@@ -3,7 +3,7 @@ import policyJson from "./jev-policy.json" with { type: "json" };
 import type { JudgeInput, JudgeProvider, JudgeResult } from "./types";
 
 const GATEWAY_URL = "https://ai-gateway.vercel.sh/typesafe/v1/systemone";
-const DEFAULT_MODEL = "typesafe-ai/jev";
+const DEFAULT_MODEL = "typesafe-ai/jev-1.14.0";
 
 const TIMEOUT_MS = 5000;
 export const QuestionVersionSchema = z.enum(["v1", "v2", "v3"]);

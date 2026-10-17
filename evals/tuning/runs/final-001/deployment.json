@@ -1,0 +1,16 @@
+{
+  "policy": {
+    "questionVersion": "v3",
+    "driftThreshold": 0.6,
+    "stallThreshold": 0.6,
+    "relevanceThreshold": 0.6,
+    "uncertainThreshold": 0.4
+  },
+  "selectionDatasetHash": "db57f545163e27633dc86920a8f7ca89d58e79835b17532a3c41f1494b9bfa44",
+  "selectionCriterion": "Validation semantic Macro-F1 with original UI-compatible thresholds fixed",
+  "selectedBeforeTest": true,
+  "adoptedBeforeTest": true,
+  "uiThresholdsUnchanged": true,
+  "model": "typesafe-ai/jev-1.14.0",
+  "note": "Separate from experimental grid winner; do not use final test to switch policies."
+}

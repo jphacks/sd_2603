@@ -19,7 +19,7 @@ Default model is pinned `typesafe-ai/jev-1.14.0`; override with `--model=...` co
 
 Each output directory has immutable dataset/model/question manifest, pilot, selection, final, attempts JSONL and Markdown reports. Shared success-only cache defaults to `runs/cache.json`; `--cache=...` and `--ledger=...` isolate test runs. Cache key includes input, model, questions and schema. Gold labels do not enter model requests. Failure attempts count against budget but are not reused. No credentials or transcript text are written to attempts logs.
 
-Default caps are 500 attempts and a $2 conservative reservation envelope, $0.005 per request (so the budget actually limits attempts to 400). `--max-calls=` and `--budget-usd=` may reduce these. Payloads are bounded to 28,000 UTF-8 bytes. Reservation is not invoice cost; the pilot records upstream usage and estimates input cost against the [published $0.04/M starting input rate](https://vercel.com/ai-gateway/models/jev) checked 2026-10-18. Requests may have provider-specific billing; validate actual charges in Vercel. Do not run multiple writer processes against one cache/ledger.
+Default caps are 500 attempts and a $2 conservative reservation envelope. New reservations use UTF-8 payload bytes × three questions × $0.04/M plus $0.00064/request overhead. Earlier fixed $0.005 reservations remain unchanged in the ledger. `--max-calls=` and `--budget-usd=` may reduce these. Payloads are bounded to 28,000 UTF-8 bytes. Reservation is not invoice cost; the pilot records upstream usage and estimates input cost against the [published $0.04/M starting input rate](https://vercel.com/ai-gateway/models/jev) checked 2026-10-18. Requests may have provider-specific billing; validate actual charges in Vercel. Do not run multiple writer processes against one cache/ledger.
 
 ## Dataset and metric contract
 
@@ -33,6 +33,10 @@ Two different metrics are reported:
 Macro-F1 is primary, accuracy breaks ties, closeness to baseline and earlier prompt break further ties. WAIT threshold remains 0.4 in this initial grid. All attempted cases remain in accuracy denominator; missing classes have F1=0. Group holdout analysis is development-only; final test is not included. Wilson case intervals are descriptive because windows within a meeting series are correlated.
 
 v1 preserves original questions; v2 makes dimensions and exceptions explicit; v3 adds authored few-shot examples. Authored examples are not taken from heldout conversations. GPT annotation is machine silver, not human ground truth; repeat agreement does not remove shared model bias.
+
+## Frozen-result inspection
+
+`node evals/tuning/run.mjs report --data=evals/tuning/pro-final-cases.json --out=evals/tuning/runs/final-001 --require-provenance` renders reports offline without rerunning Test. `node evals/tuning/import-pro.mjs` imports only the audited `data/final/` packets and `labels-final.jsonl`; the earlier provisional import is retained as history and is not the final benchmark.
 
 ## Production adoption
 

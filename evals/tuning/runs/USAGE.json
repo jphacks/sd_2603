@@ -1,0 +1,14 @@
+{
+  "successfulUniqueRequests": 418,
+  "allAttempts": 440,
+  "sandboxDnsFailures": 20,
+  "timeoutsRetried": 2,
+  "inputTokens": 408640,
+  "outputTokens": 25080,
+  "publishedInputUsdPerMillion": 0.04,
+  "estimatedSuccessfulInputUsd": 0.016345600000000002,
+  "invoiceTotalUsd": null,
+  "reservedEnvelopeUsd": 1.95668,
+  "budgetUsd": 2,
+  "note": "Reservation envelope is not actual cost; failed attempts may have unknown billing."
+}

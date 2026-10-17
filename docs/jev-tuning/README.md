@@ -1,5 +1,7 @@
 # Jev tuning: 独立ラベル付き会話データ
 
+この文書は作成元 `codex/jev-tuning-data` のデータ担当成果物を説明します。統合後のJev実測・採用設定・限界は [results.md](results.md)、作業経過は [progress-implementation.md](progress-implementation.md) を参照してください。
+
 このブランチはデータ・評価基準・監査のみを担当する。**Jevを実行しておらず、80%達成を示す結果はない。** Gateway呼び出し、アプリ変更、ステージング統合は行っていない。
 
 ## 使うファイル
