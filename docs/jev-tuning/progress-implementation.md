@@ -9,10 +9,10 @@
 
 | Requested task | Owner / approach | State |
 | --- | --- | --- |
-| 1. GitHub evidence | Coordinator: Markdown run reports, before/after policies, metrics, reproduction, limitations | Completed; final push pending |
+| 1. GitHub evidence | Coordinator: Markdown run reports, before/after policies, metrics, reproduction, limitations | Completed |
 | 2. Public evaluation excerpts | Pro branch: 50–100 real excerpts, provenance/license; implementation audits split and source IDs | Completed: final Pro source corpus integrated and audited |
 | 3. Synthetic train conversations | Pro branch: training sources only, independent labels | Completed: 36 Japanese training-only cases integrated |
-| 4. Judge / tuning / measurement | Runtime agent: versioned prompts/policy; harness agent: metrics/search; coordinator: cached live calls, frozen selection and one final test | Completed; final push pending |
+| 4. Judge / tuning / measurement | Runtime agent: versioned prompts/policy; harness agent: metrics/search; coordinator: cached live calls, frozen selection and one final test | Completed |
 | 5. 30+ criteria per parameter | Pro branch; runtime implements rubric candidates when available | Completed: 96 criteria integrated |
 
 ## Execution and evaluation contract
@@ -84,3 +84,10 @@ LLM labels are machine reference labels, not independently established human gro
 - Final typecheck passed; lint0errors with1 pre-existing warning; diff whitespace check passed.
 - Runtime/UI components unchanged except backend question version and pinned model. Final-test artifacts remain immutable; only reports were rendered offline.
 - Remaining operation: commit verified results and push implementation branch; remote SHA verification follows.
+
+### Push verification
+
+- Verified implementation/result commit `10194c24d2842a24431b27c62979e37669b638b5` pushed successfully to `origin/codex/jev-tuning-implementation`; local HEAD and remote-tracking ref matched.
+- Working tree clean at verification. Initial uncommitted changes remain preserved in `stash@{0}`; no stash dropped.
+- No staging merge, no final-test-driven reselection, no additional Gateway calls after final measurement.
+- This final documentation checkpoint records completion; subsequent Push contains only review corrections or this completion note.
