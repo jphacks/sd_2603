@@ -317,6 +317,59 @@ test('removeBot asks the bot to leave and deletes the state file', async () => {
   }
 });
 
+test('join keeps recording disabled unless a chat webhook URL is configured', async () => {
+  const box = fixture();
+  const posts = [];
+  try {
+    const cap = capture({
+      statePath: box.statePath,
+      env: { RECALL_CHAT_WEBHOOK_URL: 'https://demo.example/api/recall/chat' },
+      fetch: async (url, options) => {
+        if (options?.method === 'POST') {
+          posts.push(JSON.parse(options.body));
+          return jsonResponse(200, { id: 'bot-chat' });
+        }
+        return jsonResponse(200, {
+          status_changes: [{ code: 'in_call_not_recording', created_at: '2026-10-17T00:00:02Z' }],
+        });
+      },
+    });
+    assert.equal(await run(['join', '--url', 'https://meet.google.com/abc-defg-hij'], cap.io), 0);
+    assert.equal(posts[0].recording_config.retention, null);
+    assert.deepEqual(posts[0].recording_config.participant_events, {});
+    assert.deepEqual(posts[0].recording_config.realtime_endpoints, [{
+      type: 'webhook',
+      url: 'https://demo.example/api/recall/chat',
+      events: ['participant_events.chat_message'],
+    }]);
+    assert.equal(posts[0].chat.on_bot_join.send_to, 'everyone');
+    assert.equal(posts[0].chat.on_bot_join.pin, true);
+    assert.match(posts[0].chat.on_bot_join.message, /アジェンダ:/);
+  } finally {
+    box.cleanup();
+  }
+});
+
+test('join rejects a chat webhook URL that is not https', async () => {
+  const box = fixture();
+  let posts = 0;
+  try {
+    const cap = capture({
+      statePath: box.statePath,
+      env: { RECALL_CHAT_WEBHOOK_URL: 'http://demo.example/api/recall/chat' },
+      fetch: async () => {
+        posts += 1;
+        return jsonResponse(200, { id: 'bot-chat' });
+      },
+    });
+    assert.equal(await run(['join', '--url', 'https://meet.google.com/abc-defg-hij'], cap.io), 2);
+    assert.equal(posts, 0);
+    assert.match(cap.stderr.join('\n'), /RECALL_CHAT_WEBHOOK_URL/);
+  } finally {
+    box.cleanup();
+  }
+});
+
 function exists(file) {
   try {
     readFileSync(file);

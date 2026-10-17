@@ -1,9 +1,10 @@
 import { z } from "zod";
+import { AGENDA_CHAR_LIMIT } from "@/lib/agenda/agenda";
 import { judge } from "@/lib/judge";
 import { JevError } from "@/lib/judge/jev";
 
 const InputSchema = z.object({
-  agenda: z.string().trim().min(1).max(500),
+  agenda: z.string().trim().min(1).max(AGENDA_CHAR_LIMIT),
   transcript: z.array(z.string().trim().min(1).max(1000)).max(30),
   secondsSinceLastIntervention: z.number().finite().min(0),
 });
