@@ -1,10 +1,11 @@
 import { z } from "zod";
+import { AGENDA_CHAR_LIMIT } from "@/lib/agenda/agenda";
 import { monitoredJudge } from "@/lib/monitor/judge";
 import { JevError } from "@/lib/judge/jev";
 
 const InputSchema = z.object({
   sessionId: z.string().regex(/^[A-Za-z0-9_-]{1,128}$/).optional(),
-  agenda: z.string().trim().min(1).max(500),
+  agenda: z.string().trim().min(1).max(AGENDA_CHAR_LIMIT),
   transcript: z.array(z.string().trim().min(1).max(1000)).max(30),
   secondsSinceLastIntervention: z.number().finite().min(0),
 });

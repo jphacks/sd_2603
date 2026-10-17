@@ -114,7 +114,11 @@ npm run recall -- leave --id 01234567-89ab-cdef-0123-456789abcdef
 
 `join` の待機中に Ctrl+C しても、そのボットへ退出が 1 回送られる。会議室に残さない。
 
-## 8. もう一度入る
+## 8. チャットからアジェンダを受ける
+
+`RECALL_CHAT_WEBHOOK_URL` が空なら、入室ボディは `recording_config: null` のままです。公開 HTTPS を入れると、その URL へチャット本文だけを送り、録画の保存期間は null にします。ボットは入室時に、アジェンダの書き方をチャットへピン留めします。署名検証用の `RECALL_WEBHOOK_SECRET` もサーバーに置きます。複数アジェンダと検証結果は `docs/agenda-from-chat.md` です。
+
+## 9. もう一度入る
 
 入室中にもう一度 `join` すると拒否される。`leave` で退出したあとに、新しい URL で `join` できる。同時に送れるボットは 1 体。
 

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { AGENDA_CHAR_LIMIT, agendaForJudge } from "@/lib/agenda/agenda";
 import { monitoredJudge } from "@/lib/monitor/judge";
 import { monitorStore } from "@/lib/monitor/store";
 import { JevError } from "@/lib/judge/jev";
@@ -10,7 +11,7 @@ const BotIdSchema = z.string().uuid();
 const JudgeRequestSchema = z.object({
   mode: z.literal("judge"),
   botId: BotIdSchema,
-  agenda: z.string().trim().min(1).max(500),
+  agenda: z.string().trim().min(1).max(AGENDA_CHAR_LIMIT),
   transcript: z.array(z.string().trim().min(1).max(1000)).min(1).max(30),
   secondsSinceLastIntervention: z.number().finite().min(0),
 });
@@ -50,12 +51,13 @@ export async function POST(request: Request) {
   try {
     const input = InputSchema.parse(await readBoundedJson(request));
     if (input.mode === "judge") {
-      const result = await applyVideoDecision(input, {
+      const agenda = agendaForJudge(input.botId, input.agenda);
+      const result = await applyVideoDecision({ ...input, agenda }, {
         judge: (value) => monitoredJudge(input.botId, value),
         ...videoDependencies,
         onIntervened: (id) => monitorStore.intervened(id),
       });
-      return Response.json(result);
+      return Response.json({ ...result, agenda });
     }
     return Response.json(await restoreIdleVideo(input.botId, videoDependencies));
   } catch (error) {

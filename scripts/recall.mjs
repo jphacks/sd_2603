@@ -228,6 +228,56 @@ export class RecallCliError extends Error {
   }
 }
 
+export const BOT_NAME = 'MTG Lab';
+export const AGENDA_CHAT_PROMPT =
+  'アジェンダ: のあとに今日決めることを書くか、リンクを知っている全員が開ける Google ドキュメントの URL を貼ってください。';
+
+export function chatRecordingConfig(env) {
+  const webhookUrl = String(env?.RECALL_CHAT_WEBHOOK_URL || '').trim();
+  if (!webhookUrl) return null;
+  if (!/^https:\/\/.+/i.test(webhookUrl)) {
+    throw new RecallCliError('RECALL_CHAT_WEBHOOK_URL は https:// で始めてください。', {
+      status: 400,
+      exitCode: 2,
+    });
+  }
+  return {
+    participant_events: {},
+    retention: null,
+    realtime_endpoints: [
+      {
+        type: 'webhook',
+        url: webhookUrl,
+        events: ['participant_events.chat_message'],
+      },
+    ],
+  };
+}
+
+function createBotBody(meetingUrl, env) {
+  const recording = chatRecordingConfig(env);
+  return {
+    meeting_url: meetingUrl,
+    bot_name: BOT_NAME,
+    recording_config: recording,
+    ...(recording
+      ? {
+          chat: {
+            on_bot_join: {
+              send_to: 'everyone',
+              message: AGENDA_CHAT_PROMPT,
+              pin: true,
+            },
+          },
+        }
+      : {}),
+    automatic_leave: {
+      waiting_room_timeout: 540,
+      noone_joined_timeout: 300,
+    },
+  };
+}
+
 export async function sendBot(meetingUrl, io) {
   if (!/^https:\/\/.+/i.test(String(meetingUrl ?? ''))) {
     throw new RecallCliError('会議 URL は https:// で始めてください。', { status: 400, exitCode: 2 });
@@ -261,15 +311,7 @@ export async function sendBot(meetingUrl, io) {
 
   const created = await recallFetch(io, '/bot/', {
     method: 'POST',
-    body: {
-      meeting_url: meetingUrl,
-      bot_name: 'MTG Lab',
-      recording_config: null,
-      automatic_leave: {
-        waiting_room_timeout: 540,
-        noone_joined_timeout: 300,
-      },
-    },
+    body: createBotBody(meetingUrl, io.env),
   });
   const botId = created.id;
   if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
