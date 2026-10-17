@@ -56,6 +56,9 @@ jobs:
       - name: Test CI, Recall, decision/video controls and transcription
         run: npm test
 
+      - name: Offline meeting regression (no paid APIs)
+        run: npm run test:meeting-regression
+
       - name: Validate deployment configuration
         if: env.DEPLOY_TARGET != ''
         env:
