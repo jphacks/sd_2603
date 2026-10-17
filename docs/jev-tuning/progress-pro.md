@@ -54,3 +54,21 @@
 - Checkpoints f829de1 and a77ca9c pushed to origin/codex/jev-tuning-data. Final audited checkpoint SHA will be reported in chat.
 - External follow-up: integration owner runs Jev and selects prompts/thresholds using Train/Validation. Additional Japanese real intervention cases and selective human adjudication are needed for a convincing three-class evaluation.
 - Next.js feedback pass: no qualifying Next.js issue encountered in this data-only task; feedback command not needed.
+
+## Positive expansion — new request
+
+- Investigate at least100 evidence items including actual conversation cases (counting clarified by human); prepare at least100 positive Validation/Test scripts.
+- Reuse data worktree/branch; preserve integration checkout and its uncommitted changes.
+- Read integration branch local HEAD3167b9b and fetched remote213de90, actual v1/v2/v3 questions, priority/gates/input schema; snapshot hashes and definition contract saved under positive-expansion/.
+- Common semantics: sustained unhelpful off-agenda talk; repeated unproductive blockage. Latest-state judgment, no inferred silence, permitted breaks excluded, stalled priority. v1/v2 usefulness-axis difference recorded; new positives avoid that boundary.
+- Research in parallel: direct topical-departure literature, impasse/process-loss literature, and licensable recorded dialogue cases. No Gateway calls or application edits.
+
+### Positive expansion checkpoint
+
+- Literature records: drift13 / stalled17 (overlapping papers to be deduplicated in unified registry; not30 independent papers by fiat).
+- Research actual cases:125 unique DBDC3 Japanese human-chatbot conversations, target X votes>=20/30, MIT main data. Source archive/member SHA and pre-target excerpt ranges retained. These are real dialogue-breakdown observations, not meeting drift/stall gold.
+- Extra source candidates:2 CaSiNo resource-negotiation excerpts; no-deal is not auto-labeled stalled.
+- New authored meetings:112 Japanese scripts in28 mechanism families, all four variants per family in one split. Intended56 drift/56 stall; Validation56/Test56. Intent hidden from two primary blind labelers; independent labels underway.
+- Primary definitions aligned with integration local3167b9b, remote213de90. Schema gap recorded: current importer forbids synthetic holdouts. Do not fake dataKind to bypass it; integration needs explicit authored-holdout contract.
+
+- Blind review of112 v1 scripts found all intended positive, but exposed major diversity weakness: only agenda changed within many families. Do not count this as112 independent meeting phenomena. v2 is being individually rewritten by two authors; a third evaluator has not seen author intent and will label all revised scripts. Preserve v1 only as design history.

@@ -1,0 +1,21 @@
+{
+  "branch": "codex/jev-tuning-implementation",
+  "local_head": "3167b9b21326b58d13790ca3deea5acee9f407bf",
+  "fetched_remote_head": "213de90b65e792619393e82e75eaa3c27d0d6fba",
+  "scope": "Read-only snapshot of local integration checkout; some files uncommitted. No Jev predictions or cached scores read.",
+  "policy": {
+    "questionVersion": "v1",
+    "driftThreshold": 0.6,
+    "stallThreshold": 0.6,
+    "relevanceThreshold": 0.6,
+    "uncertainThreshold": 0.4
+  },
+  "file_sha256": {
+    "lib/judge/jev.ts": "b4dc25652eacca93e7dcf260c739fe117dd592024574cab9c8dd577e8dc69d79",
+    "lib/judge/jev-policy.json": "8a11bec2143fb9e1303b38ce030f526273789e7d0d52480d0e9de9edb931b45c",
+    "lib/judge/types.ts": "1640aac5d7ffe6d9e0b616904a16be8e6316ff52ff2a3b91beb78af5bd80e330",
+    "evals/tuning/core.mjs": "5e392771014c6b067e71f665d48d66b0b2a44611d0c303129b70fa5cf4dca718",
+    "evals/tuning/data.mjs": "afbaca394fc4e789f019dbff8a06aceae0ab81252b46586c3c0b56e5a584bb0d",
+    "evals/tuning/import-pro.mjs": "93351832c60c17f04e181bb00807981ad30129145991b5570bff34ff75cdf1b6"
+  }
+}
