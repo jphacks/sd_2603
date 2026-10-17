@@ -12,6 +12,7 @@ export type JudgeResult = {
     drifted: number;
     stalled: number;
     tangentIsRelevant: number;
+    interveneNow: number;
     model: string;
     latencyMs: number;
     questionVersion: string;
