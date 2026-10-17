@@ -3,12 +3,18 @@ import { timingSafeEqual, randomUUID } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { loadEnvFile } from 'node:process';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { WebSocketServer } from 'ws';
-import { audioJoinTimedOut, createResampler, readRecallAudio } from './transcription/audio.mjs';
-import { createInterventionGate, streamMeetingAudio } from './transcription/pipeline.mjs';
+import { audioJoinTimedOut, readRecallAudio } from './transcription/audio.mjs';
+import { createInterventionGate, isVoicedPcm, streamMeetingAudio } from './transcription/pipeline.mjs';
+import { createSegmentedTranscriber } from './transcription/segments.mjs';
+import { classifyAudioFailure } from './transcription/diagnostics.mjs';
+import { createRecallAudioCapture } from './transcription/capture.mjs';
+import { assertStreamingRuntime } from './transcription/runtime.mjs';
 
-for (const file of ['.env.local', '.env']) if (existsSync(file)) loadEnvFile(file);
-const env = process.env;
+export async function startAudioWorker({ env = process.env, transcribeAudio = streamMeetingAudio, sessionReader, handleSignals = true } = {}) {
+assertStreamingRuntime();
 const token = env.RECALL_AUDIO_TOKEN;
 const controlToken = env.RECALL_CONTROL_TOKEN;
 const port = Number(env.RECALL_AUDIO_PORT ?? 8787);
@@ -85,74 +91,108 @@ server.on('upgrade', (request, socket, head) => {
 });
 
 wss.on('connection', socket => {
+  const counts = { rawFrames: 0, pcmBytes: 0, voicedFrames: 0, sttDelta: 0, sttPartial: 0, sttFinal: 0, sttSkippedEmpty: 0, evaluations: 0, displayAttempts: 0 };
+  const report = () => console.log(`Audio worker telemetry ${JSON.stringify(counts)}`);
+  console.log('Audio worker websocket connected');
+  const telemetry = setInterval(report, 10_000);
+  telemetry.unref();
   const abort = new AbortController();
-  const resample = createResampler();
-  let controller;
-  const audio = new ReadableStream({ start(value) { controller = value; } }, { highWaterMark: 32 });
   let session;
   let gate;
+  let segments;
   let queued = 0;
   let sequence = Promise.resolve();
   let lastNonemptyAudioAt = Date.now();
   let ended = false;
-  const fail = () => {
+  const capture = createRecallAudioCapture({
+    enabled: env.RECALL_AUDIO_DIAGNOSTIC_CAPTURE === 'true',
+    onFinish: summary => console.log(`Diagnostic audio saved ${JSON.stringify(summary)}`),
+    onError: error => fail(error, 'diagnostic_capture'),
+  });
+  const fail = (error, stage = 'worker') => {
     if (ended) return;
+    const detail = classifyAudioFailure(error, stage, segments?.status);
     ended = true;
     halted = true;
     gate?.stop();
+    segments?.stop();
+    try { capture?.finish(); } catch (captureError) {
+      console.error(`Diagnostic audio close failed ${JSON.stringify(classifyAudioFailure(captureError, 'diagnostic_capture'))}`);
+    }
     abort.abort();
     socket.close(1011, 'Audio processing stopped');
-    console.error('Audio processing stopped; leave the bot via the app before retrying. No paid retry was attempted.');
-  };
-  const enqueue = pcm => {
-    if (controller.desiredSize !== null && controller.desiredSize <= 0) throw new Error('Audio backpressure limit');
-    controller.enqueue(new Uint8Array(resample(pcm)));
+    console.error(`Audio processing stopped ${JSON.stringify(detail)}; leave the bot via the app before retrying. No paid retry was attempted.`);
   };
   const silence = setInterval(() => {
     if (!ended && session && Date.now() - lastNonemptyAudioAt > 250) {
-      try { enqueue(Buffer.alloc(6400)); } catch { fail(); }
+      segments?.push(Buffer.alloc(6400));
     }
   }, 200);
-  const timeout = setTimeout(fail, 90 * 60_000);
+  const timeout = setTimeout(() => fail(new Error('Session timeout'), 'session_timeout'), 90 * 60_000);
   const processMessage = async raw => {
     const payload = JSON.parse(raw);
     if (payload.event !== 'audio_mixed_raw.data') return;
     const id = payload.data?.bot?.id;
     if (typeof id !== 'string' || !id) throw new Error('Missing bot id');
     if (!session) {
-      session = await readSession(id);
+      session = await (sessionReader ?? readSession)(id);
       gate = createInterventionGate({
         botId: id,
         agenda: session.agenda,
-        decide: input => videoRequest({ mode: 'evaluate', ...input }),
-        display: ({ botId, agenda, result, generation }) => videoRequest({ mode: 'display', botId, agenda, result, generation, requestId: randomUUID() }),
-        onError: fail,
+        decide: input => { counts.evaluations++; return videoRequest({ mode: 'evaluate', ...input }); },
+        display: ({ botId, agenda, result, generation }) => {
+          counts.displayAttempts++;
+          return videoRequest({ mode: 'display', botId, agenda, result, generation, requestId: randomUUID() });
+        },
+        onError: error => fail(error, 'decision'),
       });
       activeGate = gate;
       activeBotId = id;
-      void streamMeetingAudio(audio, { apiKey: env.AI_GATEWAY_API_KEY, signal: abort.signal, onPart: part => gate.onPart(part) }).then(() => { if (!ended) fail(); }, fail);
+      segments = createSegmentedTranscriber({
+        signal: abort.signal,
+        transcribe: (audio, { signal, onPart }) => transcribeAudio(audio, { apiKey: env.AI_GATEWAY_API_KEY, signal, onPart }),
+        onPendingChange: value => gate.setPendingAudio(value),
+        onPart: part => {
+          if (part.type === 'transcript-delta') counts.sttDelta++;
+          if (part.type === 'transcript-partial') counts.sttPartial++;
+          if (part.type === 'transcript-final') counts.sttFinal++;
+          if (part.type === 'transcript-empty') counts.sttSkippedEmpty++;
+          gate.onPart(part);
+        },
+        onError: error => fail(error, 'transcription'),
+      });
     }
     if (session.id !== id) throw new Error('Bot changed on audio stream');
     const pcm = readRecallAudio(raw, id);
     if (!pcm?.length) return;
+    counts.rawFrames++;
+    counts.pcmBytes += pcm.length;
+    const voiced = isVoicedPcm(pcm);
+    if (voiced) counts.voicedFrames++;
+    try { capture?.push(pcm, voiced); } catch (error) { fail(error, 'diagnostic_capture'); return; }
     lastNonemptyAudioAt = Date.now();
     gate.onAudio(pcm);
-    enqueue(pcm);
+    segments.push(pcm);
   };
   socket.on('message', (message, binary) => {
-    if (binary || ++queued > 50) { fail(); return; }
-    sequence = sequence.then(() => processMessage(message.toString())).catch(fail).finally(() => { queued--; });
+    if (binary || ++queued > 50) { fail(new Error('Invalid Recall message'), 'recall_message'); return; }
+    sequence = sequence.then(() => processMessage(message.toString())).catch(error => fail(error, 'recall_message')).finally(() => { queued--; });
   });
-  socket.on('error', fail);
+  socket.on('error', error => fail(error, 'recall_websocket'));
   socket.on('close', () => {
+    clearInterval(telemetry);
+    report();
     ended = true;
     clearInterval(silence);
     clearTimeout(timeout);
     gate?.stop();
+    segments?.stop();
+    try { capture?.finish(); } catch (error) {
+      console.error(`Diagnostic audio close failed ${JSON.stringify(classifyAudioFailure(error, 'diagnostic_capture'))}`);
+    }
     activeGate = undefined;
     activeBotId = undefined;
     abort.abort();
-    try { controller.close(); } catch { /* Already closed by abort. */ }
     active = undefined;
     halted = true;
   });
@@ -171,9 +211,21 @@ const joinWatchdog = setInterval(async () => {
   } catch { /* No active bot state yet. */ }
 }, 5_000);
 joinWatchdog.unref();
-for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => {
+if (handleSignals) for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => {
   halted = true;
   clearInterval(joinWatchdog);
   active?.close(1000, 'Worker stopping');
   server.close();
 });
+return { server, close: async () => {
+  halted = true;
+  clearInterval(joinWatchdog);
+  active?.close(1000, 'Worker stopping');
+  await new Promise(resolve => server.close(resolve));
+} };
+}
+
+if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) {
+  for (const file of ['.env.local', '.env']) if (existsSync(file)) loadEnvFile(file);
+  await startAudioWorker();
+}

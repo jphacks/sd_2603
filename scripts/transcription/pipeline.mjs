@@ -2,20 +2,50 @@ import { createGateway, experimental_streamTranscribe as streamTranscribe } from
 
 export const MODEL = 'openai/gpt-realtime-whisper';
 
-export async function streamMeetingAudio(audio, { apiKey, signal, onPart, transcribe = streamTranscribe }) {
+export async function streamMeetingAudio(audio, { apiKey, signal, onPart, transcribe = streamTranscribe, upstream = createGateway({ apiKey }).transcription(MODEL) }) {
+  let finishedEmpty = false;
+  let nonemptyFinal = false;
+  // Observe the provider's finish before the SDK converts an empty transcript
+  // into the same error used for an unexpectedly truncated stream.
+  const model = Object.create(upstream, {
+    doStream: { value: async options => {
+      const result = await upstream.doStream(options);
+      return {
+        ...result,
+        stream: result.stream.pipeThrough(new TransformStream({
+          transform(part, controller) {
+            if (part.type === 'finish') finishedEmpty = part.text === '';
+            controller.enqueue(part);
+          },
+        })),
+      };
+    } },
+  });
   const result = transcribe({
-    model: createGateway({ apiKey }).transcription(MODEL),
+    model,
     audio,
     inputAudioFormat: { type: 'audio/pcm', rate: 24000 },
     providerOptions: { openai: { language: 'ja', streaming: { delay: 'low' } } },
     abortSignal: signal,
     maxRetries: 0,
   });
-  for await (const part of result.fullStream) {
-    if (part.type === 'error') throw new Error('Transcription upstream failed');
-    if (part.type === 'transcript-delta' || part.type === 'transcript-partial' || part.type === 'transcript-final') onPart(part);
+  try {
+    for await (const part of result.fullStream) {
+      if (part.type === 'error') throw new Error('Transcription upstream failed');
+      if (part.type === 'transcript-final') {
+        if (!part.text?.trim()) continue;
+        nonemptyFinal = true;
+      }
+      if (part.type === 'transcript-delta' || part.type === 'transcript-partial' || part.type === 'transcript-final') onPart(part);
+    }
+    return await result.text;
+  } catch (error) {
+    if (error?.name === 'AI_NoTranscriptGeneratedError' && finishedEmpty && !nonemptyFinal) {
+      onPart({ type: 'transcript-empty' });
+      return { skippedEmpty: true };
+    }
+    throw error;
   }
-  return result.text;
 }
 
 export function isVoicedPcm(pcm, threshold = 300) {
@@ -32,16 +62,18 @@ export function createInterventionGate({ agenda, botId, decide, display, onError
   let speaking = false;
   let lastVoice = -Infinity;
   let lastIntervention = -Infinity;
-  let timer;
+  let decisionTimer;
+  let speakingTimer;
   let generation = 0;
   let processing = false;
   let stopped = false;
   let hasSpeech = false;
   let partial = '';
+  let pendingAudio = false;
 
   const run = async () => {
-    timer = undefined;
-    if (stopped || speaking || now() - lastVoice < quietMs || !finalQueue.length || !hasSpeech || processing) return;
+    decisionTimer = undefined;
+    if (stopped || pendingAudio || speaking || now() - lastVoice < quietMs || !finalQueue.length || !hasSpeech || processing) return;
     processing = true;
     const batch = finalQueue.splice(0);
     const next = [...transcript, ...batch].slice(-30);
@@ -51,7 +83,7 @@ export function createInterventionGate({ agenda, botId, decide, display, onError
       const result = await decide({ botId, agenda, transcript: next, secondsSinceLastIntervention: Number.isFinite(lastIntervention) ? Math.max(0, (now() - lastIntervention) / 1000) : 60 });
       transcript.splice(0, transcript.length, ...next);
       if (generation === currentGeneration && !finalQueue.length) hasSpeech = false;
-      if (result.action === 'INTERVENE' && !speaking && generation === currentGeneration && now() - lastVoice >= quietMs) {
+      if (result.action === 'INTERVENE' && !pendingAudio && !speaking && generation === currentGeneration && now() - lastVoice >= quietMs) {
         const displayed = await display({ botId, agenda, result, generation: currentGeneration });
         if (!displayed?.cancelled) lastIntervention = now();
       }
@@ -66,11 +98,17 @@ export function createInterventionGate({ agenda, botId, decide, display, onError
     }
   };
   const arm = () => {
-    if (stopped || !finalQueue.length || speaking) return;
-    if (timer !== undefined) unschedule(timer);
-    timer = schedule(() => { void run().catch(() => {}); }, Math.max(0, quietMs - (now() - lastVoice)));
+    if (stopped || pendingAudio || !finalQueue.length || speaking) return;
+    if (decisionTimer !== undefined) unschedule(decisionTimer);
+    decisionTimer = schedule(() => { void run().catch(() => {}); }, Math.max(0, quietMs - (now() - lastVoice)));
   };
   return {
+    setPendingAudio(value) {
+      if (stopped) return;
+      pendingAudio = Boolean(value);
+      if (pendingAudio && decisionTimer !== undefined) { unschedule(decisionTimer); decisionTimer = undefined; }
+      if (!pendingAudio) arm();
+    },
     onAudio(pcm) {
       if (stopped) return;
       if (isVoicedPcm(pcm)) {
@@ -78,8 +116,9 @@ export function createInterventionGate({ agenda, botId, decide, display, onError
         speaking = true;
         hasSpeech = true;
         lastVoice = now();
-        if (timer !== undefined) unschedule(timer);
-        timer = schedule(() => { speaking = false; arm(); }, quietMs);
+        if (speakingTimer !== undefined) unschedule(speakingTimer);
+        if (decisionTimer !== undefined) { unschedule(decisionTimer); decisionTimer = undefined; }
+        speakingTimer = schedule(() => { speakingTimer = undefined; speaking = false; arm(); }, quietMs);
       }
     },
     onPart(part) {
@@ -97,7 +136,11 @@ export function createInterventionGate({ agenda, botId, decide, display, onError
     get stopped() { return stopped; },
     get transcript() { return [...transcript]; },
     get partial() { return partial; },
-    isQuiet(value) { return !stopped && !speaking && generation === value && now() - lastVoice >= quietMs; },
-    stop() { stopped = true; if (timer !== undefined) unschedule(timer); },
+    isQuiet(value) { return !stopped && !pendingAudio && !speaking && generation === value && now() - lastVoice >= quietMs; },
+    stop() {
+      stopped = true;
+      if (decisionTimer !== undefined) unschedule(decisionTimer);
+      if (speakingTimer !== undefined) unschedule(speakingTimer);
+    },
   };
 }

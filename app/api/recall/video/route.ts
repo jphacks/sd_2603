@@ -112,7 +112,8 @@ export async function POST(request: Request) {
     }
     if (error instanceof RecallVideoError) {
       const status = error.kind === "config" ? 503 : error.kind === "rate_limit" ? 429 : 502;
-      return Response.json({ error: "Recall video output failed", kind: error.kind }, { status });
+      console.error("Recall video output failed", { kind: error.kind, diagnostic: error.diagnostic });
+      return Response.json({ error: "Recall video output failed", kind: error.kind, diagnostic: error.diagnostic }, { status });
     }
     if (error instanceof JevError) {
       const status = error.kind === "rate_limit" ? 429 : error.kind === "timeout" ? 504 : 502;

@@ -73,11 +73,34 @@ export async function renderVideoJpeg(view: VideoView) {
 
 export class RecallVideoError extends Error {
   readonly kind: "config" | "auth" | "rate_limit" | "upstream";
-  constructor(kind: RecallVideoError["kind"], message: string) {
+  readonly diagnostic?:
+    | { stage: "http"; providerStatus: number }
+    | { stage: "transport"; errorName: string; causeCode?: string };
+  constructor(kind: RecallVideoError["kind"], message: string, diagnostic?: RecallVideoError["diagnostic"]) {
     super(message);
     this.name = "RecallVideoError";
     this.kind = kind;
+    this.diagnostic = diagnostic;
   }
+}
+
+const SAFE_CAUSE_CODES = new Set([
+  "ENOTFOUND", "EAI_AGAIN", "ETIMEDOUT", "ECONNRESET", "ECONNREFUSED",
+  "EHOSTUNREACH", "ENETUNREACH", "UND_ERR_CONNECT_TIMEOUT", "UND_ERR_HEADERS_TIMEOUT",
+]);
+
+function transportDiagnostic(error: unknown): Extract<NonNullable<RecallVideoError["diagnostic"]>, { stage: "transport" }> {
+  const name = error instanceof Error ? error.name : "UnknownError";
+  const errorName = ["TypeError", "AbortError", "TimeoutError"].includes(name) ? name : "OtherError";
+  let cause: unknown = error;
+  for (let depth = 0; depth < 3 && cause && typeof cause === "object"; depth++) {
+    const code = "code" in cause ? cause.code : undefined;
+    if (typeof code === "string" && SAFE_CAUSE_CODES.has(code)) {
+      return { stage: "transport", errorName, causeCode: code };
+    }
+    cause = "cause" in cause ? cause.cause : undefined;
+  }
+  return { stage: "transport", errorName };
 }
 
 export async function outputVideo(
@@ -99,10 +122,14 @@ export async function outputVideo(
       body: JSON.stringify({ kind: "jpeg", b64_data: jpeg.toString("base64") }),
       signal: AbortSignal.timeout(10_000),
     },
-  ).catch(() => { throw new RecallVideoError("upstream", "Recall.ai request failed"); });
+  ).catch((error: unknown) => {
+    throw new RecallVideoError("upstream", "Recall.ai request failed", transportDiagnostic(error));
+  });
   if (!response.ok) {
     const kind = response.status === 401 || response.status === 403 ? "auth"
       : response.status === 429 ? "rate_limit" : "upstream";
-    throw new RecallVideoError(kind, `Recall.ai returned HTTP ${response.status}`);
+    throw new RecallVideoError(kind, `Recall.ai returned HTTP ${response.status}`, {
+      stage: "http", providerStatus: response.status,
+    });
   }
 }
