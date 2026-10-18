@@ -220,6 +220,7 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
     conversation = false;
     if (!transcript.length) return;
     processing = true;
+    if (holdAcrossSpeech) recommendation = undefined;
     const evaluatedAt = now();
     const currentRevision = finalRevision;
     try {
@@ -246,6 +247,9 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
     if (stopped || !finalQueue.length || processing) return;
     processing = true;
     lastDecision = now();
+    // Starting an evaluation supersedes the server's previous recommendation id,
+    // so a held card from it can no longer be displayed.
+    if (holdAcrossSpeech) recommendation = undefined;
     const evaluatedAt = now();
     const batch = finalQueue.splice(0);
     const next = [...transcript, ...batch].slice(-30);

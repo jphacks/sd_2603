@@ -8,7 +8,7 @@ import { JevError } from "@/lib/judge/jev";
 import { silenceJudge } from "@/lib/judge/silence";
 import { applyVideoDecision, authorizedControl, displayVideoResult, restoreIdleVideo } from "@/lib/recall/controller";
 import { outputVideo, RecallVideoError, renderVideoJpeg } from "@/lib/recall/video";
-import { assertDisplayControls, RecommendationCancelledError, recommendationStore } from "@/lib/recall/recommendation";
+import { assertDisplayControls, isRecommendationCancelled, recommendationStore } from "@/lib/recall/recommendation";
 
 const MAX_REQUEST_BYTES = 12_000;
 const BotIdSchema = z.string().uuid();
@@ -161,7 +161,7 @@ export async function POST(request: Request) {
     }
     return Response.json(await restoreIdleVideo(input.botId, videoDependencies));
   } catch (error) {
-    if (error instanceof RecommendationCancelledError) {
+    if (isRecommendationCancelled(error)) {
       return Response.json({ error: "Recommendation expired, superseded, or suppressed", cancelled: true }, { status: 409 });
     }
     if (error instanceof AgendaChangedError) {

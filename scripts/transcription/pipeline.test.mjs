@@ -1013,3 +1013,21 @@ test('offAgendaConfirmations 1 displays the first off-agenda recommendation', as
   gate.stop();
   assert.throws(() => createInterventionGate({ agenda: 'agenda', botId: 'bot', offAgendaConfirmations: 3, decide: async () => offAgenda, display: async () => {} }), RangeError);
 });
+
+test('holdAcrossSpeech drops the held card once a newer evaluation starts, then holds the newer one', async () => {
+  const clock = fakeClock();
+  let finish;
+  const results = [async () => intervention, () => new Promise(resolve => { finish = resolve; })];
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock, quietMs: 800, holdAcrossSpeech: true,
+    decide: () => results.shift()(), display: async () => { displays++; } });
+  utterance(gate, 'first');
+  await talk(gate, clock, 2000, { final: 'second' });
+  await clock.advance(800);
+  assert.equal(displays, 0, 'the first card is superseded while the second evaluation is in flight');
+  finish(intervention);
+  await tick();
+  await clock.advance(800);
+  assert.equal(displays, 1, 'the newer recommendation is held and shown at the pause');
+  gate.stop();
+});
