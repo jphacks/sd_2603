@@ -1,10 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { normalizeGoogleMeetUrl } from "@/lib/recall/meeting-url";
 import Link from "next/link";
-import { joinMeeting, leaveMeeting } from "./meeting-actions";
+import { joinMeeting, leaveMeeting, listMeetings } from "./meeting-actions";
 import { MonitorConnection } from "@/components/score-monitor/MonitorConnection";
+
+type MeetingItem = { id: string; meetingUrl: string; status: string };
 
 type MaterialItem = { name: string; saved: boolean; message: string | null };
 
@@ -12,6 +14,9 @@ const MAX_SELECTED_FILES = 5;
 
 export function JoinForm({ serverManagedControl = false, setupError = null }: { serverManagedControl?: boolean; setupError?: string | null }) {
   const [monitorSessionId, setMonitorSessionId] = useState<string | null>(null);
+  const [sessionReady, setSessionReady] = useState(!serverManagedControl);
+  const [meetings, setMeetings] = useState<MeetingItem[]>([]);
+  const [listError, setListError] = useState<string | null>(null);
   const [meetingUrl, setMeetingUrl] = useState("");
   const [agenda, setAgenda] = useState("");
   const [controlToken, setControlToken] = useState("");
@@ -22,7 +27,33 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
   const [materialNotes, setMaterialNotes] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
-  const [botId, setBotId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!serverManagedControl) return;
+    let cancelled = false;
+    void listMeetings().then(result => {
+      if (cancelled) return;
+      if (result.ok) {
+        setMeetings(result.data.meetings);
+        if (result.data.meetings[0]) setMonitorSessionId(result.data.meetings[0].id);
+      }
+      else setListError(result.data.error ?? "参加状況を取得できませんでした。");
+    }).catch(() => { if (!cancelled) setListError("参加状況を取得できませんでした。"); }).finally(() => { if (!cancelled) setSessionReady(true); });
+    return () => { cancelled = true; };
+  }, [serverManagedControl]);
+
+  async function refreshMeetings() {
+    setListError(null);
+    try {
+      const response = serverManagedControl
+        ? await listMeetings().then(result => ({ ok: result.ok, json: async () => result.data }))
+        : await fetch("/api/recall/meetings", { method: "POST", headers: { Authorization: `Bearer ${controlToken.trim()}` } });
+      const body = await response.json() as { meetings?: MeetingItem[]; error?: string };
+      if (!response.ok) { setListError(body.error ?? "参加状況を取得できませんでした。"); return; }
+      setMeetings(body.meetings ?? []);
+      setMonitorSessionId(body.meetings?.[0]?.id ?? null);
+    } catch { setListError("参加状況を取得できませんでした。"); }
+  }
 
   function replaceFiles(next: File[], limitNote: string | null) {
     setFiles(next);
@@ -50,7 +81,7 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
     setPending(true);
     let sentId: string | null = null;
     try {
-      const response = serverManagedControl ? await joinMeeting(meetingUrl, agenda).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/join", {
+      const response = serverManagedControl ? await joinMeeting(normalizedMeetingUrl, agenda).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/join", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` },
         body: JSON.stringify({ meetingUrl: normalizedMeetingUrl, agenda }),
@@ -61,8 +92,8 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
         return;
       }
       sentId = body.id;
-      setBotId(body.id);
       setMonitorSessionId(body.id);
+      setMeetings(previous => [...previous.filter(item => item.id !== body.id), { id: body.id!, meetingUrl: normalizedMeetingUrl, status: "joining_call" }]);
       if (files.length === 0) {
         setNotice(`ボットを送信しました ${body.id}`);
         return;
@@ -99,20 +130,14 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
   }
 
   async function leave() {
+    if (!monitorSessionId) { setError("退出する会議を選択してください。"); return; }
+    const leavingId = monitorSessionId;
     setError(null);
     setNotice(null);
     setMaterialNotes([]);
-    if (!botId) {
-      setError("この画面から参加させたボットがありません。");
-      return;
-    }
     setPending(true);
     try {
-      const response = serverManagedControl ? await leaveMeeting(botId).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/leave", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` },
-        body: JSON.stringify({ botId }),
-      });
+      const response = serverManagedControl ? await leaveMeeting(leavingId).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/leave", { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` }, body: JSON.stringify({ botId: leavingId }) });
       const body = (await response.json()) as {
         left?: boolean;
         alreadyGone?: boolean;
@@ -122,8 +147,8 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
         setError(body.error ?? "退出に失敗しました");
         return;
       }
-      setBotId(null);
       setMonitorSessionId(null);
+      setMeetings(previous => previous.filter(item => item.id !== leavingId));
       setNotice(body.alreadyGone ? "すでに退出しています" : "退出しました");
     } catch {
       setError("退出に失敗しました");
@@ -228,14 +253,14 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
           <button
             className="w-fit rounded bg-zinc-900 px-4 py-2 text-sm text-white disabled:opacity-50"
             type="submit"
-            disabled={pending || botId !== null || Boolean(setupError)}
+            disabled={!sessionReady || pending || monitorSessionId !== null || Boolean(setupError)}
           >
             参加
           </button>
           <button
             className="w-fit rounded border border-zinc-300 px-4 py-2 text-sm disabled:opacity-50"
             type="button"
-            disabled={pending || botId === null || Boolean(setupError)}
+            disabled={pending || monitorSessionId === null || Boolean(setupError)}
             onClick={() => {
               void leave();
             }}
@@ -251,6 +276,12 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
           </ul>
         ) : null}
       </form>
+      <section aria-label="自分の参加状況" className="grid gap-3">
+        <button type="button" className="w-fit text-sm underline" disabled={pending} onClick={() => void refreshMeetings()}>参加状況を確認</button>
+        {listError && <p role="alert" className="text-sm text-rose-700">{listError}</p>}
+        {meetings[0] && <p className="break-all text-sm">参加中: {meetings[0].meetingUrl}</p>}
+        <p className="text-xs text-zinc-600">このブラウザから参加させた会議だけを表示・操作します。再読み込み後も参加状況を復元します。</p>
+      </section>
       {monitorSessionId && (
         <section aria-label="この会議のJev判定" className="rounded-xl bg-[#090f13] p-4">
           <Link className="mb-4 block text-sm text-sky-200 underline" href={`/monitor?session=${encodeURIComponent(monitorSessionId)}`} target="_blank" rel="noopener noreferrer">

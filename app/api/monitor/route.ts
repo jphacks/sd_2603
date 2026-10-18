@@ -1,3 +1,5 @@
+import { meetingOwner } from "@/lib/recall/browser-session";
+import { ownedMeetings } from "@/lib/recall/owned-meetings";
 import { connection } from "next/server";
 import { parseMeetingSelection } from "@/lib/monitor/meeting";
 import { resolveMeetingSession } from "@/lib/monitor/resolve-meeting";
@@ -8,9 +10,16 @@ export async function GET(request: Request) {
   const meeting = new URL(request.url).searchParams.get("meeting");
   if (meeting !== null && parseMeetingSelection(meeting)?.kind !== "meeting")
     return Response.json({ error: "会議URLまたはMeetコードを入力してください。" }, { status: 400 });
-  const sessionId = meeting !== null
-    ? await resolveMeetingSession(meeting)
-    : monitorStore.activeSession();
+  let sessionId: string | null;
+  if (process.env.BROWSER_CONTROL_ENABLED === "true") {
+    const owner = await meetingOwner();
+    const own = owner ? await ownedMeetings(owner) : [];
+    sessionId = meeting !== null
+      ? own.find(item => parseMeetingSelection(item.meetingUrl)?.value === parseMeetingSelection(meeting)?.value)?.id ?? null
+      : own[0]?.id ?? null;
+  } else {
+    sessionId = meeting !== null ? await resolveMeetingSession(meeting) : monitorStore.activeSession();
+  }
   return Response.json(
     {
       sessionId,

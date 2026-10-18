@@ -29,7 +29,9 @@ async function waitFor(predicate, message, ms = 8000) {
 
 async function setup(transcripts, action = 'WAIT') {
   const directory = await mkdtemp(join(tmpdir(), 'meeting-worker-test-'));
-  await mkdir(join(directory, '.recall'));
+  await mkdir(join(directory, '.recall/bots'), { recursive: true });
+  await writeFile(join(directory, `.recall/bots/${botId}.json`), JSON.stringify({ id: botId, agenda: 'Synthetic integration agenda' }));
+  await writeFile(join(directory, '.recall/bots/meeting-b.json'), JSON.stringify({ id: 'meeting-b', agenda: 'Meeting B agenda' }));
   await writeFile(join(directory, '.recall/current.json'), JSON.stringify({ id: botId, agenda: 'Synthetic integration agenda', audioEnabled: true, createdAt: new Date().toISOString() }));
   const requests = [];
   const requestTimes = [];
@@ -72,8 +74,10 @@ async function setup(transcripts, action = 'WAIT') {
   worker.stdout.on('data', chunk => { output += chunk; });
   worker.stderr.on('data', chunk => { output += chunk; });
   let socket;
+  const extraSockets = [];
   const cleanup = async () => {
     socket?.terminate();
+    for (const extra of extraSockets) extra.terminate();
     if (worker.exitCode === null && worker.signalCode === null) {
       const exited = once(worker, 'exit');
       worker.kill('SIGTERM');
@@ -91,7 +95,11 @@ async function setup(transcripts, action = 'WAIT') {
     socket.on('error', () => {});
     await once(socket, 'open');
     const push = pcm => socket.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id: botId }, data: { buffer: pcm.toString('base64') } } }));
-    return { requests, requestTimes, recommendationIds, socket, setAgenda(value) { agendaSnapshot = value; }, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
+    return { async connectBot(id) {
+      const ws = new WebSocket(`ws://127.0.0.1:${audioPort}/recall/audio/?token=${audioToken}`);
+      ws.on('error', () => {}); extraSockets.push(ws); await once(ws, 'open');
+      return { socket: ws, utterance() { for (const pcm of [voiced, silent, silent, silent, silent, silent, silent]) ws.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id }, data: { buffer: pcm.toString('base64') } } })); } };
+    }, requests, requestTimes, recommendationIds, socket, setAgenda(value) { agendaSnapshot = value; }, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
   } catch (error) { await cleanup(); throw error; }
 }
 
@@ -166,5 +174,26 @@ test('real worker refreshes agenda and cannot confirm the old agenda recommendat
     const evaluationTimes = trial.requests.flatMap((request, index) => request.mode === 'evaluate' ? [trial.requestTimes[index]] : []);
     for (let i = 1; i < evaluationTimes.length; i++) assert.ok(evaluationTimes[i] - evaluationTimes[i - 1] >= 9900, 'agenda changes do not bypass the evaluation cadence');
     assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());
+  } finally { await trial.cleanup(); }
+});
+
+
+test('two simultaneous audio meetings keep separate agendas and transcripts; one failure leaves the other running', { timeout: 15000 }, async () => {
+  const trial = await setup(['only meeting A', 'only meeting B']);
+  try {
+    const b = await trial.connectBot('meeting-b');
+    trial.utterance();
+    await waitFor(() => trial.requests.some(input => input.mode === 'evaluate' && input.botId === botId), 'Missing meeting A evaluation');
+    trial.socket.send('invalid JSON');
+    await once(trial.socket, 'close');
+    b.utterance();
+    await waitFor(() => trial.requests.some(input => input.mode === 'evaluate' && input.botId === 'meeting-b'), 'Meeting B stopped after meeting A failure');
+    const evaluations = trial.requests.filter(input => input.mode === 'evaluate');
+    assert.equal(evaluations.length, 2);
+    assert.deepEqual(evaluations[0].transcript, ['only meeting A']);
+    assert.deepEqual(evaluations[1].transcript, ['only meeting B']);
+    assert.equal(evaluations[0].agenda, 'Synthetic integration agenda');
+    assert.equal(evaluations[1].agenda, 'Meeting B agenda');
+    assert.equal(b.socket.readyState, WebSocket.OPEN);
   } finally { await trial.cleanup(); }
 });

@@ -1,6 +1,7 @@
 import { createServer } from 'node:http';
 import { timingSafeEqual, randomUUID } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
+import { botStatePath, localRecallIo } from './recall.mjs';
 import { existsSync } from 'node:fs';
 import { loadEnvFile } from 'node:process';
 import { resolve } from 'node:path';
@@ -26,15 +27,21 @@ if (controlUrl.protocol !== 'http:' || !['localhost', '127.0.0.1'].includes(cont
   throw new Error('VIDEO_CONTROL_URL must be the local /api/recall/video endpoint');
 }
 
+const stateIo = { ...localRecallIo(env), statePath: resolve('.recall/current.json') };
+
 async function readSession(id) {
   for (let attempt = 0; attempt < 20; attempt++) {
     try {
-      const state = JSON.parse(await readFile('.recall/current.json', 'utf8'));
+      const raw = await readFile(botStatePath(stateIo, id), 'utf8').catch(error => {
+        if (error.code !== 'ENOENT') throw error;
+        return readFile(stateIo.statePath, 'utf8'); // Pre-upgrade single-bot state.
+      });
+      const state = JSON.parse(raw);
       if (state.id === id && typeof state.agenda === 'string' && state.agenda.trim() && state.agenda.length <= 500) return state;
     } catch { /* Bot creation may not have written state yet. */ }
     await new Promise(resolve => setTimeout(resolve, 250));
   }
-  throw new Error('Audio connection does not belong to the current bot');
+  throw new Error('Audio connection does not belong to a registered bot');
 }
 
 async function videoRequest(body, signal) {
@@ -49,13 +56,15 @@ async function videoRequest(body, signal) {
   return response.json();
 }
 
-let active;
-let activeGate;
-let activeBotId;
+const connections = new Map();
+const bots = new Map();
+const failedBots = new Set();
+const maxConnections = Number(env.RECALL_MAX_AUDIO_CONNECTIONS ?? 32);
+if (!Number.isInteger(maxConnections) || maxConnections < 1 || maxConnections > 128) throw new Error('Invalid audio connection limit');
 let halted = false;
 const server = createServer((request, response) => {
   if (request.url === '/health') {
-    const healthy = !halted && !active;
+    const healthy = !halted && connections.size < maxConnections;
     response.writeHead(healthy ? 200 : 503, { 'Content-Type': 'application/json' });
     response.end(JSON.stringify({ status: healthy ? 'ready' : 'unavailable' }));
     return;
@@ -69,7 +78,7 @@ const server = createServer((request, response) => {
     request.on('end', () => {
       try {
         const { botId, generation } = JSON.parse(body);
-        const quiet = !halted && activeBotId === botId && activeGate?.isQuiet(generation);
+        const quiet = !halted && !failedBots.has(botId) && bots.get(botId)?.gate?.isQuiet(generation);
         response.writeHead(quiet ? 200 : 409, { 'Content-Type': 'application/json' });
         response.end(JSON.stringify({ quiet: Boolean(quiet) }));
       } catch { response.writeHead(400); response.end(); }
@@ -83,14 +92,16 @@ server.on('upgrade', (request, socket, head) => {
   const url = new URL(request.url, 'http://localhost');
   const actual = Buffer.from(url.searchParams.get('token') ?? '');
   const expected = Buffer.from(token);
-  if (halted || active || url.pathname !== '/recall/audio/' || actual.length !== expected.length || !timingSafeEqual(actual, expected)) {
+  if (halted || connections.size >= maxConnections || url.pathname !== '/recall/audio/' || actual.length !== expected.length || !timingSafeEqual(actual, expected)) {
     socket.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n');
     return;
   }
-  wss.handleUpgrade(request, socket, head, ws => { active = ws; wss.emit('connection', ws); });
+  wss.handleUpgrade(request, socket, head, ws => { wss.emit('connection', ws); });
 });
 
 wss.on('connection', socket => {
+  const owner = { socket, gate: undefined, id: undefined };
+  connections.set(socket, owner);
   const counts = { rawFrames: 0, pcmBytes: 0, voicedFrames: 0, sttDelta: 0, sttPartial: 0, sttFinal: 0, sttSkippedEmpty: 0, evaluations: 0, displayAttempts: 0, idleAttempts: 0 };
   const report = () => console.log(`Audio worker telemetry ${JSON.stringify(counts)}`);
   console.log('Audio worker websocket connected');
@@ -113,7 +124,7 @@ wss.on('connection', socket => {
     if (ended) return;
     const detail = classifyAudioFailure(error, stage, segments?.status);
     ended = true;
-    halted = true;
+    if (owner.id) failedBots.add(owner.id);
     gate?.stop();
     segments?.stop();
     try { capture?.finish(); } catch (captureError) {
@@ -130,12 +141,17 @@ wss.on('connection', socket => {
   }, 200);
   const timeout = setTimeout(() => fail(new Error('Session timeout'), 'session_timeout'), 90 * 60_000);
   const processMessage = async raw => {
+    if (ended) return;
     const payload = JSON.parse(raw);
     if (payload.event !== 'audio_mixed_raw.data') return;
     const id = payload.data?.bot?.id;
     if (typeof id !== 'string' || !id) throw new Error('Missing bot id');
     if (!session) {
+      if (failedBots.has(id) || bots.has(id)) throw new Error('Bot already connected or stopped');
+      owner.id = id;
+      bots.set(id, owner);
       session = await (sessionReader ?? readSession)(id);
+      if (ended) return;
       gate = createInterventionGate({
         botId: id,
         agenda: session.agenda,
@@ -151,8 +167,7 @@ wss.on('connection', socket => {
         },
         onError: error => fail(error, 'decision'),
       });
-      activeGate = gate;
-      activeBotId = id;
+      owner.gate = gate;
       segments = createSegmentedTranscriber({
         signal: abort.signal,
         transcribe: (audio, { signal, onPart }) => transcribeAudio(audio, { apiKey: env.AI_GATEWAY_API_KEY, signal, onPart }),
@@ -195,23 +210,27 @@ wss.on('connection', socket => {
     try { capture?.finish(); } catch (error) {
       console.error(`Diagnostic audio close failed ${JSON.stringify(classifyAudioFailure(error, 'diagnostic_capture'))}`);
     }
-    activeGate = undefined;
-    activeBotId = undefined;
+    if (owner.id && bots.get(owner.id) === owner) bots.delete(owner.id);
     abort.abort();
-    active = undefined;
-    halted = true;
+    connections.delete(socket);
+    if (owner.id) failedBots.add(owner.id);
   });
 });
 
 await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, '127.0.0.1', resolve); });
 console.log(`Recall audio worker ready on 127.0.0.1:${port}. Start the app, then join from the UI.`);
 const joinWatchdog = setInterval(async () => {
-  if (halted || active) return;
+  if (halted) return;
   try {
-    const state = JSON.parse(await readFile('.recall/current.json', 'utf8'));
-    if (audioJoinTimedOut(state)) {
-      halted = true;
-      console.error('No audio connection arrived after join; leave the bot via the app before retrying.');
+    const io = stateIo;
+    const directory = resolve(botStatePath(io, 'probe'), '..');
+    for (const name of await readdir(directory)) {
+      if (!name.endsWith('.json')) continue;
+      const state = JSON.parse(await readFile(resolve(directory, name), 'utf8'));
+      if (!bots.has(state.id) && !failedBots.has(state.id) && audioJoinTimedOut(state)) {
+        failedBots.add(state.id);
+        console.error('A meeting received no audio after join; leave its bot via the app before retrying. Other meetings remain active.');
+      }
     }
   } catch { /* No active bot state yet. */ }
 }, 5_000);
@@ -219,15 +238,13 @@ joinWatchdog.unref();
 if (handleSignals) for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => {
   halted = true;
   clearInterval(joinWatchdog);
-  activeGate?.stop();
-  active?.close(1000, 'Worker stopping');
+  for (const { gate, socket } of connections.values()) { gate?.stop(); socket.close(1000, 'Worker stopping'); }
   server.close();
 });
 return { server, close: async () => {
   halted = true;
   clearInterval(joinWatchdog);
-  activeGate?.stop();
-  active?.close(1000, 'Worker stopping');
+  for (const { gate, socket } of connections.values()) { gate?.stop(); socket.close(1000, 'Worker stopping'); }
   await new Promise(resolve => server.close(resolve));
 } };
 }

@@ -42,7 +42,7 @@ Keep both tokens server-side except that the operator enters `RECALL_CONTROL_TOK
 
 When audio mode is disabled, the existing join still creates a muted bot without a recording configuration; join/leave still requires the control token. When audio mode is enabled, `AI_PROVIDER=jev` is required and the worker or missing secrets cause join to fail before bot creation. A worker failure stops processing and does not retry paid API calls or create another bot; leave the bot from the UI and restart the worker before trying again. If no audio WebSocket arrives within eleven minutes of bot creation (allowing for the nine-minute waiting-room timeout), the worker marks itself unhealthy and asks the operator to leave the bot. CLI joining in audio mode requires an explicit `MEETING_AGENDA` environment variable; the UI uses its agenda input instead.
 
-The worker and Next app must share `.recall/current.json` on one host. This design does not run end-to-end from a Vercel deployment alone. A Vercel-hosted WebSocket design is possible, but would require durable session state, bounded connection lifetime handling, and reconnect orchestration. It is not implemented here. No raw audio or transcript files are stored by this prototype; avoid enabling verbose provider telemetry for sensitive meetings. Recall's own retention depends on account configuration.
+The worker and Next app must share `.recall/bots/<botId>.json` on one host (legacy `.recall/current.json` is still accepted). Each meeting has an independent audio connection, transcript, agenda, gate, cooldown and restore timer. The worker accepts up to `RECALL_MAX_AUDIO_CONNECTIONS` (default 32, maximum 128); one meeting failing or disconnecting does not halt other meetings. Failed bot IDs are not automatically retried. This design does not run end-to-end from a Vercel deployment alone. A Vercel-hosted WebSocket design is possible, but would require durable session state, bounded connection lifetime handling, and reconnect orchestration. It is not implemented here. No raw audio or transcript files are stored by this prototype; avoid enabling verbose provider telemetry for sensitive meetings. Recall's own retention depends on account configuration.
 
 This is a best-effort speech boundary: a new speaker can start during network latency after the worker's last quiet-state check. Test this with real meeting audio before presenting the behavior as interruption-safe. The current worker stops on transport failure instead of replaying ambiguous transcript/video operations.
 
@@ -72,3 +72,18 @@ Official references: [Recall mixed audio](https://docs.recall.ai/docs/how-to-get
 この設定を有効にすると、参加画面へアクセスできる人にBotの入退室操作を許可する運用になります。必要ならVercel Deployment Protectionなどで画面へのアクセスを制限してください。既定値は無効で、環境変数の設定変更後には再デプロイが必要です。
 
 stagingでは利用者の承認に基づき、CIデプロイで `BROWSER_CONTROL_ENABLED=true` を設定します。mainとfeatureは従来の操作トークン入力方式のままです。
+
+
+## 複数ユーザーによる同時利用
+
+Vercelの `RECALL_API_KEY` は共通の1つを使用し、利用者Aと利用者Bはそれぞれの会議へ別のBotを参加させます。各利用者は1会議を操作するUIを使います。全員の会議を並べる選択画面はありません。「参加状況を確認」と再読み込みでは、その利用者の会議だけをRecallから復元します。退出はその利用者が参加させたBot IDだけを対象にします。会議の復元と退出はVercelの一時ファイルや同じFunctionインスタンスに依存しません。
+
+ログイン機能がないため、利用者は署名付きHttpOnly Cookieでブラウザごとに区別します。有効期限は30日、SecureはVercelで有効、SameSite=Laxです。署名にはサーバー側の `RECALL_CONTROL_TOKEN` を使用し、APIキーや操作トークンをブラウザへ渡しません。Cookie削除、別のブラウザ・端末、または署名キーの変更後は同じ利用者として復元できません。アカウントを使った端末間の引き継ぎは別途ログイン基盤が必要です。同一ブラウザ内のタブは同じ利用者です。
+
+Recall metadata `facilitator` と `owner` にアプリ環境と匿名セッションの対応を保存します。一覧はサーバーで両方を照合し、退出では対象Botを再取得して所有者も照合します。`BROWSER_CONTROL_ENABLED=true` の環境では、モニターのURL・Bot IDを指定しても別の利用者の判定を読み取れません。これはステージングの公開UI利用者を分離する仕組みで、ログイン認証やRecallの利用枠を置き換えるものではありません。
+
+環境の値は `meeting-facilitator:<RECALL_MEETING_SCOPE または VERCEL_ENV または local>` です。同じRecallキーを複数の独立プロジェクトで共有するときは、環境ごとに異なる `RECALL_MEETING_SCOPE` を設定してください。以前のmetadataなしBotは復元できないため、更新前のBotが残っている場合はMeetまたはRecall管理画面から退出させてください。同時参加の実上限はRecallワークスペースの利用枠にも依存します。REST利用者もCookieを保持し、退出には `{ "botId": "..." }` を送信します。
+
+常駐音声ワーカーは会議ごとに音声・アジェンダ・判定・クールダウン・表示タイマーを分離し、1会議の障害で他の会議を停止しません。`RECALL_MAX_AUDIO_CONNECTIONS` の既定値は32（設定範囲1〜128）です。ただし、Vercel単体で常駐音声ワーカーは動かず、既存のJevスコア・アジェンダ・介入承認メモリストアもFunctionインスタンス間では共有されません。この変更は共有DBの導入や音声ワーカーのクラウド常駐化を含みません。
+
+検証は `npm test` と `npm run test:meeting-regression`。ビルド後に `node scripts/check-multi-meeting-ui.mjs` を実行すると、独立した2つのブラウザで共通キーによる参加、利用者ごとのグラフ、他人の閲覧・退出の拒否、A退出後のBの継続を確認します。このブラウザ検証はRecallをループバックの代替サーバーへ接続し、実Botや有料AIを作成しません。Playwrightは別途利用可能な環境で実行してください。

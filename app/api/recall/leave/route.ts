@@ -1,27 +1,26 @@
-import { localRecallIo, removeBot } from "@/scripts/recall.mjs";
+import { localRecallIo, removeBot, verifyMeetingBot } from "@/scripts/recall.mjs";
+import { meetingOwner } from "@/lib/recall/browser-session";
+import { invalidateOwnedMeetings } from "@/lib/recall/owned-meetings";
 import { monitorStore } from "@/lib/monitor/store";
 import { controlAccessError } from "@/lib/recall/controller";
 
 export async function POST(request: Request) {
   const denied = controlAccessError(request, process.env.RECALL_CONTROL_TOKEN);
   if (denied) return denied;
-  let id = "";
-  try {
-    const payload: unknown = await request.json();
-    if (payload && typeof payload === "object" && "botId" in payload) {
-      id = String(payload.botId ?? "").trim();
-    }
-  } catch {
-    id = "";
-  }
-  if (!/^[0-9a-f-]{20,64}$/i.test(id)) {
-    return Response.json({ error: "退出するボットIDを確認できません。" }, { status: 400 });
+  const io = localRecallIo();
+  const payload = await request.json().catch(() => null);
+  const id = payload?.botId;
+  if (typeof id !== "string" || !/^[A-Za-z0-9_-]{1,128}$/.test(id)) {
+    return Response.json({ error: "退出する会議を選択してください。" }, { status: 400 });
   }
 
   try {
-    const io = localRecallIo(process.env, globalThis.fetch, { persistState: false });
+    const owner = await meetingOwner();
+    if (!owner) return Response.json({ error: "参加したブラウザで操作してください。" }, { status: 403 });
+    await verifyMeetingBot(io, id, owner);
     const result = await removeBot(io, id);
     if (result.left) {
+      invalidateOwnedMeetings(owner);
       monitorStore.deactivate(id);
       return Response.json({
         id: result.id,
