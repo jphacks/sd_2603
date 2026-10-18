@@ -1,0 +1,11 @@
+{
+  "cases": 10,
+  "errors": 0,
+  "latencyMs": {
+    "median": 454,
+    "p95": 1946
+  },
+  "model": "typesafe-ai/jev-1.14.0",
+  "cacheHits": 0,
+  "attempts": 10
+}

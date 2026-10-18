@@ -1,0 +1,179 @@
+{
+  "scope": "partial Train only, no CV/Validation/Test, not generalization evidence",
+  "rows": [
+    {
+      "version": "v2",
+      "metrics": {
+        "n": 150,
+        "correct": 145,
+        "errors": 0,
+        "accuracy": 0.9666666666666667,
+        "macroF1": 0.9634529387629854,
+        "majorityBaseline": 0.4,
+        "wilson95": [
+          0.9243471574929044,
+          0.9856797793044249
+        ],
+        "perClass": {
+          "INTERVENE_DRIFT": {
+            "precision": 1,
+            "recall": 0.8888888888888888,
+            "f1": 0.9411764705882353,
+            "support": 45,
+            "predicted": 40
+          },
+          "INTERVENE_STALLED": {
+            "precision": 0.9183673469387755,
+            "recall": 1,
+            "f1": 0.9574468085106383,
+            "support": 45,
+            "predicted": 49
+          },
+          "OK": {
+            "precision": 0.9836065573770492,
+            "recall": 1,
+            "f1": 0.9917355371900827,
+            "support": 60,
+            "predicted": 61
+          }
+        },
+        "matrix": {
+          "INTERVENE_DRIFT": {
+            "INTERVENE_DRIFT": 40,
+            "INTERVENE_STALLED": 4,
+            "OK": 1
+          },
+          "INTERVENE_STALLED": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 45,
+            "OK": 0
+          },
+          "OK": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 0,
+            "OK": 60
+          }
+        },
+        "falseInterventionRate": 0,
+        "exactActionMetrics": null,
+        "actionLabelCoverage": 0
+      }
+    },
+    {
+      "version": "v3",
+      "metrics": {
+        "n": 150,
+        "correct": 145,
+        "errors": 0,
+        "accuracy": 0.9666666666666667,
+        "macroF1": 0.9641749878163851,
+        "majorityBaseline": 0.4,
+        "wilson95": [
+          0.9243471574929044,
+          0.9856797793044249
+        ],
+        "perClass": {
+          "INTERVENE_DRIFT": {
+            "precision": 1,
+            "recall": 0.8888888888888888,
+            "f1": 0.9411764705882353,
+            "support": 45,
+            "predicted": 40
+          },
+          "INTERVENE_STALLED": {
+            "precision": 0.9375,
+            "recall": 1,
+            "f1": 0.967741935483871,
+            "support": 45,
+            "predicted": 48
+          },
+          "OK": {
+            "precision": 0.967741935483871,
+            "recall": 1,
+            "f1": 0.9836065573770492,
+            "support": 60,
+            "predicted": 62
+          }
+        },
+        "matrix": {
+          "INTERVENE_DRIFT": {
+            "INTERVENE_DRIFT": 40,
+            "INTERVENE_STALLED": 3,
+            "OK": 2
+          },
+          "INTERVENE_STALLED": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 45,
+            "OK": 0
+          },
+          "OK": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 0,
+            "OK": 60
+          }
+        },
+        "falseInterventionRate": 0,
+        "exactActionMetrics": null,
+        "actionLabelCoverage": 0
+      }
+    },
+    {
+      "version": "v4",
+      "metrics": {
+        "n": 150,
+        "correct": 147,
+        "errors": 0,
+        "accuracy": 0.98,
+        "macroF1": 0.9793782625891163,
+        "majorityBaseline": 0.4,
+        "wilson95": [
+          0.9428523341357583,
+          0.9931753722843516
+        ],
+        "perClass": {
+          "INTERVENE_DRIFT": {
+            "precision": 1,
+            "recall": 0.9333333333333333,
+            "f1": 0.9655172413793104,
+            "support": 45,
+            "predicted": 42
+          },
+          "INTERVENE_STALLED": {
+            "precision": 0.9782608695652174,
+            "recall": 1,
+            "f1": 0.989010989010989,
+            "support": 45,
+            "predicted": 46
+          },
+          "OK": {
+            "precision": 0.967741935483871,
+            "recall": 1,
+            "f1": 0.9836065573770492,
+            "support": 60,
+            "predicted": 62
+          }
+        },
+        "matrix": {
+          "INTERVENE_DRIFT": {
+            "INTERVENE_DRIFT": 42,
+            "INTERVENE_STALLED": 1,
+            "OK": 2
+          },
+          "INTERVENE_STALLED": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 45,
+            "OK": 0
+          },
+          "OK": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 0,
+            "OK": 60
+          }
+        },
+        "falseInterventionRate": 0,
+        "exactActionMetrics": null,
+        "actionLabelCoverage": 0
+      }
+    }
+  ]
+}

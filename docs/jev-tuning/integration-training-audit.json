@@ -1,0 +1,433 @@
+{
+  "scope": "20 training-only cases, blind opaque IDs; no Test/gold/intent/prediction shown to auditor",
+  "workflowIndependent": true,
+  "modelFamilyIndependent": false,
+  "n": 20,
+  "agreement": 20,
+  "primaryLabelsModified": false,
+  "realismLimitations": [
+    "Some families share topic/setting intentionally; lexical checks cannot prove template independence.",
+    "Repeated unchanged positions, ignored agenda-return objections, and explicit task assignment create recognizable authored style.",
+    "No overt grading instructions or gold label tokens seen in this Train-only sample."
+  ],
+  "rows": [
+    {
+      "id": "audit-000",
+      "status": "OK",
+      "reason": "機材ごとの実測時間と受付制約を比較し、音声あり・映像のみの二分類へ見積もりを更新した。末尾で予備時間を計算する次の作業も具体化している。",
+      "evidenceTurns": [
+        2,
+        3,
+        4,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-dbe33ee1577825",
+      "primaryStatus": "OK",
+      "disagreement": false
+    },
+    {
+      "id": "audit-001",
+      "status": "OK",
+      "reason": "図書館の経験談は引継ぎ直後の操作負荷という具体的な類似点を示し、二人体制と経験者配置の案に反映されている。有益な寄り道である。",
+      "evidenceTurns": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-bc8e69bb750c54",
+      "primaryStatus": "OK",
+      "disagreement": false
+    },
+    {
+      "id": "audit-002",
+      "status": "INTERVENE_STALLED",
+      "reason": "進行側と会場側で決裁を相互に求め、誰も確定時刻を出せない状態が反復している。末尾でも責任者や解決手順が決まらず連絡が保留されている。",
+      "evidenceTurns": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-df472deca5a2b5",
+      "primaryStatus": "INTERVENE_STALLED",
+      "disagreement": false
+    },
+    {
+      "id": "audit-003",
+      "status": "INTERVENE_STALLED",
+      "reason": "強い表現か柔らかい表現かの希望を同じ根拠で繰り返し、比較基準や折衷案が追加されない。末尾も元の文章を各自送り直すだけで選択が進まない。",
+      "evidenceTurns": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-88adc1eff5f2e7",
+      "primaryStatus": "INTERVENE_STALLED",
+      "disagreement": false
+    },
+    {
+      "id": "audit-004",
+      "status": "INTERVENE_STALLED",
+      "reason": "案内側確認と安全担当承認のどちらが先かを往復し、権限のない参加者同士で同じ文書を戻している。末尾でも承認者やエスカレーション先が定まらず原文が出せない。",
+      "evidenceTurns": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-c13820b439583e",
+      "primaryStatus": "INTERVENE_STALLED",
+      "disagreement": false
+    },
+    {
+      "id": "audit-005",
+      "status": "INTERVENE_STALLED",
+      "reason": "メール通知と巡回について、本人が思い出すか読まないかという既出理由を繰り返している。新しい確認情報や選択基準を加えず同じ通知案に戻っている。",
+      "evidenceTurns": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-61ffdd8987eb50",
+      "primaryStatus": "INTERVENE_STALLED",
+      "disagreement": false
+    },
+    {
+      "id": "audit-006",
+      "status": "OK",
+      "reason": "採否を決めない発散が冒頭で合意され、床の線、図形、音声、紙地図、照合方法という異なる案や組合せが増えている。未決であることはこの段階の停滞を意味しない。",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-864f9ab75198bb",
+      "primaryStatus": "OK",
+      "disagreement": false
+    },
+    {
+      "id": "audit-007",
+      "status": "INTERVENE_DRIFT",
+      "reason": "忘れ物の保管・返却窓口の決定から袋の柄や見栄えの話へ移り、窓口相談を先にしたいという指摘後も波模様の検討が続く。具体的な保管・本人確認への利益が示されない。",
+      "evidenceTurns": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-c8a36e7fece41a",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "disagreement": false
+    },
+    {
+      "id": "audit-008",
+      "status": "OK",
+      "reason": "小数点の欠落、実測値、壁の出っ張りの差を順に修復し、比較に使う実幅二メートルを確定している。言い直しや確認が新しい計測情報の整理につながっている。",
+      "evidenceTurns": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-308ed1172f0cea",
+      "primaryStatus": "OK",
+      "disagreement": false
+    },
+    {
+      "id": "audit-009",
+      "status": "INTERVENE_DRIFT",
+      "reason": "待機列の配置比較からベストの反射帯・縁・ロゴの外見比較へ移っている。制服は使えるので位置を決めたいという発言後も写真の検討が続き、通行幅の判断に戻らない。",
+      "evidenceTurns": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-a1f767a1cbbe07",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "disagreement": false
+    },
+    {
+      "id": "audit-010",
+      "status": "INTERVENE_STALLED",
+      "reason": "即日回答による満足度と担当外回答の責任という対立を同じ内容で反復している。代理回答できる条件や範囲を切り分けず、末尾でも両案を再主張して合意に至らない。",
+      "evidenceTurns": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-a48c35c34c1954",
+      "primaryStatus": "INTERVENE_STALLED",
+      "disagreement": false
+    },
+    {
+      "id": "audit-011",
+      "status": "INTERVENE_STALLED",
+      "reason": "日付の新しさと承認印のどちらを正式性の基準とするか、既出の分かりやすさと承認済みという理由が繰り返される。利用者への案内を求められても同じ二案が返り、決定方法が増えない。",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-3761718e61d881",
+      "primaryStatus": "INTERVENE_STALLED",
+      "disagreement": false
+    },
+    {
+      "id": "audit-012",
+      "status": "OK",
+      "reason": "候補の設備・搬送制約を具体化した後、鍵と利用時間、床養生の可否を別々の担当が確認する手順を決めている。必要な費用と時間をそろえて午後に選ぶ計画があり、未確定でも進展している。",
+      "evidenceTurns": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-b48eb9213273e4",
+      "primaryStatus": "OK",
+      "disagreement": false
+    },
+    {
+      "id": "audit-013",
+      "status": "INTERVENE_DRIFT",
+      "reason": "担当者不在時の問い合わせ引継ぎから新規顧客獲得の広告・バナー・特典へ話題が移る。運用設計の範囲外という指摘と未記入の引継ぎ先の確認を経ても、末尾は広告案の作成を進めている。",
+      "evidenceTurns": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-df07ffee38cc38",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "disagreement": false
+    },
+    {
+      "id": "audit-014",
+      "status": "INTERVENE_STALLED",
+      "reason": "欠員の代わりを決める権限について受付側と全体担当が互いに戻し、どちらも選べないという同じ障害が続く。末尾でも別の決裁者や確認手段が出ず依頼の往復に留まる。",
+      "evidenceTurns": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-7893e49c948ae1",
+      "primaryStatus": "INTERVENE_STALLED",
+      "disagreement": false
+    },
+    {
+      "id": "audit-015",
+      "status": "INTERVENE_DRIFT",
+      "reason": "弁当の受取から店の唐揚げや支店メニューの雑談へ移っている。十二時の受付担当や予備担当を求め、店は発注済みと説明しても、末尾は別の店や夜の定食の比較に進んでいる。",
+      "evidenceTurns": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-03f69077ee1fc2",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "disagreement": false
+    },
+    {
+      "id": "audit-016",
+      "status": "INTERVENE_DRIFT",
+      "reason": "返却窓口の矢印を決める議題から箱の角・縁・刻印の観察へ話題が続く。管理に差はなく既存の箱を使うと明言され、窓口未決も指摘された後に製造年の調査へ進んでいる。",
+      "evidenceTurns": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-beafe14120d9a4",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "disagreement": false
+    },
+    {
+      "id": "audit-017",
+      "status": "OK",
+      "reason": "飲食店の役割分担という例を受付業務へ適用し、個人情報を扱わない案内と本人確認を分離している。経験者の配置、名簿の範囲、説明担当まで具体化し、代替手順が前進している。",
+      "evidenceTurns": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-6f47e9c6bdce46",
+      "primaryStatus": "OK",
+      "disagreement": false
+    },
+    {
+      "id": "audit-018",
+      "status": "OK",
+      "reason": "同一版番号の文書を言語違いと翻訳日の差で説明し、改訂番号と言語を分けて管理する理解に収束している。末尾で同じ行への配置と誤削除防止、日付だけで選ばない注記が決まる。",
+      "evidenceTurns": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-452cc837d12a32",
+      "primaryStatus": "OK",
+      "disagreement": false
+    },
+    {
+      "id": "audit-019",
+      "status": "OK",
+      "reason": "定員と流しの利用可否という新しい根拠に基づき講義室への移転を選択し、切替時刻・担当・搬入・誘導・手順書反映まで合意している。議題に沿った具体的な決定と次の行動がある。",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": "high",
+      "uncertain": false,
+      "annotator": "integration-runtime-audit",
+      "labelSource": "independent_gpt_silver",
+      "humanReviewed": false,
+      "sourceCaseId": "synbench-8f687688c6fa83",
+      "primaryStatus": "OK",
+      "disagreement": false
+    }
+  ]
+}
