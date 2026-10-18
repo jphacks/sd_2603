@@ -527,7 +527,7 @@ export async function findLiveBotId(io) {
 export async function releaseBot(io, id) {
   const result = await requestLeave(io, id);
   await clearState(io, id);
-  return { id, left: true, alreadyGone: Boolean(result.alreadyGone), status: result.status ?? null, code: null };
+  return { id, left: true, alreadyGone: Boolean(result.alreadyGone), status: result.status ?? null, code: null, timeout: false, latest: null };
 }
 
 export async function removeBot(io, id) {
