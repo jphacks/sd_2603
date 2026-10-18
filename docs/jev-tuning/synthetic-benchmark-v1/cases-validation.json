@@ -110,6 +110,62 @@
     }
   },
   {
+    "id": "synbench-0808665439cea1",
+    "agenda": "データ収集の順序による偏りを点検する。記録画面の意匠は対象外で、条件の提示順を確かめる段階。",
+    "phase": "収集計画の点検",
+    "transcript": [
+      "統括：疲れが後の条件に重なっていないか、実施順を見たい。",
+      "補助：この画面の鳥、尾が二本に分かれてますね。",
+      "収集：二本、あ、片方は枝かもしれません。小さくて読みにくいです。",
+      "設計：絵は意匠です。順序表を先に見ませんか。",
+      "解析：枝なら葉が一枚あるはず。拡大したら見えそうだ。",
+      "統括：尾が長い鳥の見本と並べてみる？形が分かるかもしれない。",
+      "補助：上下の枝に一羽ずつ置く図もあります。",
+      "収集：羽の角度を少しずつ変えて、どれが飛んで見えるか比べましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-067",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-067",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "提示順の点検から対象外の鳥の絵の尾・枝・羽へ移り、順序表への復帰を求めた後も絵の見本比較が続いている。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-082cfb11157b6c",
     "agenda": "講師が交代しても学習者が同じ到達目標へ進める授業を設計する。 現在は共通目標の確認。",
     "phase": "共通目標の確認",
@@ -146,6 +202,114 @@
     },
     "annotation": {
       "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-0d3d3865fcdd37",
+    "agenda": "繁忙期に選考が止まらない日程を組む。面接枠をどう確保するか、他業務の例から使える手順を考える段階。",
+    "phase": "選考の詰まり防止の検討",
+    "transcript": [
+      "現場：共同の実験室で、仮予約が残って誰も使えなくなったことがある。",
+      "採用：選考の枠も仮押さえしたままになりそう。どう直したの。",
+      "現場：期限までに確定しなければ解放する欄を付けたんだ。",
+      "調整：なら面接官の枠も、候補者へ送って二日で返事がなければ戻せるね。",
+      "採用：解放前に一度確認の連絡を入れたいな。",
+      "現場：私は火曜と木曜の二枠をその条件で確保できる。",
+      "調整：期限の欄と確認担当を私の一覧に入れて、今日候補者へ送るよ。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-057",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-057",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "実験室の仮予約の失敗例から面接枠へ期限と解放前確認を適用し、火木二枠と確認担当を一覧にして候補者へ送る具体策が決まっている。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-0d595d02a3a916",
+    "agenda": "録画データの欠落に対する調査順を決める。今は録画機側と保存サーバー側のどちらを先に見るか選ぶ。",
+    "phase": "調査の開始点選定",
+    "transcript": [
+      "企画：録画機側を最初にする案で出します。",
+      "開発：私はサーバー側を最初にする案です。",
+      "広報：録画機に私も入れます。二人が選びましたね。",
+      "運用：二人でも、私はサーバーの票を変えません。",
+      "企画：録画機を選んだことは、そのまま記録してください。",
+      "開発：私のサーバーという選択も消さないでください。",
+      "運用：最初をサーバーにするという返事になります。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-038",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-038",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "録画機とサーバーへ二人ずつの票を置いて同じ希望を返し、欠落の状況など調査順を選ぶ根拠がなく開始点が定まらない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
       "confidence": "high",
       "uncertain": false,
       "humanReviewed": false,
@@ -328,6 +492,224 @@
     }
   },
   {
+    "id": "synbench-133b8d7b948856",
+    "agenda": "監視アラートの引き継ぎ担当を決める。今は合意した二分の個人検討の開始五十秒で、各自が担当可能時間を書いている。",
+    "phase": "引き継ぎ条件の個人検討",
+    "transcript": [
+      "運用：二分だけ各自で、引き取れない時間帯を書き出そう。",
+      "日勤：了解。出勤してすぐの処理も予定表と照らしているよ。",
+      "夜勤：私は引き継ぎまでに残せる記録をメモしてる。",
+      "運用：開始五十秒。まだ質問に答えなくて大丈夫だよ。",
+      "日勤：昼の会議と重なる時間だけ、もう一度確かめておくね。",
+      "夜勤：私も交代の日の違いを書き足す。二分の後で説明するよ。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-037",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-037",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "合意した二分間の個人検討の五十秒時点で、担当不可時間や記録を予定と照合している。質問への応答を後にする手順内の思考作業である。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-14efb9b94f4391",
+    "agenda": "監視アラートを日勤へ引き継ぐ方式を、共有一覧と個別連絡から一つ選ぶ。現在は方式を確定する段階。",
+    "phase": "引き継ぎ方式の選択",
+    "transcript": [
+      "日勤：共有一覧で受ける方式にしたいです。",
+      "夜勤：私は個別に連絡する方式を選ぶよ。",
+      "運用：どちらかなら、一覧のほうへ丸を付けたいな。",
+      "夜勤：個別連絡を選んでほしい。私の票はそっち。",
+      "日勤：私は一覧の選択を変えるつもりはありません。",
+      "運用：一覧で決めたいと返事しておくね。",
+      "夜勤：こちらの返事は個別連絡のままだから、その決定には乗れない。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-037",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-037",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "一覧か個別連絡かという選択だけが繰り返され、選択の変更を互いに拒んで引き継ぎ方式の共通条件や決め方が増えていない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-210be68217a950",
+    "agenda": "候補者からの質問に回答する窓口を決める。内容が未分類の問い合わせを最初に受ける担当を選ぶ段階。",
+    "phase": "受付責任の分担",
+    "transcript": [
+      "現場：仕事内容かもしれませんが、まず採用で質問を受けてください。",
+      "採用：仕事内容なら現場の受け付けが先ではありませんか。",
+      "総務：待遇の可能性もあります。分類後でないと私には回せません。",
+      "広報：私は送付文面を整えるだけなので、受ける役ではありません。",
+      "現場：まだ内容が分からないので、採用で受けてから渡してください。",
+      "採用：中身が現場のものかもしれない以上、そちらに受けてほしいです。",
+      "総務：どちらが受けるか決まらないまま、私にも返ってきています。",
+      "現場：こちらからは採用へ戻すしかありません。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-058",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-058",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "内容未分類の質問を先に受ける担当を求めるのに、分類前は受けない条件と採用・現場の押し戻しが続き、一次受付が定まらない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-23caa58ef225c8",
+    "agenda": "利用が少ない顧客への聞き取りを設計する。対象者は三名と確認済みで、現在は一人ごとの質問順を検討する。",
+    "phase": "聞き取り方法の確認",
+    "transcript": [
+      "担当：対象は三名です。各十五分で、最初に具体的な仕事を聞きます。",
+      "責任者：聞き取りの対象者は何名になりますか。",
+      "担当：三名です。先方から了承された一覧も共有しました。",
+      "責任者：一覧を見る前に、人数を先に教えていただけますか。",
+      "担当：三名、とお伝えしています。質問の順を見ていただきたいです。",
+      "責任者：順の話は後にして、対象が何名か知りたいのです。",
+      "担当：人数の回答は三名のままです。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-048",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-048",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "聞き取り対象三名を回答し了承一覧も渡すが、責任者が同じ人数の質問へ戻り続け、一人ごとの質問順の検討を進められない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": true,
+      "reviewStatus": "INTERVENE_STALLED",
+      "reviewDisagreement": false
+    }
+  },
+  {
     "id": "synbench-2b4c92d3f2a634",
     "agenda": "毎朝の報告会の時間を比較するため、実測の記録を正しく読む。 現在は計時データの修復。",
     "phase": "計時データの修復",
@@ -490,6 +872,118 @@
     }
   },
   {
+    "id": "synbench-2ed67923444c1b",
+    "agenda": "繁忙期に選考が止まらない日程を組む。面接担当の空きと候補者希望を集める起点の担当を決める段階。",
+    "phase": "日程調整の担当確認",
+    "transcript": [
+      "調整：現場の空きを先にもらえれば、候補者へ連絡できるよ。",
+      "現場：候補者の希望が来ないと、現場では空きを確保できない。",
+      "採用：どちらかが先に仮の日を出せないかな。",
+      "現場：調整担当から候補者の希望を出してほしい。",
+      "調整：こちらは現場の予定がないと聞けない。",
+      "採用：私は二つが合った後に案内する役だから、先に集めてほしい。",
+      "現場：それなら候補者の希望が届くのを待つよ。",
+      "調整：私も現場の予定を受け取るまで待つしかない。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-057",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-057",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "現場の空きと候補者希望を互いに先行条件として返し、採用も両者確定待ちとなり、仮日を求めても両者が待つままで起点がない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-2f646cdbbd1577",
+    "agenda": "値引きと納期短縮のどちらを顧客へ示すか選ぶ。資料を綴じる器具の意匠は対象外で、必要時期と総額を比較する。",
+    "phase": "提案条件の比較",
+    "transcript": [
+      "製造：短縮すると検査を増員するので、追加費用が出ます。",
+      "営業：この資料のクリップ、羽の模様が付いているんだね。",
+      "物流：羽というより小さい葉っぱに見えます。",
+      "法務：どちらでも条件には関係しないです。追加費用を確認しましょう。",
+      "経理：葉の先が尖っているから、別の木の模様かもしれません。",
+      "営業：木の葉を描いた古い文具の一覧がある。開いてみるよ。",
+      "製造：銀と銅で線の見え方が違いますね。",
+      "物流：裏側の模様も並べて、どの向きがきれいか見たいです。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-047",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-047",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "値引きと短納期の追加費用確認から資料クリップの葉模様と文具の一覧へ移り、費用へ戻す発言後も材質・模様の向きを比較している。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-2f7fb28bdc55a5",
     "agenda": "ワークショップの定員と安全に動ける机配置を決める。 現在は定員と配置の比較。",
     "phase": "定員と配置の比較",
@@ -526,6 +1020,226 @@
     },
     "annotation": {
       "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-30be9a114a5fc9",
+    "agenda": "録画データの欠落に対する調査順を決める。今は欠落した時間帯とファイルの状態を照合する段階。",
+    "phase": "欠落箇所の整理",
+    "transcript": [
+      "広報：録画機の横の置物、羽が長い鳥みたいですね。",
+      "運用：旅先でもらった物です。羽は折りたためるんですよ。",
+      "開発：置物は後で見せてください。欠落はファイル自体がないのですか。",
+      "企画：一覧にファイルはありますが、五分目から再生できません。",
+      "運用：こちらの転送元も同じ位置で止まりました。",
+      "開発：なら転送後だけの問題ではありません。保存時の終端を見ます。",
+      "広報：止まった時刻と元ファイル名を、調査票に転記しました。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-038",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-038",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "置物の雑談を区切って元ファイルも同位置で止まる証拠を得て、転送後だけの問題ではないと絞り、時刻とファイル名を調査票へ記録している。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-364ef1ce0fe132",
+    "agenda": "値引きと納期短縮のどちらを顧客へ提案するか決める。現在は顧客の必要時期と費用を照合する段階。",
+    "phase": "顧客への提案選定",
+    "transcript": [
+      "営業：先方が急ぐ理由を確認して、値引きか短納期か選びたい。",
+      "経理：契約書の印、外側の線だけ二重に見えますね。",
+      "製造：二重、いえ少しずれて押しただけかもしれません。",
+      "法務：印は照合済みです。今回は納品条件の選択をお願いします。",
+      "物流：でも線がずれると花びらみたい。丸い印だとよく出ますね。",
+      "経理：四角い印ならどう重なるのでしょう。紙で試せます。",
+      "営業：薄い色で重ねると面白そう。配置を何通りか見たい。",
+      "製造：角度を少しずつ変えて、線の模様を比べてみましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-047",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-047",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "顧客の必要時期と費用の照合から照合済み印章の線へ移り、納品条件へ戻す発言後も印の角度と模様を試そうとしている。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-36c13be7b7ecc8",
+    "agenda": "値引きと納期短縮のどちらを提案するか検討する。比較表が別条件の金額を参照しており、計算の前提を段階的に修復している。",
+    "phase": "見積比較表の修復",
+    "transcript": [
+      "経理：値引き案の金額が合いません。旧ロットの単価を拾っています。",
+      "営業：参照を今回分に替えました。差は小さくなったけど残っています。",
+      "法務：その列は税込、右側は税抜きですよ。",
+      "製造：税抜きに統一すると製造費の部分は一致しますね。",
+      "物流：短納期の追加送料だけ、まだ通常便のままです。",
+      "経理：追加分を分ける欄を作ります。通常便と混ぜないように。",
+      "営業：値引き案の合計は確定しました。追加送料が入れば二案を並べられます。",
+      "物流：その送料を今照会します。返答した額を専用欄へ入れます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-047",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-047",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "旧ロット参照、税込税抜、特急送料の混在を順に分離して製造費と値引き合計を合わせ、残る送料照会の担当と入力欄を決めている。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-388e9755ea466c",
+    "agenda": "録画データの欠落に対し、調べる順と証拠の保全担当を決める。元ファイルを変更せず原因を絞る段階。",
+    "phase": "調査計画の確定",
+    "transcript": [
+      "開発：解析前に元ファイルを複製し、元の保存先は触らずにおきたいです。",
+      "運用：私が複製して、ファイルサイズと時刻を記録します。",
+      "企画：配信開始の操作時刻は手元の進行表にあります。共有しますね。",
+      "広報：視聴者からの停止報告も時刻付きでまとめます。",
+      "開発：その三つを同じ時刻で並べ、先に保存側の切れ目を見ます。",
+      "運用：保存側で正常なら転送記録へ進む順を、調査票に入れました。",
+      "企画：今日十七時に判明した範囲と次の確認を持ち寄りましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-038",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-038",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "元ファイルを保全した複製と時刻記録を分担し、保存側から転送側へ進む調査順と十七時の共有まで決めている。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
       "confidence": "high",
       "uncertain": false,
       "humanReviewed": false,
@@ -688,6 +1402,62 @@
     },
     "annotation": {
       "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": true,
+      "reviewStatus": "INTERVENE_DRIFT",
+      "reviewDisagreement": false
+    }
+  },
+  {
+    "id": "synbench-3f3133cb74d1c6",
+    "agenda": "監視アラートの担当引き継ぎを決める。夜勤と日勤の境目で未対応の通知を誰が受け取るか選ぶ段階。",
+    "phase": "アラート担当の引き継ぎ",
+    "transcript": [
+      "運用：朝七時の時点で残る通知を、誰に渡すか決めたい。",
+      "夜勤：通知音が木琴みたいで、最近耳から離れないんだよね。",
+      "日勤：木琴なら昔習ってた。隣の音を一緒にたたくと面白いよ。",
+      "夜勤：小さい楽器を家に置くなら、何音くらい要るの。",
+      "運用：私も打楽器が欲しい。折り畳める台なら置けそう。",
+      "日勤：台の幅を見よう。子ども用と大人用で違うから。",
+      "夜勤：写真の脚、交差しててきれいだね。二種類並べてみたい。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-037",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-037",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "七時の未対応通知の受取担当を決めず、通知音から木琴と打楽器台の私的選択へ広がり、末尾も台の写真比較が続く。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
       "confidence": "high",
       "uncertain": false,
       "humanReviewed": false,
@@ -1084,6 +1854,114 @@
     }
   },
   {
+    "id": "synbench-4d336c45ae455e",
+    "agenda": "繁忙期に選考が止まらない日程を組む。現在は今月の面接候補日を照らし合わせ、休憩は予定していない。",
+    "phase": "繁忙期の面接枠調整",
+    "transcript": [
+      "現場：月末の三日間は出荷対応で、面接には出られないよ。",
+      "採用：月末の祭り、地元の大きい像を運ぶ日だね。",
+      "調整：像の背中に何か描いてあるよね。魚だったかな。",
+      "現場：竜だと思う。子どもの頃、羽が動くのを見たよ。",
+      "採用：羽があるなら鳥じゃない？昔の写真を探そう。",
+      "調整：像が三つ並ぶ写真もある。どれが一番古いんだろう。",
+      "現場：町の資料館に年代の表があるはず。今見てみようか。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-057",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-057",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "面接担当の出荷対応という制約から祭りの像や羽の記憶へ移り、年代と映像の検索が続いて候補日照合へ戻っていない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-522825120d1ed3",
+    "agenda": "データ収集の順序による偏りを点検する。順序の違いと参加者属性の違いを分けて、比較できる範囲を整理する段階。",
+    "phase": "条件順と参加群の整理",
+    "transcript": [
+      "解析：条件二を先にした群の値が高いので、順序の効果でしょうか。",
+      "収集：その群だけ経験者です。初心者は全員、条件一からでした。",
+      "設計：ああ、順序だけでなく経験も違っていましたね。",
+      "補助：一覧の群名を順序と経験の二列に分けます。",
+      "統括：今の差を順序だけの効果とは呼べない、でそろえよう。",
+      "解析：はい。同じ経験で逆順を試した記録があるか確認します。",
+      "収集：私が原記録を探します。なければ次回は経験ごとに順を入れ替えます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-067",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-067",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "順序だけでなく経験者と初心者の違いが混ざることを発見し、二列へ整理して順序効果の断定を避け、原記録確認と次回の順入替えへ進んでいる。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-55ea295dda8cbb",
     "agenda": "撤収車両の到着順を車両待機と搬出動線に合わせて確定する。 現在は呼び出し手順の合意。",
     "phase": "呼び出し手順の合意",
@@ -1134,7 +2012,9 @@
         6
       ],
       "alternativeStatus": null,
-      "reviewed": false
+      "reviewed": true,
+      "reviewStatus": "OK",
+      "reviewDisagreement": false
     }
   },
   {
@@ -1354,6 +2234,168 @@
     }
   },
   {
+    "id": "synbench-6c87919ea3d025",
+    "agenda": "データ収集の順序による偏りを点検する。現在は条件の提示順と観察された差を照合する段階。",
+    "phase": "収集順序の偏り点検",
+    "transcript": [
+      "解析：前半と後半で値が変わっています。提示順を確認したいです。",
+      "収集：番号札の切り込み、右側が一ミリ広いですね。",
+      "補助：右、じゃなくて左の影かもしれません。厚紙だと分かりにくいです。",
+      "設計：どちらでも提示順の記録は同じです。順序を見ましょう。",
+      "統括：切り込みを丸くすれば、札を差し込みやすそうだね。",
+      "収集：四角と半円の切り口を作って、形を比べたいです。",
+      "解析：紙の厚さごとに差す台も変わりそう。見本を並べよう。",
+      "補助：薄い板の作例もあります。どの角が滑らかか見てみます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-067",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-067",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "提示順の記録と関係ないと指摘された番号札の切り口から、形と紙厚・台の見本比較へ広がり、順序の偏り点検へ戻らない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-74c3a6fdbd66f8",
+    "agenda": "利用が少ない顧客への聞き取りを設計する。利用の機会と操作上の問題を区別し、押し付けない質問順と記録方法を決める。",
+    "phase": "聞き取り票の確定",
+    "transcript": [
+      "責任者：最初から不便な点と聞くと、不便だった前提を押し付けますね。",
+      "担当：では直近の対象業務で何をしたか、から始めます。",
+      "責任者：使わなかった場合は、代わりにした方法を聞きましょう。",
+      "担当：理由は選択肢を読まず、まず自由に話していただきます。",
+      "責任者：私は発言と解釈を分けて記録します。録音の了承も先に取ります。",
+      "担当：質問は私が担当し、最後に内容を読み返して確認する順で確定します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-048",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-048",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "未利用を不便と決めつけず直近業務と代替方法から自由回答で聞く順を作り、発言と解釈の別記録・了承・最後の確認を分担している。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-778b873a888a34",
+    "agenda": "候補者からの質問への回答窓口を決める。勤務条件の個別回答を誰が承認して送信するか確定する段階。",
+    "phase": "回答内容の決定権確認",
+    "transcript": [
+      "採用：この勤務条件の回答は、総務の承認後に送りたいです。",
+      "総務：実際の運用は現場ですから、現場の承認が先です。",
+      "現場：条件を決める権限はありません。採用で了承してください。",
+      "広報：文面は整えましたが、内容の承認は私にはできません。",
+      "採用：こちらも総務の了承なしでは回答を確定できません。",
+      "総務：現場の承認がないので、この原稿は戻します。",
+      "現場：こちらにも権限がないので、採用へ戻すことになります。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-058",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-058",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "勤務条件の承認を総務・現場・採用が互いの先行承認として差し戻し、誰にも決定権を置かず原稿が循環している。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-7aded4c0c232d3",
     "agenda": "会員向けの情報配信を週一回か月二回にするか決める。配信名は前回確定し変更しない。",
     "phase": "配信頻度の選定",
@@ -1404,7 +2446,9 @@
         6
       ],
       "alternativeStatus": null,
-      "reviewed": false
+      "reviewed": true,
+      "reviewStatus": "INTERVENE_DRIFT",
+      "reviewDisagreement": false
     }
   },
   {
@@ -1622,6 +2666,62 @@
     }
   },
   {
+    "id": "synbench-852c24429d8e13",
+    "agenda": "録画データの欠落に対して、保存ログと転送ログのどちらから調べるか一つ選ぶ。現在は最初の調査対象を確定する段階。",
+    "phase": "調査対象の選択",
+    "transcript": [
+      "開発：最初は保存ログを選びます。",
+      "運用：私は転送ログにしたいです。",
+      "企画：保存ログからでよさそうな感じですね。",
+      "広報：私なら転送のほうを選びます。",
+      "運用：では転送ログを先頭に置いてください。",
+      "開発：先頭は保存ログ、という返事です。",
+      "企画：私も保存の側に丸を残しておきます。",
+      "広報：転送を選ぶ側は、その丸を移すつもりはありません。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-038",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-038",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "保存ログと転送ログを選ぶだけの票が二つずつで固定され、最初に調べる根拠や決定手順を増やさず同じ返事を繰り返している。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-853700fea9d6ca",
     "agenda": "会員向け情報配信の頻度を試験結果から決め、作成担当と見直し時点を確定する。",
     "phase": "配信計画の確定",
@@ -1728,6 +2828,62 @@
     }
   },
   {
+    "id": "synbench-8bd59911a5388f",
+    "agenda": "値引きと納期短縮の提案を比較する。最短出荷日は水曜と共有済みで、現在は顧客への条件を組み立てる段階。",
+    "phase": "納期情報の確認",
+    "transcript": [
+      "物流：最短で水曜出荷です。月曜出荷はできません。",
+      "営業：それなら最短は何曜になりますか。",
+      "製造：水曜です。製造完了が火曜の夕方なので。",
+      "経理：水曜出荷の費用はこの欄にあります。",
+      "法務：条件を確定する前に、出荷できる曜日をそろえましょう。",
+      "営業：はい。私が知りたいのも最短は何曜かということです。",
+      "物流：水曜、と先ほどからお答えしています。",
+      "営業：では先に、その最短の曜日を教えてもらえますか。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-047",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-047",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "水曜が最短で月曜不可と製造理由と費用欄まで共有したのに、営業が最短曜日の同じ問いを続け、提案条件へ進めない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-8c7632e5d94e70",
     "agenda": "初めて参加するボランティアへの当日の説明順を決める。 現在は説明順の調整。",
     "phase": "説明順の調整",
@@ -1779,6 +2935,60 @@
       ],
       "alternativeStatus": null,
       "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-8cb08e32bd55fd",
+    "agenda": "利用が少ない顧客への聞き取りを設計する。まだ質問は確定しておらず、何を区別して聞くかと追加確認の担当を決める段階。",
+    "phase": "聞き取りの比較軸整理",
+    "transcript": [
+      "担当：使いにくいかだけ聞くと、使う機会がなかった人に合いません。",
+      "責任者：仕事自体が起きなかった場合と、起きたが使わなかった場合ですね。",
+      "担当：はい。最初にその二つを区別してから、操作の話へ進みたいです。",
+      "責任者：対象にも両方の方がいるか、私が利用記録と予定を確認します。",
+      "担当：私は直近の具体的な仕事を思い出してもらう質問案を作ります。",
+      "責任者：その結果を合わせれば、一律でなく分岐する聞き方を選べますね。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-048",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-048",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "業務機会がなかった場合と機会があったのに使わなかった場合を分け、対象者確認と具体的業務を思い出す質問案に担当を置いて分岐設計へ進む。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "alternativeStatus": null,
+      "reviewed": true,
+      "reviewStatus": "OK",
+      "reviewDisagreement": false
     }
   },
   {
@@ -1886,6 +3096,60 @@
         5,
         6,
         7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-90edfa1be5d435",
+    "agenda": "監視アラートの担当引き継ぎを決める。未対応と対応中をどこで区切って渡すか整理している。",
+    "phase": "夜勤からの日勤への引き継ぎ",
+    "transcript": [
+      "夜勤：対応中は私が終えるとして、未対応との区切りをそろえたい。",
+      "日勤：区切りを見ると、お弁当の仕切りを思い出した。昨日の寿司がさ。",
+      "運用：あの持ち帰りの店？巻物が大きいんだよね。",
+      "夜勤：酢が強いのは苦手だけど、ここのはどうだった。",
+      "日勤：甘め。卵の入ったのが一番好きだったよ。",
+      "運用：三人分なら盛り合わせか、好きなものを別に頼むかだね。",
+      "夜勤：写真で数を見よう。揚げ物も足せるメニューがある。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-037",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-037",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "アラートの未対応・対応中の区切りから寿司と弁当の注文相談へ話が広がり、末尾も写真で人数分の料理を選んでいて引き継ぎに接続しない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
       ],
       "alternativeStatus": null,
       "reviewed": false
@@ -2002,6 +3266,116 @@
     }
   },
   {
+    "id": "synbench-93936b590e2bb7",
+    "agenda": "候補者からの質問への回答窓口を決める。回答の速さと正確さを比べ、内容ごとの分担を検討する段階。",
+    "phase": "質問内容と応答負荷の比較",
+    "transcript": [
+      "広報：現場のことは、候補者から現場へ直接聞く形が早いと思います。",
+      "現場：全て直接だと会議中に返せません。先週は二十件来ています。",
+      "採用：二十件のうち、選考日程が十二件です。それは採用で答えられます。",
+      "総務：待遇の四件は、個別条件があるので私の確認が必要です。",
+      "広報：直接という案は外します。内容確認と返信の担当を分けましょう。",
+      "現場：残る業務の四件なら、午後にまとめて確認できます。",
+      "採用：一次受付と送信は私が持ち、専門確認だけ依頼する表にします。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-058",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-058",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "直接回答の案を質問二十件の内訳で検証し、日程・待遇・業務の専門確認を分担して、一次受付と送信を採用へ置く具体的運用に進んでいる。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-9837cc5cf99b2f",
+    "agenda": "利用が少ない顧客への聞き取りを設計する。連絡曜日は合意済みで、現在は利用を妨げる条件を知る質問を作る段階。",
+    "phase": "聞き取り内容の設計",
+    "transcript": [
+      "担当：使う機会がないのか、操作で困るのかを分けて尋ねたいです。",
+      "責任者：その前に連絡曜日、金曜ではなく水曜もよかったですね。",
+      "担当：先方と金曜で確定しています。質問の内容を見ていただけますか。",
+      "責任者：水曜という字、他の国では何に由来するのでしょう。",
+      "担当：星の名前だったように思います。言語によって違いますね。",
+      "責任者：曜日の名前を国別に並べると、関連が見えるかもしれません。",
+      "担当：その一覧を出します。木曜の列も一緒に見てみましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-048",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-048",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "合意済み連絡曜日を再開し、質問内容を見たい依頼の後も曜日名の語源と国別一覧の話へ移って、未利用理由の聞き取りに戻らない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": true,
+      "reviewStatus": "INTERVENE_DRIFT",
+      "reviewDisagreement": false
+    }
+  },
+  {
     "id": "synbench-9ad1d0b9ca99b7",
     "agenda": "新商品の試用期間を検討中。利用日数の集計に返送日が混ざっているため記録を修復する。",
     "phase": "試用記録の修復",
@@ -2108,7 +3482,9 @@
         7
       ],
       "alternativeStatus": null,
-      "reviewed": false
+      "reviewed": true,
+      "reviewStatus": "INTERVENE_STALLED",
+      "reviewDisagreement": false
     }
   },
   {
@@ -2544,6 +3920,58 @@
     }
   },
   {
+    "id": "synbench-b70207fd786a99",
+    "agenda": "繁忙期に選考が止まらない日程を組む。返答が遅れる担当者を待つ間、並行してできる作業を決める段階。",
+    "phase": "日程確定までの待ち方検討",
+    "transcript": [
+      "調整：地域の演奏会で、曲目が決まらなくても会場の空きは先に押さえたよ。",
+      "現場：面接でも評価する内容が未確定でも、空き時間は出せるか。",
+      "採用：候補者に希望日だけ聞くのも、質問の確定を待たなくていいね。",
+      "調整：ただし仮の日だと明示して、確定の連絡は分けよう。",
+      "現場：私が面接官の空き時間を明日までに集めるよ。",
+      "採用：私は候補者へ希望の曜日を聞く。質問の最終確認とは別に進めるね。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-057",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-057",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "演奏会の仮会場確保の例から、面接内容確定を待たない空き枠と希望日の収集を取り出し、仮である表示と担当期限を分けて並行作業へ進んでいる。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-b805c60515eed8",
     "agenda": "紙の申請書を画面へ置き換えるため、本人に入力してもらう項目を選ぶ。",
     "phase": "入力項目の選定",
@@ -2652,6 +4080,114 @@
     }
   },
   {
+    "id": "synbench-c69874f7dfb08b",
+    "agenda": "データ収集の順序による偏りを点検する。実施順と表の並び順が混同されたため、元記録を使って意味をそろえる段階。",
+    "phase": "提示順の記録整理",
+    "transcript": [
+      "解析：一覧は全員が条件一から始めたように見えます。",
+      "収集：それは番号順に並べた表です。実際の順番とは違います。",
+      "補助：あ、表示順と実施順を一緒にしていました。時刻の列も出します。",
+      "設計：開始時刻で並べ直すと、半分は条件二が先ですね。",
+      "統括：では全員同じ順で受けたという前提は外そう。",
+      "収集：元の進行記録とも合いました。交互に順を替えた記録があります。",
+      "解析：条件一が先の群と後の群を分け、差を比較できる表に直します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-067",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-067",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "表の番号順を実施順と誤読していた点を時刻と原進行記録で修正し、条件一が先・後の群別比較へ使える表に直している。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-c917fa644bc42f",
+    "agenda": "値引きと納期短縮の提案を比較する。必要日と希望日が混在していた聞き取り記録を直しながら、成立する案を絞る段階。",
+    "phase": "顧客条件の照合修復",
+    "transcript": [
+      "法務：先方の必着日は十日となっています。間に合うでしょうか。",
+      "営業：あ、ごめん。十日は希望日で、必須なのは展示の十五日です。",
+      "物流：十五日なら水曜出荷で翌日着の見込みです。",
+      "経理：では特急費用は、必須でなく早めに欲しい場合だけですね。",
+      "製造：十五日の朝に使うなら、十四日中に届く条件が要ります。",
+      "営業：使う時刻が抜けていました。先方に朝か午後か確認します。",
+      "法務：表の希望と必須を別欄にしました。返答を受けて条件を確定できます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-047",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-047",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "十日希望と十五日必須を分け、使用する時刻という追加条件を見つけて担当が確認し、希望と必須を別欄へ修復して成立案を絞る準備が進む。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-d10b937379d549",
     "agenda": "ボランティアの初回説明で、実際の作業を始めやすくする。 現在は説明方法の検討。",
     "phase": "説明方法の検討",
@@ -2688,6 +4224,60 @@
     },
     "annotation": {
       "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-d1aee3d6dc3b68",
+    "agenda": "繁忙期に選考が止まらない日程を組む。今は面接担当の空きと候補者への連絡日を照合する段階。",
+    "phase": "繁忙期の選考日程調整",
+    "transcript": [
+      "採用：水曜は面接官が二人空くね。候補者に提案できそう？",
+      "現場：このカレンダーの走者、腕の振りがすごいな。",
+      "調整：友達も走ってる。腕より靴を変えたら楽になったって。",
+      "採用：靴底が厚いの、私も試したい。足が沈まないかな。",
+      "現場：坂道では違うのがいいらしいよ。近くに試走コースがある。",
+      "調整：店で借りられるなら一緒に行こう。どのくらい走れるんだろう。",
+      "採用：コースの地図を出すね。川沿いと公園で長さを比べたい。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-057",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-057",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "面接官の空きと連絡日を合わせる場から走る靴、試走コース、店の借用と地図へ移り、選考日程への具体的接続がなく末尾もコース比較になっている。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
       "confidence": "high",
       "uncertain": false,
       "humanReviewed": false,
@@ -2806,6 +4396,64 @@
         4,
         5,
         6
+      ],
+      "alternativeStatus": null,
+      "reviewed": true,
+      "reviewStatus": "OK",
+      "reviewDisagreement": false
+    }
+  },
+  {
+    "id": "synbench-d82a7df08fe0a2",
+    "agenda": "候補者からの質問への回答窓口を決める。現在は質問の種類ごとに一次受付と内容確認を分ける段階。",
+    "phase": "質問への回答窓口選定",
+    "transcript": [
+      "採用：待遇と仕事内容の質問を、どこで受けるか決めたいです。",
+      "広報：質問より、応募が増える動画を先に作りませんか。",
+      "現場：仕事内容を正しく答える窓口が今日の議題ですよね。",
+      "総務：広告なら会社の建物を空から撮ると目立ちます。",
+      "採用：空撮は天気に左右されますね。撮影日を先に押さえますか。",
+      "広報：窓口表は後にして、応募ボタンへ誘導する場面を考えましょう。",
+      "現場：冒頭に大きな音を入れる案もあります。",
+      "総務：動画を流す媒体のサイズを調べます。縦と横を何本作りますか。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-058",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-058",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "質問窓口の分担から応募獲得動画の空撮と媒体サイズへ目的が移り、本題を指摘された後も動画制作を続けて窓口表を後回しにしている。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
       ],
       "alternativeStatus": null,
       "reviewed": false
@@ -2974,6 +4622,60 @@
     }
   },
   {
+    "id": "synbench-e6db2bca7a725d",
+    "agenda": "利用が少ない顧客への聞き取りを設計する。未利用の理由はまだ尋ねておらず、現在は何を聞くか決める段階。",
+    "phase": "聞き取り対象情報の確認",
+    "transcript": [
+      "責任者：使っていない理由は何だったのでしょうか。",
+      "担当：まだ聞いていません。その理由を確かめる質問を作っています。",
+      "責任者：では今、理由だけ先に教えていただけますか。",
+      "担当：未調査なので、理由は分からない状態です。",
+      "責任者：簡単な一言で構いません。使わない理由を知りたいです。",
+      "担当：聞いていないため、その一言もまだ出せません。",
+      "責任者：まず理由を教えてもらってから、質問を考えましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-048",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-048",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "未調査で分からない理由を先に答えるよう繰り返し求め、理由を知るための質問設計へ進む前提が循環している。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-ea3d3c49c92acd",
     "agenda": "展示ブースの装飾を削減するため、数量を変える承認を誰が取るか決める。",
     "phase": "削減案の決裁担当",
@@ -3118,6 +4820,170 @@
     },
     "annotation": {
       "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-ee0d234103375a",
+    "agenda": "候補者からの質問への回答窓口を決める。共通受付から内容別確認を経て回答する手順と期限を確定する。",
+    "phase": "質問窓口の運用確定",
+    "transcript": [
+      "採用：質問は共通メールで受け、当日中に受領だけ先に返します。",
+      "総務：勤務条件の質問は私へ。確認が必要なら翌日の何時に返すか伝えます。",
+      "現場：業務の質問は私が午後にまとめて見ます。個人名は伏せて渡してください。",
+      "広報：回答済みの共通事項は一覧へ入れ、毎回同じ説明を使えるようにします。",
+      "採用：候補者への送信は私が行い、確認中の場合も返答予定日を案内します。",
+      "総務：この分担と期限なら、内容を見ずに転送し合うことは減らせますね。",
+      "現場：連絡先と担当不在時の代行者も表へ入れました。今日から受けられます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-058",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-058",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "共通メール受付と当日の受領返信、内容別確認、最終送信、返答予定日、不在代行まで役割と期限を確定し、運用を開始できる状態になっている。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-ef5aaff07673b0",
+    "agenda": "データ収集の順序による偏りを点検する。前半と後半の差が順序の影響かどうか、根拠を比較する段階。",
+    "phase": "順序効果の解釈比較",
+    "transcript": [
+      "設計：順序の影響はないと思います。同じ作業をしていますから。",
+      "解析：影響はあると思います。先にやったことは後に残るからです。",
+      "収集：先にやった分が残る、という話と同じ作業、という話ですね。",
+      "補助：この差をどう扱えばよいのでしょうか。",
+      "設計：同じ作業なら順番は関係ない、と私は考えます。",
+      "統括：二人の根拠をもう少し聞きたい。",
+      "解析：先の作業が後に残るので、順番は関係します。",
+      "設計：作業が同じという点は変わらないので、関係ないという意見です。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-067",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-067",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "同じ作業だから順序無関係と、先の経験が残るから関係するという主張を往復し、追加根拠や切り分ける観察・実験を増やしていない。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-f091dc33512aa6",
+    "agenda": "録画データの欠落原因を調べる順番を決める。保存処理、転送、録画機のどこから調べるか選ぶ段階。",
+    "phase": "調査順の決定",
+    "transcript": [
+      "運用：映像が抜けた時刻を基に、保存処理から追いたいです。",
+      "企画：この機会に映像チームの表彰応募も考えませんか。",
+      "開発：欠落を調べる順番が先では。応募とは別の仕事です。",
+      "広報：応募なら、成功した映像をつないで見栄えを出せます。",
+      "企画：調査表は置いて、審査員に見せる三分を作りましょう。",
+      "運用：過去の配信なら、最後に拍手が入った映像があります。",
+      "広報：その拍手を冒頭にも入れます。応募の題名を先に決めたいです。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-038",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-038",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "録画欠落の調査を始める場から表彰応募用の成功映像へ目的が移り、別仕事との指摘後も拍手映像と応募題名を作ろうとしている。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
       "confidence": "high",
       "uncertain": false,
       "humanReviewed": false,
@@ -3298,6 +5164,58 @@
     }
   },
   {
+    "id": "synbench-fb675612e3dec2",
+    "agenda": "監視アラートの引き継ぎ相談中に、全員が五分休憩を合意した。今は開始二分で、再開後は未対応一覧を確認する。",
+    "phase": "交代相談の途中休憩",
+    "transcript": [
+      "日勤：少し声を休めたい。五分休んでから一覧を見てもいい？",
+      "運用：いいよ。九時十五分に未対応の欄から再開しよう。",
+      "夜勤：窓を少し開けるね。外はさっきより晴れてきた。",
+      "日勤：風があって気持ちいい。今のうちに水を飲もう。",
+      "夜勤：向こうに雲の切れ目が見える。すぐ明るくなりそうだ。",
+      "運用：今二分だから、あと三分はそのまま休んでいてね。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "validation",
+    "sourceGroup": "scenario-family-037",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-037",
+      "author": "author_b",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "全員が合意した五分休憩の二分目で、未対応一覧から再開する時刻を維持したまま水や風の話をしている。許可された休憩内である。"
+    },
+    "annotation": {
+      "annotator": "judge_c",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-fbed669c51ae89",
     "agenda": "受領書と数量が合わない荷物の保管と発送元への照会を確定する。 現在は照会手順の合意。",
     "phase": "照会手順の合意",
@@ -3456,7 +5374,9 @@
         6
       ],
       "alternativeStatus": null,
-      "reviewed": false
+      "reviewed": true,
+      "reviewStatus": "INTERVENE_STALLED",
+      "reviewDisagreement": false
     }
   },
   {
