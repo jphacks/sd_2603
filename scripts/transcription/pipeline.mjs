@@ -164,6 +164,9 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
       if (!stopped && !displayed?.cancelled) {
         offAgendaCandidate = undefined;
         lastIntervention = now();
+        // After AIDA has spoken, judge only what follows: the talk that caused the
+        // card would otherwise keep scoring as drift once the cooldown ends.
+        transcript.length = 0;
         conversation = false;
         armSilence();
         armIdle();

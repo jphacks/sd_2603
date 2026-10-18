@@ -1050,3 +1050,15 @@ test('showIdle puts up the idle face once, queued ahead of a later card', async 
   await gate.showIdle();
   assert.equal(calls.length, 2, 'a stopped gate shows nothing');
 });
+
+test('a displayed card clears the history, so the next judgement sees only what follows', async () => {
+  const clock = fakeClock();
+  const seen = [];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async input => { seen.push(input.transcript); return seen.length === 1 ? intervention : { action: 'WAIT', reason: 'x', message: null }; },
+    display: async () => {} });
+  utterance(gate, 'off-topic talk'); await clock.advance(1500);
+  utterance(gate, 'back on the agenda'); await clock.advance(1500);
+  assert.deepEqual(seen, [['off-topic talk'], ['back on the agenda']]);
+  gate.stop();
+});
