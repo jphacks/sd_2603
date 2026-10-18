@@ -116,3 +116,5 @@
 - 10:15 JST: labeled/audited375, actual{'OK': 150, 'INTERVENE_DRIFT': 112, 'INTERVENE_STALLED': 113}, re-reviewed19, uncertain2. Latest Push6312559; next375-case checkpoint. Conditional extension authorD started in a fresh context, no core Test input; core500 remains priority.
 
 - 10:19 JST: generated500 / labeled-audited435 / reviewed20; actual{'OK': 174, 'INTERVENE_DRIFT': 130, 'INTERVENE_STALLED': 131}; uncertain2. Latest Push1a554ce; next435-case checkpoint; remaining primary packet65 ready for next increment.
+
+- 10:22 JST: CORE500 COMPLETE: 500/500 primary labeled and structurally/duplicate audited; actual{'OK': 200, 'INTERVENE_DRIFT': 150, 'INTERVENE_STALLED': 150}; split300/100/100; third reviews39; uncertain3 all re-reviewed; intent differences0. Core release immutable at releases/core500; reproducible8 artifacts. Latest Push992529f; next data-freeze Push follows. Extension first50 authored in fresh context,500 extra only if completed and audited before handoff.

@@ -85,6 +85,34 @@
           "stable primary-class/split sample"
         ]
       }
+    },
+    "b": {
+      "reviewer": "review_a",
+      "packet": "blind/review-a-final-on-b.jsonl",
+      "count": 7,
+      "selectionReasons": {
+        "synbench-c02e568db4112b": [
+          "primary uncertain/boundary"
+        ],
+        "synbench-9837cc5cf99b2f": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-23caa58ef225c8": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-8cb08e32bd55fd": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-c25b70a250055c": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-317f70ede09d1d": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-2119b7d44fc116": [
+          "stable primary-class/split sample"
+        ]
+      }
     }
   }
 }
