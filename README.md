@@ -1,10 +1,10 @@
-![AIDA のロゴ（未定）](../docs/logo.svg)
+![AIDA](docs/brand/aida-logo-horizontal.svg)
 
 # **空気を読み、あいだに入る**
 
 # *AIDA*
 
-### *Ambient Intelligence, Discreet Assistance.*
+### *Ambient Intelligence, Discreet Agent.*
 
 [デモ（URL未設定）](#) · [LP（URL未設定）](#)
 
@@ -37,7 +37,7 @@
 
 ### 製品説明（具体的な製品の説明）
 
-AIDA（Ambient Intelligence, Discreet Assistance）は、必要なときだけ議論を戻す AI ファシリテーターです。空気のように席にいて、必要なときだけ手を貸します。それ以外は端にいて、誰の出番も奪わず、有益な寄り道は止めず、進行の役を、特定の参加者には任せません。先に決めるのは、戻す文面より、いま口を開くかどうかです。
+AIDA（Ambient Intelligence, Discreet Agent）は、必要なときだけ議論を戻す AI ファシリテーターです。空気のように席にいて、必要なときだけ手を貸します。それ以外は端にいて、誰の出番も奪わず、有益な寄り道は止めず、進行の役を、特定の参加者には任せません。先に決めるのは、戻す文面より、いま口を開くかどうかです。
 
 **会議に参加する**
 
