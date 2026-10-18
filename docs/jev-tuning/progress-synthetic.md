@@ -114,3 +114,15 @@
 - リモート/ローカルProブランチの最新は5a52564。完成した1,000件releaseは届いていないため、事前に定めた時刻・品質条件に従いcore500を採用。精度値は規模判断に使用しない。
 - Train300/Validation100/Test100・100系列・出典コミット・release hash・runner hashを`synthetic-data-decision.json`へ固定。成功キャッシュ900件がすべてTrainであることを照合し、固定時点のValidation/Test APIは0。
 - 1,000件は未達であり、追加の未ラベル本文を完成データ数へ加算しない。この固定後にValidation、設定固定、Testの順で実行する。
+
+## 11:00以降 — 固定500件での設定選択
+
+- Train300件の5fold OOFは、v2 298/300 (99.3%, Macro-F1 0.994)、v4 297/300 (99.0%, 0.990)、v3 296/300 (98.7%, 0.987)。これはTest精度ではない。
+- 上位v2/v4の閾値を全Trainから固定し、現行v3・元閾値との計3設定をValidationで比較中。新たなPrompt・Few-shot・閾値候補を追加しない。
+
+## 11:01 JST — Validationで設定を固定（Test未使用）
+
+- Validation100件: 現行v3は99/100 (Macro-F1 0.989)、v2/0.6・0.7・0.7は99/100 (0.990)、v4/0.5・0.6・0.8は100/100 (1.000)。事前の選択規則でv4を採用。
+- `selection.json`のhashは`f294657a41d0661f8b0e5bbf758cd75b62d57a52825d2606905edc5b9f002fc8`。`selected-policy.json`へ実験設定を出力。ここまでTestのJev要求は0。
+- 事前登録1dcc63fのアプリ反映条件に従い、固定表示と異なる閾値のため既定アプリはv3/0.6・0.6・0.6/WAIT0.4を維持。判断を`runtime-adoption.json`へTest前に保存した。Testを見てこの判断を変更しない。
+- 次はbaseline v3と選択v4だけを未使用Test100件で採点。候補追加・ラベル改変・閾値選び直しは行わない。

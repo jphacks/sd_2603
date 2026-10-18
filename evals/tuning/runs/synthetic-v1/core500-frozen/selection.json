@@ -1,0 +1,335 @@
+{
+  "datasetHash": "00f480a9493577386289dd3571c2b8d3f201852b153a37e16fc04e6ab9f76f5a",
+  "splitManifestHash": "5b7a3dfc4e806be76773901135d2cdd4629ceb2ff9ac34fb0cff8325a2239eb7",
+  "protocolHash": "42ba9394d64e0fb473dc20b1433b0016cfa941e65b4a1cd853e9528001c9ca56",
+  "inputLabelHash": "25547f2663972122ccc50daca1360b5ab935407e1daee98a676580328d53ebb1",
+  "count": 500,
+  "splits": {
+    "train": 300,
+    "validation": 100,
+    "test": 100
+  },
+  "selectedAt": "2026-10-18T02:01:23.790Z",
+  "trainSelectionHash": "19ba52f5ae04c51f54c06646c3d941527cbe17a3bd6584082ce5d38cf30868ce",
+  "validationScoresHash": "73cc0cb4061587f694f09558f8eb9270795bdd52584e4fe1d3fa505658b97d42",
+  "baseline": {
+    "questionVersion": "v3",
+    "driftThreshold": 0.6,
+    "stallThreshold": 0.6,
+    "relevanceThreshold": 0.6,
+    "uncertainThreshold": 0.4
+  },
+  "compared": [
+    {
+      "policy": {
+        "questionVersion": "v3",
+        "driftThreshold": 0.6,
+        "stallThreshold": 0.6,
+        "relevanceThreshold": 0.6,
+        "uncertainThreshold": 0.4
+      },
+      "metrics": {
+        "n": 100,
+        "correct": 99,
+        "errors": 0,
+        "accuracy": 0.99,
+        "macroF1": 0.9888858016115587,
+        "majorityBaseline": 0.4,
+        "wilson95": [
+          0.9455124752390653,
+          0.9982326134344526
+        ],
+        "perClass": {
+          "INTERVENE_DRIFT": {
+            "precision": 1,
+            "recall": 0.9666666666666667,
+            "f1": 0.983050847457627,
+            "support": 30,
+            "predicted": 29
+          },
+          "INTERVENE_STALLED": {
+            "precision": 0.967741935483871,
+            "recall": 1,
+            "f1": 0.9836065573770492,
+            "support": 30,
+            "predicted": 31
+          },
+          "OK": {
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "support": 40,
+            "predicted": 40
+          }
+        },
+        "matrix": {
+          "INTERVENE_DRIFT": {
+            "INTERVENE_DRIFT": 29,
+            "INTERVENE_STALLED": 1,
+            "OK": 0
+          },
+          "INTERVENE_STALLED": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 30,
+            "OK": 0
+          },
+          "OK": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 0,
+            "OK": 40
+          }
+        },
+        "falseInterventionRate": 0,
+        "exactActionMetrics": null,
+        "actionLabelCoverage": 0,
+        "intervention": {
+          "tp": 60,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        }
+      }
+    },
+    {
+      "policy": {
+        "questionVersion": "v2",
+        "driftThreshold": 0.6,
+        "stallThreshold": 0.7,
+        "relevanceThreshold": 0.7,
+        "uncertainThreshold": 0.4
+      },
+      "metrics": {
+        "n": 100,
+        "correct": 99,
+        "errors": 0,
+        "accuracy": 0.99,
+        "macroF1": 0.9902350561484271,
+        "majorityBaseline": 0.4,
+        "wilson95": [
+          0.9455124752390653,
+          0.9982326134344526
+        ],
+        "perClass": {
+          "INTERVENE_DRIFT": {
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "support": 30,
+            "predicted": 30
+          },
+          "INTERVENE_STALLED": {
+            "precision": 1,
+            "recall": 0.9666666666666667,
+            "f1": 0.983050847457627,
+            "support": 30,
+            "predicted": 29
+          },
+          "OK": {
+            "precision": 0.975609756097561,
+            "recall": 1,
+            "f1": 0.9876543209876543,
+            "support": 40,
+            "predicted": 41
+          }
+        },
+        "matrix": {
+          "INTERVENE_DRIFT": {
+            "INTERVENE_DRIFT": 30,
+            "INTERVENE_STALLED": 0,
+            "OK": 0
+          },
+          "INTERVENE_STALLED": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 29,
+            "OK": 1
+          },
+          "OK": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 0,
+            "OK": 40
+          }
+        },
+        "falseInterventionRate": 0,
+        "exactActionMetrics": null,
+        "actionLabelCoverage": 0,
+        "intervention": {
+          "tp": 59,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1,
+          "recall": 0.9833333333333333,
+          "f1": 0.9915966386554621
+        }
+      }
+    },
+    {
+      "policy": {
+        "questionVersion": "v4",
+        "driftThreshold": 0.5,
+        "stallThreshold": 0.6,
+        "relevanceThreshold": 0.8,
+        "uncertainThreshold": 0.4
+      },
+      "metrics": {
+        "n": 100,
+        "correct": 100,
+        "errors": 0,
+        "accuracy": 1,
+        "macroF1": 1,
+        "majorityBaseline": 0.4,
+        "wilson95": [
+          0.9630051925239981,
+          0.9999999999999999
+        ],
+        "perClass": {
+          "INTERVENE_DRIFT": {
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "support": 30,
+            "predicted": 30
+          },
+          "INTERVENE_STALLED": {
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "support": 30,
+            "predicted": 30
+          },
+          "OK": {
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "support": 40,
+            "predicted": 40
+          }
+        },
+        "matrix": {
+          "INTERVENE_DRIFT": {
+            "INTERVENE_DRIFT": 30,
+            "INTERVENE_STALLED": 0,
+            "OK": 0
+          },
+          "INTERVENE_STALLED": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 30,
+            "OK": 0
+          },
+          "OK": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 0,
+            "OK": 40
+          }
+        },
+        "falseInterventionRate": 0,
+        "exactActionMetrics": null,
+        "actionLabelCoverage": 0,
+        "intervention": {
+          "tp": 60,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        }
+      }
+    }
+  ],
+  "selected": {
+    "policy": {
+      "questionVersion": "v4",
+      "driftThreshold": 0.5,
+      "stallThreshold": 0.6,
+      "relevanceThreshold": 0.8,
+      "uncertainThreshold": 0.4
+    },
+    "metrics": {
+      "n": 100,
+      "correct": 100,
+      "errors": 0,
+      "accuracy": 1,
+      "macroF1": 1,
+      "majorityBaseline": 0.4,
+      "wilson95": [
+        0.9630051925239981,
+        0.9999999999999999
+      ],
+      "perClass": {
+        "INTERVENE_DRIFT": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 30,
+          "predicted": 30
+        },
+        "INTERVENE_STALLED": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 30,
+          "predicted": 30
+        },
+        "OK": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 40,
+          "predicted": 40
+        }
+      },
+      "matrix": {
+        "INTERVENE_DRIFT": {
+          "INTERVENE_DRIFT": 30,
+          "INTERVENE_STALLED": 0,
+          "OK": 0
+        },
+        "INTERVENE_STALLED": {
+          "INTERVENE_DRIFT": 0,
+          "INTERVENE_STALLED": 30,
+          "OK": 0
+        },
+        "OK": {
+          "INTERVENE_DRIFT": 0,
+          "INTERVENE_STALLED": 0,
+          "OK": 40
+        }
+      },
+      "falseInterventionRate": 0,
+      "exactActionMetrics": null,
+      "actionLabelCoverage": 0,
+      "intervention": {
+        "tp": 60,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1
+      }
+    }
+  },
+  "testUsed": false,
+  "protocol": {
+    "version": "synthetic-campaign-v1",
+    "model": "typesafe-ai/jev-1.14.0",
+    "versions": [
+      "v2",
+      "v3",
+      "v4"
+    ],
+    "baseline": {
+      "questionVersion": "v3",
+      "driftThreshold": 0.6,
+      "stallThreshold": 0.6,
+      "relevanceThreshold": 0.6,
+      "uncertainThreshold": 0.4
+    },
+    "questionHash": "3bdf938989153aa259e7ed8dbce0fad441b005e11ed44de4ed888dc3ef1c2aaa",
+    "trainMetric": "fivefold group OOF semantic Macro-F1",
+    "validationRule": "choose among two Train-CV finalists and unchanged v3 baseline by semantic Macro-F1, then accuracy, then baseline proximity",
+    "inputComposition": "agenda plus explicit phase supplied to model; annotation/intents excluded",
+    "testRule": "baseline and selected policy only; never reselect",
+    "minimumCases": 500
+  }
+}

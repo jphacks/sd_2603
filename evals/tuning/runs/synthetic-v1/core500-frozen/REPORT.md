@@ -44,8 +44,20 @@
 | 4 | v3 | {"questionVersion":"v3","driftThreshold":0.4,"stallThreshold":0.7,"relevanceThreshold":0.7,"uncertainThreshold":0.4} | 100.0% | 1.000 |
 | 4 | v4 | {"questionVersion":"v4","driftThreshold":0.6,"stallThreshold":0.6,"relevanceThreshold":0.8,"uncertainThreshold":0.4} | 98.3% | 0.984 |
 
+## Validation selection
+
+上位2つのTrain-CV候補と従来v3のみを比較し、Macro-F1→Accuracy→従来閾値への近さで選択。Testは選択に使わない。
+
+| Policy | Accuracy | Macro-F1 |
+| --- | ---: | ---: |
+| {"questionVersion":"v3","driftThreshold":0.6,"stallThreshold":0.6,"relevanceThreshold":0.6,"uncertainThreshold":0.4} | 99.0% | 0.989 |
+| {"questionVersion":"v2","driftThreshold":0.6,"stallThreshold":0.7,"relevanceThreshold":0.7,"uncertainThreshold":0.4} | 99.0% | 0.990 |
+| {"questionVersion":"v4","driftThreshold":0.5,"stallThreshold":0.6,"relevanceThreshold":0.8,"uncertainThreshold":0.4} | 100.0% | 1.000 |
+
+Selected: `{"questionVersion":"v4","driftThreshold":0.5,"stallThreshold":0.6,"relevanceThreshold":0.8,"uncertainThreshold":0.4}`
+
 ## Cost and scope
 
-Campaign attempts 901; successful cached requests 900; input tokens 1221954; published input-price estimate $0.048878; reserved envelope $0.993339. Invoice total is not measured.
+Campaign attempts 1201; successful cached requests 1200; input tokens 1629134; published input-price estimate $0.065165; reserved envelope $1.324197. Invoice total is not measured.
 
 500/1000 cases are correlated authored scenarios, not independent real meetings. Authors span splits, and GPT judges share model-family biases. Benchmark-specific80% does not establish Japanese real-meeting80%. Source research supports mechanisms, not these synthetic gold labels. No Test-result-driven reselection. UI/runtime policy adoption is separate and must preserve truthful threshold display.

@@ -1,0 +1,7 @@
+{
+  "questionVersion": "v4",
+  "driftThreshold": 0.5,
+  "stallThreshold": 0.6,
+  "relevanceThreshold": 0.8,
+  "uncertainThreshold": 0.4
+}

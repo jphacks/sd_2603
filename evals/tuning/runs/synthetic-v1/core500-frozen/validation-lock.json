@@ -1,0 +1,9 @@
+{
+  "manifestHash": "d9726296518319850dbd6113b9cd4782de6e7ffec530bac2a12690c69f5fa0af",
+  "trainSelectionHash": "19ba52f5ae04c51f54c06646c3d941527cbe17a3bd6584082ce5d38cf30868ce",
+  "versions": [
+    "v3",
+    "v2",
+    "v4"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "decidedAt": "2026-10-18T02:01:23.853Z",
+  "rulePreregisteredCommit": "1dcc63f",
+  "selectionHash": "f294657a41d0661f8b0e5bbf758cd75b62d57a52825d2606905edc5b9f002fc8",
+  "selectedPolicy": {
+    "questionVersion": "v4",
+    "driftThreshold": 0.5,
+    "stallThreshold": 0.6,
+    "relevanceThreshold": 0.8,
+    "uncertainThreshold": 0.4
+  },
+  "eligibleForUnchangedDisplay": false,
+  "applied": false,
+  "changed": false,
+  "runtimePolicy": {
+    "questionVersion": "v3",
+    "driftThreshold": 0.6,
+    "stallThreshold": 0.6,
+    "relevanceThreshold": 0.6,
+    "uncertainThreshold": 0.4
+  },
+  "testUsed": false,
+  "reason": "Selected thresholds differ from the fixed display. Preserve current v3 runtime and export selected experimental policy."
+}
