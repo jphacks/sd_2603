@@ -35,6 +35,7 @@ Featureとstagingには別々の固定URLを割り当てます。同じブラン
 - 識別子はリポジトリ名と元のブランチ名から計算します。`feature/a/b`と`feature/a-b`、大文字・小文字、長い名前の切り詰めによる重複を避けます。
 - Vercelの自動生成URLも保持します。どちらもActions実行画面のSummaryに表示します。
 - Vercelの認証保護は維持します。ログインやCLIの`vercel curl`でアクセスしてください。
+- Recall.aiのWebカメラだけは、Vercelの **Protection Bypass for Automation** を利用して認証保護を通過させます。一般公開やVercelログインの無効化は不要です。
 - 固定URLはVercel公式のAlias APIで割り当てます。既存のチームID・トークンを使い、追加のSecret・Variableは不要です。
 - 独自ドメイン・追加の料金プランは使いません。Pushごとにビルドするため、利用量は増えます。
 - ビルドやMock検証が失敗した場合、固定URLは前の成功版のままです。エイリアス更新で失敗した場合はActionsが失敗し、自動生成URLをログで確認できます。
@@ -147,6 +148,20 @@ timeout 30s vercel curl /api/judge --deployment "$PREVIEW_URL" -- \
 ```
 
 期待値は `INTERVENE` とHTTP 200です。Vercel CLIの起動表示だけで止まる場合は認証・通信の待機が考えられます。`timeout 20s vercel whoami`で認証を確認します。外側のタイムアウトの終了コードは124です。
+
+### 4-4. Recall.aiから認証付きPreviewを開く
+
+この設定はVercelプロジェクトにつき一度だけ行う。参加者側でVercelへログインする必要はない。
+
+1. Vercelの対象プロジェクトで **Settings → Deployment Protection** を開く。
+2. **Protection Bypass for Automation** を有効にして秘密値を作成する。
+3. **Settings → Environment Variables** でPreview環境へ `RECALL_API_KEY` と `RECALL_REGION=ap-northeast-1` を登録する。
+4. Vercelのシステム環境変数を有効にする。`VERCEL_BRANCH_URL` と `VERCEL_AUTOMATION_BYPASS_SECRET` はデプロイ時にアプリへ渡される。
+5. FeatureブランチをPushして再デプロイする。環境変数は既存のデプロイには遡って反映されない。
+
+`VERCEL_TOKEN` はGitHub ActionsがVercelへデプロイするための鍵、`VERCEL_AUTOMATION_BYPASS_SECRET` はRecall.aiが保護されたカメラページを読むための鍵で、用途が異なる。どちらも `NEXT_PUBLIC_` を付けず、チャット・ログ・Gitへ出さない。
+
+Vercel上のCLI状態は書き込み可能な一時領域へ保存するため、単一ボットのデモ確認に利用できる。複数会議を同時運用する本番では、状態を共有データベースへ移す。
 
 ### 5. Productionを有効にする
 

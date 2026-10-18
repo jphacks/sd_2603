@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { run, removeBot, sendBot } from './recall.mjs';
+import { cameraOutputConfig, localRecallIo, recallCameraUrl, run, removeBot, sendBot } from './recall.mjs';
 
 function fixture() {
   const dir = mkdtempSync(path.join(tmpdir(), 'recall-cli-'));
@@ -65,6 +65,83 @@ test('status and leave without a bot exit 1', async () => {
     assert.equal(await run(['status'], status.io), 1);
     const leave = capture({ statePath: box.statePath });
     assert.equal(await run(['leave'], leave.io), 1);
+  } finally {
+    box.cleanup();
+  }
+});
+
+test('camera URL uses the Vercel branch URL and adds the automation bypass', () => {
+  const url = new URL(recallCameraUrl({
+    VERCEL_BRANCH_URL: 'preview.example.vercel.app',
+    VERCEL_AUTOMATION_BYPASS_SECRET: 'vercel-secret',
+  }, 'off-track'));
+  assert.equal(url.origin, 'https://preview.example.vercel.app');
+  assert.equal(url.pathname, '/recall/camera');
+  assert.equal(url.searchParams.get('embed'), '1');
+  assert.equal(url.searchParams.get('autoplay'), '1');
+  assert.equal(url.searchParams.get('mode'), 'off-track');
+  assert.equal(url.searchParams.get('x-vercel-protection-bypass'), 'vercel-secret');
+  assert.equal(url.searchParams.get('x-vercel-set-bypass-cookie'), 'samesitenone');
+});
+
+test('camera config is optional outside Vercel', () => {
+  assert.equal(cameraOutputConfig({}), null);
+});
+
+test('Vercel runtime uses its writable temporary directory for bot state', () => {
+  const io = localRecallIo({ VERCEL: '1' }, async () => jsonResponse(200, {}));
+  assert.equal(path.dirname(io.statePath), tmpdir());
+});
+
+test('join starts the on-track camera when Vercel camera settings are available', async () => {
+  const box = fixture();
+  const posts = [];
+  try {
+    const cap = capture({
+      statePath: box.statePath,
+      env: {
+        VERCEL_BRANCH_URL: 'preview.example.vercel.app',
+        VERCEL_AUTOMATION_BYPASS_SECRET: 'vercel-secret',
+      },
+      fetch: async (url, options) => {
+        if (options?.method === 'POST') {
+          posts.push(JSON.parse(options.body));
+          return jsonResponse(200, { id: 'bot-camera' });
+        }
+        return jsonResponse(200, {
+          status_changes: [{ code: 'in_call_not_recording', created_at: '2026-10-17T00:00:02Z' }],
+        });
+      },
+    });
+    assert.equal(await run(['join', '--url', 'https://meet.google.com/abc-defg-hij'], cap.io), 0);
+    const cameraUrl = new URL(posts[0].output_media.camera.config.url);
+    assert.equal(cameraUrl.searchParams.get('mode'), 'on-track');
+    assert.equal(cameraUrl.searchParams.get('x-vercel-protection-bypass'), 'vercel-secret');
+    assert.equal(`${cap.stdout.join('\n')}\n${cap.stderr.join('\n')}`.includes('vercel-secret'), false);
+  } finally {
+    box.cleanup();
+  }
+});
+
+test('camera command stops the old camera before switching modes', async () => {
+  const box = fixture();
+  mkdirSync(box.dir, { recursive: true });
+  writeFileSync(box.statePath, JSON.stringify({ id: 'bot-camera' }));
+  const requests = [];
+  try {
+    const cap = capture({
+      statePath: box.statePath,
+      env: { RECALL_CAMERA_URL: 'https://preview.example/recall/camera' },
+      fetch: async (url, options) => {
+        requests.push({ url: String(url), method: options.method, body: JSON.parse(options.body) });
+        return jsonResponse(options.method === 'DELETE' ? 204 : 200, {});
+      },
+    });
+    assert.equal(await run(['camera', '--mode', 'silence'], cap.io), 0);
+    assert.deepEqual(requests.map((request) => request.method), ['DELETE', 'POST']);
+    assert.deepEqual(requests[0].body, { camera: true });
+    const cameraUrl = new URL(requests[1].body.camera.config.url);
+    assert.equal(cameraUrl.searchParams.get('mode'), 'silence');
   } finally {
     box.cleanup();
   }
@@ -228,7 +305,7 @@ test('leave removes the bot and deletes the state file', async () => {
   try {
     const cap = capture({
       statePath: box.statePath,
-      fetch: async (url, options) => {
+      fetch: async (url) => {
         if (String(url).endsWith('/leave_call/')) return jsonResponse(200, {});
         return jsonResponse(200, {
           status_changes: [

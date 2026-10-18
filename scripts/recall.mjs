@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 
@@ -7,8 +8,11 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STATE_PATH = path.join(ROOT, '.recall', 'current.json');
 const USAGE = `使い方:
   npm run recall -- join --url https://meet.google.com/abc-defg-hij
+  npm run recall -- camera --mode on-track
   npm run recall -- status
   npm run recall -- leave [--id <bot-uuid>]`;
+
+const CAMERA_MODES = new Set(['on-track', 'off-track', 'silence']);
 
 const LIVE = new Set([
   'joining_call',
@@ -42,11 +46,11 @@ function loadEnvFile(file) {
 
 function parseArgs(argv) {
   const positional = [];
-  /** @type {{ url?: string, id?: string }} */
+  /** @type {{ url?: string, id?: string, mode?: string }} */
   const flags = {};
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
-    if (arg === '--url' || arg === '--id') {
+    if (arg === '--url' || arg === '--id' || arg === '--mode') {
       const value = argv[i + 1];
       if (!value || value.startsWith('--')) {
         return { error: `${arg} には値が必要です` };
@@ -255,12 +259,84 @@ export function chatRecordingConfig(env) {
   };
 }
 
-function createBotBody(meetingUrl, env) {
+function cameraBaseUrl(env) {
+  const configured = String(env?.RECALL_CAMERA_URL || '').trim();
+  if (configured) return configured;
+  const vercelHost = String(env?.VERCEL_BRANCH_URL || env?.VERCEL_URL || '').trim();
+  return vercelHost ? `https://${vercelHost}/recall/camera` : '';
+}
+
+export function recallCameraUrl(env, mode = 'on-track') {
+  if (!CAMERA_MODES.has(mode)) {
+    throw new RecallCliError('camera mode は on-track / off-track / silence のいずれかです。', {
+      status: 400,
+      exitCode: 2,
+    });
+  }
+  const configured = cameraBaseUrl(env);
+  if (!configured) return null;
+  let url;
+  try {
+    url = new URL(configured);
+  } catch {
+    throw new RecallCliError('RECALL_CAMERA_URL は有効な https:// URL にしてください。', {
+      status: 400,
+      exitCode: 2,
+    });
+  }
+  if (url.protocol !== 'https:') {
+    throw new RecallCliError('RECALL_CAMERA_URL は https:// で始めてください。', {
+      status: 400,
+      exitCode: 2,
+    });
+  }
+  url.searchParams.set('embed', '1');
+  url.searchParams.set('autoplay', '1');
+  url.searchParams.set('mode', mode);
+  const bypassSecret = String(env?.VERCEL_AUTOMATION_BYPASS_SECRET || '').trim();
+  if (bypassSecret) {
+    url.searchParams.set('x-vercel-protection-bypass', bypassSecret);
+    url.searchParams.set('x-vercel-set-bypass-cookie', 'samesitenone');
+  }
+  return url.toString();
+}
+
+export function cameraOutputConfig(env, mode = 'on-track') {
+  const url = recallCameraUrl(env, mode);
+  return url ? { camera: { kind: 'webpage', config: { url } } } : null;
+}
+
+export async function switchCamera(io, id, mode = 'on-track') {
+  const outputMedia = cameraOutputConfig(io.env, mode);
+  if (!outputMedia) {
+    throw new RecallCliError(
+      'カメラURLがありません。Vercel上で実行するか、RECALL_CAMERA_URLを設定してください。',
+      { status: 400, exitCode: 2 },
+    );
+  }
+  try {
+    await recallFetch(io, `/bot/${encodeURIComponent(id)}/output_media/`, {
+      method: 'DELETE',
+      body: { camera: true },
+    });
+  } catch (error) {
+    if (error.status !== 400 && error.status !== 404) throw error;
+  }
+  await recallFetch(io, `/bot/${encodeURIComponent(id)}/output_media/`, {
+    method: 'POST',
+    body: outputMedia,
+  });
+  return { id, mode };
+}
+
+export function createBotBody(meetingUrl, env) {
   const recording = chatRecordingConfig(env);
+  const outputMedia = cameraOutputConfig(env);
   return {
     meeting_url: meetingUrl,
     bot_name: BOT_NAME,
     recording_config: recording,
+    ...(outputMedia ? { output_media: outputMedia } : {}),
     ...(recording
       ? {
           chat: {
@@ -329,7 +405,9 @@ export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch) {
   return {
     env,
     fetch: fetchImpl,
-    statePath: STATE_PATH,
+    statePath: env.VERCEL
+      ? path.join(tmpdir(), 'meeting-facilitator-recall-current.json')
+      : STATE_PATH,
     now: () => Date.now(),
     sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
     pollMs: 3000,
@@ -447,7 +525,7 @@ async function join(flags, io) {
 }
 
 async function status(flags, io) {
-  if (flags.url || flags.id) {
+  if (flags.url || flags.id || flags.mode) {
     io.stderr(USAGE);
     return 2;
   }
@@ -464,6 +542,29 @@ async function status(flags, io) {
   }
   for (const change of changes) io.stdout(formatChange(change));
   return 0;
+}
+
+async function camera(flags, io) {
+  if (flags.url || flags.id) {
+    io.stderr(USAGE);
+    return 2;
+  }
+  const state = await readState(io);
+  if (!state) {
+    io.stderr('状態ファイルがありません。先にボットを会議へ参加させてください。');
+    return 1;
+  }
+  try {
+    const result = await switchCamera(io, state.id, flags.mode || 'on-track');
+    io.stdout(`カメラを切り替えました (${result.mode})`);
+    return 0;
+  } catch (error) {
+    if (error instanceof RecallCliError) {
+      io.stderr(error.message);
+      return error.exitCode;
+    }
+    throw error;
+  }
 }
 
 export async function removeBot(io, id) {
@@ -491,7 +592,7 @@ export async function removeBot(io, id) {
 }
 
 async function leave(flags, io) {
-  if (flags.url) {
+  if (flags.url || flags.mode) {
     io.stderr(USAGE);
     return 2;
   }
@@ -553,6 +654,7 @@ export async function run(argv, io = {}) {
     return 2;
   }
   if (parsed.command === 'join') return join(parsed.flags, full);
+  if (parsed.command === 'camera') return camera(parsed.flags, full);
   if (parsed.command === 'status') return status(parsed.flags, full);
   if (parsed.command === 'leave') return leave(parsed.flags, full);
   full.stderr(USAGE);

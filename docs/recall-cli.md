@@ -2,10 +2,9 @@
 
 `sd_2603` から Google Meet へボットを入れ、状態を見て、退出させる。録画と文字起こしはしない。実装方針はワークスペースの `docs/recall-cli-join-leave.md`。
 
-作業ブランチは `feature/recall-join-leave`。
-
 ```powershell
 npm run recall -- join --url https://meet.google.com/abc-defg-hij
+npm run recall -- camera --mode off-track
 npm run recall -- status
 npm run recall -- leave
 ```
@@ -29,7 +28,7 @@ Recall のアカウントはリージョンごとに別になる。東京以外�
 ## 3. ローカルの設定
 
 ```powershell
-cd "c:\Users\IBUKI\Documents\東北大学\26JPHACKS\sd_2603"
+cd "このリポジトリをクローンしたフォルダー"
 node -v
 copy .env.example .env
 ```
@@ -78,6 +77,15 @@ Meet で MTG Lab の参加を許可してください
 
 この時点では録画も文字起こしも始まらない。会議に参加者が見えることが完了条件。
 
+Vercel のカメラURLが設定済みなら、入室と同時に「順調」画面もカメラとして共有される。ローカルから試す場合は `.env` に次を追加する。秘密値はGitへコミットしない。
+
+```env
+RECALL_CAMERA_URL=https://ブランチ別Previewの固定URL/recall/camera
+VERCEL_AUTOMATION_BYPASS_SECRET=Vercelで発行したProtection Bypassの値
+```
+
+`VERCEL_AUTOMATION_BYPASS_SECRET` はGitHub Actions用の `VERCEL_TOKEN` とは別物。Vercelの **Settings → Deployment Protection → Protection Bypass for Automation** で一度作成する。Vercel上では `VERCEL_BRANCH_URL` とこの秘密値が自動で環境変数として渡されるため、カメラURLを手入力する必要はない。
+
 許可しないまま約 9 分たつと、次の表示で終了コード 1 になる。
 
 ```text
@@ -114,11 +122,27 @@ npm run recall -- leave --id 01234567-89ab-cdef-0123-456789abcdef
 
 `join` の待機中に Ctrl+C しても、そのボットへ退出が 1 回送られる。会議室に残さない。
 
-## 8. チャットからアジェンダを受ける
+## 8. カメラ表示を切り替える
+
+入室中のボットへ、3種類のカメラ画面を送れる。
+
+```powershell
+npm run recall -- camera --mode on-track
+npm run recall -- camera --mode off-track
+npm run recall -- camera --mode silence
+```
+
+- `on-track`: 順調。緑色で静かに動く。
+- `off-track`: 脱線。赤色の注意モーション後に短い案内を表示する。
+- `silence`: 沈黙。濃い青の注意モーション後に短い案内を表示する。
+
+切り替え時は現在のWebカメラ出力を停止して、選択した画面を同じボットへ再設定する。会議への再入室は不要。
+
+## 9. チャットからアジェンダを受ける
 
 `RECALL_CHAT_WEBHOOK_URL` が空なら、入室ボディは `recording_config: null` のままです。公開 HTTPS を入れると、その URL へチャット本文だけを送り、録画の保存期間は null にします。ボットは入室時に、アジェンダの書き方をチャットへピン留めします。署名検証用の `RECALL_WEBHOOK_SECRET` もサーバーに置きます。複数アジェンダと検証結果は `docs/agenda-from-chat.md` です。
 
-## 9. もう一度入る
+## 10. もう一度入る
 
 入室中にもう一度 `join` すると拒否される。`leave` で退出したあとに、新しい URL で `join` できる。同時に送れるボットは 1 体。
 
