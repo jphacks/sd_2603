@@ -9,7 +9,7 @@ type MaterialItem = { name: string; saved: boolean; message: string | null };
 
 const MAX_SELECTED_FILES = 5;
 
-export function JoinForm({ serverManagedControl = false }: { serverManagedControl?: boolean }) {
+export function JoinForm({ serverManagedControl = false, setupError = null }: { serverManagedControl?: boolean; setupError?: string | null }) {
   const [monitorSessionId, setMonitorSessionId] = useState<string | null>(null);
   const [meetingUrl, setMeetingUrl] = useState("");
   const [agenda, setAgenda] = useState("");
@@ -127,6 +127,7 @@ export function JoinForm({ serverManagedControl = false }: { serverManagedContro
           会議 URL を渡すと、MTG Lab が録画せずに入室します。Meet の参加申請を許可してください。テキストの議案書も一緒に渡すと、そのファイルを読んでアジェンダにします。
         </p>
       </header>
+      {setupError && <p role="alert" className="text-sm text-rose-700">{setupError}</p>}
       <form
         className="grid gap-3"
         onSubmit={(event) => {
@@ -200,7 +201,7 @@ export function JoinForm({ serverManagedControl = false }: { serverManagedContro
                 <button
                   className="shrink-0 rounded border border-zinc-300 px-2 py-1 text-xs disabled:opacity-50"
                   type="button"
-                  disabled={pending}
+                  disabled={pending || Boolean(setupError)}
                   onClick={() => removeFile(index)}
                 >
                   取り消す
@@ -214,14 +215,14 @@ export function JoinForm({ serverManagedControl = false }: { serverManagedContro
           <button
             className="w-fit rounded bg-zinc-900 px-4 py-2 text-sm text-white disabled:opacity-50"
             type="submit"
-            disabled={pending}
+            disabled={pending || Boolean(setupError)}
           >
             参加
           </button>
           <button
             className="w-fit rounded border border-zinc-300 px-4 py-2 text-sm disabled:opacity-50"
             type="button"
-            disabled={pending}
+            disabled={pending || Boolean(setupError)}
             onClick={() => {
               void leave();
             }}
