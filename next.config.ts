@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
     agentFeedback: true,
   },
   cacheComponents: true,
+  // The camera card draws its text from this font (lib/recall/video.ts).
+  outputFileTracingIncludes: {
+    "/api/recall/video": ["./lib/brand/fonts/*.otf"],
+  },
   partialPrefetching: true,
   turbopack: {
     rules: {
