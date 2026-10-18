@@ -1,5 +1,6 @@
 export type InterventionKind = "off_agenda" | "stalled";
 export type CueId = "back_to_agenda" | "summarize";
+export type StallCause = "silence" | "repetition";
 
 const MUTE_MS = 120_000;
 const MAX_SESSIONS = 32;
@@ -7,6 +8,7 @@ const IDLE_MS = 600_000;
 
 type DeviceState = {
   lastKind: InterventionKind | null;
+  lastCause: StallCause | null;
   lastAt: number | null;
   cue: { id: CueId; seq: number } | null;
   mutedUntil: number | null;
@@ -23,7 +25,7 @@ export function createDeviceStore(now = Date.now) {
     if (!value) {
       if (sessions.size >= MAX_SESSIONS) sessions.delete(sessions.keys().next().value!);
       value = {
-        data: { lastKind: null, lastAt: null, cue: null, mutedUntil: null, manualRequested: false },
+        data: { lastKind: null, lastCause: null, lastAt: null, cue: null, mutedUntil: null, manualRequested: false },
         touched: time,
       };
       sessions.set(id, value);
@@ -37,9 +39,10 @@ export function createDeviceStore(now = Date.now) {
       if (data.mutedUntil !== null && data.mutedUntil <= now()) data.mutedUntil = null;
       return structuredClone(data);
     },
-    intervened(id: string, kind: InterventionKind) {
+    intervened(id: string, kind: InterventionKind, cause?: StallCause) {
       const data = entry(id);
       data.lastKind = kind;
+      data.lastCause = kind === "stalled" ? (cause ?? "repetition") : null;
       data.lastAt = now();
       data.cue = { id: kind === "stalled" ? "summarize" : "back_to_agenda", seq: (data.cue?.seq ?? 0) + 1 };
       data.manualRequested = false;

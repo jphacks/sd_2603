@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { JudgeInput, JudgeProvider, JudgeResult } from "./types";
+import { STALLED_REASON } from "./silence.ts";
 
 const GATEWAY_URL = "https://ai-gateway.vercel.sh/typesafe/v1/systemone";
 const DEFAULT_MODEL = "typesafe-ai/jev";
@@ -71,7 +72,7 @@ function questions() {
 
 export function decideFromScores(scores: Scores): JudgeResult {
   if (scores.stalled >= INTERVENTION_THRESHOLD && scores.interveneNow >= INTERVENTION_THRESHOLD) {
-    return { action: "INTERVENE", reason: "Discussion appears stalled", message: "一度、ここまでの意見を整理してみませんか？" };
+    return { action: "INTERVENE", reason: STALLED_REASON, message: "一度、ここまでの意見を整理してみませんか？" };
   }
   if (scores.drifted >= INTERVENTION_THRESHOLD && scores.tangentIsRelevant < INTERVENTION_THRESHOLD && scores.interveneNow >= INTERVENTION_THRESHOLD) {
     return { action: "INTERVENE", reason: "Discussion appears off agenda", message: "そろそろ議題に戻りませんか？" };

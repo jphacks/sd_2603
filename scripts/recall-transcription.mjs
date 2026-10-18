@@ -18,6 +18,8 @@ assertStreamingRuntime();
 const token = env.RECALL_AUDIO_TOKEN;
 const controlToken = env.RECALL_CONTROL_TOKEN;
 const port = Number(env.RECALL_AUDIO_PORT ?? 8787);
+const silenceSeconds = Number(env.SILENCE_NUDGE_SECONDS ?? 20);
+if (!Number.isFinite(silenceSeconds) || silenceSeconds < 0) throw new Error('SILENCE_NUDGE_SECONDS must be a non-negative number (0 disables the silence nudge)');
 const controlUrl = new URL(env.VIDEO_CONTROL_URL ?? 'http://127.0.0.1:3000/api/recall/video');
 if (env.ENABLE_REALTIME_TRANSCRIPTION !== 'true' || env.AI_PROVIDER !== 'jev' || env.ALLOW_PAID_AI !== 'true' || !env.AI_GATEWAY_API_KEY || !token || token.length < 32 || !controlToken || controlToken.length < 32 || !Number.isInteger(port) || port < 1 || port > 65535) {
   throw new Error('Audio worker requires paid-AI opt-in, Gateway key, control token, audio token, and valid port');
@@ -44,7 +46,7 @@ async function videoRequest(body, signal) {
     body: JSON.stringify(body),
     signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(15_000)]) : AbortSignal.timeout(15_000),
   });
-  if (['agenda', 'evaluate', 'display'].includes(body.mode) && response.status === 409) return { cancelled: true };
+  if (['agenda', 'evaluate', 'silence', 'display'].includes(body.mode) && response.status === 409) return { cancelled: true };
   if (!response.ok) throw new Error(`Video control HTTP ${response.status}`);
   return response.json();
 }
@@ -91,7 +93,7 @@ server.on('upgrade', (request, socket, head) => {
 });
 
 wss.on('connection', socket => {
-  const counts = { rawFrames: 0, pcmBytes: 0, voicedFrames: 0, sttDelta: 0, sttPartial: 0, sttFinal: 0, sttSkippedEmpty: 0, evaluations: 0, displayAttempts: 0, idleAttempts: 0 };
+  const counts = { rawFrames: 0, pcmBytes: 0, voicedFrames: 0, sttDelta: 0, sttPartial: 0, sttFinal: 0, sttSkippedEmpty: 0, evaluations: 0, silenceNudges: 0, displayAttempts: 0, idleAttempts: 0 };
   const report = () => console.log(`Audio worker telemetry ${JSON.stringify(counts)}`);
   console.log('Audio worker websocket connected');
   const telemetry = setInterval(report, 10_000);
@@ -141,6 +143,8 @@ wss.on('connection', socket => {
         agenda: session.agenda,
         resolveAgenda: ({ botId, agenda, signal }) => videoRequest({ mode: 'agenda', botId, agenda }, signal),
         decide: input => { counts.evaluations++; return videoRequest({ mode: 'evaluate', ...input }); },
+        // Silence is timed here; the server applies cooldown/mute and owns the card.
+        ...(silenceSeconds > 0 ? { silenceMs: silenceSeconds * 1000, nudge: input => { counts.silenceNudges++; return videoRequest({ mode: 'silence', ...input }); } } : {}),
         display: ({ botId, agenda, agendaVersion, result, generation, signal }) => {
           counts.displayAttempts++;
           return videoRequest({ mode: 'display', botId, agenda, agendaVersion, result, recommendationId: result.recommendationId, generation, requestId: randomUUID() }, signal);

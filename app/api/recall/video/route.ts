@@ -5,6 +5,7 @@ import { monitorStore } from "@/lib/monitor/store";
 import { withDeviceControls } from "@/lib/device/judge";
 import { deviceStore } from "@/lib/device/state";
 import { JevError } from "@/lib/judge/jev";
+import { silenceJudge } from "@/lib/judge/silence";
 import { applyVideoDecision, authorizedControl, displayVideoResult, restoreIdleVideo } from "@/lib/recall/controller";
 import { outputVideo, RecallVideoError, renderVideoJpeg } from "@/lib/recall/video";
 import { assertDisplayControls, RecommendationCancelledError, recommendationStore } from "@/lib/recall/recommendation";
@@ -20,6 +21,8 @@ const JudgeRequestSchema = z.object({
 });
 const AgendaVersionSchema = z.string().min(1).max(128);
 const EvaluateRequestSchema = JudgeRequestSchema.extend({ mode: z.literal("evaluate"), agendaVersion: AgendaVersionSchema });
+// The worker reports a silence; the server owns the resulting reason and message.
+const SilenceRequestSchema = EvaluateRequestSchema.extend({ mode: z.literal("silence") });
 const AgendaRequestSchema = z.object({ mode: z.literal("agenda"), botId: BotIdSchema, agenda: z.string().trim().min(1).max(AGENDA_CHAR_LIMIT) });
 const DisplayRequestSchema = z.object({
   mode: z.literal("display"),
@@ -36,7 +39,7 @@ const DisplayRequestSchema = z.object({
   }),
 });
 const ResetRequestSchema = z.object({ mode: z.literal("idle"), botId: BotIdSchema });
-const InputSchema = z.discriminatedUnion("mode", [JudgeRequestSchema, EvaluateRequestSchema, DisplayRequestSchema, ResetRequestSchema, AgendaRequestSchema]);
+const InputSchema = z.discriminatedUnion("mode", [JudgeRequestSchema, EvaluateRequestSchema, SilenceRequestSchema, DisplayRequestSchema, ResetRequestSchema, AgendaRequestSchema]);
 const videoDependencies = { render: renderVideoJpeg, output: outputVideo };
 const displayed = new Set<string>();
 const displaying = new Map<string, Promise<unknown>>();
@@ -97,9 +100,9 @@ export async function POST(request: Request) {
         judge: withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value, validate)),
         ...videoDependencies,
         guard: async () => validate(),
-        onIntervened: (id, kind) => {
+        onIntervened: (id, kind, cause) => {
           monitorStore.intervened(id);
-          deviceStore.intervened(id, kind);
+          deviceStore.intervened(id, kind, cause);
         },
       });
       return Response.json({ ...result, agenda });
@@ -109,6 +112,15 @@ export async function POST(request: Request) {
       // the new result is WAIT/SILENCE or evaluation fails.
       const recommendationId = recommendationStore.begin(input);
       const judge = withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value, () => assertAgendaSnapshot(input.botId, input.agenda, input.agendaVersion)));
+      const result = await judge(input);
+      recommendationStore.complete(input, recommendationId, result);
+      return Response.json({ ...result, recommendationId });
+    }
+    if (input.mode === "silence") {
+      // Same recommendation/display guard as "evaluate", without the paid judge.
+      // Cooldown and device mute apply; a pending manual request is left alone.
+      const recommendationId = recommendationStore.begin(input);
+      const judge = withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value, () => assertAgendaSnapshot(input.botId, input.agenda, input.agendaVersion), silenceJudge), deviceStore, { manual: false });
       const result = await judge(input);
       recommendationStore.complete(input, recommendationId, result);
       return Response.json({ ...result, recommendationId });
@@ -134,9 +146,9 @@ export async function POST(request: Request) {
           recommendationStore.read(input, input.recommendationId);
           checkControls();
         }),
-        onIntervened: (id, kind) => {
+        onIntervened: (id, kind, cause) => {
           monitorStore.intervened(id);
-          deviceStore.intervened(id, kind);
+          deviceStore.intervened(id, kind, cause);
         },
       });
       displaying.set(key, task);

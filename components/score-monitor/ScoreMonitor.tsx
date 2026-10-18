@@ -14,6 +14,7 @@ const descriptions = {
   COOLDOWN: "介入後のクールダウン",
   INSUFFICIENT_CONTEXT: "会話の蓄積を待つ",
   STALLED: "整理を促す",
+  SILENT: "発言を促す",
   DRIFTED_IRRELEVANT: "議題に戻す",
   OBSERVE: "もう少し観察",
   ON_TOPIC: "介入しない",

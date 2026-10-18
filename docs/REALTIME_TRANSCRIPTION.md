@@ -12,6 +12,8 @@ The worker applies a separate display safety policy: an off-agenda card requires
 
 The API also issues a short-lived, bot/agenda-bound recommendation identifier and uses its server-owned result when displaying. A newer evaluation invalidates the old identifier, and the display guard rechecks current device mute and successful-output cooldown as well as agenda and worker quiet/pending state. A caller-supplied manual flag cannot grant an override. This authorization store is process-local, so evaluation and display must reach the same Next.js instance; restart discards pending recommendations.
 
+The worker also nudges a meeting that has gone quiet. After at least one accepted final since the bot joined or since the last displayed card, no further final for `SILENCE_NUDGE_SECONDS` (default 20; `0` disables it) counts as a stall. Silence is decided from timing alone; Jev is not called. The worker refreshes the agenda and sends `mode: "silence"` to the video API, which applies the server-side cooldown and device mute (a pending manual device request is left for the next real judgement), records the result in the monitor (`Meeting has gone silent`, reason code `SILENT`), and issues a recommendation identifier just like `evaluate`. The card is then delivered through the same queue, quiet/pending gate, and guarded `display` step, so the caller never supplies the card's reason or text. It uses the `stalled` card and nudge face with the question 「ここまでで、気になる点はありますか？」 (M5: 「何か気になる点は？」 with the summarize cue). Voiced audio or pending recognition when the timer fires defers it; speech arriving while the nudge is in flight cancels its card. If the local 60-second cooldown is still running, the nudge waits until it ends. Each silence gets at most one attempt, whether it is displayed, suppressed by mute/cooldown, or cancelled; the next accepted final re-arms the timer.
+
 After a successful intervention image response, the worker waits eight seconds and sends an authenticated `idle` request automatically, without another judge call. This image-only restore does not wait for silence. The worker serializes its display and restore operations; a newer successful card replaces the older deadline, and a cancelled card does not cancel the existing deadline. Closing the audio session or stopping the worker cancels pending timers and aborts its in-flight video requests. A restore failure stops processing without a retry, so the operator may still need to restore the card manually or leave the bot. The timer lives in the always-on worker, not in a Vercel Function.
 
 The worker must be the only display owner for its bot. Do not invoke manual `judge`, `display`, or `idle` operations concurrently for that same bot: independent API callers do not share the worker's display queue or timer epochs. The manual `mode: "judge"` endpoint alone does not schedule automatic restoration. Worker/process crashes cannot guarantee a final idle image; the existing leave operation remains the cleanup path.
@@ -31,6 +33,8 @@ RECALL_CONTROL_TOKEN=a-random-secret-at-least-32-characters
 RECALL_AUDIO_TOKEN=a-different-random-secret-at-least-32-characters
 RECALL_AUDIO_PUBLIC_URL=wss://your-public-tunnel.example
 RECALL_AUDIO_PORT=8787
+# Optional: seconds without a final before the silence nudge (0 disables).
+SILENCE_NUDGE_SECONDS=20
 VIDEO_CONTROL_URL=http://127.0.0.1:3000/api/recall/video
 ```
 
@@ -46,7 +50,7 @@ The worker and Next app must share `.recall/current.json` on one host. This desi
 
 This is a best-effort speech boundary: a new speaker can start during network latency after the worker's last quiet-state check. Test this with real meeting audio before presenting the behavior as interruption-safe. The current worker stops on transport failure instead of replaying ambiguous transcript/video operations.
 
-The no-audio watchdog only covers a WebSocket that never connects. A connected WebSocket with no speech may simply mean everyone is muted; this prototype does not infer failure from silence. Its health endpoint therefore does not prove transcription quality or Gateway acceptance. Monitor the worker and verify at least one real final transcript in a test meeting before relying on automatic intervention.
+The no-audio watchdog only covers a WebSocket that never connects. A connected WebSocket with no speech may simply mean everyone is muted; this prototype does not infer failure from silence (the silence nudge above only follows earlier conversation). Its health endpoint therefore does not prove transcription quality or Gateway acceptance. Monitor the worker and verify at least one real final transcript in a test meeting before relying on automatic intervention.
 
 Official references: [Recall mixed audio](https://docs.recall.ai/docs/how-to-get-mixed-audio-real-time), [AI Gateway streaming transcription](https://vercel.com/docs/ai-gateway/modalities/speech-to-text), [AI SDK transcription events and provider options](https://ai-sdk.dev/docs/ai-sdk-core/transcription).
 

@@ -7,6 +7,7 @@ const codes: Record<string, Snapshot["reasonCode"]> = {
   "Cooldown active": "COOLDOWN",
   "Not enough conversation": "INSUFFICIENT_CONTEXT",
   "Discussion appears stalled": "STALLED",
+  "Meeting has gone silent": "SILENT",
   "Discussion appears off agenda": "DRIFTED_IRRELEVANT",
   "Conversation needs more observation": "OBSERVE",
   "Conversation is progressing": "ON_TOPIC",
