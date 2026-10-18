@@ -1,0 +1,4857 @@
+{
+  "manifestHash": "d9726296518319850dbd6113b9cd4782de6e7ffec530bac2a12690c69f5fa0af",
+  "selectionHash": "f294657a41d0661f8b0e5bbf758cd75b62d57a52825d2606905edc5b9f002fc8",
+  "measuredAt": "2026-10-18T02:02:12.952Z",
+  "policy": {
+    "questionVersion": "v4",
+    "driftThreshold": 0.5,
+    "stallThreshold": 0.6,
+    "relevanceThreshold": 0.8,
+    "uncertainThreshold": 0.4
+  },
+  "before": {
+    "n": 100,
+    "correct": 100,
+    "errors": 0,
+    "accuracy": 1,
+    "macroF1": 1,
+    "majorityBaseline": 0.4,
+    "wilson95": [
+      0.9630051925239981,
+      0.9999999999999999
+    ],
+    "perClass": {
+      "INTERVENE_DRIFT": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "support": 30,
+        "predicted": 30
+      },
+      "INTERVENE_STALLED": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "support": 30,
+        "predicted": 30
+      },
+      "OK": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "support": 40,
+        "predicted": 40
+      }
+    },
+    "matrix": {
+      "INTERVENE_DRIFT": {
+        "INTERVENE_DRIFT": 30,
+        "INTERVENE_STALLED": 0,
+        "OK": 0
+      },
+      "INTERVENE_STALLED": {
+        "INTERVENE_DRIFT": 0,
+        "INTERVENE_STALLED": 30,
+        "OK": 0
+      },
+      "OK": {
+        "INTERVENE_DRIFT": 0,
+        "INTERVENE_STALLED": 0,
+        "OK": 40
+      }
+    },
+    "falseInterventionRate": 0,
+    "exactActionMetrics": null,
+    "actionLabelCoverage": 0,
+    "intervention": {
+      "tp": 60,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    }
+  },
+  "after": {
+    "n": 100,
+    "correct": 100,
+    "errors": 0,
+    "accuracy": 1,
+    "macroF1": 1,
+    "majorityBaseline": 0.4,
+    "wilson95": [
+      0.9630051925239981,
+      0.9999999999999999
+    ],
+    "perClass": {
+      "INTERVENE_DRIFT": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "support": 30,
+        "predicted": 30
+      },
+      "INTERVENE_STALLED": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "support": 30,
+        "predicted": 30
+      },
+      "OK": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "support": 40,
+        "predicted": 40
+      }
+    },
+    "matrix": {
+      "INTERVENE_DRIFT": {
+        "INTERVENE_DRIFT": 30,
+        "INTERVENE_STALLED": 0,
+        "OK": 0
+      },
+      "INTERVENE_STALLED": {
+        "INTERVENE_DRIFT": 0,
+        "INTERVENE_STALLED": 30,
+        "OK": 0
+      },
+      "OK": {
+        "INTERVENE_DRIFT": 0,
+        "INTERVENE_STALLED": 0,
+        "OK": 40
+      }
+    },
+    "falseInterventionRate": 0,
+    "exactActionMetrics": null,
+    "actionLabelCoverage": 0,
+    "intervention": {
+      "tp": 60,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    }
+  },
+  "syntheticOnly": true,
+  "labels": "independent GPT silver",
+  "bootstrap": {
+    "replicates": 1000,
+    "seed": 20261018,
+    "series": 20,
+    "accuracy95": [
+      1,
+      1
+    ]
+  },
+  "rows": [
+    {
+      "id": "synbench-006c6e4e69a932",
+      "sourceGroup": "scenario-family-090",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-08ddb1c0008043",
+      "sourceGroup": "scenario-family-009",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-0aa35200c30cd9",
+      "sourceGroup": "scenario-family-030",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-0c4e0c7cbccb6f",
+      "sourceGroup": "scenario-family-039",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-10d5bf79d5ad9c",
+      "sourceGroup": "scenario-family-089",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-121faa73bc888f",
+      "sourceGroup": "scenario-family-079",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-12507cb65c3c89",
+      "sourceGroup": "scenario-family-079",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-13c3097b866310",
+      "sourceGroup": "scenario-family-050",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-149c39e764f9ec",
+      "sourceGroup": "scenario-family-080",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-1cb3b322276a10",
+      "sourceGroup": "scenario-family-029",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-1ccd0cbb911b4a",
+      "sourceGroup": "scenario-family-050",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-1f4ae167dfe73d",
+      "sourceGroup": "scenario-family-030",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-20744dce846b94",
+      "sourceGroup": "scenario-family-049",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-2119b7d44fc116",
+      "sourceGroup": "scenario-family-059",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-22fc0c3766ef44",
+      "sourceGroup": "scenario-family-069",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-245c571497165c",
+      "sourceGroup": "scenario-family-099",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-2fdf3cdb25c646",
+      "sourceGroup": "scenario-family-020",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-2fe764f83e3edd",
+      "sourceGroup": "scenario-family-100",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-317f70ede09d1d",
+      "sourceGroup": "scenario-family-040",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-3273744b9a9172",
+      "sourceGroup": "scenario-family-040",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-34851424f03c45",
+      "sourceGroup": "scenario-family-099",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-38f267af015128",
+      "sourceGroup": "scenario-family-009",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-3bc4bd6ea4d2c8",
+      "sourceGroup": "scenario-family-009",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-3d792cae7d17e0",
+      "sourceGroup": "scenario-family-080",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-3f6b9167d9814a",
+      "sourceGroup": "scenario-family-070",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-42567b5b899d66",
+      "sourceGroup": "scenario-family-040",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-450209fd7677f4",
+      "sourceGroup": "scenario-family-069",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-460fd42a8fade1",
+      "sourceGroup": "scenario-family-089",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-4e20fa13f4b728",
+      "sourceGroup": "scenario-family-090",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-4e2aa53bd6b3f8",
+      "sourceGroup": "scenario-family-090",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-4ee43bde47006c",
+      "sourceGroup": "scenario-family-010",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-50d00380c22fae",
+      "sourceGroup": "scenario-family-059",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-52f6b77d44db38",
+      "sourceGroup": "scenario-family-050",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-54282cb1a7049b",
+      "sourceGroup": "scenario-family-080",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-55380de1d867e4",
+      "sourceGroup": "scenario-family-100",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-56d8228d44ba2e",
+      "sourceGroup": "scenario-family-089",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-5ad4eece2f9aab",
+      "sourceGroup": "scenario-family-090",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-5dbf5beaa3744e",
+      "sourceGroup": "scenario-family-039",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-5e72866b9bdfc8",
+      "sourceGroup": "scenario-family-060",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-5ea8c854de7626",
+      "sourceGroup": "scenario-family-049",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-5fd856fca42911",
+      "sourceGroup": "scenario-family-079",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-638201f648e81c",
+      "sourceGroup": "scenario-family-010",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-6ad35b3406a55f",
+      "sourceGroup": "scenario-family-040",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-715604142dd867",
+      "sourceGroup": "scenario-family-009",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-76bba9b4ecd3f7",
+      "sourceGroup": "scenario-family-099",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-796f752c61fd91",
+      "sourceGroup": "scenario-family-059",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-84be627a897dc6",
+      "sourceGroup": "scenario-family-019",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-8670f6a57ef5a7",
+      "sourceGroup": "scenario-family-010",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-86c3fe0479d55e",
+      "sourceGroup": "scenario-family-029",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-8980aa4ded11e9",
+      "sourceGroup": "scenario-family-019",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-8b6131db4d5491",
+      "sourceGroup": "scenario-family-060",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-8cc5c89d79fd6b",
+      "sourceGroup": "scenario-family-090",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-8ed0f2add585e7",
+      "sourceGroup": "scenario-family-089",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-91ae0299b24bf3",
+      "sourceGroup": "scenario-family-080",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-92d675addfe21a",
+      "sourceGroup": "scenario-family-020",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-96881bffa7a081",
+      "sourceGroup": "scenario-family-020",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-9e8b370525e040",
+      "sourceGroup": "scenario-family-089",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-a092cb357dd7ca",
+      "sourceGroup": "scenario-family-100",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-a3bdb7b9e4de2f",
+      "sourceGroup": "scenario-family-049",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-a79393f385ce35",
+      "sourceGroup": "scenario-family-070",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-ad73c6ccfb2422",
+      "sourceGroup": "scenario-family-099",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-aeedd9c9c5be49",
+      "sourceGroup": "scenario-family-030",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-af3e3dca53461d",
+      "sourceGroup": "scenario-family-080",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-b5805f90b4b586",
+      "sourceGroup": "scenario-family-100",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-b6936509c3f02e",
+      "sourceGroup": "scenario-family-079",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-be77f92fa2eb82",
+      "sourceGroup": "scenario-family-029",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-beb2cb490993f2",
+      "sourceGroup": "scenario-family-049",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-c02e568db4112b",
+      "sourceGroup": "scenario-family-049",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": true
+    },
+    {
+      "id": "synbench-c25b70a250055c",
+      "sourceGroup": "scenario-family-059",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-c7092d2a180da2",
+      "sourceGroup": "scenario-family-030",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-cbc82130d01f6f",
+      "sourceGroup": "scenario-family-039",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-cbdaa9da3c8de3",
+      "sourceGroup": "scenario-family-040",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-cc09acedc1cbe2",
+      "sourceGroup": "scenario-family-009",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-cc7c404554a946",
+      "sourceGroup": "scenario-family-050",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-cf5046facf0daa",
+      "sourceGroup": "scenario-family-060",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-d1020df3173bf7",
+      "sourceGroup": "scenario-family-070",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-d2e95646377fe3",
+      "sourceGroup": "scenario-family-020",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-d535d89f1a03b2",
+      "sourceGroup": "scenario-family-079",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-d54672a2084be2",
+      "sourceGroup": "scenario-family-019",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-d88e9bfc90d882",
+      "sourceGroup": "scenario-family-099",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-d9a6f29bb3b314",
+      "sourceGroup": "scenario-family-059",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-dd4e0299b15f6c",
+      "sourceGroup": "scenario-family-069",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-de0b178273bd1c",
+      "sourceGroup": "scenario-family-070",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-df52e7f6a5e454",
+      "sourceGroup": "scenario-family-029",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-e1cfb5e0dd946f",
+      "sourceGroup": "scenario-family-069",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-e27fb0ddc58763",
+      "sourceGroup": "scenario-family-020",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-e29be21a85173e",
+      "sourceGroup": "scenario-family-010",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-e4414eed0636a1",
+      "sourceGroup": "scenario-family-060",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-e44e2d35609d27",
+      "sourceGroup": "scenario-family-019",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-e50796d44cfc30",
+      "sourceGroup": "scenario-family-039",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-e61e64937d7ef3",
+      "sourceGroup": "scenario-family-100",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-e907d93a97d78b",
+      "sourceGroup": "scenario-family-060",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-ec033475f1fed4",
+      "sourceGroup": "scenario-family-039",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-ee446d4ff13123",
+      "sourceGroup": "scenario-family-070",
+      "gold": "INTERVENE_DRIFT",
+      "actual": "INTERVENE_DRIFT",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-f45f09321620dd",
+      "sourceGroup": "scenario-family-019",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-f87db7f57b3452",
+      "sourceGroup": "scenario-family-030",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-fa234f07abb6e6",
+      "sourceGroup": "scenario-family-069",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-fc8e7f1f9ba74e",
+      "sourceGroup": "scenario-family-029",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-fd535bd7287947",
+      "sourceGroup": "scenario-family-050",
+      "gold": "INTERVENE_STALLED",
+      "actual": "INTERVENE_STALLED",
+      "uncertain": false
+    },
+    {
+      "id": "synbench-feea642b973de6",
+      "sourceGroup": "scenario-family-010",
+      "gold": "OK",
+      "actual": "OK",
+      "uncertain": false
+    }
+  ],
+  "scores": {
+    "v3": {
+      "synbench-006c6e4e69a932": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.91,
+          "tangentIsRelevant": 0.23
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1084,
+          "output_tokens": 60
+        },
+        "latencyMs": 659,
+        "caseId": "synbench-006c6e4e69a932",
+        "inputHash": "b5fcfa043a75c895d0d1c0433a4fa5ba95a7652b262d6fafa1a9bd6cd4c07c4b",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3461,
+        "reservationMicrousd": 1056,
+        "measuredAt": "2026-10-18T02:01:43.324Z"
+      },
+      "synbench-08ddb1c0008043": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.85
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1051,
+          "output_tokens": 60
+        },
+        "latencyMs": 557,
+        "caseId": "synbench-08ddb1c0008043",
+        "inputHash": "f1d2df5b842b4904ea8c279c4cc52b78de20914e7e16f1b4013227fcf9f205a4",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3360,
+        "reservationMicrousd": 1044,
+        "measuredAt": "2026-10-18T02:01:43.317Z"
+      },
+      "synbench-0aa35200c30cd9": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.14
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1047,
+          "output_tokens": 60
+        },
+        "latencyMs": 569,
+        "caseId": "synbench-0aa35200c30cd9",
+        "inputHash": "aeea926c38adce2b003c1212cb11f9a929c40e1fc69ee8bb8eff9edd4f00b1f5",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3348,
+        "reservationMicrousd": 1042,
+        "measuredAt": "2026-10-18T02:01:43.332Z"
+      },
+      "synbench-0c4e0c7cbccb6f": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.32
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1088,
+          "output_tokens": 60
+        },
+        "latencyMs": 714,
+        "caseId": "synbench-0c4e0c7cbccb6f",
+        "inputHash": "82f0ece2b7901fd295d68a4b3170e5f92b8406d64d691443d3acdc628d8c8c9e",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3528,
+        "reservationMicrousd": 1064,
+        "measuredAt": "2026-10-18T02:01:44.032Z"
+      },
+      "synbench-10d5bf79d5ad9c": {
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.26
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1041,
+          "output_tokens": 60
+        },
+        "latencyMs": 544,
+        "caseId": "synbench-10d5bf79d5ad9c",
+        "inputHash": "9f4144ba076568f60cb97c2231ff9a6e404faf9cf1101eef494e4e887684c8a6",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3328,
+        "reservationMicrousd": 1040,
+        "measuredAt": "2026-10-18T02:01:43.870Z"
+      },
+      "synbench-121faa73bc888f": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.29
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1047,
+          "output_tokens": 60
+        },
+        "latencyMs": 453,
+        "caseId": "synbench-121faa73bc888f",
+        "inputHash": "7838b5bf89501fefef905e4a83cd85a8c0be9901c95759d4611e80ffc190b0b8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3346,
+        "reservationMicrousd": 1042,
+        "measuredAt": "2026-10-18T02:01:43.790Z"
+      },
+      "synbench-12507cb65c3c89": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.31
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1056,
+          "output_tokens": 60
+        },
+        "latencyMs": 440,
+        "caseId": "synbench-12507cb65c3c89",
+        "inputHash": "5aca1d18f938e0ebe141c76fc0d2613d876baa33ef259b83e1708a5a909aec3c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3370,
+        "reservationMicrousd": 1045,
+        "measuredAt": "2026-10-18T02:01:44.231Z"
+      },
+      "synbench-13c3097b866310": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.25,
+          "tangentIsRelevant": 0.06
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1084,
+          "output_tokens": 60
+        },
+        "latencyMs": 382,
+        "caseId": "synbench-13c3097b866310",
+        "inputHash": "95a374c680fb25f3b49f6f9298af9113c51dabb1353902b195377f99103fbe41",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3519,
+        "reservationMicrousd": 1063,
+        "measuredAt": "2026-10-18T02:01:44.254Z"
+      },
+      "synbench-149c39e764f9ec": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.75,
+          "tangentIsRelevant": 0.25
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1037,
+          "output_tokens": 60
+        },
+        "latencyMs": 380,
+        "caseId": "synbench-149c39e764f9ec",
+        "inputHash": "3c2c9755fc85829886c91e45ea70e88f3d3c6b0d2b9ed5b314e3ef19405c8a08",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3307,
+        "reservationMicrousd": 1037,
+        "measuredAt": "2026-10-18T02:01:44.413Z"
+      },
+      "synbench-1cb3b322276a10": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.46,
+          "tangentIsRelevant": 0.03
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1023,
+          "output_tokens": 60
+        },
+        "latencyMs": 367,
+        "caseId": "synbench-1cb3b322276a10",
+        "inputHash": "7a74d4c99b60feed81c38b9d9413e6a7396a5a7414a9d87eba1510f2c26144e2",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3267,
+        "reservationMicrousd": 1033,
+        "measuredAt": "2026-10-18T02:01:44.599Z"
+      },
+      "synbench-1ccd0cbb911b4a": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.31
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1064,
+          "output_tokens": 60
+        },
+        "latencyMs": 457,
+        "caseId": "synbench-1ccd0cbb911b4a",
+        "inputHash": "ab0a14fac5beee8cc34a410fe7463e44c5d8dd60cbf13d06d6e0bafce33fba50",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3459,
+        "reservationMicrousd": 1056,
+        "measuredAt": "2026-10-18T02:01:44.712Z"
+      },
+      "synbench-1f4ae167dfe73d": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.23
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1045,
+          "output_tokens": 60
+        },
+        "latencyMs": 489,
+        "caseId": "synbench-1f4ae167dfe73d",
+        "inputHash": "ba4af69d471e1f2459f3c67c1da5786eed7bc28a745bdabf7e31261965965610",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3327,
+        "reservationMicrousd": 1040,
+        "measuredAt": "2026-10-18T02:01:44.903Z"
+      },
+      "synbench-20744dce846b94": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.22,
+          "tangentIsRelevant": 0.05
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1040,
+          "output_tokens": 60
+        },
+        "latencyMs": 574,
+        "caseId": "synbench-20744dce846b94",
+        "inputHash": "9806e0dca376725aa1fddf2ee74f095ccef01c50749aa7c5b50e14a39397c06f",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3384,
+        "reservationMicrousd": 1047,
+        "measuredAt": "2026-10-18T02:01:45.185Z"
+      },
+      "synbench-2119b7d44fc116": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.33
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1070,
+          "output_tokens": 60
+        },
+        "latencyMs": 563,
+        "caseId": "synbench-2119b7d44fc116",
+        "inputHash": "e21fc77e6164241bf5f7c8571c3c66e404f7570e8e2b375b6ec5eed56cc11aa2",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3465,
+        "reservationMicrousd": 1056,
+        "measuredAt": "2026-10-18T02:01:45.275Z"
+      },
+      "synbench-22fc0c3766ef44": {
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.88,
+          "tangentIsRelevant": 0.21
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1027,
+          "output_tokens": 60
+        },
+        "latencyMs": 443,
+        "caseId": "synbench-22fc0c3766ef44",
+        "inputHash": "01b41bba4c885de49326d2f6923084974e9b8970c445823ea71bb110690c02a5",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3271,
+        "reservationMicrousd": 1033,
+        "measuredAt": "2026-10-18T02:01:45.347Z"
+      },
+      "synbench-245c571497165c": {
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.39,
+          "tangentIsRelevant": 0.06
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1054,
+          "output_tokens": 60
+        },
+        "latencyMs": 351,
+        "caseId": "synbench-245c571497165c",
+        "inputHash": "09e336c898fee81de6e63ace5de36511cae59855cc7a12cc193b0b0abb9e6e32",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3355,
+        "reservationMicrousd": 1043,
+        "measuredAt": "2026-10-18T02:01:45.537Z"
+      },
+      "synbench-2fdf3cdb25c646": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.31
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1030,
+          "output_tokens": 60
+        },
+        "latencyMs": 430,
+        "caseId": "synbench-2fdf3cdb25c646",
+        "inputHash": "638c840e771f3af22f558e2ce9c683cff2bc45437afbae3087adcb75c0267078",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3306,
+        "reservationMicrousd": 1037,
+        "measuredAt": "2026-10-18T02:01:45.706Z"
+      },
+      "synbench-2fe764f83e3edd": {
+        "scores": {
+          "drifted": 0.9,
+          "stalled": 0.22,
+          "tangentIsRelevant": 0.08
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1069,
+          "output_tokens": 60
+        },
+        "latencyMs": 468,
+        "caseId": "synbench-2fe764f83e3edd",
+        "inputHash": "544cf9ec694b19c041a30276476583e73fe617d34d5f85d790b59b24f6b6e2b9",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3400,
+        "reservationMicrousd": 1048,
+        "measuredAt": "2026-10-18T02:01:45.815Z"
+      },
+      "synbench-317f70ede09d1d": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.96,
+          "tangentIsRelevant": 0.23
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1010,
+          "output_tokens": 60
+        },
+        "latencyMs": 440,
+        "caseId": "synbench-317f70ede09d1d",
+        "inputHash": "5a633a75bd058f81628a424a60928bcff46194824e60f56e80bcddb8f7a987af",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3294,
+        "reservationMicrousd": 1036,
+        "measuredAt": "2026-10-18T02:01:45.978Z"
+      },
+      "synbench-3273744b9a9172": {
+        "scores": {
+          "drifted": 0.88,
+          "stalled": 0.32,
+          "tangentIsRelevant": 0.08
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1056,
+          "output_tokens": 60
+        },
+        "latencyMs": 472,
+        "caseId": "synbench-3273744b9a9172",
+        "inputHash": "80221d1d60bfc2b6f4cac9d21aa108de666d8f9cee55b2b00681611525c4cb09",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3405,
+        "reservationMicrousd": 1049,
+        "measuredAt": "2026-10-18T02:01:46.179Z"
+      },
+      "synbench-34851424f03c45": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.2
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1079,
+          "output_tokens": 60
+        },
+        "latencyMs": 433,
+        "caseId": "synbench-34851424f03c45",
+        "inputHash": "222c29f6fca2be1545ae93e95cf5c9c1080c78a44c9f4b043cb59c577953cbb2",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3421,
+        "reservationMicrousd": 1051,
+        "measuredAt": "2026-10-18T02:01:46.249Z"
+      },
+      "synbench-38f267af015128": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.34,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1027,
+          "output_tokens": 60
+        },
+        "latencyMs": 470,
+        "caseId": "synbench-38f267af015128",
+        "inputHash": "34f2f6c590ac534d8d1e2ef830f766c7bbe88baeef42008508a7695d05f9e2b5",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3294,
+        "reservationMicrousd": 1036,
+        "measuredAt": "2026-10-18T02:01:46.449Z"
+      },
+      "synbench-3bc4bd6ea4d2c8": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.7
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1066,
+          "output_tokens": 60
+        },
+        "latencyMs": 655,
+        "caseId": "synbench-3bc4bd6ea4d2c8",
+        "inputHash": "544e083e6d47c9d794a0f65cbe7d61255a8d72f58bf655189bd02bf3f0016a56",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3414,
+        "reservationMicrousd": 1050,
+        "measuredAt": "2026-10-18T02:01:46.839Z"
+      },
+      "synbench-3d792cae7d17e0": {
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.19,
+          "tangentIsRelevant": 0.06
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1017,
+          "output_tokens": 60
+        },
+        "latencyMs": 354,
+        "caseId": "synbench-3d792cae7d17e0",
+        "inputHash": "ee01a71faffd35cb7df6a33ba8a9c036d4a0eb9ca7cbea3d7236da825bb7d324",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3265,
+        "reservationMicrousd": 1032,
+        "measuredAt": "2026-10-18T02:01:46.603Z"
+      },
+      "synbench-3f6b9167d9814a": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.23
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1045,
+          "output_tokens": 60
+        },
+        "latencyMs": 476,
+        "caseId": "synbench-3f6b9167d9814a",
+        "inputHash": "6f40f9415095793c4fb0bc089f355b56c364b653e69d800854e4de1766bd8911",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3347,
+        "reservationMicrousd": 1042,
+        "measuredAt": "2026-10-18T02:01:46.926Z"
+      },
+      "synbench-42567b5b899d66": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.36
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1027,
+          "output_tokens": 60
+        },
+        "latencyMs": 335,
+        "caseId": "synbench-42567b5b899d66",
+        "inputHash": "44b6338b6bfe76656bf878a277fe4d96e24ca5b7fd81a1a693031ca08a3f2ce2",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3351,
+        "reservationMicrousd": 1043,
+        "measuredAt": "2026-10-18T02:01:46.939Z"
+      },
+      "synbench-450209fd7677f4": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.3
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1009,
+          "output_tokens": 60
+        },
+        "latencyMs": 446,
+        "caseId": "synbench-450209fd7677f4",
+        "inputHash": "9c0fc36dc037f1b9b2fe304efbaf04ff97aed0942280ef88af3825f148550dcc",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3238,
+        "reservationMicrousd": 1029,
+        "measuredAt": "2026-10-18T02:01:47.288Z"
+      },
+      "synbench-460fd42a8fade1": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.81
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1056,
+          "output_tokens": 60
+        },
+        "latencyMs": 446,
+        "caseId": "synbench-460fd42a8fade1",
+        "inputHash": "48b67d309a1e7a2fdfdef227afe5efaf04b46c85886372023da5098faacb70e9",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3376,
+        "reservationMicrousd": 1046,
+        "measuredAt": "2026-10-18T02:01:47.373Z"
+      },
+      "synbench-4e20fa13f4b728": {
+        "scores": {
+          "drifted": 0.93,
+          "stalled": 0.23,
+          "tangentIsRelevant": 0.12
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1105,
+          "output_tokens": 60
+        },
+        "latencyMs": 381,
+        "caseId": "synbench-4e20fa13f4b728",
+        "inputHash": "03e1d538bb12b04fd4ff278a7eba399b6609eba8484c6123e63ef142daadda78",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3518,
+        "reservationMicrousd": 1063,
+        "measuredAt": "2026-10-18T02:01:47.321Z"
+      },
+      "synbench-4e2aa53bd6b3f8": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.93,
+          "tangentIsRelevant": 0.24
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1120,
+          "output_tokens": 60
+        },
+        "latencyMs": 479,
+        "caseId": "synbench-4e2aa53bd6b3f8",
+        "inputHash": "014cbac1a8bb18b2a1d3c11549753e633ff9e8fd7acfa5bc96506392b20b472c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3566,
+        "reservationMicrousd": 1068,
+        "measuredAt": "2026-10-18T02:01:47.767Z"
+      },
+      "synbench-4ee43bde47006c": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.9,
+          "tangentIsRelevant": 0.26
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1081,
+          "output_tokens": 60
+        },
+        "latencyMs": 430,
+        "caseId": "synbench-4ee43bde47006c",
+        "inputHash": "6a5295c144b1c6504c02d000ebcd8f0bdc93ad7c0c1adf139d33825c34e8c067",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3432,
+        "reservationMicrousd": 1052,
+        "measuredAt": "2026-10-18T02:01:47.752Z"
+      },
+      "synbench-50d00380c22fae": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.27
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1084,
+          "output_tokens": 60
+        },
+        "latencyMs": 429,
+        "caseId": "synbench-50d00380c22fae",
+        "inputHash": "f5b984fb544af5e9f5815f90d40080feeb23facf23a04fc00a9a7f80311fbaec",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3513,
+        "reservationMicrousd": 1062,
+        "measuredAt": "2026-10-18T02:01:47.802Z"
+      },
+      "synbench-52f6b77d44db38": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.9,
+          "tangentIsRelevant": 0.23
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1062,
+          "output_tokens": 60
+        },
+        "latencyMs": 475,
+        "caseId": "synbench-52f6b77d44db38",
+        "inputHash": "9d1b98173e9c0e7d6bc5d43a381f13517bfd382f7e1d70ff46e0c42cb74d182a",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3444,
+        "reservationMicrousd": 1054,
+        "measuredAt": "2026-10-18T02:01:48.233Z"
+      },
+      "synbench-54282cb1a7049b": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.28
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1040,
+          "output_tokens": 60
+        },
+        "latencyMs": 479,
+        "caseId": "synbench-54282cb1a7049b",
+        "inputHash": "7aee26681508c927bb636c362627dc5979da26e17d9bb243fd871f611a731912",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3334,
+        "reservationMicrousd": 1041,
+        "measuredAt": "2026-10-18T02:01:48.247Z"
+      },
+      "synbench-55380de1d867e4": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.33
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1076,
+          "output_tokens": 60
+        },
+        "latencyMs": 427,
+        "caseId": "synbench-55380de1d867e4",
+        "inputHash": "be60f6f10940971ef1d263f46f366fefd4dffe9b4cfd3ff81f6423cd66a749ea",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3439,
+        "reservationMicrousd": 1053,
+        "measuredAt": "2026-10-18T02:01:48.230Z"
+      },
+      "synbench-56d8228d44ba2e": {
+        "scores": {
+          "drifted": 0.98,
+          "stalled": 0.2,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1032,
+          "output_tokens": 60
+        },
+        "latencyMs": 438,
+        "caseId": "synbench-56d8228d44ba2e",
+        "inputHash": "297677ef7d07f562f12128db5490512958a4e455bf07c243a04274803d38890e",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3301,
+        "reservationMicrousd": 1037,
+        "measuredAt": "2026-10-18T02:01:48.669Z"
+      },
+      "synbench-5ad4eece2f9aab": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.44
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1074,
+          "output_tokens": 60
+        },
+        "latencyMs": 431,
+        "caseId": "synbench-5ad4eece2f9aab",
+        "inputHash": "8ad811a2c4f112f89549273a5333a21387cde027a2ebf49cf4ec2b59d947dcb0",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3447,
+        "reservationMicrousd": 1054,
+        "measuredAt": "2026-10-18T02:01:48.665Z"
+      },
+      "synbench-5dbf5beaa3744e": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.97,
+          "tangentIsRelevant": 0.19
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1028,
+          "output_tokens": 60
+        },
+        "latencyMs": 459,
+        "caseId": "synbench-5dbf5beaa3744e",
+        "inputHash": "f49d3687d1043094f0ba1f7b66a614e35c208a40c30a3d39550cfd9664725a3b",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3348,
+        "reservationMicrousd": 1042,
+        "measuredAt": "2026-10-18T02:01:48.707Z"
+      },
+      "synbench-5e72866b9bdfc8": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.22
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1051,
+          "output_tokens": 60
+        },
+        "latencyMs": 541,
+        "caseId": "synbench-5e72866b9bdfc8",
+        "inputHash": "4e2b2003075933bfcbe190d5c04a5c39748cb54158c0317da6690fadf3e48487",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3420,
+        "reservationMicrousd": 1051,
+        "measuredAt": "2026-10-18T02:01:49.206Z"
+      },
+      "synbench-5ea8c854de7626": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.18,
+          "tangentIsRelevant": 0.08
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1023,
+          "output_tokens": 60
+        },
+        "latencyMs": 324,
+        "caseId": "synbench-5ea8c854de7626",
+        "inputHash": "c967f8aac7b7d554e06219d9ad6709e8d0e1f5741c5016074aefb3113e2e05f6",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3324,
+        "reservationMicrousd": 1039,
+        "measuredAt": "2026-10-18T02:01:48.993Z"
+      },
+      "synbench-5fd856fca42911": {
+        "scores": {
+          "drifted": 0.95,
+          "stalled": 0.43,
+          "tangentIsRelevant": 0.05
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1041,
+          "output_tokens": 60
+        },
+        "latencyMs": 512,
+        "caseId": "synbench-5fd856fca42911",
+        "inputHash": "567b86d9993d98273d86e3bb073cd0b0df4c9894fd9e0fa06537ffd4d0109f4d",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3322,
+        "reservationMicrousd": 1039,
+        "measuredAt": "2026-10-18T02:01:49.220Z"
+      },
+      "synbench-638201f648e81c": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.88,
+          "tangentIsRelevant": 0.27
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1051,
+          "output_tokens": 60
+        },
+        "latencyMs": 355,
+        "caseId": "synbench-638201f648e81c",
+        "inputHash": "d114859d1c992209b96d653f15faa4f1d916e04a616ef32a7f376a5dda2db48f",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3357,
+        "reservationMicrousd": 1043,
+        "measuredAt": "2026-10-18T02:01:49.348Z"
+      },
+      "synbench-6ad35b3406a55f": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.97,
+          "tangentIsRelevant": 0.22
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1016,
+          "output_tokens": 60
+        },
+        "latencyMs": 429,
+        "caseId": "synbench-6ad35b3406a55f",
+        "inputHash": "8c2d63c80c1d7bcc1cfc3142606e4a6ba64a15b14c81ce247deb348d091901f0",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3312,
+        "reservationMicrousd": 1038,
+        "measuredAt": "2026-10-18T02:01:49.643Z"
+      },
+      "synbench-715604142dd867": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.5,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1024,
+          "output_tokens": 60
+        },
+        "latencyMs": 455,
+        "caseId": "synbench-715604142dd867",
+        "inputHash": "0248dddcf49ed3a16724a8185f34107c0d8226984e65b3580a79238ec16c3d0c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3291,
+        "reservationMicrousd": 1035,
+        "measuredAt": "2026-10-18T02:01:49.675Z"
+      },
+      "synbench-76bba9b4ecd3f7": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.39
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1061,
+          "output_tokens": 60
+        },
+        "latencyMs": 358,
+        "caseId": "synbench-76bba9b4ecd3f7",
+        "inputHash": "a54fa2ef481df8c3fd4577dda45582fd9f694e2ec24d38ccfb9130f399325ade",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3382,
+        "reservationMicrousd": 1046,
+        "measuredAt": "2026-10-18T02:01:49.707Z"
+      },
+      "synbench-796f752c61fd91": {
+        "scores": {
+          "drifted": 0.89,
+          "stalled": 0.25,
+          "tangentIsRelevant": 0.09
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1077,
+          "output_tokens": 60
+        },
+        "latencyMs": 710,
+        "caseId": "synbench-796f752c61fd91",
+        "inputHash": "a20b24a46e1760e988c494439ab0a49bc82d0959c094d254acccaa7034192e2e",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3477,
+        "reservationMicrousd": 1058,
+        "measuredAt": "2026-10-18T02:01:50.354Z"
+      },
+      "synbench-84be627a897dc6": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.54,
+          "tangentIsRelevant": 0.05
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1044,
+          "output_tokens": 60
+        },
+        "latencyMs": 458,
+        "caseId": "synbench-84be627a897dc6",
+        "inputHash": "b1d11a058da27f3f0cd6265b99ec684266b4224dfe4a670fbfac76c5f872cebc",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3321,
+        "reservationMicrousd": 1039,
+        "measuredAt": "2026-10-18T02:01:50.134Z"
+      },
+      "synbench-8670f6a57ef5a7": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.26
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1044,
+          "output_tokens": 60
+        },
+        "latencyMs": 505,
+        "caseId": "synbench-8670f6a57ef5a7",
+        "inputHash": "e61596f8f8cf824f0432b2d2d1f135a6dabdf07aea6b243cf9b1c106d2eb84f8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3327,
+        "reservationMicrousd": 1040,
+        "measuredAt": "2026-10-18T02:01:50.212Z"
+      },
+      "synbench-86c3fe0479d55e": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.33
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1036,
+          "output_tokens": 60
+        },
+        "latencyMs": 455,
+        "caseId": "synbench-86c3fe0479d55e",
+        "inputHash": "967989441e2f6ee7d4d22c3c6f64cc82dd713bdb596e943b0a9ccb3a7fbe4aea",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3321,
+        "reservationMicrousd": 1039,
+        "measuredAt": "2026-10-18T02:01:50.590Z"
+      },
+      "synbench-8980aa4ded11e9": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.19,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1030,
+          "output_tokens": 60
+        },
+        "latencyMs": 460,
+        "caseId": "synbench-8980aa4ded11e9",
+        "inputHash": "26dc39ec34f2e7a2e8c3e3904b967c7e3847785c2b71368dec7a579f70765f51",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3291,
+        "reservationMicrousd": 1035,
+        "measuredAt": "2026-10-18T02:01:50.673Z"
+      },
+      "synbench-8b6131db4d5491": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.05
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1056,
+          "output_tokens": 60
+        },
+        "latencyMs": 430,
+        "caseId": "synbench-8b6131db4d5491",
+        "inputHash": "6b7a23bb720ce9f23fdbf67fb8c26a35cad490161e37a88443d34a938f132eef",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3438,
+        "reservationMicrousd": 1053,
+        "measuredAt": "2026-10-18T02:01:50.785Z"
+      },
+      "synbench-8cc5c89d79fd6b": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.25
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1068,
+          "output_tokens": 60
+        },
+        "latencyMs": 466,
+        "caseId": "synbench-8cc5c89d79fd6b",
+        "inputHash": "21e56954b353fc46ddac780888a166baaf19d7e9a1e8064635e28c0fda388a94",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3423,
+        "reservationMicrousd": 1051,
+        "measuredAt": "2026-10-18T02:01:51.056Z"
+      },
+      "synbench-8ed0f2add585e7": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.67
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1066,
+          "output_tokens": 60
+        },
+        "latencyMs": 479,
+        "caseId": "synbench-8ed0f2add585e7",
+        "inputHash": "88149a570b580f0d3729fe4a03744df144d2ab432306b234326a3dfb72674431",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3412,
+        "reservationMicrousd": 1050,
+        "measuredAt": "2026-10-18T02:01:51.162Z"
+      },
+      "synbench-91ae0299b24bf3": {
+        "scores": {
+          "drifted": 0.16,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.17
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1049,
+          "output_tokens": 60
+        },
+        "latencyMs": 430,
+        "caseId": "synbench-91ae0299b24bf3",
+        "inputHash": "3e4632b60abba5880f3d325d651a02a6e9c5b2638de3f340abeed1961a862085",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3352,
+        "reservationMicrousd": 1043,
+        "measuredAt": "2026-10-18T02:01:51.216Z"
+      },
+      "synbench-92d675addfe21a": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.92,
+          "tangentIsRelevant": 0.24
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1046,
+          "output_tokens": 60
+        },
+        "latencyMs": 450,
+        "caseId": "synbench-92d675addfe21a",
+        "inputHash": "0b9ef0c2e4aa481e36ed4336cce4f441de5489742a84ecc3f27cc5a364e314a8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3339,
+        "reservationMicrousd": 1041,
+        "measuredAt": "2026-10-18T02:01:51.507Z"
+      },
+      "synbench-96881bffa7a081": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.33
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1063,
+          "output_tokens": 60
+        },
+        "latencyMs": 460,
+        "caseId": "synbench-96881bffa7a081",
+        "inputHash": "08ac8093f700a542936ca206c47e338521e06f93f8d11c8d058f6ce41f0f2bd9",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3405,
+        "reservationMicrousd": 1049,
+        "measuredAt": "2026-10-18T02:01:51.623Z"
+      },
+      "synbench-9e8b370525e040": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.5,
+          "tangentIsRelevant": 0.1
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1034,
+          "output_tokens": 60
+        },
+        "latencyMs": 432,
+        "caseId": "synbench-9e8b370525e040",
+        "inputHash": "a8199de76a3d084556b3072ceef919d90044ccfd30ee0e6517df586d2a5833d8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3295,
+        "reservationMicrousd": 1036,
+        "measuredAt": "2026-10-18T02:01:51.649Z"
+      },
+      "synbench-a092cb357dd7ca": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.22
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1061,
+          "output_tokens": 60
+        },
+        "latencyMs": 436,
+        "caseId": "synbench-a092cb357dd7ca",
+        "inputHash": "f027e80f04cb5114586e11b06e203369b21f97d7f5d123791737dd1be7bba275",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3388,
+        "reservationMicrousd": 1047,
+        "measuredAt": "2026-10-18T02:01:51.943Z"
+      },
+      "synbench-a3bdb7b9e4de2f": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.62
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1041,
+          "output_tokens": 60
+        },
+        "latencyMs": 523,
+        "caseId": "synbench-a3bdb7b9e4de2f",
+        "inputHash": "9097c2586d28618ffa24fa9b048f35e898a0c33b2642603d8e78b01ed7b1fc16",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3381,
+        "reservationMicrousd": 1046,
+        "measuredAt": "2026-10-18T02:01:52.147Z"
+      },
+      "synbench-a79393f385ce35": {
+        "scores": {
+          "drifted": 0.08,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.37
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1058,
+          "output_tokens": 60
+        },
+        "latencyMs": 351,
+        "caseId": "synbench-a79393f385ce35",
+        "inputHash": "ac8f46ae4ca5e388911a808232cb5cf42ce45360bb3ed0c6e226d4c0388d856a",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3390,
+        "reservationMicrousd": 1047,
+        "measuredAt": "2026-10-18T02:01:52.000Z"
+      },
+      "synbench-ad73c6ccfb2422": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.45
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1072,
+          "output_tokens": 60
+        },
+        "latencyMs": 554,
+        "caseId": "synbench-ad73c6ccfb2422",
+        "inputHash": "0e780e7f735f4e46a1910a1463fc0e40cee2a99594f1428e1cfbc4d84f584224",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3418,
+        "reservationMicrousd": 1051,
+        "measuredAt": "2026-10-18T02:01:52.498Z"
+      },
+      "synbench-aeedd9c9c5be49": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.74,
+          "tangentIsRelevant": 0.22
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1014,
+          "output_tokens": 60
+        },
+        "latencyMs": 383,
+        "caseId": "synbench-aeedd9c9c5be49",
+        "inputHash": "03be644e6573cbc677e05c31ed24511a8a876767f85dadbd087adfc8bc66f80a",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3258,
+        "reservationMicrousd": 1031,
+        "measuredAt": "2026-10-18T02:01:52.384Z"
+      },
+      "synbench-af3e3dca53461d": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.43
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1058,
+          "output_tokens": 60
+        },
+        "latencyMs": 477,
+        "caseId": "synbench-af3e3dca53461d",
+        "inputHash": "8413144d8bc3cc7b56777be218a178c3164f15632f0c8a10fa6d8b67fea7e82e",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3364,
+        "reservationMicrousd": 1044,
+        "measuredAt": "2026-10-18T02:01:52.627Z"
+      },
+      "synbench-b5805f90b4b586": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.96,
+          "tangentIsRelevant": 0.22
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1037,
+          "output_tokens": 60
+        },
+        "latencyMs": 443,
+        "caseId": "synbench-b5805f90b4b586",
+        "inputHash": "a3ca4ef20602d55507f2ad95120ad7b3c828bc941e1b29ec88f5452244d19a37",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3304,
+        "reservationMicrousd": 1037,
+        "measuredAt": "2026-10-18T02:01:52.827Z"
+      },
+      "synbench-b6936509c3f02e": {
+        "scores": {
+          "drifted": 0.92,
+          "stalled": 0.18,
+          "tangentIsRelevant": 0.08
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1055,
+          "output_tokens": 60
+        },
+        "latencyMs": 328,
+        "caseId": "synbench-b6936509c3f02e",
+        "inputHash": "63432609a2dc781faaa0fae3daf1df4f66b18ebe427a07aaef57ae5302f4ab0a",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3358,
+        "reservationMicrousd": 1043,
+        "measuredAt": "2026-10-18T02:01:52.826Z"
+      },
+      "synbench-be77f92fa2eb82": {
+        "scores": {
+          "drifted": 0.16,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.14
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1032,
+          "output_tokens": 60
+        },
+        "latencyMs": 538,
+        "caseId": "synbench-be77f92fa2eb82",
+        "inputHash": "34bb3fdf7b43f4db1f26d52ac2f9393baf2a2ab8093ae2c39100daad9cb72eac",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3285,
+        "reservationMicrousd": 1035,
+        "measuredAt": "2026-10-18T02:01:53.166Z"
+      },
+      "synbench-beb2cb490993f2": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.93
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1072,
+          "output_tokens": 60
+        },
+        "latencyMs": 446,
+        "caseId": "synbench-beb2cb490993f2",
+        "inputHash": "c25d77222818fd150209078542d67a28cad2792881ca560d45156ba54878e134",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3477,
+        "reservationMicrousd": 1058,
+        "measuredAt": "2026-10-18T02:01:53.272Z"
+      },
+      "synbench-c02e568db4112b": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.21
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1022,
+          "output_tokens": 60
+        },
+        "latencyMs": 468,
+        "caseId": "synbench-c02e568db4112b",
+        "inputHash": "6fd8b9509333f2e6265b8eb304bd15cbaf56e8397974c5bbd556740da9625fda",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3333,
+        "reservationMicrousd": 1040,
+        "measuredAt": "2026-10-18T02:01:53.295Z"
+      },
+      "synbench-c25b70a250055c": {
+        "scores": {
+          "drifted": 0.93,
+          "stalled": 0.12,
+          "tangentIsRelevant": 0.08
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1069,
+          "output_tokens": 60
+        },
+        "latencyMs": 420,
+        "caseId": "synbench-c25b70a250055c",
+        "inputHash": "b04e03aeee5ad95982ab7ba547f013ac1645d45c724ed1b0144dbde5ce1c510c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3453,
+        "reservationMicrousd": 1055,
+        "measuredAt": "2026-10-18T02:01:53.586Z"
+      },
+      "synbench-c7092d2a180da2": {
+        "scores": {
+          "drifted": 0.98,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.05
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1035,
+          "output_tokens": 60
+        },
+        "latencyMs": 458,
+        "caseId": "synbench-c7092d2a180da2",
+        "inputHash": "95ee24f30b0fe8e235ac64492fd1b12c1491b5067798d8ef3cac0b4bc0c78579",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3315,
+        "reservationMicrousd": 1038,
+        "measuredAt": "2026-10-18T02:01:53.730Z"
+      },
+      "synbench-cbc82130d01f6f": {
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.36,
+          "tangentIsRelevant": 0.1
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1077,
+          "output_tokens": 60
+        },
+        "latencyMs": 449,
+        "caseId": "synbench-cbc82130d01f6f",
+        "inputHash": "53f8a19cf3cd2412c3f902f817b17581357cb6d73ed0f96c1ad09752a5dd7c47",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3486,
+        "reservationMicrousd": 1059,
+        "measuredAt": "2026-10-18T02:01:53.745Z"
+      },
+      "synbench-cbdaa9da3c8de3": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.31
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1031,
+          "output_tokens": 60
+        },
+        "latencyMs": 457,
+        "caseId": "synbench-cbdaa9da3c8de3",
+        "inputHash": "7ceb30424f69d32d61d58c76a14b73130a0d5ba0498418e33a0256c28c0ab899",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3366,
+        "reservationMicrousd": 1044,
+        "measuredAt": "2026-10-18T02:01:54.044Z"
+      },
+      "synbench-cc09acedc1cbe2": {
+        "scores": {
+          "drifted": 0.09,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.34
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1039,
+          "output_tokens": 60
+        },
+        "latencyMs": 374,
+        "caseId": "synbench-cc09acedc1cbe2",
+        "inputHash": "cc89f19d02e4b12eec67c82059c26fcbdbded7fcd0a7f6a4c4d63d9874e7c953",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3324,
+        "reservationMicrousd": 1039,
+        "measuredAt": "2026-10-18T02:01:54.107Z"
+      },
+      "synbench-cc7c404554a946": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.25
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1065,
+          "output_tokens": 60
+        },
+        "latencyMs": 451,
+        "caseId": "synbench-cc7c404554a946",
+        "inputHash": "8995696cc2664cf15aecc19ab441f9ac4af8f4eaf3191b7cd5a1549c1e6cf0c2",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3465,
+        "reservationMicrousd": 1056,
+        "measuredAt": "2026-10-18T02:01:54.196Z"
+      },
+      "synbench-cf5046facf0daa": {
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.96,
+          "tangentIsRelevant": 0.29
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1064,
+          "output_tokens": 60
+        },
+        "latencyMs": 430,
+        "caseId": "synbench-cf5046facf0daa",
+        "inputHash": "ce8bd79de30e8454b42e42200b2ba6db9113c8022c76224edbc4a268b69170ba",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3468,
+        "reservationMicrousd": 1057,
+        "measuredAt": "2026-10-18T02:01:54.474Z"
+      },
+      "synbench-d1020df3173bf7": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.27
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1053,
+          "output_tokens": 60
+        },
+        "latencyMs": 455,
+        "caseId": "synbench-d1020df3173bf7",
+        "inputHash": "a2fe73aa395b91f26e3cb973b4c3c6fe0991efa299219e05dfe25f2935830282",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3396,
+        "reservationMicrousd": 1048,
+        "measuredAt": "2026-10-18T02:01:54.564Z"
+      },
+      "synbench-d2e95646377fe3": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.48,
+          "tangentIsRelevant": 0.06
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1056,
+          "output_tokens": 60
+        },
+        "latencyMs": 361,
+        "caseId": "synbench-d2e95646377fe3",
+        "inputHash": "b51307b0907250e1dce3bc066111816c16fca347080c609ca2027a0f63d92f1a",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3363,
+        "reservationMicrousd": 1044,
+        "measuredAt": "2026-10-18T02:01:54.558Z"
+      },
+      "synbench-d535d89f1a03b2": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.82,
+          "tangentIsRelevant": 0.26
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1066,
+          "output_tokens": 60
+        },
+        "latencyMs": 429,
+        "caseId": "synbench-d535d89f1a03b2",
+        "inputHash": "f4a0c0615a7e9376cfc2fc35e6aebcad3a9f06c72ee0eb26a949464987b94f3f",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3394,
+        "reservationMicrousd": 1048,
+        "measuredAt": "2026-10-18T02:01:54.904Z"
+      },
+      "synbench-d54672a2084be2": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.45
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1057,
+          "output_tokens": 60
+        },
+        "latencyMs": 688,
+        "caseId": "synbench-d54672a2084be2",
+        "inputHash": "96a9253a84e4c582b8df7c5083c8ab96cee3160770d44833ef744de87991959c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3378,
+        "reservationMicrousd": 1046,
+        "measuredAt": "2026-10-18T02:01:55.246Z"
+      },
+      "synbench-d88e9bfc90d882": {
+        "scores": {
+          "drifted": 0.95,
+          "stalled": 0.38,
+          "tangentIsRelevant": 0.05
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1037,
+          "output_tokens": 60
+        },
+        "latencyMs": 351,
+        "caseId": "synbench-d88e9bfc90d882",
+        "inputHash": "3c72a05581a8df84f8d5c1e232133f8a780a1e33b7edebd940d17ce191e7af92",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3301,
+        "reservationMicrousd": 1037,
+        "measuredAt": "2026-10-18T02:01:54.915Z"
+      },
+      "synbench-d9a6f29bb3b314": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.39
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1065,
+          "output_tokens": 60
+        },
+        "latencyMs": 447,
+        "caseId": "synbench-d9a6f29bb3b314",
+        "inputHash": "c80118553beb8f82bd601b0e7ba0f37a4aab1ae8773c121cea5bc1d097c62d61",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3459,
+        "reservationMicrousd": 1056,
+        "measuredAt": "2026-10-18T02:01:55.351Z"
+      },
+      "synbench-dd4e0299b15f6c": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.35,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1037,
+          "output_tokens": 60
+        },
+        "latencyMs": 338,
+        "caseId": "synbench-dd4e0299b15f6c",
+        "inputHash": "ae936569d6df9c34b4dd5f2ed33ae151a9b1df51a13b06b9141a3a6f0ab87bb3",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3310,
+        "reservationMicrousd": 1038,
+        "measuredAt": "2026-10-18T02:01:55.258Z"
+      },
+      "synbench-de0b178273bd1c": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.89,
+          "tangentIsRelevant": 0.24
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1054,
+          "output_tokens": 60
+        },
+        "latencyMs": 457,
+        "caseId": "synbench-de0b178273bd1c",
+        "inputHash": "ef2d2dff8cebb2b59ed54ed0fc201069c27c752f5c19e07ab3058f749b6978b2",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3371,
+        "reservationMicrousd": 1045,
+        "measuredAt": "2026-10-18T02:01:55.708Z"
+      },
+      "synbench-df52e7f6a5e454": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.4,
+          "tangentIsRelevant": 0.03
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1025,
+          "output_tokens": 60
+        },
+        "latencyMs": 356,
+        "caseId": "synbench-df52e7f6a5e454",
+        "inputHash": "d82003d7b7b260d9d93372fd83ea09aea77a554ff200639ffdf02fdc5a1b1f62",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3282,
+        "reservationMicrousd": 1034,
+        "measuredAt": "2026-10-18T02:01:55.614Z"
+      },
+      "synbench-e1cfb5e0dd946f": {
+        "scores": {
+          "drifted": 0.98,
+          "stalled": 0.26,
+          "tangentIsRelevant": 0.05
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1021,
+          "output_tokens": 60
+        },
+        "latencyMs": 378,
+        "caseId": "synbench-e1cfb5e0dd946f",
+        "inputHash": "db66e542edd5c3bd828add8f9bbc7b6dbea2e9aa002e0328bc11e7b0d8378539",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3259,
+        "reservationMicrousd": 1032,
+        "measuredAt": "2026-10-18T02:01:55.730Z"
+      },
+      "synbench-e27fb0ddc58763": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.97,
+          "tangentIsRelevant": 0.2
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1040,
+          "output_tokens": 60
+        },
+        "latencyMs": 341,
+        "caseId": "synbench-e27fb0ddc58763",
+        "inputHash": "c861cc838b2c2e729604caac12307aa57a81c3bddb9bbb1d1b362742e55e2ea7",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3327,
+        "reservationMicrousd": 1040,
+        "measuredAt": "2026-10-18T02:01:55.956Z"
+      },
+      "synbench-e29be21a85173e": {
+        "scores": {
+          "drifted": 0.91,
+          "stalled": 0.15,
+          "tangentIsRelevant": 0.2
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1050,
+          "output_tokens": 60
+        },
+        "latencyMs": 469,
+        "caseId": "synbench-e29be21a85173e",
+        "inputHash": "5510d6de8fb3a0ecf945dbc349dc542def0fe0967c24406020b83d1a57443043",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3336,
+        "reservationMicrousd": 1041,
+        "measuredAt": "2026-10-18T02:01:56.178Z"
+      },
+      "synbench-e4414eed0636a1": {
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.24
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1064,
+          "output_tokens": 60
+        },
+        "latencyMs": 335,
+        "caseId": "synbench-e4414eed0636a1",
+        "inputHash": "afe670be81db98bc9bbc0f6605ff6b717110ef809451faf2ac3bc3eacbd4edb2",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3450,
+        "reservationMicrousd": 1054,
+        "measuredAt": "2026-10-18T02:01:56.065Z"
+      },
+      "synbench-e44e2d35609d27": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.35
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1066,
+          "output_tokens": 60
+        },
+        "latencyMs": 345,
+        "caseId": "synbench-e44e2d35609d27",
+        "inputHash": "d9e70c5f2c372a64050a1c47afb83861a47fee5d2103d6d67da4c4778405353d",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3402,
+        "reservationMicrousd": 1049,
+        "measuredAt": "2026-10-18T02:01:56.302Z"
+      },
+      "synbench-e50796d44cfc30": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.34
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1064,
+          "output_tokens": 60
+        },
+        "latencyMs": 355,
+        "caseId": "synbench-e50796d44cfc30",
+        "inputHash": "38b953dd953bc187248fdcbaaf631525f1ab38b0c2c29928f05ea9a4f7c4de7c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3462,
+        "reservationMicrousd": 1056,
+        "measuredAt": "2026-10-18T02:01:56.420Z"
+      },
+      "synbench-e61e64937d7ef3": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.97,
+          "tangentIsRelevant": 0.2
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1054,
+          "output_tokens": 60
+        },
+        "latencyMs": 341,
+        "caseId": "synbench-e61e64937d7ef3",
+        "inputHash": "bb3a548f5e1be49b993d69db7cb4dc2e63bb72311b955f8beec92c832c24ab55",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3358,
+        "reservationMicrousd": 1043,
+        "measuredAt": "2026-10-18T02:01:56.520Z"
+      },
+      "synbench-e907d93a97d78b": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.39
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1036,
+          "output_tokens": 60
+        },
+        "latencyMs": 437,
+        "caseId": "synbench-e907d93a97d78b",
+        "inputHash": "8ae79b74e6d7e1891e1b7b471c4ef3c9ba5e4f7a36b0494cc7a1381e23aea23b",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3381,
+        "reservationMicrousd": 1046,
+        "measuredAt": "2026-10-18T02:01:56.738Z"
+      },
+      "synbench-ec033475f1fed4": {
+        "scores": {
+          "drifted": 0.92,
+          "stalled": 0.35,
+          "tangentIsRelevant": 0.05
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1081,
+          "output_tokens": 60
+        },
+        "latencyMs": 437,
+        "caseId": "synbench-ec033475f1fed4",
+        "inputHash": "1bd0569201be2e41effa135bff537722e69f1a9592d15b9e196c32a67ffbb879",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3480,
+        "reservationMicrousd": 1058,
+        "measuredAt": "2026-10-18T02:01:56.861Z"
+      },
+      "synbench-ee446d4ff13123": {
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.35,
+          "tangentIsRelevant": 0.12
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1072,
+          "output_tokens": 60
+        },
+        "latencyMs": 452,
+        "caseId": "synbench-ee446d4ff13123",
+        "inputHash": "4de8d338fa1d2ba24777595db614af990b9a5a28f4bfde422fc9ac6c2f087d75",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3435,
+        "reservationMicrousd": 1053,
+        "measuredAt": "2026-10-18T02:01:56.972Z"
+      },
+      "synbench-f45f09321620dd": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.25
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1049,
+          "output_tokens": 60
+        },
+        "latencyMs": 449,
+        "caseId": "synbench-f45f09321620dd",
+        "inputHash": "d866bbfc5b7cca452831d65a095c8ea6f05d5c19a5b944eea5d494d5bf25d298",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3342,
+        "reservationMicrousd": 1042,
+        "measuredAt": "2026-10-18T02:01:57.188Z"
+      },
+      "synbench-f87db7f57b3452": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.02,
+          "tangentIsRelevant": 0.26
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1068,
+          "output_tokens": 60
+        },
+        "latencyMs": 431,
+        "caseId": "synbench-f87db7f57b3452",
+        "inputHash": "6cb5a628cd752fe90ebaf530d4a2935ec49c6a2e53b62088aa5f8f5afd7c51a6",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3408,
+        "reservationMicrousd": 1049,
+        "measuredAt": "2026-10-18T02:01:57.295Z"
+      },
+      "synbench-fa234f07abb6e6": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.3
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1015,
+          "output_tokens": 60
+        },
+        "latencyMs": 462,
+        "caseId": "synbench-fa234f07abb6e6",
+        "inputHash": "b0e5db151effcb146e6132b477859a573e3a7136717acdc97e2a71107c47b1b5",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3262,
+        "reservationMicrousd": 1032,
+        "measuredAt": "2026-10-18T02:01:57.435Z"
+      },
+      "synbench-fc8e7f1f9ba74e": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.9,
+          "tangentIsRelevant": 0.24
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 988,
+          "output_tokens": 60
+        },
+        "latencyMs": 501,
+        "caseId": "synbench-fc8e7f1f9ba74e",
+        "inputHash": "52881613f33ff3245b9b94bb09028864de25e9ca82b93c94bd105cee2813da36",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3180,
+        "reservationMicrousd": 1022,
+        "measuredAt": "2026-10-18T02:01:57.689Z"
+      },
+      "synbench-fd535bd7287947": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.96,
+          "tangentIsRelevant": 0.2
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1051,
+          "output_tokens": 60
+        },
+        "latencyMs": 424,
+        "caseId": "synbench-fd535bd7287947",
+        "inputHash": "5e78699ee2d8aa99bf214a11373241f032d364fe9160f846d831f47588e41806",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3420,
+        "reservationMicrousd": 1051,
+        "measuredAt": "2026-10-18T02:01:57.719Z"
+      },
+      "synbench-feea642b973de6": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.41
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v3",
+        "usage": {
+          "input_tokens": 1060,
+          "output_tokens": 60
+        },
+        "latencyMs": 475,
+        "caseId": "synbench-feea642b973de6",
+        "inputHash": "459440694dc0832dff3daf74ddd98e9d98e06824d7560a8343c746285cbfb4ab",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 3375,
+        "reservationMicrousd": 1045,
+        "measuredAt": "2026-10-18T02:01:57.910Z"
+      }
+    },
+    "v4": {
+      "synbench-006c6e4e69a932": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.73,
+          "tangentIsRelevant": 0.5
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2129,
+          "output_tokens": 60
+        },
+        "latencyMs": 410,
+        "caseId": "synbench-006c6e4e69a932",
+        "inputHash": "d55e8dcc27210a6d3a75f0c1618682a42058e28905f27a6685fb14cbd1423b74",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5523,
+        "reservationMicrousd": 1303,
+        "measuredAt": "2026-10-18T02:01:58.100Z"
+      },
+      "synbench-08ddb1c0008043": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.79
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2096,
+          "output_tokens": 60
+        },
+        "latencyMs": 435,
+        "caseId": "synbench-08ddb1c0008043",
+        "inputHash": "bb525dab932cf7024596faaec368c15a213b4649e2368c0b2f3f4fde38daa42f",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5422,
+        "reservationMicrousd": 1291,
+        "measuredAt": "2026-10-18T02:01:58.154Z"
+      },
+      "synbench-0aa35200c30cd9": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.31
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2092,
+          "output_tokens": 60
+        },
+        "latencyMs": 490,
+        "caseId": "synbench-0aa35200c30cd9",
+        "inputHash": "9949e4e765cb09098ca8edfc2bf8c910bd8ab105c8f997364d04ab083d9950f6",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5410,
+        "reservationMicrousd": 1290,
+        "measuredAt": "2026-10-18T02:01:58.409Z"
+      },
+      "synbench-0c4e0c7cbccb6f": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.7
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2133,
+          "output_tokens": 60
+        },
+        "latencyMs": 465,
+        "caseId": "synbench-0c4e0c7cbccb6f",
+        "inputHash": "0ed81fc74f1c50ddade5b5a8d8588135957c4144e42100e86d9f55ca639f41c8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5590,
+        "reservationMicrousd": 1311,
+        "measuredAt": "2026-10-18T02:01:58.567Z"
+      },
+      "synbench-10d5bf79d5ad9c": {
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.93,
+          "tangentIsRelevant": 0.54
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2086,
+          "output_tokens": 60
+        },
+        "latencyMs": 457,
+        "caseId": "synbench-10d5bf79d5ad9c",
+        "inputHash": "321da84b158fc33604318e65101996164d2175758c5d63c4377f005871d58bc3",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5390,
+        "reservationMicrousd": 1287,
+        "measuredAt": "2026-10-18T02:01:58.612Z"
+      },
+      "synbench-121faa73bc888f": {
+        "scores": {
+          "drifted": 0.13,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.6
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2092,
+          "output_tokens": 60
+        },
+        "latencyMs": 467,
+        "caseId": "synbench-121faa73bc888f",
+        "inputHash": "9346570916e4aebb1411d2c4794d13616c0f880239045d9739ec3063d0298eff",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5408,
+        "reservationMicrousd": 1289,
+        "measuredAt": "2026-10-18T02:01:58.877Z"
+      },
+      "synbench-12507cb65c3c89": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.67
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2101,
+          "output_tokens": 60
+        },
+        "latencyMs": 430,
+        "caseId": "synbench-12507cb65c3c89",
+        "inputHash": "a7eb6ae0dd2a1b6996abbb01d56fdaadebaf6d0d12af896123bef0a8dccf2722",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5432,
+        "reservationMicrousd": 1292,
+        "measuredAt": "2026-10-18T02:01:58.998Z"
+      },
+      "synbench-13c3097b866310": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.05
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2129,
+          "output_tokens": 60
+        },
+        "latencyMs": 461,
+        "caseId": "synbench-13c3097b866310",
+        "inputHash": "bdadd72a64a22b3d875299d4e7fd76ef22993aa45e2a2e467c093eed2c716d27",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5581,
+        "reservationMicrousd": 1310,
+        "measuredAt": "2026-10-18T02:01:59.073Z"
+      },
+      "synbench-149c39e764f9ec": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.76,
+          "tangentIsRelevant": 0.4
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2082,
+          "output_tokens": 60
+        },
+        "latencyMs": 449,
+        "caseId": "synbench-149c39e764f9ec",
+        "inputHash": "bd8abfce0b9e9b1b2331c8eb74ec14ea0aa7ba5a0dcfc04b1df54070d9073f3a",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5369,
+        "reservationMicrousd": 1285,
+        "measuredAt": "2026-10-18T02:01:59.326Z"
+      },
+      "synbench-1cb3b322276a10": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.17,
+          "tangentIsRelevant": 0.02
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2068,
+          "output_tokens": 60
+        },
+        "latencyMs": 491,
+        "caseId": "synbench-1cb3b322276a10",
+        "inputHash": "1020c9c511516f93c7dcf818459eed9cdef96e553ad7a2bd3ea4e44b09550375",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5329,
+        "reservationMicrousd": 1280,
+        "measuredAt": "2026-10-18T02:01:59.489Z"
+      },
+      "synbench-1ccd0cbb911b4a": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.84
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2109,
+          "output_tokens": 60
+        },
+        "latencyMs": 495,
+        "caseId": "synbench-1ccd0cbb911b4a",
+        "inputHash": "1a420e36e63a056e14592dc1349c782cf194bb7763310ff9953e6af19c93fb2e",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5521,
+        "reservationMicrousd": 1303,
+        "measuredAt": "2026-10-18T02:01:59.569Z"
+      },
+      "synbench-1f4ae167dfe73d": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.33
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2090,
+          "output_tokens": 60
+        },
+        "latencyMs": 540,
+        "caseId": "synbench-1f4ae167dfe73d",
+        "inputHash": "4b7f9bd2a86ce5c425729b3d991a5c1c2c3e14713d59d3202b5823fdeb780f94",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5389,
+        "reservationMicrousd": 1287,
+        "measuredAt": "2026-10-18T02:01:59.866Z"
+      },
+      "synbench-20744dce846b94": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.03
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2085,
+          "output_tokens": 60
+        },
+        "latencyMs": 463,
+        "caseId": "synbench-20744dce846b94",
+        "inputHash": "5ea34e8f3cba09e874c3d87fda39ecd1d043b315e534641c24894d56bb18a008",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5446,
+        "reservationMicrousd": 1294,
+        "measuredAt": "2026-10-18T02:01:59.963Z"
+      },
+      "synbench-2119b7d44fc116": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.68
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2115,
+          "output_tokens": 60
+        },
+        "latencyMs": 456,
+        "caseId": "synbench-2119b7d44fc116",
+        "inputHash": "26ed340a80f32f92bb4b4ca0a364298c7fa3b19d60becf28ba7f2cc8d6e823d4",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5527,
+        "reservationMicrousd": 1304,
+        "measuredAt": "2026-10-18T02:02:00.026Z"
+      },
+      "synbench-22fc0c3766ef44": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.85,
+          "tangentIsRelevant": 0.26
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2072,
+          "output_tokens": 60
+        },
+        "latencyMs": 434,
+        "caseId": "synbench-22fc0c3766ef44",
+        "inputHash": "39d7a111feedef018f052bb3f2055088e0950d8855a9f290bc07e84c89ca8575",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5333,
+        "reservationMicrousd": 1280,
+        "measuredAt": "2026-10-18T02:02:00.302Z"
+      },
+      "synbench-245c571497165c": {
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.22,
+          "tangentIsRelevant": 0.06
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2099,
+          "output_tokens": 60
+        },
+        "latencyMs": 449,
+        "caseId": "synbench-245c571497165c",
+        "inputHash": "83bb998e53ba281666a0d7d37acedc587f31a26273fce209449f990adb6968d9",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5417,
+        "reservationMicrousd": 1291,
+        "measuredAt": "2026-10-18T02:02:00.413Z"
+      },
+      "synbench-2fdf3cdb25c646": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.7
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2075,
+          "output_tokens": 60
+        },
+        "latencyMs": 348,
+        "caseId": "synbench-2fdf3cdb25c646",
+        "inputHash": "15328497e41954138cffb0d1012d37a994fefa66976e72fe301bef50eab4c5b6",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5368,
+        "reservationMicrousd": 1285,
+        "measuredAt": "2026-10-18T02:02:00.375Z"
+      },
+      "synbench-2fe764f83e3edd": {
+        "scores": {
+          "drifted": 0.9,
+          "stalled": 0.16,
+          "tangentIsRelevant": 0.08
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2114,
+          "output_tokens": 60
+        },
+        "latencyMs": 457,
+        "caseId": "synbench-2fe764f83e3edd",
+        "inputHash": "7e29112c8568786b6e76aff1d4b979d502b710110e8132e6e5248dbcb6628211",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5462,
+        "reservationMicrousd": 1296,
+        "measuredAt": "2026-10-18T02:02:00.759Z"
+      },
+      "synbench-317f70ede09d1d": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.24
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2055,
+          "output_tokens": 60
+        },
+        "latencyMs": 344,
+        "caseId": "synbench-317f70ede09d1d",
+        "inputHash": "86e8644a93c15bd942bbee2fd4e49a3a4332f1a974fe6c60ff449359b77a775d",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5356,
+        "reservationMicrousd": 1283,
+        "measuredAt": "2026-10-18T02:02:00.719Z"
+      },
+      "synbench-3273744b9a9172": {
+        "scores": {
+          "drifted": 0.9,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.16
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2101,
+          "output_tokens": 60
+        },
+        "latencyMs": 447,
+        "caseId": "synbench-3273744b9a9172",
+        "inputHash": "71844f86c0164c2588a19809d6de1e18e8691b3947db7568e829ff91e5c583a0",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5467,
+        "reservationMicrousd": 1297,
+        "measuredAt": "2026-10-18T02:02:00.861Z"
+      },
+      "synbench-34851424f03c45": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.93,
+          "tangentIsRelevant": 0.31
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2124,
+          "output_tokens": 60
+        },
+        "latencyMs": 409,
+        "caseId": "synbench-34851424f03c45",
+        "inputHash": "4236cf59325d0f5678e9b2e25d25054aad74b949c84f9f1d1a92baba79385c14",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5483,
+        "reservationMicrousd": 1298,
+        "measuredAt": "2026-10-18T02:02:01.129Z"
+      },
+      "synbench-38f267af015128": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.15,
+          "tangentIsRelevant": 0.03
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2072,
+          "output_tokens": 60
+        },
+        "latencyMs": 429,
+        "caseId": "synbench-38f267af015128",
+        "inputHash": "66427eec864db07e516b7ce80321533c4528e11057423231a8b901d3d2ebe145",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5356,
+        "reservationMicrousd": 1283,
+        "measuredAt": "2026-10-18T02:02:01.189Z"
+      },
+      "synbench-3bc4bd6ea4d2c8": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.78
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2111,
+          "output_tokens": 60
+        },
+        "latencyMs": 472,
+        "caseId": "synbench-3bc4bd6ea4d2c8",
+        "inputHash": "dcb09c8266f67cf22ea4fa7d0e63630f24cb42848005e92a8639f94938d5757c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5476,
+        "reservationMicrousd": 1298,
+        "measuredAt": "2026-10-18T02:02:01.338Z"
+      },
+      "synbench-3d792cae7d17e0": {
+        "scores": {
+          "drifted": 0.93,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.06
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2062,
+          "output_tokens": 60
+        },
+        "latencyMs": 330,
+        "caseId": "synbench-3d792cae7d17e0",
+        "inputHash": "16074b9acce3ac7656359a269627d88f4b8cfffcc536c15f43a3eacc0a055a5c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5327,
+        "reservationMicrousd": 1280,
+        "measuredAt": "2026-10-18T02:02:01.460Z"
+      },
+      "synbench-3f6b9167d9814a": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.85,
+          "tangentIsRelevant": 0.25
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2090,
+          "output_tokens": 60
+        },
+        "latencyMs": 452,
+        "caseId": "synbench-3f6b9167d9814a",
+        "inputHash": "91f30274e21a007b5fc792e8dd9c6b23a2ab810fd20d2714c20aac94a912f010",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5409,
+        "reservationMicrousd": 1290,
+        "measuredAt": "2026-10-18T02:02:01.642Z"
+      },
+      "synbench-42567b5b899d66": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.19,
+          "tangentIsRelevant": 0.78
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2072,
+          "output_tokens": 60
+        },
+        "latencyMs": 482,
+        "caseId": "synbench-42567b5b899d66",
+        "inputHash": "25f54a8536bd25b15783c832dcbcb18a780aa14e36c615913e1ee346c72a7618",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5413,
+        "reservationMicrousd": 1290,
+        "measuredAt": "2026-10-18T02:02:01.820Z"
+      },
+      "synbench-450209fd7677f4": {
+        "scores": {
+          "drifted": 0.08,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.25
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2054,
+          "output_tokens": 60
+        },
+        "latencyMs": 335,
+        "caseId": "synbench-450209fd7677f4",
+        "inputHash": "c1aadfd15ef7d32a02dbc496efb1cec811fcb0fac37b563d06f0fe3219fc563c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5300,
+        "reservationMicrousd": 1276,
+        "measuredAt": "2026-10-18T02:02:01.795Z"
+      },
+      "synbench-460fd42a8fade1": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.85
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2101,
+          "output_tokens": 60
+        },
+        "latencyMs": 515,
+        "caseId": "synbench-460fd42a8fade1",
+        "inputHash": "6becdadaaec0ef5607646aa44e2244ab2786e2f502ad43c8b84c36c2b77607b8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5438,
+        "reservationMicrousd": 1293,
+        "measuredAt": "2026-10-18T02:02:02.157Z"
+      },
+      "synbench-4e20fa13f4b728": {
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.08
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2150,
+          "output_tokens": 60
+        },
+        "latencyMs": 450,
+        "caseId": "synbench-4e20fa13f4b728",
+        "inputHash": "ba77a11768c0044422b03a8270dd95e0da803ef2ccb6acc5a40330d5714dc95d",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5580,
+        "reservationMicrousd": 1310,
+        "measuredAt": "2026-10-18T02:02:02.245Z"
+      },
+      "synbench-4e2aa53bd6b3f8": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.9,
+          "tangentIsRelevant": 0.6
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2165,
+          "output_tokens": 60
+        },
+        "latencyMs": 447,
+        "caseId": "synbench-4e2aa53bd6b3f8",
+        "inputHash": "02920cb616d3a2ef0d648686b4353805dc85b3c571888edea72a6051453f8e7c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5628,
+        "reservationMicrousd": 1316,
+        "measuredAt": "2026-10-18T02:02:02.268Z"
+      },
+      "synbench-4ee43bde47006c": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.83,
+          "tangentIsRelevant": 0.62
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2126,
+          "output_tokens": 60
+        },
+        "latencyMs": 530,
+        "caseId": "synbench-4ee43bde47006c",
+        "inputHash": "ee63646eceaf1eba3fe107b89a9cbd9a7266995de43afe9916c1f5ecd0e47f44",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5494,
+        "reservationMicrousd": 1300,
+        "measuredAt": "2026-10-18T02:02:02.705Z"
+      },
+      "synbench-50d00380c22fae": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.93,
+          "tangentIsRelevant": 0.62
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2129,
+          "output_tokens": 60
+        },
+        "latencyMs": 478,
+        "caseId": "synbench-50d00380c22fae",
+        "inputHash": "f29d3e29c9b9e3c20e49ed900ea586b1dbe93d4eb7cd49d479ecf3bf6e2fea49",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5575,
+        "reservationMicrousd": 1309,
+        "measuredAt": "2026-10-18T02:02:02.724Z"
+      },
+      "synbench-52f6b77d44db38": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.89,
+          "tangentIsRelevant": 0.39
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2107,
+          "output_tokens": 60
+        },
+        "latencyMs": 452,
+        "caseId": "synbench-52f6b77d44db38",
+        "inputHash": "a8c33cb5988b0c93db6e800118288f7a47b207a07fe7584087c4a041016ed3aa",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5506,
+        "reservationMicrousd": 1301,
+        "measuredAt": "2026-10-18T02:02:02.728Z"
+      },
+      "synbench-54282cb1a7049b": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.61
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2085,
+          "output_tokens": 60
+        },
+        "latencyMs": 500,
+        "caseId": "synbench-54282cb1a7049b",
+        "inputHash": "13498fe0b7581741313a29de5d2afdcd5d0226a33fa3490ce1634d5ef78f5441",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5396,
+        "reservationMicrousd": 1288,
+        "measuredAt": "2026-10-18T02:02:03.206Z"
+      },
+      "synbench-55380de1d867e4": {
+        "scores": {
+          "drifted": 0.17,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.67
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2121,
+          "output_tokens": 60
+        },
+        "latencyMs": 465,
+        "caseId": "synbench-55380de1d867e4",
+        "inputHash": "2122e4321cca33e777c260b1060677effe691c1436b9420e69cb6f9eac8533ce",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5501,
+        "reservationMicrousd": 1301,
+        "measuredAt": "2026-10-18T02:02:03.190Z"
+      },
+      "synbench-56d8228d44ba2e": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.03
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2077,
+          "output_tokens": 60
+        },
+        "latencyMs": 447,
+        "caseId": "synbench-56d8228d44ba2e",
+        "inputHash": "4dafc5948fb7eb562486907001dea394d51bae4b704fb38cfd069bc5a908070a",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5363,
+        "reservationMicrousd": 1284,
+        "measuredAt": "2026-10-18T02:02:03.175Z"
+      },
+      "synbench-5ad4eece2f9aab": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.66
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2119,
+          "output_tokens": 60
+        },
+        "latencyMs": 500,
+        "caseId": "synbench-5ad4eece2f9aab",
+        "inputHash": "b258c2238587b185581562408a2b9a510152706ccf7b90e2402fe8a950f5fef1",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5509,
+        "reservationMicrousd": 1302,
+        "measuredAt": "2026-10-18T02:02:03.676Z"
+      },
+      "synbench-5dbf5beaa3744e": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.96,
+          "tangentIsRelevant": 0.2
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2073,
+          "output_tokens": 60
+        },
+        "latencyMs": 480,
+        "caseId": "synbench-5dbf5beaa3744e",
+        "inputHash": "ead2e6e2883a260a7fc8d2c5c41bb151c05778ef0158a6b02701925ae1ffa2a8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5410,
+        "reservationMicrousd": 1290,
+        "measuredAt": "2026-10-18T02:02:03.671Z"
+      },
+      "synbench-5e72866b9bdfc8": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.63
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2096,
+          "output_tokens": 60
+        },
+        "latencyMs": 482,
+        "caseId": "synbench-5e72866b9bdfc8",
+        "inputHash": "a0aebfb979314f41cf1a9ac18dc51449c8c1b674ec4217434aba10fef21b2889",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5482,
+        "reservationMicrousd": 1298,
+        "measuredAt": "2026-10-18T02:02:03.689Z"
+      },
+      "synbench-5ea8c854de7626": {
+        "scores": {
+          "drifted": 0.95,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.06
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2068,
+          "output_tokens": 60
+        },
+        "latencyMs": 483,
+        "caseId": "synbench-5ea8c854de7626",
+        "inputHash": "7c4a140aff87ab8e1b2e15508105841515a51d2f525dfd6abf6041b1cc456b05",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5386,
+        "reservationMicrousd": 1287,
+        "measuredAt": "2026-10-18T02:02:04.155Z"
+      },
+      "synbench-5fd856fca42911": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.21,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2086,
+          "output_tokens": 60
+        },
+        "latencyMs": 609,
+        "caseId": "synbench-5fd856fca42911",
+        "inputHash": "0dccf0bd5a26e40b7e779b8b00f1201b344a5374aa79ceb154e85634d32b4073",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5384,
+        "reservationMicrousd": 1287,
+        "measuredAt": "2026-10-18T02:02:04.286Z"
+      },
+      "synbench-638201f648e81c": {
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.84,
+          "tangentIsRelevant": 0.53
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2096,
+          "output_tokens": 60
+        },
+        "latencyMs": 597,
+        "caseId": "synbench-638201f648e81c",
+        "inputHash": "fb7be013bcbaf5ba2f5d8e3260df7942190c4c783edf5b2e7debc56bea979e76",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5419,
+        "reservationMicrousd": 1291,
+        "measuredAt": "2026-10-18T02:02:04.288Z"
+      },
+      "synbench-6ad35b3406a55f": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.96,
+          "tangentIsRelevant": 0.21
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2061,
+          "output_tokens": 60
+        },
+        "latencyMs": 501,
+        "caseId": "synbench-6ad35b3406a55f",
+        "inputHash": "c4183a82ec3ad92351397c9ef02d5f362fc3a65c442b6e5b342a491b09c6593d",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5374,
+        "reservationMicrousd": 1285,
+        "measuredAt": "2026-10-18T02:02:04.666Z"
+      },
+      "synbench-715604142dd867": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.12,
+          "tangentIsRelevant": 0.03
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2069,
+          "output_tokens": 60
+        },
+        "latencyMs": 477,
+        "caseId": "synbench-715604142dd867",
+        "inputHash": "a2b5d06baec649c9136216e53bd5d0e8262b7ade8174f8fbd800b7e84b2db172",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5353,
+        "reservationMicrousd": 1283,
+        "measuredAt": "2026-10-18T02:02:04.763Z"
+      },
+      "synbench-76bba9b4ecd3f7": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.56
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2106,
+          "output_tokens": 60
+        },
+        "latencyMs": 442,
+        "caseId": "synbench-76bba9b4ecd3f7",
+        "inputHash": "fe8f3d842ae6c720beb4c6d9f875658772f54431c5a629cb1d55998091f3e2cf",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5444,
+        "reservationMicrousd": 1294,
+        "measuredAt": "2026-10-18T02:02:04.730Z"
+      },
+      "synbench-796f752c61fd91": {
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.09
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2122,
+          "output_tokens": 60
+        },
+        "latencyMs": 453,
+        "caseId": "synbench-796f752c61fd91",
+        "inputHash": "66de64efef30c9f8725633339654d966db342f889b37591568e7eae106fd1cb1",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5539,
+        "reservationMicrousd": 1305,
+        "measuredAt": "2026-10-18T02:02:05.120Z"
+      },
+      "synbench-84be627a897dc6": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.2,
+          "tangentIsRelevant": 0.03
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2089,
+          "output_tokens": 60
+        },
+        "latencyMs": 460,
+        "caseId": "synbench-84be627a897dc6",
+        "inputHash": "05f7b9a14f20c085af1eab64d6784a4c1769ce7002a00490e6c5017103a11101",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5383,
+        "reservationMicrousd": 1286,
+        "measuredAt": "2026-10-18T02:02:05.190Z"
+      },
+      "synbench-8670f6a57ef5a7": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.53
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2089,
+          "output_tokens": 60
+        },
+        "latencyMs": 471,
+        "caseId": "synbench-8670f6a57ef5a7",
+        "inputHash": "27e1cc749948c731efe286e1bb1c02568707c2498dc3aeff28eaedb2d3c3015f",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5389,
+        "reservationMicrousd": 1287,
+        "measuredAt": "2026-10-18T02:02:05.235Z"
+      },
+      "synbench-86c3fe0479d55e": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.76
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2081,
+          "output_tokens": 60
+        },
+        "latencyMs": 467,
+        "caseId": "synbench-86c3fe0479d55e",
+        "inputHash": "8f784c72b2ce1d2c8322f2a3fda91151382a6efaf5ea23791e6c81df5a431cc9",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5383,
+        "reservationMicrousd": 1286,
+        "measuredAt": "2026-10-18T02:02:05.587Z"
+      },
+      "synbench-8980aa4ded11e9": {
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2075,
+          "output_tokens": 60
+        },
+        "latencyMs": 452,
+        "caseId": "synbench-8980aa4ded11e9",
+        "inputHash": "194a8c867d1597f1d43e730fda62ac282fb90aeb474969f4906854248f705480",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5353,
+        "reservationMicrousd": 1283,
+        "measuredAt": "2026-10-18T02:02:05.643Z"
+      },
+      "synbench-8b6131db4d5491": {
+        "scores": {
+          "drifted": 0.93,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.03
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2101,
+          "output_tokens": 60
+        },
+        "latencyMs": 459,
+        "caseId": "synbench-8b6131db4d5491",
+        "inputHash": "4bd95b2de116ccbd969b36195d2d745b99bd298edd935c5fbbec2f64fce44240",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5500,
+        "reservationMicrousd": 1300,
+        "measuredAt": "2026-10-18T02:02:05.695Z"
+      },
+      "synbench-8cc5c89d79fd6b": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.64
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2113,
+          "output_tokens": 60
+        },
+        "latencyMs": 470,
+        "caseId": "synbench-8cc5c89d79fd6b",
+        "inputHash": "96ae9b3456c4a43a0882431067f0bc027a952aceedad8bd0d121e79f6366e251",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5485,
+        "reservationMicrousd": 1299,
+        "measuredAt": "2026-10-18T02:02:06.057Z"
+      },
+      "synbench-8ed0f2add585e7": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.88
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2111,
+          "output_tokens": 60
+        },
+        "latencyMs": 524,
+        "caseId": "synbench-8ed0f2add585e7",
+        "inputHash": "6f38b66925938514c55520f74050a1e977a2754e705e5226eecb170cfbc490d8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5474,
+        "reservationMicrousd": 1297,
+        "measuredAt": "2026-10-18T02:02:06.174Z"
+      },
+      "synbench-91ae0299b24bf3": {
+        "scores": {
+          "drifted": 0.16,
+          "stalled": 0.93,
+          "tangentIsRelevant": 0.18
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2094,
+          "output_tokens": 60
+        },
+        "latencyMs": 355,
+        "caseId": "synbench-91ae0299b24bf3",
+        "inputHash": "e8dd1949800beab2922b0bcee55287664c420bc056fb676501c6492a70e7b8b0",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5414,
+        "reservationMicrousd": 1290,
+        "measuredAt": "2026-10-18T02:02:06.050Z"
+      },
+      "synbench-92d675addfe21a": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.46
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2091,
+          "output_tokens": 60
+        },
+        "latencyMs": 342,
+        "caseId": "synbench-92d675addfe21a",
+        "inputHash": "bbb0fb02fffddb2164ff4cd85aaa11657870d90e568364cb3c35e4068170f462",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5401,
+        "reservationMicrousd": 1289,
+        "measuredAt": "2026-10-18T02:02:06.394Z"
+      },
+      "synbench-96881bffa7a081": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.73
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2108,
+          "output_tokens": 60
+        },
+        "latencyMs": 462,
+        "caseId": "synbench-96881bffa7a081",
+        "inputHash": "557d0d3e2bf06b0d66b1effa1b1536e032650d4bfe30a451edb85e4e9ec63bcf",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5467,
+        "reservationMicrousd": 1297,
+        "measuredAt": "2026-10-18T02:02:06.520Z"
+      },
+      "synbench-9e8b370525e040": {
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.13,
+          "tangentIsRelevant": 0.08
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2079,
+          "output_tokens": 60
+        },
+        "latencyMs": 347,
+        "caseId": "synbench-9e8b370525e040",
+        "inputHash": "f0e7b62ba9c826ef7cb5934c4532713c36afd8aa5f9503fe1027a9c292ed64cd",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5357,
+        "reservationMicrousd": 1283,
+        "measuredAt": "2026-10-18T02:02:06.522Z"
+      },
+      "synbench-a092cb357dd7ca": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.55
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2106,
+          "output_tokens": 60
+        },
+        "latencyMs": 355,
+        "caseId": "synbench-a092cb357dd7ca",
+        "inputHash": "2b42d86459a82125b17c3b84f78b3f0c3c4d073dc9c47cea8c839cf00bf2c7ea",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5450,
+        "reservationMicrousd": 1294,
+        "measuredAt": "2026-10-18T02:02:06.749Z"
+      },
+      "synbench-a3bdb7b9e4de2f": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.82
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2086,
+          "output_tokens": 60
+        },
+        "latencyMs": 374,
+        "caseId": "synbench-a3bdb7b9e4de2f",
+        "inputHash": "71fd4c9397af3d3632b4708557f56d8d223e9f526e1e4773b89912e21636b43e",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5443,
+        "reservationMicrousd": 1294,
+        "measuredAt": "2026-10-18T02:02:06.895Z"
+      },
+      "synbench-a79393f385ce35": {
+        "scores": {
+          "drifted": 0.07,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.56
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2103,
+          "output_tokens": 60
+        },
+        "latencyMs": 459,
+        "caseId": "synbench-a79393f385ce35",
+        "inputHash": "3d343cbf7df2221c2b3cd218f1e7c1ee5fa50ac828f5dd2cfcfd8ec6ce734863",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5452,
+        "reservationMicrousd": 1295,
+        "measuredAt": "2026-10-18T02:02:06.981Z"
+      },
+      "synbench-ad73c6ccfb2422": {
+        "scores": {
+          "drifted": 0.07,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.8
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2117,
+          "output_tokens": 60
+        },
+        "latencyMs": 335,
+        "caseId": "synbench-ad73c6ccfb2422",
+        "inputHash": "8c89f7a73a402c3a850dba18adbaeee13a2f115f0bc4a02b11668100e4133528",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5480,
+        "reservationMicrousd": 1298,
+        "measuredAt": "2026-10-18T02:02:07.085Z"
+      },
+      "synbench-aeedd9c9c5be49": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.72,
+          "tangentIsRelevant": 0.26
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2059,
+          "output_tokens": 60
+        },
+        "latencyMs": 398,
+        "caseId": "synbench-aeedd9c9c5be49",
+        "inputHash": "fcac03414ca40304b37a5c2ff997c3d06a3f56a11b31ff9e45118cfe0935cb85",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5320,
+        "reservationMicrousd": 1279,
+        "measuredAt": "2026-10-18T02:02:07.293Z"
+      },
+      "synbench-af3e3dca53461d": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.75
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2103,
+          "output_tokens": 60
+        },
+        "latencyMs": 487,
+        "caseId": "synbench-af3e3dca53461d",
+        "inputHash": "93a73a97ec9f756f7452604d4ba99a09840815bb3a2625833f9acf1900c99234",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5426,
+        "reservationMicrousd": 1292,
+        "measuredAt": "2026-10-18T02:02:07.479Z"
+      },
+      "synbench-b5805f90b4b586": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.25
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2082,
+          "output_tokens": 60
+        },
+        "latencyMs": 465,
+        "caseId": "synbench-b5805f90b4b586",
+        "inputHash": "6da02dcdcdb608f15377b48eca145b4086dbc5253db54da452de6172c032ff0d",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5366,
+        "reservationMicrousd": 1284,
+        "measuredAt": "2026-10-18T02:02:07.551Z"
+      },
+      "synbench-b6936509c3f02e": {
+        "scores": {
+          "drifted": 0.92,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.08
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2100,
+          "output_tokens": 60
+        },
+        "latencyMs": 511,
+        "caseId": "synbench-b6936509c3f02e",
+        "inputHash": "01d99be1cebf7bfc28dcf223d73c1e743c0d26f845d4cd3854622a077104037b",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5420,
+        "reservationMicrousd": 1291,
+        "measuredAt": "2026-10-18T02:02:07.809Z"
+      },
+      "synbench-be77f92fa2eb82": {
+        "scores": {
+          "drifted": 0.42,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.05
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2077,
+          "output_tokens": 60
+        },
+        "latencyMs": 364,
+        "caseId": "synbench-be77f92fa2eb82",
+        "inputHash": "a7404565d1fbb4f6ebf6a9201e15fd33f576aed1fa4dbfb345cf274f639e6aa5",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5347,
+        "reservationMicrousd": 1282,
+        "measuredAt": "2026-10-18T02:02:07.843Z"
+      },
+      "synbench-beb2cb490993f2": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.91
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2117,
+          "output_tokens": 60
+        },
+        "latencyMs": 467,
+        "caseId": "synbench-beb2cb490993f2",
+        "inputHash": "3ec2f6a7c28166dea22ed200397761ce4ad49fd4a189b153e1823b81ed6aed25",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5539,
+        "reservationMicrousd": 1305,
+        "measuredAt": "2026-10-18T02:02:08.019Z"
+      },
+      "synbench-c02e568db4112b": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.93,
+          "tangentIsRelevant": 0.37
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2067,
+          "output_tokens": 60
+        },
+        "latencyMs": 449,
+        "caseId": "synbench-c02e568db4112b",
+        "inputHash": "6b803478d6a3c2ea32e3b5a4f02d6dc023ac5a45401110ed404574a4bc1494a9",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5395,
+        "reservationMicrousd": 1288,
+        "measuredAt": "2026-10-18T02:02:08.258Z"
+      },
+      "synbench-c25b70a250055c": {
+        "scores": {
+          "drifted": 0.88,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.07
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2114,
+          "output_tokens": 60
+        },
+        "latencyMs": 350,
+        "caseId": "synbench-c25b70a250055c",
+        "inputHash": "c12253beab1148f53ba881f448856ab4e590b42c37c87c46a23799df8ea1f626",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5515,
+        "reservationMicrousd": 1302,
+        "measuredAt": "2026-10-18T02:02:08.193Z"
+      },
+      "synbench-c7092d2a180da2": {
+        "scores": {
+          "drifted": 0.98,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2080,
+          "output_tokens": 60
+        },
+        "latencyMs": 505,
+        "caseId": "synbench-c7092d2a180da2",
+        "inputHash": "235499d5a39ca08c8fcb57390bf24859f934e8365e27180620a03f2635c3a88b",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5377,
+        "reservationMicrousd": 1286,
+        "measuredAt": "2026-10-18T02:02:08.524Z"
+      },
+      "synbench-cbc82130d01f6f": {
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.25,
+          "tangentIsRelevant": 0.11
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2122,
+          "output_tokens": 60
+        },
+        "latencyMs": 464,
+        "caseId": "synbench-cbc82130d01f6f",
+        "inputHash": "e41ceb6a43c53670d6c4ac2af7307b7966c8444707e96fc1b32212adf63e3745",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5548,
+        "reservationMicrousd": 1306,
+        "measuredAt": "2026-10-18T02:02:08.658Z"
+      },
+      "synbench-cbdaa9da3c8de3": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.79
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2076,
+          "output_tokens": 60
+        },
+        "latencyMs": 452,
+        "caseId": "synbench-cbdaa9da3c8de3",
+        "inputHash": "b79882b7f658672f8cabf22aafa9ef8c73ba9f4207be24d4f73b867bba4fcd33",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5428,
+        "reservationMicrousd": 1292,
+        "measuredAt": "2026-10-18T02:02:08.710Z"
+      },
+      "synbench-cc09acedc1cbe2": {
+        "scores": {
+          "drifted": 0.11,
+          "stalled": 0.91,
+          "tangentIsRelevant": 0.64
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2084,
+          "output_tokens": 60
+        },
+        "latencyMs": 467,
+        "caseId": "synbench-cc09acedc1cbe2",
+        "inputHash": "99795f8370b1f5c217877e81067fba4bb13e3e7dce57c4767e514250a5ecede1",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5386,
+        "reservationMicrousd": 1287,
+        "measuredAt": "2026-10-18T02:02:08.997Z"
+      },
+      "synbench-cc7c404554a946": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.6
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2110,
+          "output_tokens": 60
+        },
+        "latencyMs": 474,
+        "caseId": "synbench-cc7c404554a946",
+        "inputHash": "e1be3aa608ecf2fcaf9455dd65d406177c4f967a6da943364fe47ac16b764f91",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5527,
+        "reservationMicrousd": 1304,
+        "measuredAt": "2026-10-18T02:02:09.133Z"
+      },
+      "synbench-cf5046facf0daa": {
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.53
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2109,
+          "output_tokens": 60
+        },
+        "latencyMs": 466,
+        "caseId": "synbench-cf5046facf0daa",
+        "inputHash": "0c3ae815f746481aa0694f06502af10031b2884d67d6b191c952a60c15cf29db",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5530,
+        "reservationMicrousd": 1304,
+        "measuredAt": "2026-10-18T02:02:09.178Z"
+      },
+      "synbench-d1020df3173bf7": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.63
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2098,
+          "output_tokens": 60
+        },
+        "latencyMs": 462,
+        "caseId": "synbench-d1020df3173bf7",
+        "inputHash": "dc87f72db3557c9650a591207cd3ff1b7d49891ace950d6af5b450720fd7c429",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5458,
+        "reservationMicrousd": 1295,
+        "measuredAt": "2026-10-18T02:02:09.460Z"
+      },
+      "synbench-d2e95646377fe3": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.16,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2101,
+          "output_tokens": 60
+        },
+        "latencyMs": 433,
+        "caseId": "synbench-d2e95646377fe3",
+        "inputHash": "4801e32fe1453bf9dad770805186b6492a423dc4c350e4ff75a2e4ee54e9765b",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5425,
+        "reservationMicrousd": 1291,
+        "measuredAt": "2026-10-18T02:02:09.567Z"
+      },
+      "synbench-d535d89f1a03b2": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.86,
+          "tangentIsRelevant": 0.34
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2111,
+          "output_tokens": 60
+        },
+        "latencyMs": 453,
+        "caseId": "synbench-d535d89f1a03b2",
+        "inputHash": "2a6a4f41ef06c875dae2405c445eb70edab8abf7d2334ba986af978366750dbc",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5456,
+        "reservationMicrousd": 1295,
+        "measuredAt": "2026-10-18T02:02:09.631Z"
+      },
+      "synbench-d54672a2084be2": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.77
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2102,
+          "output_tokens": 60
+        },
+        "latencyMs": 481,
+        "caseId": "synbench-d54672a2084be2",
+        "inputHash": "9718cb2fefbecc8e851639b61a5fdd389ba8eabbf8b3cabe6a02634ce3cd013b",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5440,
+        "reservationMicrousd": 1293,
+        "measuredAt": "2026-10-18T02:02:09.942Z"
+      },
+      "synbench-d88e9bfc90d882": {
+        "scores": {
+          "drifted": 0.93,
+          "stalled": 0.18,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2082,
+          "output_tokens": 60
+        },
+        "latencyMs": 467,
+        "caseId": "synbench-d88e9bfc90d882",
+        "inputHash": "da52668bc64354646fb43fbec9cfd0b3c46c9d853a4570d6917f22ebc979cdd6",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5363,
+        "reservationMicrousd": 1284,
+        "measuredAt": "2026-10-18T02:02:10.034Z"
+      },
+      "synbench-d9a6f29bb3b314": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.78
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2110,
+          "output_tokens": 60
+        },
+        "latencyMs": 531,
+        "caseId": "synbench-d9a6f29bb3b314",
+        "inputHash": "35605ca604d35b7cbd7a22ea8e8272f8083d9a776ba6d7bc791cc5d9ce9d2967",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5521,
+        "reservationMicrousd": 1303,
+        "measuredAt": "2026-10-18T02:02:10.163Z"
+      },
+      "synbench-dd4e0299b15f6c": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2082,
+          "output_tokens": 60
+        },
+        "latencyMs": 453,
+        "caseId": "synbench-dd4e0299b15f6c",
+        "inputHash": "f613b3d12dacbffe038e435edc2107d56951ba5265341fc296fc4fb5d604e87b",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5372,
+        "reservationMicrousd": 1285,
+        "measuredAt": "2026-10-18T02:02:10.395Z"
+      },
+      "synbench-de0b178273bd1c": {
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.76,
+          "tangentIsRelevant": 0.49
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2099,
+          "output_tokens": 60
+        },
+        "latencyMs": 467,
+        "caseId": "synbench-de0b178273bd1c",
+        "inputHash": "b0cbdc58bb4092eec76e511c08e234c74c36e1e4db914195360306913c4a6bf1",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5433,
+        "reservationMicrousd": 1292,
+        "measuredAt": "2026-10-18T02:02:10.510Z"
+      },
+      "synbench-df52e7f6a5e454": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.23,
+          "tangentIsRelevant": 0.02
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2070,
+          "output_tokens": 60
+        },
+        "latencyMs": 440,
+        "caseId": "synbench-df52e7f6a5e454",
+        "inputHash": "e25057d3b442e2b85839ce564c734438039dbed892cd0ea5f1ff33fcdb6a18b4",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5344,
+        "reservationMicrousd": 1282,
+        "measuredAt": "2026-10-18T02:02:10.604Z"
+      },
+      "synbench-e1cfb5e0dd946f": {
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.03
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2066,
+          "output_tokens": 60
+        },
+        "latencyMs": 464,
+        "caseId": "synbench-e1cfb5e0dd946f",
+        "inputHash": "ed08c610e6fdc3f77c5238f915054c8b5236164b4248032f25fad197fde19005",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5321,
+        "reservationMicrousd": 1279,
+        "measuredAt": "2026-10-18T02:02:10.859Z"
+      },
+      "synbench-e27fb0ddc58763": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.33
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2085,
+          "output_tokens": 60
+        },
+        "latencyMs": 473,
+        "caseId": "synbench-e27fb0ddc58763",
+        "inputHash": "20431dc4488a75193d27de5717fb8a1cb63ee0a69e9c81ecc2f621a6068eadf6",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5389,
+        "reservationMicrousd": 1287,
+        "measuredAt": "2026-10-18T02:02:10.983Z"
+      },
+      "synbench-e29be21a85173e": {
+        "scores": {
+          "drifted": 0.93,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.17
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2095,
+          "output_tokens": 60
+        },
+        "latencyMs": 441,
+        "caseId": "synbench-e29be21a85173e",
+        "inputHash": "222dde9dbe68c546c6931b798e733ad6275308e0af2c1d4e18218e2a01ff79a8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5398,
+        "reservationMicrousd": 1288,
+        "measuredAt": "2026-10-18T02:02:11.045Z"
+      },
+      "synbench-e4414eed0636a1": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.5
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2109,
+          "output_tokens": 60
+        },
+        "latencyMs": 465,
+        "caseId": "synbench-e4414eed0636a1",
+        "inputHash": "81fa44469a8c92f333249f8745fac87f1fcb75070fb3996a88721bc2be103183",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5512,
+        "reservationMicrousd": 1302,
+        "measuredAt": "2026-10-18T02:02:11.325Z"
+      },
+      "synbench-e44e2d35609d27": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.85
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2111,
+          "output_tokens": 60
+        },
+        "latencyMs": 347,
+        "caseId": "synbench-e44e2d35609d27",
+        "inputHash": "bd1651bda610163c603d5e8698dcd9432f04a42b86a3ec75886d9563cb55870d",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5464,
+        "reservationMicrousd": 1296,
+        "measuredAt": "2026-10-18T02:02:11.330Z"
+      },
+      "synbench-e50796d44cfc30": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.87
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2109,
+          "output_tokens": 60
+        },
+        "latencyMs": 439,
+        "caseId": "synbench-e50796d44cfc30",
+        "inputHash": "37eb13621e1ab64c82200848ce9d7bce0e91bfe3605fbd8723f963b96d116ad8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5524,
+        "reservationMicrousd": 1303,
+        "measuredAt": "2026-10-18T02:02:11.485Z"
+      },
+      "synbench-e61e64937d7ef3": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.28
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2099,
+          "output_tokens": 60
+        },
+        "latencyMs": 437,
+        "caseId": "synbench-e61e64937d7ef3",
+        "inputHash": "1e11da74ce323894dd9284eed914aa5d712cd32dc4c2b6de24c888b6b1ef4fbb",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5420,
+        "reservationMicrousd": 1291,
+        "measuredAt": "2026-10-18T02:02:11.762Z"
+      },
+      "synbench-e907d93a97d78b": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.86
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2081,
+          "output_tokens": 60
+        },
+        "latencyMs": 351,
+        "caseId": "synbench-e907d93a97d78b",
+        "inputHash": "475679015076a7f96dae4aec7d88ea3cb38c880b85758649b0bf3b68dfcb2664",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5443,
+        "reservationMicrousd": 1294,
+        "measuredAt": "2026-10-18T02:02:11.682Z"
+      },
+      "synbench-ec033475f1fed4": {
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.04
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2126,
+          "output_tokens": 60
+        },
+        "latencyMs": 462,
+        "caseId": "synbench-ec033475f1fed4",
+        "inputHash": "35281c24b62a4cf847a983237ea130119977ac775a79954fe914c1f56f125012",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5542,
+        "reservationMicrousd": 1306,
+        "measuredAt": "2026-10-18T02:02:11.958Z"
+      },
+      "synbench-ee446d4ff13123": {
+        "scores": {
+          "drifted": 0.95,
+          "stalled": 0.2,
+          "tangentIsRelevant": 0.06
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2117,
+          "output_tokens": 60
+        },
+        "latencyMs": 352,
+        "caseId": "synbench-ee446d4ff13123",
+        "inputHash": "587b703ae73c3ef38cc2333c20879937fd4c847d0b5eb13bb51586d2fe89e0a8",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5497,
+        "reservationMicrousd": 1300,
+        "measuredAt": "2026-10-18T02:02:12.035Z"
+      },
+      "synbench-f45f09321620dd": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.91,
+          "tangentIsRelevant": 0.35
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2094,
+          "output_tokens": 60
+        },
+        "latencyMs": 424,
+        "caseId": "synbench-f45f09321620dd",
+        "inputHash": "717b2452a2b60fa8d495a83b2628483a591e4ac86d0c6fda954c3b84582b54f5",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5404,
+        "reservationMicrousd": 1289,
+        "measuredAt": "2026-10-18T02:02:12.187Z"
+      },
+      "synbench-f87db7f57b3452": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.68
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2113,
+          "output_tokens": 60
+        },
+        "latencyMs": 469,
+        "caseId": "synbench-f87db7f57b3452",
+        "inputHash": "fd57e887cda60616cd65b2461acb1749b684c42d9568e5d18d81fb49be7ba082",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5470,
+        "reservationMicrousd": 1297,
+        "measuredAt": "2026-10-18T02:02:12.428Z"
+      },
+      "synbench-fa234f07abb6e6": {
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.69
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2060,
+          "output_tokens": 60
+        },
+        "latencyMs": 435,
+        "caseId": "synbench-fa234f07abb6e6",
+        "inputHash": "89b57b2eecd0c129f59f4ff0b7c4beb06249ace4cdf72d0b53ff0a69c76cc113",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5324,
+        "reservationMicrousd": 1279,
+        "measuredAt": "2026-10-18T02:02:12.471Z"
+      },
+      "synbench-fc8e7f1f9ba74e": {
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.9,
+          "tangentIsRelevant": 0.4
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2033,
+          "output_tokens": 60
+        },
+        "latencyMs": 369,
+        "caseId": "synbench-fc8e7f1f9ba74e",
+        "inputHash": "021fd385e2afc1c2ec4ce7fb6d168aaf36ac278dbcb00b5c8ba58c3a689ee427",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5242,
+        "reservationMicrousd": 1270,
+        "measuredAt": "2026-10-18T02:02:12.557Z"
+      },
+      "synbench-fd535bd7287947": {
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.16
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2096,
+          "output_tokens": 60
+        },
+        "latencyMs": 493,
+        "caseId": "synbench-fd535bd7287947",
+        "inputHash": "39b891cb984621c72b87704f06fd894abd40dc67e9d396a9be99b01f7ffcb28a",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5482,
+        "reservationMicrousd": 1298,
+        "measuredAt": "2026-10-18T02:02:12.924Z"
+      },
+      "synbench-feea642b973de6": {
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.76
+        },
+        "model": "typesafe-ai/jev-1.14.0",
+        "questionVersion": "v4",
+        "usage": {
+          "input_tokens": 2105,
+          "output_tokens": 60
+        },
+        "latencyMs": 337,
+        "caseId": "synbench-feea642b973de6",
+        "inputHash": "1a2026182db070a7515eee60ef2b3490d39a3ebc002bd8e7009bafd4850f189c",
+        "requestedModel": "typesafe-ai/jev-1.14.0",
+        "payloadBytes": 5437,
+        "reservationMicrousd": 1293,
+        "measuredAt": "2026-10-18T02:02:12.809Z"
+      }
+    }
+  }
+}

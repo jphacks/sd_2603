@@ -1,0 +1,1472 @@
+{
+  "analyzedAfterPrimaryFinal": true,
+  "primaryFinalMeasuredAt": "2026-10-18T02:02:12.952Z",
+  "n": 50,
+  "primaryShadowAgreement": 50,
+  "jevShadowAgreement": 50,
+  "primaryCounts": {
+    "OK": 19,
+    "INTERVENE_STALLED": 14,
+    "INTERVENE_DRIFT": 17
+  },
+  "shadowCounts": {
+    "OK": 19,
+    "INTERVENE_STALLED": 14,
+    "INTERVENE_DRIFT": 17
+  },
+  "uncertainShadow": 0,
+  "groups": 14,
+  "authors": {
+    "author_a": 24,
+    "author_c": 26
+  },
+  "limitations": [
+    "Fresh context saw only opaque inputs and common rubric; no generation intent, primary gold, Jev output or target80%.",
+    "Same GPT model family; not human gold or independent model-family validation.",
+    "Convenience subset sampled from core heldouts available when audit packet was prepared; not the full500 or an additional optimization set.",
+    "Analyzed only after frozen primary final; primary labels, model policy and denominator remain unchanged."
+  ],
+  "rows": [
+    {
+      "opaqueId": "shadow-000",
+      "sourceId": "synbench-86c3fe0479d55e",
+      "inputHash": "f71804ed989424678c7552e28ddbcef1c692ef1fd150f72ff2d111483779eb8e",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-000",
+        "status": "OK",
+        "reason": "四分の個人試算を合意しており、現在二分で箱別・送料別の計算を続けている。共有を待つことは合意した手順に沿う。",
+        "evidenceTurns": [
+          0,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-001",
+      "sourceId": "synbench-b5805f90b4b586",
+      "inputHash": "b625ea20aef0045dc5b7aa58e23e70bffe28dffc539b4b8ca23f9bd19c0af842",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-001",
+        "status": "INTERVENE_STALLED",
+        "reason": "施錠による保護と設営への運びやすさの主張を同じ理由で往復し、比較基準や調整案が増えない。",
+        "evidenceTurns": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-002",
+      "sourceId": "synbench-5ad4eece2f9aab",
+      "inputHash": "aa4fba8e123f60f67182e42e43e2ae7a03123b5081092c00df12e214470ea4fc",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-002",
+        "status": "OK",
+        "reason": "夕方二十件の内訳から案内・書類預かりと本人確認処理を分け、翌週に待ち時間を記録する次の手順まで進んだ。",
+        "evidenceTurns": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-003",
+      "sourceId": "synbench-8ed0f2add585e7",
+      "inputHash": "be683a27ce2b23e2eaf0853c41d98e502f2d2bddc0857e2dacd08c36bc822c84",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-003",
+        "status": "OK",
+        "reason": "体育館の利用確認例を共同スペースの前日確認・電話・待機組連絡に具体化し、登録表確認と団体への聞き取りを分担した。",
+        "evidenceTurns": [
+          1,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-004",
+      "sourceId": "synbench-715604142dd867",
+      "inputHash": "85944ef1aefac8ee76cfff82393a8c4f4d03c09c4419a9990a2eb9166e9dcc49",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-004",
+        "status": "INTERVENE_DRIFT",
+        "reason": "不足六人を募る議題に戻そうとする発言後も、劇の主役・台詞・公演年表の話が継続し購入条件へ復帰していない。",
+        "evidenceTurns": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-005",
+      "sourceId": "synbench-ad73c6ccfb2422",
+      "inputHash": "ffaa90accace368311849f4f8ff7faff87a84a23b670a0253b2fb664f9dd1fe8",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-005",
+        "status": "OK",
+        "reason": "八分と三分の測定終点の違いを修正し、校庭での四分に着目して記録分割と曲がり角の誘導検討へ進んだ。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-006",
+      "sourceId": "synbench-55380de1d867e4",
+      "inputHash": "39fe7df61e8e09b086597e1dd8319a4b466e5dbcf7b42409c4228f622486c9cf",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-006",
+        "status": "OK",
+        "reason": "採否を留保する発散の合意に従い、持ち場所表示・写真・受取確認・試し搬入と傷防止案が増えている。",
+        "evidenceTurns": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-007",
+      "sourceId": "synbench-56d8228d44ba2e",
+      "inputHash": "b870fb5b8cb5fb2fa387ce40dba3a8cc00282ef40b4225743da0bef3af6f0c69",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-007",
+        "status": "INTERVENE_DRIFT",
+        "reason": "二重予約防止から家庭の受話器修理、棚の色、居間の壁紙に合うカタログへ移り、受付運用の比較へ戻らない。",
+        "evidenceTurns": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-008",
+      "sourceId": "synbench-460fd42a8fade1",
+      "inputHash": "6bbd5e941bfdcdb15e4c200491a5227f190772d6d0fc8290742dcd64def69b86",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-008",
+        "status": "OK",
+        "reason": "診療所の入替時間の例が片付け十分を予約枠へ含める二方式の比較に結び付き、過去五件で時間の妥当性を確かめる。",
+        "evidenceTurns": [
+          1,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-009",
+      "sourceId": "synbench-fc8e7f1f9ba74e",
+      "inputHash": "d8558c771c99e89b43826e9b5df7e036819d1c9d47171104906e2572027db8c1",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-009",
+        "status": "INTERVENE_STALLED",
+        "reason": "一箱六十円増という回答と単位の補足を受けても増額の同じ質問を繰り返し、末尾で最初の質問へ戻っている。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-010",
+      "sourceId": "synbench-aeedd9c9c5be49",
+      "inputHash": "3d5df6fc83b13018cccb58c16ad58c9362e82e9cc3291484b8c162127a2db102",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-010",
+        "status": "INTERVENE_STALLED",
+        "reason": "最低額八万円、送料を除く商品合計と繰り返し回答済みだが、参加に必要な額の確認が解消せず反復している。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-011",
+      "sourceId": "synbench-4ee43bde47006c",
+      "inputHash": "7ddfc166981ca4817d72ffdf0ebe22cc7082c0cf85e275804d057dc1201d4f05",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-011",
+        "status": "INTERVENE_STALLED",
+        "reason": "営業と運用が費用区分と口座権限を理由に発注を互いへ戻し、二十枚が未手配と確認しても同じ依頼を送り返している。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-012",
+      "sourceId": "synbench-e27fb0ddc58763",
+      "inputHash": "558b5f9ffeaf07e930c85709b035dbed88c98d6fe1e250b1e1a54752582ba097",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-012",
+        "status": "INTERVENE_STALLED",
+        "reason": "他人の変更を守る停止案と自分の作業を守る保存案を同じ理由で繰り返し、両立手段や判断基準が出ていない。",
+        "evidenceTurns": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-013",
+      "sourceId": "synbench-d2e95646377fe3",
+      "inputHash": "6e78adedae38325498b283592bbdc4dd36bfe7fa949bf251af2692891e19d6ac",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-013",
+        "status": "INTERVENE_DRIFT",
+        "reason": "確定済みの背景色へ戻る提案から洋館の壁紙や応接室の模様へ移り、衝突通知へ戻す指摘の後も写真比較が続く。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-014",
+      "sourceId": "synbench-fa234f07abb6e6",
+      "inputHash": "4eb7793380fc38f9971be407dd72b97bcf103707fdf244b8521dbfe008a64a60",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-014",
+        "status": "OK",
+        "reason": "三分の黙読を合意し現在一分と明示され、各自が記録確認と表への転記を続けている。中断を要する停滞ではない。",
+        "evidenceTurns": [
+          0,
+          2,
+          3,
+          4,
+          5
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-015",
+      "sourceId": "synbench-4e20fa13f4b728",
+      "inputHash": "ac2476bc8412a7eb4b49741cabc3553c9c4547ffc296ff7bdbe6fe50f9df4b79",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-015",
+        "status": "INTERVENE_DRIFT",
+        "reason": "一人窓口での対応範囲を決める話から宣伝動画に移り、人数不足は解消しないとの指摘後も服装や音楽を選び続けている。",
+        "evidenceTurns": [
+          0,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-016",
+      "sourceId": "synbench-2fe764f83e3edd",
+      "inputHash": "2a5c08a4c678e5dc12340e9f222d60b6bc79dfff56f24d273b61f504c4469d3c",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-016",
+        "status": "INTERVENE_DRIFT",
+        "reason": "了承済みの招待状意匠へ戻り、搬入作品の置き場を見たいとの指摘後も三角や線の太さ・色の比較を続けている。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-017",
+      "sourceId": "synbench-e1cfb5e0dd946f",
+      "inputHash": "67ddef23be006280301c95bf01e8082654e6e16483ebc81c5ce1177a2605a2f8",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-017",
+        "status": "INTERVENE_DRIFT",
+        "reason": "試料の仮名から映画・衣装展示・週末の外出と入場券や席の比較へ進み、記録項目の選定へ復帰していない。",
+        "evidenceTurns": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-018",
+      "sourceId": "synbench-38f267af015128",
+      "inputHash": "bac8d6234d5dad248d577bcc9902d87704e128bbf97836982bf3dd607308cd7e",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-018",
+        "status": "INTERVENE_DRIFT",
+        "reason": "最低人数の比較へ戻そうとした後もカードの背番号、光沢、年代別印刷の話が続いている。",
+        "evidenceTurns": [
+          0,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-019",
+      "sourceId": "synbench-0aa35200c30cd9",
+      "inputHash": "22e90154a881e588439ec91947d25a5e966d02341452363f58d1d275e38fa57a",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-019",
+        "status": "OK",
+        "reason": "倉庫の思い出は切り上げられ、六箱の保管限界と四箱の即使用、分納二千円を組み合わせて個別購入費との比較へ戻った。",
+        "evidenceTurns": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-020",
+      "sourceId": "synbench-245c571497165c",
+      "inputHash": "1d2abbfc910ef942841d2db2d5661e49157fd57d98a51a829485df5577565d18",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-020",
+        "status": "INTERVENE_DRIFT",
+        "reason": "点呼で名簿を探す問題から印の枠や朱色の歴史へ移り、名簿配置を見ようという指摘後も古い印の一覧を出している。",
+        "evidenceTurns": [
+          0,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-021",
+      "sourceId": "synbench-3f6b9167d9814a",
+      "inputHash": "1deae8a4a0ada186618bd81c6c898a15ba2a1eb61003836b830b70518e6d05f9",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-021",
+        "status": "INTERVENE_STALLED",
+        "reason": "判断表が空欄で基準未設定と認識されても、群間比較と相関を選ぶという希望の反復にとどまり締切表に入れる分析が選べない。",
+        "evidenceTurns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-022",
+      "sourceId": "synbench-d54672a2084be2",
+      "inputHash": "c38f519d5970da9af68e77b9c64df23d4d0830c792e661ae33a560b092e90ad4",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-022",
+        "status": "OK",
+        "reason": "十分を握力の限界ではなく二十個の処理時間と訂正し、持ち替え回数を別列にして二指標で比較する整理が進んでいる。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-023",
+      "sourceId": "synbench-84be627a897dc6",
+      "inputHash": "198527705dca7b1d771d98a1347c20c2e30ee5bb01a489f644c4d5f25a34c940",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-023",
+        "status": "INTERVENE_DRIFT",
+        "reason": "持ち替え頻度の試験比較から対象外の梱包動物の種・爪・鼻の写真比較へ移り、試験結果へ戻す指摘後も復帰していない。",
+        "evidenceTurns": [
+          0,
+          1,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-024",
+      "sourceId": "synbench-2fdf3cdb25c646",
+      "inputHash": "4d581a31fe2e7de7cb28c8a6dbdc8860ce48b4b082e2f9ec52ee767647182fcf",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-024",
+        "status": "OK",
+        "reason": "試用の理解困難を受けて文章比較と差分表示、下書き保持、共有版上書きの保留、採用通知を具体的に確定している。",
+        "evidenceTurns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-025",
+      "sourceId": "synbench-22fc0c3766ef44",
+      "inputHash": "fc6068ee30277a54260542de2ececc83c155f46db7b01c1e795d9277cb3d232a",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-025",
+        "status": "INTERVENE_STALLED",
+        "reason": "記録の細かさの希望だけが反復され、比較項目は未定、投票の合意もなく、選び直しても同じ二択の対立が残る。",
+        "evidenceTurns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-026",
+      "sourceId": "synbench-92d675addfe21a",
+      "inputHash": "2767d5df11cb48fa9d222f8d0340e2642c2dae40c1c28d8ec5c2aa3616f2882e",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-026",
+        "status": "INTERVENE_STALLED",
+        "reason": "気付きやすい中央警告と作業を邪魔しない欄内表示の理由を繰り返し、比較の方法や折り合う選択肢が増えない。",
+        "evidenceTurns": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-027",
+      "sourceId": "synbench-149c39e764f9ec",
+      "inputHash": "c437a2847eef67375ca4fe99cde832593f121a03c01d710e040c6ce5feb8f4d5",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-027",
+        "status": "INTERVENE_STALLED",
+        "reason": "確定名簿の四十名全員という配布人数を何度回答しても人数の質問が反復し、枚数決定の確認が解消していない。",
+        "evidenceTurns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-028",
+      "sourceId": "synbench-54282cb1a7049b",
+      "inputHash": "a67da593bde937c15378a9d0200666cfc8e7a1c37ee808a271af08f7558ebc7b",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-028",
+        "status": "OK",
+        "reason": "携帯を使わない六名への紙併用、退場口の回収箱、担当分担、予備十枚と重複確認まで実施手順を具体化した。",
+        "evidenceTurns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-029",
+      "sourceId": "synbench-c7092d2a180da2",
+      "inputHash": "ab0ac84d0a448d1920fdbbd7490eb192381bb5b609d872e8413fb963d7999b0e",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-029",
+        "status": "INTERVENE_DRIFT",
+        "reason": "共同購入の納期や最低額から独自ブランドの販売へ移り、参加条件の会議との指摘後も名称・商標・販売サイトの制作が進む。",
+        "evidenceTurns": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-030",
+      "sourceId": "synbench-96881bffa7a081",
+      "inputHash": "611370a622bc20c4528af8468517f0044ca579f7c9c180aa71ad5708e8b4bc48",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-030",
+        "status": "OK",
+        "reason": "採否を決めない発散段階で行表示・音・光・保存時差分・選択式を追加し、通知が続く場合の工夫へ進んでいる。",
+        "evidenceTurns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-031",
+      "sourceId": "synbench-e29be21a85173e",
+      "inputHash": "a7cb344df8f7c1dfce27839875b732cbe45ecb9934e12e7aac1f5a2f322a6dc1",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-031",
+        "status": "INTERVENE_DRIFT",
+        "reason": "雨天の貸出傘回収と通路確保の議題から常設店の通年販売へ移り、別事業との指摘後も看板・雑貨・陳列を検討している。",
+        "evidenceTurns": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-032",
+      "sourceId": "synbench-10d5bf79d5ad9c",
+      "inputHash": "19822c6d27f5d15c75b6a77308e094e10d185b6bcbcdeff3e003d1af8279c238",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-032",
+        "status": "INTERVENE_STALLED",
+        "reason": "重複予約を変える権限が管理側と予約係のどちらにもないまま、互いの判断待ちと依頼の返送を反復している。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-033",
+      "sourceId": "synbench-91ae0299b24bf3",
+      "inputHash": "6c7faa1a652795f331d429adff19190a5d6715f1eadad5226cfd4558cbfc5161",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-033",
+        "status": "INTERVENE_STALLED",
+        "reason": "配布担当と時刻を繰り返し尋ねても全参加者へ渡すという対象の回答に終始し、担当候補や手順が増えない。",
+        "evidenceTurns": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-034",
+      "sourceId": "synbench-e44e2d35609d27",
+      "inputHash": "6d5d955d9f14761dab5bcfbd912ced5dd848669a151b859cd0e173f879f54623",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-034",
+        "status": "OK",
+        "reason": "左右の違いという見方を手袋条件の違いへ修正し、厚さと滑りを分けて表を整理し欠測条件を聞き直す手順ができた。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-035",
+      "sourceId": "synbench-de0b178273bd1c",
+      "inputHash": "bd69bd6fa683c8bf3630e6b1c1e6af450f4055c7a6ac64a107470312fc543d6e",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-035",
+        "status": "INTERVENE_STALLED",
+        "reason": "モデル分析と記述統計の付箋を戻し合い、二枚が同じ位置と確認されても票を足すだけで採用基準や分析範囲が決まらない。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-036",
+      "sourceId": "synbench-76bba9b4ecd3f7",
+      "inputHash": "3f9b6bca654e648bf0c6675c7e738dfb70a06549e10f9335a2c9e097fa78d55d",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-036",
+        "status": "OK",
+        "reason": "二種類の五人が同じ人々と分かり、誘導から点呼ずれへの経路と分岐番号不足を特定し、番号表示の改善と次回観測を決めた。",
+        "evidenceTurns": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-037",
+      "sourceId": "synbench-1cb3b322276a10",
+      "inputHash": "5061d68e6954a61cd78c30e50098b06479ca419cb5a97b2cce0e5af4655079e4",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-037",
+        "status": "INTERVENE_DRIFT",
+        "reason": "価格表の同梱数を見るよう促した後も犬の耳・寝方・子犬時代の写真や年別アルバムへ話が進み、価格比較へ戻らない。",
+        "evidenceTurns": [
+          0,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-038",
+      "sourceId": "synbench-5fd856fca42911",
+      "inputHash": "e036a5d69219fe0751011f364afd0bd84806beeff251d16961cbaf420f9d08ef",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-038",
+        "status": "INTERVENE_DRIFT",
+        "reason": "撮影可能区域の境界を確認する議題からカメラの色やメッキ、ネジ、歴代モデルの光沢へ移り、区域確認の促し後も続く。",
+        "evidenceTurns": [
+          0,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-039",
+      "sourceId": "synbench-d88e9bfc90d882",
+      "inputHash": "ab804a40973372a738594ba6204c73fc44f0781ec438e5b8001325d7e6777d42",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-039",
+        "status": "INTERVENE_DRIFT",
+        "reason": "避難列の重なりの改善を選ぶ話から帽子の縫い目と古い写真比較へ移り、列の分け方へ戻す発言後も糸やつばの話を続ける。",
+        "evidenceTurns": [
+          0,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-040",
+      "sourceId": "synbench-1f4ae167dfe73d",
+      "inputHash": "a0a9e8278111feb00b4acf655baafc1850e332bcf4cf554a641397955229fdc6",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-040",
+        "status": "INTERVENE_STALLED",
+        "reason": "業者回答待ちで確定日はないと繰り返し説明されても確定日を一つ求め続け、情報取得の代替手順や保留判断が増えない。",
+        "evidenceTurns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-041",
+      "sourceId": "synbench-f45f09321620dd",
+      "inputHash": "4e86ac1dd59431013f29a163201b78bf0aca2cb6b76663621df8fa83df708a8b",
+      "primaryStatus": "INTERVENE_STALLED",
+      "shadowStatus": "INTERVENE_STALLED",
+      "selectedJevStatus": "INTERVENE_STALLED",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-041",
+        "status": "INTERVENE_STALLED",
+        "reason": "細い案の指調整と太い案の安定した握りを同じ理由で反復し、比較方法を問われてもその答えや基準が追加されない。",
+        "evidenceTurns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-042",
+      "sourceId": "synbench-8980aa4ded11e9",
+      "inputHash": "b4600699939da37a35a5f1942f94de3ce5d2b5357afbb13201c637a53dd98cbc",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-042",
+        "status": "INTERVENE_DRIFT",
+        "reason": "工具の負担比較から選定に使わない色札のぶどう品種、房形状や粒数へ移り、仮分類との指摘後も写真集めを続ける。",
+        "evidenceTurns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-043",
+      "sourceId": "synbench-450209fd7677f4",
+      "inputHash": "b42ce740bd646c5f76e0aa96d125c5068991c7847f8abd8aa702f57933b70148",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-043",
+        "status": "OK",
+        "reason": "十四分再開の了承済み休憩で現在十一分と明示され、お菓子や肩回しの話は休憩内に収まり資料交換の準備もできている。",
+        "evidenceTurns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-044",
+      "sourceId": "synbench-f87db7f57b3452",
+      "inputHash": "03d71c59e4bfca5d2f533eb3471c427dda5acde1e10b1fcb0077ffdabbba1d68",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-044",
+        "status": "OK",
+        "reason": "最低額・納期・保管・費用の条件をそろえ参加を決定し、発注担当、変更時の再見積もり、棚空けまで確定した。",
+        "evidenceTurns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-045",
+      "sourceId": "synbench-dd4e0299b15f6c",
+      "inputHash": "61774caed6f09769ed50192a7154f2b9fa8a6f2b34bc39050fee21bbfdd9952d",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-045",
+        "status": "INTERVENE_DRIFT",
+        "reason": "実験の時刻記録の粒度から私物の腕時計の修理や歯車、ベルトへ移り、記録を先にしたいとの言及後も時計比較が続いている。",
+        "evidenceTurns": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-046",
+      "sourceId": "synbench-df52e7f6a5e454",
+      "inputHash": "21e76a6303829b961e2c8981060d2fefc9bcad61ae7b7bfdbf1298c1dd0a2562",
+      "primaryStatus": "INTERVENE_DRIFT",
+      "shadowStatus": "INTERVENE_DRIFT",
+      "selectedJevStatus": "INTERVENE_DRIFT",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-046",
+        "status": "INTERVENE_DRIFT",
+        "reason": "六十円の送料値上げから昔のラジオ番組へ移り、商品ごとの箱数を見たいとの促し後も録音・雑誌予告・投稿者を探している。",
+        "evidenceTurns": [
+          0,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-047",
+      "sourceId": "synbench-a092cb357dd7ca",
+      "inputHash": "34957c579dbf15c6cb3f4959c8ec0ce81e9784f1f0a6ef6535c98c17f6beb636",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-047",
+        "status": "OK",
+        "reason": "額と立体の到着時刻、各保管場所、受取・開封担当、写真記録を整え、受領表と作者案内を同内容で送付する合意に進んだ。",
+        "evidenceTurns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-048",
+      "sourceId": "synbench-08ddb1c0008043",
+      "inputHash": "cca5b89f8eb69253a1df4f86c191ffdf53e6733a8eb0a2bbd27a0aeab60bc13d",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-048",
+        "status": "OK",
+        "reason": "合宿の人数と泊数の例が人数と注文箱数の区別につながり、最低十二箱と受取一枠六人を分ける成立条件を合意している。",
+        "evidenceTurns": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    },
+    {
+      "opaqueId": "shadow-049",
+      "sourceId": "synbench-12507cb65c3c89",
+      "inputHash": "633537af577579135c3a14a3d1c65f1a722650de3a8704fd492b58f40e10a7c3",
+      "primaryStatus": "OK",
+      "shadowStatus": "OK",
+      "selectedJevStatus": "OK",
+      "agreement": true,
+      "jevShadowAgreement": true,
+      "shadowAnnotation": {
+        "id": "shadow-049",
+        "status": "OK",
+        "reason": "図の北上と入口視点の不一致を特定し、回転後の左右と部屋番号を照合して設置方向を確定し印刷へ進んでいる。",
+        "evidenceTurns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "confidence": "high",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "annotator": "fresh-shadow-judge",
+        "labelSource": "independent_gpt_silver",
+        "humanReviewed": false
+      }
+    }
+  ]
+}

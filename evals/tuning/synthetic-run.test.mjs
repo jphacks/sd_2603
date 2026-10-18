@@ -69,6 +69,8 @@ test('500-case synthetic campaign isolates Train CV, shortlist Validation, froze
  f.run('report');assert.equal(f.calls().length,completed);
  assert.match(readFileSync(join(f.out,'REPORT.md'),'utf8'),/silver/);
  assert.match(readFileSync(join(f.out,'REPORT.md'),'utf8'),/COMPLETE: no API errors/);
+ assert.match(readFileSync(join(f.out,'REPORT.md'),'utf8'),/ceiling result/);
+ assert.match(readFileSync(join(f.out,'REPORT.md'),'utf8'),/bootstrap interval is degenerate/);
  assert.match(f.run('final',false).stderr,/Final already completed/);
  assert.match(f.run('select',false).stderr,/Test locked/);
  assert.match(f.run('score-train',false).stderr,/Test locked/);

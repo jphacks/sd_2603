@@ -174,6 +174,8 @@ function render(t,s,f){
     md+='\nBinary intervention diagnostics (does not check correct intervention reason):\n\n| Setting | Precision | Recall | F1 | TP | FP | FN |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: |\n';
     for(const [name,m]of [['Baseline v3',f.before],['Selected',f.after]]){const i=m.intervention;md+=`| ${name} | ${i.precision==null?'N/A':pct(i.precision)} | ${i.recall==null?'N/A':pct(i.recall)} | ${i.f1.toFixed(3)} | ${i.tp} | ${i.fp} | ${i.fn} |\n`;}
     md+=`\nFamily bootstrap95% accuracy interval: ${f.bootstrap.accuracy95.map(pct).join('–')} (${f.bootstrap.series} groups;1000 replicates; seed20261018).\n`;
+    if(f.bootstrap.accuracy95[0]===f.bootstrap.accuracy95[1])md+='\nThe empirical bootstrap interval is degenerate; it is not a guarantee about unseen meetings. Resampling observed error-free cases cannot reveal unobserved errors.\n';
+    if(f.before.accuracy===1)md+='\nBaseline already reaches100% on this Test. No Test accuracy improvement is established; this ceiling result limits benchmark discrimination.\n';
     for(const [name,m]of [['Baseline',f.before],['Selected',f.after]]){
       md+=`\n### ${name} confusion\n\n| Gold / Predicted | Drift | Stalled | OK |\n| --- | ---: | ---: | ---: |\n`;
       for(const [c,row]of Object.entries(m.matrix))md+=`| ${c} | ${Object.values(row).join(' | ')} |\n`;
