@@ -12,7 +12,7 @@ async function readCurrent(): Promise<unknown> {
   const names = await readdir(directory).catch(() => [] as string[]);
   const local = await Promise.all(names.filter(name => /^[A-Za-z0-9_-]+\.json$/.test(name)).map(name =>
     readFile(directory + name, "utf8").then(text => JSON.parse(text)).catch(() => null)));
-  const legacy = await readFile(io.statePath, "utf8").then(text => JSON.parse(text)).catch(() => null);
+  const legacy = io.statePath ? await readFile(io.statePath, "utf8").then(text => JSON.parse(text)).catch(() => null) : null;
   if (io.env.VERCEL !== "1") return [...local, legacy];
   if (!shared || shared.expires < Date.now()) {
     loading ??= listMeetingBots(io).then(meetings => {

@@ -47,36 +47,53 @@ try {
     await delay(100);
   }
   browser = await chromium.launch({ executablePath: process.env.CHROME_EXECUTABLE, headless: true, args: ['--no-sandbox'] });
-  const page = await browser.newPage();
-  await page.goto(base);
+  const pageA = await browser.newPage();
+  const pageB = await browser.newPage();
   const urlA = 'https://meet.google.com/aaa-bbbb-ccc';
   const urlB = 'https://meet.google.com/ddd-eeee-fff';
-  const join = page.getByRole('button', { name: '参加', exact: true });
-  await page.getByLabel('会議 URL', { exact: true }).fill(urlA);
-  await join.click();
-  await page.getByText(/ボットを送信しました/).waitFor();
+  async function join(page, url) {
+    await page.goto(base);
+    await page.getByLabel('会議 URL', { exact: true }).fill(url);
+    await page.getByRole('button', { name: '参加', exact: true }).click();
+    await page.getByText(/ボットを送信しました/).waitFor();
+  }
+  await join(pageA, urlA);
   const a = [...bots.keys()][0];
-  await page.getByLabel('会議 URL', { exact: true }).fill(urlB);
-  await join.click();
-  await page.getByRole('region', { name: '参加中の会議' }).getByRole('button', { name: new RegExp(urlB) }).waitFor();
+  await join(pageB, urlB);
   const b = [...bots.keys()][1];
   assert.equal(bots.size, 2);
-  const graph = page.getByRole('link', { name: 'この会議の判定グラフを別画面で開く' });
-  assert.equal(await graph.getAttribute('href'), `/monitor?session=${b}`);
-  const meetings = page.getByRole('region', { name: '参加中の会議' });
-  await meetings.getByRole('button', { name: new RegExp(urlA) }).click();
-  assert.equal(await graph.getAttribute('href'), `/monitor?session=${a}`);
-  await page.getByRole('button', { name: '選択した会議から退出' }).click();
-  await page.getByText('退出しました', { exact: true }).waitFor();
+  assert.notEqual(bots.get(a).metadata.owner, bots.get(b).metadata.owner);
+  assert.equal(await pageA.getByRole('link', { name: 'この会議の判定グラフを別画面で開く' }).getAttribute('href'), `/monitor?session=${a}`);
+  assert.equal(await pageB.getByRole('link', { name: 'この会議の判定グラフを別画面で開く' }).getAttribute('href'), `/monitor?session=${b}`);
+  assert.equal((await pageA.content()).includes(urlB), false);
+  assert.equal((await pageB.content()).includes(urlA), false);
+  assert.equal(await pageA.evaluate(async url => (await fetch(url)).status, `/api/monitor/${b}`), 403);
+  const foreignLeave = await pageA.evaluate(async ({ id, token }) => {
+    const response = await fetch('/api/recall/leave', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ botId: id }) });
+    return { status: response.status, body: await response.json() };
+  }, { id: b, token: secret });
+  assert.equal(foreignLeave.status, 403);
+  assert.match(foreignLeave.body.error, /この利用者/);
+  const foreignMaterials = await pageA.evaluate(async id => {
+    const form = new FormData(); form.set('botId', id);
+    return (await fetch('/api/recall/materials', { method: 'POST', body: form })).status;
+  }, b);
+  assert.equal(foreignMaterials, 403);
+  assert.deepEqual(left, []);
+  await pageA.reload();
+  await pageA.getByRole('link', { name: 'この会議の判定グラフを別画面で開く' }).waitFor();
+  assert.equal(await pageA.getByRole('link', { name: 'この会議の判定グラフを別画面で開く' }).getAttribute('href'), `/monitor?session=${a}`);
+  await pageA.getByRole('button', { name: '退出', exact: true }).click();
+  try { await pageA.getByText('退出しました', { exact: true }).waitFor({ timeout: 5000 }); }
+  catch (error) { console.error(await pageA.locator('main').innerText()); console.error(output); throw error; }
   assert.deepEqual(left, [a]);
-  await page.reload();
-  await meetings.getByRole('button', { name: new RegExp(urlB) }).waitFor();
-  assert.equal(await meetings.getByRole('button', { name: new RegExp(urlA) }).count(), 0);
-  await meetings.getByRole('button', { name: new RegExp(urlB) }).click();
-  assert.equal(await graph.getAttribute('href'), `/monitor?session=${b}`);
-  assert.equal((await page.content()).includes(secret), false);
-  for (const endpoint of ['join', 'leave', 'meetings']) assert.equal((await page.request.post(`${base}/api/recall/${endpoint}`, { data: {} })).status(), 401);
-  console.log('PASS: two meetings using one key, selected monitor, leave only A, restore B after reload, token absent, REST auth retained. All Recall calls used a loopback fixture; no paid requests.');
+  await pageB.reload();
+  await pageB.getByRole('link', { name: 'この会議の判定グラフを別画面で開く' }).waitFor();
+  assert.equal(await pageB.getByRole('link', { name: 'この会議の判定グラフを別画面で開く' }).getAttribute('href'), `/monitor?session=${b}`);
+  assert.equal(await pageB.evaluate(async url => (await fetch(url)).status, `/api/monitor/${b}`), 200);
+  assert.equal((await pageB.content()).includes(secret), false);
+  for (const endpoint of ['join', 'leave', 'meetings']) assert.equal((await pageB.request.post(`${base}/api/recall/${endpoint}`, { data: {} })).status(), 401);
+  console.log('PASS: two independent users using one key, separate sessions/monitors, foreign meeting read/leave denied, leave only A, restore B after reload, token absent, REST auth retained. All Recall calls used a loopback fixture; no paid requests.');
 } finally {
   await browser?.close();
   server.kill('SIGTERM');

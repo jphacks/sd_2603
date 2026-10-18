@@ -74,12 +74,16 @@ Official references: [Recall mixed audio](https://docs.recall.ai/docs/how-to-get
 stagingでは利用者の承認に基づき、CIデプロイで `BROWSER_CONTROL_ENABLED=true` を設定します。mainとfeatureは従来の操作トークン入力方式のままです。
 
 
-## 複数会議の入退室
+## 複数ユーザーによる同時利用
 
-Vercelの `RECALL_API_KEY` は共通の1つを使用します。別の会議URLを続けて送ると、それぞれに独立したBotを作成します。「参加中の会議」から選んだ会議のモニターを表示し、「選択した会議から退出」はそのBot IDだけを対象にします。RESTの退出も `{ "botId": "..." }` が必須です。UIの再読み込み後はRecallの一覧APIから復元するため、Vercelの一時ファイルや同じFunctionインスタンスに依存しません。一覧は自動ポーリングせず、初期表示・「一覧を更新」で取得します。
+Vercelの `RECALL_API_KEY` は共通の1つを使用し、利用者Aと利用者Bはそれぞれの会議へ別のBotを参加させます。各利用者は1会議を操作するUIを使います。全員の会議を並べる選択画面はありません。「参加状況を確認」と再読み込みでは、その利用者の会議だけをRecallから復元します。退出はその利用者が参加させたBot IDだけを対象にします。会議の復元と退出はVercelの一時ファイルや同じFunctionインスタンスに依存しません。
 
-作成時のRecall metadata `facilitator` で、このアプリと環境のBotだけに絞ります。値は `meeting-facilitator:<RECALL_MEETING_SCOPE または VERCEL_ENV または local>` です。同じRecallキーを複数の独立プロジェクトで共有するときは、環境ごとに異なる `RECALL_MEETING_SCOPE` を設定してください。過去バージョンのmetadataなしBotは新一覧に出ないため、更新前に退出してください。キーはサーバー内に保持し、ブラウザには渡しません。同時参加の実上限はRecallのワークスペース枠にも依存します。
+ログイン機能がないため、利用者は署名付きHttpOnly Cookieでブラウザごとに区別します。有効期限は30日、SecureはVercelで有効、SameSite=Laxです。署名にはサーバー側の `RECALL_CONTROL_TOKEN` を使用し、APIキーや操作トークンをブラウザへ渡しません。Cookie削除、別のブラウザ・端末、または署名キーの変更後は同じ利用者として復元できません。アカウントを使った端末間の引き継ぎは別途ログイン基盤が必要です。同一ブラウザ内のタブは同じ利用者です。
 
-この変更は入退室の共有管理と、同じホスト上の複数音声セッション対応です。Jevスコア・アジェンダ・介入承認の既存メモリストアを共有DBへ置換するものではありません。Vercel単体では常駐音声ワーカーは動かず、複数Functionインスタンス間で判定データも共有しません。各会議のモニターはBot ID付きの専用リンクで開いてください。ID指定のない `/monitor` は最後に選択された会議を表示します。
+Recall metadata `facilitator` と `owner` にアプリ環境と匿名セッションの対応を保存します。一覧はサーバーで両方を照合し、退出では対象Botを再取得して所有者も照合します。`BROWSER_CONTROL_ENABLED=true` の環境では、モニターのURL・Bot IDを指定しても別の利用者の判定を読み取れません。これはステージングの公開UI利用者を分離する仕組みで、ログイン認証やRecallの利用枠を置き換えるものではありません。
 
-オフライン検証: `npm test`、`npm run test:meeting-regression`。ビルド後、Playwrightの利用可能な環境では `node scripts/check-multi-meeting-ui.mjs` で、同じキーでの2会議参加・Aだけ退出・Bの再読み込み復元を確認できます。このブラウザ検証はRecallをループバックの代替サーバーへ接続し、実Botや有料AIを作成しません。
+環境の値は `meeting-facilitator:<RECALL_MEETING_SCOPE または VERCEL_ENV または local>` です。同じRecallキーを複数の独立プロジェクトで共有するときは、環境ごとに異なる `RECALL_MEETING_SCOPE` を設定してください。以前のmetadataなしBotは復元できないため、更新前のBotが残っている場合はMeetまたはRecall管理画面から退出させてください。同時参加の実上限はRecallワークスペースの利用枠にも依存します。REST利用者もCookieを保持し、退出には `{ "botId": "..." }` を送信します。
+
+常駐音声ワーカーは会議ごとに音声・アジェンダ・判定・クールダウン・表示タイマーを分離し、1会議の障害で他の会議を停止しません。`RECALL_MAX_AUDIO_CONNECTIONS` の既定値は32（設定範囲1〜128）です。ただし、Vercel単体で常駐音声ワーカーは動かず、既存のJevスコア・アジェンダ・介入承認メモリストアもFunctionインスタンス間では共有されません。この変更は共有DBの導入や音声ワーカーのクラウド常駐化を含みません。
+
+検証は `npm test` と `npm run test:meeting-regression`。ビルド後に `node scripts/check-multi-meeting-ui.mjs` を実行すると、独立した2つのブラウザで共通キーによる参加、利用者ごとのグラフ、他人の閲覧・退出の拒否、A退出後のBの継続を確認します。このブラウザ検証はRecallをループバックの代替サーバーへ接続し、実Botや有料AIを作成しません。Playwrightは別途利用可能な環境で実行してください。

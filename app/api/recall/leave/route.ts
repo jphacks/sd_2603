@@ -1,4 +1,6 @@
 import { localRecallIo, removeBot, verifyMeetingBot } from "@/scripts/recall.mjs";
+import { meetingOwner } from "@/lib/recall/browser-session";
+import { invalidateOwnedMeetings } from "@/lib/recall/owned-meetings";
 import { monitorStore } from "@/lib/monitor/store";
 import { controlAccessError } from "@/lib/recall/controller";
 
@@ -13,9 +15,12 @@ export async function POST(request: Request) {
   }
 
   try {
-    await verifyMeetingBot(io, id);
+    const owner = await meetingOwner();
+    if (!owner) return Response.json({ error: "参加したブラウザで操作してください。" }, { status: 403 });
+    await verifyMeetingBot(io, id, owner);
     const result = await removeBot(io, id);
     if (result.left) {
+      invalidateOwnedMeetings(owner);
       monitorStore.deactivate(id);
       return Response.json({
         id: result.id,

@@ -1,3 +1,5 @@
+import { meetingOwner } from "@/lib/recall/browser-session";
+import { ownedMeetings } from "@/lib/recall/owned-meetings";
 import { z } from "zod";
 import { MAX_MATERIAL_BYTES, MAX_MATERIAL_UPLOADS, ingestJoinMaterials } from "@/lib/agenda/materials";
 
@@ -14,6 +16,11 @@ export async function POST(request: Request) {
   const botId = String(form.get("botId") ?? "");
   if (!BotIdSchema.safeParse(botId).success) {
     return Response.json({ error: "ボットが確認できません" }, { status: 400 });
+  }
+
+  if (process.env.BROWSER_CONTROL_ENABLED === "true") {
+    const owner = await meetingOwner();
+    if (!owner || !(await ownedMeetings(owner)).some(meeting => meeting.id === botId)) return Response.json({ error: "この会議の資料を変更する権限がありません。" }, { status: 403 });
   }
 
   const files = [];

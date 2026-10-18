@@ -14,6 +14,7 @@ const MAX_SELECTED_FILES = 5;
 
 export function JoinForm({ serverManagedControl = false, setupError = null }: { serverManagedControl?: boolean; setupError?: string | null }) {
   const [monitorSessionId, setMonitorSessionId] = useState<string | null>(null);
+  const [sessionReady, setSessionReady] = useState(!serverManagedControl);
   const [meetings, setMeetings] = useState<MeetingItem[]>([]);
   const [listError, setListError] = useState<string | null>(null);
   const [meetingUrl, setMeetingUrl] = useState("");
@@ -32,9 +33,12 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
     let cancelled = false;
     void listMeetings().then(result => {
       if (cancelled) return;
-      if (result.ok) setMeetings(result.data.meetings);
-      else setListError(result.data.error ?? "会議一覧を取得できませんでした。");
-    }).catch(() => { if (!cancelled) setListError("会議一覧を取得できませんでした。"); });
+      if (result.ok) {
+        setMeetings(result.data.meetings);
+        if (result.data.meetings[0]) setMonitorSessionId(result.data.meetings[0].id);
+      }
+      else setListError(result.data.error ?? "参加状況を取得できませんでした。");
+    }).catch(() => { if (!cancelled) setListError("参加状況を取得できませんでした。"); }).finally(() => { if (!cancelled) setSessionReady(true); });
     return () => { cancelled = true; };
   }, [serverManagedControl]);
 
@@ -45,9 +49,10 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
         ? await listMeetings().then(result => ({ ok: result.ok, json: async () => result.data }))
         : await fetch("/api/recall/meetings", { method: "POST", headers: { Authorization: `Bearer ${controlToken.trim()}` } });
       const body = await response.json() as { meetings?: MeetingItem[]; error?: string };
-      if (!response.ok) { setListError(body.error ?? "会議一覧を取得できませんでした。"); return; }
+      if (!response.ok) { setListError(body.error ?? "参加状況を取得できませんでした。"); return; }
       setMeetings(body.meetings ?? []);
-    } catch { setListError("会議一覧を取得できませんでした。"); }
+      setMonitorSessionId(body.meetings?.[0]?.id ?? null);
+    } catch { setListError("参加状況を取得できませんでした。"); }
   }
 
   function replaceFiles(next: File[], limitNote: string | null) {
@@ -248,19 +253,19 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
           <button
             className="w-fit rounded bg-zinc-900 px-4 py-2 text-sm text-white disabled:opacity-50"
             type="submit"
-            disabled={pending || Boolean(setupError)}
+            disabled={!sessionReady || pending || monitorSessionId !== null || Boolean(setupError)}
           >
             参加
           </button>
           <button
             className="w-fit rounded border border-zinc-300 px-4 py-2 text-sm disabled:opacity-50"
             type="button"
-            disabled={pending || Boolean(setupError)}
+            disabled={pending || monitorSessionId === null || Boolean(setupError)}
             onClick={() => {
               void leave();
             }}
           >
-            選択した会議から退出
+            退出
           </button>
         </div>
         {error ? <p className="text-sm text-rose-700">{error}</p> : null}
@@ -271,22 +276,11 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
           </ul>
         ) : null}
       </form>
-      <section aria-label="参加中の会議" className="grid gap-3">
-        <div className="flex items-center justify-between">
-          <h2 className="font-semibold">参加中の会議</h2>
-          <button type="button" className="text-sm underline" disabled={pending} onClick={() => void refreshMeetings()}>一覧を更新</button>
-        </div>
+      <section aria-label="自分の参加状況" className="grid gap-3">
+        <button type="button" className="w-fit text-sm underline" disabled={pending} onClick={() => void refreshMeetings()}>参加状況を確認</button>
         {listError && <p role="alert" className="text-sm text-rose-700">{listError}</p>}
-        {meetings.length === 0 && <p className="text-sm text-zinc-600">参加中の会議はありません。別の会議URLでも続けて参加できます。</p>}
-        {meetings.map(meeting => (
-          <button type="button" key={meeting.id} aria-pressed={monitorSessionId === meeting.id} disabled={pending}
-            className={`rounded border p-3 text-left text-sm ${monitorSessionId === meeting.id ? "border-sky-600 bg-sky-50" : "border-zinc-300"}`}
-            onClick={() => setMonitorSessionId(meeting.id)}>
-            <span className="block break-all">{meeting.meetingUrl}</span>
-            <span className="block text-xs text-zinc-600">Bot ID: {meeting.id}</span>
-          </button>
-        ))}
-        <p className="text-xs text-zinc-600">会議を選択すると、その会議の判定グラフを表示します。退出も選択した会議だけに適用します。</p>
+        {meetings[0] && <p className="break-all text-sm">参加中: {meetings[0].meetingUrl}</p>}
+        <p className="text-xs text-zinc-600">このブラウザから参加させた会議だけを表示・操作します。再読み込み後も参加状況を復元します。</p>
       </section>
       {monitorSessionId && (
         <section aria-label="この会議のJev判定" className="rounded-xl bg-[#090f13] p-4">

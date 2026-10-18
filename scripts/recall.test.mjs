@@ -624,3 +624,16 @@ test('shared meeting list paginates, isolates environments and projects only pub
   await assert.rejects(() => verifyMeetingBot(wrong, 'bot-1'), error => error.status === 403);
   await assert.rejects(() => verifyMeetingBot(io, '../another'), /Bot ID/);
 });
+
+test('a shared key lists only the caller owner and rejects another owner even in the same environment', async () => {
+  const scope = meetingScope({});
+  const io = capture({ fetch: async url => {
+    assert.equal(new URL(url).searchParams.get('metadata__owner'), 'owner-a');
+    return jsonResponse(200, { next: null, results: [
+      { id: 'a', meeting_url: 'https://meet.google.com/aaa-bbbb-ccc', metadata: { facilitator: scope, owner: 'owner-a' } },
+      { id: 'b', meeting_url: 'https://meet.google.com/ddd-eeee-fff', metadata: { facilitator: scope, owner: 'owner-b' } },
+    ] });
+  } }).io;
+  assert.deepEqual((await listMeetingBots(io, 'owner-a')).map(meeting => meeting.id), ['a']);
+  await assert.rejects(() => verifyMeetingBot({ ...io, fetch: async () => jsonResponse(200, { metadata: { facilitator: scope, owner: 'owner-b' } }) }, 'b', 'owner-a'), error => error.status === 403);
+});

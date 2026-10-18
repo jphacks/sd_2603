@@ -292,7 +292,7 @@ export function cameraOutputConfig(env) {
   return { camera: { kind: 'webpage', config: { url: url.toString() } } };
 }
 
-function createBotBody(meetingUrl, env, audioConfig = null) {
+function createBotBody(meetingUrl, env, audioConfig = null, owner = '') {
   const outputMedia = cameraOutputConfig(env);
   const chatConfig = chatRecordingConfig(env);
   const recording = audioConfig && chatConfig
@@ -303,7 +303,7 @@ function createBotBody(meetingUrl, env, audioConfig = null) {
     bot_name: BOT_NAME,
     recording_config: recording,
     ...(outputMedia ? { output_media: outputMedia } : {}),
-    metadata: { facilitator: meetingScope(env) },
+    metadata: { facilitator: meetingScope(env), ...(owner ? { owner } : {}) },
     ...(chatConfig
       ? {
           chat: {
@@ -336,8 +336,9 @@ export function botStatePath(io, id) {
   return path.join(path.dirname(io.statePath), 'bots', `${id}.json`);
 }
 
-export async function listMeetingBots(io) {
+export async function listMeetingBots(io, owner = '') {
   const query = new URLSearchParams({ [`metadata__facilitator`]: meetingScope(io.env) });
+  if (owner) query.set('metadata__owner', owner);
   for (const status of LIVE) query.append('status', status);
   const meetings = [];
   for (let page = 1; page <= 100; page++) {
@@ -345,7 +346,7 @@ export async function listMeetingBots(io) {
     if (!Array.isArray(body.results)) throw new RecallCliError('Recallの会議一覧を取得できませんでした。', { status: 502 });
     for (const bot of body.results) {
       // Never return provider credentials, recording configuration or arbitrary metadata.
-      if (bot.metadata?.facilitator !== meetingScope(io.env)) continue;
+      if (bot.metadata?.facilitator !== meetingScope(io.env) || (owner && bot.metadata?.owner !== owner)) continue;
       const code = latestChange(bot)?.code ?? 'joining_call';
       if (LIVE.has(code)) meetings.push({ id: bot.id, meetingUrl: bot.meeting_url, status: code });
     }
@@ -354,16 +355,16 @@ export async function listMeetingBots(io) {
   throw new RecallCliError('会議一覧が多すぎます。Recall管理画面を確認してください。', { status: 502 });
 }
 
-export async function verifyMeetingBot(io, id) {
+export async function verifyMeetingBot(io, id, owner = '') {
   validateBotId(id);
   const bot = await recallFetch(io, `/bot/${encodeURIComponent(id)}/`);
-  if (bot.metadata?.facilitator !== meetingScope(io.env)) {
-    throw new RecallCliError('この環境から参加させたBotではありません。', { status: 403 });
+  if (bot.metadata?.facilitator !== meetingScope(io.env) || (owner && bot.metadata?.owner !== owner)) {
+    throw new RecallCliError('この利用者が参加させたBotではありません。', { status: 403 });
   }
   return bot;
 }
 
-export async function sendBot(meetingUrl, io, agenda, { multiple = false } = {}) {
+export async function sendBot(meetingUrl, io, agenda, { multiple = false, owner = '' } = {}) {
   const normalizedMeetingUrl = normalizeGoogleMeetUrl(String(meetingUrl ?? ''));
   if (!normalizedMeetingUrl) {
     throw new RecallCliError('Google Meet のURLを確認してください（例: https://meet.google.com/abc-defg-hij）。', { status: 400, exitCode: 2 });
@@ -415,7 +416,7 @@ export async function sendBot(meetingUrl, io, agenda, { multiple = false } = {})
 
   const created = await recallFetch(io, '/bot/', {
     method: 'POST',
-    body: createBotBody(normalizedMeetingUrl, io.env, audioConfig),
+    body: createBotBody(normalizedMeetingUrl, io.env, audioConfig, owner),
   });
   const botId = created.id;
   if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
@@ -446,6 +447,8 @@ export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch, o
   return {
     env,
     fetch: fetchImpl,
+    stdout: () => {},
+    stderr: () => {},
     statePath: options.persistState === false ? null : env.VERCEL === '1'
       ? path.join(tmpdir(), 'meeting-facilitator-recall', 'current.json')
       : STATE_PATH,
