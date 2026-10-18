@@ -1,0 +1,12 @@
+{
+  "datasetHash": "262b3b8c3a28d3e9afe7621cae4bc822514ef68c7180bdb81c1a2b68e02a2b23",
+  "splitManifestHash": "5b7a3dfc4e806be76773901135d2cdd4629ceb2ff9ac34fb0cff8325a2239eb7",
+  "protocolHash": "42ba9394d64e0fb473dc20b1433b0016cfa941e65b4a1cd853e9528001c9ca56",
+  "inputLabelHash": "0daffde094a1d33e01493ea06958298937d08c71b585a96165d7f11269039d7f",
+  "count": 300,
+  "splits": {
+    "train": 300,
+    "validation": 0,
+    "test": 0
+  }
+}

@@ -19,6 +19,7 @@ if(expectedSplitHash&&createHash('sha256').update(readFileSync(splitPath)).diges
 const raw=read(dataPath),cases=adaptCases(raw),split=read(splitPath);
 validateCases(cases);assertProvenance(cases,{allowAuthoredEvaluation:true,splitManifest:split});
 if(cases.some(c=>c.dataKind!=='synthetic'||!c.generation))throw new Error('Synthetic campaign accepts only explicitly authored synthetic cases');
+for(const c of cases)if(c.gold.action!==undefined)throw new Error('Synthetic semantic benchmark does not invent independent WAIT/SILENCE action labels');
 for(const c of cases)if(typeof c.phase!=='string'||!c.phase.trim()||c.transcript.length<6||c.transcript.length>12||c.secondsSinceLastIntervention!==120)throw new Error(`Synthetic protocol requires phase,6-12 turns and120s cooldown: ${c.id}`);
 const {groups,assignments}=validateSplitManifest(split);
 const versions=['v2','v3','v4'];
@@ -158,7 +159,7 @@ else if(command==='pilot'){
 else throw new Error(`Unknown command: ${command}`);
 function render(t,s,f){
   const pct=x=>(100*x).toFixed(1)+'%';
-  let md=`# 日本語合成会議ベンチマーク — Jev tuning\n\n- Dataset SHA256: \`${manifest.datasetHash}\`\n- Split manifest SHA256: \`${manifest.splitManifestHash}\`\n- Protocol SHA256: \`${manifest.protocolHash}\`\n- Model: ${model}; cases ${cases.length}; Train/Validation/Test ${train.length}/${validation.length}/${test.length}\n- 生成系列単位の分離。参照ラベルは独立したGPT作業によるsilverで、人間gold・実会議精度ではない。\n- 生成意図に合わせたラベル修正・不一致例の都合のよい除外を行わない。独立したWAIT/SILENCEラベルはないため意味3分類のみ評価。\n\n## Train-only fivefold group cross-validation\n\n閾値は各foldで残り4foldから選択し、除外foldに評価。表はOOF予測の集計で、Validation/Testは未使用。\n\n| Prompt | n | OOF accuracy | OOF Macro-F1 |\n| --- | ---: | ---: | ---: |\n`;
+  let md=`# 日本語合成会議ベンチマーク — Jev tuning\n\n- Dataset SHA256: \`${manifest.datasetHash}\`\n- Split manifest SHA256: \`${manifest.splitManifestHash}\`\n- Protocol SHA256: \`${manifest.protocolHash}\`\n- Model: ${model}; cases ${cases.length}; Train/Validation/Test ${train.length}/${validation.length}/${test.length}\n- Test status: ${f?(f.before.errors||f.after.errors?'INCOMPLETE: API failures; resume the frozen selection':'COMPLETE: no API errors'):'not evaluated'}\n- 生成系列単位の分離。参照ラベルは独立したGPT作業によるsilverで、人間gold・実会議精度ではない。\n- 生成意図に合わせたラベル修正・不一致例の都合のよい除外を行わない。独立したWAIT/SILENCEラベルはないため意味3分類のみ評価。\n\n## Train-only fivefold group cross-validation\n\n閾値は各foldで残り4foldから選択し、除外foldに評価。表はOOF予測の集計で、Validation/Testは未使用。\n\n| Prompt | n | OOF accuracy | OOF Macro-F1 |\n| --- | ---: | ---: | ---: |\n`;
   for(const r of t.cv.rankedVersions)md+=`| ${r.version} | ${r.metrics.n} | ${pct(r.metrics.accuracy)} | ${r.metrics.macroF1.toFixed(3)} |\n`;
   md+='\n| Fold | Fit groups | Heldout groups | Cases |\n| --- | ---: | ---: | ---: |\n';
   for(const r of t.cv.folds)md+=`| ${r.fold} | ${r.fitGroups.length} | ${r.holdoutGroups.length} | ${r.n} |\n`;
@@ -168,8 +169,8 @@ function render(t,s,f){
     for(const r of s.compared)md+=`| ${JSON.stringify(r.policy)} | ${pct(r.metrics.accuracy)} | ${r.metrics.macroF1.toFixed(3)} |\n`;
     md+=`\nSelected: \`${JSON.stringify(s.selected.policy)}\`\n`;
   }
-  if(f){md+='\n## Frozen final Test — synthetic only\n\n| Setting | Correct / n | Accuracy | Macro-F1 | Majority | OKへの誤介入 |\n| --- | ---: | ---: | ---: | ---: | ---: |\n';
-    for(const [name,m]of [['Baseline v3',f.before],['Selected',f.after]])md+=`| ${name} | ${m.correct}/${m.n} | ${pct(m.accuracy)} | ${m.macroF1.toFixed(3)} | ${pct(m.majorityBaseline)} | ${m.falseInterventionRate==null?'N/A':pct(m.falseInterventionRate)} |\n`;
+  if(f){md+='\n## Frozen final Test — synthetic only\n\n| Setting | Correct / n | Accuracy | Macro-F1 | Majority | OKへの誤介入 | API errors |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: |\n';
+    for(const [name,m]of [['Baseline v3',f.before],['Selected',f.after]])md+=`| ${name} | ${m.correct}/${m.n} | ${pct(m.accuracy)} | ${m.macroF1.toFixed(3)} | ${pct(m.majorityBaseline)} | ${m.falseInterventionRate==null?'N/A':pct(m.falseInterventionRate)} | ${m.errors} |\n`;
     md+='\nBinary intervention diagnostics (does not check correct intervention reason):\n\n| Setting | Precision | Recall | F1 | TP | FP | FN |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: |\n';
     for(const [name,m]of [['Baseline v3',f.before],['Selected',f.after]]){const i=m.intervention;md+=`| ${name} | ${i.precision==null?'N/A':pct(i.precision)} | ${i.recall==null?'N/A':pct(i.recall)} | ${i.f1.toFixed(3)} | ${i.tp} | ${i.fp} | ${i.fn} |\n`;}
     md+=`\nFamily bootstrap95% accuracy interval: ${f.bootstrap.accuracy95.map(pct).join('–')} (${f.bootstrap.series} groups;1000 replicates; seed20261018).\n`;
