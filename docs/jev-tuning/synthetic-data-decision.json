@@ -1,0 +1,55 @@
+{
+  "fixedAt": "2026-10-18T02:00:22.081Z",
+  "cases": 500,
+  "sourceGroups": 100,
+  "splits": {
+    "train": 300,
+    "validation": 100,
+    "test": 100
+  },
+  "sourceCommit": "5a52564",
+  "data": "docs/jev-tuning/synthetic-benchmark-v1/releases/core500/cases.json",
+  "run": "evals/tuning/runs/synthetic-v1/core500-frozen",
+  "releaseManifest": {
+    "release": "core500",
+    "version": "synthetic-benchmark-v1",
+    "frozenAtJST": "2026-10-18T10:22:29.687299+09:00",
+    "gitBaseBeforeFreeze": "992529f2ad6ab09777b2e2857d8b2359357817a2",
+    "count": 500,
+    "dataKind": "synthetic",
+    "labelSource": "independent_gpt_silver",
+    "humanGold": false,
+    "splitCounts": {
+      "train": 300,
+      "validation": 100,
+      "test": 100
+    },
+    "actualLabelCounts": {
+      "OK": 200,
+      "INTERVENE_DRIFT": 150,
+      "INTERVENE_STALLED": 150
+    },
+    "casesHash": "49afcd95c9eb2888c27139586da9eb94d98d97cf9d27f1f0930dccba8fa2108b",
+    "warning": "Not Jev accuracy, real recordings or human-certified gold."
+  },
+  "runnerManifest": {
+    "datasetHash": "00f480a9493577386289dd3571c2b8d3f201852b153a37e16fc04e6ab9f76f5a",
+    "splitManifestHash": "5b7a3dfc4e806be76773901135d2cdd4629ceb2ff9ac34fb0cff8325a2239eb7",
+    "protocolHash": "42ba9394d64e0fb473dc20b1433b0016cfa941e65b4a1cd853e9528001c9ca56",
+    "inputLabelHash": "25547f2663972122ccc50daca1360b5ab935407e1daee98a676580328d53ebb1",
+    "count": 500,
+    "splits": {
+      "train": 300,
+      "validation": 100,
+      "test": 100
+    }
+  },
+  "reason": "At the preregistered 11:00 JST deadline, core500 was frozen and audited; no complete independently labeled audited full1000 release was committed. No accuracy values were used to decide dataset size.",
+  "paidStageBeforeFreeze": {
+    "attempts": 901,
+    "successfulTrainRequests": 900,
+    "validationRequests": 0,
+    "testRequests": 0
+  },
+  "testUsed": false
+}
