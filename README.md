@@ -8,6 +8,8 @@
 
 [デモ（URL未設定）](#) · [LP（URL未設定）](#)
 
+[Jevチューニングの手法・最終評価](docs/jev-tuning/timeline.md)
+
 ## 目次
 
 - [製品概要](#overview)

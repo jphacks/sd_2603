@@ -67,3 +67,12 @@ Push後にActionsのPreviewデプロイ完了を確認する。これで4質問�
 
 - 反映直前にstagingを再取得し、追加されたNode24ローカル有効化改修efeb18aもfast-forwardで取り込んだ。Jev/モニター/音声ワーカーへの追加差分は0で、4質問仕様は同一。
 - ローカル全171テスト、Lint、型、Webpackビルド、SSRの補助線50/60/80・WAIT40確認、アプリ起動/Mockスモークを通過。会議リプレイは初回にテスト用portの一時的EADDRINUSEがあり、再実行では7ケースすべて成功した。
+
+## デプロイ完了確認（2026-10-18）
+
+- staging反映SHA: `05573caf73ff72051392a182a2b22a18a58fdd8d`。復旧タグ: `jev-v4-staging-20261018`。
+- [GitHub Actions](https://github.com/jphacks/sd_2603/actions/runs/39091998844) は成功。CIテスト、会議回帰、Vercelビルド/型検査、スモーク、Preview公開/alias更新を通過。
+- 公開staging: https://meeting-facilitator-staging-3858469cb831.vercel.app/ 。`/monitor` HTTP200。
+- 公開`POST /api/judge`へ新規の合成3発話を1回送信しHTTP200。diagnosticは`questionVersion=v4-staging-gated`、`model=typesafe-ai/jev-1.14.0`、`drifted=0.01`、`stalled=0.06`、`tangentIsRelevant=0.61`、`interveneNow=0.06`、`latencyMs=446`。結果はSILENCE。公開runtimeの4質問版反映を確認した。
+- main/Productionは変更していない。元作業ツリーの未コミットファイルは保全した。
+- この完了記録のみ作業ブランチ`codex/jev-v4-staging`へ追加保存する。stagingのデプロイ済みSHAは上記のままにし、記録追加だけで再デプロイしない。
