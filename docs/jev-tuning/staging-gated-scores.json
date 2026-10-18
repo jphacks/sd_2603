@@ -1,0 +1,2018 @@
+{
+  "blind-01f1a8b77853": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.82,
+      "interveneNow": 0.06
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 1085,
+    "id": "blind-01f1a8b77853",
+    "at": "2026-10-18T02:55:19.906Z"
+  },
+  "blind-00d50d91b9ad": {
+    "scores": {
+      "drifted": 0.16,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.94,
+      "interveneNow": 0.21
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 1180,
+    "id": "blind-00d50d91b9ad",
+    "at": "2026-10-18T02:55:19.908Z"
+  },
+  "blind-018be073ef8a": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.49,
+      "interveneNow": 0.26
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 1153,
+    "id": "blind-018be073ef8a",
+    "at": "2026-10-18T02:55:19.911Z"
+  },
+  "blind-01f9c9f7d32a": {
+    "scores": {
+      "drifted": 0.97,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.23,
+      "interveneNow": 0.79
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 467,
+    "id": "blind-01f9c9f7d32a",
+    "at": "2026-10-18T02:55:20.374Z"
+  },
+  "blind-04e3ce624cd4": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.58,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 479,
+    "id": "blind-04e3ce624cd4",
+    "at": "2026-10-18T02:55:20.391Z"
+  },
+  "blind-029087d09008": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.65,
+      "interveneNow": 0.07
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 487,
+    "id": "blind-029087d09008",
+    "at": "2026-10-18T02:55:20.396Z"
+  },
+  "blind-09436dbfff3d": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.14,
+      "tangentIsRelevant": 0.6,
+      "interveneNow": 0.35
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 363,
+    "id": "blind-09436dbfff3d",
+    "at": "2026-10-18T02:55:20.754Z"
+  },
+  "blind-08e20f1f367c": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.55,
+      "tangentIsRelevant": 0.62,
+      "interveneNow": 0.81
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 443,
+    "id": "blind-08e20f1f367c",
+    "at": "2026-10-18T02:55:20.819Z"
+  },
+  "blind-0c7f7d228301": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.48,
+      "tangentIsRelevant": 0.77,
+      "interveneNow": 0.55
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 437,
+    "id": "blind-0c7f7d228301",
+    "at": "2026-10-18T02:55:20.834Z"
+  },
+  "blind-0d4b63d3ca75": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.13,
+      "tangentIsRelevant": 0.45,
+      "interveneNow": 0.2
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 446,
+    "id": "blind-0d4b63d3ca75",
+    "at": "2026-10-18T02:55:21.202Z"
+  },
+  "blind-0f39853d46cc": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.54,
+      "interveneNow": 0.07
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 432,
+    "id": "blind-0f39853d46cc",
+    "at": "2026-10-18T02:55:21.635Z"
+  },
+  "blind-0fb0413ee3f9": {
+    "scores": {
+      "drifted": 0.05,
+      "stalled": 0.1,
+      "tangentIsRelevant": 0.93,
+      "interveneNow": 0.36
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 474,
+    "id": "blind-0fb0413ee3f9",
+    "at": "2026-10-18T02:55:21.681Z"
+  },
+  "blind-0f3f36183ff9": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.7,
+      "interveneNow": 0.11
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 483,
+    "id": "blind-0f3f36183ff9",
+    "at": "2026-10-18T02:55:21.688Z"
+  },
+  "blind-0fd27946e9c4": {
+    "scores": {
+      "drifted": 0.96,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.1,
+      "interveneNow": 0.62
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 443,
+    "id": "blind-0fd27946e9c4",
+    "at": "2026-10-18T02:55:22.078Z"
+  },
+  "blind-13685c1a7022": {
+    "scores": {
+      "drifted": 0.06,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.87,
+      "interveneNow": 0.13
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 464,
+    "id": "blind-13685c1a7022",
+    "at": "2026-10-18T02:55:22.153Z"
+  },
+  "blind-12283bfff86e": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.92,
+      "tangentIsRelevant": 0.64,
+      "interveneNow": 0.87
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 618,
+    "id": "blind-12283bfff86e",
+    "at": "2026-10-18T02:55:22.299Z"
+  },
+  "blind-14f7943415ee": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.57,
+      "interveneNow": 0.08
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 455,
+    "id": "blind-14f7943415ee",
+    "at": "2026-10-18T02:55:22.534Z"
+  },
+  "blind-17086a0fd4a4": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.09,
+      "interveneNow": 0.28
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 452,
+    "id": "blind-17086a0fd4a4",
+    "at": "2026-10-18T02:55:22.606Z"
+  },
+  "blind-174cc2059c3d": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.4,
+      "tangentIsRelevant": 0.33,
+      "interveneNow": 0.87
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 457,
+    "id": "blind-174cc2059c3d",
+    "at": "2026-10-18T02:55:22.758Z"
+  },
+  "blind-18a3f369ab93": {
+    "scores": {
+      "drifted": 0.9,
+      "stalled": 0.43,
+      "tangentIsRelevant": 0.24,
+      "interveneNow": 0.91
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 350,
+    "id": "blind-18a3f369ab93",
+    "at": "2026-10-18T02:55:22.886Z"
+  },
+  "blind-1d2ba3b5e35b": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.1,
+      "tangentIsRelevant": 0.79,
+      "interveneNow": 0.19
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 457,
+    "id": "blind-1d2ba3b5e35b",
+    "at": "2026-10-18T02:55:23.064Z"
+  },
+  "blind-1d450cc03e1b": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.73,
+      "interveneNow": 0.21
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 332,
+    "id": "blind-1d450cc03e1b",
+    "at": "2026-10-18T02:55:23.090Z"
+  },
+  "blind-1dd9c91470cf": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.49,
+      "interveneNow": 0.07
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 339,
+    "id": "blind-1dd9c91470cf",
+    "at": "2026-10-18T02:55:23.226Z"
+  },
+  "blind-1f2ea6e31efb": {
+    "scores": {
+      "drifted": 0.98,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.02,
+      "interveneNow": 0.86
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 445,
+    "id": "blind-1f2ea6e31efb",
+    "at": "2026-10-18T02:55:23.510Z"
+  },
+  "blind-20a8878514c5": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.21,
+      "interveneNow": 0.05
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 438,
+    "id": "blind-20a8878514c5",
+    "at": "2026-10-18T02:55:23.529Z"
+  },
+  "blind-20d58e8c2f21": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.66,
+      "interveneNow": 0.17
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 334,
+    "id": "blind-20d58e8c2f21",
+    "at": "2026-10-18T02:55:23.561Z"
+  },
+  "blind-21f2911b5fb6": {
+    "scores": {
+      "drifted": 0.87,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.07,
+      "interveneNow": 0.58
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 352,
+    "id": "blind-21f2911b5fb6",
+    "at": "2026-10-18T02:55:23.868Z"
+  },
+  "blind-26639961f27b": {
+    "scores": {
+      "drifted": 0.97,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.87
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 441,
+    "id": "blind-26639961f27b",
+    "at": "2026-10-18T02:55:23.971Z"
+  },
+  "blind-2a216eb8c4ef": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.32,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 446,
+    "id": "blind-2a216eb8c4ef",
+    "at": "2026-10-18T02:55:24.008Z"
+  },
+  "blind-2bb690a508b6": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.05,
+      "interveneNow": 0.23
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 357,
+    "id": "blind-2bb690a508b6",
+    "at": "2026-10-18T02:55:24.225Z"
+  },
+  "blind-2d3c6372b2dd": {
+    "scores": {
+      "drifted": 0.95,
+      "stalled": 0.1,
+      "tangentIsRelevant": 0.3,
+      "interveneNow": 0.73
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 427,
+    "id": "blind-2d3c6372b2dd",
+    "at": "2026-10-18T02:55:24.399Z"
+  },
+  "blind-2f167320ad9e": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.95,
+      "tangentIsRelevant": 0.47,
+      "interveneNow": 0.86
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 523,
+    "id": "blind-2f167320ad9e",
+    "at": "2026-10-18T02:55:24.533Z"
+  },
+  "blind-3287e10d6299": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.03,
+      "tangentIsRelevant": 0.18,
+      "interveneNow": 0.22
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 465,
+    "id": "blind-3287e10d6299",
+    "at": "2026-10-18T02:55:24.691Z"
+  },
+  "blind-33a36db5e8d2": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.63,
+      "interveneNow": 0.17
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 436,
+    "id": "blind-33a36db5e8d2",
+    "at": "2026-10-18T02:55:24.836Z"
+  },
+  "blind-341eb1163463": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.58,
+      "interveneNow": 0.11
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 448,
+    "id": "blind-341eb1163463",
+    "at": "2026-10-18T02:55:24.984Z"
+  },
+  "blind-36634dbfab6e": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.89,
+      "interveneNow": 0.14
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 344,
+    "id": "blind-36634dbfab6e",
+    "at": "2026-10-18T02:55:25.036Z"
+  },
+  "blind-38ff2da71a55": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.78,
+      "tangentIsRelevant": 0.27,
+      "interveneNow": 0.83
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 591,
+    "id": "blind-38ff2da71a55",
+    "at": "2026-10-18T02:55:25.428Z"
+  },
+  "blind-3a47f458463d": {
+    "scores": {
+      "drifted": 0.11,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.21,
+      "interveneNow": 0.44
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 398,
+    "id": "blind-3a47f458463d",
+    "at": "2026-10-18T02:55:25.435Z"
+  },
+  "blind-390fc7de8984": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.57,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 454,
+    "id": "blind-390fc7de8984",
+    "at": "2026-10-18T02:55:25.438Z"
+  },
+  "blind-3f25073b9a39": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.6,
+      "interveneNow": 0.13
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 346,
+    "id": "blind-3f25073b9a39",
+    "at": "2026-10-18T02:55:25.785Z"
+  },
+  "blind-3beb08985f28": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.8,
+      "tangentIsRelevant": 0.36,
+      "interveneNow": 0.92
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 456,
+    "id": "blind-3beb08985f28",
+    "at": "2026-10-18T02:55:25.892Z"
+  },
+  "blind-3b65e563de7c": {
+    "scores": {
+      "drifted": 0.97,
+      "stalled": 0.2,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.95
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 475,
+    "id": "blind-3b65e563de7c",
+    "at": "2026-10-18T02:55:25.905Z"
+  },
+  "blind-40380b8abe79": {
+    "scores": {
+      "drifted": 0.97,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.03,
+      "interveneNow": 0.66
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 433,
+    "id": "blind-40380b8abe79",
+    "at": "2026-10-18T02:55:26.220Z"
+  },
+  "blind-40a802f855a6": {
+    "scores": {
+      "drifted": 0.3,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.37,
+      "interveneNow": 0.15
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 450,
+    "id": "blind-40a802f855a6",
+    "at": "2026-10-18T02:55:26.344Z"
+  },
+  "blind-45740c0839a3": {
+    "scores": {
+      "drifted": 0.07,
+      "stalled": 0.13,
+      "tangentIsRelevant": 0.83,
+      "interveneNow": 0.74
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 478,
+    "id": "blind-45740c0839a3",
+    "at": "2026-10-18T02:55:26.385Z"
+  },
+  "blind-464a9337461a": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.59,
+      "interveneNow": 0.08
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 462,
+    "id": "blind-464a9337461a",
+    "at": "2026-10-18T02:55:26.683Z"
+  },
+  "blind-46737018b270": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.62,
+      "interveneNow": 0.07
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 473,
+    "id": "blind-46737018b270",
+    "at": "2026-10-18T02:55:26.819Z"
+  },
+  "blind-486e99aea111": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.42,
+      "tangentIsRelevant": 0.36,
+      "interveneNow": 0.86
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 441,
+    "id": "blind-486e99aea111",
+    "at": "2026-10-18T02:55:26.827Z"
+  },
+  "blind-49e9f8a60ac9": {
+    "scores": {
+      "drifted": 0.96,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.05,
+      "interveneNow": 0.83
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 442,
+    "id": "blind-49e9f8a60ac9",
+    "at": "2026-10-18T02:55:27.126Z"
+  },
+  "blind-4be692686d53": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.49,
+      "interveneNow": 0.11
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 357,
+    "id": "blind-4be692686d53",
+    "at": "2026-10-18T02:55:27.189Z"
+  },
+  "blind-4b7ed1cb840c": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.73,
+      "interveneNow": 0.27
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 435,
+    "id": "blind-4b7ed1cb840c",
+    "at": "2026-10-18T02:55:27.255Z"
+  },
+  "blind-4c057179aee9": {
+    "scores": {
+      "drifted": 0.95,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.07,
+      "interveneNow": 0.21
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 428,
+    "id": "blind-4c057179aee9",
+    "at": "2026-10-18T02:55:27.555Z"
+  },
+  "blind-4dcae47eea2d": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.91,
+      "tangentIsRelevant": 0.41,
+      "interveneNow": 0.87
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 463,
+    "id": "blind-4dcae47eea2d",
+    "at": "2026-10-18T02:55:27.654Z"
+  },
+  "blind-4f03900587da": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.58,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 449,
+    "id": "blind-4f03900587da",
+    "at": "2026-10-18T02:55:27.705Z"
+  },
+  "blind-4fca17297765": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.16,
+      "tangentIsRelevant": 0.74,
+      "interveneNow": 0.45
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 432,
+    "id": "blind-4fca17297765",
+    "at": "2026-10-18T02:55:27.988Z"
+  },
+  "blind-5001671b49a8": {
+    "scores": {
+      "drifted": 0.44,
+      "stalled": 0.43,
+      "tangentIsRelevant": 0.77,
+      "interveneNow": 0.55
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 354,
+    "id": "blind-5001671b49a8",
+    "at": "2026-10-18T02:55:28.009Z"
+  },
+  "blind-535cb11e9484": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.17,
+      "tangentIsRelevant": 0.64,
+      "interveneNow": 0.69
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 467,
+    "id": "blind-535cb11e9484",
+    "at": "2026-10-18T02:55:28.174Z"
+  },
+  "blind-54abd8d7853d": {
+    "scores": {
+      "drifted": 0.95,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.08,
+      "interveneNow": 0.8
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 451,
+    "id": "blind-54abd8d7853d",
+    "at": "2026-10-18T02:55:28.439Z"
+  },
+  "blind-54defe8d671a": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.37,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 466,
+    "id": "blind-54defe8d671a",
+    "at": "2026-10-18T02:55:28.476Z"
+  },
+  "blind-5549f8638973": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.78,
+      "tangentIsRelevant": 0.65,
+      "interveneNow": 0.79
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 333,
+    "id": "blind-5549f8638973",
+    "at": "2026-10-18T02:55:28.508Z"
+  },
+  "blind-5a07e056a59a": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.57,
+      "interveneNow": 0.1
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 335,
+    "id": "blind-5a07e056a59a",
+    "at": "2026-10-18T02:55:28.778Z"
+  },
+  "blind-5b08ef9b7b07": {
+    "scores": {
+      "drifted": 0.55,
+      "stalled": 0.84,
+      "tangentIsRelevant": 0.28,
+      "interveneNow": 0.9
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 333,
+    "id": "blind-5b08ef9b7b07",
+    "at": "2026-10-18T02:55:28.841Z"
+  },
+  "blind-5ac0e514df05": {
+    "scores": {
+      "drifted": 0.06,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.7
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 479,
+    "id": "blind-5ac0e514df05",
+    "at": "2026-10-18T02:55:28.956Z"
+  },
+  "blind-5b3a46067292": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.67,
+      "interveneNow": 0.07
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 434,
+    "id": "blind-5b3a46067292",
+    "at": "2026-10-18T02:55:29.212Z"
+  },
+  "blind-5dd3b9cc2f95": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.89,
+      "tangentIsRelevant": 0.68,
+      "interveneNow": 0.78
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 506,
+    "id": "blind-5dd3b9cc2f95",
+    "at": "2026-10-18T02:55:29.348Z"
+  },
+  "blind-62cf687728f7": {
+    "scores": {
+      "drifted": 0.07,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.92,
+      "interveneNow": 0.15
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 457,
+    "id": "blind-62cf687728f7",
+    "at": "2026-10-18T02:55:29.413Z"
+  },
+  "blind-6540a744a6f2": {
+    "scores": {
+      "drifted": 0.05,
+      "stalled": 0.17,
+      "tangentIsRelevant": 0.91,
+      "interveneNow": 0.44
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 422,
+    "id": "blind-6540a744a6f2",
+    "at": "2026-10-18T02:55:29.635Z"
+  },
+  "blind-67d40c5f66ed": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.66,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 433,
+    "id": "blind-67d40c5f66ed",
+    "at": "2026-10-18T02:55:29.781Z"
+  },
+  "blind-6969cf1381ac": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.65,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 520,
+    "id": "blind-6969cf1381ac",
+    "at": "2026-10-18T02:55:29.933Z"
+  },
+  "blind-6ac83c03d10d": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.84,
+      "interveneNow": 0.28
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 436,
+    "id": "blind-6ac83c03d10d",
+    "at": "2026-10-18T02:55:30.072Z"
+  },
+  "blind-6f9f3641eddd": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.26,
+      "tangentIsRelevant": 0.52,
+      "interveneNow": 0.44
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 337,
+    "id": "blind-6f9f3641eddd",
+    "at": "2026-10-18T02:55:30.119Z"
+  },
+  "blind-72280ea5a987": {
+    "scores": {
+      "drifted": 0.07,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.3
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 436,
+    "id": "blind-72280ea5a987",
+    "at": "2026-10-18T02:55:30.370Z"
+  },
+  "blind-74c4729a1854": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.1,
+      "tangentIsRelevant": 0.66,
+      "interveneNow": 0.35
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 368,
+    "id": "blind-74c4729a1854",
+    "at": "2026-10-18T02:55:30.489Z"
+  },
+  "blind-7278656dbd9d": {
+    "scores": {
+      "drifted": 0.97,
+      "stalled": 0.22,
+      "tangentIsRelevant": 0.05,
+      "interveneNow": 0.93
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 455,
+    "id": "blind-7278656dbd9d",
+    "at": "2026-10-18T02:55:30.527Z"
+  },
+  "blind-74f8e121d7a4": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.55,
+      "interveneNow": 0.24
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 501,
+    "id": "blind-74f8e121d7a4",
+    "at": "2026-10-18T02:55:30.872Z"
+  },
+  "blind-7564c55d983a": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.12,
+      "interveneNow": 0.2
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 462,
+    "id": "blind-7564c55d983a",
+    "at": "2026-10-18T02:55:30.951Z"
+  },
+  "blind-7695388877ce": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.56,
+      "tangentIsRelevant": 0.79,
+      "interveneNow": 0.72
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 430,
+    "id": "blind-7695388877ce",
+    "at": "2026-10-18T02:55:30.958Z"
+  },
+  "blind-78f45450a5b0": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.54,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 448,
+    "id": "blind-78f45450a5b0",
+    "at": "2026-10-18T02:55:31.320Z"
+  },
+  "blind-7922c4538722": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.47,
+      "interveneNow": 0.1
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 460,
+    "id": "blind-7922c4538722",
+    "at": "2026-10-18T02:55:31.412Z"
+  },
+  "blind-7d9a5798ea50": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.67,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 497,
+    "id": "blind-7d9a5798ea50",
+    "at": "2026-10-18T02:55:31.456Z"
+  },
+  "blind-7e5c895fb5e8": {
+    "scores": {
+      "drifted": 0.08,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.06,
+      "interveneNow": 0.61
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 436,
+    "id": "blind-7e5c895fb5e8",
+    "at": "2026-10-18T02:55:31.782Z"
+  },
+  "blind-8015631355e8": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.91,
+      "interveneNow": 0.17
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 463,
+    "id": "blind-8015631355e8",
+    "at": "2026-10-18T02:55:31.876Z"
+  },
+  "blind-802dd4effcbe": {
+    "scores": {
+      "drifted": 0.92,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.58
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 455,
+    "id": "blind-802dd4effcbe",
+    "at": "2026-10-18T02:55:31.911Z"
+  },
+  "blind-8277b536b2a6": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.71,
+      "interveneNow": 0.08
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 425,
+    "id": "blind-8277b536b2a6",
+    "at": "2026-10-18T02:55:32.208Z"
+  },
+  "blind-856c75dcd6fe": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.9,
+      "interveneNow": 0.12
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 447,
+    "id": "blind-856c75dcd6fe",
+    "at": "2026-10-18T02:55:32.325Z"
+  },
+  "blind-8623c8a9dfe6": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.6,
+      "tangentIsRelevant": 0.62,
+      "interveneNow": 0.79
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 439,
+    "id": "blind-8623c8a9dfe6",
+    "at": "2026-10-18T02:55:32.351Z"
+  },
+  "blind-86a30cdf441a": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.92,
+      "tangentIsRelevant": 0.67,
+      "interveneNow": 0.85
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 531,
+    "id": "blind-86a30cdf441a",
+    "at": "2026-10-18T02:55:32.740Z"
+  },
+  "blind-8843e62f58bb": {
+    "scores": {
+      "drifted": 0.07,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.08,
+      "interveneNow": 0.55
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 452,
+    "id": "blind-8843e62f58bb",
+    "at": "2026-10-18T02:55:32.777Z"
+  },
+  "blind-89aa8b26c956": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.19,
+      "interveneNow": 0.05
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 459,
+    "id": "blind-89aa8b26c956",
+    "at": "2026-10-18T02:55:32.811Z"
+  },
+  "blind-8a1ace2dac3b": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.92,
+      "interveneNow": 0.12
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 340,
+    "id": "blind-8a1ace2dac3b",
+    "at": "2026-10-18T02:55:33.082Z"
+  },
+  "blind-8bfa1671b76a": {
+    "scores": {
+      "drifted": 0.96,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.73
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 453,
+    "id": "blind-8bfa1671b76a",
+    "at": "2026-10-18T02:55:33.231Z"
+  },
+  "blind-8e43527657d4": {
+    "scores": {
+      "drifted": 0.97,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.86
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 433,
+    "id": "blind-8e43527657d4",
+    "at": "2026-10-18T02:55:33.245Z"
+  },
+  "blind-9037262b7dd7": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.47,
+      "interveneNow": 0.05
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 444,
+    "id": "blind-9037262b7dd7",
+    "at": "2026-10-18T02:55:33.526Z"
+  },
+  "blind-9489e1934380": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.54,
+      "interveneNow": 0.26
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 342,
+    "id": "blind-9489e1934380",
+    "at": "2026-10-18T02:55:33.587Z"
+  },
+  "blind-910796f5ef8b": {
+    "scores": {
+      "drifted": 0.95,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.08,
+      "interveneNow": 0.64
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 468,
+    "id": "blind-910796f5ef8b",
+    "at": "2026-10-18T02:55:33.699Z"
+  },
+  "blind-94903947b6fe": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.8,
+      "tangentIsRelevant": 0.52,
+      "interveneNow": 0.88
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 449,
+    "id": "blind-94903947b6fe",
+    "at": "2026-10-18T02:55:33.976Z"
+  },
+  "blind-96d9862a74df": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.39,
+      "tangentIsRelevant": 0.26,
+      "interveneNow": 0.63
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 436,
+    "id": "blind-96d9862a74df",
+    "at": "2026-10-18T02:55:34.024Z"
+  },
+  "blind-97c736af9bd8": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.61,
+      "interveneNow": 0.13
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 467,
+    "id": "blind-97c736af9bd8",
+    "at": "2026-10-18T02:55:34.169Z"
+  },
+  "blind-97e6d910a4c1": {
+    "scores": {
+      "drifted": 0.26,
+      "stalled": 0.12,
+      "tangentIsRelevant": 0.94,
+      "interveneNow": 0.18
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 452,
+    "id": "blind-97e6d910a4c1",
+    "at": "2026-10-18T02:55:34.428Z"
+  },
+  "blind-9a056efc95d1": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.87,
+      "interveneNow": 0.1
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 443,
+    "id": "blind-9a056efc95d1",
+    "at": "2026-10-18T02:55:34.468Z"
+  },
+  "blind-9a49b15ac486": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.34,
+      "interveneNow": 0.07
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 471,
+    "id": "blind-9a49b15ac486",
+    "at": "2026-10-18T02:55:34.642Z"
+  },
+  "blind-9ab13b6decee": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.78,
+      "tangentIsRelevant": 0.67,
+      "interveneNow": 0.83
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 444,
+    "id": "blind-9ab13b6decee",
+    "at": "2026-10-18T02:55:34.874Z"
+  },
+  "blind-9f3b0dc7cc2c": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.16,
+      "tangentIsRelevant": 0.56,
+      "interveneNow": 0.57
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 471,
+    "id": "blind-9f3b0dc7cc2c",
+    "at": "2026-10-18T02:55:34.940Z"
+  },
+  "blind-a369b7dbf06f": {
+    "scores": {
+      "drifted": 0.09,
+      "stalled": 0.13,
+      "tangentIsRelevant": 0.7,
+      "interveneNow": 0.74
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 457,
+    "id": "blind-a369b7dbf06f",
+    "at": "2026-10-18T02:55:35.100Z"
+  },
+  "blind-a58fea25e145": {
+    "scores": {
+      "drifted": 0.88,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.16,
+      "interveneNow": 0.76
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 449,
+    "id": "blind-a58fea25e145",
+    "at": "2026-10-18T02:55:35.325Z"
+  },
+  "blind-a6882a75068b": {
+    "scores": {
+      "drifted": 0.96,
+      "stalled": 0.11,
+      "tangentIsRelevant": 0.05,
+      "interveneNow": 0.89
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 473,
+    "id": "blind-a6882a75068b",
+    "at": "2026-10-18T02:55:35.414Z"
+  },
+  "blind-a6a703a80538": {
+    "scores": {
+      "drifted": 0.98,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.03,
+      "interveneNow": 0.6
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 426,
+    "id": "blind-a6a703a80538",
+    "at": "2026-10-18T02:55:35.527Z"
+  },
+  "blind-a78406778474": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.5,
+      "interveneNow": 0.19
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 475,
+    "id": "blind-a78406778474",
+    "at": "2026-10-18T02:55:35.802Z"
+  },
+  "blind-a789e4f2307d": {
+    "scores": {
+      "drifted": 0.6,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.94,
+      "interveneNow": 0.27
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 489,
+    "id": "blind-a789e4f2307d",
+    "at": "2026-10-18T02:55:35.903Z"
+  },
+  "blind-a7bf0fbdc86b": {
+    "scores": {
+      "drifted": 0.95,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.32
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 463,
+    "id": "blind-a7bf0fbdc86b",
+    "at": "2026-10-18T02:55:35.991Z"
+  },
+  "blind-a83f073f29e1": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.9,
+      "interveneNow": 0.13
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 473,
+    "id": "blind-a83f073f29e1",
+    "at": "2026-10-18T02:55:36.275Z"
+  },
+  "blind-aaeb838f3397": {
+    "scores": {
+      "drifted": 0.05,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.9,
+      "interveneNow": 0.12
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 429,
+    "id": "blind-aaeb838f3397",
+    "at": "2026-10-18T02:55:36.334Z"
+  },
+  "blind-ac565261728f": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.89,
+      "interveneNow": 0.15
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 471,
+    "id": "blind-ac565261728f",
+    "at": "2026-10-18T02:55:36.463Z"
+  },
+  "blind-ac8e6d3f876a": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.76,
+      "interveneNow": 0.22
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 464,
+    "id": "blind-ac8e6d3f876a",
+    "at": "2026-10-18T02:55:36.739Z"
+  },
+  "blind-b27c414ecac9": {
+    "scores": {
+      "drifted": 0.87,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.28,
+      "interveneNow": 0.86
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 425,
+    "id": "blind-b27c414ecac9",
+    "at": "2026-10-18T02:55:36.759Z"
+  },
+  "blind-b29228dface4": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.52,
+      "interveneNow": 0.08
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 328,
+    "id": "blind-b29228dface4",
+    "at": "2026-10-18T02:55:36.792Z"
+  },
+  "blind-b5f749b3d787": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.68,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 323,
+    "id": "blind-b5f749b3d787",
+    "at": "2026-10-18T02:55:37.116Z"
+  },
+  "blind-b4b70eb9df64": {
+    "scores": {
+      "drifted": 0.97,
+      "stalled": 0.11,
+      "tangentIsRelevant": 0.07,
+      "interveneNow": 0.75
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 470,
+    "id": "blind-b4b70eb9df64",
+    "at": "2026-10-18T02:55:37.211Z"
+  },
+  "blind-b4cbaecc6d2d": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.84,
+      "interveneNow": 0.25
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 517,
+    "id": "blind-b4cbaecc6d2d",
+    "at": "2026-10-18T02:55:37.278Z"
+  },
+  "blind-b81119063236": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.85,
+      "tangentIsRelevant": 0.54,
+      "interveneNow": 0.84
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 446,
+    "id": "blind-b81119063236",
+    "at": "2026-10-18T02:55:37.562Z"
+  },
+  "blind-b9b86a324112": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.54,
+      "interveneNow": 0.08
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 349,
+    "id": "blind-b9b86a324112",
+    "at": "2026-10-18T02:55:37.627Z"
+  },
+  "blind-b9864e7c62a1": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.1,
+      "tangentIsRelevant": 0.21,
+      "interveneNow": 0.28
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 451,
+    "id": "blind-b9864e7c62a1",
+    "at": "2026-10-18T02:55:37.663Z"
+  },
+  "blind-ba77c91bcc97": {
+    "scores": {
+      "drifted": 0.08,
+      "stalled": 0.17,
+      "tangentIsRelevant": 0.85,
+      "interveneNow": 0.34
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 430,
+    "id": "blind-ba77c91bcc97",
+    "at": "2026-10-18T02:55:37.992Z"
+  },
+  "blind-bbf2d47b5728": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.64,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 371,
+    "id": "blind-bbf2d47b5728",
+    "at": "2026-10-18T02:55:37.998Z"
+  },
+  "blind-bccaf37d8a58": {
+    "scores": {
+      "drifted": 0.95,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.61
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 436,
+    "id": "blind-bccaf37d8a58",
+    "at": "2026-10-18T02:55:38.099Z"
+  },
+  "blind-bd2befe2b2c8": {
+    "scores": {
+      "drifted": 0.96,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.76
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 452,
+    "id": "blind-bd2befe2b2c8",
+    "at": "2026-10-18T02:55:38.446Z"
+  },
+  "blind-be2972b9e0ae": {
+    "scores": {
+      "drifted": 0.93,
+      "stalled": 0.11,
+      "tangentIsRelevant": 0.08,
+      "interveneNow": 0.74
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 480,
+    "id": "blind-be2972b9e0ae",
+    "at": "2026-10-18T02:55:38.479Z"
+  },
+  "blind-bff4c8cad478": {
+    "scores": {
+      "drifted": 0.15,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.09,
+      "interveneNow": 0.45
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 450,
+    "id": "blind-bff4c8cad478",
+    "at": "2026-10-18T02:55:38.550Z"
+  },
+  "blind-c0f9186be450": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.21,
+      "tangentIsRelevant": 0.39,
+      "interveneNow": 0.12
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 337,
+    "id": "blind-c0f9186be450",
+    "at": "2026-10-18T02:55:38.817Z"
+  },
+  "blind-c04873a114cb": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.03,
+      "tangentIsRelevant": 0.59,
+      "interveneNow": 0.11
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 478,
+    "id": "blind-c04873a114cb",
+    "at": "2026-10-18T02:55:38.925Z"
+  },
+  "blind-c75c5d249849": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.85,
+      "tangentIsRelevant": 0.53,
+      "interveneNow": 0.85
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 459,
+    "id": "blind-c75c5d249849",
+    "at": "2026-10-18T02:55:39.010Z"
+  },
+  "blind-c8fe17d13773": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.64,
+      "interveneNow": 0.18
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 332,
+    "id": "blind-c8fe17d13773",
+    "at": "2026-10-18T02:55:39.151Z"
+  },
+  "blind-ce077de10e75": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.63,
+      "interveneNow": 0.21
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 511,
+    "id": "blind-ce077de10e75",
+    "at": "2026-10-18T02:55:39.438Z"
+  },
+  "blind-cf542346f2d8": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.2,
+      "tangentIsRelevant": 0.35,
+      "interveneNow": 0.28
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 478,
+    "id": "blind-cf542346f2d8",
+    "at": "2026-10-18T02:55:39.489Z"
+  },
+  "blind-cf5e7a331c28": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.33,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 468,
+    "id": "blind-cf5e7a331c28",
+    "at": "2026-10-18T02:55:39.619Z"
+  },
+  "blind-d301be62a467": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.54,
+      "interveneNow": 0.3
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 356,
+    "id": "blind-d301be62a467",
+    "at": "2026-10-18T02:55:39.848Z"
+  },
+  "blind-d2bf9d313154": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.61,
+      "interveneNow": 0.1
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 444,
+    "id": "blind-d2bf9d313154",
+    "at": "2026-10-18T02:55:39.883Z"
+  },
+  "blind-d351ed8c6f19": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.87,
+      "tangentIsRelevant": 0.61,
+      "interveneNow": 0.82
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 466,
+    "id": "blind-d351ed8c6f19",
+    "at": "2026-10-18T02:55:40.087Z"
+  },
+  "blind-d355315132b4": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.87,
+      "interveneNow": 0.16
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 456,
+    "id": "blind-d355315132b4",
+    "at": "2026-10-18T02:55:40.305Z"
+  },
+  "blind-d67510c4ca93": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.57,
+      "interveneNow": 0.08
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 426,
+    "id": "blind-d67510c4ca93",
+    "at": "2026-10-18T02:55:40.316Z"
+  },
+  "blind-d8e99c05df1e": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.57,
+      "tangentIsRelevant": 0.78,
+      "interveneNow": 0.59
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 483,
+    "id": "blind-d8e99c05df1e",
+    "at": "2026-10-18T02:55:40.571Z"
+  },
+  "blind-daab412656b0": {
+    "scores": {
+      "drifted": 0.23,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.74,
+      "interveneNow": 0.27
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 430,
+    "id": "blind-daab412656b0",
+    "at": "2026-10-18T02:55:40.736Z"
+  },
+  "blind-db7fc7a79ecb": {
+    "scores": {
+      "drifted": 0.05,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.73,
+      "interveneNow": 0.07
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 429,
+    "id": "blind-db7fc7a79ecb",
+    "at": "2026-10-18T02:55:40.746Z"
+  },
+  "blind-dc9016881e66": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.85,
+      "interveneNow": 0.33
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 476,
+    "id": "blind-dc9016881e66",
+    "at": "2026-10-18T02:55:41.048Z"
+  },
+  "blind-dcde3fcf7d3f": {
+    "scores": {
+      "drifted": 0.05,
+      "stalled": 0.12,
+      "tangentIsRelevant": 0.9,
+      "interveneNow": 0.34
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 462,
+    "id": "blind-dcde3fcf7d3f",
+    "at": "2026-10-18T02:55:41.199Z"
+  },
+  "blind-dd4500942716": {
+    "scores": {
+      "drifted": 0.96,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.21,
+      "interveneNow": 0.64
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 459,
+    "id": "blind-dd4500942716",
+    "at": "2026-10-18T02:55:41.507Z"
+  },
+  "blind-dd3129f01d6a": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.69,
+      "interveneNow": 0.1
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 906,
+    "id": "blind-dd3129f01d6a",
+    "at": "2026-10-18T02:55:41.653Z"
+  },
+  "blind-def9c58a07e1": {
+    "scores": {
+      "drifted": 0.92,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.12,
+      "interveneNow": 0.38
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 467,
+    "id": "blind-def9c58a07e1",
+    "at": "2026-10-18T02:55:41.667Z"
+  },
+  "blind-df1819095dbe": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.1,
+      "tangentIsRelevant": 0.68,
+      "interveneNow": 0.37
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 459,
+    "id": "blind-df1819095dbe",
+    "at": "2026-10-18T02:55:41.967Z"
+  },
+  "blind-e234bdcb3c96": {
+    "scores": {
+      "drifted": 0.06,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.83,
+      "interveneNow": 0.16
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 440,
+    "id": "blind-e234bdcb3c96",
+    "at": "2026-10-18T02:55:42.095Z"
+  },
+  "blind-e4512670d73c": {
+    "scores": {
+      "drifted": 0.85,
+      "stalled": 0.07,
+      "tangentIsRelevant": 0.04,
+      "interveneNow": 0.46
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 447,
+    "id": "blind-e4512670d73c",
+    "at": "2026-10-18T02:55:42.115Z"
+  },
+  "blind-e5b158538284": {
+    "scores": {
+      "drifted": 0.96,
+      "stalled": 0.32,
+      "tangentIsRelevant": 0.05,
+      "interveneNow": 0.92
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 467,
+    "id": "blind-e5b158538284",
+    "at": "2026-10-18T02:55:42.435Z"
+  },
+  "blind-e8d2e1478d94": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.12,
+      "tangentIsRelevant": 0.52,
+      "interveneNow": 0.35
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 349,
+    "id": "blind-e8d2e1478d94",
+    "at": "2026-10-18T02:55:42.465Z"
+  },
+  "blind-e5bb11302972": {
+    "scores": {
+      "drifted": 0.42,
+      "stalled": 0.08,
+      "tangentIsRelevant": 0.44,
+      "interveneNow": 0.34
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 441,
+    "id": "blind-e5bb11302972",
+    "at": "2026-10-18T02:55:42.537Z"
+  },
+  "blind-eb2d94138914": {
+    "scores": {
+      "drifted": 0.93,
+      "stalled": 0.16,
+      "tangentIsRelevant": 0.14,
+      "interveneNow": 0.69
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 471,
+    "id": "blind-eb2d94138914",
+    "at": "2026-10-18T02:55:42.907Z"
+  },
+  "blind-ebb6307601f1": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.09,
+      "tangentIsRelevant": 0.45,
+      "interveneNow": 0.43
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 456,
+    "id": "blind-ebb6307601f1",
+    "at": "2026-10-18T02:55:42.922Z"
+  },
+  "blind-ed56155e9787": {
+    "scores": {
+      "drifted": 0.05,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.9,
+      "interveneNow": 0.24
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 464,
+    "id": "blind-ed56155e9787",
+    "at": "2026-10-18T02:55:43.002Z"
+  },
+  "blind-f275fa8c1aef": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.72,
+      "interveneNow": 0.09
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 391,
+    "id": "blind-f275fa8c1aef",
+    "at": "2026-10-18T02:55:43.299Z"
+  },
+  "blind-f29ac32a69e8": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.83,
+      "tangentIsRelevant": 0.76,
+      "interveneNow": 0.83
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 446,
+    "id": "blind-f29ac32a69e8",
+    "at": "2026-10-18T02:55:43.372Z"
+  },
+  "blind-f31be311b0fd": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.13,
+      "tangentIsRelevant": 0.55,
+      "interveneNow": 0.39
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 430,
+    "id": "blind-f31be311b0fd",
+    "at": "2026-10-18T02:55:43.434Z"
+  },
+  "blind-f400e84d4edb": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.36,
+      "interveneNow": 0.1
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 456,
+    "id": "blind-f400e84d4edb",
+    "at": "2026-10-18T02:55:43.755Z"
+  },
+  "blind-f69325e65c35": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.04,
+      "tangentIsRelevant": 0.5,
+      "interveneNow": 0.11
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 487,
+    "id": "blind-f69325e65c35",
+    "at": "2026-10-18T02:55:43.861Z"
+  },
+  "blind-f813ef33d771": {
+    "scores": {
+      "drifted": 0.04,
+      "stalled": 0.13,
+      "tangentIsRelevant": 0.93,
+      "interveneNow": 0.48
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 432,
+    "id": "blind-f813ef33d771",
+    "at": "2026-10-18T02:55:43.868Z"
+  },
+  "blind-fd460facfecd": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.57,
+      "interveneNow": 0.1
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 473,
+    "id": "blind-fd460facfecd",
+    "at": "2026-10-18T02:55:44.231Z"
+  },
+  "blind-fe31d09f97ad": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.11,
+      "tangentIsRelevant": 0.48,
+      "interveneNow": 0.43
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 428,
+    "id": "blind-fe31d09f97ad",
+    "at": "2026-10-18T02:55:44.297Z"
+  },
+  "blind-fd974f026bfa": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.46,
+      "interveneNow": 0.08
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 440,
+    "id": "blind-fd974f026bfa",
+    "at": "2026-10-18T02:55:44.303Z"
+  },
+  "blind-fe97170aaf06": {
+    "scores": {
+      "drifted": 0.02,
+      "stalled": 0.05,
+      "tangentIsRelevant": 0.2,
+      "interveneNow": 0.06
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 452,
+    "id": "blind-fe97170aaf06",
+    "at": "2026-10-18T02:55:44.685Z"
+  },
+  "blind-febc633d1252": {
+    "scores": {
+      "drifted": 0.03,
+      "stalled": 0.06,
+      "tangentIsRelevant": 0.61,
+      "interveneNow": 0.1
+    },
+    "model": "typesafe-ai/jev-1.14.0",
+    "latencyMs": 437,
+    "id": "blind-febc633d1252",
+    "at": "2026-10-18T02:55:44.736Z"
+  }
+}
