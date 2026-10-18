@@ -45,7 +45,7 @@ Featureとstagingには別々の固定URLを割り当てます。同じブラン
 
 - 既存のVercelプロジェクト `meeting-facilitator-deploy` を利用し、新規プロジェクト・料金プラン変更は行いません。
 - GitHubのスイッチで公開対象を制御します。`ENABLE_FEATURE_PREVIEW_DEPLOYMENT`はfeature、`ENABLE_PREVIEW_DEPLOYMENT`はstaging、`ENABLE_PRODUCTION_DEPLOYMENT`はmainが対象です。未設定またはfalseなら対象ブランチはCIのみです。
-- 両環境ともビルド時・実行時は `AI_PROVIDER=mock`、`ALLOW_PAID_AI=false` です。キーは追加しません。
+- CIのビルド・テストは `AI_PROVIDER=mock`、`ALLOW_PAID_AI=false` のまま外部AIを呼びません。stagingの公開環境は `AI_PROVIDER=jev`、`ALLOW_PAID_AI=true`、`JEV_MODEL_ID=typesafe-ai/jev` とし、Repository Secret `AI_GATEWAY_API_KEY` を実行時へ渡します。キーが未設定なら公開を停止します。mainとfeatureの公開環境は従来どおりMockです。
 - `/api/test-ai` にはFocus UI側で検証済みのガードを取り込み、CIで外部AI処理が走るのを防ぎます。
 - GitHub Secretsへ渡すVercelトークンは利用者本人が発行・登録します。ローカルCLIのログイントークンは流用しません。
 
@@ -163,7 +163,7 @@ timeout 30s vercel curl /api/judge --deployment "$PREVIEW_URL" -- \
 ## ファイル構成
 
 - `.github/workflows/ci-deploy.yml`：チェックとブランチ別デプロイ。
-- `scripts/ci/prepare-vercel-env.mjs`：Vercelから取得した環境ファイルをMock設定に固定。取得した秘密情報はログに出しません。
+- `scripts/ci/prepare-vercel-env.mjs`：ビルド・ローカル検証用の環境ファイルをMock設定に固定。公開環境のJev設定はworkflowのデプロイ工程で指定。取得した秘密情報はログに出しません。
 - `scripts/ci/helpers.test.mjs`：Mock設定の強制、秘密情報の非出力、デプロイ結果のURL検証をテスト。
 - `scripts/ci/smoke-test.mjs`：ビルド済みアプリを一時起動し、トップ画面、Judgeの3判定、有料AIテストの403を確認。
 - `scripts/ci/report-deployment.mjs`：デプロイ結果のURLをActions Summaryと後続ステップへ渡す。

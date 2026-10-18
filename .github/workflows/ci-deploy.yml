@@ -19,6 +19,9 @@ env:
   NEXT_TELEMETRY_DISABLED: '1'
   AI_PROVIDER: mock
   ALLOW_PAID_AI: 'false'
+  # Only staging runs real Jev; checks and other environments keep their existing policy.
+  DEPLOY_AI_PROVIDER: ${{ github.ref == 'refs/heads/staging' && 'jev' || 'mock' }}
+  DEPLOY_ALLOW_PAID_AI: ${{ github.ref == 'refs/heads/staging' && 'true' || 'false' }}
   # PRs and manual runs always validate without deployment credentials.
   DEPLOY_TARGET: ${{ github.event_name == 'push' && ((github.ref == 'refs/heads/staging' && vars.ENABLE_PREVIEW_DEPLOYMENT == 'true') || (startsWith(github.ref, 'refs/heads/feature/') && vars.ENABLE_FEATURE_PREVIEW_DEPLOYMENT == 'true')) && 'preview' || github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ENABLE_PRODUCTION_DEPLOYMENT == 'true' && 'production' || '' }}
 
@@ -103,6 +106,16 @@ jobs:
       - name: Smoke test built app and Mock Judge
         run: node scripts/ci/smoke-test.mjs
 
+      - name: Validate staging Jev credentials
+        if: env.DEPLOY_TARGET != '' && env.DEPLOY_AI_PROVIDER == 'jev'
+        env:
+          AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
+        run: |
+          if [ -z "$AI_GATEWAY_API_KEY" ]; then
+            echo "::error::AI_GATEWAY_API_KEY is required for staging Jev."
+            exit 1
+          fi
+
       - name: Deploy the tested artifact (links in Summary)
         id: deployment
         if: env.DEPLOY_TARGET != ''
@@ -110,13 +123,17 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
         run: |
           deploy_args=()
+          if [ "$DEPLOY_AI_PROVIDER" = jev ]; then
+            deploy_args+=(--env "AI_GATEWAY_API_KEY=$AI_GATEWAY_API_KEY" --env JEV_MODEL_ID=typesafe-ai/jev)
+          fi
           if [ "$DEPLOY_TARGET" = production ]; then
             deploy_args+=(--prod)
           fi
           vercel deploy --prebuilt --yes --json "${deploy_args[@]}" \
-            --env AI_PROVIDER=mock --env ALLOW_PAID_AI=false \
+            --env "AI_PROVIDER=$DEPLOY_AI_PROVIDER" --env "ALLOW_PAID_AI=$DEPLOY_ALLOW_PAID_AI" \
             --token="$VERCEL_TOKEN" > "$RUNNER_TEMP/vercel-deployment.json"
           node scripts/ci/report-deployment.mjs "$RUNNER_TEMP/vercel-deployment.json"
 
