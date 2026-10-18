@@ -1,5 +1,4 @@
-import { readFile } from "node:fs/promises";
-import { localRecallIo, removeBot } from "@/scripts/recall.mjs";
+import { localRecallIo, removeBot, verifyMeetingBot } from "@/scripts/recall.mjs";
 import { monitorStore } from "@/lib/monitor/store";
 import { controlAccessError } from "@/lib/recall/controller";
 
@@ -7,18 +6,14 @@ export async function POST(request: Request) {
   const denied = controlAccessError(request, process.env.RECALL_CONTROL_TOKEN);
   if (denied) return denied;
   const io = localRecallIo();
-  let id = "";
-  try {
-    const state = JSON.parse(await readFile(io.statePath, "utf8")) as { id?: string };
-    id = typeof state.id === "string" ? state.id : "";
-  } catch {
-    id = "";
-  }
-  if (!id) {
-    return Response.json({ error: "退出するボットがありません。" }, { status: 404 });
+  const payload = await request.json().catch(() => null);
+  const id = payload?.botId;
+  if (typeof id !== "string" || !/^[A-Za-z0-9_-]{1,128}$/.test(id)) {
+    return Response.json({ error: "退出する会議を選択してください。" }, { status: 400 });
   }
 
   try {
+    await verifyMeetingBot(io, id);
     const result = await removeBot(io, id);
     if (result.left) {
       monitorStore.deactivate(id);

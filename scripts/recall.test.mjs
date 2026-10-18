@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { run, removeBot, sendBot, localRecallIo } from './recall.mjs';
+import { run, removeBot, sendBot, localRecallIo, listMeetingBots, verifyMeetingBot, botStatePath, meetingScope } from './recall.mjs';
 
 function fixture() {
   const dir = mkdtempSync(path.join(tmpdir(), 'recall-cli-'));
@@ -527,4 +527,62 @@ test('a storage failure after creation requests leave for only the newly created
     assert.equal(calls.length, 2);
     assert.equal(calls.filter(([url]) => url.endsWith('/bot/')).length, 1);
   } finally { box.cleanup(); }
+});
+
+
+test('two overlapping web joins preserve separate state and leaving one never targets the other', async () => {
+  const box = fixture();
+  const leaves = [];
+  try {
+    let serial = 0;
+    const io = capture({ statePath: box.statePath, fetch: async (url, options) => {
+      if (url.endsWith('/leave_call/')) { leaves.push(url); return jsonResponse(200, {}); }
+      if (options.method === 'POST') return jsonResponse(201, { id: `multi-${++serial}` });
+      return jsonResponse(200, { status_changes: [{ code: 'done' }] });
+    } }).io;
+    const [a, b] = await Promise.all([
+      sendBot('https://meet.google.com/aaa-bbbb-ccc', io, '', { multiple: true }),
+      sendBot('https://meet.google.com/ddd-eeee-fff', io, '', { multiple: true }),
+    ]);
+    assert.notEqual(a.id, b.id);
+    assert.equal(JSON.parse(readFileSync(botStatePath(io, a.id))).meetingUrl, a.meetingUrl);
+    assert.equal(JSON.parse(readFileSync(botStatePath(io, b.id))).meetingUrl, b.meetingUrl);
+    await removeBot(io, a.id);
+    assert.deepEqual(leaves, [`https://ap-northeast-1.recall.ai/api/v1/bot/${a.id}/leave_call/`]);
+    assert.equal(JSON.parse(readFileSync(botStatePath(io, b.id))).id, b.id);
+  } finally { box.cleanup(); }
+});
+
+test('Vercel multiple joins do not require a writable local state file', async () => {
+  const box = fixture();
+  try {
+    writeFileSync(box.statePath, 'file blocks directory');
+    let serial = 0;
+    const io = capture({ statePath: path.join(box.statePath, 'cannot-write.json'), env: { VERCEL: '1' }, fetch: async (_url, options) => {
+      assert.equal(options.method, 'POST');
+      assert.equal(JSON.parse(options.body).metadata.facilitator, meetingScope({}));
+      return jsonResponse(201, { id: `vercel-${++serial}` });
+    } }).io;
+    assert.equal((await sendBot('https://meet.google.com/aaa-bbbb-ccc', io, '', { multiple: true })).id, 'vercel-1');
+    assert.equal((await sendBot('https://meet.google.com/ddd-eeee-fff', io, '', { multiple: true })).id, 'vercel-2');
+  } finally { box.cleanup(); }
+});
+
+test('shared meeting list paginates, isolates environments and projects only public meeting fields', async () => {
+  const requests = [];
+  const scope = meetingScope({ VERCEL_ENV: 'preview' });
+  const io = capture({ env: { VERCEL_ENV: 'preview' }, fetch: async url => {
+    const parsed = new URL(url); requests.push(parsed);
+    const page = parsed.searchParams.get('page');
+    return jsonResponse(200, { next: page === '1' ? 'untrusted-url-is-never-followed' : null, results: [
+      { id: `bot-${page}`, meeting_url: `https://meet.google.com/${page}`, metadata: { facilitator: scope, private: 'do-not-expose' }, recording_config: { secret: 'do-not-expose' }, status_changes: [{ code: 'in_call_recording' }] },
+      { id: 'other-env', metadata: { facilitator: 'other' } },
+      { id: 'finished', metadata: { facilitator: scope }, status_changes: [{ code: 'done' }] },
+    ] });
+  } }).io;
+  assert.deepEqual(await listMeetingBots(io), [1, 2].map(page => ({ id: `bot-${page}`, meetingUrl: `https://meet.google.com/${page}`, status: 'in_call_recording' })));
+  for (const url of requests) assert.equal(url.searchParams.get('metadata__facilitator'), scope);
+  const wrong = { ...io, fetch: async () => jsonResponse(200, { metadata: { facilitator: 'other' } }) };
+  await assert.rejects(() => verifyMeetingBot(wrong, 'bot-1'), error => error.status === 403);
+  await assert.rejects(() => verifyMeetingBot(io, '../another'), /Bot ID/);
 });

@@ -1,9 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { joinMeeting, leaveMeeting } from "./meeting-actions";
+import { joinMeeting, leaveMeeting, listMeetings } from "./meeting-actions";
 import { MonitorConnection } from "@/components/score-monitor/MonitorConnection";
+
+type MeetingItem = { id: string; meetingUrl: string; status: string };
 
 type MaterialItem = { name: string; saved: boolean; message: string | null };
 
@@ -11,6 +13,8 @@ const MAX_SELECTED_FILES = 5;
 
 export function JoinForm({ serverManagedControl = false, setupError = null }: { serverManagedControl?: boolean; setupError?: string | null }) {
   const [monitorSessionId, setMonitorSessionId] = useState<string | null>(null);
+  const [meetings, setMeetings] = useState<MeetingItem[]>([]);
+  const [listError, setListError] = useState<string | null>(null);
   const [meetingUrl, setMeetingUrl] = useState("");
   const [agenda, setAgenda] = useState("");
   const [controlToken, setControlToken] = useState("");
@@ -21,6 +25,29 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
   const [materialNotes, setMaterialNotes] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+
+  useEffect(() => {
+    if (!serverManagedControl) return;
+    let cancelled = false;
+    void listMeetings().then(result => {
+      if (cancelled) return;
+      if (result.ok) setMeetings(result.data.meetings);
+      else setListError(result.data.error ?? "会議一覧を取得できませんでした。");
+    }).catch(() => { if (!cancelled) setListError("会議一覧を取得できませんでした。"); });
+    return () => { cancelled = true; };
+  }, [serverManagedControl]);
+
+  async function refreshMeetings() {
+    setListError(null);
+    try {
+      const response = serverManagedControl
+        ? await listMeetings().then(result => ({ ok: result.ok, json: async () => result.data }))
+        : await fetch("/api/recall/meetings", { method: "POST", headers: { Authorization: `Bearer ${controlToken.trim()}` } });
+      const body = await response.json() as { meetings?: MeetingItem[]; error?: string };
+      if (!response.ok) { setListError(body.error ?? "会議一覧を取得できませんでした。"); return; }
+      setMeetings(body.meetings ?? []);
+    } catch { setListError("会議一覧を取得できませんでした。"); }
+  }
 
   function replaceFiles(next: File[], limitNote: string | null) {
     setFiles(next);
@@ -59,6 +86,7 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
       }
       sentId = body.id;
       setMonitorSessionId(body.id);
+      setMeetings(previous => [...previous.filter(item => item.id !== body.id), { id: body.id!, meetingUrl, status: "joining_call" }]);
       if (files.length === 0) {
         setNotice(`ボットを送信しました ${body.id}`);
         return;
@@ -95,12 +123,14 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
   }
 
   async function leave() {
+    if (!monitorSessionId) { setError("退出する会議を選択してください。"); return; }
+    const leavingId = monitorSessionId;
     setError(null);
     setNotice(null);
     setMaterialNotes([]);
     setPending(true);
     try {
-      const response = serverManagedControl ? await leaveMeeting().then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/leave", { method: "POST", headers: { Authorization: `Bearer ${controlToken.trim()}` } });
+      const response = serverManagedControl ? await leaveMeeting(leavingId).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/leave", { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` }, body: JSON.stringify({ botId: leavingId }) });
       const body = (await response.json()) as {
         left?: boolean;
         alreadyGone?: boolean;
@@ -111,6 +141,7 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
         return;
       }
       setMonitorSessionId(null);
+      setMeetings(previous => previous.filter(item => item.id !== leavingId));
       setNotice(body.alreadyGone ? "すでに退出しています" : "退出しました");
     } catch {
       setError("退出に失敗しました");
@@ -227,7 +258,7 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
               void leave();
             }}
           >
-            退出
+            選択した会議から退出
           </button>
         </div>
         {error ? <p className="text-sm text-rose-700">{error}</p> : null}
@@ -238,6 +269,23 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
           </ul>
         ) : null}
       </form>
+      <section aria-label="参加中の会議" className="grid gap-3">
+        <div className="flex items-center justify-between">
+          <h2 className="font-semibold">参加中の会議</h2>
+          <button type="button" className="text-sm underline" disabled={pending} onClick={() => void refreshMeetings()}>一覧を更新</button>
+        </div>
+        {listError && <p role="alert" className="text-sm text-rose-700">{listError}</p>}
+        {meetings.length === 0 && <p className="text-sm text-zinc-600">参加中の会議はありません。別の会議URLでも続けて参加できます。</p>}
+        {meetings.map(meeting => (
+          <button type="button" key={meeting.id} aria-pressed={monitorSessionId === meeting.id} disabled={pending}
+            className={`rounded border p-3 text-left text-sm ${monitorSessionId === meeting.id ? "border-sky-600 bg-sky-50" : "border-zinc-300"}`}
+            onClick={() => setMonitorSessionId(meeting.id)}>
+            <span className="block break-all">{meeting.meetingUrl}</span>
+            <span className="block text-xs text-zinc-600">Bot ID: {meeting.id}</span>
+          </button>
+        ))}
+        <p className="text-xs text-zinc-600">会議を選択すると、その会議の判定グラフを表示します。退出も選択した会議だけに適用します。</p>
+      </section>
       {monitorSessionId && (
         <section aria-label="この会議のJev判定" className="rounded-xl bg-[#090f13] p-4">
           <Link className="mb-4 block text-sm text-sky-200 underline" href={`/monitor?session=${encodeURIComponent(monitorSessionId)}`} target="_blank" rel="noopener noreferrer">

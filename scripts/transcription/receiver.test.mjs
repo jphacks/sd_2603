@@ -23,11 +23,11 @@ test('worker rejects invalid token and unknown bot without a paid request', { ti
     assert.match(error.message, /403/);
     const accepted = new WebSocket(`ws://127.0.0.1:${port}/recall/audio/?token=${token}`);
     await once(accepted, 'open');
-    assert.equal((await fetch(`http://127.0.0.1:${port}/health`)).status, 503);
+    assert.equal((await fetch(`http://127.0.0.1:${port}/health`)).status, 200);
     accepted.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id: 'wrong' }, data: { buffer: 'AAAA' } } }));
     const [code] = await once(accepted, 'close');
     assert.equal(code, 1011);
-    assert.equal((await fetch(`http://127.0.0.1:${port}/health`)).status, 503);
+    assert.equal((await fetch(`http://127.0.0.1:${port}/health`)).status, 200);
   } finally {
     worker.kill('SIGTERM');
     if (worker.exitCode === null) await once(worker, 'exit');

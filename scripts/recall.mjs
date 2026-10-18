@@ -13,6 +13,7 @@ const USAGE = `使い方:
   npm run recall -- leave [--id <bot-uuid>]`;
 
 const LIVE = new Set([
+  'ready',
   'joining_call',
   'in_waiting_room',
   'in_call_not_recording',
@@ -182,6 +183,7 @@ async function writeState(io, state) {
 }
 
 async function clearState(io, id) {
+  await rm(botStatePath(io, id), { force: true });
   const state = await readState(io).catch(() => null);
   if (state?.id === id) await rm(io.statePath, { force: true });
 }
@@ -276,6 +278,7 @@ function createBotBody(meetingUrl, env, audioConfig = null) {
     meeting_url: meetingUrl,
     bot_name: BOT_NAME,
     recording_config: recording,
+    metadata: { facilitator: meetingScope(env) },
     ...(chatConfig
       ? {
           chat: {
@@ -294,7 +297,48 @@ function createBotBody(meetingUrl, env, audioConfig = null) {
   };
 }
 
-export async function sendBot(meetingUrl, io, agenda) {
+
+export function meetingScope(env) {
+  return `meeting-facilitator:${env.RECALL_MEETING_SCOPE || env.VERCEL_ENV || 'local'}`;
+}
+
+function validateBotId(id) {
+  if (typeof id !== 'string' || !/^[A-Za-z0-9_-]{1,128}$/.test(id)) throw new RecallCliError('Bot IDが正しくありません。');
+}
+
+export function botStatePath(io, id) {
+  validateBotId(id);
+  return path.join(path.dirname(io.statePath), 'bots', `${id}.json`);
+}
+
+export async function listMeetingBots(io) {
+  const query = new URLSearchParams({ [`metadata__facilitator`]: meetingScope(io.env) });
+  for (const status of LIVE) query.append('status', status);
+  const meetings = [];
+  for (let page = 1; page <= 100; page++) {
+    const body = await recallFetch(io, `/bot/?${query}&page=${page}`);
+    if (!Array.isArray(body.results)) throw new RecallCliError('Recallの会議一覧を取得できませんでした。', { status: 502 });
+    for (const bot of body.results) {
+      // Never return provider credentials, recording configuration or arbitrary metadata.
+      if (bot.metadata?.facilitator !== meetingScope(io.env)) continue;
+      const code = latestChange(bot)?.code ?? 'joining_call';
+      if (LIVE.has(code)) meetings.push({ id: bot.id, meetingUrl: bot.meeting_url, status: code });
+    }
+    if (!body.next) return meetings;
+  }
+  throw new RecallCliError('会議一覧が多すぎます。Recall管理画面を確認してください。', { status: 502 });
+}
+
+export async function verifyMeetingBot(io, id) {
+  validateBotId(id);
+  const bot = await recallFetch(io, `/bot/${encodeURIComponent(id)}/`);
+  if (bot.metadata?.facilitator !== meetingScope(io.env)) {
+    throw new RecallCliError('この環境から参加させたBotではありません。', { status: 403 });
+  }
+  return bot;
+}
+
+export async function sendBot(meetingUrl, io, agenda, { multiple = false } = {}) {
   if (!/^https:\/\/.+/i.test(String(meetingUrl ?? ''))) {
     throw new RecallCliError('会議 URL は https:// で始めてください。', { status: 400, exitCode: 2 });
   }
@@ -316,8 +360,8 @@ export async function sendBot(meetingUrl, io, agenda) {
     }
   }
 
-  await ensureStateWritable(io);
-  const existing = await readState(io);
+  if (!multiple || io.env.VERCEL !== '1') await ensureStateWritable(io);
+  const existing = multiple ? null : await readState(io);
   if (existing) {
     try {
       const bot = await recallFetch(io, `/bot/${existing.id}/`);
@@ -350,13 +394,17 @@ export async function sendBot(meetingUrl, io, agenda) {
   const botId = created.id;
   if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
   try {
-    await writeState(io, {
+    const state = {
       id: botId,
       region: regionOf(io.env),
       meetingUrl,
       ...(audioEnabled ? { agenda: agenda.trim(), audioEnabled: true } : {}),
       createdAt: new Date(io.now()).toISOString(),
-    });
+    };
+    if (io.env.VERCEL !== '1' || !multiple) {
+      await writeState({ ...io, statePath: botStatePath(io, botId) }, state);
+      if (!multiple) await writeState(io, state);
+    }
   } catch {
     try {
       await requestLeave(io, botId);
