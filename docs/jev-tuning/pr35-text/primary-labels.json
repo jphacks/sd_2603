@@ -1,0 +1,3122 @@
+[
+  {
+    "id": "blind-00d50d91b9ad",
+    "inputHash": "88ea5a9e5ec221a47a20bbfe3c91f497b05db8ab3b2647afc39a5aa2e7eb7540",
+    "status": "OK",
+    "reason": "出張日程の確認を実際に依頼し、会場判断の前提を確認中。",
+    "evidenceTurns": [
+      5,
+      7
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-018be073ef8a",
+    "inputHash": "ee0e0adaca6d4890f624e2f368cbf639ade81eecbcc0260f860cd22edfe63ede",
+    "status": "OK",
+    "reason": "名称候補が次々に増え、合意した発散を継続している。",
+    "evidenceTurns": [
+      4,
+      5,
+      8
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-01f1a8b77853",
+    "inputHash": "07c8ef525902bedc0f4ddae60ee959984142cdc08d5d5bc19e12be6b630009a8",
+    "status": "OK",
+    "reason": "QA承認を含む更新後の手順を整理して合意。",
+    "evidenceTurns": [
+      2,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-01f9c9f7d32a",
+    "inputHash": "b74915df6d38cf943b2777cc33778d9818f9f38aa36ae26567249292248780ca",
+    "status": "INTERVENE_DRIFT",
+    "reason": "通知機能の検討から競合の資金調達と採用事情へ移り復帰なし。",
+    "evidenceTurns": [
+      6,
+      7,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-029087d09008",
+    "inputHash": "78b5edc0af3a8f2af8fecbdd6203dddebe4ae63952199b9b3562dc0b50bd83c4",
+    "status": "OK",
+    "reason": "総コストの基準、見積担当、期限と比較資料形式まで具体化。",
+    "evidenceTurns": [
+      5,
+      10,
+      12,
+      15
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-04e3ce624cd4",
+    "inputHash": "e9922977838e9d2cea46f5d19bc373347b47e369ec2c7edb8add0c00157f9d74",
+    "status": "OK",
+    "reason": "承認と経理チェックの流れを確認し周知へ進む。",
+    "evidenceTurns": [
+      1,
+      2,
+      4
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-08e20f1f367c",
+    "inputHash": "591d75b030087b786bc605f80a4d7847559a9db423233e81072fd77104e76529",
+    "status": "OK",
+    "reason": "各曜日の制約は増えており、空き枠なしと整理した段階。",
+    "evidenceTurns": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_STALLED",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-09436dbfff3d",
+    "inputHash": "11a1bf3f4e4e5d0fd88a9863d346220092a2a8933bbe372c47c9740a329026ed",
+    "status": "OK",
+    "reason": "媒体ごとの費用、リーチ、開始時期を共有し比較へ進む。",
+    "evidenceTurns": [
+      2,
+      4,
+      5,
+      8
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-0c7f7d228301",
+    "inputHash": "491d17e3ea2d27843a99d1eabd554c89cf11aeb6ca531de3fc7a69f8812f4eca",
+    "status": "OK",
+    "reason": "夜間案への海外利用者の制約を示し無停止方式を新たに問う。",
+    "evidenceTurns": [
+      3,
+      4,
+      6
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_STALLED",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-0d4b63d3ca75",
+    "inputHash": "f375212a6f2839ef2ec8d1deb48957262d2dc76fa1dd0ce6320fb2ebc394e8ef",
+    "status": "OK",
+    "reason": "顧客との対面を重視する今期方針を共有し現場伝達を確認。",
+    "evidenceTurns": [
+      0,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-0f39853d46cc",
+    "inputHash": "41a490f1eba27f4bbe2f9fec6b596108e6638cce87a7d6e622539e456b0c1c70",
+    "status": "OK",
+    "reason": "再現不能時から事後報告まで緊急修正手順を確認。",
+    "evidenceTurns": [
+      3,
+      7,
+      8,
+      10
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-0f3f36183ff9",
+    "inputHash": "571c1aa94e770b061d5c030aba6ecc1a448118891d6c81fc838a378ad2b2c48f",
+    "status": "OK",
+    "reason": "採用を二期に分け人数と入社目標、依頼の次手を合意。",
+    "evidenceTurns": [
+      4,
+      6,
+      7
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-0fb0413ee3f9",
+    "inputHash": "f6e74275634a0ed50091a29d230f243a37ece2ef20d13ab3289224f5fb8982fc",
+    "status": "OK",
+    "reason": "API制限と反映遅延を比較し、関連する同期障害の経験を提示。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-0fd27946e9c4",
+    "inputHash": "e327a90fd612c254b3bd33d93201dedef998f3885dc6ec5b2694141fdda45c3c",
+    "status": "INTERVENE_DRIFT",
+    "reason": "予算配分から退職の噂と後任の話へ移り末尾も継続。",
+    "evidenceTurns": [
+      1,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-12283bfff86e",
+    "inputHash": "6ceec89c37a5364fd3edd7f389150b12258f46e5163f23c3bc11e9251565554e",
+    "status": "INTERVENE_STALLED",
+    "reason": "来週水曜と再来週月曜の不一致を一巡後に再び繰り返す。",
+    "evidenceTurns": [
+      1,
+      2,
+      5,
+      6,
+      7
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-13685c1a7022",
+    "inputHash": "e7395e0eafc3d754c7bd029c4497f89e4436baa4e4f6f058d309e8ed3cd9f5d2",
+    "status": "OK",
+    "reason": "食事制約を申込フォームへ反映し、関連するベジ対応経験を提示。",
+    "evidenceTurns": [
+      1,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-14f7943415ee",
+    "inputHash": "db9a1bf8446bd0af19f2f307c4baa455d87fbb366dc4d8da3c9d0cc9ad3c5b15",
+    "status": "OK",
+    "reason": "広告、動画、記事、イベントへの具体的配分に合意。",
+    "evidenceTurns": [
+      2,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-17086a0fd4a4",
+    "inputHash": "7c22aff0ff185291be2f0a2499289ccb26e91b7ba82ad453a1c6cbb46512170e",
+    "status": "OK",
+    "reason": "天候の雑談を終えて予算総額の確認に戻っている。",
+    "evidenceTurns": [
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-174cc2059c3d",
+    "inputHash": "7c151a3103df5719e696d14b9ad6a6bf4343e1da7cb43327ff308bf23eb658d9",
+    "status": "INTERVENE_STALLED",
+    "reason": "互いに判断を委ねる応答が続き、再質問しても意見が増えず持越し。",
+    "evidenceTurns": [
+      10,
+      13,
+      16,
+      17,
+      19,
+      21
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-18a3f369ab93",
+    "inputHash": "1c229ac1895b9c60d187a4b6bbb322148ffbfc1057a26e87dcc1d54976f14dc7",
+    "status": "INTERVENE_DRIFT",
+    "reason": "DB障害の対策から営業や他部署への不満、組織変更談へ逸れ続ける。",
+    "evidenceTurns": [
+      6,
+      10,
+      14,
+      18,
+      19
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-1d2ba3b5e35b",
+    "inputHash": "d2fd678a9945d08e17ea35a471d161b0f6657c8e5834f0fcdf056fabcbd0a487",
+    "status": "OK",
+    "reason": "営業日の意味を月曜入社で明確化し文面に残す次手を合意。",
+    "evidenceTurns": [
+      2,
+      4,
+      5,
+      8,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-1d450cc03e1b",
+    "inputHash": "8825f6a0070ae0e5f9497317a9f32372e90c547a55b7e0239ecb85449b629a45",
+    "status": "OK",
+    "reason": "候補の価格、導入期間、サポートの情報が増えている。",
+    "evidenceTurns": [
+      2,
+      4,
+      5,
+      7
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-1dd9c91470cf",
+    "inputHash": "1111737b92b4068ebbb1a5e96ea1d9d3428991c124b7205685c9c288fa820e9d",
+    "status": "OK",
+    "reason": "原因に対応する三つの再発防止策と即日対応を合意。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-1f2ea6e31efb",
+    "inputHash": "0159d82b42fa31d04058f5b09aae76ed5a72d57bb1510e51aee4445cb878705f",
+    "status": "INTERVENE_DRIFT",
+    "reason": "面接見直しを始めずドラマの展開と次回放送の雑談が継続。",
+    "evidenceTurns": [
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-20a8878514c5",
+    "inputHash": "ae08f823cb609676cedd101bddd730bf22cd259571b2827fa5ad6ecca8505aa4",
+    "status": "OK",
+    "reason": "会場の決定と予約担当が確認されている。",
+    "evidenceTurns": [
+      0,
+      3,
+      4
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-20d58e8c2f21",
+    "inputHash": "78664ed3bb7e99e0a4edf213282f62ce78851fc47bb8a40812210071d12e616a",
+    "status": "OK",
+    "reason": "三候補の費用、期間、サポートを提示し比較判断へ進む。",
+    "evidenceTurns": [
+      7,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-21f2911b5fb6",
+    "inputHash": "36bd73aaaa67785b3ed05073fb898bee67345269bd3c430ae7d119b7ad88d9a1",
+    "status": "INTERVENE_DRIFT",
+    "reason": "顧客獲得施策から兄の転職紹介ボーナスへ移り羨望の雑談で終わる。",
+    "evidenceTurns": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "OK",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-26639961f27b",
+    "inputHash": "7fda1690bf539b2446596159db234c566d6b502770a0ebfa842340b21f9ef271",
+    "status": "INTERVENE_DRIFT",
+    "reason": "提案条件から健康診断、運動、サプリの話へ長く逸れ復帰なし。",
+    "evidenceTurns": [
+      5,
+      11,
+      16,
+      17
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-2a216eb8c4ef",
+    "inputHash": "e6adb56da77fdc33250ea7991a87cad0041861699d3e8aa9cc734839a4cb6fda",
+    "status": "OK",
+    "reason": "各担当の進捗、完了見込み、障害なしを順に確認。",
+    "evidenceTurns": [
+      1,
+      3,
+      5,
+      6,
+      7
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-2bb690a508b6",
+    "inputHash": "c2f8dc83743bb98496b65e9d541d94632756364cb8c2786041d0774ad2c9bd3e",
+    "status": "OK",
+    "reason": "電車の雑談から戻り段階目標を決定しダッシュボード担当も決める。",
+    "evidenceTurns": [
+      12,
+      14,
+      17,
+      19
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-2d3c6372b2dd",
+    "inputHash": "c47dcd08b240aeb310a347ca1880ee58f4eceebc00206286a0d5a2921f367a32",
+    "status": "INTERVENE_DRIFT",
+    "reason": "OKRの数値検討から別チームの組織変更と異動の噂へ逸れ続ける。",
+    "evidenceTurns": [
+      4,
+      6,
+      8,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-2f167320ad9e",
+    "inputHash": "964f5345ec86894db7f3e38a294d7bd16b05ec882acc982959f437792aa5d210",
+    "status": "INTERVENE_STALLED",
+    "reason": "広さ対Wi-Fiの同じ長短を反復し判断材料や次手が増えない。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-3287e10d6299",
+    "inputHash": "5ef9e02219fd2868d26c79c0ffaf68995c093e76757fef0d83d573073c733aeb",
+    "status": "OK",
+    "reason": "弁当の話から料金比較へ戻り品川会場に決定。",
+    "evidenceTurns": [
+      5,
+      6,
+      8,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-33a36db5e8d2",
+    "inputHash": "875ca801e46bcdeefc99ecda6dabd6896356f77f8e42e838dc4c928f3c53cb9b",
+    "status": "OK",
+    "reason": "申請、上長、部長、経理チェックと手順を順に明確化。",
+    "evidenceTurns": [
+      2,
+      4,
+      6,
+      7
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-341eb1163463",
+    "inputHash": "ce5878757572ab17e96f9fd1f9d3578571e9a98839683f01cd4f005b8088de0b",
+    "status": "OK",
+    "reason": "会場候補の紹介を始め価格と人数の情報を提示した段階。",
+    "evidenceTurns": [
+      0,
+      2
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-36634dbfab6e",
+    "inputHash": "6a445af2d040a33b1f85fb4d0aadeadfafd6a21a2a203fc0afa9b1789180b047",
+    "status": "OK",
+    "reason": "過去イベントの商談化率を調べる担当と最終決定への手順を合意。",
+    "evidenceTurns": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-38ff2da71a55",
+    "inputHash": "879a9c4ff4c49ea6cfe7e3b0be51a767119e69ec190929cad07e209cd8929104",
+    "status": "INTERVENE_STALLED",
+    "reason": "両案への賛辞だけが続き、デモ案の決定確認もパネルへの再言及で戻る。",
+    "evidenceTurns": [
+      8,
+      9,
+      11,
+      14,
+      16,
+      17
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-390fc7de8984",
+    "inputHash": "c298862729707773ce0299e9d340934fe1d26a78700e0fc1289d9958296be2c1",
+    "status": "OK",
+    "reason": "更新後のリリース工程とQAの担当が明確になっている。",
+    "evidenceTurns": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-3a47f458463d",
+    "inputHash": "51c5f7cbd34f46579a8d79ed9337be495916074b8bd8f5b8daece5d6cd57ddfd",
+    "status": "OK",
+    "reason": "昼食の会話を挟むが末尾では権限と保存階層の設計を進めている。",
+    "evidenceTurns": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-3b65e563de7c",
+    "inputHash": "db6bbeafd704decfef93ad9540c2de959fb1cace538a75a453e64ae5be9eecd8",
+    "status": "INTERVENE_DRIFT",
+    "reason": "採用人数への復帰要請を遮り受験と家族の雑談を続ける。",
+    "evidenceTurns": [
+      9,
+      10,
+      11,
+      12,
+      14,
+      16
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-3beb08985f28",
+    "inputHash": "fbee1d6af36df2c2bdb255f5d2ba0de0ab0a649e2c9af87943356c9b5a0a2bd2",
+    "status": "INTERVENE_STALLED",
+    "reason": "判断を部長と現場で繰り返し委ね合い選択の根拠が増えない。",
+    "evidenceTurns": [
+      4,
+      7,
+      10,
+      11,
+      12,
+      13
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-3f25073b9a39",
+    "inputHash": "145c7f99ea26958dfc64b8cb1bb14cf7b5506b57b03b0358d1eef3af78525120",
+    "status": "OK",
+    "reason": "未着のC社見積を待って翌日判断する具体的手順を合意。",
+    "evidenceTurns": [
+      2,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-40380b8abe79",
+    "inputHash": "5ba295a953a4c82bfd967ffaf69ac7a5cef4cf50527b39f82f2a38f4be6ac64d",
+    "status": "INTERVENE_DRIFT",
+    "reason": "リンク仕様から京都旅行の食事とホテルの雑談へ逸れ復帰なし。",
+    "evidenceTurns": [
+      2,
+      3,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-40a802f855a6",
+    "inputHash": "89e7176751adb9295eaa50c7ae288254ac49187698b1a5b2c41a58bb8b4f08c7",
+    "status": "OK",
+    "reason": "対象の詳細は省略されているが修正完了と先方への送付に合意。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-45740c0839a3",
+    "inputHash": "49bf814063f8cfc2204a6faeebd33fae3c8951eeff0709319e9bead1afb9bba4",
+    "status": "OK",
+    "reason": "責任論を越えて増員案と月200万円の費用という新情報が出る。",
+    "evidenceTurns": [
+      9,
+      11,
+      12,
+      13
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-464a9337461a",
+    "inputHash": "4d4ef96efa6ae975a1e66e6aa2327536686aea9846f4cdcf895e396782442d11",
+    "status": "OK",
+    "reason": "計測窓、バーンレート閾値、顧客向けSLAを具体化している。",
+    "evidenceTurns": [
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-46737018b270",
+    "inputHash": "94ff20ff58607a262de76ef5fae99175054ddd0b5c1a8671087929d96aed3904",
+    "status": "OK",
+    "reason": "段階値上げの対象、時期、率と電話通知の担当手順まで決定。",
+    "evidenceTurns": [
+      8,
+      11,
+      14,
+      16,
+      17
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-486e99aea111",
+    "inputHash": "e8624e76cd0118de2667d90967e5ebe48aca40002e3226a573015ead19a249c9",
+    "status": "INTERVENE_STALLED",
+    "reason": "複数人が意見を出さず部長や他者へ判断を委ね、再促しも実らない。",
+    "evidenceTurns": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "OK",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-49e9f8a60ac9",
+    "inputHash": "018740ee627134237b240b1844180d2d7a247ab3590e801354c7d7b7e0d9f3f1",
+    "status": "INTERVENE_DRIFT",
+    "reason": "予算の償却確認から昔の手書き作業と接待の思い出へ逸れている。",
+    "evidenceTurns": [
+      6,
+      7,
+      9,
+      11,
+      13
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-4b7ed1cb840c",
+    "inputHash": "5700e6d61f5e660aa57216e8ee552c2659221d3fc2f89401d6a997d7ccd12a3f",
+    "status": "OK",
+    "reason": "両案の工期、費用、リスクと見栄えを比較整理している。",
+    "evidenceTurns": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-4be692686d53",
+    "inputHash": "0229598006859803500057e32a5ec3db61d2d6c03850bcdfc6065a573c39e4ef",
+    "status": "OK",
+    "reason": "返品条件と例外判断、経理連携を明確化しマニュアル作成へ進む。",
+    "evidenceTurns": [
+      3,
+      5,
+      7,
+      8,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-4c057179aee9",
+    "inputHash": "8cbfc3ad95195955582f3ca2f4b4b3eded9a48b964f1309c6d03c5fb105acc2d",
+    "status": "OK",
+    "reason": "リリース日と凍結日を決定済みで、その後の打ち上げ手配を相談。",
+    "evidenceTurns": [
+      0,
+      1,
+      4,
+      8
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_DRIFT",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-4dcae47eea2d",
+    "inputHash": "de45d10a265b5b3ad46bad30e7bb60124250bc557f323fc1e44c6bd2c79c7f2c",
+    "status": "INTERVENE_STALLED",
+    "reason": "利益確保の2980円と価格への懸念を繰り返し、条件や打開策が増えない。",
+    "evidenceTurns": [
+      2,
+      3,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-4f03900587da",
+    "inputHash": "c9ea1b048b4f78407de63b336c82320a3995785e3379896e1d6caf35f867c777",
+    "status": "OK",
+    "reason": "参加制約に合わせ日程を決め、人数に適した会場予約へ進む。",
+    "evidenceTurns": [
+      2,
+      3,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-4fca17297765",
+    "inputHash": "85a6a4d44de2e1f9371a5dd459bf96890725bab606a0b3b60dcf9bff51faf39c",
+    "status": "OK",
+    "reason": "テンプレート案に保守負担という初めての懸念が提示された段階。",
+    "evidenceTurns": [
+      1,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-5001671b49a8",
+    "inputHash": "522ee0b3f83aadd35fbdbb7018bc39e3e34274e55acf9a2cd73ce02b3e88963f",
+    "status": "OK",
+    "reason": "KPIの背景として疲労や残業を共有し人員か業務量の論点が増える。",
+    "evidenceTurns": [
+      2,
+      3,
+      6,
+      8
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_STALLED",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-535cb11e9484",
+    "inputHash": "d587d2ec55d5edf805b0358d80c6bc2e127435a519da88d649249e7fc339a047",
+    "status": "OK",
+    "reason": "対立のあと課長が顧客連絡を引き受け、当面の次手ができる。",
+    "evidenceTurns": [
+      5,
+      6,
+      8
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-54abd8d7853d",
+    "inputHash": "cbfa34afbeb24c6664d4085538d7787c3fcde4386dfd189f0597fe343caf2892",
+    "status": "INTERVENE_DRIFT",
+    "reason": "顧客紹介施策から社員紹介の報奨金と人事への要望へ逸れ続ける。",
+    "evidenceTurns": [
+      4,
+      7,
+      8,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-54defe8d671a",
+    "inputHash": "d93dd0dbfb5244993b4c48565c9fd97f19b4375a24cf091a8fc60ef8e1777aa3",
+    "status": "OK",
+    "reason": "各自のタスクと締切を共有し担当ごとの実行を確認。",
+    "evidenceTurns": [
+      0,
+      1,
+      2,
+      3,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-5549f8638973",
+    "inputHash": "a34ffc23e0ddb4fb9feb35210a12dd20941dad2fbd3d1b9bdafa1b17cb95cda8",
+    "status": "INTERVENE_STALLED",
+    "reason": "ユーザー要望と実装容易性の優先主張を反復し折合いの基準が増えない。",
+    "evidenceTurns": [
+      3,
+      4,
+      6,
+      7,
+      9,
+      10
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-5a07e056a59a",
+    "inputHash": "59cb39c4efe1303d3fecb2b66045971b213436677edea1b0c33e74f2f10a7237",
+    "status": "OK",
+    "reason": "L1から開発までの連携と顧客連絡担当を整理し文書化へ進む。",
+    "evidenceTurns": [
+      3,
+      4,
+      6,
+      7,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-5ac0e514df05",
+    "inputHash": "06b31ea2d85586e7f4222e505e511ffbc784829fd42383d92d73a4d1cf27e0c2",
+    "status": "OK",
+    "reason": "電車の話を本人が打ち切り初動時間の議題へ明示的に戻った。",
+    "evidenceTurns": [
+      8,
+      10,
+      12
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_DRIFT",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-5b08ef9b7b07",
+    "inputHash": "9742a7ea1c2b795b9d75ca40ac22cfd463071d0907abbd0ddba3044b6b333788",
+    "status": "INTERVENE_STALLED",
+    "reason": "納期を動かせない問題から責任論の押し問答となり対処案が止まる。",
+    "evidenceTurns": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "OK",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-5b3a46067292",
+    "inputHash": "68711927ba2866f19874041eef577a551a3aedf964337b93b65c66a0596ccb8a",
+    "status": "OK",
+    "reason": "残バグ修正と再テストを条件にGoを決め、期限も具体化。",
+    "evidenceTurns": [
+      19,
+      20,
+      21,
+      23
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-5dd3b9cc2f95",
+    "inputHash": "2bf01f00a31cfdbf68499911b372ac4e488c59cd2debac51394d40ea48446626",
+    "status": "INTERVENE_STALLED",
+    "reason": "広告の測定可能性とイベントのブランド効果を繰り返し比較が進まない。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-62cf687728f7",
+    "inputHash": "281e92b4fc388528d6acbbb3ab3b80b7f15011e4ebc04b1ab861226b75d124da",
+    "status": "OK",
+    "reason": "在庫検索の複合インデックス不足を発見し検証と結果共有へ進む。",
+    "evidenceTurns": [
+      5,
+      7,
+      8,
+      9,
+      10
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-6540a744a6f2",
+    "inputHash": "700890d6793691e840382855ca16035ab77494e617f239c3fb0f09797e5f7484",
+    "status": "OK",
+    "reason": "メンター配置に直結する納期リスクを確認し状況照会を決める。",
+    "evidenceTurns": [
+      1,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-67d40c5f66ed",
+    "inputHash": "f9b3d03f1e6974e1d906837f5ffa27fd960eaace06218d1e03c9b85f495256df",
+    "status": "OK",
+    "reason": "承認者の名称誤りを特定し図の修正担当を確認。",
+    "evidenceTurns": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-6969cf1381ac",
+    "inputHash": "b69cd441a05a8c83ac711f33444399d0e7617b1dd6f9b01094a74f8580aa7424",
+    "status": "OK",
+    "reason": "監視ツールの最初の候補について費用と導入期間を提示中。",
+    "evidenceTurns": [
+      0,
+      2
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-6ac83c03d10d",
+    "inputHash": "d2e7be2bc122278f126084a7c7f74f3145cc5825bf22e40be0d312edcfb27c5a",
+    "status": "OK",
+    "reason": "CSVの工数と通知の不確実性を踏まえスコープ調整案が出る。",
+    "evidenceTurns": [
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-6f9f3641eddd",
+    "inputHash": "3f231c028607b92ca6515ca87d21c856fd86fd57c354b19e8ae1e2b39ad46a7a",
+    "status": "OK",
+    "reason": "三基盤の月額、移行、契約と学習コストを共有し比較を進める。",
+    "evidenceTurns": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      8
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-72280ea5a987",
+    "inputHash": "f24777f58c8104b254d288d3426abcf8af3d3a3e686aa72f725bb2ed0337a994",
+    "status": "OK",
+    "reason": "日程と体制の確認後、ゴルフへの一度の言及だけで持続した脱線とはまだ言えない。",
+    "evidenceTurns": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_DRIFT",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-7278656dbd9d",
+    "inputHash": "4ae8e5a58a4a78e3e8285d7d2e7b895078a2bc2de0b688e0dc9a3103baeb7e06",
+    "status": "INTERVENE_DRIFT",
+    "reason": "フェーズ分けへの二度の復帰要請を遮り出張の食事話を続ける。",
+    "evidenceTurns": [
+      6,
+      9,
+      10,
+      11,
+      12
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-74c4729a1854",
+    "inputHash": "437dd8c35829a5319ad4931249641ecafc71d1558c2c96922a1d79a3641f3f79",
+    "status": "OK",
+    "reason": "候補の違いを挙げ重視する基準を先に決める手順を提案。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-74f8e121d7a4",
+    "inputHash": "886eaecd0e83b290583c09554a20089b9837ac72e528cf31e7b6cd1cb597db30",
+    "status": "OK",
+    "reason": "日程別の参加人数と費用差を提示し比較確認へ進む。",
+    "evidenceTurns": [
+      2,
+      4,
+      5,
+      6,
+      8
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-7564c55d983a",
+    "inputHash": "c5e90409d1f74feab03d283c1326f24673892a52aedd085016ef0ab02e510610",
+    "status": "OK",
+    "reason": "昨年のインターンの話から戻りPC、アカウント、初日資料の準備を確認。",
+    "evidenceTurns": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-7695388877ce",
+    "inputHash": "8362b6da8786e1b8e3b4eda4541ef2552378813b8e4262ecfc2d57eee2419169",
+    "status": "OK",
+    "reason": "頻出だけのテンプレ化という絞込み案と選定作業の新たな懸念が出る。",
+    "evidenceTurns": [
+      4,
+      5,
+      6
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_STALLED",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-78f45450a5b0",
+    "inputHash": "c5ad061458511e5ef92f9d518d3ec1b73441ed9c684c7badf3259f56ce686ded",
+    "status": "OK",
+    "reason": "閲覧専用とログイン不要を決め、次の有効期限の検討へ進む。",
+    "evidenceTurns": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-7922c4538722",
+    "inputHash": "033cf88214f93dbaea56770f5f2666d2acf7b65b19950ec5f740316b360c0d26",
+    "status": "OK",
+    "reason": "重大度による分岐と関係者招集、暫定対応を順に整理。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-7d9a5798ea50",
+    "inputHash": "6504c9f2c46ad1648476397910ab00feb5dbc191630eb5412deed1f6747f7510",
+    "status": "OK",
+    "reason": "原価と解約懸念を踏まえ段階値上げの方針と理由が提示される。",
+    "evidenceTurns": [
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-7e5c895fb5e8",
+    "inputHash": "1e4879e355696e021e2f350cc959b731b292c2f17bd60248edb51bfc99bd34c0",
+    "status": "OK",
+    "reason": "冒頭の週末雑談を終え会議開始に同意している。",
+    "evidenceTurns": [
+      6,
+      7
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_DRIFT",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-8015631355e8",
+    "inputHash": "6b82734de4f0255e234c8a9ad6536633c5cb258c90db49281495425ddaddbb1c",
+    "status": "OK",
+    "reason": "会場の通信リスクと対策案を挙げ情シス確認後の確定を決める。",
+    "evidenceTurns": [
+      1,
+      2,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-802dd4effcbe",
+    "inputHash": "5c98f6f78d6a91cc38720be405214e52b3ec00425fd44fa0324abf5e316d58fd",
+    "status": "INTERVENE_DRIFT",
+    "reason": "フェーズ分けから出張先ホテルの不満へ数発話移り末尾も戻っていない。",
+    "evidenceTurns": [
+      4,
+      5,
+      6
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "OK",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-8277b536b2a6",
+    "inputHash": "58a6045ed54adbc0e313b010f7cb658637cc79701d23ab0cda4827ba72dddaef",
+    "status": "OK",
+    "reason": "QA承認、本番反映、問題時のロールバックまで手順確認が進む。",
+    "evidenceTurns": [
+      7,
+      8,
+      10,
+      11,
+      12
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-856c75dcd6fe",
+    "inputHash": "4cef44b689010b12ed6a57da5b96b5dcb74f7cbcf4e95280ed4c96a75cd703fb",
+    "status": "OK",
+    "reason": "事前課題の負担を比較し共同コード読みの代案と案作成を合意。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-8623c8a9dfe6",
+    "inputHash": "c163981cc217d5443efa8af3ff8f13ea709647704f882885c578b5dfa886a0d9",
+    "status": "INTERVENE_STALLED",
+    "reason": "予算判断を今求められる一方計測不足の障害が残り、不安の再表明で終わる。",
+    "evidenceTurns": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "OK",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-86a30cdf441a",
+    "inputHash": "8ec33de636755c3796c6e66b66122a541cc0af5eadc82ac94ceccf6d20d3421e",
+    "status": "INTERVENE_STALLED",
+    "reason": "二人の評価ばらつきと三人の緊張という懸念を同じ形で反復。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-8843e62f58bb",
+    "inputHash": "c7e541abe9450281f1dc336a41f51fa4e2dadbde9b62a330d393c6bae332bc0a",
+    "status": "OK",
+    "reason": "昼食の脇会話があるが本筋では紹介特典と費用を詰め重点施策を決定。",
+    "evidenceTurns": [
+      11,
+      12,
+      13,
+      14,
+      16,
+      17
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-89aa8b26c956",
+    "inputHash": "97e0a6e57b23ead7ef994d67c2909dc673bdf4ad1b86fc687da9350153889dc9",
+    "status": "OK",
+    "reason": "リリース日、担当、次回日程をまとめ関係者が確認。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-8a1ace2dac3b",
+    "inputHash": "84fa6c1eafe1ae9ef270516750df48f56b321530974298eacdb0c270f0bb0fe3",
+    "status": "OK",
+    "reason": "過去の問い合わせを根拠に期限切れメッセージと再発行導線を具体化。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-8bfa1671b76a",
+    "inputHash": "9f820c45e18b73d65e0065847e2c6d5f06e835338f38a847e2852fb2ff0fe5c3",
+    "status": "INTERVENE_DRIFT",
+    "reason": "ロール設計からオフィス移転、空調と西日の雑談へ移り継続。",
+    "evidenceTurns": [
+      5,
+      6,
+      8,
+      9,
+      10
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-8e43527657d4",
+    "inputHash": "090d118d5f8d08f630423f307e86bb247214b2db48f6f9ac43b881e6e0e22e76",
+    "status": "INTERVENE_DRIFT",
+    "reason": "リリース体制から長いゴルフ談へ移り、コンペの手配を指示して終わる。",
+    "evidenceTurns": [
+      6,
+      12,
+      14,
+      17,
+      19
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-9037262b7dd7",
+    "inputHash": "dc7a24bbeaeef790e8bf469bd29e1e30abf281465d2a75ee139fb3d5531983dc",
+    "status": "OK",
+    "reason": "ボタン、リンク、エラー表示を具体化し今日中の修正案作成を確認。",
+    "evidenceTurns": [
+      1,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-910796f5ef8b",
+    "inputHash": "926f311f3a82c6b9d6bf2194364018882a3ec9282af24e0b0d31d37919c07083",
+    "status": "INTERVENE_DRIFT",
+    "reason": "食事制約の検討後、新しい唐揚げ店と私的ランチ日程へ話が逸れる。",
+    "evidenceTurns": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-9489e1934380",
+    "inputHash": "5863426d04f14aed0dedfcc356d060ce8b5664bc2e2059ebd158290ba6b01995",
+    "status": "OK",
+    "reason": "三機種の価格、重量、電池と拡張性を共有し比較資料作成へ進む。",
+    "evidenceTurns": [
+      2,
+      4,
+      6,
+      8,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-94903947b6fe",
+    "inputHash": "badf32bd4a1da76c7989584ff96d0d4b5a050d78d5473415acb95dcbb3a6193f",
+    "status": "INTERVENE_STALLED",
+    "reason": "開発の知識と負担、運用の限界を巡る主張から担当の打開策が増えない。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-96d9862a74df",
+    "inputHash": "d68c896c5b87563801e4f8c6dbe48d80e67bb407ee03bfe8e34538e42c362b34",
+    "status": "OK",
+    "reason": "参照権限を確認し新しいエクスポートの問いに思考時間を取る段階。",
+    "evidenceTurns": [
+      3,
+      4,
+      6,
+      7,
+      9
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_STALLED",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-97c736af9bd8",
+    "inputHash": "3dd3798e008f6a7ae7b5c956423b8c51007c17ce8caf953106573ec08b0040b3",
+    "status": "OK",
+    "reason": "自動化と連携の案に続き具体的な初動時間目標を提案。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-97e6d910a4c1",
+    "inputHash": "dfa500a4fa88aa91041a1dba602b5fac07acff54ff81f895a14ccb27f0330dc9",
+    "status": "OK",
+    "reason": "今回の移行にも関わる外字化けのリスクを過去事例で明らかにする。",
+    "evidenceTurns": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-9a056efc95d1",
+    "inputHash": "d0ad95dbe6255c22b2f62fb3044591b6a347785ddea704b2469bd58dc68e39be",
+    "status": "OK",
+    "reason": "移行順序を確認し文字コードという次の前提情報を共有。",
+    "evidenceTurns": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-9a49b15ac486",
+    "inputHash": "e49658daef3abab06f51ef61925255813c10be7472da7868358d016ced5674b2",
+    "status": "OK",
+    "reason": "ボタン色について明確な承認を得て確認が完了。",
+    "evidenceTurns": [
+      0,
+      1,
+      2
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-9ab13b6decee",
+    "inputHash": "29c748f474a6aeb45b98b68ce6a5cc14b4adda15f7c1dbd10d77b0b05e8b494d",
+    "status": "INTERVENE_STALLED",
+    "reason": "新人保護と人数不足がペア案の後も同じ形で繰り返される。",
+    "evidenceTurns": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-9f3b0dc7cc2c",
+    "inputHash": "8a9c749df5ea1d9348ac41a6676a7b7787b46f808ca81f6b727081a01e9181e6",
+    "status": "OK",
+    "reason": "不明な承認者を認識し課長が調査と共有を引き受ける。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-a369b7dbf06f",
+    "inputHash": "9393145ef490dc31768f73b0402ae10e98e25ac2a8682c6498dfc5f2d10f3a67",
+    "status": "OK",
+    "reason": "採用、連絡、費用という異なる軸を挙げ、整理の必要を認識。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-a58fea25e145",
+    "inputHash": "84eeb74ecead0b91ead748a4fd5e1833192393d3b492991ce79a942e7735c56c",
+    "status": "OK",
+    "reason": "認可とトークンの違いを説明し、設計に関わる共通理解を増やす寄道。",
+    "evidenceTurns": [
+      2,
+      5,
+      6,
+      8,
+      9
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_DRIFT",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-a6882a75068b",
+    "inputHash": "058d161b5bfeef7bff791ca1ac743844445e52095de5e25f2e578d19a9676385",
+    "status": "INTERVENE_DRIFT",
+    "reason": "部門予算から昔の接待や週末の飲み会、同期の話へ逸れ続ける。",
+    "evidenceTurns": [
+      7,
+      13,
+      16,
+      18,
+      20
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-a6a703a80538",
+    "inputHash": "6924536499048e384f0012d9a75913714496213f601eba2472a09aaf5b4e0dd8",
+    "status": "INTERVENE_DRIFT",
+    "reason": "画面レビューから野球の逆転と観戦予定へ移り戻らない。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-a78406778474",
+    "inputHash": "856964811eeb91c320092dd62e2e8228152bca65485276cbc12577e4cf619055",
+    "status": "OK",
+    "reason": "三社の報酬、紹介数、得意職種を比較し資料化を依頼。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      6,
+      7,
+      8
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-a789e4f2307d",
+    "inputHash": "a2627b3f9591124a56015e6e548a1d86e86bf9eca648d4bc7f6a8fc5dea7f9c4",
+    "status": "OK",
+    "reason": "商用利用の前提となる依存ライセンスをツールで確認する具体策がある。",
+    "evidenceTurns": [
+      1,
+      4,
+      5,
+      7,
+      8
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-a7bf0fbdc86b",
+    "inputHash": "edccc547dd2d880b3683a4389d3d96c421fefd0af55fcac0be12e3254333e4ed",
+    "status": "INTERVENE_DRIFT",
+    "reason": "再発防止策を今後提示するだけの状態で昼食店の雑談が持続。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "OK",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-a83f073f29e1",
+    "inputHash": "921b7aaf63c58238c3a93619090d6a0cd39cedac380237a6fef935518a2d6120",
+    "status": "OK",
+    "reason": "雨天の危険事例を対策に結び付けテントと案内担当を具体化。",
+    "evidenceTurns": [
+      5,
+      7,
+      8,
+      10,
+      11,
+      12,
+      14
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-aaeb838f3397",
+    "inputHash": "51ad7681387d6bbffe7b0b2c38f8a1e09f38c3514aba39342c0222413d6a64f0",
+    "status": "OK",
+    "reason": "外字のサンプル検査を決めた後、注文履歴の件数と分割処理へ進む。",
+    "evidenceTurns": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-ac565261728f",
+    "inputHash": "4b0b5c1c45865f72f2c36a94ebe7bf102ce93388c5bd45dafb6c960d3b56c41b",
+    "status": "OK",
+    "reason": "ベロシティ低下の原因からレビュー期限ルールを次計画に反映。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-ac8e6d3f876a",
+    "inputHash": "47aeee6d1672806fe0fa3e85a2e65daa0796591da6bed484637bc36fc127a969",
+    "status": "OK",
+    "reason": "閲覧専用ロールの要望と更新不可の意味を明確にしている。",
+    "evidenceTurns": [
+      1,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-b27c414ecac9",
+    "inputHash": "722c9f93695c88617863b4e6b10254e6c5e123e01fabcc635ea9d8a0216e1904",
+    "status": "INTERVENE_DRIFT",
+    "reason": "競合の価格比較から社長交代と経歴の噂へ移り料金判断に戻らない。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "OK",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-b29228dface4",
+    "inputHash": "d2565c06577fded26b84b88f41dddcfd65979931ed91418523b60387a24d39b4",
+    "status": "OK",
+    "reason": "在庫有無による分岐と発送通知まで注文処理を整理。",
+    "evidenceTurns": [
+      3,
+      5,
+      6,
+      7,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-b4b70eb9df64",
+    "inputHash": "c8042293b92b1e28cb4e6354e36442f7e6029f8a3fb3f81b90d3181f8aecd666",
+    "status": "INTERVENE_DRIFT",
+    "reason": "ハッカソンの日程から無関係な請求書と契約書の処理へ話が移る。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-b4cbaecc6d2d",
+    "inputHash": "23136b1b690082a9869c06589786fa0df30d0f1d06b299cf193a57578e51fc31",
+    "status": "OK",
+    "reason": "検索停止の懸念に対し夜間作業という新しい対処案が出る。",
+    "evidenceTurns": [
+      1,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-b5f749b3d787",
+    "inputHash": "d191e4af31387b788e1b90a9e00ea09ac58f560737bbbab1c9da9fa2964f1701",
+    "status": "OK",
+    "reason": "申込フローと料金別の人数、審査差を整理し説明資料化へ進む。",
+    "evidenceTurns": [
+      0,
+      2,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-b81119063236",
+    "inputHash": "4a03e8a886efa9732f2e719c92ec19d83911d018aab17055312b5c9793e9eeaf",
+    "status": "INTERVENE_STALLED",
+    "reason": "ブランドに合う青と目立つ緑の主張を反復し選択基準が増えない。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-b9864e7c62a1",
+    "inputHash": "a4aeb312d7722fe9fb4aeae3293201292c29ce612dff50ba8f3b860d8ca8d31c",
+    "status": "OK",
+    "reason": "動画と記事の具体的配分を確認し、追加懸念なしと応答。",
+    "evidenceTurns": [
+      0,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-b9b86a324112",
+    "inputHash": "9789d505683108c7a0cf3693d078222e8d2e1dcf7069359451c428a5a03991ad",
+    "status": "OK",
+    "reason": "書類から内定、条件面談までの順序と承諾期限を明確化。",
+    "evidenceTurns": [
+      2,
+      4,
+      6,
+      8,
+      9,
+      10
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-ba77c91bcc97",
+    "inputHash": "1804c9aae048389052c545e1f0a7a49697551a37f1e368b5c22f2bd70864476a",
+    "status": "OK",
+    "reason": "国内外向けの違いに加え文言の語尾という新しい検討観点が出る。",
+    "evidenceTurns": [
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_STALLED",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-bbf2d47b5728",
+    "inputHash": "86f2b694d98de975e5c2e7c8ee00ae533e83909acd957d7277c588253c7e9890",
+    "status": "OK",
+    "reason": "初日の時刻、担当と受付からセットアップまでの流れを共有。",
+    "evidenceTurns": [
+      2,
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-bccaf37d8a58",
+    "inputHash": "209cd310bd4706e6e0b9487d77645ee119a4f480dd1f9835143e6ef98015aec3",
+    "status": "INTERVENE_DRIFT",
+    "reason": "次スプリントの優先順位から私的な引越しと家賃の雑談へ逸れ続ける。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-bd2befe2b2c8",
+    "inputHash": "647872f538d2db54b098b2fe7045a949da5849b47395f827fa6e0bc1650657fb",
+    "status": "INTERVENE_DRIFT",
+    "reason": "体制確認からゴルフのコースとクラブの話に長く移り復帰なし。",
+    "evidenceTurns": [
+      6,
+      8,
+      10,
+      12
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-be2972b9e0ae",
+    "inputHash": "9bd107daac519823c90e69c43ef3893a8bdfc6d82c71dd292c1b8f302cbb66e5",
+    "status": "INTERVENE_DRIFT",
+    "reason": "業務チャットボットから家庭でのAI利用の楽しさへ話が逸れて続く。",
+    "evidenceTurns": [
+      4,
+      5,
+      6,
+      7,
+      9,
+      10
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-bff4c8cad478",
+    "inputHash": "b87aa0579df1e480bad3f94d622ca07f34240c4e542cb9799547ec94c3188718",
+    "status": "OK",
+    "reason": "償却の確認に昔の作業への一度の言及が入っただけで持続性は未確認。",
+    "evidenceTurns": [
+      6,
+      7
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_DRIFT",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-c04873a114cb",
+    "inputHash": "f7a184c43ac4d99697c9c19b5ca922d5b28e4019657cb0adfd9b76b406cb2284",
+    "status": "OK",
+    "reason": "面接統合の負担を時間配分で調整し次回までの案作成を合意。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-c0a957c882b4",
+    "inputHash": "cbc38fe7f1ef853ff57a1e104dc368ddebeea1366d933cdf17c7db8677d6f480",
+    "status": "OK",
+    "reason": "案選定を開始し相違点の説明を求める正常な導入段階。",
+    "evidenceTurns": [
+      0,
+      1
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-c0f9186be450",
+    "inputHash": "1a42e169b6efce286f467e0e232cb5325f3b99f7a87edfb1f2c99f870cb1e742",
+    "status": "OK",
+    "reason": "決まった仕様をまとめ最後に一度確認しており未解決の反復ではない。",
+    "evidenceTurns": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-c75c5d249849",
+    "inputHash": "86738d0c3ea18d71599816c9017e2eaf5fc11df5eac3105b74d33f365d9a11cd",
+    "status": "INTERVENE_STALLED",
+    "reason": "キャンペーン期限とテスト品質の対立を繰り返し、短縮案も却下され同じ要求に戻る。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-c8fe17d13773",
+    "inputHash": "506bd078421a85657280abf76a37b73b4c3c7ea966aff31587ee170ce9af44ae",
+    "status": "OK",
+    "reason": "KPI未達から下期のキャンペーンと紹介強化という選択肢を出す。",
+    "evidenceTurns": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-ce077de10e75",
+    "inputHash": "03009af55d135ed1742b7d0b4df8b8ce3981d8203f8a4b16f5a5172a8b429ba7",
+    "status": "OK",
+    "reason": "曖昧な承認手順について本人申請と上長承認から整理を始める。",
+    "evidenceTurns": [
+      0,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-cf542346f2d8",
+    "inputHash": "970be1e77a27a127f6675f9a4cefea9d2de0426fdc1c9092c7f82913a5773d33",
+    "status": "OK",
+    "reason": "手順変更を知らせた導入段階で、説明の停滞を示す反復はない。",
+    "evidenceTurns": [
+      0,
+      1,
+      2
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-cf5e7a331c28",
+    "inputHash": "1e1c303cd1e17f3a62452720c0229e589725b1deaecf20c344922b985a9099fe",
+    "status": "OK",
+    "reason": "月次売上、増減と営業利益を報告し確認が済む。",
+    "evidenceTurns": [
+      0,
+      2,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-d2bf9d313154",
+    "inputHash": "4ead76774eab994b91a877b551916bcd054c9b5614f88ba6c2c869c0626a2a89",
+    "status": "OK",
+    "reason": "各料金プランの人数とサポート差を整理して提案資料に反映する。",
+    "evidenceTurns": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      9
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-d301be62a467",
+    "inputHash": "eb5f0b4b101c5be1fab4fdc1aaa07183ae16ec1821ea34e68bea08b325c5bd2f",
+    "status": "OK",
+    "reason": "二会場の料金と収容人数、貸切条件を提示し予算制約を把握。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-d351ed8c6f19",
+    "inputHash": "64ad23305e7bf1a1a62475d1b0b12ebc40e0e8ce46f178e7602fe56f0fa72a6c",
+    "status": "INTERVENE_STALLED",
+    "reason": "頻出分への限定提案後も保守負担と回答短縮の必要を同じまま繰り返す。",
+    "evidenceTurns": [
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-d355315132b4",
+    "inputHash": "11ed4321eb9ef84a407e53a9d593b74ec3716685b2f55c7861fe864c90da8bb8",
+    "status": "OK",
+    "reason": "A案の工期とリスクに続きB案の工期という比較情報を追加。",
+    "evidenceTurns": [
+      2,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-d67510c4ca93",
+    "inputHash": "7a40fac1044571bfaefc46903c981115b05ad52eccb0a16eb5eb567655d60448",
+    "status": "OK",
+    "reason": "障害初動の確認を始め当番のトリアージを提示した段階。",
+    "evidenceTurns": [
+      0,
+      2
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-d8e99c05df1e",
+    "inputHash": "d932b666e59747750d5a5c3236a488fe9db1a2dfb446601b0bb03083b1e3f7e8",
+    "status": "OK",
+    "reason": "移行ガイド、旧版期限、大口顧客の反発など反論ごとに新しい論点が増える。",
+    "evidenceTurns": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_STALLED",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-daab412656b0",
+    "inputHash": "767ae024787c44fcf03c8955fb23a2d9021e9580bf206c53a1ad93472185014c",
+    "status": "OK",
+    "reason": "監視ツール乗換えを切り分け今回のプラグイン対応に合意。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-db7fc7a79ecb",
+    "inputHash": "70b47451ce2b9cc4fbb422fc8feddda6f63bc31086470ab62c3ff06f23c8a411",
+    "status": "OK",
+    "reason": "有給と特別休暇の違いへの質問に回答して理解を確認。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-dc9016881e66",
+    "inputHash": "a8e390a5f297fdb4ab1b4efd6184ae7cb37d5a2ccc3d1849ec07cc629de886b5",
+    "status": "OK",
+    "reason": "責任論を越え増員費用の交渉と二段階納品の具体策を合意。",
+    "evidenceTurns": [
+      13,
+      14,
+      16,
+      19,
+      20,
+      21
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-dcde3fcf7d3f",
+    "inputHash": "72d6374c27ba3b2abfea2fdb1e3b0cca43bfdb65ed9b46760489fa734874e0b8",
+    "status": "OK",
+    "reason": "過去の停止事例から監視、リトライ、異常系テストを追加し同期方式へ戻る。",
+    "evidenceTurns": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-dd3129f01d6a",
+    "inputHash": "333c21cb3cf83ae0d72150f086fab47de04ae3e1cd8d072e505950645c737f8b",
+    "status": "OK",
+    "reason": "未完チケットの見込みを確認し検索優先と次機能の見積を具体化。",
+    "evidenceTurns": [
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-dd4500942716",
+    "inputHash": "641eff28a3078c3e99e0d8b2b7f91a2df1c673f2a1733bad9f5e21c63499e904",
+    "status": "INTERVENE_DRIFT",
+    "reason": "初日の計画から別プロジェクトの仕様追加とリソース相談へ移り復帰なし。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "OK",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-def9c58a07e1",
+    "inputHash": "f2aedc7624ef5f97d1651d285b63d15a3950684a9bd1cb67ae00a8ce0e785c82",
+    "status": "OK",
+    "reason": "受入期間とメンターを決めた後の過去インターンに関する短い関連雑談。",
+    "evidenceTurns": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_DRIFT",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-df1819095dbe",
+    "inputHash": "eef0fa003e3f80d25abf7eeb4a3f31fedec6f732fe2f82ad345fa90eb44b9cfb",
+    "status": "OK",
+    "reason": "通知とフィルタにCSVを加える可能性と初めての工数懸念を提示。",
+    "evidenceTurns": [
+      1,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-e234bdcb3c96",
+    "inputHash": "4ef02104683f05dfb5c0290f9a11b92c3fd5a1ba95599dda8e3989e300b38f12",
+    "status": "OK",
+    "reason": "障害対策を仕様に入れた上で同期方式をハイブリッドに決定。",
+    "evidenceTurns": [
+      8,
+      12,
+      13,
+      14,
+      15,
+      17
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-e4512670d73c",
+    "inputHash": "3a8bb556e88fc02900d8683a94a79d48f1eaf06ec4ec8078d65d2ce166d2bddb",
+    "status": "OK",
+    "reason": "三ロールのたたき台作成後に引越しの短い応答があるが脱線の持続は未確認。",
+    "evidenceTurns": [
+      4,
+      5,
+      6
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_DRIFT",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-e5b158538284",
+    "inputHash": "6491849ddea55fcb3f8600793a63f480124503af12d0357380d2090c587dd7b4",
+    "status": "INTERVENE_DRIFT",
+    "reason": "何度も議題への復帰を求められるが出張の食事と土産の話を続ける。",
+    "evidenceTurns": [
+      9,
+      11,
+      12,
+      16,
+      18,
+      19
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-e5bb11302972",
+    "inputHash": "d5108dea24bdda72f50f6aadfff740080dee0e32f5f74ed3d0bf4f34217a6bb8",
+    "status": "OK",
+    "reason": "食事対応を決めたあと既存ケータリングの品質を短く振り返る関連話題。",
+    "evidenceTurns": [
+      4,
+      5,
+      6
+    ],
+    "confidence": "medium",
+    "uncertain": true,
+    "alternativeStatus": "INTERVENE_DRIFT",
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-e8d2e1478d94",
+    "inputHash": "24f1ca22af908f381e2ea3b865729df0d84df3e04d467ed1f1e9516ad06e6d8e",
+    "status": "OK",
+    "reason": "手順の続きについて資料を読むと明言し相手も待つことに同意。",
+    "evidenceTurns": [
+      2,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-eb2d94138914",
+    "inputHash": "6c0059313794d675aa0a88dbbdb88e7480eb04928e5109bc5cbe8b5298fec735",
+    "status": "INTERVENE_DRIFT",
+    "reason": "発表担当を決める途中で終電と漫画喫茶の雑談が持続。",
+    "evidenceTurns": [
+      3,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-ebb6307601f1",
+    "inputHash": "3cd740affe380f04b3dc35178f370ea2d51e115aec12a00225615491cb6044b4",
+    "status": "OK",
+    "reason": "候補出しの段階として四つの選択肢を追加し発散を継続。",
+    "evidenceTurns": [
+      0,
+      1,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-ed56155e9787",
+    "inputHash": "a3195482cd0c3b29a9ba5b3d459c24511cbb12fdb9286894ffafe182763699cb",
+    "status": "OK",
+    "reason": "顧客の不満を電話任意化と記述欄拡張という具体的改善に結び付ける。",
+    "evidenceTurns": [
+      2,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-f275fa8c1aef",
+    "inputHash": "ff55e48ba4afb94804afd54abe8caf47207912c7fab7211dbc1a69bf6e3dd503",
+    "status": "OK",
+    "reason": "段階値上げの対象と時期、事前電話の手順を具体化している。",
+    "evidenceTurns": [
+      5,
+      8,
+      10,
+      11,
+      12
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-f29ac32a69e8",
+    "inputHash": "5ea956ce4051687ea0cfd47624cb214d4ae7f420e9aab97898b58ccd44c24bec",
+    "status": "INTERVENE_STALLED",
+    "reason": "無停止には追加容量が必要だが余裕なしという障害を反復し打開策が増えない。",
+    "evidenceTurns": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-f31be311b0fd",
+    "inputHash": "aae7a4ea2bc22b5a6ceb72211138844aeebfc1a9e92f6aff8dbd23510ad13bca",
+    "status": "OK",
+    "reason": "候補表の特徴を確認し導入が遅いCを除く判断が進む。",
+    "evidenceTurns": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-f400e84d4edb",
+    "inputHash": "aa0c790fcb0576811dacc8028270079c83c68c3348f6f64f5d86ae9a03682c1f",
+    "status": "OK",
+    "reason": "初週の活動、メンター方針、振返り面談の日程を合意。",
+    "evidenceTurns": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-f69325e65c35",
+    "inputHash": "a0c01e471244f019e27345df9b7c4364de60712f08c825a8310776d52eb06d8c",
+    "status": "OK",
+    "reason": "受入時期を確認し主担当と補助メンターが決まる。",
+    "evidenceTurns": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-f813ef33d771",
+    "inputHash": "f41da36d1c26bca905c0b4f9927593f827f0266faba149a4cf52fb6017ce1a5c",
+    "status": "OK",
+    "reason": "過去の全面改訂失敗の原因を示し小単位で出す改善方針が生まれる。",
+    "evidenceTurns": [
+      4,
+      6,
+      7,
+      8
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-fd460facfecd",
+    "inputHash": "b1d6a4b0129a315f0acf7b219210c891093701ea1cd9ef0017ae75309f79a05d",
+    "status": "OK",
+    "reason": "承認から振込と不備差戻しまでの手順を整理し周知へ進む。",
+    "evidenceTurns": [
+      4,
+      6,
+      8,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-fd974f026bfa",
+    "inputHash": "1efce1892e6f3bccbf070092500fe74b08742a2484d5a3dfebe57c4bfb66d247",
+    "status": "OK",
+    "reason": "初動から顧客告知、恒久対応、振返り期限まで具体的に確認。",
+    "evidenceTurns": [
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-fe31d09f97ad",
+    "inputHash": "95c48e0336e1de36b3eebb1496ceeb95c874e79cf38863eb5ba5592652cc81d8",
+    "status": "OK",
+    "reason": "三会場を価格と人数で比較し条件不一致を確認、資料化に進む。",
+    "evidenceTurns": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-fe97170aaf06",
+    "inputHash": "ece10b1e79852b210cb9250aa7646809cad79a7eb1819de99638af673a8de4a7",
+    "status": "OK",
+    "reason": "次回の日時を提案し参加者が合意。",
+    "evidenceTurns": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  },
+  {
+    "id": "blind-febc633d1252",
+    "inputHash": "54c7c0b697a7cddce653021086c3fecb19830ebe2669b45faf3f069cd68a9cc3",
+    "status": "OK",
+    "reason": "機能優先度とCSVの条件を合意しリリース日と凍結日まで決める。",
+    "evidenceTurns": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "confidence": "high",
+    "uncertain": false,
+    "alternativeStatus": null,
+    "annotator": "pr35_fresh_primary",
+    "labelSource": "independent_gpt_silver",
+    "humanReviewed": false
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "frozenAt": "2026-10-18T02:23:55.293178+00:00",
+  "n": 169,
+  "labelerAgent": "pr35_labeler (fresh context, labels only)",
+  "labelingCompleteBeforeTesterSpawn": true,
+  "jevRequestsBeforeFreeze": 0,
+  "sha256": {
+    "blind-inputs.json": "607624f6ea951ae54016f1ddfc91342833fc5cd045f19d414e41a0b2357fd24c",
+    "primary-labels.json": "813854262b30fbbcc142c56633b3a9348693a5f6bdf6ad5464d1f2921cdf235c",
+    "protocol.json": "9ec4b3fcdfb48fda8a1a1dc5acd392ee7613066d48951459edf552b5cb5bc11b",
+    "questions.json": "67ca691b95a6beb991ef26dc3fa0955c2c78ff8f265b186939624328e44fd3e6",
+    "source-manifest.json": "6f542d9f57b9973c81bf8e02b6d9ffafbf9f7c7bb46e31ef0916667b3a8d77e6",
+    "source-map.json": "63c51ea6a49cf0086d92b4425d295e3cd3c0cd4e22005f46d6314195ac5142c4"
+  },
+  "counts": {
+    "OK": 124,
+    "INTERVENE_DRIFT": 27,
+    "INTERVENE_STALLED": 18
+  },
+  "uncertain": 24,
+  "limitations": [
+    "GPT silver, not human gold",
+    "Related full/cut windows exist; judge instructed to assess current visible evidence only"
+  ]
+}
