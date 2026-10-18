@@ -125,6 +125,7 @@ try {
   });
   await page.goto(baseUrl + "/");
   await page.getByLabel("会議 URL", { exact: true }).fill("https://meet.google.com/abc-defg-hij");
+  await page.getByLabel("操作トークン", { exact: true }).fill("fixture-control-".repeat(3));
   await page.getByRole("button", { name: "参加", exact: true }).click();
   await page.getByText("72.5%", { exact: true }).waitFor();
   assert.equal(joins, 1);

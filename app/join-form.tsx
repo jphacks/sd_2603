@@ -2,13 +2,14 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
+import { joinMeeting, leaveMeeting } from "./meeting-actions";
 import { MonitorConnection } from "@/components/score-monitor/MonitorConnection";
 
 type MaterialItem = { name: string; saved: boolean; message: string | null };
 
 const MAX_SELECTED_FILES = 5;
 
-export function JoinForm() {
+export function JoinForm({ serverManagedControl = false }: { serverManagedControl?: boolean }) {
   const [monitorSessionId, setMonitorSessionId] = useState<string | null>(null);
   const [meetingUrl, setMeetingUrl] = useState("");
   const [agenda, setAgenda] = useState("");
@@ -46,9 +47,9 @@ export function JoinForm() {
     setPending(true);
     let sentId: string | null = null;
     try {
-      const response = await fetch("/api/recall/join", {
+      const response = serverManagedControl ? await joinMeeting(meetingUrl, agenda).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/join", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken}` },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` },
         body: JSON.stringify({ meetingUrl, agenda }),
       });
       const body = (await response.json()) as { id?: string; error?: string };
@@ -99,7 +100,7 @@ export function JoinForm() {
     setMaterialNotes([]);
     setPending(true);
     try {
-      const response = await fetch("/api/recall/leave", { method: "POST", headers: { Authorization: `Bearer ${controlToken}` } });
+      const response = serverManagedControl ? await leaveMeeting().then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/leave", { method: "POST", headers: { Authorization: `Bearer ${controlToken.trim()}` } });
       const body = (await response.json()) as {
         left?: boolean;
         alreadyGone?: boolean;
@@ -154,16 +155,26 @@ export function JoinForm() {
         <p className="text-xs text-zinc-600">
           最初は上のアジェンダを使い、議案書やMeetチャットから取り込んだアジェンダも次の音声判定に反映します。更新中は介入を保留します。
         </p>
+        {serverManagedControl ? (
+          <p className="text-xs text-zinc-600">入退室にはサーバーに設定済みの認証情報を使用します。操作トークンの入力は不要です。</p>
+        ) : (
+          <>
         <label className="grid gap-1 text-sm">
           操作トークン
           <input
             type="password"
             autoComplete="off"
+            required
+            minLength={32}
+            aria-describedby="control-token-help"
             className="rounded border border-zinc-300 bg-white px-3 py-2 text-zinc-950"
             value={controlToken}
             onChange={(event) => setControlToken(event.target.value)}
           />
         </label>
+            <p id="control-token-help" className="text-xs text-zinc-600">VercelのRECALL_CONTROL_TOKENと同じ32文字以上の値を入力してください。</p>
+          </>
+        )}
         <label className="grid gap-1 text-sm">
           議案書ファイル（任意、.txt / .md、最大5件）
           <input
