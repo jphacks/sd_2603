@@ -1031,3 +1031,22 @@ test('holdAcrossSpeech drops the held card once a newer evaluation starts, then 
   assert.equal(displays, 1, 'the newer recommendation is held and shown at the pause');
   gate.stop();
 });
+
+test('showIdle puts up the idle face once, queued ahead of a later card', async () => {
+  const clock = fakeClock();
+  const calls = [];
+  let release;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => intervention,
+    display: async () => { calls.push('card'); },
+    restoreIdle: () => new Promise(resolve => { calls.push('idle'); release = resolve; }),
+  });
+  const shown = gate.showIdle();
+  utterance(gate); await clock.advance(1500);
+  assert.deepEqual(calls, ['idle'], 'the card waits for the idle face to finish');
+  release(); await shown; await tick(); await tick();
+  assert.deepEqual(calls, ['idle', 'card']);
+  gate.stop();
+  await gate.showIdle();
+  assert.equal(calls.length, 2, 'a stopped gate shows nothing');
+});

@@ -339,6 +339,12 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
       armSilence();
       arm();
     },
+    // The camera shows nothing until the first card; put up the idle face once,
+    // through the same queue so it can never land on top of a newer card.
+    showIdle() {
+      if (stopped || !restoreIdle) return Promise.resolve();
+      return changeVideo(() => restoreIdle({ botId, signal: videoAbort.signal }));
+    },
     get stopped() { return stopped; },
     get transcript() { return [...transcript]; },
     get partial() { return partial; },

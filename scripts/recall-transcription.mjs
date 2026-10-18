@@ -167,6 +167,8 @@ wss.on('connection', socket => {
       });
       activeGate = gate;
       activeBotId = id;
+      // Audio arriving means the bot is in the call, so its camera can show the idle face.
+      gate.showIdle().catch(error => console.warn(`Idle card not shown: ${error instanceof Error ? error.message : 'unknown error'}`));
       segments = createSegmentedTranscriber({
         signal: abort.signal,
         transcribe: (audio, { signal, onPart }) => transcribeAudio(audio, { apiKey: env.AI_GATEWAY_API_KEY, signal, onPart }),
