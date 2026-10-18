@@ -54,6 +54,9 @@ export function createDeviceStore(now = Date.now) {
     value.touched = time;
     return value.data;
   }
+  // A card left up for the whole hold was given up on, not answered: the next
+  // card starts over instead of escalating.
+  const standing = (data: DeviceState) => data.lastAt !== null && now() - data.lastAt >= maxHoldMs() ? 0 : data.level;
   return {
     read(id: string): DeviceState {
       const data = entry(id);
@@ -63,11 +66,11 @@ export function createDeviceStore(now = Date.now) {
     // The level the next card of this kind would have.
     nextLevel(id: string, kind: InterventionKind, cause?: StallCause) {
       const data = entry(id);
-      return escalates(kind, cause) ? data.level + 1 : 1;
+      return escalates(kind, cause) ? standing(data) + 1 : 1;
     },
     intervened(id: string, kind: InterventionKind, cause?: StallCause) {
       const data = entry(id);
-      if (escalates(kind, cause)) data.level++;
+      data.level = standing(data) + (escalates(kind, cause) ? 1 : 0);
       data.lastLevel = escalates(kind, cause) ? data.level : 1;
       data.showing = true;
       data.lastKind = kind;
