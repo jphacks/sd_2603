@@ -6,7 +6,9 @@
 
 ### *Ambient Intelligence, Discreet Agent.*
 
-https://www.youtube.com/watch?v=t5-KOYChHzg
+[![AIDA デモ動画を見る（YouTube）](https://img.youtube.com/vi/t5-KOYChHzg/hqdefault.jpg)](https://www.youtube.com/watch?v=t5-KOYChHzg)
+
+[▶ デモ動画をYouTubeで再生](https://www.youtube.com/watch?v=t5-KOYChHzg)
 
  [スライド](https://docs.google.com/presentation/d/1MYe5R_gOezwBCerSCQ0umttwZnOfwg8j0fbe0uMLkHI/edit?slide=id.h29d553f4c0943f52_1_17#slide=id.h29d553f4c0943f52_1_17)
 
