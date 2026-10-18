@@ -1,13 +1,15 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { audioJoinTimedOut, createResampler, readRecallAudio, recordingConfig } from './audio.mjs';
-import { createInterventionGate, isVoicedPcm, streamMeetingAudio, MODEL } from './pipeline.mjs';
+import { createInterventionGate as createGate, isVoicedPcm, streamMeetingAudio, MODEL } from './pipeline.mjs';
 import { withDeviceControls } from '../../lib/device/judge.ts';
 import { createDeviceStore } from '../../lib/device/state.ts';
 
 const voiced = Buffer.alloc(6400);
 for (let i = 0; i < voiced.length; i += 2) voiced.writeInt16LE(1000, i);
 const silent = Buffer.alloc(6400);
+// Delivery tests isolate quiet/epoch behavior; cadence has dedicated coverage below.
+const createInterventionGate = options => createGate({ decisionIntervalMs: 0, ...options });
 
 function fakeClock() {
   let time = 0;
@@ -72,7 +74,7 @@ test('Gateway gets continuous PCM stream, Japanese and low delay; final is disti
   assert.deepEqual(events.map(event => event.type), ['transcript-delta', 'transcript-final']);
 });
 
-test('speech longer than five seconds and a short pause never trigger mid-speech', async () => {
+test('speech is evaluated from finals but a short pause never displays mid-speech', async () => {
   const clock = fakeClock();
   const decisions = [];
   const displays = [];
@@ -87,13 +89,15 @@ test('speech longer than five seconds and a short pause never trigger mid-speech
   assert.equal(gate.partial, 'provisional');
   gate.onPart({ type: 'transcript-final', text: 'confirmed' });
   for (let i = 0; i < 30; i++) { await clock.advance(200); gate.onAudio(voiced); }
-  assert.equal(decisions.length, 0);
+  assert.equal(decisions.length, 1);
+  assert.equal(displays.length, 0);
   await clock.advance(1400);
-  assert.equal(decisions.length, 0);
+  assert.equal(decisions.length, 1);
+  assert.equal(displays.length, 0);
   gate.onAudio(voiced);
   await clock.advance(1500);
   assert.equal(decisions.length, 1);
-  assert.equal(displays.length, 1);
+  assert.equal(displays.length, 1, 'the current recommendation is delivered at the first full quiet boundary');
   assert.deepEqual(decisions[0].transcript, ['confirmed']);
 });
 
@@ -670,4 +674,120 @@ test('agenda lookup pending holds safely, lookup failure stops, and resumed spee
   finish(snapshot); await tick();
   assert.equal(decisions, 1);
   resumed.stop();
+});
+
+test('default background cadence is final-driven, ten seconds apart and single-flight', async () => {
+  const clock = fakeClock();
+  let complete;
+  const inputs = [];
+  let displays = 0;
+  const gate = createGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: input => { inputs.push(input); return new Promise(resolve => { complete = resolve; }); },
+    display: async () => { displays++; },
+  });
+  gate.setPendingAudio(true);
+  utterance(gate, 'first final'); await clock.advance(0);
+  assert.equal(inputs.length, 1, 'pending STT and active speech do not block evaluation');
+  for (let i = 0; i < 10; i++) { gate.onAudio(voiced); await clock.advance(1000); }
+  gate.onPart({ type: 'transcript-final', text: 'second final' });
+  await clock.advance(0);
+  assert.equal(inputs.length, 1, 'new context cannot start a concurrent request');
+  complete(intervention); await tick(); await clock.advance(0);
+  assert.equal(inputs.length, 2, 'queued latest context is evaluated after the prior request');
+  assert.deepEqual(inputs[1].transcript, ['first final', 'second final']);
+  complete(intervention); await tick();
+  for (let i = 0; i < 5; i++) { gate.onAudio(voiced); await clock.advance(1000); }
+  gate.onPart({ type: 'transcript-final', text: 'third final' }); await clock.advance(0);
+  assert.equal(inputs.length, 2, 'burst finals are coalesced into the next cadence');
+  for (let i = 0; i < 5; i++) { gate.onAudio(voiced); await clock.advance(1000); }
+  assert.equal(inputs.length, 3);
+  complete(intervention); await tick();
+  assert.equal(displays, 0, 'internal recommendations never display during continuous speech');
+  gate.setPendingAudio(false); await clock.advance(1500);
+  assert.equal(displays, 1, 'the latest recommendation is delivered without another model call');
+  assert.equal(inputs.length, 3);
+  gate.stop();
+});
+
+test('a new final invalidates a held recommendation until its own background decision completes', async () => {
+  const clock = fakeClock();
+  let decisions = 0;
+  let displays = 0;
+  const gate = createGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => ++decisions === 1 ? intervention : { action: 'WAIT' },
+    display: async () => { displays++; },
+  });
+  gate.setPendingAudio(true);
+  utterance(gate, 'old drift'); await clock.advance(0);
+  gate.onPart({ type: 'transcript-final', text: 'returned to agenda' });
+  gate.setPendingAudio(false); await clock.advance(1500);
+  assert.equal(displays, 0, 'quiet must not deliver the invalidated old card');
+  await clock.advance(8500);
+  assert.equal(decisions, 2);
+  assert.equal(displays, 0);
+  gate.stop();
+});
+
+test('held recommendations expire after twenty seconds without paid polling', async () => {
+  const clock = fakeClock();
+  let decisions = 0;
+  let displays = 0;
+  const gate = createGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => { decisions++; return intervention; }, display: async () => { displays++; },
+  });
+  gate.setPendingAudio(true);
+  utterance(gate); await clock.advance(0);
+  await clock.advance(20000);
+  gate.setPendingAudio(false); await clock.advance(0);
+  assert.equal(displays, 0);
+  assert.equal(decisions, 1);
+  gate.stop();
+});
+
+test('an expired off-agenda vote cannot confirm a later recommendation', async () => {
+  const clock = fakeClock();
+  let displays = 0;
+  const gate = createGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => offAgenda, display: async () => { displays++; },
+  });
+  utterance(gate, 'old detour'); await clock.advance(1500);
+  await clock.advance(20001);
+  utterance(gate, 'unrelated later detour'); await clock.advance(1500);
+  assert.equal(displays, 0);
+  gate.stop();
+});
+
+test('continued off-agenda recommendations renew the confirmation instead of expiring the first vote', async () => {
+  const clock = fakeClock();
+  let displays = 0;
+  const gate = createGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => offAgenda, display: async () => { displays++; },
+  });
+  gate.setPendingAudio(true);
+  for (let final = 0; final < 4; final++) {
+    utterance(gate, `continuous detour ${final}`); await clock.advance(0);
+    if (final < 3) for (let i = 0; i < 10; i++) { gate.onAudio(voiced); await clock.advance(1000); }
+  }
+  assert.equal(displays, 0);
+  gate.setPendingAudio(false); await clock.advance(1500);
+  assert.equal(displays, 1, 'the fourth consecutive vote remains confirmed thirty seconds after the first');
+  gate.stop();
+});
+
+test('a final arriving during remote rendering invalidates its quiet generation', async () => {
+  const clock = fakeClock();
+  let displayGeneration;
+  let finishDisplay;
+  const gate = createGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => intervention,
+    display: ({ generation }) => { displayGeneration = generation; return new Promise(resolve => { finishDisplay = resolve; }); },
+  });
+  utterance(gate, 'judged context'); await clock.advance(1500);
+  assert.equal(gate.isQuiet(displayGeneration), true);
+  gate.setPendingAudio(true);
+  gate.onPart({ type: 'transcript-final', text: 'newly finalized context' });
+  gate.setPendingAudio(false);
+  assert.equal(gate.isQuiet(displayGeneration), false, 'even after STT pending clears, the old request stays stale');
+  finishDisplay({ cancelled: true }); await tick();
+  gate.stop();
 });

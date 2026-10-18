@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
 import { createServer } from 'node:http';
+import { randomUUID } from 'node:crypto';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -29,6 +30,16 @@ export const replayCases = [
   { id: 'speech-resumes-during-judgment', texts: [...context, '決め方が分からず止まっています。', '追加で条件を説明します。'], actions: ['WAIT', 'WAIT', 'INTERVENE', 'INTERVENE'], reason: stalled, resumeDuringJudgment: true, expectedDisplays: 1 },
 ];
 
+// 57.4 seconds of uninterrupted PCM produces five maximum-length segments and
+// a sixth segment that closes only at the final quiet window.
+// Keep the production three-final context floor and ten-second decision rate.
+replayCases.push({
+  id: 'continuous-speech-57-seconds',
+  texts: Array.from({ length: 6 }, (_, index) => `Continuous finalized segment ${index + 1}`),
+  continuous: true,
+  expectedDisplays: 1,
+});
+
 function syntheticWav() {
   const pcm = Buffer.alloc(6400);
   for (let i = 0; i < pcm.length; i += 2) pcm.writeInt16LE(i % 64 < 32 ? 1000 : -1000, i);
@@ -43,7 +54,7 @@ const voicedFrames = [...pcm16Chunks(parsePcmWav(syntheticWav()))];
 const silence = Buffer.alloc(6400);
 
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
-async function waitFor(predicate, message, timeoutMs = 12000) {
+async function waitFor(predicate, message, timeoutMs = 14000) {
   const start = Date.now();
   while (!predicate()) {
     if (Date.now() - start > timeoutMs) throw new Error(message);
@@ -66,6 +77,9 @@ export async function runReplayCase(scenario) {
   let evaluation = 0;
   let heldResponse;
   let failure;
+  let continuousEndedAt;
+  let pcmFrames = 0;
+  let recommendationId;
   const reply = (response, value) => {
     response.writeHead(200, { 'Content-Type': 'application/json' });
     response.end(JSON.stringify(value));
@@ -85,13 +99,21 @@ export async function runReplayCase(scenario) {
           reply(response, { agenda: 'リリース日程と担当体制を決める', agendaVersion: 'replay-v1' });
         } else if (body.mode === 'evaluate') {
           const index = evaluation++;
-          assert.ok(index < scenario.actions.length, 'Unexpected extra evaluation');
-          assert.deepEqual(body.transcript, scenario.texts.slice(0, index + 1));
-          const result = { action: scenario.actions[index], reason: scenario.reason ?? offAgenda, message: null };
+          if (scenario.continuous) {
+            assert.ok(body.transcript.length > 0 && body.transcript.length <= scenario.texts.length);
+            assert.deepEqual(body.transcript, scenario.texts.slice(0, body.transcript.length));
+          } else {
+            assert.ok(index < scenario.actions.length, 'Unexpected extra evaluation');
+            assert.deepEqual(body.transcript, scenario.texts.slice(0, index + 1));
+          }
+          const action = scenario.continuous ? (body.transcript.length >= 3 ? 'INTERVENE' : 'WAIT') : scenario.actions[index];
+          recommendationId = action === 'INTERVENE' ? randomUUID() : undefined;
+          const result = { action, reason: scenario.reason ?? offAgenda, message: null, ...(recommendationId ? { recommendationId } : {}) };
           if (scenario.resumeDuringJudgment && index === 2) heldResponse = () => reply(response, result);
           else reply(response, result);
         } else if (body.mode === 'display') {
           assert.equal(body.result.action, 'INTERVENE');
+          assert.equal(body.recommendationId, recommendationId, 'Display must use the latest server-owned recommendation');
           reply(response, { video: scenario.reason === stalled ? 'stalled' : 'off_agenda' });
         } else {
           assert.equal(body.mode, 'idle');
@@ -130,7 +152,7 @@ export async function runReplayCase(scenario) {
     socket = new WebSocket(`ws://127.0.0.1:${audioPort}/recall/audio/?token=${audioToken}`);
     socket.on('error', () => {});
     await once(socket, 'open');
-    const push = pcm => socket.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id: botId }, data: { buffer: pcm.toString('base64') } } }));
+    const push = pcm => { pcmFrames++; socket.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id: botId }, data: { buffer: pcm.toString('base64') } } })); };
     const startSpeech = () => { voiceTimes.push(Date.now()); for (const frame of voicedFrames) push(frame); };
     const finishSpeech = () => { for (let i = 0; i < 6; i++) push(silence); };
     const checkWorker = () => {
@@ -138,7 +160,20 @@ export async function runReplayCase(scenario) {
       assert.equal(socket.readyState, WebSocket.OPEN, output);
       assert.equal(output.includes('Audio processing stopped'), false, output);
     };
-    for (let index = 0; index < scenario.texts.length; index++) {
+    if (scenario.continuous) {
+      for (let frame = 0; frame < 287; frame++) {
+        voiceTimes.push(Date.now());
+        push(voicedFrames[0]);
+        await pause(150);
+        checkWorker();
+        assert.equal(requests.some(request => request.mode === 'display'), false, 'Continuous speech was interrupted');
+      }
+      continuousEndedAt = Date.now();
+      const duringSpeech = requests.filter(request => request.mode === 'evaluate' && request.at < continuousEndedAt);
+      assert.ok(duringSpeech.some(request => request.transcript.length >= 3), 'No context-eligible judgment during continuous speech');
+      assert.ok(duringSpeech.filter(request => request.transcript.length >= 3).length >= 2, 'Off-agenda confirmation did not progress during speech');
+      finishSpeech();
+    } else for (let index = 0; index < scenario.texts.length; index++) {
       startSpeech();
       if (scenario.resumeDuringJudgment && index === 3) {
         assert.ok(heldResponse, 'Expected a judgment waiting for speech to resume');
@@ -155,7 +190,7 @@ export async function runReplayCase(scenario) {
       if (!(scenario.resumeDuringJudgment && index === 2)) await pause(100);
     }
     if (scenario.expectedDisplays) {
-      await waitFor(() => requests.some(request => request.mode === 'idle') || failure || socket.readyState !== WebSocket.OPEN, 'No automatic idle restoration', 13000);
+      await waitFor(() => requests.some(request => request.mode === 'idle') || failure || socket.readyState !== WebSocket.OPEN, 'No automatic idle restoration', scenario.continuous ? 24000 : 13000);
     } else {
       // Also observe the entire idle timer window: delayed erroneous displays count.
       await pause(8300);
@@ -164,8 +199,10 @@ export async function runReplayCase(scenario) {
     const displays = requests.filter(request => request.mode === 'display');
     const idles = requests.filter(request => request.mode === 'idle');
     const metrics = {
-      id: scenario.id, passed: true, pcmFrames: voiceTimes.length * 7,
-      finalizedTurns: evaluation, evaluations: evaluation,
+      id: scenario.id, passed: true, pcmFrames,
+      finalizedTurns: Math.max(...requests.filter(request => request.mode === 'evaluate').map(request => request.transcript.length)), evaluations: evaluation,
+      evaluationsDuringSpeech: scenario.continuous ? requests.filter(request => request.mode === 'evaluate' && request.at < continuousEndedAt).length : null,
+      contextEligibleEvaluationsDuringSpeech: scenario.continuous ? requests.filter(request => request.mode === 'evaluate' && request.at < continuousEndedAt && request.transcript.length >= 3).length : null,
       falseInterventions: scenario.expectedDisplays === 0 ? displays.length : 0,
       missedInterventions: Math.max(0, scenario.expectedDisplays - displays.length),
       duplicateInterventions: Math.max(0, displays.length - scenario.expectedDisplays),
@@ -177,6 +214,13 @@ export async function runReplayCase(scenario) {
     assert.equal(displays.length, scenario.expectedDisplays, JSON.stringify(metrics));
     assert.equal(idles.length, scenario.expectedDisplays, JSON.stringify(metrics));
     assert.equal(metrics.speakingViolations, 0, JSON.stringify(metrics));
+    if (scenario.continuous) {
+      assert.equal(metrics.finalizedTurns, 6, 'Ten-second production segments must finalize all 57.4 seconds');
+      const evaluations = requests.filter(request => request.mode === 'evaluate');
+      for (let index = 1; index < evaluations.length; index++) {
+        assert.ok(evaluations[index].at - evaluations[index - 1].at >= 9900, 'Continuous audio bypassed the decision rate limit');
+      }
+    }
     if (idles.length) assert.ok(metrics.displayToIdleMs >= 7900 && metrics.displayToIdleMs < 12000, JSON.stringify(metrics));
     return metrics;
   } finally {
