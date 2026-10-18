@@ -163,6 +163,24 @@ test('decision failure stops the gate and reports degradation', async () => {
   assert.equal(errors, 1);
 });
 
+test('with onDecisionError a failed judgement is skipped without retry and the next final is judged', async () => {
+  const clock = fakeClock();
+  const skipped = [];
+  let calls = 0;
+  const displays = [];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => { calls++; if (calls === 1) throw new Error('upstream'); return intervention; },
+    display: async input => { displays.push(input); }, onDecisionError: error => skipped.push(error.message) });
+  utterance(gate, 'first'); await clock.advance(1500);
+  assert.equal(gate.stopped, false);
+  assert.deepEqual(skipped, ['upstream']);
+  assert.equal(calls, 1, 'no retry of the failed request');
+  utterance(gate, 'second'); await clock.advance(1500);
+  assert.equal(calls, 2);
+  assert.equal(displays.length, 1);
+  gate.stop();
+});
+
 const intervention = { action: 'INTERVENE', reason: 'Discussion appears stalled', message: 'return' };
 const tick = () => new Promise(resolve => setImmediate(resolve));
 function utterance(gate, text = 'confirmed') {
@@ -962,4 +980,103 @@ test('silence nudge follows the latest agenda version', async () => {
 
 test('an invalid silence duration is rejected', () => {
   assert.throws(() => createInterventionGate({ agenda: 'a', botId: 'b', decide: async () => keepWatching, display: async () => {}, silenceMs: 0 }), RangeError);
+});
+
+// Talk that keeps going with only short gaps between speakers.
+async function talk(gate, clock, ms, { final } = {}) {
+  for (let elapsed = 0; elapsed < ms; elapsed += 200) { gate.onAudio(voiced); await clock.advance(200); }
+  if (final) gate.onPart({ type: 'transcript-final', text: final });
+}
+
+test('holdAcrossSpeech shows a confirmed card at the next short pause while talk continues', async () => {
+  const run = async options => {
+    const clock = fakeClock();
+    let displays = 0;
+    const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock, quietMs: 800, ...options,
+      decide: async () => intervention, display: async () => { displays++; } });
+    utterance(gate, 'first');
+    await talk(gate, clock, 3000, { final: 'second' });
+    gate.setPendingAudio(true);
+    await talk(gate, clock, 3000);
+    assert.equal(displays, 0, 'never while someone is speaking');
+    await clock.advance(800);
+    gate.stop();
+    return displays;
+  };
+  assert.equal(await run({ holdAcrossSpeech: true }), 1, 'a newer final and pending recognition do not cancel the held card');
+  assert.equal(await run({}), 0, 'the default still waits for recognition to finish');
+});
+
+test('holdAcrossSpeech drops the held card when a newer judgement says no', async () => {
+  const clock = fakeClock();
+  const results = [intervention, { action: 'WAIT', reason: 'Conversation needs more observation', message: null }];
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock, quietMs: 800, holdAcrossSpeech: true,
+    decide: async () => results.shift(), display: async () => { displays++; } });
+  utterance(gate, 'first');
+  await talk(gate, clock, 2000, { final: 'second' });
+  await talk(gate, clock, 2000);
+  await clock.advance(800);
+  assert.equal(displays, 0);
+  gate.stop();
+});
+
+test('offAgendaConfirmations 1 displays the first off-agenda recommendation', async () => {
+  const clock = fakeClock();
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock, offAgendaConfirmations: 1,
+    decide: async () => offAgenda, display: async () => { displays++; } });
+  utterance(gate); await clock.advance(1500);
+  assert.equal(displays, 1);
+  gate.stop();
+  assert.throws(() => createInterventionGate({ agenda: 'agenda', botId: 'bot', offAgendaConfirmations: 3, decide: async () => offAgenda, display: async () => {} }), RangeError);
+});
+
+test('holdAcrossSpeech drops the held card once a newer evaluation starts, then holds the newer one', async () => {
+  const clock = fakeClock();
+  let finish;
+  const results = [async () => intervention, () => new Promise(resolve => { finish = resolve; })];
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock, quietMs: 800, holdAcrossSpeech: true,
+    decide: () => results.shift()(), display: async () => { displays++; } });
+  utterance(gate, 'first');
+  await talk(gate, clock, 2000, { final: 'second' });
+  await clock.advance(800);
+  assert.equal(displays, 0, 'the first card is superseded while the second evaluation is in flight');
+  finish(intervention);
+  await tick();
+  await clock.advance(800);
+  assert.equal(displays, 1, 'the newer recommendation is held and shown at the pause');
+  gate.stop();
+});
+
+test('showIdle puts up the idle face once, queued ahead of a later card', async () => {
+  const clock = fakeClock();
+  const calls = [];
+  let release;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => intervention,
+    display: async () => { calls.push('card'); },
+    restoreIdle: () => new Promise(resolve => { calls.push('idle'); release = resolve; }),
+  });
+  const shown = gate.showIdle();
+  utterance(gate); await clock.advance(1500);
+  assert.deepEqual(calls, ['idle'], 'the card waits for the idle face to finish');
+  release(); await shown; await tick(); await tick();
+  assert.deepEqual(calls, ['idle', 'card']);
+  gate.stop();
+  await gate.showIdle();
+  assert.equal(calls.length, 2, 'a stopped gate shows nothing');
+});
+
+test('a displayed card clears the history, so the next judgement sees only what follows', async () => {
+  const clock = fakeClock();
+  const seen = [];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async input => { seen.push(input.transcript); return seen.length === 1 ? intervention : { action: 'WAIT', reason: 'x', message: null }; },
+    display: async () => {} });
+  utterance(gate, 'off-topic talk'); await clock.advance(1500);
+  utterance(gate, 'back on the agenda'); await clock.advance(1500);
+  assert.deepEqual(seen, [['off-topic talk'], ['back on the agenda']]);
+  gate.stop();
 });

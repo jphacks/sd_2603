@@ -1,7 +1,15 @@
 import { randomUUID } from "node:crypto";
 import type { JudgeResult } from "../judge/types";
 
-export class RecommendationCancelledError extends Error {}
+export class RecommendationCancelledError extends Error {
+  override name = "RecommendationCancelledError";
+}
+
+// The store lives on globalThis, so after a dev reload its errors can come from an
+// older copy of this class. Match by name so a cancellation never becomes a 500.
+export function isRecommendationCancelled(error: unknown) {
+  return error instanceof Error && error.name === "RecommendationCancelledError";
+}
 
 type Context = { botId: string; agenda: string; agendaVersion: string };
 const TTL_MS = 20_000;

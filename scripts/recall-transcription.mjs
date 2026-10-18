@@ -20,6 +20,13 @@ const controlToken = env.RECALL_CONTROL_TOKEN;
 const port = Number(env.RECALL_AUDIO_PORT ?? 8787);
 const silenceSeconds = Number(env.SILENCE_NUDGE_SECONDS ?? 20);
 if (!Number.isFinite(silenceSeconds) || silenceSeconds < 0) throw new Error('SILENCE_NUDGE_SECONDS must be a non-negative number (0 disables the silence nudge)');
+// Faster interventions: keep a confirmed card through ongoing talk and show it at
+// the next short pause. Defaults keep the original wait-for-quiet behaviour.
+const holdAcrossSpeech = env.INTERVENE_DURING_CONVERSATION === 'true';
+const quietMs = Number(env.INTERVENTION_QUIET_MS ?? 1500);
+if (!Number.isFinite(quietMs) || quietMs < 300 || quietMs > 5000) throw new Error('INTERVENTION_QUIET_MS must be between 300 and 5000');
+const offAgendaConfirmations = Number(env.OFF_AGENDA_CONFIRMATIONS ?? 2);
+if (![1, 2].includes(offAgendaConfirmations)) throw new Error('OFF_AGENDA_CONFIRMATIONS must be 1 or 2');
 const controlUrl = new URL(env.VIDEO_CONTROL_URL ?? 'http://127.0.0.1:3000/api/recall/video');
 if (env.ENABLE_REALTIME_TRANSCRIPTION !== 'true' || env.AI_PROVIDER !== 'jev' || env.ALLOW_PAID_AI !== 'true' || !env.AI_GATEWAY_API_KEY || !token || token.length < 32 || !controlToken || controlToken.length < 32 || !Number.isInteger(port) || port < 1 || port > 65535) {
   throw new Error('Audio worker requires paid-AI opt-in, Gateway key, control token, audio token, and valid port');
@@ -47,17 +54,22 @@ async function videoRequest(body, signal) {
     signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(15_000)]) : AbortSignal.timeout(15_000),
   });
   if (['agenda', 'evaluate', 'silence', 'display'].includes(body.mode) && response.status === 409) return { cancelled: true };
-  if (!response.ok) throw new Error(`Video control HTTP ${response.status}`);
+  if (!response.ok) throw Object.assign(new Error(`Video control HTTP ${response.status}`), { status: response.status });
   return response.json();
 }
 
 let active;
 let activeGate;
 let activeBotId;
-let halted = false;
+// `stopping` is the whole worker shutting down. A bot whose session ended, failed
+// or never sent audio is blocked for good (no paid retry), but a newly joined bot
+// starts fresh, so the worker does not need a restart between meetings.
+let stopping = false;
+const blockedBots = new Set();
+const block = id => { if (id) blockedBots.add(id); };
 const server = createServer((request, response) => {
   if (request.url === '/health') {
-    const healthy = !halted && !active;
+    const healthy = !stopping && !active;
     response.writeHead(healthy ? 200 : 503, { 'Content-Type': 'application/json' });
     response.end(JSON.stringify({ status: healthy ? 'ready' : 'unavailable' }));
     return;
@@ -71,7 +83,7 @@ const server = createServer((request, response) => {
     request.on('end', () => {
       try {
         const { botId, generation } = JSON.parse(body);
-        const quiet = !halted && activeBotId === botId && activeGate?.isQuiet(generation);
+        const quiet = !stopping && !blockedBots.has(botId) && activeBotId === botId && activeGate?.isQuiet(generation);
         response.writeHead(quiet ? 200 : 409, { 'Content-Type': 'application/json' });
         response.end(JSON.stringify({ quiet: Boolean(quiet) }));
       } catch { response.writeHead(400); response.end(); }
@@ -85,7 +97,7 @@ server.on('upgrade', (request, socket, head) => {
   const url = new URL(request.url, 'http://localhost');
   const actual = Buffer.from(url.searchParams.get('token') ?? '');
   const expected = Buffer.from(token);
-  if (halted || active || url.pathname !== '/recall/audio/' || actual.length !== expected.length || !timingSafeEqual(actual, expected)) {
+  if (stopping || active || url.pathname !== '/recall/audio/' || actual.length !== expected.length || !timingSafeEqual(actual, expected)) {
     socket.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n');
     return;
   }
@@ -115,7 +127,7 @@ wss.on('connection', socket => {
     if (ended) return;
     const detail = classifyAudioFailure(error, stage, segments?.status);
     ended = true;
-    halted = true;
+    block(session?.id ?? activeBotId);
     gate?.stop();
     segments?.stop();
     try { capture?.finish(); } catch (captureError) {
@@ -123,7 +135,7 @@ wss.on('connection', socket => {
     }
     abort.abort();
     socket.close(1011, 'Audio processing stopped');
-    console.error(`Audio processing stopped ${JSON.stringify(detail)}; leave the bot via the app before retrying. No paid retry was attempted.`);
+    console.error(`Audio processing stopped ${JSON.stringify(detail)}; this bot is not retried (no paid retry). Join again from the app to start over.`);
   };
   const silence = setInterval(() => {
     if (!ended && session && Date.now() - lastNonemptyAudioAt > 250) {
@@ -137,10 +149,19 @@ wss.on('connection', socket => {
     const id = payload.data?.bot?.id;
     if (typeof id !== 'string' || !id) throw new Error('Missing bot id');
     if (!session) {
+      if (blockedBots.has(id)) {
+        console.warn('Audio from a bot that already ended was refused; join again from the app.');
+        ended = true;
+        socket.close(1008, 'Bot already ended');
+        return;
+      }
       session = await (sessionReader ?? readSession)(id);
       gate = createInterventionGate({
         botId: id,
         agenda: session.agenda,
+        holdAcrossSpeech,
+        quietMs,
+        offAgendaConfirmations,
         resolveAgenda: ({ botId, agenda, signal }) => videoRequest({ mode: 'agenda', botId, agenda }, signal),
         decide: input => { counts.evaluations++; return videoRequest({ mode: 'evaluate', ...input }); },
         // Silence is timed here; the server applies cooldown/mute and owns the card.
@@ -154,9 +175,12 @@ wss.on('connection', socket => {
           return videoRequest({ mode: 'idle', botId }, signal);
         },
         onError: error => fail(error, 'decision'),
+        onDecisionError: error => console.warn(`Judgement skipped ${JSON.stringify(classifyAudioFailure(error, 'decision'))}; the next final is judged as usual.`),
       });
       activeGate = gate;
       activeBotId = id;
+      // Audio arriving means the bot is in the call, so its camera can show the idle face.
+      gate.showIdle().catch(error => console.warn(`Idle card not shown: ${error instanceof Error ? error.message : 'unknown error'}`));
       segments = createSegmentedTranscriber({
         signal: abort.signal,
         transcribe: (audio, { signal, onPart }) => transcribeAudio(audio, { apiKey: env.AI_GATEWAY_API_KEY, signal, onPart }),
@@ -199,36 +223,36 @@ wss.on('connection', socket => {
     try { capture?.finish(); } catch (error) {
       console.error(`Diagnostic audio close failed ${JSON.stringify(classifyAudioFailure(error, 'diagnostic_capture'))}`);
     }
+    block(session?.id ?? activeBotId);
     activeGate = undefined;
     activeBotId = undefined;
     abort.abort();
     active = undefined;
-    halted = true;
   });
 });
 
 await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, '127.0.0.1', resolve); });
 console.log(`Recall audio worker ready on 127.0.0.1:${port}. Start the app, then join from the UI.`);
 const joinWatchdog = setInterval(async () => {
-  if (halted || active) return;
+  if (stopping || active) return;
   try {
     const state = JSON.parse(await readFile('.recall/current.json', 'utf8'));
-    if (audioJoinTimedOut(state)) {
-      halted = true;
-      console.error('No audio connection arrived after join; leave the bot via the app before retrying.');
+    if (typeof state.id === 'string' && !blockedBots.has(state.id) && audioJoinTimedOut(state)) {
+      block(state.id);
+      console.error('No audio connection arrived after join; join again from the app (the old bot is left automatically).');
     }
   } catch { /* No active bot state yet. */ }
 }, 5_000);
 joinWatchdog.unref();
 if (handleSignals) for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => {
-  halted = true;
+  stopping = true;
   clearInterval(joinWatchdog);
   activeGate?.stop();
   active?.close(1000, 'Worker stopping');
   server.close();
 });
 return { server, close: async () => {
-  halted = true;
+  stopping = true;
   clearInterval(joinWatchdog);
   activeGate?.stop();
   active?.close(1000, 'Worker stopping');
