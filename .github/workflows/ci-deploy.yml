@@ -117,6 +117,8 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           AUDIO_TEST_RUNTIME: ${{ github.ref == 'refs/heads/feature/staging-meet-transcription' && secrets.AUDIO_TEST_RUNTIME || '' }}
+          # Optional: live audio on staging through the tunnel worker. Unset keeps staging as before.
+          STAGING_AUDIO_RUNTIME: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_AUDIO_RUNTIME || '' }}
         run: |
           node scripts/ci/deploy-vercel.mjs "$RUNNER_TEMP/vercel-deployment.json"
           node scripts/ci/report-deployment.mjs "$RUNNER_TEMP/vercel-deployment.json"
