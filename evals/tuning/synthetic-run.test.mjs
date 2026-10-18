@@ -21,20 +21,22 @@ function fixture(t,count=500){
   }
  }
  writeFileSync(data,JSON.stringify(cases));writeFileSync(splitPath,JSON.stringify(split));
- const preload=join(dir,'mock.mjs');writeFileSync(preload,`import {appendFileSync,existsSync} from 'node:fs';
+ const failNextTest=join(dir,'fail-next-test');
+ const preload=join(dir,'mock.mjs');writeFileSync(preload,`import {appendFileSync,existsSync,unlinkSync} from 'node:fs';
  globalThis.fetch=async(url,options)=>{
   const b=JSON.parse(options.body),first=b.state.conversation[0],kind=first.split(' ')[0];
   if(first.endsWith(' test')&&!existsSync(process.env.MOCK_LOCK))throw new Error('Test accessed before selection lock');
   appendFileSync(process.env.MOCK_REQUESTS,JSON.stringify({first,locked:existsSync(process.env.MOCK_LOCK)})+'\\n');
+  if(first.endsWith(' test')&&existsSync(process.env.MOCK_FAIL_NEXT_TEST)){unlinkSync(process.env.MOCK_FAIL_NEXT_TEST);return new Response('offline failure',{status:500});}
   const s={drifted:kind==='INTERVENE_DRIFT'?.85:.1,stalled:kind==='INTERVENE_STALLED'?.85:.1,tangentIsRelevant:.1};
   return new Response(JSON.stringify({model:b.model,answers:Object.fromEntries(Object.entries(s).map(([k,noul])=>[k,{type:'noul',noul}])),usage:{input_tokens:42}}),{status:200});
  };`);
  const run=(command,ok=true,extra=[])=>{
-  const result=spawnSync(process.execPath,['--import',preload,cli,command,`--data=${data}`,`--split-manifest=${splitPath}`,`--out=${out}`,`--campaign=${campaign}`,'--concurrency=4','--budget-usd=5',...extra],{env:{...process.env,AI_GATEWAY_API_KEY:'offline-mock-only',MOCK_REQUESTS:requests,MOCK_LOCK:join(out,'test-lock.json')},encoding:'utf8',timeout:120000});
+  const result=spawnSync(process.execPath,['--import',preload,cli,command,`--data=${data}`,`--split-manifest=${splitPath}`,`--out=${out}`,`--campaign=${campaign}`,'--concurrency=4','--budget-usd=5',...extra],{env:{...process.env,AI_GATEWAY_API_KEY:'offline-mock-only',MOCK_REQUESTS:requests,MOCK_FAIL_NEXT_TEST:failNextTest,MOCK_LOCK:join(out,'test-lock.json')},encoding:'utf8',timeout:120000});
   assert.ifError(result.error);if(ok)assert.equal(result.status,0,result.stderr);else assert.notEqual(result.status,0,result.stdout);return result;
  };
  const calls=()=>existsSync(requests)?readFileSync(requests,'utf8').trim().split('\n').filter(Boolean).map(JSON.parse):[];
- return {dir,out,campaign,run,calls,cases};
+ return {dir,out,campaign,run,calls,cases,failNextTest};
 }
 test('500-case synthetic campaign isolates Train CV, shortlist Validation, frozen Test and cached requests',t=>{
  const f=fixture(t);
@@ -52,13 +54,21 @@ test('500-case synthetic campaign isolates Train CV, shortlist Validation, froze
  assert.equal(read(join(f.out,'selection.json')).selected.metrics.n,100);
  assert.equal(readFileSync(join(f.out,'train-selection.json'),'utf8'),frozenCV);
  assert.equal(f.calls().length,valCalls,'selection reuses scores');
- f.run('final');const final=read(join(f.out,'final.json'));
+ writeFileSync(f.failNextTest,'fail once');f.run('final',false);
+ assert.equal(existsSync(join(f.out,'final.json')),false);
+ assert.ok(existsSync(join(f.out,'final-incomplete.json')));
+ const incompleteCalls=f.calls().length;
+ f.run('report');assert.match(readFileSync(join(f.out,'REPORT.md'),'utf8'),/INCOMPLETE: API failures/);
+ assert.equal(f.calls().length,incompleteCalls,'report does not retry API failures');
+ f.run('final');assert.equal(f.calls().length,incompleteCalls+1,'only the failed request is retried');
+ const final=read(join(f.out,'final.json'));
  assert.equal(final.after.n,100);assert.equal(final.after.accuracy,1);assert.equal(final.syntheticOnly,true);
  assert.ok(f.calls().filter(r=>r.first.endsWith(' test')).every(r=>r.locked));
  assert.equal(readFileSync(join(f.out,'selection.json'),'utf8'),selection);
  const completed=f.calls().length;
  f.run('report');assert.equal(f.calls().length,completed);
  assert.match(readFileSync(join(f.out,'REPORT.md'),'utf8'),/silver/);
+ assert.match(readFileSync(join(f.out,'REPORT.md'),'utf8'),/COMPLETE: no API errors/);
  assert.match(f.run('final',false).stderr,/Final already completed/);
  assert.match(f.run('select',false).stderr,/Test locked/);
  assert.match(f.run('score-train',false).stderr,/Test locked/);

@@ -155,7 +155,7 @@ else if(command==='pilot'){
   const result={...locked,measuredAt:new Date().toISOString(),policy:s.selected.policy,before,after,syntheticOnly:true,labels:'independent GPT silver',bootstrap:groupBootstrap(test,s.selected.policy),
     rows:test.map(c=>({id:c.id,sourceGroup:c.sourceGroup,gold:c.gold.status,actual:casePrediction(c,cache[key(c,s.selected.policy.questionVersion)]?.scores,s.selected.policy).status,uncertain:c.annotation?.uncertain??false})),scores:allScores(test,vs)};
   const complete=before.errors===0&&after.errors===0;save(`${out}/${complete?'final':'final-incomplete'}.json`,result);render(t,s,result);console.log(JSON.stringify({before,after,bootstrap:result.bootstrap},null,2));if(!complete)process.exitCode=1;
-}else if(command==='report')render(read(`${out}/train-selection.json`),existsSync(`${out}/selection.json`)?read(`${out}/selection.json`):undefined,existsSync(`${out}/final.json`)?read(`${out}/final.json`):undefined);
+}else if(command==='report')render(read(`${out}/train-selection.json`),existsSync(`${out}/selection.json`)?read(`${out}/selection.json`):undefined,existsSync(`${out}/final.json`)?read(`${out}/final.json`):existsSync(`${out}/final-incomplete.json`)?read(`${out}/final-incomplete.json`):undefined);
 else throw new Error(`Unknown command: ${command}`);
 function render(t,s,f){
   const pct=x=>(100*x).toFixed(1)+'%';
