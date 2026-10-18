@@ -110,3 +110,5 @@
 - 10:01 JST checkpoint: generated150 / labeled150 / audited150; Train only, actual labels{'INTERVENE_DRIFT': 45, 'INTERVENE_STALLED': 45, 'OK': 60}; uncertain1; duplicates/near cross-family0, intent-label differences0. Latest data Push6052e88; next150-case checkpoint follows. Remaining150 Train and200 heldout are still planned;500 remains on track before11:00,1000 to assess after core quality.
 
 - 10:11 JST: generated300 / labeled250 / audited250 / re-reviewed19; labels{'INTERVENE_DRIFT': 75, 'OK': 100, 'INTERVENE_STALLED': 75}; uncertain1, intent differences0. Latest Push63dfeff; next250-case checkpoint follows. All own Train authored before own heldout; no Test text fed to unfinished Train authors.
+
+- 10:13 JST: generated435 / labeled300 / audited300 / re-reviewed19; label distribution{'INTERVENE_DRIFT': 90, 'OK': 120, 'INTERVENE_STALLED': 90}; uncertain2; intent differences0; duplicate/near cross-group0. Latest Push73e121c; next300-case checkpoint follows.
