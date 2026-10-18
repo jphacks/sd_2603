@@ -1,16 +1,16 @@
 {
   "state": "incomplete",
-  "cases": 150,
-  "independentScenarioGroups": 30,
+  "cases": 250,
+  "independentScenarioGroups": 50,
   "splitCounts": {
-    "train": 150
+    "train": 250
   },
   "trainFoldCounts": {
-    "4": 30,
-    "2": 30,
-    "0": 30,
-    "1": 30,
-    "3": 30
+    "2": 50,
+    "4": 50,
+    "0": 50,
+    "1": 50,
+    "3": 50
   },
   "plannedDesignCounts": {
     "drift": 150,
@@ -35,11 +35,13 @@
     "Lexical neighborhoods do not prove semantic/template independence; author instructions and manual sampling also matter.",
     "This scan checks exact reuse against legacy Test; no legacy labels or Jev predictions are used."
   ],
-  "casesHash": "777704bb37dcf1f51579a74c7f464b65a23290e08c615594718cdc09cc503631",
+  "casesHash": "89c1355c61994ed8b711b28405cab4fe0794e35ff151df00e844e59a473c04cf",
   "specHashes": {
     "generation-spec.json": "4fab0630c59d189a3d9fce2026747b77b8c4f33e79655db6781b8b4c7ac9a257",
     "split-manifest.json": "22e6dc4a51a95556aba7c65431682d3127a3089e3e6e8f0de0f749f8c8a0aa31",
     "annotation-rubric.md": "0438e216cce86456436a59104d5755c389ee8c252133804ced9064c3bafde61f",
-    "research-map.md": "fe477b27a9fad6bbd847425ba2bc947330a63474d8749781eade921b76f35666"
+    "research-map.md": "fe477b27a9fad6bbd847425ba2bc947330a63474d8749781eade921b76f35666",
+    "extension-spec.json": "fb0c4e84450fea24b891d1f88fd672e46c491685208846f47f861bbf4bdb3508",
+    "extension-split-manifest.json": "09afea5aba84dbc2ed591028885901f9c6bbef1377e7d84c378655ba94007082"
   }
 }

@@ -9,7 +9,10 @@ def sha(o):return hashlib.sha256(canonical(o)).hexdigest()
 def write(p,o):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(o,ensure_ascii=False,indent=2)+'\n')
 def jsonl(p,rs):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rs))
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--expect',type=int);a=ap.parse_args();spec=json.loads((ROOT/'generation-spec.json').read_text());planned={s['id']:(f,s) for f in spec['families'] for s in f['designSlots']}
+ ap=argparse.ArgumentParser();ap.add_argument('--expect',type=int);a=ap.parse_args();spec=json.loads((ROOT/'generation-spec.json').read_text());families=list(spec['families'])
+ extpath=ROOT/'extension-spec.json'
+ if extpath.exists():families+=json.loads(extpath.read_text())['families']
+ planned={s['id']:(f,s) for f in families for s in f['designSlots']}
  ready=json.loads((ROOT/'raw/completed-packets.json').read_text())
  paths=[ROOT/'raw'/name for name in ready]
  raw={};intents={};labels={};reviews={}
@@ -36,12 +39,13 @@ def main():
  cases=[];links=[];adoptions=[]
  for id,c in sorted(raw.items()):
   if id not in labels:continue
-  f,s=planned[id];l=labels[id];assert l['annotator']=={'author_a':'judge_b','author_b':'judge_c','author_c':'judge_a'}[c['author']],'wrong judge route';assert l['labelSource']=='independent_gpt_silver' and l['humanReviewed'] is False;assert l['status'] in ['OK','INTERVENE_DRIFT','INTERVENE_STALLED'];assert l['reason'];assert l['confidence'] in ['high','medium','low'];assert isinstance(l['uncertain'],bool);assert l['evidenceTurns'] and all(type(i)==int and 0<=i<len(c['transcript']) for i in l['evidenceTurns']);assert 'action' not in l
+  f,s=planned[id];l=labels[id];assert l['annotator']=={'author_a':'judge_b','author_b':'judge_c','author_c':'judge_a','author_d':'judge_e','author_e':'judge_f','author_f':'judge_d'}[c['author']],'wrong judge route';assert l['labelSource']=='independent_gpt_silver' and l['humanReviewed'] is False;assert l['status'] in ['OK','INTERVENE_DRIFT','INTERVENE_STALLED'];assert l['reason'];assert l['confidence'] in ['high','medium','low'];assert isinstance(l['uncertain'],bool);assert l['evidenceTurns'] and all(type(i)==int and 0<=i<len(c['transcript']) for i in l['evidenceTurns']);assert 'action' not in l
   ann={'annotator':l['annotator'],'confidence':l['confidence'],'uncertain':l['uncertain'],'humanReviewed':False,'labelSource':l['labelSource'],'evidenceTurns':l['evidenceTurns'],'alternativeStatus':l.get('alternativeStatus'),'reviewed':False}
   status=l['status'];reason=l['reason'];review=reviews.get(id)
   if review:
-   assert review['annotator'] not in [c['author'],l['annotator']];assert review['status'] in ['OK','INTERVENE_DRIFT','INTERVENE_STALLED'];assert review['evidenceTurns'] and all(0<=i<len(c['transcript']) for i in review['evidenceTurns'])
+   assert review['annotator']=={'author_a':'review_c','author_b':'review_a','author_c':'review_b','author_d':'review_f','author_e':'review_d','author_f':'review_e'}[c['author']],'secondary reviewer must be third subagent';assert review['confidence'] in ['high','medium','low'] and isinstance(review['uncertain'],bool);assert review['status'] in ['OK','INTERVENE_DRIFT','INTERVENE_STALLED'];assert review['evidenceTurns'] and all(0<=i<len(c['transcript']) for i in review['evidenceTurns'])
    conflict=review['status']!=status;ann.update(reviewed=True,reviewStatus=review['status'],reviewDisagreement=conflict);ann['uncertain']=ann['uncertain'] or review['uncertain'] or conflict
+   ann['confidence']=min([ann['confidence'],review['confidence']],key=lambda x:{'low':0,'medium':1,'high':2}[x])
    if conflict:ann['confidence']='low';ann['alternativeStatus']=review['status']
    adoptions.append({'id':id,'primaryStatus':status,'reviewStatus':review['status'],'primaryReason':reason,'reviewReason':review['reason'],'disagreement':conflict,'adoption':'retain primary provisional silver; preserve alternative and uncertainty; no Jev predictions or target-accuracy alignment'})
   case={'id':id,'agenda':c['agenda'],'phase':c['phase'],'transcript':c['transcript'],'secondsSinceLastIntervention':120,'split':f['split'],'sourceGroup':f['familyId'],'cvFold':f['fold'],'dataKind':'synthetic','generation':{'version':'synthetic-benchmark-v1','familyId':f['familyId'],'author':c['author'],'researchReferences':f['researchReferences']},'gold':{'status':status,'reason':reason},'annotation':ann};cases.append(case);links.append({'id':id,'textHash':sha({k:case[k] for k in ['agenda','phase','transcript']}),'primaryLabelHash':sha(l),'adoptedLabelHash':sha({'gold':case['gold'],'annotation':ann}),'caseHash':sha(case)})
@@ -53,5 +57,5 @@ def main():
  for c in cases:
   intent=planned[c['id']][1]['designIntent'];expected={'drift':'INTERVENE_DRIFT','stalled':'INTERVENE_STALLED','borderline_ok':'OK','clear_ok':'OK'}[intent]
   if c['gold']['status']!=expected:mismatch.append({'id':c['id'],'designIntent':intent,'actualStatus':c['gold']['status']})
- stats={'state':'complete_core500' if len(cases)==500 else 'incomplete','generated':len(raw),'primaryLabeled':len(labels),'packaged':len(cases),'reviewed':sum(c['annotation']['reviewed'] for c in cases),'uncertain':sum(c['annotation']['uncertain'] for c in cases),'designCountsForPackaged':dict(design),'actualLabels':dict(actual),'intentLabelDifferences':mismatch,'splits':{s:{'n':sum(c['split']==s for c in cases),'labels':dict(collections.Counter(c['gold']['status'] for c in cases if c['split']==s))} for s in ['train','validation','test']},'warnings':['Synthetic evaluation only; not real meetings, human gold or measured Jev accuracy.','secondsSinceLastIntervention=120 is a fixed synthetic input, not a measured time.','Primary judges received no author intent or Jev predictions.']};write(ROOT/'progress.json',stats);print(json.dumps(stats,ensure_ascii=False,indent=2))
+ stats={'state':'complete1000' if len(cases)==1000 else 'complete_core500' if len(cases)==500 else 'incomplete','generated':len(raw),'primaryLabeled':len(labels),'packaged':len(cases),'reviewed':sum(c['annotation']['reviewed'] for c in cases),'uncertain':sum(c['annotation']['uncertain'] for c in cases),'designCountsForPackaged':dict(design),'actualLabels':dict(actual),'intentLabelDifferences':mismatch,'splits':{s:{'n':sum(c['split']==s for c in cases),'labels':dict(collections.Counter(c['gold']['status'] for c in cases if c['split']==s))} for s in ['train','validation','test']},'warnings':['Synthetic evaluation only; not real meetings, human gold or measured Jev accuracy.','secondsSinceLastIntervention=120 is a fixed synthetic input, not a measured time.','Primary judges received no author intent or Jev predictions.']};write(ROOT/'progress.json',stats);print(json.dumps(stats,ensure_ascii=False,indent=2))
 if __name__=='__main__':main()
