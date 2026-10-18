@@ -1,6 +1,7 @@
 import { meetingOwner } from "@/lib/recall/browser-session";
 import { ownedMeetings } from "@/lib/recall/owned-meetings";
 import { monitorStore } from "@/lib/monitor/store";
+import { audioBridge, remoteAudioEnabled } from "@/lib/recall/audio-bridge";
 export async function GET(
   _request: Request,
   context: { params: Promise<{ sessionId: string }> },
@@ -12,6 +13,7 @@ export async function GET(
     const owner = await meetingOwner();
     if (!owner || !(await ownedMeetings(owner)).some(meeting => meeting.id === sessionId)) return Response.json({ error: "この会議を表示する権限がありません。" }, { status: 403 });
   }
+  if (remoteAudioEnabled()) return audioBridge(sessionId, `/api/monitor/${sessionId}`);
   return Response.json({ sessionId, ...monitorStore.read(sessionId) }, {
     headers: { "Cache-Control": "no-store" },
   });

@@ -13,6 +13,7 @@ import { createSegmentedTranscriber } from './transcription/segments.mjs';
 import { classifyAudioFailure } from './transcription/diagnostics.mjs';
 import { createRecallAudioCapture } from './transcription/capture.mjs';
 import { assertStreamingRuntime } from './transcription/runtime.mjs';
+import { createWorkerBridge } from './transcription/bridge.mjs';
 
 export async function startAudioWorker({ env = process.env, transcribeAudio = streamMeetingAudio, sessionReader, handleSignals = true } = {}) {
 assertStreamingRuntime();
@@ -28,10 +29,13 @@ if (controlUrl.protocol !== 'http:' || !['localhost', '127.0.0.1'].includes(cont
 }
 
 const stateIo = { ...localRecallIo(env), statePath: resolve('.recall/current.json') };
+const remoteSessions = new Map();
+const remoteCounts = new Map();
 
 async function readSession(id) {
   for (let attempt = 0; attempt < 20; attempt++) {
     try {
+      if (remoteSessions.has(id)) return remoteSessions.get(id);
       const raw = await readFile(botStatePath(stateIo, id), 'utf8').catch(error => {
         if (error.code !== 'ENOENT') throw error;
         return readFile(stateIo.statePath, 'utf8'); // Pre-upgrade single-bot state.
@@ -62,7 +66,12 @@ const failedBots = new Set();
 const maxConnections = Number(env.RECALL_MAX_AUDIO_CONNECTIONS ?? 32);
 if (!Number.isInteger(maxConnections) || maxConnections < 1 || maxConnections > 128) throw new Error('Invalid audio connection limit');
 let halted = false;
-const server = createServer((request, response) => {
+const bridge = createWorkerBridge({ token, controlToken, controlUrl, sessions: remoteSessions,
+  stopSession: id => { bots.get(id)?.gate?.stop(); bots.get(id)?.socket?.close(1000, 'Meeting left'); remoteCounts.delete(id); },
+  getStatus: id => ({ connected: bots.has(id), failed: failedBots.has(id), counts: remoteCounts.get(id) ?? null }),
+});
+const server = createServer(async (request, response) => {
+  if (env.RECALL_AUDIO_BRIDGE_MODE === 'true' && await bridge(request, response)) return;
   if (request.url === '/health') {
     const healthy = !halted && connections.size < maxConnections;
     response.writeHead(healthy ? 200 : 503, { 'Content-Type': 'application/json' });
@@ -102,7 +111,7 @@ server.on('upgrade', (request, socket, head) => {
 wss.on('connection', socket => {
   const owner = { socket, gate: undefined, id: undefined };
   connections.set(socket, owner);
-  const counts = { rawFrames: 0, pcmBytes: 0, voicedFrames: 0, sttDelta: 0, sttPartial: 0, sttFinal: 0, sttSkippedEmpty: 0, evaluations: 0, displayAttempts: 0, idleAttempts: 0 };
+  const counts = { rawFrames: 0, pcmBytes: 0, voicedFrames: 0, sttDelta: 0, sttPartial: 0, sttFinal: 0, sttSkippedEmpty: 0, evaluations: 0, jevDecisions: 0, displayAttempts: 0, idleAttempts: 0 };
   const report = () => console.log(`Audio worker telemetry ${JSON.stringify(counts)}`);
   console.log('Audio worker websocket connected');
   const telemetry = setInterval(report, 10_000);
@@ -149,6 +158,7 @@ wss.on('connection', socket => {
     if (!session) {
       if (failedBots.has(id) || bots.has(id)) throw new Error('Bot already connected or stopped');
       owner.id = id;
+      remoteCounts.set(id, counts);
       bots.set(id, owner);
       session = await (sessionReader ?? readSession)(id);
       if (ended) return;
@@ -156,7 +166,12 @@ wss.on('connection', socket => {
         botId: id,
         agenda: session.agenda,
         resolveAgenda: ({ botId, agenda, signal }) => videoRequest({ mode: 'agenda', botId, agenda }, signal),
-        decide: input => { counts.evaluations++; return videoRequest({ mode: 'evaluate', ...input }); },
+        decide: async input => {
+          counts.evaluations++;
+          const result = await videoRequest({ mode: 'evaluate', ...input });
+          if (result.diagnostic?.model) counts.jevDecisions++;
+          return result;
+        },
         display: ({ botId, agenda, agendaVersion, result, generation, signal }) => {
           counts.displayAttempts++;
           return videoRequest({ mode: 'display', botId, agenda, agendaVersion, result, recommendationId: result.recommendationId, generation, requestId: randomUUID() }, signal);
@@ -221,6 +236,10 @@ await new Promise((resolve, reject) => { server.once('error', reject); server.li
 console.log(`Recall audio worker ready on 127.0.0.1:${port}. Start the app, then join from the UI.`);
 const joinWatchdog = setInterval(async () => {
   if (halted) return;
+  for (const [id, session] of remoteSessions) {
+    if (!bots.has(id) && audioJoinTimedOut(session)) failedBots.add(id);
+    if (Date.now() - Date.parse(session.createdAt) > 95 * 60_000) { remoteSessions.delete(id); remoteCounts.delete(id); failedBots.delete(id); }
+  }
   try {
     const io = stateIo;
     const directory = resolve(botStatePath(io, 'probe'), '..');

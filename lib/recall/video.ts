@@ -1,4 +1,5 @@
 import sharp from "sharp";
+import { cameraOutputConfig } from "../../scripts/recall.mjs";
 
 const IMAGE_WIDTH = 1280;
 const IMAGE_HEIGHT = 720;
@@ -132,4 +133,36 @@ export async function outputVideo(
       stage: "http", providerStatus: response.status,
     });
   }
+}
+
+/** Keep intervention output on the same animated webpage camera used at join. */
+export async function outputMeetingView(
+  botId: string,
+  jpeg: Buffer,
+  view: VideoView,
+  options: { env?: NodeJS.ProcessEnv; fetch?: typeof fetch } = {},
+) {
+  const env = options.env ?? process.env;
+  const camera = cameraOutputConfig(env);
+  if (!camera) return outputVideo(botId, jpeg, { apiKey: env.RECALL_API_KEY, region: env.RECALL_REGION, fetch: options.fetch });
+  if (!env.RECALL_API_KEY || !env.RECALL_REGION || !["us-east-1", "us-west-2", "eu-central-1", "ap-northeast-1"].includes(env.RECALL_REGION)) {
+    throw new RecallVideoError("config", "Recall camera output is not configured");
+  }
+  const url = new URL(camera.camera.config.url);
+  url.searchParams.set("mode", view.kind === "off_agenda" ? "off-track" : view.kind === "stalled" ? "silence" : "on-track");
+  url.searchParams.set("cue", String(Date.now()));
+  const endpoint = `https://${env.RECALL_REGION}.recall.ai/api/v1/bot/${encodeURIComponent(botId)}/output_media/`;
+  const request = async (method: string, body: unknown) => {
+    const response = await (options.fetch ?? fetch)(endpoint, {
+      method, redirect: "error", headers: { Authorization: `Token ${env.RECALL_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify(body), signal: AbortSignal.timeout(10_000),
+    }).catch((error: unknown) => { throw new RecallVideoError("upstream", "Recall camera request failed", transportDiagnostic(error)); });
+    if (!response.ok) {
+      const kind = response.status === 401 || response.status === 403 ? "auth" : response.status === 429 ? "rate_limit" : "upstream";
+      throw new RecallVideoError(kind, "Recall camera update failed", { stage: "http", providerStatus: response.status });
+    }
+  };
+  // Stop only this bot's camera; never affect audio, screenshare or another bot.
+  await request("DELETE", { camera: true });
+  await request("POST", { camera: { kind: "webpage", config: { url: url.toString() } } });
 }

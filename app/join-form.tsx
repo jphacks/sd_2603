@@ -5,6 +5,7 @@ import { normalizeGoogleMeetUrl } from "@/lib/recall/meeting-url";
 import Link from "next/link";
 import { joinMeeting, leaveMeeting, listMeetings } from "./meeting-actions";
 import { MonitorConnection } from "@/components/score-monitor/MonitorConnection";
+import { AudioPipelineStatus } from "@/components/score-monitor/AudioPipelineStatus";
 
 type MeetingItem = { id: string; meetingUrl: string; status: string };
 
@@ -284,6 +285,7 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
       </section>
       {monitorSessionId && (
         <section aria-label="この会議のJev判定" className="rounded-xl bg-[#090f13] p-4">
+          <AudioPipelineStatus key={`audio-${monitorSessionId}`} botId={monitorSessionId} />
           <Link className="mb-4 block text-sm text-sky-200 underline" href={`/monitor?session=${encodeURIComponent(monitorSessionId)}`} target="_blank" rel="noopener noreferrer">
             この会議の判定グラフを別画面で開く
           </Link>

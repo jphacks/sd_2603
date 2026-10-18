@@ -1,5 +1,10 @@
 # Google Meet audio → live transcription → Jev → Recall video
 
+> StagingのVercel参加画面と常時起動workerを接続する場合は
+> [STAGING_AUDIO_BRIDGE.md](./STAGING_AUDIO_BRIDGE.md) を参照。
+> 以下は既存の同一ホスト・ローカルモードの説明。bridgeモードではBot情報を
+> 認証付きで登録し、Vercel上の `.recall/current.json` を共有しない。
+
 This is a local, single-host prototype. The existing Meet URL form owns bot creation and leave. The separate, always-on Node worker receives that same bot's mixed audio. It streams 16 kHz Recall PCM (resampled continuously to 24 kHz) to `openai/gpt-realtime-whisper` through AI Gateway. Only final transcript events enter the bounded meeting context. The worker evaluates new finalized context during speech, at most once every ten seconds and with only one evaluation in flight. Display is a separate step: it waits for roughly 1.5 seconds without voiced audio and for pending recognition to finish. Partial transcripts are provisional and never trigger a decision or card.
 
 The first utterance starts streaming immediately. About 1.2 seconds of silence, or ten seconds of continuous audio, closes its input so recognition can finalize without ending the meeting; later audio remains buffered in order while that final is pending. Pending audio blocks display, not evaluation of already finalized context. Normal empty recognitions are skipped; missing finals, oversized buffers, and other failures stop processing without a paid retry. Jev still waits for at least three final transcript entries, so one or two recognized segments alone do not produce a paid decision. The shorter ten-second segment limit allows continuous speech to reach that minimum without artificial pauses. Its real-provider transcription quality and cost impact have not yet been measured in Meet.

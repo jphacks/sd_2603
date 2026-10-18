@@ -5,6 +5,7 @@ import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { normalizeGoogleMeetUrl } from '../lib/recall/meeting-url.ts';
 import { recordingConfig } from './transcription/audio.mjs';
+import { workerRequest } from './transcription/bridge.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STATE_PATH = path.join(ROOT, '.recall', 'current.json');
@@ -380,7 +381,9 @@ export async function sendBot(meetingUrl, io, agenda, { multiple = false, owner 
       audioConfig = recordingConfig(io.env.RECALL_AUDIO_PUBLIC_URL, io.env.RECALL_AUDIO_TOKEN);
       const port = Number(io.env.RECALL_AUDIO_PORT ?? 8787);
       if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid audio port');
-      const health = await io.fetch(`http://127.0.0.1:${port}/health`, { signal: AbortSignal.timeout(1500) });
+      const health = io.env.RECALL_AUDIO_WORKER_URL
+        ? await workerRequest(io.env, '/ready', {}, io.fetch)
+        : await io.fetch(`http://127.0.0.1:${port}/health`, { signal: AbortSignal.timeout(1500) });
       if (!health.ok) throw new Error('Worker unavailable');
     } catch {
       throw new RecallCliError('Audio worker is not ready; bot was not created', { status: 503 });
@@ -421,6 +424,10 @@ export async function sendBot(meetingUrl, io, agenda, { multiple = false, owner 
   const botId = created.id;
   if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
   try {
+    if (audioEnabled && io.env.RECALL_AUDIO_WORKER_URL) {
+      const registered = await workerRequest(io.env, '/sessions', { id: botId, agenda: agenda.trim() }, io.fetch);
+      if (!registered.ok) throw new Error('Audio session registration failed');
+    }
     const state = {
       id: botId,
       region: regionOf(io.env),
