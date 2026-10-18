@@ -11,3 +11,5 @@ raw/{author}-{batch}.jsonl は1行1会話、フィールドid,familyId,agenda,ph
 まず**担当内で最初のTrain10系列=50件だけ**をbatch01として作り、完了したら止めて報告する。他の作者の50件を独立Judgeとして判定するタスクを次に受ける。Trainがすべて完成するまで自分のValidation/Test本文を作らない。評価者として他担当Testを読むのも、全Train執筆終了後にする。
 
 Gateway・有料モデルAPIは禁止。このGPTセッションで執筆する。アプリ・ランナー・Jev設定・既存成果物は変更しない。新ディレクトリ内の自分のrawだけ編集する。作業場所: /home/fc6.ctrl/.codex/worktrees/jev-tuning-data/meeting-facilitator。シェルsandbox起動不可なら明示担当依頼に基づくrequire_escalatedを使う。
+
+拡張を実行する場合は作者D/E/Fが author-plans/d.json,e.json,f.json を同じ契約で使う。新しいサブエージェント会話で開始し、core500のTest本文は一切入力しない。拡張でも自身のTrainを全て書いた後にheldoutを執筆する。

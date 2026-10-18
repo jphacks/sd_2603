@@ -8,8 +8,15 @@ def norm(c):return re.sub(r'[\W_0-9０-９A-Za-z]+','', ''.join(c['transcript'])
 def grams(s,n=4):return {s[i:i+n] for i in range(max(0,len(s)-n+1))}
 def main():
  p=argparse.ArgumentParser();p.add_argument('--expect',type=int);a=p.parse_args();cases=json.loads((ROOT/'cases.json').read_text());spec=json.loads((ROOT/'generation-spec.json').read_text());assign={r['id']:r for r in json.loads((ROOT/'split-manifest.json').read_text())['caseAssignments']};expected=json.loads((ROOT/'spec-hashes.json').read_text())
+ extmanifest=ROOT/'extension-split-manifest.json'
+ if extmanifest.exists():
+  assign.update({r['id']:r for r in json.loads(extmanifest.read_text())['caseAssignments']});expected.update(json.loads((ROOT/'extension-spec-hashes.json').read_text()))
  for f,h in expected.items():assert hashlib.sha256((ROOT/f).read_bytes()).hexdigest()==h,'frozen spec changed '+f
  if a.expect is not None:assert len(cases)==a.expect
+ byid={r['id']:r for r in cases}
+ frozen=ROOT/'releases/core500/manifest.json'
+ if frozen.exists():
+  fm=json.loads(frozen.read_text());assert all(id in byid and sha(byid[id])==h for id,h in fm['caseHashes'].items()),'core500 frozen case changed'
  ids=[r['id'] for r in cases];assert len(ids)==len(set(ids));group=collections.defaultdict(set);fold=collections.defaultdict(set)
  for c in cases:
   x=assign[c['id']];assert c['sourceGroup']==x['sourceGroup'] and c['split']==x['split'] and c['cvFold']==x['fold'];group[c['sourceGroup']].add(c['split']);fold[c['sourceGroup']].add(c['cvFold']);assert c['dataKind']=='synthetic';assert c['annotation']['humanReviewed'] is False;assert c['generation']['author']!=c['annotation']['annotator'];assert 'action' not in c['gold'];assert 6<=len(c['transcript'])<=12
@@ -41,6 +48,6 @@ def main():
  design=collections.Counter()
  for f in spec['families']:
   for s in f['designSlots']:design[s['designIntent']]+=1
- report={'state':'complete_core500' if len(cases)==500 else 'incomplete','cases':len(cases),'independentScenarioGroups':len(group),'splitCounts':dict(collections.Counter(c['split'] for c in cases)),'trainFoldCounts':dict(collections.Counter(c['cvFold'] for c in cases if c['split']=='train')),'plannedDesignCounts':dict(design),'sourceGroupSplitLeaks':0,'sourceGroupFoldLeaks':0,'exactNormalizedDuplicates':0,'nearPairsWithinGroup':pairs,'nearCrossGroupDuplicates':0,'legacyTestExactReuse':0,'legacyTestNearReuse':0,'legacyTestRecordsScanned':len(legacy),'nearThresholds':{'char4Jaccard':.55,'sequenceRatio':.80,'sequenceCandidateJaccard':.30},'limitations':['Lexical neighborhoods do not prove semantic/template independence; author instructions and manual sampling also matter.','This scan checks exact reuse against legacy Test; no legacy labels or Jev predictions are used.'],'casesHash':sha(cases),'specHashes':expected}
+ report={'state':'complete1000' if len(cases)==1000 else 'complete_core500' if len(cases)==500 else 'incomplete','cases':len(cases),'independentScenarioGroups':len(group),'splitCounts':dict(collections.Counter(c['split'] for c in cases)),'trainFoldCounts':dict(collections.Counter(c['cvFold'] for c in cases if c['split']=='train')),'plannedDesignCounts':dict(design),'sourceGroupSplitLeaks':0,'sourceGroupFoldLeaks':0,'exactNormalizedDuplicates':0,'nearPairsWithinGroup':pairs,'nearCrossGroupDuplicates':0,'legacyTestExactReuse':0,'legacyTestNearReuse':0,'legacyTestRecordsScanned':len(legacy),'nearThresholds':{'char4Jaccard':.55,'sequenceRatio':.80,'sequenceCandidateJaccard':.30},'limitations':['Lexical neighborhoods do not prove semantic/template independence; author instructions and manual sampling also matter.','This scan checks exact reuse against legacy Test; no legacy labels or Jev predictions are used.'],'casesHash':sha(cases),'specHashes':expected}
  write(ROOT/'duplicate-audit.json',report);print(json.dumps({k:v for k,v in report.items() if k!='nearPairsWithinGroup'},ensure_ascii=False,indent=2))
 if __name__=='__main__':main()

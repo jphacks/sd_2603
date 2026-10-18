@@ -14,5 +14,23 @@
     "primaryJudge": "judge_a",
     "judgeAgent": "/root/rubric"
   },
-  "reviewer": "root or third subagent with no authorship of the reviewed family"
+  "reviewer": "root or third subagent with no authorship of the reviewed family",
+  "author_d": {
+    "agent": "/root/bench_d",
+    "primaryJudge": "judge_e",
+    "judgeAgent": "/root/bench_e",
+    "context": "fresh fork_turns=none; no core500 conversation history"
+  },
+  "author_e": {
+    "agent": "/root/bench_e",
+    "primaryJudge": "judge_f",
+    "judgeAgent": "/root/bench_f",
+    "context": "fresh fork_turns=none; no core500 conversation history"
+  },
+  "author_f": {
+    "agent": "/root/bench_f",
+    "primaryJudge": "judge_d",
+    "judgeAgent": "/root/bench_d",
+    "context": "fresh fork_turns=none; no core500 conversation history"
+  }
 }

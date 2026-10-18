@@ -1,0 +1,38 @@
+{
+  "policy": "All low/uncertain/intent mismatches plus stable class-stratified samples; selection flags hidden from reviewer.",
+  "earlySample": {
+    "reviewer": "review_c",
+    "ids": [
+      "synbench-1cd12a35afad5e",
+      "synbench-a71b7ba1a12a86",
+      "synbench-514e7e8ba9c847",
+      "synbench-ebf919c9f57824",
+      "synbench-b59a9b24444103",
+      "synbench-8a637947e4b682"
+    ],
+    "selection": "2 per primary class from authorA batch01; no author or primary judge overlap"
+  },
+  "earlySampleA": {
+    "ids": [
+      "synbench-15f5d2e190d93a",
+      "synbench-3c59edd83ddfce",
+      "synbench-432f100b9634e2",
+      "synbench-5bb963ad7e8e67",
+      "synbench-807b3caa931521",
+      "synbench-9e6db6d9e93d96",
+      "synbench-e037c9ba68014c"
+    ],
+    "selection": "All uncertain/low B01 and2 per primary class; labels/selection reason hidden from reviewer"
+  },
+  "earlySampleB": {
+    "ids": [
+      "synbench-03f69077ee1fc2",
+      "synbench-3761718e61d881",
+      "synbench-5b4e67e6558de9",
+      "synbench-6f47e9c6bdce46",
+      "synbench-76e2f6c9f1faba",
+      "synbench-820568880bae7e"
+    ],
+    "selection": "2 per primary class C01; labels hidden from third reviewer"
+  }
+}
