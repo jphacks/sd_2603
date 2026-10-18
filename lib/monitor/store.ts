@@ -12,6 +12,8 @@ const codes: Record<string, Snapshot["reasonCode"]> = {
 };
 export function createMonitorStore(now = Date.now) {
   const sessions = new Map<string, { data: Envelope; touched: number }>();
+  let activeSessionId: string | null = null;
+  const ended = new Set<string>();
   function entry(id: string) {
     const time = now();
     for (const [key, value] of sessions)
@@ -29,6 +31,20 @@ export function createMonitorStore(now = Date.now) {
     return value.data;
   }
   return {
+    activate(id: string) {
+      entry(id);
+      ended.delete(id);
+      activeSessionId = id;
+    },
+    deactivate(id: string) {
+      if (activeSessionId === id) activeSessionId = null;
+      ended.add(id);
+      if (ended.size > 32) ended.delete(ended.values().next().value!);
+    },
+    activeSession() {
+      if (activeSessionId && !sessions.has(activeSessionId)) activeSessionId = null;
+      return activeSessionId;
+    },
     read(id: string): Envelope {
       const data = entry(id);
       data.history = data.history
@@ -38,6 +54,8 @@ export function createMonitorStore(now = Date.now) {
     },
     record(id: string, input: JudgeInput, result: JudgeResult) {
       const data = entry(id);
+      // CLI/worker meetings can begin evaluating without the web join endpoint.
+      if ((!activeSessionId || activeSessionId === "judge") && !ended.has(id)) activeSessionId = id;
       const previous = data.snapshot;
       const sequence = (previous?.sequence ?? 0) + 1;
       const scores = ScoreSchema.safeParse(result.diagnostic);

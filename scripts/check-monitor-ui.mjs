@@ -28,6 +28,7 @@ try {
     cooldownUntil: now + 50000,
   };
   const data = {
+    sessionId: "ui-test",
     snapshot,
     history: [0, 1, 2].map((i) => ({
       sequence: i + 1,
@@ -61,7 +62,7 @@ try {
   await page.screenshot({ path: "/tmp/jev-monitor-meter.png" });
   await page.setViewportSize({ width: 360, height: 800 });
   assert.ok(await page.locator('.jev-monitor').evaluate(element => element.getBoundingClientRect().right <= innerWidth));
-  assert.equal(await page.getByRole('button').count(), 0);
+  assert.equal(await page.locator('.jev-monitor').getByRole('button').count(), 0);
   await page.clock.runFor(14000);
   await page.getByText("● 更新停止").waitFor();
   const remaining = Number((await page.locator(".jm-footer").innerText()).match(/クールダウン (\d+)秒/)[1]);
@@ -70,12 +71,53 @@ try {
   invalid = true;
   await page.clock.runFor(2500);
   await page.getByText("● 入力エラー").waitFor();
+  await page.route("**/api/monitor/another-session", route => route.fulfill({ json: {
+    sessionId: "another-session", snapshot: null, history: [], expectedIntervalMs: null,
+  } }));
   await page.goto(baseUrl + "/monitor?session=another-session");
   await page.getByText("● 実スコア未取得").waitFor();
   assert.equal(await page.locator(".jm-fill").count(), 0);
+
+  let current = { sessionId: null, snapshot: null, history: [], expectedIntervalMs: null };
+  await page.route("**/api/monitor", route => route.fulfill({ json: current }));
+  await page.goto(baseUrl + "/monitor");
+  await page.getByText("● 実スコア未取得").waitFor();
+  current = data;
+  await page.clock.runFor(2500);
+  await page.getByText("72.5%", { exact: true }).waitFor();
+  current = { sessionId: "meeting-b", snapshot: null, history: [], expectedIntervalMs: null };
+  await page.clock.runFor(2500);
+  await page.getByText("● 実スコア未取得").waitFor();
+  assert.equal(await page.locator(".jm-fill").count(), 0);
+  current = { ...data, sessionId: "meeting-b", snapshot: { ...snapshot, sessionId: "meeting-b", scores: { ...scores, drifted: 0.2 } } };
+  await page.clock.runFor(2500);
+  await page.getByText("20.0%", { exact: true }).first().waitFor();
+  assert.equal(await page.getByText("72.5%", { exact: true }).count(), 0);
+  current = { sessionId: null, snapshot: null, history: [], expectedIntervalMs: null };
+  await page.clock.runFor(2500);
+  await page.getByText("● 実スコア未取得").waitFor();
+  assert.equal(await page.locator(".jm-fill").count(), 0);
+
+  // Joining sends the meeting URL once and immediately connects its returned Bot ID.
+  invalid = false;
+  let joins = 0;
+  await page.route("**/api/recall/join", route => {
+    joins++;
+    assert.equal(route.request().postDataJSON().meetingUrl, "https://meet.google.com/abc-defg-hij");
+    return route.fulfill({ json: { id: "ui-test" } });
+  });
+  await page.goto(baseUrl + "/");
+  await page.getByLabel("会議 URL", { exact: true }).fill("https://meet.google.com/abc-defg-hij");
+  await page.getByRole("button", { name: "参加", exact: true }).click();
+  await page.getByText("72.5%", { exact: true }).waitFor();
+  assert.equal(joins, 1);
+  assert.equal(await page.getByRole("link", { name: "この会議の判定グラフを別画面で開く" }).getAttribute("href"), "/monitor?session=ui-test");
+  await page.setViewportSize({ width: 360, height: 800 });
+  assert.ok(await page.locator('.jev-monitor').evaluate(element => element.getBoundingClientRect().right <= innerWidth));
+  await page.screenshot({ path: "/tmp/jev-meeting-join-monitor.png", fullPage: true });
 } finally {
   await browser.close();
 }
 console.log(
-  "PASS: vertical meters, split-screen layout, stale status, cooldown clock, invalid data, session reset",
+  "PASS: vertical meters, split-screen layout, stale status, cooldown clock, invalid data, session reset, auto meeting selection/switch/leave, join UI connection",
 );

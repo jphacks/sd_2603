@@ -57,6 +57,8 @@ try {
       expected === 'INTERVENE' ? 'string' : null);
   }
   assert.equal((await request('/api/test-ai')).status, 403);
+  const initialMonitor = await (await request('/api/monitor')).json();
+  assert.equal(initialMonitor.sessionId, 'judge');
   const botId = randomUUID();
   const agenda = 'Synthetic device integration';
   const postControl = body => request('/api/recall/video', {
@@ -87,6 +89,14 @@ try {
   assert.equal(muted.manual, false);
   assert.equal((await event('unmute')).status, 200);
   assert.equal((await (await postControl({ ...evaluate, secondsSinceLastIntervention: 60 })).json()).action, 'INTERVENE');
+  const current = await request('/api/monitor');
+  assert.equal(current.status, 200);
+  const monitored = await current.json();
+  assert.equal(monitored.sessionId, botId);
+  assert.equal(monitored.snapshot.sessionId, botId);
+  assert.equal(monitored.snapshot.decision, 'INTERVENE');
+  const selected = await (await request(`/api/monitor/${botId}`)).json();
+  assert.deepEqual(selected.snapshot, monitored.snapshot);
   console.log('PASS: app startup, Mock SILENCE/WAIT/INTERVENE, device manual/mute, stale agenda cancellation, paid AI blocked.');
 } finally {
   server.kill('SIGTERM');
