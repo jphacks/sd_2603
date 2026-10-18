@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { normalizeGoogleMeetUrl } from "@/lib/recall/meeting-url";
 import Link from "next/link";
 import { joinMeeting, leaveMeeting, listMeetings } from "./meeting-actions";
 import { MonitorConnection } from "@/components/score-monitor/MonitorConnection";
@@ -67,17 +68,18 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
     setError(null);
     setNotice(null);
     setMaterialNotes([]);
-    if (!/^https:\/\/.+/i.test(meetingUrl)) {
-      setError("会議 URL は https:// で始めてください。");
+    const normalizedMeetingUrl = normalizeGoogleMeetUrl(meetingUrl);
+    if (!normalizedMeetingUrl) {
+      setError("Google Meet のURLを確認してください（例: https://meet.google.com/abc-defg-hij）。");
       return;
     }
     setPending(true);
     let sentId: string | null = null;
     try {
-      const response = serverManagedControl ? await joinMeeting(meetingUrl, agenda).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/join", {
+      const response = serverManagedControl ? await joinMeeting(normalizedMeetingUrl, agenda).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/join", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` },
-        body: JSON.stringify({ meetingUrl, agenda }),
+        body: JSON.stringify({ meetingUrl: normalizedMeetingUrl, agenda }),
       });
       const body = (await response.json()) as { id?: string; error?: string };
       if (!response.ok || !body.id) {
@@ -86,7 +88,7 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
       }
       sentId = body.id;
       setMonitorSessionId(body.id);
-      setMeetings(previous => [...previous.filter(item => item.id !== body.id), { id: body.id!, meetingUrl, status: "joining_call" }]);
+      setMeetings(previous => [...previous.filter(item => item.id !== body.id), { id: body.id!, meetingUrl: normalizedMeetingUrl, status: "joining_call" }]);
       if (files.length === 0) {
         setNotice(`ボットを送信しました ${body.id}`);
         return;
