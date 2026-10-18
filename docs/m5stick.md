@@ -31,7 +31,8 @@ M5 が 2 秒ごとに読む。`Authorization: Bearer <DEVICE_TOKEN>` を付け�
   "seq": 42,
   "state": "intervene",
   "view": "off_agenda",
-  "title": "アジェンダに戻りましょう",
+  "face": "redirect",
+  "title": "議題に戻りませんか？",
   "agendaShort": "次のリリース方針を決める",
   "scores": { "drift": 82, "stall": 15, "tangent": 20 },
   "cooldownSec": 47,
@@ -43,8 +44,9 @@ M5 が 2 秒ごとに読む。`Authorization: Bearer <DEVICE_TOKEN>` を付け�
 | フィールド | 意味 |
 | --- | --- |
 | `seq` | スナップショットの連番。古い応答を捨てる。ストアの `sequence` を使う |
-| `state` | `silence` / `wait` / `intervene`。画面の色に対応（緑・黄・赤）。まだ判定が1回もないときは `unknown`（灰色） |
+| `state` | `silence` / `wait` / `intervene`。まだ判定が1回もないときは `unknown`。画面は状態の色ではなく `face` の表情で表す |
 | `view` | `idle` / `off_agenda` / `stalled`。`videoCopy()` と同じ区分。最後の実介入から一定時間だけ非 `idle`、以降は `idle` に戻す |
+| `face` | `watching` / `nudge` / `redirect`。画面に描く AIDA の表情。`view` が `idle` なら `watching`、`stalled` なら `nudge`、`off_agenda` なら `redirect`。Meet のカメラカードと同じ対応（`DESIGN.md`） |
 | `title` / `agendaShort` | 画面用の短い文言。アジェンダは 12 文字程度に切る。M5 の画面は小さいので 2 行まで |
 | `scores` | 0〜100 の整数。ストアの 0〜1 の実測値を変換。未取得は `null`（0 として扱わない） |
 | `cooldownSec` | 次に介入できるまでの残り秒数（`remainingCooldown`） |
@@ -77,9 +79,9 @@ M5 が 2 秒ごとに読む。`Authorization: Bearer <DEVICE_TOKEN>` を付け�
 | ボタン A 長押し | `unmute` |
 | ボタン B 短押し | `tangent_ok`（有益な寄り道） |
 | ボタン B 長押し | 画面表示の切り替え（状態表示 ⇄ スコアのゲージ） |
-| 画面（通常） | 状態色の背景に `title` とクールダウンのカウントダウン |
+| 画面（通常） | 白地の中央に `face` の表情を黒で描き、下に `title` を出す。左上に次の介入までの残り秒数。寄り道OK の間は「寄り道OK・介入停止中」 |
 | 画面（スコア） | 脱線・停滞・寄り道の有用性を縦のゲージで表示（モニター画面と同じ 3 本、同じ色） |
-| 切断時 | 画面を灰色にして「接続待ち」を出す。最後の値を現在値として出さない |
+| 切断時 | 灰色の「見守る」の表情と「接続待ち」を出す。最後の値を現在値として出さない |
 
 ## 必要な変更
 

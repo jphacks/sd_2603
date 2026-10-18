@@ -1,4 +1,5 @@
 import sharp from "sharp";
+import { FACE_FRAME, faceGroup, type FaceKind } from "../brand/faces.ts";
 
 const IMAGE_WIDTH = 1280;
 const IMAGE_HEIGHT = 720;
@@ -22,42 +23,48 @@ function truncate(value: string, maxCharacters: number) {
     : value.trim();
 }
 
-export function videoCopy(view: VideoView) {
-  if (view.kind === "idle") {
-    return { eyebrow: "MEETING FACILITATOR", title: "会議を見守っています", subtitle: "必要なときだけ、ひとこと。" };
-  }
+// The face AIDA shows for each view (see DESIGN.md).
+const FACES: Record<VideoView["kind"], FaceKind> = {
+  idle: "watching",
+  stalled: "nudge",
+  off_agenda: "redirect",
+};
+
+// Meet may crop the 16:9 camera to its tile, so keep everything inside the
+// centered 4:3 area (960px wide).
+const LINE_CHARACTERS = 17;
+const AGENDA_CHARACTERS = LINE_CHARACTERS - 2;
+const FONT_SIZE = 54;
+const LINE_GAP = 22;
+const FACE_SCALE = 0.95;
+const FACE_TEXT_GAP = 60;
+
+export function videoCopy(view: VideoView): { message: string | null; lines: string[] } {
+  if (view.kind === "idle") return { message: null, lines: [] };
   if (view.kind === "stalled") {
-    return { eyebrow: "少し立ち止まって", title: "ここまでの意見を整理しませんか", subtitle: "決めるために、次の一歩を。" };
+    const message = "ここまでの意見を、整理しませんか？";
+    return { message, lines: [message] };
   }
-  const agenda = truncate(view.agenda, 30);
-  return {
-    eyebrow: "アジェンダに戻るタイミングです",
-    title: `「${agenda}」`,
-    subtitle: "というアジェンダに戻りましょう",
-  };
+  const message = `「${view.agenda.trim()}」に戻りませんか？`;
+  if (Array.from(message).length <= LINE_CHARACTERS) return { message, lines: [message] };
+  return { message, lines: [`「${truncate(view.agenda, AGENDA_CHARACTERS)}」`, "に戻りませんか？"] };
 }
 
 export function videoSvg(view: VideoView) {
-  const copy = videoCopy(view);
-  const active = view.kind !== "idle";
-  const titleSize = view.kind === "off_agenda" ? 50 : 55;
-  const color = active ? "#214344" : "#677d75";
-  const titleCharacters = Array.from(copy.title);
-  const titleLines = view.kind === "off_agenda" && titleCharacters.length > 16
-    ? [titleCharacters.slice(0, 16).join(""), titleCharacters.slice(16).join("")]
-    : [copy.title];
-  const titleMarkup = titleLines.map((line, index) =>
-    `<text x="220" y="${titleLines.length === 1 ? 380 : 350 + index * 68}" fill="${color}" font-family="sans-serif" font-size="${titleSize}" font-weight="700">${escapeXml(line)}</text>`
-  ).join("\n  ");
+  const { lines } = videoCopy(view);
+  const frameHeight = FACE_FRAME.height * FACE_SCALE;
+  const textHeight = lines.length ? FACE_TEXT_GAP + lines.length * FONT_SIZE + (lines.length - 1) * LINE_GAP : 0;
+  const top = (IMAGE_HEIGHT - frameHeight - textHeight) / 2;
+  const left = IMAGE_WIDTH / 2 - (FACE_FRAME.width * FACE_SCALE) / 2;
+  const textMarkup = lines.map((line, index) => {
+    // Baseline sits about 0.88em below the top of each line.
+    const y = top + frameHeight + FACE_TEXT_GAP + index * (FONT_SIZE + LINE_GAP) + FONT_SIZE * 0.88;
+    return `<text x="${IMAGE_WIDTH / 2}" y="${Math.round(y)}" text-anchor="middle" fill="#000000" font-family="Noto Sans JP, Hiragino Sans, Yu Gothic, sans-serif" font-size="${FONT_SIZE}" font-weight="700">${escapeXml(line)}</text>`;
+  }).join("\n  ");
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" viewBox="0 0 ${IMAGE_WIDTH} ${IMAGE_HEIGHT}">
-  <rect width="1280" height="720" fill="#f5f6f1"/>
-  <rect x="92" y="106" width="1096" height="508" rx="52" fill="#fffefa"/>
-  <rect x="160" y="180" width="14" height="360" rx="7" fill="${active ? "#e0a668" : "#aec5b5"}"/>
-  <circle cx="1090" cy="205" r="18" fill="${active ? "#e0a668" : "#aec5b5"}"/>
-  <text x="220" y="260" fill="#698278" font-family="sans-serif" font-size="30" font-weight="600">${escapeXml(copy.eyebrow)}</text>
-  ${titleMarkup}
-  <text x="220" y="${titleLines.length === 1 ? 465 : 502}" fill="${color}" font-family="sans-serif" font-size="43" font-weight="500">${escapeXml(copy.subtitle)}</text>
-  <text x="220" y="551" fill="#8ba098" font-family="sans-serif" font-size="26">Meeting Facilitator</text>
+  <rect width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" fill="#ffffff"/>
+  ${faceGroup(FACES[view.kind], Math.round(left * 10) / 10, Math.round(top * 10) / 10, FACE_SCALE, "#000000")}
+  ${textMarkup}
 </svg>`;
 }
 

@@ -14,8 +14,15 @@ type DeviceStateView = {
 
 const TITLES = {
   idle: "見守っています",
-  off_agenda: "アジェンダに戻りましょう",
-  stalled: "意見を整理しませんか",
+  off_agenda: "議題に戻りませんか？",
+  stalled: "意見を整理しませんか？",
+} as const;
+
+// The same faces as the Meet camera card (lib/recall/video.ts).
+const FACES = {
+  idle: "watching",
+  off_agenda: "redirect",
+  stalled: "nudge",
 } as const;
 
 export function shortAgenda(agenda: string | null) {
@@ -56,6 +63,7 @@ export function buildDevicePayload(
     seq: snapshot?.sequence ?? 0,
     state: stateFor(snapshot?.decision ?? null, view),
     view,
+    face: FACES[view],
     title: TITLES[view],
     agendaShort: shortAgenda(agenda),
     // Missing scores stay null; never show them as 0.
