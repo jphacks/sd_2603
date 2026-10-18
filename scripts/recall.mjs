@@ -260,7 +260,26 @@ export function chatRecordingConfig(env) {
   };
 }
 
+export function cameraOutputConfig(env) {
+  const host = String(env.VERCEL_URL || env.VERCEL_BRANCH_URL || '').trim();
+  const configured = String(env.RECALL_CAMERA_URL || (host ? `https://${host}/recall/camera` : '')).trim();
+  if (!configured) return null;
+  let url;
+  try { url = new URL(configured); } catch {
+    throw new RecallCliError('RECALL_CAMERA_URL は有効なHTTPS URLにしてください。');
+  }
+  if (url.protocol !== 'https:') throw new RecallCliError('RECALL_CAMERA_URL はHTTPS URLにしてください。');
+  url.searchParams.set('embed', '1');
+  url.searchParams.set('mode', 'on-track');
+  if (env.VERCEL_AUTOMATION_BYPASS_SECRET) {
+    url.searchParams.set('x-vercel-protection-bypass', env.VERCEL_AUTOMATION_BYPASS_SECRET);
+    url.searchParams.set('x-vercel-set-bypass-cookie', 'samesitenone');
+  }
+  return { camera: { kind: 'webpage', config: { url: url.toString() } } };
+}
+
 function createBotBody(meetingUrl, env, audioConfig = null) {
+  const outputMedia = cameraOutputConfig(env);
   const chatConfig = chatRecordingConfig(env);
   const recording = audioConfig && chatConfig
     ? { ...audioConfig, ...chatConfig, realtime_endpoints: [...audioConfig.realtime_endpoints, ...chatConfig.realtime_endpoints] }
@@ -269,6 +288,7 @@ function createBotBody(meetingUrl, env, audioConfig = null) {
     meeting_url: meetingUrl,
     bot_name: BOT_NAME,
     recording_config: recording,
+    ...(outputMedia ? { output_media: outputMedia } : {}),
     ...(chatConfig
       ? {
           chat: {

@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { run, removeBot, sendBot } from './recall.mjs';
+import { cameraOutputConfig, run, removeBot, sendBot } from './recall.mjs';
 
 function fixture() {
   const dir = mkdtempSync(path.join(tmpdir(), 'recall-cli-'));
@@ -453,6 +453,26 @@ function exists(file) {
     throw error;
   }
 }
+
+test('Vercel join includes the deployed camera page and private automation bypass', async () => {
+  const env = { VERCEL_URL: 'deployment.example.vercel.app', VERCEL_AUTOMATION_BYPASS_SECRET: 'test-private-bypass' };
+  const output = cameraOutputConfig(env);
+  const url = new URL(output.camera.config.url);
+  assert.equal(url.origin, 'https://deployment.example.vercel.app');
+  assert.equal(url.pathname, '/recall/camera');
+  assert.equal(url.searchParams.get('embed'), '1');
+  assert.equal(url.searchParams.get('mode'), 'on-track');
+  assert.equal(url.searchParams.get('x-vercel-protection-bypass'), 'test-private-bypass');
+  let body;
+  const io = capture({ statePath: null, env, fetch: async (_url, options) => {
+    body = JSON.parse(options.body);
+    return jsonResponse(200, { id: 'camera-bot' });
+  }}).io;
+  await sendBot('https://meet.google.com/abc-defg-hij', io);
+  assert.deepEqual(body.output_media, output);
+  assert.equal(body.recording_config, null);
+  assert.equal(cameraOutputConfig({}), null);
+});
 
 for (const withChat of [false, true]) test(`audio opt-in uses one UI-owned bot with explicit agenda${withChat ? ' and chat webhook' : ''}`, async () => {
   const box = fixture();
