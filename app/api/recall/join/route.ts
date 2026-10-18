@@ -1,11 +1,10 @@
 import { RecallCliError, localRecallIo, sendBot } from "@/scripts/recall.mjs";
 import { monitorStore } from "@/lib/monitor/store";
-import { authorizedControl } from "@/lib/recall/controller";
+import { controlAccessError } from "@/lib/recall/controller";
 
 export async function POST(request: Request) {
-  if (!authorizedControl(request, process.env.RECALL_CONTROL_TOKEN)) {
-    return Response.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = controlAccessError(request, process.env.RECALL_CONTROL_TOKEN);
+  if (denied) return denied;
   let meetingUrl = "";
   let agenda = "";
   try {

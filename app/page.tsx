@@ -1,5 +1,12 @@
+import { Suspense } from "react";
+import { connection } from "next/server";
 import { JoinForm } from "./join-form";
 
+async function ConfiguredJoinForm() {
+  await connection();
+  return <JoinForm serverManagedControl={process.env.BROWSER_CONTROL_ENABLED === "true"} />;
+}
+
 export default function Home() {
-  return <JoinForm />;
+  return <Suspense fallback={<p>参加画面を読み込んでいます…</p>}><ConfiguredJoinForm /></Suspense>;
 }

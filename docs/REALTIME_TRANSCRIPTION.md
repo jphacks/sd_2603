@@ -63,3 +63,12 @@ Official references: [Recall mixed audio](https://docs.recall.ai/docs/how-to-get
 
 
 モニターの入力欄は、Google Meetの会議URL、会議コード（`abc-defg-hij`）、参加後のBot IDを受け付けます。参加画面で登録した会議URL、またはCLIの `.recall/current.json` のURLとBot IDの対応を使い、対象会議の判定を取得します。会議URLに付いたクエリは照合時に除きます。対応する参加情報がまだない場合は待機し、別の会議のスコアは表示しません。URLの入力自体ではBotを入室させません。
+
+
+## ブラウザの入退室認証
+
+既定では操作トークンの入力が必要です。`BROWSER_CONTROL_ENABLED=true` を明示した環境では参加・退出をServer Actionsで実行し、サーバー側の `RECALL_CONTROL_TOKEN` を内部APIへ渡します。ブラウザにはトークンを返しません。既存のREST APIと音声ワーカーのBearer認証は維持します。
+
+この設定を有効にすると、参加画面へアクセスできる人にBotの入退室操作を許可する運用になります。必要ならVercel Deployment Protectionなどで画面へのアクセスを制限してください。既定値は無効で、環境変数の設定変更後には再デプロイが必要です。
+
+stagingでは利用者の承認に基づき、CIデプロイで `BROWSER_CONTROL_ENABLED=true` を設定します。mainとfeatureは従来の操作トークン入力方式のままです。

@@ -9,7 +9,7 @@ const deviceToken = randomBytes(32).toString('hex');
 const server = spawn(process.execPath, [
   'node_modules/next/dist/bin/next', 'start', '--hostname', '127.0.0.1', '--port', '3100',
 ], {
-  env: { ...process.env, AI_PROVIDER: 'mock', ALLOW_PAID_AI: 'false', PORT: '3100', RECALL_CONTROL_TOKEN: controlToken, DEVICE_TOKEN: deviceToken, ENABLE_REALTIME_TRANSCRIPTION: 'false' },
+  env: { ...process.env, AI_PROVIDER: 'mock', ALLOW_PAID_AI: 'false', PORT: '3100', RECALL_CONTROL_TOKEN: controlToken, DEVICE_TOKEN: deviceToken, ENABLE_REALTIME_TRANSCRIPTION: 'false', BROWSER_CONTROL_ENABLED: 'false' },
   stdio: ['ignore', 'pipe', 'pipe'],
 });
 let output = '';
@@ -57,6 +57,17 @@ try {
       expected === 'INTERVENE' ? 'string' : null);
   }
   assert.equal((await request('/api/test-ai')).status, 403);
+  for (const path of ['/api/recall/join', '/api/recall/leave']) {
+    const missing = await request(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+    assert.equal(missing.status, 401);
+    assert.equal((await missing.json()).code, 'CONTROL_TOKEN_REQUIRED');
+    const invalid = await request(path, { method: 'POST', headers: { Authorization: 'Bearer wrong', 'Content-Type': 'application/json' }, body: '{}' });
+    assert.equal(invalid.status, 401);
+    assert.equal((await invalid.json()).code, 'CONTROL_TOKEN_INVALID');
+  }
+  const validControl = await request('/api/recall/join', { method: 'POST', headers: { Authorization: `Bearer ${controlToken}`, 'Content-Type': 'application/json' }, body: '{}' });
+  assert.equal(validControl.status, 400); // Passed auth; no meeting URL means no bot/API call.
+
   const initialMonitor = await (await request('/api/monitor')).json();
   assert.equal(initialMonitor.sessionId, 'judge');
   const missingMeeting = await (await request('/api/monitor?meeting=https%3A%2F%2Fmeet.google.com%2Fabc-defg-hij')).json();
