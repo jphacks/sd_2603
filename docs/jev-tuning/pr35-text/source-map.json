@@ -1,0 +1,1354 @@
+[
+  {
+    "id": "blind-ce077de10e75",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-approval@33",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 0,
+    "inputHash": "03009af55d135ed1742b7d0b4df8b8ce3981d8203f8a4b16f5a5172a8b429ba7"
+  },
+  {
+    "id": "blind-33a36db5e8d2",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-approval@67",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 1,
+    "inputHash": "875ca801e46bcdeefc99ecda6dabd6896356f77f8e42e838dc4c928f3c53cb9b"
+  },
+  {
+    "id": "blind-fd460facfecd",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-approval",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 2,
+    "inputHash": "b1d6a4b0129a315f0acf7b219210c891093701ea1cd9ef0017ae75309f79a05d"
+  },
+  {
+    "id": "blind-cf542346f2d8",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-deploy@23",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 3,
+    "inputHash": "970be1e77a27a127f6675f9a4cefea9d2de0426fdc1c9092c7f82913a5773d33"
+  },
+  {
+    "id": "blind-390fc7de8984",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-deploy@62",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 4,
+    "inputHash": "c298862729707773ce0299e9d340934fe1d26a78700e0fc1289d9958296be2c1"
+  },
+  {
+    "id": "blind-8277b536b2a6",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-deploy",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 5,
+    "inputHash": "58a6045ed54adbc0e313b010f7cb658637cc79701d23ab0cda4827ba72dddaef"
+  },
+  {
+    "id": "blind-bbf2d47b5728",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-onboarding",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 6,
+    "inputHash": "86f2b694d98de975e5c2e7c8ee00ae533e83909acd957d7277c588253c7e9890"
+  },
+  {
+    "id": "blind-d67510c4ca93",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-incident@25",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 7,
+    "inputHash": "7a40fac1044571bfaefc46903c981115b05ad52eccb0a16eb5eb567655d60448"
+  },
+  {
+    "id": "blind-7922c4538722",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-incident@58",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 8,
+    "inputHash": "033cf88214f93dbaea56770f5f2666d2acf7b65b19950ec5f740316b360c0d26"
+  },
+  {
+    "id": "blind-fd974f026bfa",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-incident",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 9,
+    "inputHash": "1efce1892e6f3bccbf070092500fe74b08742a2484d5a3dfebe57c4bfb66d247"
+  },
+  {
+    "id": "blind-b29228dface4",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-order",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 10,
+    "inputHash": "d2565c06577fded26b84b88f41dddcfd65979931ed91418523b60387a24d39b4"
+  },
+  {
+    "id": "blind-4be692686d53",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-refund",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 11,
+    "inputHash": "0229598006859803500057e32a5ec3db61d2d6c03850bcdfc6065a573c39e4ef"
+  },
+  {
+    "id": "blind-b9b86a324112",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-hiring",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 12,
+    "inputHash": "9789d505683108c7a0cf3693d078222e8d2e1dcf7069359451c428a5a03991ad"
+  },
+  {
+    "id": "blind-0f39853d46cc",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-hotfix",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 13,
+    "inputHash": "41a490f1eba27f4bbe2f9fec6b596108e6638cce87a7d6e622539e456b0c1c70"
+  },
+  {
+    "id": "blind-5a07e056a59a",
+    "sourceDataset": "canvas",
+    "sourceId": "flow-escalation",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 14,
+    "inputHash": "59cb39c4efe1303d3fecb2b66045971b213436677edea1b0c33e74f2f10a7237"
+  },
+  {
+    "id": "blind-6969cf1381ac",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-vendor@25",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 15,
+    "inputHash": "b69cd441a05a8c83ac711f33444399d0e7617b1dd6f9b01094a74f8580aa7424"
+  },
+  {
+    "id": "blind-1d450cc03e1b",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-vendor@67",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 16,
+    "inputHash": "8825f6a0070ae0e5f9497317a9f32372e90c547a55b7e0239ecb85449b629a45"
+  },
+  {
+    "id": "blind-20d58e8c2f21",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-vendor",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 17,
+    "inputHash": "78664ed3bb7e99e0a4edf213282f62ce78851fc47bb8a40812210071d12e616a"
+  },
+  {
+    "id": "blind-d2bf9d313154",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-plan",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 18,
+    "inputHash": "4ead76774eab994b91a877b551916bcd054c9b5614f88ba6c2c869c0626a2a89"
+  },
+  {
+    "id": "blind-c0a957c882b4",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-ab@17",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 19,
+    "inputHash": "cbc38fe7f1ef853ff57a1e104dc368ddebeea1366d933cdf17c7db8677d6f480"
+  },
+  {
+    "id": "blind-d355315132b4",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-ab@50",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 20,
+    "inputHash": "11ed4321eb9ef84a407e53a9d593b74ec3716685b2f55c7861fe864c90da8bb8"
+  },
+  {
+    "id": "blind-4b7ed1cb840c",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-ab",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 21,
+    "inputHash": "5700e6d61f5e660aa57216e8ee552c2659221d3fc2f89401d6a997d7ccd12a3f"
+  },
+  {
+    "id": "blind-74f8e121d7a4",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-schedule",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 22,
+    "inputHash": "886eaecd0e83b290583c09554a20089b9837ac72e528cf31e7b6cd1cb597db30"
+  },
+  {
+    "id": "blind-341eb1163463",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-venue@27",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 23,
+    "inputHash": "ce5878757572ab17e96f9fd1f9d3578571e9a98839683f01cd4f005b8088de0b"
+  },
+  {
+    "id": "blind-d301be62a467",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-venue@64",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 24,
+    "inputHash": "eb5f0b4b101c5be1fab4fdc1aaa07183ae16ec1821ea34e68bea08b325c5bd2f"
+  },
+  {
+    "id": "blind-fe31d09f97ad",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-venue",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 25,
+    "inputHash": "95c48e0336e1de36b3eebb1496ceeb95c874e79cf38863eb5ba5592652cc81d8"
+  },
+  {
+    "id": "blind-9489e1934380",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-laptop",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 26,
+    "inputHash": "5863426d04f14aed0dedfcc356d060ce8b5664bc2e2059ebd158290ba6b01995"
+  },
+  {
+    "id": "blind-a78406778474",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-agency",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 27,
+    "inputHash": "856964811eeb91c320092dd62e2e8228152bca65485276cbc12577e4cf619055"
+  },
+  {
+    "id": "blind-6f9f3641eddd",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-cloud",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 28,
+    "inputHash": "3f231c028607b92ca6515ca87d21c856fd86fd57c354b19e8ae1e2b39ad46a7a"
+  },
+  {
+    "id": "blind-09436dbfff3d",
+    "sourceDataset": "canvas",
+    "sourceId": "tbl-ads",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 29,
+    "inputHash": "11a1bf3f4e4e5d0fd88a9863d346220092a2a8933bbe372c47c9740a329026ed"
+  },
+  {
+    "id": "blind-e8d2e1478d94",
+    "sourceDataset": "canvas",
+    "sourceId": "wait-steps-incomplete",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 30,
+    "inputHash": "24f1ca22af908f381e2ea3b865729df0d84df3e04d467ed1f1e9516ad06e6d8e"
+  },
+  {
+    "id": "blind-ebb6307601f1",
+    "sourceDataset": "canvas",
+    "sourceId": "wait-options-listing",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 31,
+    "inputHash": "3cd740affe380f04b3dc35178f370ea2d51e115aec12a00225615491cb6044b4"
+  },
+  {
+    "id": "blind-9f3b0dc7cc2c",
+    "sourceDataset": "canvas",
+    "sourceId": "wait-flow-unknown-step",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 32,
+    "inputHash": "8a9c749df5ea1d9348ac41a6676a7b7787b46f808ca81f6b727081a01e9181e6"
+  },
+  {
+    "id": "blind-3f25073b9a39",
+    "sourceDataset": "canvas",
+    "sourceId": "wait-compare-two-of-three",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 33,
+    "inputHash": "145c7f99ea26958dfc64b8cb1bb14cf7b5506b57b03b0358d1eef3af78525120"
+  },
+  {
+    "id": "blind-74c4729a1854",
+    "sourceDataset": "canvas",
+    "sourceId": "wait-criteria-not-yet",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 34,
+    "inputHash": "437dd8c35829a5319ad4931249641ecafc71d1558c2c96922a1d79a3641f3f79"
+  },
+  {
+    "id": "blind-7e5c895fb5e8",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-chitchat",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 35,
+    "inputHash": "1e4879e355696e021e2f350cc959b731b292c2f17bd60248edb51bfc99bd34c0"
+  },
+  {
+    "id": "blind-2a216eb8c4ef",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-status",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 36,
+    "inputHash": "e6adb56da77fdc33250ea7991a87cad0041861699d3e8aa9cc734839a4cb6fda"
+  },
+  {
+    "id": "blind-9a49b15ac486",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-yesno",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 37,
+    "inputHash": "e49658daef3abab06f51ef61925255813c10be7472da7868358d016ced5674b2"
+  },
+  {
+    "id": "blind-cf5e7a331c28",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-numbers",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 38,
+    "inputHash": "1e1c303cd1e17f3a62452720c0229e589725b1deaecf20c344922b985a9099fe"
+  },
+  {
+    "id": "blind-40a802f855a6",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-shared-context",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 39,
+    "inputHash": "89e7176751adb9295eaa50c7ae288254ac49187698b1a5b2c41a58bb8b4f08c7"
+  },
+  {
+    "id": "blind-018be073ef8a",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-brainstorm",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 40,
+    "inputHash": "ee0e0adaca6d4890f624e2f368cbf639ade81eecbcc0260f860cd22edfe63ede"
+  },
+  {
+    "id": "blind-535cb11e9484",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-heated",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 41,
+    "inputHash": "d587d2ec55d5edf805b0358d80c6bc2e127435a519da88d649249e7fc339a047"
+  },
+  {
+    "id": "blind-db7fc7a79ecb",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-qa",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 42,
+    "inputHash": "70b47451ce2b9cc4fbb422fc8feddda6f63bc31086470ab62c3ff06f23c8a411"
+  },
+  {
+    "id": "blind-54defe8d671a",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-todos",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 43,
+    "inputHash": "d93dd0dbfb5244993b4c48565c9fd97f19b4375a24cf091a8fc60ef8e1777aa3"
+  },
+  {
+    "id": "blind-20a8878514c5",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-decided",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 44,
+    "inputHash": "ae08f823cb609676cedd101bddd730bf22cd259571b2827fa5ad6ecca8505aa4"
+  },
+  {
+    "id": "blind-0d4b63d3ca75",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-boss-monologue",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 45,
+    "inputHash": "f375212a6f2839ef2ec8d1deb48957262d2dc76fa1dd0ce6320fb2ebc394e8ef"
+  },
+  {
+    "id": "blind-fe97170aaf06",
+    "sourceDataset": "canvas",
+    "sourceId": "sil-schedule-tidbit",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 46,
+    "inputHash": "ece10b1e79852b210cb9250aa7646809cad79a7eb1819de99638af673a8de4a7"
+  },
+  {
+    "id": "blind-04e3ce624cd4",
+    "sourceDataset": "canvas",
+    "sourceId": "dedup-flow-same",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 47,
+    "inputHash": "e9922977838e9d2cea46f5d19bc373347b47e369ec2c7edb8add0c00157f9d74"
+  },
+  {
+    "id": "blind-f31be311b0fd",
+    "sourceDataset": "canvas",
+    "sourceId": "dedup-table-same",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 48,
+    "inputHash": "aae7a4ea2bc22b5a6ceb72211138844aeebfc1a9e92f6aff8dbd23510ad13bca"
+  },
+  {
+    "id": "blind-01f1a8b77853",
+    "sourceDataset": "canvas",
+    "sourceId": "dedup-flow-changed",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 49,
+    "inputHash": "07c8ef525902bedc0f4ddae60ee959984142cdc08d5d5bc19e12be6b630009a8"
+  },
+  {
+    "id": "blind-67d40c5f66ed",
+    "sourceDataset": "canvas",
+    "sourceId": "dedup-minor-edit",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 50,
+    "inputHash": "f9b3d03f1e6974e1d906837f5ffa27fd960eaace06218d1e03c9b85f495256df"
+  },
+  {
+    "id": "blind-b5f749b3d787",
+    "sourceDataset": "canvas",
+    "sourceId": "amb-flow-or-table",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 51,
+    "inputHash": "d191e4af31387b788e1b90a9e00ea09ac58f560737bbbab1c9da9fa2964f1701"
+  },
+  {
+    "id": "blind-a369b7dbf06f",
+    "sourceDataset": "canvas",
+    "sourceId": "amb-two-options",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 52,
+    "inputHash": "9393145ef490dc31768f73b0402ae10e98e25ac2a8682c6498dfc5f2d10f3a67"
+  },
+  {
+    "id": "blind-89aa8b26c956",
+    "sourceDataset": "canvas",
+    "sourceId": "amb-recap",
+    "sourcePath": "evals/fixtures/meeting/datasets/canvas.json",
+    "sourceIndex": 53,
+    "inputHash": "97e0a6e57b23ead7ef994d67c2909dc673bdf4ad1b86fc687da9350153889dc9"
+  },
+  {
+    "id": "blind-78f45450a5b0",
+    "sourceDataset": "derail",
+    "sourceId": "ot-share-link",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 0,
+    "inputHash": "c5ad061458511e5ef92f9d518d3ec1b73441ed9c684c7badf3259f56ce686ded"
+  },
+  {
+    "id": "blind-dd3129f01d6a",
+    "sourceDataset": "derail",
+    "sourceId": "ot-sprint",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 1,
+    "inputHash": "333c21cb3cf83ae0d72150f086fab47de04ae3e1cd8d072e505950645c737f8b"
+  },
+  {
+    "id": "blind-4f03900587da",
+    "sourceDataset": "derail",
+    "sourceId": "ot-hackathon",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 2,
+    "inputHash": "c9ea1b048b4f78407de63b336c82320a3995785e3379896e1d6caf35f867c777"
+  },
+  {
+    "id": "blind-c04873a114cb",
+    "sourceDataset": "derail",
+    "sourceId": "ot-hiring",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 3,
+    "inputHash": "f7a184c43ac4d99697c9c19b5ca922d5b28e4019657cb0adfd9b76b406cb2284"
+  },
+  {
+    "id": "blind-14f7943415ee",
+    "sourceDataset": "derail",
+    "sourceId": "ot-budget",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 4,
+    "inputHash": "db9a1bf8446bd0af19f2f307c4baa455d87fbb366dc4d8da3c9d0cc9ad3c5b15"
+  },
+  {
+    "id": "blind-1dd9c91470cf",
+    "sourceDataset": "derail",
+    "sourceId": "ot-incident",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 5,
+    "inputHash": "1111737b92b4068ebbb1a5e96ea1d9d3428991c124b7205685c9c288fa820e9d"
+  },
+  {
+    "id": "blind-9037262b7dd7",
+    "sourceDataset": "derail",
+    "sourceId": "ot-design",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 6,
+    "inputHash": "dc7a24bbeaeef790e8bf469bd29e1e30abf281465d2a75ee139fb3d5531983dc"
+  },
+  {
+    "id": "blind-f400e84d4edb",
+    "sourceDataset": "derail",
+    "sourceId": "ot-onboarding",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 7,
+    "inputHash": "aa0c790fcb0576811dacc8028270079c83c68c3348f6f64f5d86ae9a03682c1f"
+  },
+  {
+    "id": "blind-8a1ace2dac3b",
+    "sourceDataset": "derail",
+    "sourceId": "pt-share-expiry",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 8,
+    "inputHash": "84fa6c1eafe1ae9ef270516750df48f56b321530974298eacdb0c270f0bb0fe3"
+  },
+  {
+    "id": "blind-36634dbfab6e",
+    "sourceDataset": "derail",
+    "sourceId": "pt-budget-actuals",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 9,
+    "inputHash": "6a445af2d040a33b1f85fb4d0aadeadfafd6a21a2a203fc0afa9b1789180b047"
+  },
+  {
+    "id": "blind-8015631355e8",
+    "sourceDataset": "derail",
+    "sourceId": "pt-hackathon-wifi",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 10,
+    "inputHash": "6b82734de4f0255e234c8a9ad6536633c5cb258c90db49281495425ddaddbb1c"
+  },
+  {
+    "id": "blind-856c75dcd6fe",
+    "sourceDataset": "derail",
+    "sourceId": "pt-hiring-others",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 11,
+    "inputHash": "4cef44b689010b12ed6a57da5b96b5dcb74f7cbcf4e95280ed4c96a75cd703fb"
+  },
+  {
+    "id": "blind-daab412656b0",
+    "sourceDataset": "derail",
+    "sourceId": "pt-incident-monitor",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 12,
+    "inputHash": "767ae024787c44fcf03c8955fb23a2d9021e9580bf206c53a1ad93472185014c"
+  },
+  {
+    "id": "blind-ac565261728f",
+    "sourceDataset": "derail",
+    "sourceId": "pt-sprint-velocity",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 13,
+    "inputHash": "4b0b5c1c45865f72f2c36a94ebe7bf102ce93388c5bd45dafb6c960d3b56c41b"
+  },
+  {
+    "id": "blind-40380b8abe79",
+    "sourceDataset": "derail",
+    "sourceId": "dr-trip-late",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 14,
+    "inputHash": "5ba295a953a4c82bfd967ffaf69ac7a5cef4cf50527b39f82f2a38f4be6ac64d"
+  },
+  {
+    "id": "blind-0fd27946e9c4",
+    "sourceDataset": "derail",
+    "sourceId": "dr-budget-hr-mid",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 15,
+    "inputHash": "e327a90fd612c254b3bd33d93201dedef998f3885dc6ec5b2694141fdda45c3c"
+  },
+  {
+    "id": "blind-1f2ea6e31efb",
+    "sourceDataset": "derail",
+    "sourceId": "dr-hiring-drama-early",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 16,
+    "inputHash": "0159d82b42fa31d04058f5b09aae76ed5a72d57bb1510e51aee4445cb878705f"
+  },
+  {
+    "id": "blind-a7bf0fbdc86b",
+    "sourceDataset": "derail",
+    "sourceId": "dr-incident-lunch",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 17,
+    "inputHash": "edccc547dd2d880b3683a4389d3d96c421fefd0af55fcac0be12e3254333e4ed"
+  },
+  {
+    "id": "blind-b4b70eb9df64",
+    "sourceDataset": "derail",
+    "sourceId": "dr-hackathon-otherproj",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 18,
+    "inputHash": "c8042293b92b1e28cb4e6354e36442f7e6029f8a3fb3f81b90d3181f8aecd666"
+  },
+  {
+    "id": "blind-a6a703a80538",
+    "sourceDataset": "derail",
+    "sourceId": "dr-design-baseball",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 19,
+    "inputHash": "6924536499048e384f0012d9a75913714496213f601eba2472a09aaf5b4e0dd8"
+  },
+  {
+    "id": "blind-bccaf37d8a58",
+    "sourceDataset": "derail",
+    "sourceId": "dr-sprint-moving",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 20,
+    "inputHash": "209cd310bd4706e6e0b9487d77645ee119a4f480dd1f9835143e6ef98015aec3"
+  },
+  {
+    "id": "blind-dd4500942716",
+    "sourceDataset": "derail",
+    "sourceId": "dr-onboarding-otherproj",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 21,
+    "inputHash": "641eff28a3078c3e99e0d8b2b7f91a2df1c673f2a1733bad9f5e21c63499e904"
+  },
+  {
+    "id": "blind-4dcae47eea2d",
+    "sourceDataset": "derail",
+    "sourceId": "st-pricing",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 22,
+    "inputHash": "de45d10a265b5b3ad46bad30e7bb60124250bc557f323fc1e44c6bd2c79c7f2c"
+  },
+  {
+    "id": "blind-2f167320ad9e",
+    "sourceDataset": "derail",
+    "sourceId": "st-venue",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 23,
+    "inputHash": "964f5345ec86894db7f3e38a294d7bd16b05ec882acc982959f437792aa5d210"
+  },
+  {
+    "id": "blind-86a30cdf441a",
+    "sourceDataset": "derail",
+    "sourceId": "st-interviewers",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 24,
+    "inputHash": "8ec33de636755c3796c6e66b66122a541cc0af5eadc82ac94ceccf6d20d3421e"
+  },
+  {
+    "id": "blind-c75c5d249849",
+    "sourceDataset": "derail",
+    "sourceId": "st-release-date",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 25,
+    "inputHash": "86738d0c3ea18d71599816c9017e2eaf5fc11df5eac3105b74d33f365d9a11cd"
+  },
+  {
+    "id": "blind-5dd3b9cc2f95",
+    "sourceDataset": "derail",
+    "sourceId": "st-ads-vs-event",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 26,
+    "inputHash": "2bf01f00a31cfdbf68499911b372ac4e488c59cd2debac51394d40ea48446626"
+  },
+  {
+    "id": "blind-b81119063236",
+    "sourceDataset": "derail",
+    "sourceId": "st-button-color",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 27,
+    "inputHash": "4a03e8a886efa9732f2e719c92ec19d83911d018aab17055312b5c9793e9eeaf"
+  },
+  {
+    "id": "blind-94903947b6fe",
+    "sourceDataset": "derail",
+    "sourceId": "st-oncall-owner",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 28,
+    "inputHash": "badf32bd4a1da76c7989584ff96d0d4b5a050d78d5473415acb95dcbb3a6193f"
+  },
+  {
+    "id": "blind-12283bfff86e",
+    "sourceDataset": "derail",
+    "sourceId": "st-kickoff-date",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 29,
+    "inputHash": "6ceec89c37a5364fd3edd7f389150b12258f46e5163f23c3bc11e9251565554e"
+  },
+  {
+    "id": "blind-b27c414ecac9",
+    "sourceDataset": "derail",
+    "sourceId": "am-competitor-gossip",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 30,
+    "inputHash": "722c9f93695c88617863b4e6b10254e6c5e123e01fabcc635ea9d8a0216e1904"
+  },
+  {
+    "id": "blind-17086a0fd4a4",
+    "sourceDataset": "derail",
+    "sourceId": "am-icebreaker",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 31,
+    "inputHash": "7c22aff0ff185291be2f0a2499289ccb26e91b7ba82ad453a1c6cbb46512170e"
+  },
+  {
+    "id": "blind-ba77c91bcc97",
+    "sourceDataset": "derail",
+    "sourceId": "am-deep-dive",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 32,
+    "inputHash": "1804c9aae048389052c545e1f0a7a49697551a37f1e368b5c22f2bd70864476a"
+  },
+  {
+    "id": "blind-c0f9186be450",
+    "sourceDataset": "derail",
+    "sourceId": "am-recap",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 33,
+    "inputHash": "1a42e169b6efce286f467e0e232cb5325f3b99f7a87edfb1f2c99f870cb1e742"
+  },
+  {
+    "id": "blind-6540a744a6f2",
+    "sourceDataset": "derail",
+    "sourceId": "am-dependency",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 34,
+    "inputHash": "700890d6793691e840382855ca16035ab77494e617f239c3fb0f09797e5f7484"
+  },
+  {
+    "id": "blind-b9864e7c62a1",
+    "sourceDataset": "derail",
+    "sourceId": "am-low-energy",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail.json",
+    "sourceIndex": 35,
+    "inputHash": "a4aeb312d7722fe9fb4aeae3293201292c29ce612dff50ba8f3b860d8ca8d31c"
+  },
+  {
+    "id": "blind-ac8e6d3f876a",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g1-office-move@4",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 0,
+    "inputHash": "47aeee6d1672806fe0fa3e85a2e65daa0796591da6bed484637bc36fc127a969"
+  },
+  {
+    "id": "blind-e4512670d73c",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g1-office-move@7",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 1,
+    "inputHash": "3a8bb556e88fc02900d8683a94a79d48f1eaf06ec4ec8078d65d2ce166d2bddb"
+  },
+  {
+    "id": "blind-8bfa1671b76a",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g1-office-move@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 2,
+    "inputHash": "9f820c45e18b73d65e0065847e2c6d5f06e835338f38a847e2852fb2ff0fe5c3"
+  },
+  {
+    "id": "blind-c8fe17d13773",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g2-referral-bonus@4",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 3,
+    "inputHash": "506bd078421a85657280abf76a37b73b4c3c7ea966aff31587ee170ce9af44ae"
+  },
+  {
+    "id": "blind-21f2911b5fb6",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g2-referral-bonus@7",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 4,
+    "inputHash": "36bd73aaaa67785b3ed05073fb898bee67345269bd3c430ae7d119b7ad88d9a1"
+  },
+  {
+    "id": "blind-54abd8d7853d",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g2-referral-bonus@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 5,
+    "inputHash": "cbfa34afbeb24c6664d4085538d7787c3fcde4386dfd189f0597fe343caf2892"
+  },
+  {
+    "id": "blind-b4cbaecc6d2d",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g3-index-rebuild@4",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 6,
+    "inputHash": "23136b1b690082a9869c06589786fa0df30d0f1d06b299cf193a57578e51fc31"
+  },
+  {
+    "id": "blind-0c7f7d228301",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g3-index-rebuild@7",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 7,
+    "inputHash": "491d17e3ea2d27843a99d1eabd554c89cf11aeb6ca531de3fc7a69f8812f4eca"
+  },
+  {
+    "id": "blind-f29ac32a69e8",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g3-index-rebuild@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 8,
+    "inputHash": "5ea956ce4051687ea0cfd47624cb214d4ae7f420e9aab97898b58ccd44c24bec"
+  },
+  {
+    "id": "blind-9a056efc95d1",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g4-encoding-detour@4",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 9,
+    "inputHash": "d0ad95dbe6255c22b2f62fb3044591b6a347785ddea704b2469bd58dc68e39be"
+  },
+  {
+    "id": "blind-97e6d910a4c1",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g4-encoding-detour@7",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 10,
+    "inputHash": "dfa500a4fa88aa91041a1dba602b5fac07acff54ff81f895a14ccb27f0330dc9"
+  },
+  {
+    "id": "blind-aaeb838f3397",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g4-encoding-detour@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 11,
+    "inputHash": "51ad7681387d6bbffe7b0b2c38f8a1e09f38c3514aba39342c0222413d6a64f0"
+  },
+  {
+    "id": "blind-13685c1a7022",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g5-catering-to-lunch@4",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 12,
+    "inputHash": "e7395e0eafc3d754c7bd029c4497f89e4436baa4e4f6f058d309e8ed3cd9f5d2"
+  },
+  {
+    "id": "blind-e5bb11302972",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g5-catering-to-lunch@7",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 13,
+    "inputHash": "d5108dea24bdda72f50f6aadfff740080dee0e32f5f74ed3d0bf4f34217a6bb8"
+  },
+  {
+    "id": "blind-910796f5ef8b",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g5-catering-to-lunch@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 14,
+    "inputHash": "926f311f3a82c6b9d6bf2194364018882a3ec9282af24e0b0d31d37919c07083"
+  },
+  {
+    "id": "blind-df1819095dbe",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g6-release-scope@4",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 15,
+    "inputHash": "eef0fa003e3f80d25abf7eeb4a3f31fedec6f732fe2f82ad345fa90eb44b9cfb"
+  },
+  {
+    "id": "blind-6ac83c03d10d",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g6-release-scope@7",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 16,
+    "inputHash": "d2e7be2bc122278f126084a7c7f74f3145cc5825bf22e40be0d312edcfb27c5a"
+  },
+  {
+    "id": "blind-febc633d1252",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g6-release-scope@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 17,
+    "inputHash": "54c7c0b697a7cddce653021086c3fecb19830ebe2669b45faf3f069cd68a9cc3"
+  },
+  {
+    "id": "blind-4fca17297765",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g7-template-loop@4",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 18,
+    "inputHash": "85a6a4d44de2e1f9371a5dd459bf96890725bab606a0b3b60dcf9bff51faf39c"
+  },
+  {
+    "id": "blind-7695388877ce",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g7-template-loop@7",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 19,
+    "inputHash": "8362b6da8786e1b8e3b4eda4541ef2552378813b8e4262ecfc2d57eee2419169"
+  },
+  {
+    "id": "blind-d351ed8c6f19",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g7-template-loop@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 20,
+    "inputHash": "64ad23305e7bf1a1a62475d1b0b12ebc40e0e8ce46f178e7602fe56f0fa72a6c"
+  },
+  {
+    "id": "blind-f69325e65c35",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g8-self-correct@4",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 21,
+    "inputHash": "a0c01e471244f019e27345df9b7c4364de60712f08c825a8310776d52eb06d8c"
+  },
+  {
+    "id": "blind-def9c58a07e1",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g8-self-correct@7",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 22,
+    "inputHash": "f2aedc7624ef5f97d1651d285b63d15a3950684a9bd1cb67ae00a8ce0e785c82"
+  },
+  {
+    "id": "blind-7564c55d983a",
+    "sourceDataset": "derail-hard",
+    "sourceId": "g8-self-correct@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 23,
+    "inputHash": "c5e90409d1f74feab03d283c1326f24673892a52aedd085016ef0ab02e510610"
+  },
+  {
+    "id": "blind-0f3f36183ff9",
+    "sourceDataset": "derail-hard",
+    "sourceId": "ot-decision-buried",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 24,
+    "inputHash": "571c1aa94e770b061d5c030aba6ecc1a448118891d6c81fc838a378ad2b2c48f"
+  },
+  {
+    "id": "blind-3287e10d6299",
+    "sourceDataset": "derail-hard",
+    "sourceId": "ot-steer-back-done",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 25,
+    "inputHash": "5ef9e02219fd2868d26c79c0ffaf68995c093e76757fef0d83d573073c733aeb"
+  },
+  {
+    "id": "blind-464a9337461a",
+    "sourceDataset": "derail-hard",
+    "sourceId": "ot-jargon",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 26,
+    "inputHash": "4d4ef96efa6ae975a1e66e6aa2327536686aea9846f4cdcf895e396782442d11"
+  },
+  {
+    "id": "blind-d8e99c05df1e",
+    "sourceDataset": "derail-hard",
+    "sourceId": "ot-heated-substantive",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 27,
+    "inputHash": "d932b666e59747750d5a5c3236a488fe9db1a2dfb446601b0bb03083b1e3f7e8"
+  },
+  {
+    "id": "blind-62cf687728f7",
+    "sourceDataset": "derail-hard",
+    "sourceId": "pt-deep-dive-long",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 28,
+    "inputHash": "281e92b4fc388528d6acbbb3ab3b80b7f15011e4ebc04b1ab861226b75d124da"
+  },
+  {
+    "id": "blind-a789e4f2307d",
+    "sourceDataset": "derail-hard",
+    "sourceId": "pt-license-check",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 29,
+    "inputHash": "a2627b3f9591124a56015e6e548a1d86e86bf9eca648d4bc7f6a8fc5dea7f9c4"
+  },
+  {
+    "id": "blind-00d50d91b9ad",
+    "sourceDataset": "derail-hard",
+    "sourceId": "pt-affects-agenda",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 30,
+    "inputHash": "88ea5a9e5ec221a47a20bbfe3c91f497b05db8ab3b2647afc39a5aa2e7eb7540"
+  },
+  {
+    "id": "blind-f813ef33d771",
+    "sourceDataset": "derail-hard",
+    "sourceId": "pt-past-lesson",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 31,
+    "inputHash": "f41da36d1c26bca905c0b4f9927593f827f0266faba149a4cf52fb6017ce1a5c"
+  },
+  {
+    "id": "blind-ed56155e9787",
+    "sourceDataset": "derail-hard",
+    "sourceId": "pt-customer-complaint",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 32,
+    "inputHash": "a3195482cd0c3b29a9ba5b3d459c24511cbb12fdb9286894ffafe182763699cb"
+  },
+  {
+    "id": "blind-eb2d94138914",
+    "sourceDataset": "derail-hard",
+    "sourceId": "dr-slide-commute",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 33,
+    "inputHash": "6c0059313794d675aa0a88dbbdb88e7480eb04928e5109bc5cbe8b5298fec735"
+  },
+  {
+    "id": "blind-2d3c6372b2dd",
+    "sourceDataset": "derail-hard",
+    "sourceId": "dr-org-gossip",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 34,
+    "inputHash": "c47dcd08b240aeb310a347ca1880ee58f4eceebc00206286a0d5a2921f367a32"
+  },
+  {
+    "id": "blind-be2972b9e0ae",
+    "sourceDataset": "derail-hard",
+    "sourceId": "dr-ai-at-home",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 35,
+    "inputHash": "9bd107daac519823c90e69c43ef3893a8bdfc6d82c71dd292c1b8f302cbb66e5"
+  },
+  {
+    "id": "blind-5549f8638973",
+    "sourceDataset": "derail-hard",
+    "sourceId": "st-priority-rephrased",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 36,
+    "inputHash": "a34ffc23e0ddb4fb9feb35210a12dd20941dad2fbd3d1b9bdafa1b17cb95cda8"
+  },
+  {
+    "id": "blind-9ab13b6decee",
+    "sourceDataset": "derail-hard",
+    "sourceId": "st-oncall-newbie",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 37,
+    "inputHash": "29c748f474a6aeb45b98b68ce6a5cc14b4adda15f7c1dbd10d77b0b05e8b494d"
+  },
+  {
+    "id": "blind-8623c8a9dfe6",
+    "sourceDataset": "derail-hard",
+    "sourceId": "st-ad-budget",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 38,
+    "inputHash": "c163981cc217d5443efa8af3ff8f13ea709647704f882885c578b5dfa886a0d9"
+  },
+  {
+    "id": "blind-08e20f1f367c",
+    "sourceDataset": "derail-hard",
+    "sourceId": "am-scheduling-grind",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 39,
+    "inputHash": "591d75b030087b786bc605f80a4d7847559a9db423233e81072fd77104e76529"
+  },
+  {
+    "id": "blind-96d9862a74df",
+    "sourceDataset": "derail-hard",
+    "sourceId": "am-silent-thinking",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 40,
+    "inputHash": "d68c896c5b87563801e4f8c6dbe48d80e67bb407ee03bfe8e34538e42c362b34"
+  },
+  {
+    "id": "blind-3a47f458463d",
+    "sourceDataset": "derail-hard",
+    "sourceId": "am-interleaved-lunch",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 41,
+    "inputHash": "51c5f7cbd34f46579a8d79ed9337be495916074b8bd8f5b8daece5d6cd57ddfd"
+  },
+  {
+    "id": "blind-01f9c9f7d32a",
+    "sourceDataset": "derail-hard",
+    "sourceId": "am-competitor-funding",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 42,
+    "inputHash": "b74915df6d38cf943b2777cc33778d9818f9f38aa36ae26567249292248780ca"
+  },
+  {
+    "id": "blind-4c057179aee9",
+    "sourceDataset": "derail-hard",
+    "sourceId": "am-wrapup-chat",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 43,
+    "inputHash": "8cbfc3ad95195955582f3ca2f4b4b3eded9a48b964f1309c6d03c5fb105acc2d"
+  },
+  {
+    "id": "blind-a58fea25e145",
+    "sourceDataset": "derail-hard",
+    "sourceId": "am-newbie-lecture",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 44,
+    "inputHash": "84eeb74ecead0b91ead748a4fd5e1833192393d3b492991ce79a942e7735c56c"
+  },
+  {
+    "id": "blind-5001671b49a8",
+    "sourceDataset": "derail-hard",
+    "sourceId": "am-morale-in-kpi",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 45,
+    "inputHash": "522ee0b3f83aadd35fbdbb7018bc39e3e34274e55acf9a2cd73ce02b3e88963f"
+  },
+  {
+    "id": "blind-1d2ba3b5e35b",
+    "sourceDataset": "derail-hard",
+    "sourceId": "am-decision-recheck",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-hard.json",
+    "sourceIndex": 46,
+    "inputHash": "d2fd678a9945d08e17ea35a471d161b0f6657c8e5834f0fcdf056fabcbd0a487"
+  },
+  {
+    "id": "blind-72280ea5a987",
+    "sourceDataset": "derail-multi",
+    "sourceId": "a1-golf@35",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 0,
+    "inputHash": "f24777f58c8104b254d288d3426abcf8af3d3a3e686aa72f725bb2ed0337a994"
+  },
+  {
+    "id": "blind-bd2befe2b2c8",
+    "sourceDataset": "derail-multi",
+    "sourceId": "a1-golf@65",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 1,
+    "inputHash": "647872f538d2db54b098b2fe7045a949da5849b47395f827fa6e0bc1650657fb"
+  },
+  {
+    "id": "blind-8e43527657d4",
+    "sourceDataset": "derail-multi",
+    "sourceId": "a1-golf@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 2,
+    "inputHash": "090d118d5f8d08f630423f307e86bb247214b2db48f6f9ac43b881e6e0e22e76"
+  },
+  {
+    "id": "blind-26639961f27b",
+    "sourceDataset": "derail-multi",
+    "sourceId": "a2-health",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 3,
+    "inputHash": "7fda1690bf539b2446596159db234c566d6b502770a0ebfa842340b21f9ef271"
+  },
+  {
+    "id": "blind-bff4c8cad478",
+    "sourceDataset": "derail-multi",
+    "sourceId": "a3-oldwar@35",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 4,
+    "inputHash": "b87aa0579df1e480bad3f94d622ca07f34240c4e542cb9799547ec94c3188718"
+  },
+  {
+    "id": "blind-49e9f8a60ac9",
+    "sourceDataset": "derail-multi",
+    "sourceId": "a3-oldwar@65",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 5,
+    "inputHash": "018740ee627134237b240b1844180d2d7a247ab3590e801354c7d7b7e0d9f3f1"
+  },
+  {
+    "id": "blind-a6882a75068b",
+    "sourceDataset": "derail-multi",
+    "sourceId": "a3-oldwar@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 6,
+    "inputHash": "058d161b5bfeef7bff791ca1ac743844445e52095de5e25f2e578d19a9676385"
+  },
+  {
+    "id": "blind-18a3f369ab93",
+    "sourceDataset": "derail-multi",
+    "sourceId": "a4-complaint",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 7,
+    "inputHash": "1c229ac1895b9c60d187a4b6bbb322148ffbfc1057a26e87dcc1d54976f14dc7"
+  },
+  {
+    "id": "blind-802dd4effcbe",
+    "sourceDataset": "derail-multi",
+    "sourceId": "b1-trip@35",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 8,
+    "inputHash": "5c98f6f78d6a91cc38720be405214e52b3ec00425fd44fa0324abf5e316d58fd"
+  },
+  {
+    "id": "blind-7278656dbd9d",
+    "sourceDataset": "derail-multi",
+    "sourceId": "b1-trip@65",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 9,
+    "inputHash": "4ae8e5a58a4a78e3e8285d7d2e7b895078a2bc2de0b688e0dc9a3103baeb7e06"
+  },
+  {
+    "id": "blind-e5b158538284",
+    "sourceDataset": "derail-multi",
+    "sourceId": "b1-trip@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 10,
+    "inputHash": "6491849ddea55fcb3f8600793a63f480124503af12d0357380d2090c587dd7b4"
+  },
+  {
+    "id": "blind-3b65e563de7c",
+    "sourceDataset": "derail-multi",
+    "sourceId": "b2-son",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 11,
+    "inputHash": "db6bbeafd704decfef93ad9540c2de959fb1cace538a75a453e64ae5be9eecd8"
+  },
+  {
+    "id": "blind-7d9a5798ea50",
+    "sourceDataset": "derail-multi",
+    "sourceId": "c1-pricing@35",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 12,
+    "inputHash": "6504c9f2c46ad1648476397910ab00feb5dbc191630eb5412deed1f6747f7510"
+  },
+  {
+    "id": "blind-f275fa8c1aef",
+    "sourceDataset": "derail-multi",
+    "sourceId": "c1-pricing@65",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 13,
+    "inputHash": "ff55e48ba4afb94804afd54abe8caf47207912c7fab7211dbc1a69bf6e3dd503"
+  },
+  {
+    "id": "blind-46737018b270",
+    "sourceDataset": "derail-multi",
+    "sourceId": "c1-pricing@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 14,
+    "inputHash": "94ff20ff58607a262de76ef5fae99175054ddd0b5c1a8671087929d96aed3904"
+  },
+  {
+    "id": "blind-029087d09008",
+    "sourceDataset": "derail-multi",
+    "sourceId": "c2-logistics",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 15,
+    "inputHash": "78b5edc0af3a8f2af8fecbdd6203dddebe4ae63952199b9b3562dc0b50bd83c4"
+  },
+  {
+    "id": "blind-0fb0413ee3f9",
+    "sourceDataset": "derail-multi",
+    "sourceId": "d1-sync@35",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 16,
+    "inputHash": "f6e74275634a0ed50091a29d230f243a37ece2ef20d13ab3289224f5fb8982fc"
+  },
+  {
+    "id": "blind-dcde3fcf7d3f",
+    "sourceDataset": "derail-multi",
+    "sourceId": "d1-sync@65",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 17,
+    "inputHash": "72d6374c27ba3b2abfea2fdb1e3b0cca43bfdb65ed9b46760489fa734874e0b8"
+  },
+  {
+    "id": "blind-e234bdcb3c96",
+    "sourceDataset": "derail-multi",
+    "sourceId": "d1-sync@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 18,
+    "inputHash": "4ef02104683f05dfb5c0290f9a11b92c3fd5a1ba95599dda8e3989e300b38f12"
+  },
+  {
+    "id": "blind-a83f073f29e1",
+    "sourceDataset": "derail-multi",
+    "sourceId": "d2-rain",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 19,
+    "inputHash": "921b7aaf63c58238c3a93619090d6a0cd39cedac380237a6fef935518a2d6120"
+  },
+  {
+    "id": "blind-486e99aea111",
+    "sourceDataset": "derail-multi",
+    "sourceId": "e1-layout@35",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 20,
+    "inputHash": "e8624e76cd0118de2667d90967e5ebe48aca40002e3226a573015ead19a249c9"
+  },
+  {
+    "id": "blind-3beb08985f28",
+    "sourceDataset": "derail-multi",
+    "sourceId": "e1-layout@65",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 21,
+    "inputHash": "fbee1d6af36df2c2bdb255f5d2ba0de0ab0a649e2c9af87943356c9b5a0a2bd2"
+  },
+  {
+    "id": "blind-174cc2059c3d",
+    "sourceDataset": "derail-multi",
+    "sourceId": "e1-layout@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 22,
+    "inputHash": "7c151a3103df5719e696d14b9ad6a6bf4343e1da7cb43327ff308bf23eb658d9"
+  },
+  {
+    "id": "blind-38ff2da71a55",
+    "sourceDataset": "derail-multi",
+    "sourceId": "e2-booth",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 23,
+    "inputHash": "879a9c4ff4c49ea6cfe7e3b0be51a767119e69ec190929cad07e209cd8929104"
+  },
+  {
+    "id": "blind-97c736af9bd8",
+    "sourceDataset": "derail-multi",
+    "sourceId": "f1-train@35",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 24,
+    "inputHash": "3dd3798e008f6a7ae7b5c956423b8c51007c17ce8caf953106573ec08b0040b3"
+  },
+  {
+    "id": "blind-5ac0e514df05",
+    "sourceDataset": "derail-multi",
+    "sourceId": "f1-train@65",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 25,
+    "inputHash": "06b31ea2d85586e7f4222e505e511ffbc784829fd42383d92d73a4d1cf27e0c2"
+  },
+  {
+    "id": "blind-2bb690a508b6",
+    "sourceDataset": "derail-multi",
+    "sourceId": "f1-train@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 26,
+    "inputHash": "c2f8dc83743bb98496b65e9d541d94632756364cb8c2786041d0774ad2c9bd3e"
+  },
+  {
+    "id": "blind-8843e62f58bb",
+    "sourceDataset": "derail-multi",
+    "sourceId": "g1-lunch",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 27,
+    "inputHash": "c7e541abe9450281f1dc336a41f51fa4e2dadbde9b62a330d393c6bae332bc0a"
+  },
+  {
+    "id": "blind-5b3a46067292",
+    "sourceDataset": "derail-multi",
+    "sourceId": "h1-gonogo",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 28,
+    "inputHash": "68711927ba2866f19874041eef577a551a3aedf964337b93b65c66a0596ccb8a"
+  },
+  {
+    "id": "blind-5b08ef9b7b07",
+    "sourceDataset": "derail-multi",
+    "sourceId": "i1-delay@35",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 29,
+    "inputHash": "9742a7ea1c2b795b9d75ca40ac22cfd463071d0907abbd0ddba3044b6b333788"
+  },
+  {
+    "id": "blind-45740c0839a3",
+    "sourceDataset": "derail-multi",
+    "sourceId": "i1-delay@65",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 30,
+    "inputHash": "49bf814063f8cfc2204a6faeebd33fae3c8951eeff0709319e9bead1afb9bba4"
+  },
+  {
+    "id": "blind-dc9016881e66",
+    "sourceDataset": "derail-multi",
+    "sourceId": "i1-delay@full",
+    "sourcePath": "evals/fixtures/meeting/datasets/derail-multi.json",
+    "sourceIndex": 31,
+    "inputHash": "a8e390a5f297fdb4ab1b4efd6184ae7cb37d5a2ccc3d1849ec07cc629de886b5"
+  }
+]

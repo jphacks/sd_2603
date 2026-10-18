@@ -1,0 +1,14 @@
+{
+  "priorFiles": [
+    "evals/tuning/pro-cases.json",
+    "evals/tuning/pro-final-cases.json",
+    "docs/jev-tuning/synthetic-benchmark-v1/releases/core500/cases.json"
+  ],
+  "priorRowsScanned": 772,
+  "normalizedExactTranscriptReuse": [],
+  "limitations": [
+    "Exact normalized string check only; not proof of semantic/template independence.",
+    "Prior files include development and heldout data; split values are recorded if any match.",
+    "PR includes correlated cuts and repeated scenario families; dataset counts are not independent-meeting counts."
+  ]
+}

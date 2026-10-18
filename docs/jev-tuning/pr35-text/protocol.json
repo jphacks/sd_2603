@@ -1,0 +1,35 @@
+{
+  "version": "pr35-text-evaluation-v1",
+  "sourceCommit": "90d82bd6968b4d2163c01a72319003869df2b7b7",
+  "n": 169,
+  "model": "typesafe-ai/jev-1.14.0",
+  "policies": [
+    {
+      "name": "current-v3",
+      "questionVersion": "v3",
+      "driftThreshold": 0.6,
+      "stallThreshold": 0.6,
+      "relevanceThreshold": 0.6,
+      "uncertainThreshold": 0.4
+    },
+    {
+      "name": "frozen-selected-v4",
+      "questionVersion": "v4",
+      "driftThreshold": 0.5,
+      "stallThreshold": 0.6,
+      "relevanceThreshold": 0.8,
+      "uncertainThreshold": 0.4
+    }
+  ],
+  "questionHash": "eda50bb8dd7133c19be87cfd944ff27bbdb4ff7121a7ca579178515eac54e8d3",
+  "input": "Only original agenda and speaker-prefixed text; no phase/scenario/author label metadata added",
+  "cooldownSeconds": 120,
+  "runtimeGates": true,
+  "primaryMetric": "semantic 3-class agreement with independently generated GPT silver, all169 denominator including uncertain",
+  "search": false,
+  "maxAttempts": 400,
+  "reservationUSD": 1,
+  "concurrency": 3,
+  "firstPaidStage": "ten baseline-v3 cases only, after label freeze",
+  "sequence": "fresh primary labeler -> validate and freeze labels -> fresh separate tester -> pilot -> all fixed policies -> report; no label editing or model selection"
+}

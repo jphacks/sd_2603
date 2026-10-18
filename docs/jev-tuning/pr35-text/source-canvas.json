@@ -1,0 +1,3045 @@
+[
+  {
+    "id": "flow-approval@33",
+    "group": "flow-approval",
+    "category": "cut",
+    "scenario": "経費精算の承認ルール（分岐＋差し戻し）",
+    "agenda": "経費精算の承認ルールの整理",
+    "utterances": [
+      {
+        "speaker": "田中",
+        "text": "経費精算の承認の流れ、いまいち曖昧なんで整理しましょう"
+      },
+      {
+        "speaker": "高橋",
+        "text": "あ、私まだよく分かってなくて"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "まず本人が申請しますよね、システムに"
+      },
+      {
+        "speaker": "田中",
+        "text": "うん、で、上長が承認"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear",
+    "note": "申請→上長承認まで。分岐や経理がまだ",
+    "cut": {
+      "turns": 4,
+      "ofTotal": 12
+    }
+  },
+  {
+    "id": "flow-approval@67",
+    "group": "flow-approval",
+    "category": "cut",
+    "scenario": "経費精算の承認ルール（分岐＋差し戻し）",
+    "agenda": "経費精算の承認ルールの整理",
+    "utterances": [
+      {
+        "speaker": "田中",
+        "text": "経費精算の承認の流れ、いまいち曖昧なんで整理しましょう"
+      },
+      {
+        "speaker": "高橋",
+        "text": "あ、私まだよく分かってなくて"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "まず本人が申請しますよね、システムに"
+      },
+      {
+        "speaker": "田中",
+        "text": "うん、で、上長が承認"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "そう、上長。で、3万円超えるやつは部長も"
+      },
+      {
+        "speaker": "高橋",
+        "text": "あ、部長まで行くんですね"
+      },
+      {
+        "speaker": "田中",
+        "text": "はい。そのあと経理がチェックして"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "証憑の確認ね。領収書とか"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear",
+    "note": "経理チェックまで。支払い・差し戻しがまだ",
+    "cut": {
+      "turns": 8,
+      "ofTotal": 12
+    }
+  },
+  {
+    "id": "flow-approval",
+    "group": "flow-approval",
+    "category": "flow",
+    "scenario": "経費精算の承認ルール（分岐＋差し戻し）",
+    "agenda": "経費精算の承認ルールの整理",
+    "utterances": [
+      {
+        "speaker": "田中",
+        "text": "経費精算の承認の流れ、いまいち曖昧なんで整理しましょう"
+      },
+      {
+        "speaker": "高橋",
+        "text": "あ、私まだよく分かってなくて"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "まず本人が申請しますよね、システムに"
+      },
+      {
+        "speaker": "田中",
+        "text": "うん、で、上長が承認"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "そう、上長。で、3万円超えるやつは部長も"
+      },
+      {
+        "speaker": "高橋",
+        "text": "あ、部長まで行くんですね"
+      },
+      {
+        "speaker": "田中",
+        "text": "はい。そのあと経理がチェックして"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "証憑の確認ね。領収書とか"
+      },
+      {
+        "speaker": "田中",
+        "text": "それで問題なければ支払い処理、月末の振込"
+      },
+      {
+        "speaker": "高橋",
+        "text": "差し戻しはどうなります？"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "経理で不備があったら本人に戻します"
+      },
+      {
+        "speaker": "田中",
+        "text": "OK、なるほど、じゃあその流れで周知しましょう"
+      }
+    ],
+    "label": "FLOW",
+    "humanAgreement": "clear",
+    "window": {
+      "earliestTurn": 9,
+      "latestTurn": 12
+    },
+    "gold": {
+      "flow": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "本人が申請"
+          },
+          {
+            "id": "n2",
+            "label": "上長が承認"
+          },
+          {
+            "id": "n3",
+            "label": "部長が承認"
+          },
+          {
+            "id": "n4",
+            "label": "経理がチェック"
+          },
+          {
+            "id": "n5",
+            "label": "月末に振込"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2"
+          },
+          {
+            "from": "n2",
+            "to": "n3",
+            "label": "3万円超"
+          },
+          {
+            "from": "n2",
+            "to": "n4",
+            "label": "3万円以下"
+          },
+          {
+            "from": "n3",
+            "to": "n4"
+          },
+          {
+            "from": "n4",
+            "to": "n5",
+            "label": "問題なし"
+          },
+          {
+            "from": "n4",
+            "to": "n1",
+            "label": "不備は差し戻し"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "flow-deploy@23",
+    "group": "flow-deploy",
+    "category": "cut",
+    "scenario": "リリース手順（パイプライン＋ロールバック）",
+    "agenda": "リリース手順の確認",
+    "utterances": [
+      {
+        "speaker": "山本",
+        "text": "来週のリリース、手順って結局どうなってるんでしたっけ"
+      },
+      {
+        "speaker": "中村",
+        "text": "あー、ちょっと前に変わったんですよ"
+      },
+      {
+        "speaker": "山本",
+        "text": "え、そうなんですか"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear",
+    "note": "導入の質問だけで、手順はまだ出ていない",
+    "cut": {
+      "turns": 3,
+      "ofTotal": 13
+    }
+  },
+  {
+    "id": "flow-deploy@62",
+    "group": "flow-deploy",
+    "category": "cut",
+    "scenario": "リリース手順（パイプライン＋ロールバック）",
+    "agenda": "リリース手順の確認",
+    "utterances": [
+      {
+        "speaker": "山本",
+        "text": "来週のリリース、手順って結局どうなってるんでしたっけ"
+      },
+      {
+        "speaker": "中村",
+        "text": "あー、ちょっと前に変わったんですよ"
+      },
+      {
+        "speaker": "山本",
+        "text": "え、そうなんですか"
+      },
+      {
+        "speaker": "中村",
+        "text": "まずPRを出して、レビューを通す"
+      },
+      {
+        "speaker": "小林",
+        "text": "で、マージしたらCIが走ります"
+      },
+      {
+        "speaker": "中村",
+        "text": "そう、CIが通ったらステージングに自動で上がる"
+      },
+      {
+        "speaker": "山本",
+        "text": "ステージングで確認するのは誰？"
+      },
+      {
+        "speaker": "小林",
+        "text": "QAの人が受け入れテストして"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear",
+    "note": "QAの受け入れテストまで。本番デプロイがまだ",
+    "cut": {
+      "turns": 8,
+      "ofTotal": 13
+    }
+  },
+  {
+    "id": "flow-deploy",
+    "group": "flow-deploy",
+    "category": "flow",
+    "scenario": "リリース手順（パイプライン＋ロールバック）",
+    "agenda": "リリース手順の確認",
+    "utterances": [
+      {
+        "speaker": "山本",
+        "text": "来週のリリース、手順って結局どうなってるんでしたっけ"
+      },
+      {
+        "speaker": "中村",
+        "text": "あー、ちょっと前に変わったんですよ"
+      },
+      {
+        "speaker": "山本",
+        "text": "え、そうなんですか"
+      },
+      {
+        "speaker": "中村",
+        "text": "まずPRを出して、レビューを通す"
+      },
+      {
+        "speaker": "小林",
+        "text": "で、マージしたらCIが走ります"
+      },
+      {
+        "speaker": "中村",
+        "text": "そう、CIが通ったらステージングに自動で上がる"
+      },
+      {
+        "speaker": "山本",
+        "text": "ステージングで確認するのは誰？"
+      },
+      {
+        "speaker": "小林",
+        "text": "QAの人が受け入れテストして"
+      },
+      {
+        "speaker": "中村",
+        "text": "OKが出たら、本番デプロイは手動で、リリース担当が実行"
+      },
+      {
+        "speaker": "山本",
+        "text": "もし本番で問題出たら？"
+      },
+      {
+        "speaker": "中村",
+        "text": "ロールバックですね、直前のバージョンに戻す"
+      },
+      {
+        "speaker": "小林",
+        "text": "ロールバック手順は別ドキュメントに"
+      },
+      {
+        "speaker": "山本",
+        "text": "了解です、助かりました"
+      }
+    ],
+    "label": "FLOW",
+    "humanAgreement": "clear",
+    "window": {
+      "earliestTurn": 9,
+      "latestTurn": 13
+    },
+    "gold": {
+      "flow": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "PRレビュー"
+          },
+          {
+            "id": "n2",
+            "label": "CI実行"
+          },
+          {
+            "id": "n3",
+            "label": "ステージングで受入テスト"
+          },
+          {
+            "id": "n4",
+            "label": "本番デプロイ"
+          },
+          {
+            "id": "n5",
+            "label": "ロールバック"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2",
+            "label": "マージ"
+          },
+          {
+            "from": "n2",
+            "to": "n3",
+            "label": "CI通過"
+          },
+          {
+            "from": "n3",
+            "to": "n4",
+            "label": "QAがOK"
+          },
+          {
+            "from": "n4",
+            "to": "n5",
+            "label": "問題発生時"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "flow-onboarding",
+    "group": "flow-onboarding",
+    "category": "flow",
+    "scenario": "新入社員の初日（階層のある会議）",
+    "agenda": "新入社員の初日の流れ",
+    "utterances": [
+      {
+        "speaker": "人事 佐々木",
+        "text": "来月入社の方の初日、流れを共有しますね"
+      },
+      {
+        "speaker": "部長",
+        "text": "お願いします"
+      },
+      {
+        "speaker": "人事 佐々木",
+        "text": "9時に受付で入館証を受け取ってもらって"
+      },
+      {
+        "speaker": "部長",
+        "text": "うん"
+      },
+      {
+        "speaker": "人事 佐々木",
+        "text": "そのあとPCとアカウントの受け渡し、情シスが担当です"
+      },
+      {
+        "speaker": "新人 吉田",
+        "text": "あ、私も聞いていいですか、初日って何時までですか"
+      },
+      {
+        "speaker": "人事 佐々木",
+        "text": "18時までです。午前中にオリエンテーションで、会社説明と規則の説明"
+      },
+      {
+        "speaker": "部長",
+        "text": "午後はうちの部で自己紹介してもらって"
+      },
+      {
+        "speaker": "人事 佐々木",
+        "text": "はい、そのあと席でアカウントのセットアップの続きですね"
+      },
+      {
+        "speaker": "部長",
+        "text": "歓迎会は別日だから、初日はそこまで"
+      }
+    ],
+    "label": "FLOW",
+    "humanAgreement": "clear",
+    "gold": {
+      "flow": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "受付で入館証を受け取る"
+          },
+          {
+            "id": "n2",
+            "label": "PC・アカウントの受け渡し"
+          },
+          {
+            "id": "n3",
+            "label": "オリエンテーション"
+          },
+          {
+            "id": "n4",
+            "label": "部内で自己紹介"
+          },
+          {
+            "id": "n5",
+            "label": "アカウントのセットアップ"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2"
+          },
+          {
+            "from": "n2",
+            "to": "n3",
+            "label": "午前"
+          },
+          {
+            "from": "n3",
+            "to": "n4",
+            "label": "午後"
+          },
+          {
+            "from": "n4",
+            "to": "n5"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "flow-incident@25",
+    "group": "flow-incident",
+    "category": "cut",
+    "scenario": "障害の初動（重大度で分岐）",
+    "agenda": "障害対応の一次対応フロー",
+    "utterances": [
+      {
+        "speaker": "SRE 村上",
+        "text": "障害のときの初動、改めて確認させてください"
+      },
+      {
+        "speaker": "部長",
+        "text": "うん、頼む"
+      },
+      {
+        "speaker": "SRE 村上",
+        "text": "まずアラートを検知したら、当番がトリアージします"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear",
+    "note": "最初のステップが1つ出ただけ",
+    "cut": {
+      "turns": 3,
+      "ofTotal": 12
+    }
+  },
+  {
+    "id": "flow-incident@58",
+    "group": "flow-incident",
+    "category": "cut",
+    "scenario": "障害の初動（重大度で分岐）",
+    "agenda": "障害対応の一次対応フロー",
+    "utterances": [
+      {
+        "speaker": "SRE 村上",
+        "text": "障害のときの初動、改めて確認させてください"
+      },
+      {
+        "speaker": "部長",
+        "text": "うん、頼む"
+      },
+      {
+        "speaker": "SRE 村上",
+        "text": "まずアラートを検知したら、当番がトリアージします"
+      },
+      {
+        "speaker": "開発 森",
+        "text": "影響範囲と重大度の判断ね"
+      },
+      {
+        "speaker": "SRE 村上",
+        "text": "はい。重大度が高ければ、インシデントチャンネルを立てて関係者を招集"
+      },
+      {
+        "speaker": "開発 森",
+        "text": "低いやつは通常チケットでいいよね"
+      },
+      {
+        "speaker": "SRE 村上",
+        "text": "そうです。で、招集したら暫定対応、たとえば切り戻しとか"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear",
+    "note": "暫定対応まで。告知・恒久対応がまだ",
+    "cut": {
+      "turns": 7,
+      "ofTotal": 12
+    }
+  },
+  {
+    "id": "flow-incident",
+    "group": "flow-incident",
+    "category": "flow",
+    "scenario": "障害の初動（重大度で分岐）",
+    "agenda": "障害対応の一次対応フロー",
+    "utterances": [
+      {
+        "speaker": "SRE 村上",
+        "text": "障害のときの初動、改めて確認させてください"
+      },
+      {
+        "speaker": "部長",
+        "text": "うん、頼む"
+      },
+      {
+        "speaker": "SRE 村上",
+        "text": "まずアラートを検知したら、当番がトリアージします"
+      },
+      {
+        "speaker": "開発 森",
+        "text": "影響範囲と重大度の判断ね"
+      },
+      {
+        "speaker": "SRE 村上",
+        "text": "はい。重大度が高ければ、インシデントチャンネルを立てて関係者を招集"
+      },
+      {
+        "speaker": "開発 森",
+        "text": "低いやつは通常チケットでいいよね"
+      },
+      {
+        "speaker": "SRE 村上",
+        "text": "そうです。で、招集したら暫定対応、たとえば切り戻しとか"
+      },
+      {
+        "speaker": "部長",
+        "text": "暫定対応で復旧したら、お客様に連絡？"
+      },
+      {
+        "speaker": "SRE 村上",
+        "text": "はい、広報と相談して告知します"
+      },
+      {
+        "speaker": "開発 森",
+        "text": "そのあと恒久対応と、ポストモーテム"
+      },
+      {
+        "speaker": "部長",
+        "text": "ポストモーテムは1週間以内にね"
+      },
+      {
+        "speaker": "SRE 村上",
+        "text": "了解です"
+      }
+    ],
+    "label": "FLOW",
+    "humanAgreement": "clear",
+    "window": {
+      "earliestTurn": 10,
+      "latestTurn": 12
+    },
+    "gold": {
+      "flow": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "検知・トリアージ"
+          },
+          {
+            "id": "n2",
+            "label": "関係者を招集"
+          },
+          {
+            "id": "n3",
+            "label": "暫定対応（切り戻し）"
+          },
+          {
+            "id": "n4",
+            "label": "お客様へ告知"
+          },
+          {
+            "id": "n5",
+            "label": "恒久対応・ポストモーテム"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2",
+            "label": "重大度が高い"
+          },
+          {
+            "from": "n2",
+            "to": "n3"
+          },
+          {
+            "from": "n3",
+            "to": "n4",
+            "label": "復旧後"
+          },
+          {
+            "from": "n4",
+            "to": "n5"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "flow-order",
+    "group": "flow-order",
+    "category": "flow",
+    "scenario": "注文処理（在庫で分岐して合流）",
+    "agenda": "注文処理の流れの整理",
+    "utterances": [
+      {
+        "speaker": "田中",
+        "text": "注文が入ってからの処理、いまの流れをおさらいしたいです"
+      },
+      {
+        "speaker": "吉岡",
+        "text": "はい。まずWebから注文が入ると、自動で在庫を確認します"
+      },
+      {
+        "speaker": "田中",
+        "text": "在庫あるなしで分かれるんでしたよね"
+      },
+      {
+        "speaker": "吉岡",
+        "text": "あれば出荷準備に回って、倉庫がピッキングして梱包"
+      },
+      {
+        "speaker": "加藤",
+        "text": "在庫がなかったら？"
+      },
+      {
+        "speaker": "吉岡",
+        "text": "入荷待ちになって、お客様に入荷予定日をメールします"
+      },
+      {
+        "speaker": "田中",
+        "text": "入荷したら出荷準備に合流ですね"
+      },
+      {
+        "speaker": "吉岡",
+        "text": "そうです。出荷準備のあと配送業者に引き渡して、発送完了メール"
+      },
+      {
+        "speaker": "加藤",
+        "text": "発送完了メールまでが一連ですね"
+      },
+      {
+        "speaker": "田中",
+        "text": "はい、そこまで"
+      }
+    ],
+    "label": "FLOW",
+    "humanAgreement": "clear",
+    "gold": {
+      "flow": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "注文受付"
+          },
+          {
+            "id": "n2",
+            "label": "在庫確認"
+          },
+          {
+            "id": "n3",
+            "label": "出荷準備（ピッキング・梱包）"
+          },
+          {
+            "id": "n4",
+            "label": "入荷待ち（予定日を連絡）"
+          },
+          {
+            "id": "n5",
+            "label": "発送・完了メール"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2"
+          },
+          {
+            "from": "n2",
+            "to": "n3",
+            "label": "在庫あり"
+          },
+          {
+            "from": "n2",
+            "to": "n4",
+            "label": "在庫なし"
+          },
+          {
+            "from": "n4",
+            "to": "n3",
+            "label": "入荷後"
+          },
+          {
+            "from": "n3",
+            "to": "n5"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "flow-refund",
+    "group": "flow-refund",
+    "category": "flow",
+    "scenario": "返金の判断フロー（3分岐）",
+    "agenda": "返金対応の判断フロー",
+    "utterances": [
+      {
+        "speaker": "課長",
+        "text": "返金の判断基準、担当によってバラバラなんでそろえたい"
+      },
+      {
+        "speaker": "伊藤",
+        "text": "いまは問い合わせが来たら、まず内容を確認してます"
+      },
+      {
+        "speaker": "課長",
+        "text": "そこからが人によって違う"
+      },
+      {
+        "speaker": "伊藤",
+        "text": "商品の不良なら全額返金です、送料込みで"
+      },
+      {
+        "speaker": "中島",
+        "text": "お客様都合は？"
+      },
+      {
+        "speaker": "伊藤",
+        "text": "未開封なら返品を受けて、商品代だけ返金"
+      },
+      {
+        "speaker": "中島",
+        "text": "開封済みは基本お断りですよね"
+      },
+      {
+        "speaker": "課長",
+        "text": "うん、例外は私が判断"
+      },
+      {
+        "speaker": "伊藤",
+        "text": "返金が決まったら経理に連携して振込、ですね"
+      },
+      {
+        "speaker": "課長",
+        "text": "OK、その流れでマニュアル作ろう"
+      }
+    ],
+    "label": "FLOW",
+    "humanAgreement": "clear",
+    "gold": {
+      "flow": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "問い合わせ内容の確認"
+          },
+          {
+            "id": "n2",
+            "label": "全額返金（送料込み）"
+          },
+          {
+            "id": "n3",
+            "label": "商品代のみ返金"
+          },
+          {
+            "id": "n4",
+            "label": "原則お断り"
+          },
+          {
+            "id": "n5",
+            "label": "経理に連携して振込"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2",
+            "label": "商品の不良"
+          },
+          {
+            "from": "n1",
+            "to": "n3",
+            "label": "お客様都合・未開封"
+          },
+          {
+            "from": "n1",
+            "to": "n4",
+            "label": "お客様都合・開封済"
+          },
+          {
+            "from": "n2",
+            "to": "n5"
+          },
+          {
+            "from": "n3",
+            "to": "n5"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "flow-hiring",
+    "group": "flow-hiring",
+    "category": "flow",
+    "scenario": "採用の選考フロー（役職が混ざる）",
+    "agenda": "今期の選考フローの確認",
+    "utterances": [
+      {
+        "speaker": "人事 西田",
+        "text": "採用の選考フロー、今期の分を確認します"
+      },
+      {
+        "speaker": "本部長",
+        "text": "お願い"
+      },
+      {
+        "speaker": "人事 西田",
+        "text": "書類選考のあとに一次面接、ここは現場のリーダー"
+      },
+      {
+        "speaker": "リーダー 森",
+        "text": "はい"
+      },
+      {
+        "speaker": "人事 西田",
+        "text": "一次を通ったら適性検査"
+      },
+      {
+        "speaker": "リーダー 加藤",
+        "text": "オンラインですよね"
+      },
+      {
+        "speaker": "人事 西田",
+        "text": "そうです。で、そのあとが最終面接、本部長と役員"
+      },
+      {
+        "speaker": "本部長",
+        "text": "私と専務ね"
+      },
+      {
+        "speaker": "人事 西田",
+        "text": "最終を通過したら内定、条件面談はそのあとです"
+      },
+      {
+        "speaker": "リーダー 森",
+        "text": "内定承諾までの期限は？"
+      },
+      {
+        "speaker": "人事 西田",
+        "text": "1週間です"
+      },
+      {
+        "speaker": "本部長",
+        "text": "OK"
+      }
+    ],
+    "label": "FLOW",
+    "humanAgreement": "clear",
+    "gold": {
+      "flow": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "書類選考"
+          },
+          {
+            "id": "n2",
+            "label": "一次面接（現場リーダー）"
+          },
+          {
+            "id": "n3",
+            "label": "適性検査（オンライン）"
+          },
+          {
+            "id": "n4",
+            "label": "最終面接（本部長・専務）"
+          },
+          {
+            "id": "n5",
+            "label": "内定・条件面談"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2"
+          },
+          {
+            "from": "n2",
+            "to": "n3",
+            "label": "通過"
+          },
+          {
+            "from": "n3",
+            "to": "n4"
+          },
+          {
+            "from": "n4",
+            "to": "n5",
+            "label": "通過"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "flow-hotfix",
+    "group": "flow-hotfix",
+    "category": "flow",
+    "scenario": "緊急修正（速いテンポ・短い発言）",
+    "agenda": "緊急修正の手順の確認",
+    "utterances": [
+      {
+        "speaker": "中村",
+        "text": "本番で不具合報告きたら、緊急修正どう動くんでしたっけ"
+      },
+      {
+        "speaker": "吉田",
+        "text": "まず報告を受けた人がチケット切って、再現確認"
+      },
+      {
+        "speaker": "中村",
+        "text": "再現できなかったら？"
+      },
+      {
+        "speaker": "吉田",
+        "text": "情報不足でユーザーに追加ヒアリング"
+      },
+      {
+        "speaker": "小林",
+        "text": "再現できたら修正して、レビューは簡略版で"
+      },
+      {
+        "speaker": "中村",
+        "text": "簡略版って、1人承認でOK？"
+      },
+      {
+        "speaker": "小林",
+        "text": "そう、1人でいい"
+      },
+      {
+        "speaker": "吉田",
+        "text": "それでテスト通したら本番反映"
+      },
+      {
+        "speaker": "小林",
+        "text": "反映したら事後報告をチャンネルに"
+      },
+      {
+        "speaker": "中村",
+        "text": "それで通常のリリースフローに修正を取り込む、と"
+      },
+      {
+        "speaker": "吉田",
+        "text": "ですね"
+      }
+    ],
+    "label": "FLOW",
+    "humanAgreement": "clear",
+    "gold": {
+      "flow": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "チケット化・再現確認"
+          },
+          {
+            "id": "n2",
+            "label": "修正"
+          },
+          {
+            "id": "n3",
+            "label": "簡易レビュー（1人承認）"
+          },
+          {
+            "id": "n4",
+            "label": "本番反映"
+          },
+          {
+            "id": "n5",
+            "label": "事後報告"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2",
+            "label": "再現できた"
+          },
+          {
+            "from": "n2",
+            "to": "n3"
+          },
+          {
+            "from": "n3",
+            "to": "n4",
+            "label": "テスト通過"
+          },
+          {
+            "from": "n4",
+            "to": "n5"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "flow-escalation",
+    "group": "flow-escalation",
+    "category": "flow",
+    "scenario": "サポートのエスカレーション",
+    "agenda": "サポートのエスカレーション手順",
+    "utterances": [
+      {
+        "speaker": "リーダー",
+        "text": "エスカレーションのルールを決めたいです"
+      },
+      {
+        "speaker": "斉藤",
+        "text": "いまは一次対応のL1が受けて、解決しなければL2へ"
+      },
+      {
+        "speaker": "リーダー",
+        "text": "L2は技術サポートでしたっけ"
+      },
+      {
+        "speaker": "斉藤",
+        "text": "はい。L2で原因が特定できなければ開発チームに回す"
+      },
+      {
+        "speaker": "青木",
+        "text": "開発に回すときはチケットに再現手順をつける決まりですよね"
+      },
+      {
+        "speaker": "斉藤",
+        "text": "そうです。開発が修正して復旧したら"
+      },
+      {
+        "speaker": "リーダー",
+        "text": "お客様への連絡は誰が？"
+      },
+      {
+        "speaker": "斉藤",
+        "text": "最初に受けたL1が連絡して、クローズ"
+      },
+      {
+        "speaker": "青木",
+        "text": "なるほど"
+      },
+      {
+        "speaker": "リーダー",
+        "text": "じゃあその流れで文書化しましょう"
+      }
+    ],
+    "label": "FLOW",
+    "humanAgreement": "clear",
+    "gold": {
+      "flow": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "L1が一次対応"
+          },
+          {
+            "id": "n2",
+            "label": "L2（技術サポート）"
+          },
+          {
+            "id": "n3",
+            "label": "開発チームが修正"
+          },
+          {
+            "id": "n4",
+            "label": "L1がお客様へ連絡"
+          },
+          {
+            "id": "n5",
+            "label": "クローズ"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2",
+            "label": "未解決"
+          },
+          {
+            "from": "n2",
+            "to": "n3",
+            "label": "原因不明"
+          },
+          {
+            "from": "n3",
+            "to": "n4",
+            "label": "復旧後"
+          },
+          {
+            "from": "n4",
+            "to": "n5"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "tbl-vendor@25",
+    "group": "tbl-vendor",
+    "category": "cut",
+    "scenario": "監視ツール3候補の比較（価格・期間・サポート）",
+    "agenda": "監視ツールの選定",
+    "utterances": [
+      {
+        "speaker": "佐藤",
+        "text": "監視ツール、候補を3つに絞りました"
+      },
+      {
+        "speaker": "部長",
+        "text": "聞かせて"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Aは月額5万円、導入に2週間くらいです"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear",
+    "note": "A案の情報だけ。他の候補がまだ",
+    "cut": {
+      "turns": 3,
+      "ofTotal": 12
+    }
+  },
+  {
+    "id": "tbl-vendor@67",
+    "group": "tbl-vendor",
+    "category": "cut",
+    "scenario": "監視ツール3候補の比較（価格・期間・サポート）",
+    "agenda": "監視ツールの選定",
+    "utterances": [
+      {
+        "speaker": "佐藤",
+        "text": "監視ツール、候補を3つに絞りました"
+      },
+      {
+        "speaker": "部長",
+        "text": "聞かせて"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Aは月額5万円、導入に2週間くらいです"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "サポートは？"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Aは平日のみです"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Bは月額8万円で、導入は1ヶ月"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "Bのほうが高いね、サポートは24時間？"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "はい、24時間365日"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear",
+    "note": "AとBまで。Cがまだ",
+    "cut": {
+      "turns": 8,
+      "ofTotal": 12
+    }
+  },
+  {
+    "id": "tbl-vendor",
+    "group": "tbl-vendor",
+    "category": "table",
+    "scenario": "監視ツール3候補の比較（価格・期間・サポート）",
+    "agenda": "監視ツールの選定",
+    "utterances": [
+      {
+        "speaker": "佐藤",
+        "text": "監視ツール、候補を3つに絞りました"
+      },
+      {
+        "speaker": "部長",
+        "text": "聞かせて"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Aは月額5万円、導入に2週間くらいです"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "サポートは？"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Aは平日のみです"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Bは月額8万円で、導入は1ヶ月"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "Bのほうが高いね、サポートは24時間？"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "はい、24時間365日"
+      },
+      {
+        "speaker": "部長",
+        "text": "Cは？"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Cは月額3万円で安いんですが、導入に3ヶ月かかって、サポートはメールのみです"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "Cは安いけど遅いし弱いな"
+      },
+      {
+        "speaker": "部長",
+        "text": "なるほど、これ比べて決めよう"
+      }
+    ],
+    "label": "TABLE",
+    "humanAgreement": "clear",
+    "window": {
+      "earliestTurn": 10,
+      "latestTurn": 12
+    },
+    "gold": {
+      "table": {
+        "columns": [
+          "候補",
+          "月額",
+          "導入期間",
+          "サポート"
+        ],
+        "rows": [
+          [
+            "A",
+            "5万円",
+            "2週間",
+            "平日のみ"
+          ],
+          [
+            "B",
+            "8万円",
+            "1ヶ月",
+            "24時間365日"
+          ],
+          [
+            "C",
+            "3万円",
+            "3ヶ月",
+            "メールのみ"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "tbl-plan",
+    "group": "tbl-plan",
+    "category": "table",
+    "scenario": "料金プラン3種の整理",
+    "agenda": "お客様に出す料金プランの整理",
+    "utterances": [
+      {
+        "speaker": "営業",
+        "text": "お客様に出すプラン、整理しますね"
+      },
+      {
+        "speaker": "課長",
+        "text": "うん"
+      },
+      {
+        "speaker": "営業",
+        "text": "ライトが月額3,000円で、ユーザーは5人まで"
+      },
+      {
+        "speaker": "営業",
+        "text": "スタンダードは月額1万円、20人まで、チャットサポートつき"
+      },
+      {
+        "speaker": "新人",
+        "text": "プレミアムは？"
+      },
+      {
+        "speaker": "営業",
+        "text": "プレミアムが月額3万円で、人数無制限、電話サポートもつきます"
+      },
+      {
+        "speaker": "課長",
+        "text": "ライトはサポートなしだっけ"
+      },
+      {
+        "speaker": "営業",
+        "text": "メールのみです"
+      },
+      {
+        "speaker": "新人",
+        "text": "なるほど、結構違いますね"
+      },
+      {
+        "speaker": "課長",
+        "text": "提案資料に載せられるようにしておこう"
+      }
+    ],
+    "label": "TABLE",
+    "humanAgreement": "clear",
+    "gold": {
+      "table": {
+        "columns": [
+          "プラン",
+          "月額",
+          "ユーザー数",
+          "サポート"
+        ],
+        "rows": [
+          [
+            "ライト",
+            "3,000円",
+            "5人まで",
+            "メールのみ"
+          ],
+          [
+            "スタンダード",
+            "1万円",
+            "20人まで",
+            "チャット"
+          ],
+          [
+            "プレミアム",
+            "3万円",
+            "無制限",
+            "電話あり"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "tbl-ab@17",
+    "group": "tbl-ab",
+    "category": "cut",
+    "scenario": "A案・B案の比較（階層のある会議）",
+    "agenda": "新機能の進め方（A案かB案か）",
+    "utterances": [
+      {
+        "speaker": "リーダー",
+        "text": "新機能、A案とB案どっちで行くか決めたいんですが"
+      },
+      {
+        "speaker": "部長",
+        "text": "違いをざっくり教えて"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear",
+    "note": "導入の質問だけ",
+    "cut": {
+      "turns": 2,
+      "ofTotal": 12
+    }
+  },
+  {
+    "id": "tbl-ab@50",
+    "group": "tbl-ab",
+    "category": "cut",
+    "scenario": "A案・B案の比較（階層のある会議）",
+    "agenda": "新機能の進め方（A案かB案か）",
+    "utterances": [
+      {
+        "speaker": "リーダー",
+        "text": "新機能、A案とB案どっちで行くか決めたいんですが"
+      },
+      {
+        "speaker": "部長",
+        "text": "違いをざっくり教えて"
+      },
+      {
+        "speaker": "リーダー",
+        "text": "A案は既存画面に追加で、開発は3週間、コストは約200万円です"
+      },
+      {
+        "speaker": "部長",
+        "text": "リスクは？"
+      },
+      {
+        "speaker": "リーダー",
+        "text": "既存コードを触るので、不具合が出るリスクは中くらい"
+      },
+      {
+        "speaker": "開発 森",
+        "text": "B案は新しい画面を作るので5週間かかります"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear",
+    "note": "A案は出そろい、B案は途中",
+    "cut": {
+      "turns": 6,
+      "ofTotal": 12
+    }
+  },
+  {
+    "id": "tbl-ab",
+    "group": "tbl-ab",
+    "category": "table",
+    "scenario": "A案・B案の比較（階層のある会議）",
+    "agenda": "新機能の進め方（A案かB案か）",
+    "utterances": [
+      {
+        "speaker": "リーダー",
+        "text": "新機能、A案とB案どっちで行くか決めたいんですが"
+      },
+      {
+        "speaker": "部長",
+        "text": "違いをざっくり教えて"
+      },
+      {
+        "speaker": "リーダー",
+        "text": "A案は既存画面に追加で、開発は3週間、コストは約200万円です"
+      },
+      {
+        "speaker": "部長",
+        "text": "リスクは？"
+      },
+      {
+        "speaker": "リーダー",
+        "text": "既存コードを触るので、不具合が出るリスクは中くらい"
+      },
+      {
+        "speaker": "開発 森",
+        "text": "B案は新しい画面を作るので5週間かかります"
+      },
+      {
+        "speaker": "部長",
+        "text": "コストは？"
+      },
+      {
+        "speaker": "開発 森",
+        "text": "約400万円です。ただ既存への影響は小さいのでリスクは低い"
+      },
+      {
+        "speaker": "営業",
+        "text": "お客様に見せるなら、B案のほうが見栄えは良いです"
+      },
+      {
+        "speaker": "部長",
+        "text": "A案は早いけど安全性がちょっと、B案は遅くて高いけど安全ね"
+      },
+      {
+        "speaker": "リーダー",
+        "text": "はい、そういう整理です"
+      },
+      {
+        "speaker": "部長",
+        "text": "じゃあ両方を見比べながら決めよう"
+      }
+    ],
+    "label": "TABLE",
+    "humanAgreement": "clear",
+    "window": {
+      "earliestTurn": 8,
+      "latestTurn": 12
+    },
+    "gold": {
+      "table": {
+        "columns": [
+          "項目",
+          "A案",
+          "B案"
+        ],
+        "rows": [
+          [
+            "開発期間",
+            "3週間",
+            "5週間"
+          ],
+          [
+            "コスト",
+            "約200万円",
+            "約400万円"
+          ],
+          [
+            "不具合リスク",
+            "中",
+            "低"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "tbl-schedule",
+    "group": "tbl-schedule",
+    "category": "table",
+    "scenario": "合宿の日程候補3つ",
+    "agenda": "合宿の日程決め",
+    "utterances": [
+      {
+        "speaker": "幹事",
+        "text": "合宿の日程、3つ候補があります"
+      },
+      {
+        "speaker": "田中",
+        "text": "どれですか"
+      },
+      {
+        "speaker": "幹事",
+        "text": "1つ目は11月8日、会場は山中湖で、参加できるのは12人"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "少ないな"
+      },
+      {
+        "speaker": "幹事",
+        "text": "2つ目は11月15日、会場は同じ山中湖、参加は18人です"
+      },
+      {
+        "speaker": "幹事",
+        "text": "3つ目は11月22日で、場所は熱海、参加は20人、ただし宿代が1人2千円高い"
+      },
+      {
+        "speaker": "田中",
+        "text": "20人来られるなら3つ目かな"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "宿代の差が気になるけど"
+      },
+      {
+        "speaker": "幹事",
+        "text": "並べて確認しましょうか"
+      }
+    ],
+    "label": "TABLE",
+    "humanAgreement": "clear",
+    "gold": {
+      "table": {
+        "columns": [
+          "候補日",
+          "会場",
+          "参加可能人数",
+          "備考"
+        ],
+        "rows": [
+          [
+            "11/8",
+            "山中湖",
+            "12人",
+            "なし"
+          ],
+          [
+            "11/15",
+            "山中湖",
+            "18人",
+            "なし"
+          ],
+          [
+            "11/22",
+            "熱海",
+            "20人",
+            "宿代+2,000円/人"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "tbl-venue@27",
+    "group": "tbl-venue",
+    "category": "cut",
+    "scenario": "忘年会の会場3候補（途中で別の話が混ざる）",
+    "agenda": "忘年会の会場選び",
+    "utterances": [
+      {
+        "speaker": "幹事",
+        "text": "忘年会の会場、候補を3つ出します"
+      },
+      {
+        "speaker": "課長",
+        "text": "おう"
+      },
+      {
+        "speaker": "幹事",
+        "text": "駅前の居酒屋は、1人5千円で、30人まで入れます"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear",
+    "note": "最初の候補だけ",
+    "cut": {
+      "turns": 3,
+      "ofTotal": 11
+    }
+  },
+  {
+    "id": "tbl-venue@64",
+    "group": "tbl-venue",
+    "category": "cut",
+    "scenario": "忘年会の会場3候補（途中で別の話が混ざる）",
+    "agenda": "忘年会の会場選び",
+    "utterances": [
+      {
+        "speaker": "幹事",
+        "text": "忘年会の会場、候補を3つ出します"
+      },
+      {
+        "speaker": "課長",
+        "text": "おう"
+      },
+      {
+        "speaker": "幹事",
+        "text": "駅前の居酒屋は、1人5千円で、30人まで入れます"
+      },
+      {
+        "speaker": "事務",
+        "text": "個室ですか？"
+      },
+      {
+        "speaker": "幹事",
+        "text": "個室じゃなくて貸切です"
+      },
+      {
+        "speaker": "幹事",
+        "text": "ホテルのバンケットは1人8千円、50人まで、個室あり"
+      },
+      {
+        "speaker": "課長",
+        "text": "予算オーバーだな"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear",
+    "note": "2候補まで。3つ目がまだ",
+    "cut": {
+      "turns": 7,
+      "ofTotal": 11
+    }
+  },
+  {
+    "id": "tbl-venue",
+    "group": "tbl-venue",
+    "category": "table",
+    "scenario": "忘年会の会場3候補（途中で別の話が混ざる）",
+    "agenda": "忘年会の会場選び",
+    "utterances": [
+      {
+        "speaker": "幹事",
+        "text": "忘年会の会場、候補を3つ出します"
+      },
+      {
+        "speaker": "課長",
+        "text": "おう"
+      },
+      {
+        "speaker": "幹事",
+        "text": "駅前の居酒屋は、1人5千円で、30人まで入れます"
+      },
+      {
+        "speaker": "事務",
+        "text": "個室ですか？"
+      },
+      {
+        "speaker": "幹事",
+        "text": "個室じゃなくて貸切です"
+      },
+      {
+        "speaker": "幹事",
+        "text": "ホテルのバンケットは1人8千円、50人まで、個室あり"
+      },
+      {
+        "speaker": "課長",
+        "text": "予算オーバーだな"
+      },
+      {
+        "speaker": "幹事",
+        "text": "会社の近くの食堂は1人3千円、20人までで、これも貸切"
+      },
+      {
+        "speaker": "事務",
+        "text": "20人だと足りないね、参加予定25人だから"
+      },
+      {
+        "speaker": "課長",
+        "text": "うーん、見比べたいな"
+      },
+      {
+        "speaker": "幹事",
+        "text": "はい、まとめます"
+      }
+    ],
+    "label": "TABLE",
+    "humanAgreement": "clear",
+    "window": {
+      "earliestTurn": 8,
+      "latestTurn": 11
+    },
+    "gold": {
+      "table": {
+        "columns": [
+          "会場",
+          "1人あたり",
+          "収容人数",
+          "個室/貸切"
+        ],
+        "rows": [
+          [
+            "駅前の居酒屋",
+            "5,000円",
+            "30人",
+            "貸切"
+          ],
+          [
+            "ホテルのバンケット",
+            "8,000円",
+            "50人",
+            "個室あり"
+          ],
+          [
+            "近くの食堂",
+            "3,000円",
+            "20人",
+            "貸切"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "tbl-laptop",
+    "group": "tbl-laptop",
+    "category": "table",
+    "scenario": "ノートPC3機種（速いテンポ）",
+    "agenda": "開発用ノートPCの選定",
+    "utterances": [
+      {
+        "speaker": "伊藤",
+        "text": "ノートPC更新、3機種に絞りました"
+      },
+      {
+        "speaker": "高橋",
+        "text": "いくら？"
+      },
+      {
+        "speaker": "伊藤",
+        "text": "Xが18万円で重さ1.2キロ、バッテリー12時間"
+      },
+      {
+        "speaker": "高橋",
+        "text": "軽くていいね"
+      },
+      {
+        "speaker": "伊藤",
+        "text": "Yは15万円、1.6キロ、バッテリー8時間"
+      },
+      {
+        "speaker": "中村",
+        "text": "Yは重いな"
+      },
+      {
+        "speaker": "伊藤",
+        "text": "Zは22万円で1.4キロ、バッテリー16時間、メモリ増設もできます"
+      },
+      {
+        "speaker": "高橋",
+        "text": "Zは高いけど長持ちか"
+      },
+      {
+        "speaker": "中村",
+        "text": "Xが無難かな、でも比べてみたいな"
+      },
+      {
+        "speaker": "伊藤",
+        "text": "まとめて出します"
+      }
+    ],
+    "label": "TABLE",
+    "humanAgreement": "clear",
+    "gold": {
+      "table": {
+        "columns": [
+          "機種",
+          "価格",
+          "重さ",
+          "バッテリー"
+        ],
+        "rows": [
+          [
+            "X",
+            "18万円",
+            "1.2kg",
+            "12時間"
+          ],
+          [
+            "Y",
+            "15万円",
+            "1.6kg",
+            "8時間"
+          ],
+          [
+            "Z",
+            "22万円",
+            "1.4kg",
+            "16時間"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "tbl-agency",
+    "group": "tbl-agency",
+    "category": "table",
+    "scenario": "採用エージェント3社（役職が混ざる）",
+    "agenda": "採用エージェントの比較",
+    "utterances": [
+      {
+        "speaker": "人事 西田",
+        "text": "エージェント3社を比較したいです"
+      },
+      {
+        "speaker": "本部長",
+        "text": "頼む"
+      },
+      {
+        "speaker": "人事 西田",
+        "text": "A社は成功報酬が年収の30%、紹介数は月10人くらい、エンジニアに強いです"
+      },
+      {
+        "speaker": "人事 田村",
+        "text": "B社は35%で、紹介は月5人、営業職が得意です"
+      },
+      {
+        "speaker": "人事 西田",
+        "text": "C社は25%と安いんですが、紹介は月3人で、特に強い領域はないです"
+      },
+      {
+        "speaker": "本部長",
+        "text": "数が少ないとな"
+      },
+      {
+        "speaker": "人事 田村",
+        "text": "紹介数ならA社が一番ですね"
+      },
+      {
+        "speaker": "本部長",
+        "text": "見比べたいから、資料で出して"
+      },
+      {
+        "speaker": "人事 西田",
+        "text": "承知しました"
+      }
+    ],
+    "label": "TABLE",
+    "humanAgreement": "clear",
+    "gold": {
+      "table": {
+        "columns": [
+          "会社",
+          "手数料",
+          "紹介数/月",
+          "得意領域"
+        ],
+        "rows": [
+          [
+            "A社",
+            "年収の30%",
+            "10人",
+            "エンジニア"
+          ],
+          [
+            "B社",
+            "年収の35%",
+            "5人",
+            "営業職"
+          ],
+          [
+            "C社",
+            "年収の25%",
+            "3人",
+            "なし"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "tbl-cloud",
+    "group": "tbl-cloud",
+    "category": "table",
+    "scenario": "クラウド基盤3候補（専門用語）",
+    "agenda": "クラウド基盤の候補比較",
+    "utterances": [
+      {
+        "speaker": "インフラ 村上",
+        "text": "基盤の候補、AWSとGCPとAzureで見積もり出ました"
+      },
+      {
+        "speaker": "CTO",
+        "text": "聞かせて"
+      },
+      {
+        "speaker": "インフラ 村上",
+        "text": "AWSは月額120万円、うちはもう契約があるので移行不要、チームも慣れてます"
+      },
+      {
+        "speaker": "インフラ 村上",
+        "text": "GCPは月額100万円、契約は新規で、学習コストは中くらい"
+      },
+      {
+        "speaker": "開発 森",
+        "text": "Azureは？"
+      },
+      {
+        "speaker": "インフラ 村上",
+        "text": "Azureは月額110万円、契約は新規、学習コストは高いです"
+      },
+      {
+        "speaker": "CTO",
+        "text": "GCPが安いけど、新規契約なのがな"
+      },
+      {
+        "speaker": "開発 森",
+        "text": "AWSは高いけど移行ゼロ"
+      },
+      {
+        "speaker": "CTO",
+        "text": "うん、数字を並べて決めよう"
+      }
+    ],
+    "label": "TABLE",
+    "humanAgreement": "clear",
+    "gold": {
+      "table": {
+        "columns": [
+          "候補",
+          "月額見積",
+          "契約",
+          "学習コスト"
+        ],
+        "rows": [
+          [
+            "AWS",
+            "120万円",
+            "既存あり",
+            "低（慣れている）"
+          ],
+          [
+            "GCP",
+            "100万円",
+            "新規",
+            "中"
+          ],
+          [
+            "Azure",
+            "110万円",
+            "新規",
+            "高"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "tbl-ads",
+    "group": "tbl-ads",
+    "category": "table",
+    "scenario": "広告媒体3種の比較",
+    "agenda": "広告媒体の選定",
+    "utterances": [
+      {
+        "speaker": "マーケ",
+        "text": "広告の媒体、3つ比べます"
+      },
+      {
+        "speaker": "課長",
+        "text": "うん"
+      },
+      {
+        "speaker": "マーケ",
+        "text": "検索広告は月50万円、想定リーチは10万人、すぐ開始できます"
+      },
+      {
+        "speaker": "新人",
+        "text": "SNS広告は？"
+      },
+      {
+        "speaker": "マーケ",
+        "text": "SNSは月30万円で、リーチは20万人、開始は来週から"
+      },
+      {
+        "speaker": "マーケ",
+        "text": "交通広告は月200万円、リーチは100万人、でも掲載まで2ヶ月かかります"
+      },
+      {
+        "speaker": "課長",
+        "text": "費用対効果で見ないとだな"
+      },
+      {
+        "speaker": "新人",
+        "text": "交通は高いですね"
+      },
+      {
+        "speaker": "課長",
+        "text": "3つ並べて見たいな"
+      }
+    ],
+    "label": "TABLE",
+    "humanAgreement": "clear",
+    "gold": {
+      "table": {
+        "columns": [
+          "媒体",
+          "月額費用",
+          "想定リーチ",
+          "開始時期"
+        ],
+        "rows": [
+          [
+            "検索広告",
+            "50万円",
+            "10万人",
+            "すぐ"
+          ],
+          [
+            "SNS広告",
+            "30万円",
+            "20万人",
+            "来週"
+          ],
+          [
+            "交通広告",
+            "200万円",
+            "100万人",
+            "2ヶ月後"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "wait-steps-incomplete",
+    "group": "wait-steps-incomplete",
+    "category": "wait",
+    "scenario": "手順を話し始めたが途中で止まる",
+    "agenda": "入会手続きの流れ",
+    "utterances": [
+      {
+        "speaker": "受付",
+        "text": "入会の手続きなんですが、まず申込書を書いてもらって"
+      },
+      {
+        "speaker": "上長",
+        "text": "うん"
+      },
+      {
+        "speaker": "受付",
+        "text": "それから本人確認を"
+      },
+      {
+        "speaker": "上長",
+        "text": "ほかには？"
+      },
+      {
+        "speaker": "受付",
+        "text": "えーと、あとは…ちょっと待ってください、資料を見ます"
+      },
+      {
+        "speaker": "上長",
+        "text": "はい"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "wait-options-listing",
+    "group": "wait-options-listing",
+    "category": "wait",
+    "scenario": "候補を挙げている最中で、比べる中身がない",
+    "agenda": "ツール選定の候補出し",
+    "utterances": [
+      {
+        "speaker": "鈴木",
+        "text": "候補はまずAですね、有名なやつ"
+      },
+      {
+        "speaker": "田中",
+        "text": "あとBもあるよ"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "あー、Bもか。ほかには？"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Cも一応あるんですけど、まだ調べてなくて"
+      },
+      {
+        "speaker": "田中",
+        "text": "それと、Dもあった気がする"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "比べる軸はまだ決めてないけど、とりあえず出そうか"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "wait-flow-unknown-step",
+    "group": "wait-flow-unknown-step",
+    "category": "wait",
+    "scenario": "流れの途中で担当者が分からず確認中",
+    "agenda": "請求書発行の手順",
+    "utterances": [
+      {
+        "speaker": "経理",
+        "text": "請求書は、まず営業から売上報告が来て"
+      },
+      {
+        "speaker": "課長",
+        "text": "うん"
+      },
+      {
+        "speaker": "経理",
+        "text": "そのあと私が請求書を作って、で、次に…誰だっけ、承認"
+      },
+      {
+        "speaker": "課長",
+        "text": "私か、部長かな"
+      },
+      {
+        "speaker": "経理",
+        "text": "ちょっと確認しないと分かんないです"
+      },
+      {
+        "speaker": "課長",
+        "text": "あとで調べて共有するよ"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "wait-compare-two-of-three",
+    "group": "wait-compare-two-of-three",
+    "category": "wait",
+    "scenario": "3候補のうち2つだけ判明、残りは明日",
+    "agenda": "ベンダー選定",
+    "utterances": [
+      {
+        "speaker": "佐藤",
+        "text": "AとBはもう見積もりが来てます"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "いくら？"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Aが30万円で2週間、Bが45万円で1週間"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "Bは高いけど早いな"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "Cは見積もりが明日来る予定です"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "じゃあ明日それを見てから判断しよう"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "wait-criteria-not-yet",
+    "group": "wait-criteria-not-yet",
+    "category": "wait",
+    "scenario": "候補はあるが比較の軸が決まっていない",
+    "agenda": "移転先オフィスの検討",
+    "utterances": [
+      {
+        "speaker": "総務",
+        "text": "候補の物件が4つあります"
+      },
+      {
+        "speaker": "部長",
+        "text": "多いな"
+      },
+      {
+        "speaker": "総務",
+        "text": "駅近のところ、広いところ、安いところ、新築のところ"
+      },
+      {
+        "speaker": "部長",
+        "text": "何で比べればいいんだろう"
+      },
+      {
+        "speaker": "総務",
+        "text": "基準を決めないとですね"
+      },
+      {
+        "speaker": "部長",
+        "text": "まず会議で何を重視するか決めよう"
+      }
+    ],
+    "label": "WAIT",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-chitchat",
+    "group": "sil-chitchat",
+    "category": "silence",
+    "scenario": "雑談",
+    "agenda": "週次定例",
+    "utterances": [
+      {
+        "speaker": "田中",
+        "text": "週末どうでした？"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "子どもの運動会でした、暑かった"
+      },
+      {
+        "speaker": "田中",
+        "text": "もう秋なのにね"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "うちも先週行きましたよ"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "お弁当作るの大変で"
+      },
+      {
+        "speaker": "田中",
+        "text": "分かる、早起きしんどい"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "そろそろ始めましょうか"
+      },
+      {
+        "speaker": "田中",
+        "text": "そうですね"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-status",
+    "group": "sil-status",
+    "category": "silence",
+    "scenario": "進捗の口頭報告（人ごとの状況）",
+    "agenda": "週次定例の進捗報告",
+    "utterances": [
+      {
+        "speaker": "田中",
+        "text": "じゃあ進捗、佐藤さんから"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "ログイン画面の修正は完了しました、レビュー待ちです"
+      },
+      {
+        "speaker": "田中",
+        "text": "了解"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "私は検索の改善、いま7割くらいです"
+      },
+      {
+        "speaker": "田中",
+        "text": "来週には終わりそう？"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "はい、大丈夫だと思います"
+      },
+      {
+        "speaker": "高橋",
+        "text": "私はドキュメント更新して、特にブロッカーなしです"
+      },
+      {
+        "speaker": "田中",
+        "text": "OK、ありがとう"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear",
+    "note": "担当×状況の表にもなりうるが、口頭の報告は表にしないのが自然、というラベル"
+  },
+  {
+    "id": "sil-yesno",
+    "group": "sil-yesno",
+    "category": "silence",
+    "scenario": "はい／いいえの確認だけ",
+    "agenda": "デザイン確認",
+    "utterances": [
+      {
+        "speaker": "デザイナー",
+        "text": "このボタン、青でよかったですか"
+      },
+      {
+        "speaker": "部長",
+        "text": "うん、青でOK"
+      },
+      {
+        "speaker": "デザイナー",
+        "text": "了解です"
+      },
+      {
+        "speaker": "部長",
+        "text": "ありがとう"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-numbers",
+    "group": "sil-numbers",
+    "category": "silence",
+    "scenario": "数字の報告（構造なし）",
+    "agenda": "月次売上報告",
+    "utterances": [
+      {
+        "speaker": "経理",
+        "text": "今月の売上は1億2千万円でした"
+      },
+      {
+        "speaker": "部長",
+        "text": "先月比は？"
+      },
+      {
+        "speaker": "経理",
+        "text": "プラス5%です"
+      },
+      {
+        "speaker": "部長",
+        "text": "利益は？"
+      },
+      {
+        "speaker": "経理",
+        "text": "営業利益で1,800万円"
+      },
+      {
+        "speaker": "部長",
+        "text": "了解、悪くないね"
+      },
+      {
+        "speaker": "経理",
+        "text": "はい"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-shared-context",
+    "group": "sil-shared-context",
+    "category": "silence",
+    "scenario": "2人にしか通じない略語の会話",
+    "agenda": "（定例の合間の雑談）",
+    "utterances": [
+      {
+        "speaker": "Aさん",
+        "text": "例のやつ、あれ直した？"
+      },
+      {
+        "speaker": "Bさん",
+        "text": "うん、昨日のうちに"
+      },
+      {
+        "speaker": "Aさん",
+        "text": "じゃあ先方にはいつもの感じで"
+      },
+      {
+        "speaker": "Bさん",
+        "text": "了解、あとで送っとく"
+      },
+      {
+        "speaker": "Aさん",
+        "text": "頼む"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-brainstorm",
+    "group": "sil-brainstorm",
+    "category": "silence",
+    "scenario": "構造のないアイデア出し",
+    "agenda": "新サービスの名前のアイデア出し",
+    "utterances": [
+      {
+        "speaker": "司会",
+        "text": "新サービスの名前、思いつくままいきましょう"
+      },
+      {
+        "speaker": "田中",
+        "text": "ひだまり、とか"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "もっと短いほうがよくない？ ポン、とか"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "あはは、猫っぽい"
+      },
+      {
+        "speaker": "田中",
+        "text": "じゃあミライ"
+      },
+      {
+        "speaker": "高橋",
+        "text": "カタカナにしてミライズ"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "なんか既にありそう"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "とりあえずメモしておきましょう"
+      },
+      {
+        "speaker": "司会",
+        "text": "はい、どんどん出してください"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-heated",
+    "group": "sil-heated",
+    "category": "silence",
+    "scenario": "感情的な言い合い（議題の内側）",
+    "agenda": "納期遅延への対応",
+    "utterances": [
+      {
+        "speaker": "営業",
+        "text": "納期遅れるって、なんで先に言ってくれなかったんですか"
+      },
+      {
+        "speaker": "開発",
+        "text": "言ってましたよ、先週のミーティングで"
+      },
+      {
+        "speaker": "営業",
+        "text": "聞いてないです、お客様に何て説明すれば"
+      },
+      {
+        "speaker": "開発",
+        "text": "それはこっちも想定外で"
+      },
+      {
+        "speaker": "営業",
+        "text": "想定外で済まされないですよ"
+      },
+      {
+        "speaker": "課長",
+        "text": "まあまあ、落ち着いて"
+      },
+      {
+        "speaker": "開発",
+        "text": "すみません、でも人手が足りなくて"
+      },
+      {
+        "speaker": "営業",
+        "text": "それは分かりますけど…"
+      },
+      {
+        "speaker": "課長",
+        "text": "とりあえずお客様への連絡は私がします"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-qa",
+    "group": "sil-qa",
+    "category": "silence",
+    "scenario": "質疑応答（1問ずつ）",
+    "agenda": "新入社員向け制度説明",
+    "utterances": [
+      {
+        "speaker": "講師",
+        "text": "ここまで、何か質問ありますか"
+      },
+      {
+        "speaker": "新人",
+        "text": "有給って、入社してすぐ取れますか"
+      },
+      {
+        "speaker": "人事",
+        "text": "半年後からですが、特別休暇ならすぐ使えます"
+      },
+      {
+        "speaker": "新人",
+        "text": "特別休暇ってどんなものですか"
+      },
+      {
+        "speaker": "人事",
+        "text": "結婚とか忌引きとかですね"
+      },
+      {
+        "speaker": "新人",
+        "text": "分かりました、ありがとうございます"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-todos",
+    "group": "sil-todos",
+    "category": "silence",
+    "scenario": "無関係なTODOの列挙",
+    "agenda": "今週のタスク共有",
+    "utterances": [
+      {
+        "speaker": "田中",
+        "text": "今週のTODO共有しますね、まずコピー機のトナー発注"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "あ、私は来客用のお茶を買っておきます"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "社内報の原稿、金曜までに出します"
+      },
+      {
+        "speaker": "田中",
+        "text": "それと、経費精算の締め、木曜です"
+      },
+      {
+        "speaker": "高橋",
+        "text": "私は特にないです"
+      },
+      {
+        "speaker": "田中",
+        "text": "OK、各自お願いします"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-decided",
+    "group": "sil-decided",
+    "category": "silence",
+    "scenario": "全員が理解している決定の確認",
+    "agenda": "来月のイベント会場",
+    "utterances": [
+      {
+        "speaker": "部長",
+        "text": "じゃあ、来月のイベントはA会場で決まりね"
+      },
+      {
+        "speaker": "田中",
+        "text": "はい"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "了解です"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "予約しておきます"
+      },
+      {
+        "speaker": "部長",
+        "text": "よろしく"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-boss-monologue",
+    "group": "sil-boss-monologue",
+    "category": "silence",
+    "scenario": "上司の長い一人語り（議題に関連、構造なし）",
+    "agenda": "今期の方針共有",
+    "utterances": [
+      {
+        "speaker": "部長",
+        "text": "えー、今期の方針について少し話すとね、やっぱり一番大事なのはお客様との信頼関係だと思うんですよ。私が若い頃は、毎週お客様のところに足を運んでね、顔を覚えてもらうところから始めたもんです。だからみんなにも、メールだけじゃなくて直接会う機会を大事にしてほしい。数字も大事だけど、結局は人と人ですから"
+      },
+      {
+        "speaker": "課長",
+        "text": "おっしゃる通りです"
+      },
+      {
+        "speaker": "新人",
+        "text": "勉強になります"
+      },
+      {
+        "speaker": "部長",
+        "text": "うん"
+      },
+      {
+        "speaker": "課長",
+        "text": "現場にも共有しておきます"
+      },
+      {
+        "speaker": "部長",
+        "text": "頼むよ"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "sil-schedule-tidbit",
+    "group": "sil-schedule-tidbit",
+    "category": "silence",
+    "scenario": "日程調整（候補は1つだけ）",
+    "agenda": "次回の打ち合わせ",
+    "utterances": [
+      {
+        "speaker": "田中",
+        "text": "次の打ち合わせ、来週火曜の14時でどうですか"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "大丈夫です"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "私もOKです"
+      },
+      {
+        "speaker": "田中",
+        "text": "じゃあそれで"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear"
+  },
+  {
+    "id": "dedup-flow-same",
+    "group": "dedup-flow-same",
+    "category": "dedup",
+    "scenario": "同じ内容を会話で繰り返しているだけ（フロー）",
+    "agenda": "経費精算の承認ルールの整理",
+    "utterances": [
+      {
+        "speaker": "田中",
+        "text": "さっきの図のとおり、申請したら上長ですよね"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "はい、3万円超なら部長も"
+      },
+      {
+        "speaker": "高橋",
+        "text": "図を見ると、経理のチェックが入ってから振込なんですね"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "そうです、月末に"
+      },
+      {
+        "speaker": "田中",
+        "text": "じゃあこの流れで周知しましょう"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear",
+    "hasActiveDiagram": true,
+    "activeSummary": "経費精算の承認フロー（本人申請→上長承認→3万円超は部長承認→経理チェック→月末振込、不備は本人へ差し戻し）"
+  },
+  {
+    "id": "dedup-table-same",
+    "group": "dedup-table-same",
+    "category": "dedup",
+    "scenario": "同じ内容を会話で繰り返しているだけ（表）",
+    "agenda": "監視ツールの選定",
+    "utterances": [
+      {
+        "speaker": "部長",
+        "text": "表を見ると、Aは月5万円で2週間か"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "はい、サポートは平日のみです"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "Bは高いけど24時間なのがいいな"
+      },
+      {
+        "speaker": "部長",
+        "text": "Cは遅いからなしかな"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "ですね"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear",
+    "hasActiveDiagram": true,
+    "activeSummary": "監視ツール比較表（A/B/Cの月額・導入期間・サポート）"
+  },
+  {
+    "id": "dedup-flow-changed",
+    "group": "dedup-flow-changed",
+    "category": "dedup",
+    "scenario": "表示中の図の内容が会話で大きく変わった",
+    "agenda": "リリース手順の更新",
+    "utterances": [
+      {
+        "speaker": "山本",
+        "text": "さっきの図、実は先月から変わってて"
+      },
+      {
+        "speaker": "中村",
+        "text": "あ、そうなんですか"
+      },
+      {
+        "speaker": "山本",
+        "text": "CIのあとにステージングでQAが受け入れテストをして"
+      },
+      {
+        "speaker": "小林",
+        "text": "QAが承認したら本番デプロイ、っていう流れになりました"
+      },
+      {
+        "speaker": "中村",
+        "text": "じゃあ図は、PRレビュー、CI、ステージング、QA承認、本番、になりますね"
+      },
+      {
+        "speaker": "山本",
+        "text": "はい、それです"
+      }
+    ],
+    "label": "FLOW",
+    "humanAgreement": "clear",
+    "hasActiveDiagram": true,
+    "activeSummary": "リリース手順（PRレビュー→CI→本番デプロイ）",
+    "gold": {
+      "flow": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "PRレビュー"
+          },
+          {
+            "id": "n2",
+            "label": "CI"
+          },
+          {
+            "id": "n3",
+            "label": "ステージングで受入テスト"
+          },
+          {
+            "id": "n4",
+            "label": "QA承認"
+          },
+          {
+            "id": "n5",
+            "label": "本番デプロイ"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2"
+          },
+          {
+            "from": "n2",
+            "to": "n3"
+          },
+          {
+            "from": "n3",
+            "to": "n4"
+          },
+          {
+            "from": "n4",
+            "to": "n5"
+          }
+        ]
+      }
+    },
+    "note": "表示中の図と手順が実質的に違う。出し直しが妥当（判断が割れる場合は ambiguous に移すこと）"
+  },
+  {
+    "id": "dedup-minor-edit",
+    "group": "dedup-minor-edit",
+    "category": "dedup",
+    "scenario": "表示中の図の軽微な訂正（名称だけ）",
+    "agenda": "経費精算の承認ルールの整理",
+    "utterances": [
+      {
+        "speaker": "鈴木",
+        "text": "承認の名前、図では部長ってなってるけど"
+      },
+      {
+        "speaker": "田中",
+        "text": "あ、本部長ですね、うちは"
+      },
+      {
+        "speaker": "鈴木",
+        "text": "修正しといてもらえます？"
+      },
+      {
+        "speaker": "高橋",
+        "text": "はい、あとで直します"
+      }
+    ],
+    "label": "SILENCE",
+    "humanAgreement": "clear",
+    "hasActiveDiagram": true,
+    "activeSummary": "経費精算の承認フロー（本人申請→上長承認→3万円超は部長承認→経理チェック→月末振込、不備は本人へ差し戻し）",
+    "note": "名称の訂正だけなので、図の作り直しは不要"
+  },
+  {
+    "id": "amb-flow-or-table",
+    "group": "amb-flow-or-table",
+    "category": "ambiguous",
+    "scenario": "手順と違いが混ざる（フローにも表にもなる）",
+    "agenda": "新プランの申込手順と違いの説明",
+    "utterances": [
+      {
+        "speaker": "営業",
+        "text": "新プランの申込は、フォームを送って、審査があって、開通です"
+      },
+      {
+        "speaker": "新人",
+        "text": "プランごとの違いも聞いていいですか"
+      },
+      {
+        "speaker": "営業",
+        "text": "ライトは月3千円で5人まで、スタンダードは1万円で20人まで"
+      },
+      {
+        "speaker": "新人",
+        "text": "申込の流れはどのプランも同じですか"
+      },
+      {
+        "speaker": "営業",
+        "text": "同じです、ただプレミアムは審査が少し長いです"
+      },
+      {
+        "speaker": "課長",
+        "text": "流れと違い、両方まとめて説明資料にしよう"
+      }
+    ],
+    "label": "ambiguous",
+    "humanAgreement": "split",
+    "acceptable": [
+      "FLOW",
+      "TABLE",
+      "WAIT"
+    ]
+  },
+  {
+    "id": "amb-two-options",
+    "group": "amb-two-options",
+    "category": "ambiguous",
+    "scenario": "2つの選択肢の一長一短（論点が混ざる）",
+    "agenda": "働き方の方針",
+    "utterances": [
+      {
+        "speaker": "部長",
+        "text": "週3リモートにするか、完全出社に戻すか"
+      },
+      {
+        "speaker": "課長",
+        "text": "リモートだと採用はしやすいです"
+      },
+      {
+        "speaker": "人事",
+        "text": "出社のほうがコミュニケーションは取りやすい"
+      },
+      {
+        "speaker": "課長",
+        "text": "コストはオフィス代がかかる"
+      },
+      {
+        "speaker": "部長",
+        "text": "両方一長一短だな"
+      },
+      {
+        "speaker": "人事",
+        "text": "論点が混ざってますね、整理したほうがいいかも"
+      }
+    ],
+    "label": "ambiguous",
+    "humanAgreement": "split",
+    "acceptable": [
+      "TABLE",
+      "WAIT",
+      "SILENCE"
+    ]
+  },
+  {
+    "id": "amb-recap",
+    "group": "amb-recap",
+    "category": "ambiguous",
+    "scenario": "会議終盤の決定事項の確認（列挙）",
+    "agenda": "本日のまとめ",
+    "utterances": [
+      {
+        "speaker": "司会",
+        "text": "最後に決まったことを確認します"
+      },
+      {
+        "speaker": "司会",
+        "text": "1つ目、リリースは来月15日"
+      },
+      {
+        "speaker": "司会",
+        "text": "2つ目、担当は佐藤さん"
+      },
+      {
+        "speaker": "司会",
+        "text": "3つ目、次回は来週木曜"
+      },
+      {
+        "speaker": "田中",
+        "text": "はい"
+      },
+      {
+        "speaker": "佐藤",
+        "text": "了解です"
+      }
+    ],
+    "label": "ambiguous",
+    "humanAgreement": "split",
+    "acceptable": [
+      "SILENCE",
+      "WAIT",
+      "TABLE"
+    ]
+  }
+]

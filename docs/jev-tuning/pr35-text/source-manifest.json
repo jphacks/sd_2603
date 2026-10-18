@@ -1,0 +1,45 @@
+{
+  "pr": "https://github.com/jphacks/sd_2603/pull/35",
+  "commit": "90d82bd6968b4d2163c01a72319003869df2b7b7",
+  "datasets": {
+    "canvas": {
+      "n": 54,
+      "bytes": 77398,
+      "sha256": "ce238a6ce7838c1f5936dd171487ab8221af4d09d134d8d286a54ae45d11a7b4",
+      "turns": 398
+    },
+    "derail": {
+      "n": 36,
+      "bytes": 39055,
+      "sha256": "24637c7afc8f28af11bccdafb5fd1b411a497551ac6c8fffc42b9f28625b908b",
+      "turns": 239
+    },
+    "derail-hard": {
+      "n": 47,
+      "bytes": 72602,
+      "sha256": "586891c86e8198d5ad3d4d6f9a34efcb001e529bb736595bd5666eb2843caaed",
+      "turns": 412
+    },
+    "derail-multi": {
+      "n": 32,
+      "bytes": 95748,
+      "sha256": "78e0cd7196872a90da0d862f00d140897e77e1661b8dd05cd4565b8dbbccf9ba",
+      "turns": 476
+    }
+  },
+  "n": 169,
+  "uniqueExactInputs": 169,
+  "textOnly": true,
+  "excludedMetadata": [
+    "label",
+    "humanAgreement",
+    "note",
+    "expectedNudge",
+    "scenario",
+    "category",
+    "group",
+    "phase",
+    "cutAt",
+    "boss"
+  ]
+}
