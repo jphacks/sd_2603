@@ -4,7 +4,7 @@ import { isVoicedPcm } from './pipeline.mjs';
 const PCM_RATE = 16000;
 
 /** Send the first utterance live; hold only later utterances while its final is pending. */
-export function createSegmentedTranscriber({ transcribe, onPart, onPendingChange = () => {}, onError = () => {}, signal, silenceMs = 1200, maxSegmentMs = 45000, maxBufferedBytes = 3_200_000, finalTimeoutMs = 15000 }) {
+export function createSegmentedTranscriber({ transcribe, onPart, onPendingChange = () => {}, onError = () => {}, signal, silenceMs = 1200, maxSegmentMs = 10000, maxBufferedBytes = 3_200_000, finalTimeoutMs = 15000 }) {
   const silenceSamples = PCM_RATE * silenceMs / 1000;
   const maxSegmentBytes = PCM_RATE * 2 * maxSegmentMs / 1000;
   let preRoll = [];

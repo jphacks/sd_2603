@@ -4,8 +4,8 @@ const target = process.argv[2];
 if (!['preview', 'production'].includes(target)) {
   throw new Error('Expected preview or production');
 }
-// Vercel build reads the downloaded environment file. Force Mock even when
-// project settings change; never print the downloaded secrets into CI logs.
+// The build and local smoke test use Mock without paid API calls. Deployment
+// runtime settings are selected separately in ci-deploy.yml. Never log secrets.
 const path = `.vercel/.env.${target}.local`;
 const original = await readFile(path, 'utf8');
 const lines = original.split(/\r?\n/).filter(line =>

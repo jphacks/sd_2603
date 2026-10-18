@@ -1,4 +1,5 @@
 import type { JudgeInput, JudgeResult } from "../judge/types";
+import { parseMeetingSelection } from "./meeting.ts";
 import { ScoreSchema, expectedInterval } from "./schema.ts";
 import type { Envelope, Snapshot } from "./schema.ts";
 
@@ -12,6 +13,9 @@ const codes: Record<string, Snapshot["reasonCode"]> = {
 };
 export function createMonitorStore(now = Date.now) {
   const sessions = new Map<string, { data: Envelope; touched: number }>();
+  const meetings = new Map<string, string>();
+  let activeSessionId: string | null = null;
+  const ended = new Set<string>();
   function entry(id: string) {
     const time = now();
     for (const [key, value] of sessions)
@@ -28,7 +32,37 @@ export function createMonitorStore(now = Date.now) {
     value.touched = time;
     return value.data;
   }
+  function registerMeeting(id: string, reference: string) {
+    const selection = parseMeetingSelection(reference);
+    if (selection?.kind !== "meeting") return;
+    entry(id);
+    meetings.set(selection.value, id);
+    for (const [key, session] of meetings)
+      if (!sessions.has(session)) meetings.delete(key);
+  }
   return {
+    registerMeeting,
+    resolveMeeting(reference: string) {
+      const selection = parseMeetingSelection(reference);
+      if (selection?.kind !== "meeting") return null;
+      const id = meetings.get(selection.value);
+      return id && sessions.has(id) ? id : null;
+    },
+    activate(id: string, meetingUrl?: string) {
+      entry(id);
+      if (meetingUrl) registerMeeting(id, meetingUrl);
+      ended.delete(id);
+      activeSessionId = id;
+    },
+    deactivate(id: string) {
+      if (activeSessionId === id) activeSessionId = null;
+      ended.add(id);
+      if (ended.size > 32) ended.delete(ended.values().next().value!);
+    },
+    activeSession() {
+      if (activeSessionId && !sessions.has(activeSessionId)) activeSessionId = null;
+      return activeSessionId;
+    },
     read(id: string): Envelope {
       const data = entry(id);
       data.history = data.history
@@ -38,6 +72,8 @@ export function createMonitorStore(now = Date.now) {
     },
     record(id: string, input: JudgeInput, result: JudgeResult) {
       const data = entry(id);
+      // CLI/worker meetings can begin evaluating without the web join endpoint.
+      if ((!activeSessionId || activeSessionId === "judge") && !ended.has(id)) activeSessionId = id;
       const previous = data.snapshot;
       const sequence = (previous?.sequence ?? 0) + 1;
       const scores = ScoreSchema.safeParse(result.diagnostic);

@@ -57,6 +57,12 @@ try {
       expected === 'INTERVENE' ? 'string' : null);
   }
   assert.equal((await request('/api/test-ai')).status, 403);
+  const initialMonitor = await (await request('/api/monitor')).json();
+  assert.equal(initialMonitor.sessionId, 'judge');
+  const missingMeeting = await (await request('/api/monitor?meeting=https%3A%2F%2Fmeet.google.com%2Fabc-defg-hij')).json();
+  assert.equal(missingMeeting.sessionId, null);
+  assert.equal(missingMeeting.snapshot, null);
+  assert.equal((await request('/api/monitor?meeting=https%3A%2F%2Fexample.com%2Fabc-defg-hij')).status, 400);
   const botId = randomUUID();
   const agenda = 'Synthetic device integration';
   const postControl = body => request('/api/recall/video', {
@@ -86,8 +92,34 @@ try {
   assert.equal(muted.action, 'WAIT');
   assert.equal(muted.manual, false);
   assert.equal((await event('unmute')).status, 200);
-  assert.equal((await (await postControl({ ...evaluate, secondsSinceLastIntervention: 60 })).json()).action, 'INTERVENE');
-  console.log('PASS: app startup, Mock SILENCE/WAIT/INTERVENE, device manual/mute, stale agenda cancellation, paid AI blocked.');
+  const pending = await (await postControl({ ...evaluate, secondsSinceLastIntervention: 60 })).json();
+  assert.equal(pending.action, 'INTERVENE');
+  const current = await request('/api/monitor');
+  assert.equal(current.status, 200);
+  const monitored = await current.json();
+  assert.equal(monitored.sessionId, botId);
+  assert.equal(monitored.snapshot.sessionId, botId);
+  assert.equal(monitored.snapshot.decision, 'INTERVENE');
+  const selected = await (await request(`/api/monitor/${botId}`)).json();
+  assert.deepEqual(selected.snapshot, monitored.snapshot);
+  const display = recommendation => ({
+    mode: 'display', ...snapshot, generation: 0, requestId: randomUUID(),
+    recommendationId: recommendation.recommendationId,
+    result: { action: 'INTERVENE', reason: 'Manual request', message: 'forged', manual: true },
+  });
+  assert.equal((await event('tangent_ok')).status, 200);
+  // Device mute arriving while a recommendation waits must cancel before any
+  // external output; a caller cannot manufacture the manual bypass.
+  assert.equal((await postControl(display(pending))).status, 409);
+  const waiting = await (await postControl({ ...evaluate, secondsSinceLastIntervention: 60 })).json();
+  assert.equal(waiting.action, 'WAIT');
+  assert.equal((await postControl(display(pending))).status, 409);
+  assert.equal((await event('unmute')).status, 200);
+  const noOutput = await postControl(display(waiting));
+  assert.equal(noOutput.status, 200);
+  assert.equal((await noOutput.json()).video, 'unchanged');
+  assert.equal((await postControl({ ...display(waiting), recommendationId: randomUUID() })).status, 409);
+  console.log('PASS: app startup, Mock SILENCE/WAIT/INTERVENE, active meeting monitor, device manual/mute, server-owned deferred decisions, stale agenda/recommendation cancellation, paid AI blocked.');
 } finally {
   server.kill('SIGTERM');
   await Promise.race([exited, setTimeout(5000)]);

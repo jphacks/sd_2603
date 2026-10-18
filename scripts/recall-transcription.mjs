@@ -143,7 +143,7 @@ wss.on('connection', socket => {
         decide: input => { counts.evaluations++; return videoRequest({ mode: 'evaluate', ...input }); },
         display: ({ botId, agenda, agendaVersion, result, generation, signal }) => {
           counts.displayAttempts++;
-          return videoRequest({ mode: 'display', botId, agenda, agendaVersion, result, generation, requestId: randomUUID() }, signal);
+          return videoRequest({ mode: 'display', botId, agenda, agendaVersion, result, recommendationId: result.recommendationId, generation, requestId: randomUUID() }, signal);
         },
         restoreIdle: ({ botId, signal }) => {
           counts.idleAttempts++;

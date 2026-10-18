@@ -7,6 +7,7 @@ import { deviceStore } from "@/lib/device/state";
 import { JevError } from "@/lib/judge/jev";
 import { applyVideoDecision, authorizedControl, displayVideoResult, restoreIdleVideo } from "@/lib/recall/controller";
 import { outputVideo, RecallVideoError, renderVideoJpeg } from "@/lib/recall/video";
+import { assertDisplayControls, RecommendationCancelledError, recommendationStore } from "@/lib/recall/recommendation";
 
 const MAX_REQUEST_BYTES = 12_000;
 const BotIdSchema = z.string().uuid();
@@ -26,6 +27,7 @@ const DisplayRequestSchema = z.object({
   agenda: z.string().trim().min(1).max(AGENDA_CHAR_LIMIT),
   agendaVersion: AgendaVersionSchema,
   requestId: z.string().uuid(),
+  recommendationId: z.string().uuid(),
   generation: z.number().int().min(0),
   result: z.object({
     action: z.enum(["SILENCE", "WAIT", "INTERVENE"]),
@@ -103,8 +105,13 @@ export async function POST(request: Request) {
       return Response.json({ ...result, agenda });
     }
     if (input.mode === "evaluate") {
+      // Starting any newer evaluation invalidates its predecessor, even when
+      // the new result is WAIT/SILENCE or evaluation fails.
+      const recommendationId = recommendationStore.begin(input);
       const judge = withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value, () => assertAgendaSnapshot(input.botId, input.agenda, input.agendaVersion)));
-      return Response.json(await judge(input));
+      const result = await judge(input);
+      recommendationStore.complete(input, recommendationId, result);
+      return Response.json({ ...result, recommendationId });
     }
     if (input.mode === "display") {
       const key = `${input.botId}:${input.requestId}`;
@@ -113,9 +120,20 @@ export async function POST(request: Request) {
         await displaying.get(key);
         return Response.json({ video: "unchanged", duplicate: true });
       }
-      const task = displayVideoResult(input, {
+      // Never trust a caller-supplied manual flag, reason, or model decision.
+      const recommendation = recommendationStore.read(input, input.recommendationId);
+      const checkControls = () => assertDisplayControls(recommendation, {
+        mutedUntil: deviceStore.read(input.botId).mutedUntil,
+        lastIntervenedAt: monitorStore.read(input.botId).snapshot?.lastIntervenedAt ?? null,
+      });
+      checkControls();
+      const task = displayVideoResult({ ...input, result: recommendation }, {
         ...videoDependencies,
-        guard: () => withAgendaSnapshot(input, () => confirmQuiet(input.botId, input.generation)),
+        guard: () => withAgendaSnapshot(input, async () => {
+          await confirmQuiet(input.botId, input.generation);
+          recommendationStore.read(input, input.recommendationId);
+          checkControls();
+        }),
         onIntervened: (id, kind) => {
           monitorStore.intervened(id);
           deviceStore.intervened(id, kind);
@@ -125,11 +143,15 @@ export async function POST(request: Request) {
       let result;
       try { result = await task; } finally { displaying.delete(key); }
       displayed.add(key);
+      recommendationStore.invalidate(input.botId);
       if (displayed.size > 100) displayed.delete(displayed.values().next().value!);
       return Response.json(result);
     }
     return Response.json(await restoreIdleVideo(input.botId, videoDependencies));
   } catch (error) {
+    if (error instanceof RecommendationCancelledError) {
+      return Response.json({ error: "Recommendation expired, superseded, or suppressed", cancelled: true }, { status: 409 });
+    }
     if (error instanceof AgendaChangedError) {
       return Response.json({ error: "Agenda changed or updating; recommendation cancelled", cancelled: true }, { status: 409 });
     }

@@ -16,9 +16,9 @@ Loopback HTTP/WebSocket access must be permitted by the execution environment.
 
 Each scenario starts the real transcription worker in a separate process, replays a
 generated mono PCM16 WAV as Recall mixed-audio WebSocket frames, and traverses the
-real resampler, streaming SDK, final-only segmentation, quiet gate, HTTP control
-contract, and eight-second automatic idle timer. Scenarios run in parallel and
-typically take about 15–20 seconds together. Processes, connections, and temporary
+real resampler, streaming SDK, final-only segmentation, separate judgment/display
+gates, HTTP control contract, and eight-second automatic idle timer. Scenarios run
+in parallel and typically take about one minute together. Processes, connections, and temporary
 session files are cleaned up after success or failure.
 
 The Gateway WebSocket is replaced by a fixed-transcript transport. All external
@@ -35,6 +35,7 @@ judgments include two initial WAIT responses to represent accumulating context.
 | Sustained detour | INTERVENE twice on new finals | One display, one idle |
 | Stalled discussion | Stalled INTERVENE | One display, one idle |
 | Speech resumes during judgment | Delayed stale INTERVENE, then new final | No interruption; later one display, one idle |
+| Continuous 57.4-second speech | WAIT below three finals, then off-agenda INTERVENE | Judgments while speaking; display only after quiet, then one idle |
 
 ## Reading the report
 
@@ -46,11 +47,22 @@ judgments include two initial WAIT responses to represent accumulating context.
   the display request. It includes the quiet window and local processing, not real
   provider/network or end-to-end Meet latency.
 - `displayToIdleMs` measures the real eight-second worker timer to the idle request.
-- `finalizedTurns` counts HTTP evaluations whose final transcript history was
-  checked against the fixture. It is not a count of human speaker turns.
+- `finalizedTurns` counts the longest final transcript history checked against
+  the fixture. It is not a count of human speaker turns.
+- `evaluationsDuringSpeech` and `contextEligibleEvaluationsDuringSpeech` report
+  continuous-case requests before the final speech packet. The latter preserves
+  the production three-final context minimum and must be at least two so the
+  off-agenda confirmation policy can progress without manual playback pauses.
 
 PCM is deliberately sent faster than real time; silence segmentation uses frame
-duration while intervention/idle timers use real elapsed time. The generated tone
+duration while judgment/intervention/idle timers use real elapsed time. The
+continuous case sends 287 voiced 200-ms frames with a 150-ms wall-clock cadence:
+57.4 seconds of audio over approximately 43 seconds with no inserted silence.
+It uses the production ten-second segment limit and decision rate, requires six
+finalized segments, checks at least two context-eligible requests during speech,
+checks zero displays throughout speech, and then observes the eight-second idle
+restoration. It does not use injected final events or shorten the worker timers.
+The generated tone
 contains no speech. Therefore a green report proves deterministic pipeline policy
 regression coverage, **not transcription accuracy, semantic judgment quality,
 rendering correctness, or a successful live meeting**. Keep Jev evaluation results

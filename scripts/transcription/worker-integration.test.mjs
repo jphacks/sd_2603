@@ -7,6 +7,7 @@ import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { randomUUID } from 'node:crypto';
 import { WebSocket } from 'ws';
 
 const workerPath = fileURLToPath(new URL('../recall-transcription.mjs', import.meta.url));
@@ -31,6 +32,8 @@ async function setup(transcripts, action = 'WAIT') {
   await mkdir(join(directory, '.recall'));
   await writeFile(join(directory, '.recall/current.json'), JSON.stringify({ id: botId, agenda: 'Synthetic integration agenda', audioEnabled: true, createdAt: new Date().toISOString() }));
   const requests = [];
+  const requestTimes = [];
+  const recommendationIds = [];
   let agendaSnapshot;
   const control = createServer((request, response) => {
     if (request.url !== '/api/recall/video' || request.headers.authorization !== `Bearer ${controlToken}`) { response.writeHead(401); response.end(); return; }
@@ -39,9 +42,12 @@ async function setup(transcripts, action = 'WAIT') {
     request.on('end', () => {
       const input = JSON.parse(body);
       requests.push(input);
+      requestTimes.push(Date.now());
+      const recommendationId = input.mode === 'evaluate' ? randomUUID() : undefined;
+      if (recommendationId) recommendationIds.push(recommendationId);
       response.writeHead(200, { 'Content-Type': 'application/json' });
       response.end(JSON.stringify(input.mode === 'agenda' ? agendaSnapshot ?? { agenda: input.agenda, agendaVersion: 'test-v1' } : input.mode === 'idle' ? { video: 'idle' }
-        : { action, reason: 'Discussion appears off agenda', message: null, ...(input.mode === 'display' ? { video: 'off_agenda' } : {}) }));
+        : { action, reason: 'Discussion appears off agenda', message: null, ...(recommendationId ? { recommendationId } : {}), ...(input.mode === 'display' ? { video: 'off_agenda' } : {}) }));
     });
   });
   await new Promise(resolve => control.listen(0, '127.0.0.1', resolve));
@@ -85,7 +91,7 @@ async function setup(transcripts, action = 'WAIT') {
     socket.on('error', () => {});
     await once(socket, 'open');
     const push = pcm => socket.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id: botId }, data: { buffer: pcm.toString('base64') } } }));
-    return { requests, socket, setAgenda(value) { agendaSnapshot = value; }, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
+    return { requests, requestTimes, recommendationIds, socket, setAgenda(value) { agendaSnapshot = value; }, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
   } catch (error) { await cleanup(); throw error; }
 }
 
@@ -117,7 +123,7 @@ test('empty finish is isolated and next utterance still reaches the local WAIT A
   } finally { await trial.cleanup(); }
 });
 
-test('real worker confirms off-agenda on new finals then automatically restores idle without another evaluation', { timeout: 20000 }, async () => {
+test('real worker confirms off-agenda on new finals then automatically restores idle without another evaluation', { timeout: 35000 }, async () => {
   const trial = await setup(['synthetic first detour', 'synthetic continuing detour'], 'INTERVENE');
   try {
     trial.utterance();
@@ -125,28 +131,40 @@ test('real worker confirms off-agenda on new finals then automatically restores 
     assert.deepEqual(trial.requests.map(request => request.mode), ['agenda', 'evaluate']);
     trial.utterance();
     await waitFor(() => trial.requests.some(request => request.mode === 'idle') || trial.socket.readyState !== WebSocket.OPEN,
-      'No automatic idle after the intervention', 14000);
+      'No automatic idle after the intervention', 23000);
     assert.deepEqual(trial.requests.map(request => request.mode), ['agenda', 'evaluate', 'agenda', 'evaluate', 'display', 'idle'], trial.output());
+    const [firstEvaluation, secondEvaluation] = trial.requests.flatMap((request, index) => request.mode === 'evaluate' ? [trial.requestTimes[index]] : []);
+    // Server-observed timestamps allow 100ms for loopback transport/scheduling;
+    // the production gate's ten-second interval is not overridden in this test.
+    assert.ok(secondEvaluation - firstEvaluation >= 9900, 'new finals must respect the ten-second evaluation cadence');
+    assert.ok(secondEvaluation - firstEvaluation < 20000, 'confirmation must arrive within the twenty-second vote lifetime');
+    const displayIndex = trial.requests.findIndex(request => request.mode === 'display');
+    assert.equal(trial.requests[displayIndex].recommendationId, trial.recommendationIds[1], 'display forwards the latest server recommendation token');
+    assert.match(trial.requests[displayIndex].recommendationId, /^[0-9a-f-]{36}$/);
+    assert.ok(trial.requestTimes.at(-1) - trial.requestTimes[displayIndex] >= 7900, 'idle restoration waits eight seconds after display');
     assert.equal(trial.requests.at(-1).botId, botId);
     assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());
     assert.equal(trial.output().includes('Audio processing stopped'), false);
   } finally { await trial.cleanup(); }
 });
 
-test('real worker refreshes agenda and cannot confirm the old agenda recommendation', { timeout: 15000 }, async () => {
+test('real worker refreshes agenda and cannot confirm the old agenda recommendation', { timeout: 40000 }, async () => {
   const trial = await setup(['old agenda detour', 'new agenda first detour', 'new agenda continuing detour'], 'INTERVENE');
   try {
     trial.utterance();
     await waitFor(() => trial.requests.filter(request => request.mode === 'evaluate').length === 1, 'No old agenda evaluation');
     trial.setAgenda({ agenda: 'Updated integration agenda', agendaVersion: 'test-v2' });
     trial.utterance();
-    await waitFor(() => trial.requests.filter(request => request.mode === 'evaluate').length === 2, 'No new agenda evaluation');
+    await waitFor(() => trial.requests.filter(request => request.mode === 'evaluate').length === 2, 'No new agenda evaluation', 13000);
     assert.equal(trial.requests.some(request => request.mode === 'display'), false);
     trial.utterance();
-    await waitFor(() => trial.requests.some(request => request.mode === 'display'), 'No new agenda confirmation');
+    await waitFor(() => trial.requests.some(request => request.mode === 'display'), 'No new agenda confirmation', 13000);
     const display = trial.requests.find(request => request.mode === 'display');
     assert.equal(display.agenda, 'Updated integration agenda');
     assert.equal(display.agendaVersion, 'test-v2');
+    assert.equal(display.recommendationId, trial.recommendationIds[2], 'old-agenda tokens cannot supply the confirmed display');
+    const evaluationTimes = trial.requests.flatMap((request, index) => request.mode === 'evaluate' ? [trial.requestTimes[index]] : []);
+    for (let i = 1; i < evaluationTimes.length; i++) assert.ok(evaluationTimes[i] - evaluationTimes[i - 1] >= 9900, 'agenda changes do not bypass the evaluation cadence');
     assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());
   } finally { await trial.cleanup(); }
 });

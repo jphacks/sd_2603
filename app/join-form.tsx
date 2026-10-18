@@ -2,12 +2,15 @@
 
 import { useRef, useState } from "react";
 import { normalizeGoogleMeetUrl } from "@/lib/recall/meeting-url";
+import Link from "next/link";
+import { MonitorConnection } from "@/components/score-monitor/MonitorConnection";
 
 type MaterialItem = { name: string; saved: boolean; message: string | null };
 
 const MAX_SELECTED_FILES = 5;
 
 export function JoinForm() {
+  const [monitorSessionId, setMonitorSessionId] = useState<string | null>(null);
   const [meetingUrl, setMeetingUrl] = useState("");
   const [agenda, setAgenda] = useState("");
   const [controlToken, setControlToken] = useState("");
@@ -58,6 +61,7 @@ export function JoinForm() {
       }
       sentId = body.id;
       setBotId(body.id);
+      setMonitorSessionId(body.id);
       if (files.length === 0) {
         setNotice(`ボットを送信しました ${body.id}`);
         return;
@@ -118,6 +122,7 @@ export function JoinForm() {
         return;
       }
       setBotId(null);
+      setMonitorSessionId(null);
       setNotice(body.alreadyGone ? "すでに退出しています" : "退出しました");
     } catch {
       setError("退出に失敗しました");
@@ -234,6 +239,14 @@ export function JoinForm() {
           </ul>
         ) : null}
       </form>
+      {monitorSessionId && (
+        <section aria-label="この会議のJev判定" className="rounded-xl bg-[#090f13] p-4">
+          <Link className="mb-4 block text-sm text-sky-200 underline" href={`/monitor?session=${encodeURIComponent(monitorSessionId)}`} target="_blank" rel="noopener noreferrer">
+            この会議の判定グラフを別画面で開く
+          </Link>
+          <MonitorConnection key={monitorSessionId} sessionId={monitorSessionId} />
+        </section>
+      )}
     </main>
   );
 }
