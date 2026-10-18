@@ -1,4 +1,5 @@
 import type { JudgeInput, JudgeResult } from "../judge/types";
+import { parseMeetingSelection } from "./meeting.ts";
 import { ScoreSchema, expectedInterval } from "./schema.ts";
 import type { Envelope, Snapshot } from "./schema.ts";
 
@@ -12,6 +13,7 @@ const codes: Record<string, Snapshot["reasonCode"]> = {
 };
 export function createMonitorStore(now = Date.now) {
   const sessions = new Map<string, { data: Envelope; touched: number }>();
+  const meetings = new Map<string, string>();
   let activeSessionId: string | null = null;
   const ended = new Set<string>();
   function entry(id: string) {
@@ -30,9 +32,25 @@ export function createMonitorStore(now = Date.now) {
     value.touched = time;
     return value.data;
   }
+  function registerMeeting(id: string, reference: string) {
+    const selection = parseMeetingSelection(reference);
+    if (selection?.kind !== "meeting") return;
+    entry(id);
+    meetings.set(selection.value, id);
+    for (const [key, session] of meetings)
+      if (!sessions.has(session)) meetings.delete(key);
+  }
   return {
-    activate(id: string) {
+    registerMeeting,
+    resolveMeeting(reference: string) {
+      const selection = parseMeetingSelection(reference);
+      if (selection?.kind !== "meeting") return null;
+      const id = meetings.get(selection.value);
+      return id && sessions.has(id) ? id : null;
+    },
+    activate(id: string, meetingUrl?: string) {
       entry(id);
+      if (meetingUrl) registerMeeting(id, meetingUrl);
       ended.delete(id);
       activeSessionId = id;
     },

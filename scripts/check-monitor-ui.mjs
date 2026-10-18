@@ -98,6 +98,23 @@ try {
   await page.getByText("● 実スコア未取得").waitFor();
   assert.equal(await page.locator(".jm-fill").count(), 0);
 
+  // The same pasted Meet URL and its short code must resolve to the Bot ID API response.
+  await page.route("**/api/monitor?meeting=*", route => {
+    assert.equal(new URL(route.request().url()).searchParams.get("meeting"), "https://meet.google.com/abc-defg-hij");
+    return route.fulfill({ json: data });
+  });
+  await page.goto(baseUrl + "/monitor");
+  await page.getByLabel("会議URL・Meetコード・Bot ID").fill("https://meet.google.com/abc-defg-hij");
+  await page.getByRole("button", { name: "表示する", exact: true }).click();
+  await page.getByText("72.5%", { exact: true }).waitFor();
+  assert.equal(await page.getByText("MTG IDが正しくありません。", { exact: true }).count(), 0);
+  await page.getByLabel("会議URL・Meetコード・Bot ID").fill("abc-defg-hij");
+  await page.getByRole("button", { name: "表示する", exact: true }).click();
+  await page.getByText("72.5%", { exact: true }).waitFor();
+  await page.goto(baseUrl + "/monitor?session=" + encodeURIComponent("https://example.com/abc-defg-hij"));
+  await page.getByRole("alert").filter({ hasText: "Google Meet" }).waitFor();
+  assert.equal(await page.getByLabel("会議URL・Meetコード・Bot ID").count(), 1);
+
   // Joining sends the meeting URL once and immediately connects its returned Bot ID.
   invalid = false;
   let joins = 0;
@@ -119,5 +136,5 @@ try {
   await browser.close();
 }
 console.log(
-  "PASS: vertical meters, split-screen layout, stale status, cooldown clock, invalid data, session reset, auto meeting selection/switch/leave, join UI connection",
+  "PASS: vertical meters, split-screen layout, stale status, cooldown clock, invalid data, session reset, auto meeting selection/switch/leave, Meet URL and code selection, recoverable invalid input, join UI connection",
 );
