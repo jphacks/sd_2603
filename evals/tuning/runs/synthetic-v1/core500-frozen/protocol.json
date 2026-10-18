@@ -1,0 +1,22 @@
+{
+  "version": "synthetic-campaign-v1",
+  "model": "typesafe-ai/jev-1.14.0",
+  "versions": [
+    "v2",
+    "v3",
+    "v4"
+  ],
+  "baseline": {
+    "questionVersion": "v3",
+    "driftThreshold": 0.6,
+    "stallThreshold": 0.6,
+    "relevanceThreshold": 0.6,
+    "uncertainThreshold": 0.4
+  },
+  "questionHash": "3bdf938989153aa259e7ed8dbce0fad441b005e11ed44de4ed888dc3ef1c2aaa",
+  "trainMetric": "fivefold group OOF semantic Macro-F1",
+  "validationRule": "choose among two Train-CV finalists and unchanged v3 baseline by semantic Macro-F1, then accuracy, then baseline proximity",
+  "inputComposition": "agenda plus explicit phase supplied to model; annotation/intents excluded",
+  "testRule": "baseline and selected policy only; never reselect",
+  "minimumCases": 500
+}

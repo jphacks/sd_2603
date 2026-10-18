@@ -77,3 +77,11 @@
 - 通常のTurbopackビルドは既知の環境制約（子プロセスのport bindがOperation not permitted）で失敗。Webpackビルドに切り替え、回帰テスト・型・Lintも再確認中。アプリの設定で回避する変更は加えない。
 
 - 最新回帰確認は全99テスト成功・TypeScript成功・Lint0エラー（既存警告1）。ロックとAPI呼び出し上限の2テストも含む。
+
+## 10:24 JST — core500固定版の受領
+
+- Proの5a52564を統合。`releases/core500/cases.json`は独立主ラベル500件、Train300/Validation100/Test100、100系列、第三者再確認39件、不確実3件（全件再確認済み）。
+- split原本SHAを維持し、release manifestの全500個別case hashと全体hashを照合。`integration-core500-check.json`へ記録。参照ID6種類はいずれも研究対応表に存在するが、全例へ共通して付く研究背景であり、各goldを論文が保証したものではない。
+- Proの再現スクリプトを統合側でも実行し、package/auditの8成果物がbyte-identical。これは固定済みGPT本文/ラベルの再梱包で、GPT生成の再現保証ではない。
+- 不変core500用runのpilot/Trainスコアはすべて共有キャッシュを再利用。追加APIは0。1000用の本文は最初の50件まで届いているが、採用件数はまだ決めず10:30点検を維持。
+- Webpackによる本番ビルド成功。通常Turbopackのport制約は以前と同じ既報の事象で、Nextのfeedback手順を確認した上で重複した報告下書きは作らない。

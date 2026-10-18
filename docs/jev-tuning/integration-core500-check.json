@@ -1,0 +1,35 @@
+{
+  "sourceCommit": "5a52564",
+  "release": "core500",
+  "releaseCasesHashPythonCanonical": "49afcd95c9eb2888c27139586da9eb94d98d97cf9d27f1f0930dccba8fa2108b",
+  "all500CaseHashesVerified": true,
+  "count": 500,
+  "sourceGroups": 100,
+  "splitCounts": {
+    "validation": 100,
+    "train": 300,
+    "test": 100
+  },
+  "researchReferenceCounts": {
+    "DR01": 500,
+    "DR02": 500,
+    "ST08": 500,
+    "ST10": 500,
+    "ST12": 500,
+    "ST13": 500
+  },
+  "unknownResearchReferences": [],
+  "reviewed": 39,
+  "uncertain": 3,
+  "authors": {
+    "author_c": 165,
+    "author_a": 170,
+    "author_b": 165
+  },
+  "reproduction": "scripts/reproduce.py verified byte-identical 8 package/audit artifacts",
+  "limitations": [
+    "Research IDs trace mechanisms, not gold labels or copied real meeting transcripts.",
+    "Reference presence is checked against research-map; no new primary-source access is claimed.",
+    "Canonical Python case hash and JS adapted dataset hash serialize different objects and are deliberately distinct."
+  ]
+}
