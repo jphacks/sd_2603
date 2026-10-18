@@ -1,8 +1,8 @@
-// AIDA's three faces, in the same coordinates as docs/brand/aida-face-*.svg.
+// AIDA's four faces, in the same coordinates as docs/brand/aida-face-*.svg.
 // The frame occupies 0..314 x 0..309; the "notice" lines reach above and to the right.
 // Keep these shapes in sync with the SVG files and firmware/src/main.cpp.
 
-export type FaceKind = "watching" | "nudge" | "redirect";
+export type FaceKind = "watching" | "nudge" | "redirect" | "angry";
 
 export const FACE_VIEWBOX = { x: 0, y: -34, width: 384, height: 344 } as const;
 export const FACE_FRAME = { width: 314, height: 309 } as const;
@@ -25,6 +25,14 @@ const PARTS: Record<FaceKind, string[]> = {
     FRAME,
     `<path d="M68.7 108L112.5 133L68.8 158.7M244.7 108.2L199.5 133L243.7 158.7" stroke-width="16.3"/>`,
     `<path d="M142.5 177.5L119 202L142.5 227.5M119 202H180A13.5 13.5 0 0 1 193.5 215.5V238.5" stroke-width="17.5"/>`,
+    NOTICE,
+  ],
+  // Shown when interventions pile up without the meeting returning.
+  angry: [
+    FRAME,
+    `<path d="M74 100L116 112M240 100L198 112" stroke-width="18"/>`,
+    `<path d="M92.6 132V152M219.5 132V152" stroke-width="24"/>`,
+    `<path d="M128 222L156.5 208L185 222" stroke-width="17"/>`,
     NOTICE,
   ],
 };

@@ -19,6 +19,8 @@ type Dependencies = {
   output: (botId: string, jpeg: Buffer) => Promise<void>;
   guard?: () => Promise<void>;
   onIntervened?: (botId: string, kind: Exclude<VideoView["kind"], "idle">, cause?: StallCause) => void;
+  /** Server-side escalation: whether this card should be the firmer, angry one. */
+  angry?: (botId: string, kind: Exclude<VideoView["kind"], "idle">, cause?: StallCause) => boolean;
 };
 
 export async function applyVideoDecision(
@@ -31,22 +33,24 @@ export async function applyVideoDecision(
 
 export async function displayVideoResult(
   input: { botId: string; agenda: string; result: JudgeResult },
-  dependencies: Pick<Dependencies, "render" | "output" | "guard" | "onIntervened">,
+  dependencies: Pick<Dependencies, "render" | "output" | "guard" | "onIntervened" | "angry">,
 ) {
   const { result } = input;
   if (result.action !== "INTERVENE") {
     return { ...result, video: "unchanged" as const };
   }
-  const view: VideoView = result.reason === SILENCE_REASON
+  const base: VideoView = result.reason === SILENCE_REASON
     ? { kind: "stalled", cause: "silence" }
     : result.reason === STALLED_REASON
       ? { kind: "stalled" }
       : { kind: "off_agenda", agenda: input.agenda };
+  const angry = dependencies.angry?.(input.botId, base.kind, base.kind === "stalled" ? base.cause : undefined) === true;
+  const view: VideoView = angry ? { ...base, angry } : base;
   const jpeg = await dependencies.render(view);
   await dependencies.guard?.();
   await dependencies.output(input.botId, jpeg);
   dependencies.onIntervened?.(input.botId, view.kind, view.kind === "stalled" ? view.cause : undefined);
-  return { ...result, video: view.kind };
+  return { ...result, video: view.kind, ...(angry ? { angry } : {}) };
 }
 
 export async function restoreIdleVideo(

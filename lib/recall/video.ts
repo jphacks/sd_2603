@@ -30,8 +30,8 @@ const MAX_IMAGE_BYTES = 1_300_000;
 
 export type VideoView =
   | { kind: "idle" }
-  | { kind: "off_agenda"; agenda: string }
-  | { kind: "stalled"; cause?: "silence" | "repetition" };
+  | { kind: "off_agenda"; agenda: string; angry?: boolean }
+  | { kind: "stalled"; cause?: "silence" | "repetition"; angry?: boolean };
 
 function escapeXml(value: string) {
   return value.replace(/[&<>"']/g, (character) => ({
@@ -52,6 +52,8 @@ const FACES: Record<VideoView["kind"], FaceKind> = {
   stalled: "nudge",
   off_agenda: "redirect",
 };
+// Interventions that pile up without the meeting returning get the angry face.
+const faceFor = (view: VideoView): FaceKind => view.kind !== "idle" && view.angry ? "angry" : FACES[view.kind];
 
 // Meet may crop the 16:9 camera to its tile, so keep everything inside the
 // centered 4:3 area (960px wide).
@@ -69,12 +71,14 @@ export function videoCopy(view: VideoView): { message: string | null; lines: str
     return { message: "ここまでで、気になる点はありますか？", lines: ["ここまでで、", "気になる点はありますか？"] };
   }
   if (view.kind === "stalled") {
-    const message = "ここまでの意見を、整理しませんか？";
+    // Firmer statements replace the question once interventions pile up.
+    const message = view.angry ? "一度、ここまでを整理しましょう。" : "ここまでの意見を、整理しませんか？";
     return { message, lines: [message] };
   }
-  const message = `「${view.agenda.trim()}」に戻りませんか？`;
+  const tail = view.angry ? "に戻りましょう。" : "に戻りませんか？";
+  const message = `「${view.agenda.trim()}」${tail}`;
   if (Array.from(message).length <= LINE_CHARACTERS) return { message, lines: [message] };
-  return { message, lines: [`「${truncate(view.agenda, AGENDA_CHARACTERS)}」`, "に戻りませんか？"] };
+  return { message, lines: [`「${truncate(view.agenda, AGENDA_CHARACTERS)}」`, tail] };
 }
 
 export function videoSvg(view: VideoView) {
@@ -91,7 +95,7 @@ export function videoSvg(view: VideoView) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" viewBox="0 0 ${IMAGE_WIDTH} ${IMAGE_HEIGHT}">
   <title>${escapeXml(message ?? "AIDA")}</title>
   <rect width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" fill="#ffffff"/>
-  ${faceGroup(FACES[view.kind], Math.round(left * 10) / 10, Math.round(top * 10) / 10, FACE_SCALE, "#000000")}
+  ${faceGroup(faceFor(view), Math.round(left * 10) / 10, Math.round(top * 10) / 10, FACE_SCALE, "#000000")}
   ${textMarkup}
 </svg>`;
 }

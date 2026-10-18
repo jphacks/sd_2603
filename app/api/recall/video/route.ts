@@ -3,7 +3,9 @@ import { AGENDA_CHAR_LIMIT, AgendaChangedError, assertAgendaSnapshot, getAgendaS
 import { monitoredJudge } from "@/lib/monitor/judge";
 import { monitorStore } from "@/lib/monitor/store";
 import { withDeviceControls } from "@/lib/device/judge";
-import { deviceStore } from "@/lib/device/state";
+import { angryAfter, deviceStore, type InterventionKind, type StallCause } from "@/lib/device/state";
+import { resolvesIntervention } from "@/lib/judge/resolution";
+import type { JudgeResult } from "@/lib/judge/types";
 import { JevError } from "@/lib/judge/jev";
 import { silenceJudge } from "@/lib/judge/silence";
 import { applyVideoDecision, authorizedControl, displayVideoResult, restoreIdleVideo } from "@/lib/recall/controller";
@@ -44,6 +46,20 @@ const videoDependencies = { render: renderVideoJpeg, output: outputVideo };
 const displayed = new Set<string>();
 const displaying = new Map<string, Promise<unknown>>();
 class SpeechResumedError extends Error {}
+
+// Escalation lives on the server: the worker never decides the level or the face.
+function angryCard(botId: string, kind: InterventionKind, cause?: StallCause) {
+  const threshold = angryAfter();
+  return threshold > 0 && deviceStore.nextLevel(botId, kind, cause) >= threshold;
+}
+
+// A judgement that shows the meeting back on track resets the escalation, and
+// tells the worker it may take down the card it is holding.
+function noteResolution(botId: string, result: JudgeResult) {
+  const resolved = resolvesIntervention(result);
+  if (resolved) deviceStore.resolve(botId);
+  return resolved;
+}
 
 async function confirmQuiet(botId: string, generation: number) {
   if (process.env.ENABLE_REALTIME_TRANSCRIPTION !== "true") return;
@@ -100,12 +116,13 @@ export async function POST(request: Request) {
         judge: withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value, validate)),
         ...videoDependencies,
         guard: async () => validate(),
+        angry: angryCard,
         onIntervened: (id, kind, cause) => {
           monitorStore.intervened(id);
           deviceStore.intervened(id, kind, cause);
         },
       });
-      return Response.json({ ...result, agenda });
+      return Response.json({ ...result, agenda, resolved: noteResolution(input.botId, result) });
     }
     if (input.mode === "evaluate") {
       // Starting any newer evaluation invalidates its predecessor, even when
@@ -114,7 +131,7 @@ export async function POST(request: Request) {
       const judge = withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value, () => assertAgendaSnapshot(input.botId, input.agenda, input.agendaVersion)));
       const result = await judge(input);
       recommendationStore.complete(input, recommendationId, result);
-      return Response.json({ ...result, recommendationId });
+      return Response.json({ ...result, recommendationId, resolved: noteResolution(input.botId, result) });
     }
     if (input.mode === "silence") {
       // Same recommendation/display guard as "evaluate", without the paid judge.
@@ -146,6 +163,7 @@ export async function POST(request: Request) {
           recommendationStore.read(input, input.recommendationId);
           checkControls();
         }),
+        angry: angryCard,
         onIntervened: (id, kind, cause) => {
           monitorStore.intervened(id);
           deviceStore.intervened(id, kind, cause);
@@ -159,7 +177,9 @@ export async function POST(request: Request) {
       if (displayed.size > 100) displayed.delete(displayed.values().next().value!);
       return Response.json(result);
     }
-    return Response.json(await restoreIdleVideo(input.botId, videoDependencies));
+    const restored = await restoreIdleVideo(input.botId, videoDependencies);
+    deviceStore.cleared(input.botId);
+    return Response.json(restored);
   } catch (error) {
     if (isRecommendationCancelled(error)) {
       return Response.json({ error: "Recommendation expired, superseded, or suppressed", cancelled: true }, { status: 409 });

@@ -45,8 +45,9 @@ M5 が 2 秒ごとに読む。`Authorization: Bearer <DEVICE_TOKEN>` を付け�
 | --- | --- |
 | `seq` | スナップショットの連番。古い応答を捨てる。ストアの `sequence` を使う |
 | `state` | `silence` / `wait` / `intervene`。まだ判定が1回もないときは `unknown`。画面は状態の色ではなく `face` の表情で表す |
-| `view` | `idle` / `off_agenda` / `stalled`。`videoCopy()` と同じ区分。最後の実介入から一定時間だけ非 `idle`、以降は `idle` に戻す |
-| `face` | `watching` / `nudge` / `redirect`。画面に描く AIDA の表情。`view` が `idle` なら `watching`、`stalled` なら `nudge`、`off_agenda` なら `redirect`。Meet のカメラカードと同じ対応（`DESIGN.md`） |
+| `view` | `idle` / `off_agenda` / `stalled`。`videoCopy()` と同じ区分。介入のカードが Meet に出ているあいだ（会議が戻るまで、最大 `INTERVENTION_MAX_HOLD_SECONDS` 秒）は非 `idle`。ワーカーが待機表示に戻すと `idle` |
+| `face` | `watching` / `nudge` / `redirect` / `angry`。画面に描く AIDA の表情。`view` が `idle` なら `watching`、`stalled` なら `nudge`、`off_agenda` なら `redirect`。戻らないまま介入が重なり `level` が `ANGRY_AFTER_INTERVENTIONS`（既定 2）以上なら `angry`（沈黙の声かけは除く）。Meet のカメラカードと同じ対応（`DESIGN.md`） |
+| `level` | 表示中のカードの段階。`idle` なら 0、最初の介入は 1、会議が戻らないまま重なるごとに増える |
 | `title` / `agendaShort` | 画面用の短い文言。アジェンダは 12 文字程度に切る。M5 の画面は小さいので 2 行まで |
 | `scores` | 0〜100 の整数。ストアの 0〜1 の実測値を変換。未取得は `null`（0 として扱わない） |
 | `cooldownSec` | 次に介入できるまでの残り秒数（`remainingCooldown`） |
@@ -104,7 +105,7 @@ M5 が 2 秒ごとに読む。`Authorization: Bearer <DEVICE_TOKEN>` を付け�
 - `app/api/device/[sessionId]` と `.../event`。`DEVICE_TOKEN`（32 文字以上）が必要。
 - `/api/recall/video` の判定にボタン状態を反映し、介入成功時に M5 の音の合図を更新する。
 - `back` は次の判定呼び出しで効く。判定の呼び出し元（文字起こしワーカー）の間隔だけ遅れる。
-- 自動文字起こし経路でもボタン状態を反映する。`back` による明示操作だけは AI の脱線判定の二回確認を待たないが、発言再開・議題変更・停止時の取消は維持する。表示成功時だけ合図を更新し、Meet のカードはワーカーが 8 秒後に待機表示へ戻す。
+- 自動文字起こし経路でもボタン状態を反映する。`back` による明示操作だけは AI の脱線判定の二回確認を待たないが、発言再開・議題変更・停止時の取消は維持する。表示成功時だけ合図を更新し、Meet のカードは会議が戻るまで（最大 `INTERVENTION_MAX_HOLD_SECONDS` 秒）出したままにする。
 - `POST /api/device/{sessionId}/debug`: 開発用。`NODE_ENV=development` のときだけ動き、疑似の判定結果と介入の合図を入れて、画面・ゲージ・音を確認できる。本番では 404。
 - `firmware/` の `SESSION_ID` を `"auto"` にすると、`GET /api/monitor` が返す今の会議（アプリから最後に参加させた Bot）に 10 秒ごとに追従する。会議ごとに書き込み直さなくてよい。
 - `firmware/`: PlatformIO の雛形。実機（M5StickS3、2.4GHz Wi-Fi）で、取得・色・ボタン送信・ゲージ・介入の音を確認済み。Recall の実会議を通した確認は未実施。

@@ -25,6 +25,9 @@ if (!Number.isFinite(silenceSeconds) || silenceSeconds < 0) throw new Error('SIL
 const holdAcrossSpeech = env.INTERVENE_DURING_CONVERSATION === 'true';
 const quietMs = Number(env.INTERVENTION_QUIET_MS ?? 1500);
 if (!Number.isFinite(quietMs) || quietMs < 300 || quietMs > 5000) throw new Error('INTERVENTION_QUIET_MS must be between 300 and 5000');
+// A card stays until the meeting returns; this is only the upper limit.
+const maxHoldSeconds = Number(env.INTERVENTION_MAX_HOLD_SECONDS ?? 180);
+if (!Number.isFinite(maxHoldSeconds) || maxHoldSeconds <= 0) throw new Error('INTERVENTION_MAX_HOLD_SECONDS must be a positive number');
 const offAgendaConfirmations = Number(env.OFF_AGENDA_CONFIRMATIONS ?? 2);
 if (![1, 2].includes(offAgendaConfirmations)) throw new Error('OFF_AGENDA_CONFIRMATIONS must be 1 or 2');
 const controlUrl = new URL(env.VIDEO_CONTROL_URL ?? 'http://127.0.0.1:3000/api/recall/video');
@@ -161,6 +164,7 @@ wss.on('connection', socket => {
         agenda: session.agenda,
         holdAcrossSpeech,
         quietMs,
+        displayMs: maxHoldSeconds * 1000,
         offAgendaConfirmations,
         resolveAgenda: ({ botId, agenda, signal }) => videoRequest({ mode: 'agenda', botId, agenda }, signal),
         decide: input => { counts.evaluations++; return videoRequest({ mode: 'evaluate', ...input }); },

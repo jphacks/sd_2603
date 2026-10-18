@@ -89,6 +89,9 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
   let conversation = false;
   let lastFinalAt = -Infinity;
   let silenceTimer;
+  // The card on the camera stays until the meeting returns (a resolved judgement,
+  // or speech after a silence card); displayMs is only the upper limit.
+  let heldCard;
   let videoQueue = Promise.resolve();
   const videoAbort = new AbortController();
 
@@ -120,6 +123,7 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
     idleTimer = schedule(() => {
       if (stopped || epoch !== displayEpoch) return;
       idleTimer = undefined;
+      heldCard = undefined;
       void changeVideo(async () => {
         if (epoch !== displayEpoch) return;
         await restoreIdle({ botId, signal: videoAbort.signal });
@@ -127,6 +131,18 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
     }, displayMs);
   };
   const awaitingRecognition = () => pendingAudio && !holdAcrossSpeech;
+  const restoreHeld = () => {
+    if (!heldCard || stopped) return;
+    heldCard = undefined;
+    const epoch = ++displayEpoch;
+    if (idleTimer !== undefined) unschedule(idleTimer);
+    idleTimer = undefined;
+    if (!restoreIdle) return;
+    void changeVideo(async () => {
+      if (epoch !== displayEpoch) return;
+      await restoreIdle({ botId, signal: videoAbort.signal });
+    }).catch(fail);
+  };
   const canDisplay = value => !stopped && !awaitingRecognition() && !speaking && generation === value && now() - lastVoice >= quietMs;
   const staleRevision = revision => !holdAcrossSpeech && revision !== finalRevision;
   // A model recommendation is not a display instruction. Off-agenda cards need
@@ -170,6 +186,7 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
         conversation = false;
         armSilence();
         armIdle();
+        heldCard = { silence: candidate.result.reason === 'Meeting has gone silent' };
       }
       return displayed;
     });
@@ -286,6 +303,8 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
       }
       if (generation === currentGeneration && !finalQueue.length) hasSpeech = false;
       if (stopped) return;
+      // The server marks a judgement that shows the meeting back on track.
+      if (result?.resolved === true) restoreHeld();
       if (result?.cancelled || generation !== currentGeneration || staleRevision(currentRevision)) {
         recommendation = undefined;
         offAgendaCandidate = undefined;
@@ -340,6 +359,8 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
       const text = part.text?.trim();
       if (!text || (!hasSpeech && !pendingAudio)) return;
       finalRevision++;
+      // Someone spoke: a silence card has done its job.
+      if (heldCard?.silence) restoreHeld();
       // The remote quiet check carries this generation too: a final arriving
       // while the video route renders must invalidate that older display.
       if (!holdAcrossSpeech) {

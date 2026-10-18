@@ -140,6 +140,9 @@ export async function runReplayCase(scenario) {
         AI_GATEWAY_API_KEY: 'offline-key', RECALL_AUDIO_TOKEN: audioToken, RECALL_CONTROL_TOKEN: controlToken,
         RECALL_AUDIO_PORT: String(audioPort), VIDEO_CONTROL_URL: `http://127.0.0.1:${controlPort}/api/recall/video`,
         TEST_GATEWAY_TRANSCRIPTS: JSON.stringify(scenario.texts),
+        // The mock judge never reports a return, so the maximum hold stands in for the
+        // card coming down; 8 s keeps the original restore-timing checks.
+        INTERVENTION_MAX_HOLD_SECONDS: '8',
       },
       stdio: ['ignore', 'pipe', 'pipe'],
     });

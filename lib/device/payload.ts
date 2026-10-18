@@ -1,14 +1,14 @@
 import type { Envelope } from "../monitor/schema.ts";
-import type { CueId, InterventionKind, StallCause } from "./state.ts";
+import { angryAfter, maxHoldMs, type CueId, type InterventionKind, type StallCause } from "./state.ts";
 
-// How long the intervention view stays on the device before it returns to idle.
-const VIEW_HOLD_MS = 30_000;
 const AGENDA_SHORT_CHARS = 12;
 
 type DeviceStateView = {
   lastKind: InterventionKind | null;
   lastCause?: StallCause | null;
   lastAt: number | null;
+  showing?: boolean;
+  lastLevel?: number;
   cue: { id: CueId; seq: number } | null;
   mutedUntil: number | null;
 };
@@ -20,6 +20,11 @@ const TITLES = {
 } as const;
 // Silence asks for a voice instead of a summary; same nudge face.
 const SILENCE_TITLE = "何か気になる点は？";
+// Firmer lines once interventions pile up without the meeting returning.
+const ANGRY_TITLES = {
+  off_agenda: "議題に戻りましょう",
+  stalled: "一度整理しましょう",
+} as const;
 
 // The same faces as the Meet camera card (lib/recall/video.ts).
 const FACES = {
@@ -55,9 +60,15 @@ export function buildDevicePayload(
   now: number,
 ) {
   const snapshot = envelope.snapshot;
-  const view = device.lastKind && device.lastAt !== null && now - device.lastAt < VIEW_HOLD_MS
+  // The card stays while the camera shows it (until the meeting returns), with
+  // the same upper limit as the worker in case it never restores the idle face.
+  const view = device.showing && device.lastKind && device.lastAt !== null && now - device.lastAt < maxHoldMs()
     ? device.lastKind
     : ("idle" as const);
+  const silence = view === "stalled" && device.lastCause === "silence";
+  const level = view === "idle" ? 0 : (device.lastLevel ?? 1);
+  const threshold = angryAfter();
+  const angry = view !== "idle" && !silence && threshold > 0 && level >= threshold;
   const cooldownSec = snapshot?.cooldownUntil
     ? Math.max(0, Math.ceil((snapshot.cooldownUntil - now) / 1000))
     : 0;
@@ -66,8 +77,9 @@ export function buildDevicePayload(
     seq: snapshot?.sequence ?? 0,
     state: stateFor(snapshot?.decision ?? null, view),
     view,
-    face: FACES[view],
-    title: view === "stalled" && device.lastCause === "silence" ? SILENCE_TITLE : TITLES[view],
+    level,
+    face: angry ? ("angry" as const) : FACES[view],
+    title: angry ? ANGRY_TITLES[view] : silence ? SILENCE_TITLE : TITLES[view],
     agendaShort: shortAgenda(agenda),
     // Missing scores stay null; never show them as 0.
     scores: snapshot?.scores

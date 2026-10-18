@@ -18,7 +18,7 @@ struct DeviceState {
   bool valid = false;
   String state = "unknown";  // silence | wait | intervene | unknown
   String view = "idle";      // idle | off_agenda | stalled
-  String face = "watching";  // watching | nudge | redirect
+  String face = "watching";  // watching | nudge | redirect | angry
   String title;
   String agenda;
   int scores[3] = {-1, -1, -1};  // drift, stall, tangent; -1 = not available
@@ -213,6 +213,15 @@ static void drawFace(const String &face, float x, float y, float s, uint16_t ink
       py = ny;
     }
     faceLine(p, 193.5, 215.5, 193.5, 238.5, 17.5);
+    if (notice) drawNotice(p);
+  } else if (face == "angry") {
+    // Shown when interventions pile up without the meeting returning.
+    faceLine(p, 74, 100, 116, 112, 18);
+    faceLine(p, 240, 100, 198, 112, 18);
+    faceLine(p, 92.6, 132, 92.6, 152, 24);
+    faceLine(p, 219.5, 132, 219.5, 152, 24);
+    faceLine(p, 128, 222, 156.5, 208, 17);
+    faceLine(p, 156.5, 208, 185, 222, 17);
     if (notice) drawNotice(p);
   } else {
     faceLine(p, 65.8, 141, 119.8, 141, 22);

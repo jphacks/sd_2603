@@ -1080,3 +1080,50 @@ test('a displayed card clears the history, so the next judgement sees only what 
   assert.deepEqual(seen, [['off-topic talk'], ['back on the agenda']]);
   gate.stop();
 });
+
+test('a card is held until a judgement says the meeting is back, with displayMs only as the limit', async () => {
+  const clock = fakeClock();
+  const calls = [];
+  const results = [intervention, { action: 'WAIT', reason: 'Conversation needs more observation', message: null, resolved: false },
+    { action: 'SILENCE', reason: 'Conversation is progressing', message: null, resolved: true }];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock, displayMs: 180000,
+    decide: async () => results.shift(), display: async () => { calls.push('card'); }, restoreIdle: async () => { calls.push('idle'); } });
+  utterance(gate, 'stuck'); await clock.advance(1500);
+  assert.deepEqual(calls, ['card']);
+  await clock.advance(30000);
+  utterance(gate, 'still unsure'); await clock.advance(1500);
+  assert.deepEqual(calls, ['card'], 'an uncertain judgement keeps the card');
+  utterance(gate, 'back on the agenda'); await clock.advance(1500);
+  assert.deepEqual(calls, ['card', 'idle'], 'a resolved judgement takes it down');
+  await clock.advance(180000);
+  assert.deepEqual(calls, ['card', 'idle'], 'the fallback timer was cancelled');
+  gate.stop();
+});
+
+test('a silence card comes down as soon as someone speaks', async () => {
+  const clock = fakeClock();
+  const calls = [];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock, displayMs: 180000,
+    decide: async () => ({ action: 'WAIT', reason: 'Not enough conversation', message: null }),
+    nudge: async () => ({ action: 'INTERVENE', reason: 'Meeting has gone silent', message: 'x' }),
+    display: async () => { calls.push('card'); }, restoreIdle: async () => { calls.push('idle'); } });
+  utterance(gate, 'one'); await clock.advance(1500);
+  await clock.advance(61000);
+  assert.deepEqual(calls, ['card']);
+  utterance(gate, 'someone answers'); await tick(); await tick();
+  assert.deepEqual(calls, ['card', 'idle']);
+  gate.stop();
+});
+
+test('without a resolution the card still comes down at displayMs', async () => {
+  const clock = fakeClock();
+  const calls = [];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock, displayMs: 180000,
+    decide: async () => intervention, display: async () => { calls.push('card'); }, restoreIdle: async () => { calls.push('idle'); } });
+  utterance(gate); await clock.advance(1500);
+  await clock.advance(179000);
+  assert.deepEqual(calls, ['card']);
+  await clock.advance(1000);
+  assert.deepEqual(calls, ['card', 'idle']);
+  gate.stop();
+});
