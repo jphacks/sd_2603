@@ -33,3 +33,10 @@
 - 実測timeout15秒/production5秒の違いを記録。実測最大4,641ms、5秒超0。将来のレイテンシ同等性は主張しない。
 - 全103テスト成功。新規評価コードのLint警告は解消し、専用4テスト再確認。全体Lintは既存recall.test.mjsの警告1のみ、エラーなし。Next.jsコードを変更していないため追加ビルドは不要。
 - docsのREADME/ERRORSへ結果・不一致・分母・出典・限界・再現手順を統合。アプリ既定設定・UI・既存未追跡docs/jevno-demo-script.mdは変更なし。PR/stagingはマージせず、新しい評価ブランチへ保存する。
+
+## 最終保存の確認
+
+- 成果物コミット`bc74364`を`origin/codex/jev-pr35-evaluation`へPushし、HEADとremote追跡refの一致を確認。Gitへ保存された入力・ラベル・質問・report/cacheのバイト列SHAも固定値と一致した。
+- ラベル担当→hash固定→別テスト担当の順序を実行時刻・コミットで保存。評価後の再チューニング、参照ラベル変更、アプリ変更、PR/stagingマージはなし。
+- 既存の未追跡`docs/jevno-demo-script.md`のみ作業ツリーへ残る。内容には触れていない。
+- この確認ログを追記したコミットも同じ評価ブランチへPushする。
