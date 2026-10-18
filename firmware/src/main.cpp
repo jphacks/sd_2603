@@ -40,8 +40,15 @@ static uint32_t toastUntil = 0;
 static const uint32_t NOTICE_DELAY_MS = 200;
 static uint32_t noticeAt = 0;
 
+// SESSION_ID "auto" follows the meeting the server is watching (GET /api/monitor),
+// so a new bot does not need a reflash. Empty until the server reports one.
+static const bool AUTO_SESSION = strcmp(SESSION_ID, "auto") == 0;
+static const uint32_t SESSION_REFRESH_MS = 10000;
+static String sessionId = AUTO_SESSION ? "" : SESSION_ID;
+static uint32_t lastSessionAt = 0;
+
 static String url(const char *suffix) {
-  return String(SERVER_BASE) + "/api/device/" + SESSION_ID + suffix;
+  return String(SERVER_BASE) + "/api/device/" + sessionId + suffix;
 }
 
 static bool request(const String &target, const char *method, const char *body, String &out) {
@@ -63,6 +70,23 @@ static bool request(const String &target, const char *method, const char *body, 
   if (code > 0) out = http.getString();
   http.end();
   return code >= 200 && code < 300;
+}
+
+static void refreshSession() {
+  String body;
+  if (!request(String(SERVER_BASE) + "/api/monitor", "GET", nullptr, body)) return;
+  JsonDocument filter;
+  filter["sessionId"] = true;  // the response also carries score history; skip it
+  JsonDocument doc;
+  if (deserializeJson(doc, body, DeserializationOption::Filter(filter))) return;
+  String next = doc["sessionId"] | "";
+  if (next.length() == 0 || next == sessionId) return;
+  // A different meeting: drop the old state and do not replay its last cue.
+  sessionId = next;
+  current = DeviceState();
+  lastCueSeq = -1;
+  lastOkAt = 0;
+  dirty = true;
 }
 
 static void showToast(const String &text) {
@@ -284,7 +308,12 @@ void loop() {
     dirty = true;
   }
 
-  if (WiFi.status() == WL_CONNECTED && millis() - lastPollAt >= POLL_MS) {
+  if (AUTO_SESSION && WiFi.status() == WL_CONNECTED &&
+      (lastSessionAt == 0 || millis() - lastSessionAt >= SESSION_REFRESH_MS)) {
+    lastSessionAt = millis();
+    refreshSession();
+  }
+  if (WiFi.status() == WL_CONNECTED && sessionId.length() && millis() - lastPollAt >= POLL_MS) {
     lastPollAt = millis();
     poll();
   }
