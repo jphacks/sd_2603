@@ -1,5 +1,6 @@
 import type { JudgeInput, JudgeResult } from "../judge/types";
 import { isStalledReason } from "../judge/silence.ts";
+import { TANGENT_OK_REASON } from "../judge/resolution.ts";
 import { deviceStore } from "./state.ts";
 
 type Judge = (input: JudgeInput) => Promise<JudgeResult>;
@@ -21,7 +22,7 @@ export function withDeviceControls(sessionId: string, judge: Judge, store = devi
       };
     }
     if (result.action === "INTERVENE" && store.read(sessionId).mutedUntil !== null) {
-      return { ...result, action: "WAIT", reason: "Tangent marked useful", message: null };
+      return { ...result, action: "WAIT", reason: TANGENT_OK_REASON, message: null };
     }
     return result;
   };

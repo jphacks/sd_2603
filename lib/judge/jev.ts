@@ -6,8 +6,9 @@ const GATEWAY_URL = "https://ai-gateway.vercel.sh/typesafe/v1/systemone";
 const DEFAULT_MODEL = "typesafe-ai/jev";
 const QUESTION_VERSION = "v2";
 const TIMEOUT_MS = 5000;
-const INTERVENTION_THRESHOLD = 0.6;
-const UNCERTAIN_THRESHOLD = 0.4;
+export const INTERVENTION_THRESHOLD = 0.6;
+export const UNCERTAIN_THRESHOLD = 0.4;
+export const COOLDOWN_REASON = "Cooldown active";
 
 const AnswerSchema = z.object({ type: z.literal("noul"), noul: z.number().min(0).max(1) });
 const ResponseSchema = z.object({
@@ -127,12 +128,16 @@ export async function requestJevScores(
 }
 
 export const jevJudge: JudgeProvider = async (input) => {
-  if (input.secondsSinceLastIntervention < 60) {
-    return { action: "SILENCE", reason: "Cooldown active", message: null };
-  }
   if (input.transcript.length < 3) {
     return { action: "WAIT", reason: "Not enough conversation", message: null };
   }
+  // Jev still runs during the cooldown so a held card can see the meeting
+  // return; only a new card is withheld. The real scores are kept.
   const decision = await requestJevScores(input);
-  return { ...decideFromScores(decision.scores), diagnostic: { ...decision.scores, model: decision.model, latencyMs: decision.latencyMs, questionVersion: QUESTION_VERSION } };
+  const diagnostic = { ...decision.scores, model: decision.model, latencyMs: decision.latencyMs, questionVersion: QUESTION_VERSION };
+  const result = decideFromScores(decision.scores);
+  if (input.secondsSinceLastIntervention < 60 && result.action === "INTERVENE") {
+    return { action: "SILENCE", reason: COOLDOWN_REASON, message: null, diagnostic };
+  }
+  return { ...result, diagnostic };
 };
