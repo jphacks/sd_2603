@@ -46,7 +46,7 @@
 
 **今回の合成Testで80%目標を達成しました。実会議・人間goldでの精度ではありません。** Testは脱線30・停滞30・OK40（多数派のみなら40%）、Macro-F1は両設定1.000。現行設定も全問正解で、Test上の改善差は確認できていません。1,000件は未完成のため、11:00時点の監査済み500件へ固定しました。
 
-画面の60%/40%表示を維持する事前ルールに従い、異なる閾値の選択設定は実験JSONへ保存し、アプリ既定値は現行v3を維持しています。モデル名・状態名・画面・介入文言は変更していません。探索とCVはスコアを再利用し、新規Gatewayは1,401試行・1,400成功。公開入力単価だけの見積もり約$0.078、保守的予約$1.558（請求総額は未測定）です。
+画面の60%/40%表示を維持する事前ルールに従い、異なる閾値の選択設定は実験JSONへ保存し、アプリ既定値は現行v3を維持しています。状態名・画面・介入文言は変更していません。探索とCVはスコアを再利用し、新規Gatewayは1,401試行・1,400成功。公開入力単価だけの見積もり約$0.078、保守的予約$1.558（請求総額は未測定）です。
 
 [結果・限界・再現手順](docs/jev-tuning/synthetic-results.md) · [自動実験ログ・混同行列](evals/tuning/runs/synthetic-v1/core500-frozen/REPORT.md) · [選択設定JSON](evals/tuning/runs/synthetic-v1/core500-frozen/selected-policy.json) · [逐次進捗](docs/jev-tuning/progress-synthetic.md) · [固定データと出典](docs/jev-tuning/synthetic-benchmark-v1/README.md) · [事前登録](docs/jev-tuning/synthetic-evaluation-plan.md)
 
