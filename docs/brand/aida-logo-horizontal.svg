@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 937.5 309" width="360" height="118.7" role="img" aria-labelledby="title">
   <title id="title">AIDA</title>
+  <rect width="937.5" height="309" fill="#ffffff"/>
   <g transform="translate(0 0)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
     <rect x="11" y="11" width="292" height="287" rx="63" stroke-width="22"/>
     <path d="M65.8 141H119.8M191.7 141H246.9" stroke-width="22"/>
