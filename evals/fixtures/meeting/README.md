@@ -14,6 +14,30 @@
 
 `datasets/` は TypeScript データを展開した JSON です。議題 `agenda`、話者・発言 `utterances`、ラベルや補足情報を含みます。TypeScript データと生成用ヘルパーは `source/` にあります。
 
+## 脱線しているかの正解ラベル
+
+**[ラベル一覧](LABELS.md)** に脱線判定用115ケースの日本語ラベルと、対応するWAVへのリンクをまとめています。機械的に読む場合は [`labels.json`](labels.json) を使用してください。
+
+| `label` | 意味 | `isOffTopic` |
+| --- | --- | --- |
+| `on_track` | 議題に沿っている | `false` |
+| `productive_tangent` | 議題に役立つ寄り道 | `false` |
+| `drift` | 脱線している | `true` |
+| `stalled` | 議題は変わっていないが停滞している | `false` |
+| `ambiguous` | 判断が分かれる | `null` |
+
+ラベルは台本JSONの `label` にも保存されています。`isOffTopic` は上記の意味を明示した項目です。介入の要否を表す `expectedNudge` とは別です。途中で切った台本のラベルや判断の補足も保持しています。Canvas用54ケースのラベルは図表提示の判定を表すため、この脱線ラベル一覧には含めていません。
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const labels = JSON.parse(
+  readFileSync("evals/fixtures/meeting/labels.json", "utf8"),
+);
+const answer = labels.find((item) => item.audioFiles.includes("audio/pilot/dr-trip-late.wav"));
+// answer.label === "drift", answer.isOffTopic === true
+```
+
 リポジトリのルートで、例えば次のように読み込めます。追加パッケージや API キーは不要です。
 
 ```javascript
