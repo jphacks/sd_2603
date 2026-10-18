@@ -22,8 +22,9 @@ env:
   # Only staging runs real Jev; checks and other environments keep their existing policy.
   DEPLOY_AI_PROVIDER: ${{ github.ref == 'refs/heads/staging' && 'jev' || 'mock' }}
   DEPLOY_ALLOW_PAID_AI: ${{ github.ref == 'refs/heads/staging' && 'true' || 'false' }}
-  # Owner-approved: staging UI visitors may join/leave without entering the server token.
-  DEPLOY_BROWSER_CONTROL_ENABLED: ${{ github.ref == 'refs/heads/staging' && 'true' || 'false' }}
+  # Owner-approved: staging and this test Preview use server-managed control.
+  # Do not enable this for all feature branches or main.
+  DEPLOY_BROWSER_CONTROL_ENABLED: ${{ (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/feature/staging-meet-transcription') && 'true' || 'false' }}
   # PRs and manual runs always validate without deployment credentials.
   DEPLOY_TARGET: ${{ github.event_name == 'push' && ((github.ref == 'refs/heads/staging' && vars.ENABLE_PREVIEW_DEPLOYMENT == 'true') || (startsWith(github.ref, 'refs/heads/feature/') && vars.ENABLE_FEATURE_PREVIEW_DEPLOYMENT == 'true')) && 'preview' || github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ENABLE_PRODUCTION_DEPLOYMENT == 'true' && 'production' || '' }}
 

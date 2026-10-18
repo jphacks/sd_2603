@@ -1,5 +1,9 @@
 # Staging Meet音声 → AI Gateway文字起こし → Jev
 
+`feature/staging-meet-transcription` のPreviewは利用者承認により操作トークン入力不要。
+サーバーが既存の秘密値を内部利用する。ほかのfeature・mainの設定やVercel Protectionは変更しない。
+この変更だけでは音声接続や有料Jevを有効化しない（featureのAI設定はMockのまま）。
+
 この構成は常時起動の音声worker＋同一ホストのNextアプリを判定の所有者にする。
 Vercel Functionsのローカルファイルやメモリを別インスタンスと共有しない。
 ステージング検証では承認済みの一時トンネルをworkerポートだけに向ける。
