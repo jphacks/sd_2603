@@ -118,7 +118,7 @@ jobs:
         run: |
           deploy_args=()
           if [ "$DEPLOY_AI_PROVIDER" = jev ]; then
-            deploy_args+=(--env JEV_MODEL_ID=typesafe-ai/jev)
+            deploy_args+=(--env JEV_MODEL_ID=typesafe-ai/jev-1.14.0)
           fi
           if [ "$DEPLOY_TARGET" = production ]; then
             deploy_args+=(--prod)

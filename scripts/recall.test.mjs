@@ -3,14 +3,7 @@ import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { findLiveBotId, recallStatePath, releaseBot, removeBot, run, sendBot } from './recall.mjs';
-
-test('serverless bot state is stored in the writable temp directory', () => {
-  const serverless = recallStatePath({ VERCEL: '1' });
-  assert.equal(serverless.startsWith(path.join(tmpdir(), 'aida-recall')), true);
-  const local = recallStatePath({});
-  assert.equal(local.endsWith(path.join('.recall', 'current.json')), true);
-});
+import { findLiveBotId, localRecallIo, releaseBot, removeBot, run, sendBot } from './recall.mjs';
 
 test('findLiveBotId returns a bot that is still in the call', async () => {
   const id = '11111111-1111-4111-8111-111111111111';
@@ -522,5 +515,44 @@ test('audio mode fails before creating a bot when worker is unavailable', async 
     });
     await assert.rejects(sendBot('https://meet.google.com/abc-defg-hij', cap.io, 'Release plan'), error => error.status === 503);
     assert.equal(botPosts, 0);
+  } finally { box.cleanup(); }
+});
+
+
+test('Vercel state uses writable temporary storage while local CLI keeps its existing path', () => {
+  assert.equal(localRecallIo({ VERCEL: '1' }).statePath, path.join(tmpdir(), 'meeting-facilitator-recall', 'current.json'));
+  assert.equal(path.basename(path.dirname(localRecallIo({}).statePath)), '.recall');
+});
+
+test('an unwritable state directory fails before any Recall request', async () => {
+  const box = fixture();
+  try {
+    const blocked = path.join(box.dir, 'blocked');
+    writeFileSync(blocked, 'not a directory');
+    let calls = 0;
+    const { io } = capture({ statePath: path.join(blocked, 'current.json'), fetch: async () => { calls++; throw new Error('Must not call Recall'); } });
+    await assert.rejects(sendBot('https://meet.google.com/abc-defg-hij', io), error => error.status === 503 && /Botは作成していません/.test(error.message));
+    assert.equal(calls, 0);
+  } finally { box.cleanup(); }
+});
+
+test('a storage failure after creation requests leave for only the newly created bot', async () => {
+  const box = fixture();
+  try {
+    const stateDir = path.join(box.dir, 'state');
+    const calls = [];
+    const { io } = capture({ statePath: path.join(stateDir, 'current.json'), fetch: async (url, options) => {
+      calls.push([url, options.method]);
+      if (url.endsWith('/bot/')) {
+        rmSync(stateDir, { recursive: true, force: true });
+        writeFileSync(stateDir, 'storage became unavailable');
+        return jsonResponse(201, { id: 'new-bot-only' });
+      }
+      assert.ok(url.endsWith('/bot/new-bot-only/leave_call/'));
+      return jsonResponse(200, {});
+    } });
+    await assert.rejects(sendBot('https://meet.google.com/abc-defg-hij', io), error => error.status === 503 && /退出を要求/.test(error.message));
+    assert.equal(calls.length, 2);
+    assert.equal(calls.filter(([url]) => url.endsWith('/bot/')).length, 1);
   } finally { box.cleanup(); }
 });

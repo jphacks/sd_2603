@@ -1,18 +1,12 @@
-import { existsSync, readFileSync } from 'node:fs';
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { constants, existsSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { recordingConfig } from './transcription/audio.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-
-export function recallStatePath(env = process.env) {
-  const directory = env.VERCEL
-    ? path.join(tmpdir(), 'aida-recall')
-    : path.join(ROOT, '.recall');
-  return path.join(directory, 'current.json');
-}
+const STATE_PATH = path.join(ROOT, '.recall', 'current.json');
 const USAGE = `使い方:
   npm run recall -- join --url https://meet.google.com/abc-defg-hij
   npm run recall -- status
@@ -172,6 +166,16 @@ async function readState(io) {
   }
 }
 
+export async function ensureStateWritable(io) {
+  try {
+    const directory = path.dirname(io.statePath);
+    await mkdir(directory, { recursive: true });
+    await access(directory, constants.W_OK);
+  } catch {
+    throw new RecallCliError('参加情報の保存先に書き込めません。サーバーの状態保存設定を確認してください。Botは作成していません。', { status: 503 });
+  }
+}
+
 async function writeState(io, state) {
   await mkdir(path.dirname(io.statePath), { recursive: true });
   await writeFile(io.statePath, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
@@ -312,6 +316,7 @@ export async function sendBot(meetingUrl, io, agenda) {
     }
   }
 
+  await ensureStateWritable(io);
   const existing = await readState(io);
   if (existing) {
     try {
@@ -344,13 +349,22 @@ export async function sendBot(meetingUrl, io, agenda) {
   });
   const botId = created.id;
   if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
-  await writeState(io, {
-    id: botId,
-    region: regionOf(io.env),
-    meetingUrl,
-    ...(audioEnabled ? { agenda: agenda.trim(), audioEnabled: true } : {}),
-    createdAt: new Date(io.now()).toISOString(),
-  });
+  try {
+    await writeState(io, {
+      id: botId,
+      region: regionOf(io.env),
+      meetingUrl,
+      ...(audioEnabled ? { agenda: agenda.trim(), audioEnabled: true } : {}),
+      createdAt: new Date(io.now()).toISOString(),
+    });
+  } catch {
+    try {
+      await requestLeave(io, botId);
+    } catch {
+      throw new RecallCliError(`参加情報の保存に失敗しました。作成済みBotの退出を確認してください。Bot ID: ${botId}`, { status: 503 });
+    }
+    throw new RecallCliError(`参加情報の保存に失敗したため、作成済みBotの退出を要求しました。再参加する前に会議を確認してください。Bot ID: ${botId}`, { status: 503 });
+  }
   return { id: botId, region: regionOf(io.env), meetingUrl };
 }
 
@@ -358,7 +372,9 @@ export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch) {
   return {
     env,
     fetch: fetchImpl,
-    statePath: recallStatePath(env),
+    statePath: env.VERCEL === '1'
+      ? path.join(tmpdir(), 'meeting-facilitator-recall', 'current.json')
+      : STATE_PATH,
     now: () => Date.now(),
     sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
     pollMs: 3000,
@@ -573,7 +589,7 @@ async function leave(flags, io) {
 function ioWithDefaults(io) {
   return {
     fetch: globalThis.fetch,
-    statePath: recallStatePath(),
+    statePath: STATE_PATH,
     stdout: (line) => console.log(line),
     stderr: (line) => console.error(line),
     env: process.env,

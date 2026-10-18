@@ -1,0 +1,8 @@
+{
+  "questionVersion": "v4-staging-gated",
+  "driftThreshold": 0.5,
+  "stallThreshold": 0.6,
+  "relevanceThreshold": 0.8,
+  "uncertainThreshold": 0.4,
+  "interventionThreshold": 0.6
+}

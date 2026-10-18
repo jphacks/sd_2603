@@ -133,3 +133,10 @@ npm run recall -- leave --id 01234567-89ab-cdef-0123-456789abcdef
 | `ホストが退出させた` | Meet 側でボットを削除した |
 | `すでにボットが会議にいます` | `npm run recall -- leave` してから入り直す |
 | `状態ファイルがありません` | 先に `join` する |
+
+
+### Vercelでの参加状態保存
+
+ローカルでは従来どおり `.recall/current.json` に保存します。Vercel (`VERCEL=1`) では書き込み可能な `os.tmpdir()` 配下の `meeting-facilitator-recall/current.json` を利用します。参加・退出・会議URLの照合は同じ `localRecallIo()` の保存先を参照します。
+
+Bot作成前に保存先の書き込み可否を確認します。作成後に保存が失敗した場合は、そのリクエストで作成したBotだけに退出を要求し、Bot IDを返します。一時領域は永続保存やインスタンス間共有ではありません。旧版の保存失敗で作成済みのBotが残っている場合は、会議側で退出を確認してから再参加してください。
