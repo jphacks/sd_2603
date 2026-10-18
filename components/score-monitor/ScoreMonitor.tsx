@@ -7,6 +7,7 @@ import {
 } from "../../lib/monitor/schema";
 import type { Envelope, Snapshot } from "../../lib/monitor/schema";
 import { monitorCss } from "./styles";
+import policy from "../../lib/judge/jev-policy.json";
 
 export type Connection =
   "connecting" | "connected" | "disconnected" | "invalid";
@@ -26,6 +27,8 @@ export function MeterView({ snapshot }: { snapshot: Snapshot | null }) {
       <div className="jm-meters">
         {SCORE_KEYS.map((key) => {
           const score = snapshot?.scores?.[key];
+          const threshold = key === "drifted" ? policy.driftThreshold
+            : key === "stalled" ? policy.stallThreshold : policy.relevanceThreshold;
           return (
             <div key={key} className="jm-channel">
               <strong style={{ color: SCORE_META[key].color }}>
@@ -44,12 +47,12 @@ export function MeterView({ snapshot }: { snapshot: Snapshot | null }) {
                     }}
                   />
                 )}
-                <span className="jm-threshold" style={{ bottom: "60%" }}>
-                  60
+                <span className="jm-threshold" style={{ bottom: `${threshold * 100}%` }}>
+                  {threshold * 100}
                 </span>
                 {key !== "tangentIsRelevant" && (
-                  <span className="jm-threshold" style={{ bottom: "40%" }}>
-                    40
+                  <span className="jm-threshold" style={{ bottom: `${policy.uncertainThreshold * 100}%` }}>
+                    {policy.uncertainThreshold * 100}
                   </span>
                 )}
               </div>
@@ -60,7 +63,7 @@ export function MeterView({ snapshot }: { snapshot: Snapshot | null }) {
         })}
       </div>
       <p className="jm-note">
-        有用性60%は脱線時の補助線です。高い有用性は警告ではありません。
+        有用性{policy.relevanceThreshold * 100}%は脱線時の補助線です。高い有用性は警告ではありません。
       </p>
     </div>
   );

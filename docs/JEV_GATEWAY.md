@@ -8,7 +8,7 @@
 AI_PROVIDER=jev
 ALLOW_PAID_AI=true
 AI_GATEWAY_API_KEY=your-gateway-key
-JEV_MODEL_ID=typesafe-ai/jev
+JEV_MODEL_ID=typesafe-ai/jev-1.14.0
 ```
 
 PowerShellからの確認例:
@@ -22,7 +22,7 @@ $body = @{
 Invoke-RestMethod -Uri 'http://localhost:3000/api/judge' -Method Post -ContentType 'application/json' -Body $body
 ```
 
-Jevには脱線・停滞・寄り道の有用性に加え、「今、短く声をかける価値があるか」を質問します。質問バージョンは`v2`です。脱線または停滞が0.6以上で、介入価値`interveneNow`も0.6以上のとき介入候補にします。ただし有益な寄り道が0.6以上なら、脱線だけを理由に介入しません。脱線または停滞が0.4以上でも介入条件を満たさない場合は`WAIT`です。これらの値は初期値であり、実会議での評価を通じて調整します。
+Jevには脱線・停滞・寄り道の有用性に加え、「今、短く声をかける価値があるか」を質問します。最新stagingの4質問と介入ゲートを維持した`v4-staging-gated`です。停滞>=0.6、または脱線>=0.5かつ有用性<0.8が介入候補ですが、どちらも介入価値`interveneNow`>=0.6が必要です。脱線または停滞>=0.4で介入条件を満たさない場合は`WAIT`です。判定とモニター補助線は`lib/judge/jev-policy.json`を共通で読みます。[反映内容・切り戻し](jev-tuning/staging-rollout.md)を参照してください。
 
 レスポンスの`diagnostic`にはモデル名、質問バージョン、各判定値、遅延を含めます。入力が不足すると`WAIT`、介入後60秒以内は`SILENCE`になり、いずれもGatewayを呼びません。Gateway障害時はエラーを返し、モック判定には切り替えません。
 

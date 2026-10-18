@@ -3,13 +3,14 @@
 import { useRef, useState } from "react";
 import { normalizeGoogleMeetUrl } from "@/lib/recall/meeting-url";
 import Link from "next/link";
+import { joinMeeting, leaveMeeting } from "./meeting-actions";
 import { MonitorConnection } from "@/components/score-monitor/MonitorConnection";
 
 type MaterialItem = { name: string; saved: boolean; message: string | null };
 
 const MAX_SELECTED_FILES = 5;
 
-export function JoinForm() {
+export function JoinForm({ serverManagedControl = false, setupError = null }: { serverManagedControl?: boolean; setupError?: string | null }) {
   const [monitorSessionId, setMonitorSessionId] = useState<string | null>(null);
   const [meetingUrl, setMeetingUrl] = useState("");
   const [agenda, setAgenda] = useState("");
@@ -49,9 +50,9 @@ export function JoinForm() {
     setPending(true);
     let sentId: string | null = null;
     try {
-      const response = await fetch("/api/recall/join", {
+      const response = serverManagedControl ? await joinMeeting(meetingUrl, agenda).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/join", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken}` },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` },
         body: JSON.stringify({ meetingUrl: normalizedMeetingUrl, agenda }),
       });
       const body = (await response.json()) as { id?: string; error?: string };
@@ -107,9 +108,9 @@ export function JoinForm() {
     }
     setPending(true);
     try {
-      const response = await fetch("/api/recall/leave", {
+      const response = serverManagedControl ? await leaveMeeting(botId).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/leave", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken}` },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` },
         body: JSON.stringify({ botId }),
       });
       const body = (await response.json()) as {
@@ -139,6 +140,7 @@ export function JoinForm() {
           会議 URL を渡すと、MTG Lab が録画せずに入室します。Meet の参加申請を許可してください。テキストの議案書も一緒に渡すと、そのファイルを読んでアジェンダにします。
         </p>
       </header>
+      {setupError && <p role="alert" className="text-sm text-rose-700">{setupError}</p>}
       <form
         className="grid gap-3"
         onSubmit={(event) => {
@@ -167,16 +169,26 @@ export function JoinForm() {
         <p className="text-xs text-zinc-600">
           最初は上のアジェンダを使い、議案書やMeetチャットから取り込んだアジェンダも次の音声判定に反映します。更新中は介入を保留します。
         </p>
+        {serverManagedControl ? (
+          <p className="text-xs text-zinc-600">入退室にはサーバーに設定済みの認証情報を使用します。操作トークンの入力は不要です。</p>
+        ) : (
+          <>
         <label className="grid gap-1 text-sm">
           操作トークン
           <input
             type="password"
             autoComplete="off"
+            required
+            minLength={32}
+            aria-describedby="control-token-help"
             className="rounded border border-zinc-300 bg-white px-3 py-2 text-zinc-950"
             value={controlToken}
             onChange={(event) => setControlToken(event.target.value)}
           />
         </label>
+            <p id="control-token-help" className="text-xs text-zinc-600">VercelのRECALL_CONTROL_TOKENと同じ32文字以上の値を入力してください。</p>
+          </>
+        )}
         <label className="grid gap-1 text-sm">
           議案書ファイル（任意、.txt / .md、最大5件）
           <input
@@ -202,7 +214,7 @@ export function JoinForm() {
                 <button
                   className="shrink-0 rounded border border-zinc-300 px-2 py-1 text-xs disabled:opacity-50"
                   type="button"
-                  disabled={pending}
+                  disabled={pending || Boolean(setupError)}
                   onClick={() => removeFile(index)}
                 >
                   取り消す
@@ -216,14 +228,14 @@ export function JoinForm() {
           <button
             className="w-fit rounded bg-zinc-900 px-4 py-2 text-sm text-white disabled:opacity-50"
             type="submit"
-            disabled={pending || botId !== null}
+            disabled={pending || botId !== null || Boolean(setupError)}
           >
             参加
           </button>
           <button
             className="w-fit rounded border border-zinc-300 px-4 py-2 text-sm disabled:opacity-50"
             type="button"
-            disabled={pending || botId === null}
+            disabled={pending || botId === null || Boolean(setupError)}
             onClick={() => {
               void leave();
             }}

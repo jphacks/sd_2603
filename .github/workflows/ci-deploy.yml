@@ -22,6 +22,8 @@ env:
   # Only staging runs real Jev; checks and other environments keep their existing policy.
   DEPLOY_AI_PROVIDER: ${{ github.ref == 'refs/heads/staging' && 'jev' || 'mock' }}
   DEPLOY_ALLOW_PAID_AI: ${{ github.ref == 'refs/heads/staging' && 'true' || 'false' }}
+  # Owner-approved: staging UI visitors may join/leave without entering the server token.
+  DEPLOY_BROWSER_CONTROL_ENABLED: ${{ github.ref == 'refs/heads/staging' && 'true' || 'false' }}
   # PRs and manual runs always validate without deployment credentials.
   DEPLOY_TARGET: ${{ github.event_name == 'push' && ((github.ref == 'refs/heads/staging' && vars.ENABLE_PREVIEW_DEPLOYMENT == 'true') || (startsWith(github.ref, 'refs/heads/feature/') && vars.ENABLE_FEATURE_PREVIEW_DEPLOYMENT == 'true')) && 'preview' || github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ENABLE_PRODUCTION_DEPLOYMENT == 'true' && 'production' || '' }}
 
@@ -116,7 +118,7 @@ jobs:
         run: |
           deploy_args=()
           if [ "$DEPLOY_AI_PROVIDER" = jev ]; then
-            deploy_args+=(--env JEV_MODEL_ID=typesafe-ai/jev)
+            deploy_args+=(--env JEV_MODEL_ID=typesafe-ai/jev-1.14.0)
           fi
           if [ "$DEPLOY_TARGET" = production ]; then
             deploy_args+=(--prod)
@@ -125,6 +127,7 @@ jobs:
           vercel deploy --prebuilt --yes --json "${deploy_args[@]}" \
             --meta "githubCommitRef=$GITHUB_REF_NAME" \
             --env "AI_PROVIDER=$DEPLOY_AI_PROVIDER" --env "ALLOW_PAID_AI=$DEPLOY_ALLOW_PAID_AI" \
+            --env "BROWSER_CONTROL_ENABLED=$DEPLOY_BROWSER_CONTROL_ENABLED" \
             --token="$VERCEL_TOKEN" > "$RUNNER_TEMP/vercel-deployment.json"
           node scripts/ci/report-deployment.mjs "$RUNNER_TEMP/vercel-deployment.json"
 

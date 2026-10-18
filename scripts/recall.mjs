@@ -1,5 +1,6 @@
-import { existsSync, readFileSync } from 'node:fs';
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { constants, existsSync, readFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { normalizeGoogleMeetUrl } from '../lib/recall/meeting-url.ts';
@@ -167,6 +168,17 @@ async function readState(io) {
   }
 }
 
+export async function ensureStateWritable(io) {
+  if (!io.statePath) return;
+  try {
+    const directory = path.dirname(io.statePath);
+    await mkdir(directory, { recursive: true });
+    await access(directory, constants.W_OK);
+  } catch {
+    throw new RecallCliError('参加情報の保存先に書き込めません。サーバーの状態保存設定を確認してください。Botは作成していません。', { status: 503 });
+  }
+}
+
 async function writeState(io, state) {
   if (!io.statePath) return;
   await mkdir(path.dirname(io.statePath), { recursive: true });
@@ -330,6 +342,7 @@ export async function sendBot(meetingUrl, io, agenda) {
     }
   }
 
+  await ensureStateWritable(io);
   const existing = await readState(io);
   if (existing) {
     try {
@@ -362,13 +375,22 @@ export async function sendBot(meetingUrl, io, agenda) {
   });
   const botId = created.id;
   if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
-  await writeState(io, {
-    id: botId,
-    region: regionOf(io.env),
-    meetingUrl: normalizedMeetingUrl,
-    ...(audioEnabled ? { agenda: agenda.trim(), audioEnabled: true } : {}),
-    createdAt: new Date(io.now()).toISOString(),
-  });
+  try {
+    await writeState(io, {
+      id: botId,
+      region: regionOf(io.env),
+      meetingUrl: normalizedMeetingUrl,
+      ...(audioEnabled ? { agenda: agenda.trim(), audioEnabled: true } : {}),
+      createdAt: new Date(io.now()).toISOString(),
+    });
+  } catch {
+    try {
+      await requestLeave(io, botId);
+    } catch {
+      throw new RecallCliError(`参加情報の保存に失敗しました。作成済みBotの退出を確認してください。Bot ID: ${botId}`, { status: 503 });
+    }
+    throw new RecallCliError(`参加情報の保存に失敗したため、作成済みBotの退出を要求しました。再参加する前に会議を確認してください。Bot ID: ${botId}`, { status: 503 });
+  }
   return { id: botId, region: regionOf(io.env), meetingUrl: normalizedMeetingUrl };
 }
 
@@ -376,7 +398,9 @@ export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch, o
   return {
     env,
     fetch: fetchImpl,
-    statePath: options.persistState === false ? null : STATE_PATH,
+    statePath: options.persistState === false ? null : env.VERCEL === '1'
+      ? path.join(tmpdir(), 'meeting-facilitator-recall', 'current.json')
+      : STATE_PATH,
     now: () => Date.now(),
     sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
     pollMs: 3000,
