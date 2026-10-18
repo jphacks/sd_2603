@@ -128,34 +128,101 @@ static void sendEvent(const char *type, const char *label) {
   showToast(accepted ? label : "受け付けず");
 }
 
-static uint16_t backgroundFor(const DeviceState &s, bool connected) {
-  if (!connected || !s.valid) return M5.Display.color565(80, 80, 80);
-  if (s.state == "intervene") return M5.Display.color565(190, 60, 50);
-  if (s.state == "wait") return M5.Display.color565(200, 160, 40);
-  if (s.state == "silence") return M5.Display.color565(50, 130, 90);
-  return M5.Display.color565(80, 80, 80);
+// Colors follow ../DESIGN.md: ink on paper, gray only for lines and secondary text.
+static const uint16_t INK = 0x0000;
+static const uint16_t PAPER = 0xFFFF;
+static const uint16_t SURFACE = 0xF79E;  // #F2F2F2, used while disconnected
+static const uint16_t MUTED_INK = 0x632C;  // #666666
+static const uint16_t DISCONNECTED_INK = 0xA514;  // #A0A0A0
+
+enum Expression { WATCHING, NUDGE, REDIRECT };
+
+// The expression follows what AIDA is doing, not the judge state: WAIT and SILENCE both
+// stay "watching". `view` is the same value the Meet card uses.
+static Expression expressionFor(const DeviceState &s) {
+  if (s.view == "off_agenda") return REDIRECT;
+  if (s.view == "stalled") return NUDGE;
+  return s.state == "intervene" ? NUDGE : WATCHING;
+}
+
+// AIDA face mark, same shapes as docs/brand/aida-face-*.svg (viewBox 384x344, y starts at -34).
+struct Face {
+  int x, y;
+  float scale;
+  uint16_t ink, paper;
+};
+
+static int faceX(const Face &f, float vx) { return f.x + lroundf(vx * f.scale); }
+static int faceY(const Face &f, float vy) { return f.y + lroundf((vy + 34) * f.scale); }
+
+// Round-capped stroke of width `w` (viewBox units), like stroke-linecap="round".
+static void faceStroke(const Face &f, float x0, float y0, float x1, float y1, float w) {
+  M5.Display.drawWideLine(faceX(f, x0), faceY(f, y0), faceX(f, x1), faceY(f, y1), w * f.scale / 2, f.ink);
+}
+
+static void faceRing(const Face &f, float cx, float cy, float r, float w) {
+  auto &d = M5.Display;
+  d.fillCircle(faceX(f, cx), faceY(f, cy), lroundf((r + w / 2) * f.scale), f.ink);
+  d.fillCircle(faceX(f, cx), faceY(f, cy), lroundf((r - w / 2) * f.scale), f.paper);
+}
+
+static void drawFace(const Face &f, Expression e) {
+  auto &d = M5.Display;
+  // Frame: 22-wide stroke around a 314x309 rounded square (outer radius ~74).
+  d.fillRoundRect(faceX(f, 0), faceY(f, 0), lroundf(314 * f.scale), lroundf(309 * f.scale), lroundf(74 * f.scale), f.ink);
+  d.fillRoundRect(faceX(f, 22), faceY(f, 22), lroundf(270 * f.scale), lroundf(265 * f.scale), lroundf(52 * f.scale), f.paper);
+
+  if (e == WATCHING) {
+    faceStroke(f, 65.8, 141, 119.8, 141, 22);
+    faceStroke(f, 191.7, 141, 246.9, 141, 22);
+    return;  // the signal marks are only for when AIDA speaks
+  }
+  if (e == NUDGE) {
+    faceStroke(f, 92.6, 116, 92.6, 145.5, 24);
+    faceStroke(f, 219.5, 116, 219.5, 145.5, 24);
+    faceRing(f, 156.5, 209, 25, 16);
+  } else {
+    faceStroke(f, 68.7, 108, 112.5, 133, 16.3);
+    faceStroke(f, 112.5, 133, 68.8, 158.7, 16.3);
+    faceStroke(f, 244.7, 108.2, 199.5, 133, 16.3);
+    faceStroke(f, 199.5, 133, 243.7, 158.7, 16.3);
+    // Return arrow: head, shaft, a quarter-turn corner (approximated), then down.
+    faceStroke(f, 142.5, 177.5, 119, 202, 17.5);
+    faceStroke(f, 119, 202, 142.5, 227.5, 17.5);
+    faceStroke(f, 119, 202, 180, 202, 17.5);
+    faceStroke(f, 180, 202, 189.5, 205.95, 17.5);
+    faceStroke(f, 189.5, 205.95, 193.5, 215.5, 17.5);
+    faceStroke(f, 193.5, 215.5, 193.5, 238.5, 17.5);
+  }
+  faceStroke(f, 317, 5.5, 345.1, -22.4, 20);
+  faceStroke(f, 336.7, 39.4, 371.7, 26, 20);
 }
 
 static void drawStatus(bool connected) {
   auto &d = M5.Display;
-  d.setTextColor(TFT_WHITE);
-  d.setFont(&fonts::lgfxJapanGothic_24);
-  d.setCursor(8, 10);
+  const int textX = 156;  // right column, five 16px characters wide
+  d.setFont(&fonts::lgfxJapanGothic_16);
+  d.setTextColor(connected ? INK : MUTED_INK, connected ? PAPER : SURFACE);
+  Face face = {6, 5, 0.36f, connected ? INK : DISCONNECTED_INK, connected ? PAPER : SURFACE};
+  drawFace(face, connected ? expressionFor(current) : WATCHING);
   if (!connected) {
+    d.setCursor(textX, 58);
     d.print("接続待ち");
     return;
   }
-  d.print(current.view == "idle" ? "見守り中" : current.title.c_str());
-  d.setFont(&fonts::lgfxJapanGothic_16);
-  if (current.agenda.length()) {
-    d.setCursor(8, 52);
-    d.print(current.agenda.c_str());
-  }
-  d.setCursor(8, 82);
-  if (current.cooldownSec > 0) d.printf("次の介入まで %d秒", current.cooldownSec);
   if (current.muted) {
-    d.setCursor(8, 108);
-    d.print("寄り道OK: 介入を停止中");
+    d.setCursor(textX, 8);
+    d.print("寄り道OK");
+    d.setCursor(textX, 30);
+    d.print("介入停止中");
+  }
+  if (current.cooldownSec > 0) {
+    d.setTextColor(MUTED_INK, PAPER);
+    d.setCursor(textX, 66);
+    d.print("介入まで");
+    d.setTextColor(INK, PAPER);
+    d.setCursor(textX, 86);
+    d.printf("あと%d秒", current.cooldownSec);
   }
 }
 
@@ -163,35 +230,45 @@ static void drawScores() {
   auto &d = M5.Display;
   static const char *labels[3] = {"脱線", "停滞", "寄り道"};
   static const uint16_t colors[3] = {0xF4B2, 0xEDEB, 0x86D7};  // roughly the web monitor colors
-  const int barTop = 8, barHeight = 90, barWidth = 40, gap = 20, left = 24;
-  d.setFont(&fonts::lgfxJapanGothic_16);
+  const int barTop = 24, barHeight = 80, barWidth = 44, gap = 28, left = 26, radius = 12;
   for (int i = 0; i < 3; i++) {
     int x = left + i * (barWidth + gap);
-    d.drawRect(x, barTop, barWidth, barHeight, TFT_WHITE);
+    d.setFont(&fonts::lgfxJapanGothic_16);
+    d.setTextColor(INK, PAPER);
+    d.setTextDatum(top_center);
     if (current.scores[i] >= 0) {  // missing scores are never drawn as 0
-      int h = barHeight * current.scores[i] / 100;
-      d.fillRect(x + 1, barTop + barHeight - h, barWidth - 2, h, colors[i]);
-      d.setTextColor(TFT_WHITE);
-      d.setCursor(x + 4, barTop + 36);
-      d.printf("%d", current.scores[i]);
+      int fill = (barHeight - 4) * current.scores[i] / 100;
+      if (fill > 0) {
+        d.fillRoundRect(x + 2, barTop + barHeight - 2 - fill, barWidth - 4, fill, min(radius - 2, fill / 2), colors[i]);
+      }
+      d.drawString(String(current.scores[i]), x + barWidth / 2, 3);
+    } else {
+      d.drawString("-", x + barWidth / 2, 3);
     }
-    d.setTextColor(TFT_WHITE);
-    d.setCursor(x, barTop + barHeight + 8);
-    d.print(labels[i]);
+    // 2px outline, and the 60 / 40 reference lines (no 40 for tangent usefulness).
+    d.drawRoundRect(x, barTop, barWidth, barHeight, radius, INK);
+    d.drawRoundRect(x + 1, barTop + 1, barWidth - 2, barHeight - 2, radius - 1, INK);
+    for (int level : {60, 40}) {
+      if (level == 40 && i == 2) continue;
+      int y = barTop + barHeight - 2 - (barHeight - 4) * level / 100;
+      for (int dx = 4; dx < barWidth - 6; dx += 6) d.drawFastHLine(x + dx, y, 3, INK);
+    }
+    d.drawString(labels[i], x + barWidth / 2, barTop + barHeight + 5);
   }
+  d.setTextDatum(top_left);
 }
 
 static void render() {
   bool connected = lastOkAt != 0 && millis() - lastOkAt < STALE_MS;
   auto &d = M5.Display;
-  d.fillScreen(showScores && connected ? TFT_BLACK : backgroundFor(current, connected));
+  d.fillScreen(connected ? PAPER : SURFACE);
   if (!connected) drawStatus(false);
   else if (showScores) drawScores();
   else drawStatus(true);
   if (toast.length() && millis() < toastUntil) {
     d.setFont(&fonts::lgfxJapanGothic_16);
-    d.setTextColor(TFT_WHITE, TFT_BLACK);
-    d.setCursor(8, 112);
+    d.setTextColor(PAPER, INK);
+    d.setCursor(150, 112);
     d.print(toast.c_str());
   }
   dirty = false;
