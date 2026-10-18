@@ -1,5 +1,28 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import opentype from "opentype.js";
 import sharp from "sharp";
 import { FACE_FRAME, faceGroup, type FaceKind } from "../brand/faces.ts";
+
+// Text is drawn as outlines from the bundled font, so the card does not depend
+// on fonts installed on the server (Vercel has no Japanese fonts).
+// next.config.ts includes this file in the /api/recall/video trace.
+const FONT_PATH = path.join(process.cwd(), "lib/brand/fonts/NotoSansJP-Bold.otf");
+let cardFont: opentype.Font | undefined;
+
+function loadCardFont() {
+  if (!cardFont) {
+    const file = readFileSync(FONT_PATH);
+    cardFont = opentype.parse(file.buffer.slice(file.byteOffset, file.byteOffset + file.byteLength));
+  }
+  return cardFont;
+}
+
+function centeredText(text: string, centerX: number, baseline: number, size: number) {
+  const font = loadCardFont();
+  const x = centerX - font.getAdvanceWidth(text, size, { kerning: true }) / 2;
+  return font.getPath(text, x, baseline, size, { kerning: true }).toPathData(1);
+}
 
 const IMAGE_WIDTH = 1280;
 const IMAGE_HEIGHT = 720;
@@ -55,7 +78,7 @@ export function videoCopy(view: VideoView): { message: string | null; lines: str
 }
 
 export function videoSvg(view: VideoView) {
-  const { lines } = videoCopy(view);
+  const { message, lines } = videoCopy(view);
   const frameHeight = FACE_FRAME.height * FACE_SCALE;
   const textHeight = lines.length ? FACE_TEXT_GAP + lines.length * FONT_SIZE + (lines.length - 1) * LINE_GAP : 0;
   const top = (IMAGE_HEIGHT - frameHeight - textHeight) / 2;
@@ -63,9 +86,10 @@ export function videoSvg(view: VideoView) {
   const textMarkup = lines.map((line, index) => {
     // Baseline sits about 0.88em below the top of each line.
     const y = top + frameHeight + FACE_TEXT_GAP + index * (FONT_SIZE + LINE_GAP) + FONT_SIZE * 0.88;
-    return `<text x="${IMAGE_WIDTH / 2}" y="${Math.round(y)}" text-anchor="middle" fill="#000000" font-family="Noto Sans JP, Hiragino Sans, Yu Gothic, sans-serif" font-size="${FONT_SIZE}" font-weight="700">${escapeXml(line)}</text>`;
+    return `<path class="line" fill="#000000" d="${centeredText(line, IMAGE_WIDTH / 2, Math.round(y), FONT_SIZE)}"/>`;
   }).join("\n  ");
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" viewBox="0 0 ${IMAGE_WIDTH} ${IMAGE_HEIGHT}">
+  <title>${escapeXml(message ?? "AIDA")}</title>
   <rect width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" fill="#ffffff"/>
   ${faceGroup(FACES[view.kind], Math.round(left * 10) / 10, Math.round(top * 10) / 10, FACE_SCALE, "#000000")}
   ${textMarkup}
