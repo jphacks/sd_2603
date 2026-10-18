@@ -45,7 +45,7 @@ Featureとstagingには別々の固定URLを割り当てます。同じブラン
 
 - 既存のVercelプロジェクト `meeting-facilitator-deploy` を利用し、新規プロジェクト・料金プラン変更は行いません。
 - GitHubのスイッチで公開対象を制御します。`ENABLE_FEATURE_PREVIEW_DEPLOYMENT`はfeature、`ENABLE_PREVIEW_DEPLOYMENT`はstaging、`ENABLE_PRODUCTION_DEPLOYMENT`はmainが対象です。未設定またはfalseなら対象ブランチはCIのみです。
-- 両環境ともビルド時・実行時は `AI_PROVIDER=mock`、`ALLOW_PAID_AI=false` です。キーは追加しません。
+- CIのビルド・テストは `AI_PROVIDER=mock`、`ALLOW_PAID_AI=false` のまま外部AIを呼びません。stagingの公開環境は `AI_PROVIDER=jev`、`ALLOW_PAID_AI=true`、`JEV_MODEL_ID=typesafe-ai/jev` とし、VercelプロジェクトのPreview環境に登録した `AI_GATEWAY_API_KEY` を実行時に利用します。GitHub SecretsにはJevキーを保存せず、CLI引数にも渡しません。mainとfeatureの公開環境は従来どおりMockです。
 - `/api/test-ai` にはFocus UI側で検証済みのガードを取り込み、CIで外部AI処理が走るのを防ぎます。
 - GitHub Secretsへ渡すVercelトークンは利用者本人が発行・登録します。ローカルCLIのログイントークンは流用しません。
 
@@ -73,6 +73,12 @@ Featureとstagingには別々の固定URLを割り当てます。同じブラン
 | `VERCEL_PROJECT_ID` | `prj_rdyWfklQEPHdNzze4jYYoc14N5x7` |
 
 このワークフローはRepository Secretsを利用します。Environment Secretsだけに登録しても読み取れません。トークンはログに出力しません。
+
+### 2-2. stagingのJevキーをVercelで設定する
+
+Vercelの `meeting-facilitator-deploy` → **Settings → Environment Variables** で、`AI_GATEWAY_API_KEY` を **Preview** 環境へ登録してください。ブランチで限定する場合は `staging` を指定します。Sensitiveとして登録できます。GitHub ActionsのSecretには登録しません。
+
+キーを登録・変更したらstagingのデプロイを実行してください。環境変数の変更だけでは公開済みデプロイは更新されません。公開後に `/api/judge` のレスポンスに `diagnostic.model` と4つの実スコアが含まれること、`/monitor?session=<sessionId>` に同じスコアが表示されることを確認します。実Jevの呼び出しには利用料金が発生します。
 
 ### 3. PRをレビューしてstagingへマージする
 
@@ -163,7 +169,7 @@ timeout 30s vercel curl /api/judge --deployment "$PREVIEW_URL" -- \
 ## ファイル構成
 
 - `.github/workflows/ci-deploy.yml`：チェックとブランチ別デプロイ。
-- `scripts/ci/prepare-vercel-env.mjs`：Vercelから取得した環境ファイルをMock設定に固定。取得した秘密情報はログに出しません。
+- `scripts/ci/prepare-vercel-env.mjs`：ビルド・ローカル検証用の環境ファイルをMock設定に固定。公開環境のJev設定はworkflowのデプロイ工程で指定。取得した秘密情報はログに出しません。
 - `scripts/ci/helpers.test.mjs`：Mock設定の強制、秘密情報の非出力、デプロイ結果のURL検証をテスト。
 - `scripts/ci/smoke-test.mjs`：ビルド済みアプリを一時起動し、トップ画面、Judgeの3判定、有料AIテストの403を確認。
 - `scripts/ci/report-deployment.mjs`：デプロイ結果のURLをActions Summaryと後続ステップへ渡す。
