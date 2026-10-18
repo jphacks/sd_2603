@@ -47,7 +47,7 @@ M5 が 2 秒ごとに読む。`Authorization: Bearer <DEVICE_TOKEN>` を付け�
 | `state` | `silence` / `wait` / `intervene`。まだ判定が1回もないときは `unknown`。画面は状態の色ではなく `face` の表情で表す |
 | `view` | `idle` / `off_agenda` / `stalled`。`videoCopy()` と同じ区分。介入のカードが Meet に出ているあいだ（会議が戻るまで、最大 `INTERVENTION_MAX_HOLD_SECONDS` 秒）は非 `idle`。ワーカーが待機表示に戻すと `idle` |
 | `face` | `watching` / `nudge` / `redirect` / `angry`。画面に描く AIDA の表情。`view` が `idle` なら `watching`、`stalled` なら `nudge`、`off_agenda` なら `redirect`。戻らないまま介入が重なり `level` が `ANGRY_AFTER_INTERVENTIONS`（既定 2）以上なら `angry`（沈黙の声かけは除く）。Meet のカメラカードと同じ対応（`DESIGN.md`） |
-| `level` | 表示中のカードの段階。`idle` なら 0、最初の介入は 1、会議が戻らないまま重なるごとに増える |
+| `level` | 表示中のカードの段階。`idle` なら 0、最初の介入は 1、会議が戻らないまま重なるごとに増える。前のカードが `INTERVENTION_MAX_HOLD_SECONDS` まで出たまま終わっていたら 1 から数え直す |
 | `title` / `agendaShort` | 画面用の短い文言。アジェンダは 12 文字程度に切る。M5 の画面は小さいので 2 行まで |
 | `scores` | 0〜100 の整数。ストアの 0〜1 の実測値を変換。未取得は `null`（0 として扱わない） |
 | `cooldownSec` | 次に介入できるまでの残り秒数（`remainingCooldown`） |
