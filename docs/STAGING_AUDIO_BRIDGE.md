@@ -102,3 +102,47 @@ VercelのDeployment Protectionは解除しない。
 実AI Gatewayで確定文字起こし3件を取得し、実Jev判定1件（STALLED、stalled=0.90）を確認。
 同じ結果をbridge経由のmonitor APIから取得できた。
 架空のBot IDで安全に検証したため、Recall映像出力は対象外。Meetの生音声を使用した試験ではない。
+
+## staging 本体をトンネル経由で動かす（#50 マージ後）
+
+常時稼働PCで次のコマンドを実行すると、Next（`127.0.0.1:3000`）・音声ワーカー・Cloudflare Tunnel をまとめて起動する。トンネルが公開するのはワーカーのポートだけ。
+
+```sh
+npm run build
+npm run audio-host            # 開発サーバーで動かす場合は npm run audio-host -- --dev
+```
+
+- 設定は上の「常時起動ホスト」と同じ `.env.local`。不足や中継ループ（`RECALL_AUDIO_WORKER_URL` の設定）があれば、起動前に止まる。
+- `cloudflared` が PATH にない場合は `CLOUDFLARED_PATH` に実行ファイルのパスを指定する。
+- 起動後、`https://<公開ホスト>/health` に届くことを確認してから、Vercel に入れる2つのURLを表示する。秘密値は表示しない。
+- Ctrl+C で3つとも停止する。どれか1つが落ちた場合も、残りを止めて終了する。
+
+### トンネルの種類
+
+| 種類 | 設定 | URL |
+| --- | --- | --- |
+| クイックトンネル（既定） | 追加設定なし | 起動のたびに `*.trycloudflare.com` が変わる。変わったら Secret を更新して再デプロイする |
+| 名前付きトンネル | `CLOUDFLARE_TUNNEL_TOKEN` と `RECALL_AUDIO_TUNNEL_HOSTNAME` | 固定。Cloudflare 側で公開ホスト名を `http://127.0.0.1:8787` に向けておく |
+
+継続して staging で使う場合は、URL が変わらない名前付きトンネルを推奨する。
+
+### staging のデプロイ設定
+
+GitHub の Secret `STAGING_AUDIO_RUNTIME` に、`AUDIO_TEST_RUNTIME` と同じ形の JSON を登録する。
+
+```json
+{
+  "RECALL_AUDIO_WORKER_URL": "https://<公開ホスト>",
+  "RECALL_AUDIO_PUBLIC_URL": "wss://<公開ホスト>",
+  "RECALL_AUDIO_TOKEN": "<PCと共通>",
+  "RECALL_CONTROL_TOKEN": "<PCと共通>",
+  "AI_GATEWAY_API_KEY": "<既存のキー>",
+  "RECALL_API_KEY": "<PCと同じRecallキー>",
+  "RECALL_REGION": "ap-northeast-1"
+}
+```
+
+- Secret がない間は、staging のデプロイは従来どおりで、音声は使わない。
+- Secret があるときだけ、staging の Push で実Jev・音声接続・サーバー管理の入退室を有効にする。値が不正ならデプロイを失敗させ、黙って音声なしにはしない。
+- カメラのURLは、従来どおりデプロイ先のURLから決まる。
+- Secret を登録・変更したら、staging へ再Pushしてデプロイし直す（Secret の変更だけでは反映されない）。
