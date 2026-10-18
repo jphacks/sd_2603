@@ -24,6 +24,7 @@
     - [デバイス](#devices)
   - [独自技術](#original)
     - [ハッカソンで開発した独自機能・技術](#hack)
+- [動かすには](#動かすには)
 
 ## 製品概要
 
@@ -142,3 +143,32 @@ Google Meet に参加者として入り、話を聞いて、発言の切れ目�
 * Jev から受け取った SILENCE / WAIT / INTERVENE で、会議への出し方を切り替える。[`lib/judge/jev.ts`](lib/judge/jev.ts)
 * 会議の映像は、見守る画面、議題に戻す画面、整理を促す画面で切り替える。[`lib/recall/controller.ts`](lib/recall/controller.ts)
 * 有益な寄り道では、脱線だけでは止めない
+
+## 動かすには
+
+---
+
+このリポジトリには、API キーやトークンなどの認証情報は含まれていません。**認証情報を入力しないと、会議への入室、文字起こし、Jev の判定、カメラへの表示、M5StickS3 との連携は動きません。** 入力しないまま起動すると、判定はモック（固定の結果）になり、Recall.ai と Jev には接続しません。
+
+`.env.example` を `.env.local` にコピーし、次の値を入れてください。`.env.local` は Git の対象外です。コミットしたり、会議のチャットに貼ったりしないでください。
+
+| 変数 | 内容 | 入手先 |
+| --- | --- | --- |
+| `AI_PROVIDER` / `ALLOW_PAID_AI` | `jev` / `true` にすると、Jev の判定と文字起こしを使う（従量課金） | － |
+| `AI_GATEWAY_API_KEY` | Vercel AI Gateway のキー。Jev の判定と文字起こしに使う | Vercel |
+| `RECALL_API_KEY` / `RECALL_REGION` | Recall.ai のキーと、そのキーのリージョン | Recall.ai |
+| `RECALL_CONTROL_TOKEN` | 入室・退出とカメラ表示を操作するためのトークン。入室画面のパスワード欄にも入れる | 自分で生成（32 文字以上） |
+| `ENABLE_REALTIME_TRANSCRIPTION` | `true` にすると、会議の音声から自動で判定する | － |
+| `RECALL_AUDIO_TOKEN` | 音声ワーカーへの接続を確かめるトークン | 自分で生成（32 文字以上） |
+| `RECALL_AUDIO_PUBLIC_URL` | 音声ワーカー（ローカルのポート 8787）を公開するトンネルの `wss://` URL | cloudflared など |
+| `DEVICE_TOKEN` | M5StickS3 からの接続を確かめるトークン | 自分で生成（32 文字以上） |
+
+トークンは、たとえば次のコマンドで生成できます。
+
+```sh
+node -e "console.log(require('crypto').randomBytes(24).toString('hex'))"
+```
+
+M5StickS3 を使う場合は、`firmware/src/config.h.example` を `config.h` にコピーし、Wi-Fi（2.4GHz）、アプリの URL、`DEVICE_TOKEN` と同じ値を入れてから書き込みます。`config.h` も Git の対象外です。
+
+起動の手順と、ほかの設定（会話の途中で介入する設定、沈黙の秒数など）は、[`docs/REALTIME_TRANSCRIPTION.md`](docs/REALTIME_TRANSCRIPTION.md) と [`docs/m5stick.md`](docs/m5stick.md) にあります。
