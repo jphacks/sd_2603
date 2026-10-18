@@ -53,7 +53,7 @@ test('streams first speech immediately, buffers next until prior final, and pres
   segments.stop();
 });
 
-test('pending audio holds both evaluation and quiet-display check until all finals arrive', async () => {
+test('pending audio permits evaluation but holds quiet-display check until all finals arrive', async () => {
   let now = 0;
   const timers = new Map();
   let nextId = 0;
@@ -69,7 +69,7 @@ test('pending audio holds both evaluation and quiet-display check until all fina
     }
   };
   const decisions = [];
-  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', now: () => now, schedule, unschedule,
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', now: () => now, schedule, unschedule, decisionIntervalMs: 0,
     decide: async input => { decisions.push(input); return { action: 'INTERVENE' }; }, display: async () => {} });
   const releases = [];
   const segments = createSegmentedTranscriber({
@@ -88,13 +88,14 @@ test('pending audio holds both evaluation and quiet-display check until all fina
   releases[0]();
   await until(() => releases[1]);
   await advance(2000);
-  assert.equal(decisions.length, 0);
+  assert.equal(decisions.length, 1);
+  assert.deepEqual(decisions[0].transcript, ['final-0']);
   assert.equal(gate.isQuiet(2), false);
   releases[1]();
   await until(() => !segments.pending);
   await advance(0);
-  assert.equal(decisions.length, 1);
-  assert.deepEqual(decisions[0].transcript, ['final-0', 'final-1']);
+  assert.equal(decisions.length, 2);
+  assert.deepEqual(decisions[1].transcript, ['final-0', 'final-1']);
   gate.stop(); segments.stop();
 });
 
@@ -138,6 +139,28 @@ test('a confirmed empty segment is skipped and the next segment still completes'
   await until(() => !segments.pending);
   assert.equal(calls, 2);
   assert.deepEqual(events, [{ type: 'transcript-empty' }, { type: 'transcript-final', text: 'second' }]);
+  assert.deepEqual(failures, []);
+  segments.stop();
+});
+
+test('continuous PCM is finalized every ten seconds by default without an artificial pause', async () => {
+  const events = [];
+  const lengths = [];
+  const failures = [];
+  const segments = createSegmentedTranscriber({
+    onPart: part => events.push(part), onError: error => failures.push(error),
+    transcribe: async (audio, { onPart }) => {
+      let bytes = 0;
+      for await (const chunk of audio) bytes += chunk.length;
+      lengths.push(bytes);
+      onPart({ type: 'transcript-final', text: `confirmed-${lengths.length}` });
+    },
+  });
+  for (let i = 0; i < 150; i++) segments.push(voiced);
+  await until(() => !segments.pending);
+  assert.equal(lengths.length, 3);
+  for (const bytes of lengths) assert.ok(Math.abs(bytes - 480000) <= 2, 'ten seconds of 24kHz PCM, allowing the resampler edge sample');
+  assert.equal(events.length, 3);
   assert.deepEqual(failures, []);
   segments.stop();
 });
