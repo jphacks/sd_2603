@@ -39,6 +39,15 @@ export const EnvelopeSchema = z.object({
   history: z.array(PointSchema).max(240),
   expectedIntervalMs: z.number().finite().positive().nullable(),
 });
+export const MonitorResponseSchema = EnvelopeSchema.extend({
+  sessionId: z.string().regex(/^[A-Za-z0-9_-]{1,128}$/).nullable(),
+}).refine((data) =>
+  data.sessionId === null
+    ? data.snapshot === null && data.history.length === 0
+    : !data.snapshot || data.snapshot.sessionId === data.sessionId,
+);
+export type MonitorResponse = z.infer<typeof MonitorResponseSchema>;
+
 export type Scores = z.infer<typeof ScoreSchema>;
 export type Point = z.infer<typeof PointSchema>;
 export type Snapshot = z.infer<typeof SnapshotSchema>;
@@ -88,4 +97,18 @@ export function expectedInterval(history: Point[]): number | null {
     .filter((value) => value > 0);
   if (intervals.length < 2) return null;
   return [...intervals].sort((a, b) => a - b)[Math.floor(intervals.length / 2)];
+}
+
+// Reset before accepting a different meeting, including an empty waiting state.
+export function acceptMonitorResponse(
+  previous: MonitorResponse | null,
+  incoming: MonitorResponse,
+): MonitorResponse {
+  if (!incoming.sessionId) return incoming;
+  const envelope = acceptEnvelope(
+    previous?.sessionId === incoming.sessionId ? previous : null,
+    incoming,
+    incoming.sessionId,
+  );
+  return { sessionId: incoming.sessionId, ...(envelope ?? incoming) };
 }

@@ -47,3 +47,14 @@ This is a best-effort speech boundary: a new speaker can start during network la
 The no-audio watchdog only covers a WebSocket that never connects. A connected WebSocket with no speech may simply mean everyone is muted; this prototype does not infer failure from silence. Its health endpoint therefore does not prove transcription quality or Gateway acceptance. Monitor the worker and verify at least one real final transcript in a test meeting before relying on automatic intervention.
 
 Official references: [Recall mixed audio](https://docs.recall.ai/docs/how-to-get-mixed-audio-real-time), [AI Gateway streaming transcription](https://vercel.com/docs/ai-gateway/modalities/speech-to-text), [AI SDK transcription events and provider options](https://ai-sdk.dev/docs/ai-sdk-core/transcription).
+
+
+## 会議中の判定グラフ
+
+参加画面で会議URLを送ると、返されたRecall Bot IDをMTG IDとして、その会議のJev判定グラフを参加画面内に表示します。「この会議の判定グラフを別画面で開く」から `/monitor?session=<Bot ID>` も開けます。議案書の保存に失敗した場合も、Botの参加に成功していればモニターは利用できます。
+
+`/monitor` を先に開いておくと、参加画面で送信した会議を自動表示します。CLIから参加した場合は最初の判定で自動選択します。別の会議に参加すると表示対象を切り替え、前の会議の値を混ぜません。MTG IDの入力欄で特定のBot IDを指定すると、その会議に固定できます。退出が成功すると自動表示を待機状態へ戻します。
+
+会議判定経路 `/api/recall/video` の `judge` / `evaluate` が既存のJev結果を保存し、画面は2秒間隔で結果を読み取ります。表示のための追加Jev実行や音声送信はありません。まだ判定がない間は「実スコア未取得」と表示し、クールダウン中は最後の実スコアを保持します。
+
+判定するアプリとモニターAPIは同じアプリプロセスの保存先を参照する必要があります。既存のストアはメモリ内のため、ローカルのアプリで行った判定が別のVercelデプロイへ自動転送されることはありません。複数インスタンス間の共有には別途共有ストアが必要です。
