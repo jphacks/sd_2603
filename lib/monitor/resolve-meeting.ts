@@ -4,7 +4,9 @@ import { parseMeetingSelection } from "./meeting.ts";
 import { monitorStore } from "./store.ts";
 
 async function readCurrent(): Promise<unknown> {
-  return JSON.parse(await readFile(localRecallIo().statePath, "utf8"));
+  const statePath = localRecallIo().statePath;
+  if (!statePath) return null;
+  return JSON.parse(await readFile(statePath, "utf8"));
 }
 
 export async function resolveMeetingSession(reference: string, loadCurrent = readCurrent): Promise<string | null> {

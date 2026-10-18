@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { normalizeGoogleMeetUrl } from "@/lib/recall/meeting-url";
 import Link from "next/link";
 import { joinMeeting, leaveMeeting } from "./meeting-actions";
 import { MonitorConnection } from "@/components/score-monitor/MonitorConnection";
@@ -21,6 +22,7 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
   const [materialNotes, setMaterialNotes] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const [botId, setBotId] = useState<string | null>(null);
 
   function replaceFiles(next: File[], limitNote: string | null) {
     setFiles(next);
@@ -40,8 +42,9 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
     setError(null);
     setNotice(null);
     setMaterialNotes([]);
-    if (!/^https:\/\/.+/i.test(meetingUrl)) {
-      setError("会議 URL は https:// で始めてください。");
+    const normalizedMeetingUrl = normalizeGoogleMeetUrl(meetingUrl);
+    if (!normalizedMeetingUrl) {
+      setError("Google Meet のURLを確認してください（例: https://meet.google.com/abc-defg-hij）。");
       return;
     }
     setPending(true);
@@ -50,7 +53,7 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
       const response = serverManagedControl ? await joinMeeting(meetingUrl, agenda).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/join", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` },
-        body: JSON.stringify({ meetingUrl, agenda }),
+        body: JSON.stringify({ meetingUrl: normalizedMeetingUrl, agenda }),
       });
       const body = (await response.json()) as { id?: string; error?: string };
       if (!response.ok || !body.id) {
@@ -58,6 +61,7 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
         return;
       }
       sentId = body.id;
+      setBotId(body.id);
       setMonitorSessionId(body.id);
       if (files.length === 0) {
         setNotice(`ボットを送信しました ${body.id}`);
@@ -98,9 +102,17 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
     setError(null);
     setNotice(null);
     setMaterialNotes([]);
+    if (!botId) {
+      setError("この画面から参加させたボットがありません。");
+      return;
+    }
     setPending(true);
     try {
-      const response = serverManagedControl ? await leaveMeeting().then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/leave", { method: "POST", headers: { Authorization: `Bearer ${controlToken.trim()}` } });
+      const response = serverManagedControl ? await leaveMeeting(botId).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/leave", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` },
+        body: JSON.stringify({ botId }),
+      });
       const body = (await response.json()) as {
         left?: boolean;
         alreadyGone?: boolean;
@@ -110,6 +122,7 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
         setError(body.error ?? "退出に失敗しました");
         return;
       }
+      setBotId(null);
       setMonitorSessionId(null);
       setNotice(body.alreadyGone ? "すでに退出しています" : "退出しました");
     } catch {
@@ -215,14 +228,14 @@ export function JoinForm({ serverManagedControl = false, setupError = null }: { 
           <button
             className="w-fit rounded bg-zinc-900 px-4 py-2 text-sm text-white disabled:opacity-50"
             type="submit"
-            disabled={pending || Boolean(setupError)}
+            disabled={pending || botId !== null || Boolean(setupError)}
           >
             参加
           </button>
           <button
             className="w-fit rounded border border-zinc-300 px-4 py-2 text-sm disabled:opacity-50"
             type="button"
-            disabled={pending || Boolean(setupError)}
+            disabled={pending || botId === null || Boolean(setupError)}
             onClick={() => {
               void leave();
             }}

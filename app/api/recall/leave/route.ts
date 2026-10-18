@@ -1,4 +1,3 @@
-import { readFile } from "node:fs/promises";
 import { localRecallIo, removeBot } from "@/scripts/recall.mjs";
 import { monitorStore } from "@/lib/monitor/store";
 import { controlAccessError } from "@/lib/recall/controller";
@@ -6,19 +5,21 @@ import { controlAccessError } from "@/lib/recall/controller";
 export async function POST(request: Request) {
   const denied = controlAccessError(request, process.env.RECALL_CONTROL_TOKEN);
   if (denied) return denied;
-  const io = localRecallIo();
   let id = "";
   try {
-    const state = JSON.parse(await readFile(io.statePath, "utf8")) as { id?: string };
-    id = typeof state.id === "string" ? state.id : "";
+    const payload: unknown = await request.json();
+    if (payload && typeof payload === "object" && "botId" in payload) {
+      id = String(payload.botId ?? "").trim();
+    }
   } catch {
     id = "";
   }
-  if (!id) {
-    return Response.json({ error: "退出するボットがありません。" }, { status: 404 });
+  if (!/^[0-9a-f-]{20,64}$/i.test(id)) {
+    return Response.json({ error: "退出するボットIDを確認できません。" }, { status: 400 });
   }
 
   try {
+    const io = localRecallIo(process.env, globalThis.fetch, { persistState: false });
     const result = await removeBot(io, id);
     if (result.left) {
       monitorStore.deactivate(id);

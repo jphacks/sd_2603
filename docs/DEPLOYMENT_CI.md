@@ -154,6 +154,22 @@ timeout 30s vercel curl /api/judge --deployment "$PREVIEW_URL" -- \
 
 期待値は `INTERVENE` とHTTP 200です。Vercel CLIの起動表示だけで止まる場合は認証・通信の待機が考えられます。`timeout 20s vercel whoami`で認証を確認します。外側のタイムアウトの終了コードは124です。
 
+### 4-4. VercelからGoogle Meetへ参加させる
+
+Vercelプロジェクトの **Settings → Environment Variables** で、Preview環境へ次を一度だけ登録してから再デプロイします。値をGitHub、チャット、`NEXT_PUBLIC_` 変数へ置かないでください。
+
+| Name | 内容 |
+| --- | --- |
+| `RECALL_API_KEY` | Recall.aiの東京リージョンで発行したAPIキー |
+| `RECALL_REGION` | `ap-northeast-1` |
+| `RECALL_CONTROL_TOKEN` | 32文字以上のランダムな操作トークン |
+
+`VERCEL_TOKEN` はデプロイ用であり、Meet参加フォームの操作トークンには使用しません。環境変数の変更は既存デプロイへ遡って反映されないため、登録後に対象ブランチを再デプロイします。
+
+ブラウザは参加APIから返されたRecallボットIDを保持し、退出APIへ明示的に渡します。Vercelの一時ファイルには依存しません。同じ画面で参加から退出まで操作してください。ページを再読み込みした場合はボットIDが失われるため、Recallダッシュボードから退出させます。本番で複数端末や再読み込み後の管理が必要になったら、ボットIDを共有データベースへ保存します。
+
+参加フォームへ入力できるURLは `https://meet.google.com/abc-defg-hij` 形式の直接リンクだけです。Meet側に参加申請が表示されたら、ホストが **MTG Lab** を許可します。
+
 ### 5. Productionを有効にする
 
 1. Previewで期待するアプリが動いていることを確認します。

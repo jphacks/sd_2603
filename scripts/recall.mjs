@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
+import { normalizeGoogleMeetUrl } from '../lib/recall/meeting-url.ts';
 import { recordingConfig } from './transcription/audio.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -150,6 +151,7 @@ async function recallFetch(io, pathName, options = {}) {
 }
 
 async function readState(io) {
+  if (!io.statePath) return null;
   try {
     const raw = await readFile(io.statePath, 'utf8');
     const state = JSON.parse(raw);
@@ -167,6 +169,7 @@ async function readState(io) {
 }
 
 export async function ensureStateWritable(io) {
+  if (!io.statePath) return;
   try {
     const directory = path.dirname(io.statePath);
     await mkdir(directory, { recursive: true });
@@ -177,11 +180,13 @@ export async function ensureStateWritable(io) {
 }
 
 async function writeState(io, state) {
+  if (!io.statePath) return;
   await mkdir(path.dirname(io.statePath), { recursive: true });
   await writeFile(io.statePath, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
 }
 
 async function clearState(io, id) {
+  if (!io.statePath) return;
   const state = await readState(io).catch(() => null);
   if (state?.id === id) await rm(io.statePath, { force: true });
 }
@@ -267,7 +272,26 @@ export function chatRecordingConfig(env) {
   };
 }
 
+export function cameraOutputConfig(env) {
+  const host = String(env.VERCEL_URL || env.VERCEL_BRANCH_URL || '').trim();
+  const configured = String(env.RECALL_CAMERA_URL || (host ? `https://${host}/recall/camera` : '')).trim();
+  if (!configured) return null;
+  let url;
+  try { url = new URL(configured); } catch {
+    throw new RecallCliError('RECALL_CAMERA_URL は有効なHTTPS URLにしてください。');
+  }
+  if (url.protocol !== 'https:') throw new RecallCliError('RECALL_CAMERA_URL はHTTPS URLにしてください。');
+  url.searchParams.set('embed', '1');
+  url.searchParams.set('mode', 'on-track');
+  if (env.VERCEL_AUTOMATION_BYPASS_SECRET) {
+    url.searchParams.set('x-vercel-protection-bypass', env.VERCEL_AUTOMATION_BYPASS_SECRET);
+    url.searchParams.set('x-vercel-set-bypass-cookie', 'samesitenone');
+  }
+  return { camera: { kind: 'webpage', config: { url: url.toString() } } };
+}
+
 function createBotBody(meetingUrl, env, audioConfig = null) {
+  const outputMedia = cameraOutputConfig(env);
   const chatConfig = chatRecordingConfig(env);
   const recording = audioConfig && chatConfig
     ? { ...audioConfig, ...chatConfig, realtime_endpoints: [...audioConfig.realtime_endpoints, ...chatConfig.realtime_endpoints] }
@@ -276,6 +300,7 @@ function createBotBody(meetingUrl, env, audioConfig = null) {
     meeting_url: meetingUrl,
     bot_name: BOT_NAME,
     recording_config: recording,
+    ...(outputMedia ? { output_media: outputMedia } : {}),
     ...(chatConfig
       ? {
           chat: {
@@ -295,8 +320,9 @@ function createBotBody(meetingUrl, env, audioConfig = null) {
 }
 
 export async function sendBot(meetingUrl, io, agenda) {
-  if (!/^https:\/\/.+/i.test(String(meetingUrl ?? ''))) {
-    throw new RecallCliError('会議 URL は https:// で始めてください。', { status: 400, exitCode: 2 });
+  const normalizedMeetingUrl = normalizeGoogleMeetUrl(String(meetingUrl ?? ''));
+  if (!normalizedMeetingUrl) {
+    throw new RecallCliError('Google Meet のURLを確認してください（例: https://meet.google.com/abc-defg-hij）。', { status: 400, exitCode: 2 });
   }
 
   const audioEnabled = io.env.ENABLE_REALTIME_TRANSCRIPTION === 'true';
@@ -345,7 +371,7 @@ export async function sendBot(meetingUrl, io, agenda) {
 
   const created = await recallFetch(io, '/bot/', {
     method: 'POST',
-    body: createBotBody(meetingUrl, io.env, audioConfig),
+    body: createBotBody(normalizedMeetingUrl, io.env, audioConfig),
   });
   const botId = created.id;
   if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
@@ -353,7 +379,7 @@ export async function sendBot(meetingUrl, io, agenda) {
     await writeState(io, {
       id: botId,
       region: regionOf(io.env),
-      meetingUrl,
+      meetingUrl: normalizedMeetingUrl,
       ...(audioEnabled ? { agenda: agenda.trim(), audioEnabled: true } : {}),
       createdAt: new Date(io.now()).toISOString(),
     });
@@ -365,14 +391,14 @@ export async function sendBot(meetingUrl, io, agenda) {
     }
     throw new RecallCliError(`参加情報の保存に失敗したため、作成済みBotの退出を要求しました。再参加する前に会議を確認してください。Bot ID: ${botId}`, { status: 503 });
   }
-  return { id: botId, region: regionOf(io.env), meetingUrl };
+  return { id: botId, region: regionOf(io.env), meetingUrl: normalizedMeetingUrl };
 }
 
-export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch) {
+export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch, options = {}) {
   return {
     env,
     fetch: fetchImpl,
-    statePath: env.VERCEL === '1'
+    statePath: options.persistState === false ? null : env.VERCEL === '1'
       ? path.join(tmpdir(), 'meeting-facilitator-recall', 'current.json')
       : STATE_PATH,
     now: () => Date.now(),

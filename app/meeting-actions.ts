@@ -20,8 +20,9 @@ export async function joinMeeting(meetingUrl: string, agenda: string) {
   } };
 }
 
-export async function leaveMeeting() {
-  const result = await invokeBrowserControl(process.env.BROWSER_CONTROL_ENABLED === "true", postLeave, {}, process.env.RECALL_CONTROL_TOKEN);
+export async function leaveMeeting(botId: string) {
+  if (!/^[0-9a-f-]{20,64}$/i.test(botId)) return { ok: false, status: 400, data: { error: "退出するボットIDを確認できません。" } };
+  const result = await invokeBrowserControl(process.env.BROWSER_CONTROL_ENABLED === "true", postLeave, { botId }, process.env.RECALL_CONTROL_TOKEN);
   return { ...result, data: {
     left: result.data.left === true,
     alreadyGone: result.data.alreadyGone === true,
