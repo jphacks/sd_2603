@@ -18,7 +18,11 @@ export async function POST(request: Request) {
   }
 
   try {
-    const sent = await sendBot(meetingUrl, localRecallIo(), agenda);
+    const sent = await sendBot(
+      meetingUrl,
+      localRecallIo(process.env, globalThis.fetch, { persistState: false }),
+      agenda,
+    );
     return Response.json(sent);
   } catch (error) {
     if (error instanceof RecallCliError) {

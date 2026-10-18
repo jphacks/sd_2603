@@ -17,7 +17,7 @@
     "lint": "eslint",
     "recall": "node scripts/recall.mjs",
     "test:meeting-regression": "node scripts/regression/meeting-replay.mjs",
-    "test": "node --test scripts/recall.test.mjs scripts/ci/*.test.mjs lib/judge/jev.test.mjs lib/recall/controller.test.mjs lib/recall/video.test.mjs scripts/transcription/*.test.mjs lib/agenda/agenda.test.mjs lib/agenda/materials.test.mjs lib/monitor/*.test.mjs lib/device/*.test.mjs"
+    "test": "node --test scripts/recall.test.mjs scripts/ci/*.test.mjs lib/judge/jev.test.mjs lib/recall/controller.test.mjs lib/recall/meeting-url.test.mjs lib/recall/video.test.mjs scripts/transcription/*.test.mjs lib/agenda/agenda.test.mjs lib/agenda/materials.test.mjs lib/monitor/*.test.mjs lib/device/*.test.mjs"
   },
   "dependencies": {
     "ai": "^7.0.138",

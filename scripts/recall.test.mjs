@@ -326,6 +326,25 @@ test('sendBot creates one silent bot and does not wait for admission', async () 
   }
 });
 
+test('server mode creates a bot without writing local state', async () => {
+  const requests = [];
+  const io = capture({
+    statePath: null,
+    fetch: async (url, options) => {
+      requests.push({ url: String(url), body: JSON.parse(options.body) });
+      return jsonResponse(200, { id: 'bot-server' });
+    },
+  }).io;
+
+  const sent = await sendBot(
+    'https://meet.google.com/ABC-DEFG-HIJ?authuser=0',
+    io,
+  );
+
+  assert.equal(sent.meetingUrl, 'https://meet.google.com/abc-defg-hij');
+  assert.equal(requests[0].body.meeting_url, sent.meetingUrl);
+});
+
 test('removeBot treats media_expired as left', async () => {
   const box = fixture();
   mkdirSync(box.dir, { recursive: true });

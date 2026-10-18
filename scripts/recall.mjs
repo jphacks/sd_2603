@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
+import { normalizeGoogleMeetUrl } from '../lib/recall/meeting-url.ts';
 import { recordingConfig } from './transcription/audio.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -149,6 +150,7 @@ async function recallFetch(io, pathName, options = {}) {
 }
 
 async function readState(io) {
+  if (!io.statePath) return null;
   try {
     const raw = await readFile(io.statePath, 'utf8');
     const state = JSON.parse(raw);
@@ -166,11 +168,13 @@ async function readState(io) {
 }
 
 async function writeState(io, state) {
+  if (!io.statePath) return;
   await mkdir(path.dirname(io.statePath), { recursive: true });
   await writeFile(io.statePath, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
 }
 
 async function clearState(io, id) {
+  if (!io.statePath) return;
   const state = await readState(io).catch(() => null);
   if (state?.id === id) await rm(io.statePath, { force: true });
 }
@@ -284,8 +288,9 @@ function createBotBody(meetingUrl, env, audioConfig = null) {
 }
 
 export async function sendBot(meetingUrl, io, agenda) {
-  if (!/^https:\/\/.+/i.test(String(meetingUrl ?? ''))) {
-    throw new RecallCliError('会議 URL は https:// で始めてください。', { status: 400, exitCode: 2 });
+  const normalizedMeetingUrl = normalizeGoogleMeetUrl(String(meetingUrl ?? ''));
+  if (!normalizedMeetingUrl) {
+    throw new RecallCliError('Google Meet のURLを確認してください（例: https://meet.google.com/abc-defg-hij）。', { status: 400, exitCode: 2 });
   }
 
   const audioEnabled = io.env.ENABLE_REALTIME_TRANSCRIPTION === 'true';
@@ -333,25 +338,25 @@ export async function sendBot(meetingUrl, io, agenda) {
 
   const created = await recallFetch(io, '/bot/', {
     method: 'POST',
-    body: createBotBody(meetingUrl, io.env, audioConfig),
+    body: createBotBody(normalizedMeetingUrl, io.env, audioConfig),
   });
   const botId = created.id;
   if (!botId) throw new RecallCliError('bot id が返りませんでした', { status: 502 });
   await writeState(io, {
     id: botId,
     region: regionOf(io.env),
-    meetingUrl,
+    meetingUrl: normalizedMeetingUrl,
     ...(audioEnabled ? { agenda: agenda.trim(), audioEnabled: true } : {}),
     createdAt: new Date(io.now()).toISOString(),
   });
-  return { id: botId, region: regionOf(io.env), meetingUrl };
+  return { id: botId, region: regionOf(io.env), meetingUrl: normalizedMeetingUrl };
 }
 
-export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch) {
+export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch, options = {}) {
   return {
     env,
     fetch: fetchImpl,
-    statePath: STATE_PATH,
+    statePath: options.persistState === false ? null : STATE_PATH,
     now: () => Date.now(),
     sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
     pollMs: 3000,

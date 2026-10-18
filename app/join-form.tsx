@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { normalizeGoogleMeetUrl } from "@/lib/recall/meeting-url";
 
 type MaterialItem = { name: string; saved: boolean; message: string | null };
 
@@ -17,6 +18,7 @@ export function JoinForm() {
   const [materialNotes, setMaterialNotes] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const [botId, setBotId] = useState<string | null>(null);
 
   function replaceFiles(next: File[], limitNote: string | null) {
     setFiles(next);
@@ -36,8 +38,9 @@ export function JoinForm() {
     setError(null);
     setNotice(null);
     setMaterialNotes([]);
-    if (!/^https:\/\/.+/i.test(meetingUrl)) {
-      setError("会議 URL は https:// で始めてください。");
+    const normalizedMeetingUrl = normalizeGoogleMeetUrl(meetingUrl);
+    if (!normalizedMeetingUrl) {
+      setError("Google Meet のURLを確認してください（例: https://meet.google.com/abc-defg-hij）。");
       return;
     }
     setPending(true);
@@ -46,7 +49,7 @@ export function JoinForm() {
       const response = await fetch("/api/recall/join", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken}` },
-        body: JSON.stringify({ meetingUrl, agenda }),
+        body: JSON.stringify({ meetingUrl: normalizedMeetingUrl, agenda }),
       });
       const body = (await response.json()) as { id?: string; error?: string };
       if (!response.ok || !body.id) {
@@ -54,6 +57,7 @@ export function JoinForm() {
         return;
       }
       sentId = body.id;
+      setBotId(body.id);
       if (files.length === 0) {
         setNotice(`ボットを送信しました ${body.id}`);
         return;
@@ -93,9 +97,17 @@ export function JoinForm() {
     setError(null);
     setNotice(null);
     setMaterialNotes([]);
+    if (!botId) {
+      setError("この画面から参加させたボットがありません。");
+      return;
+    }
     setPending(true);
     try {
-      const response = await fetch("/api/recall/leave", { method: "POST", headers: { Authorization: `Bearer ${controlToken}` } });
+      const response = await fetch("/api/recall/leave", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken}` },
+        body: JSON.stringify({ botId }),
+      });
       const body = (await response.json()) as {
         left?: boolean;
         alreadyGone?: boolean;
@@ -105,6 +117,7 @@ export function JoinForm() {
         setError(body.error ?? "退出に失敗しました");
         return;
       }
+      setBotId(null);
       setNotice(body.alreadyGone ? "すでに退出しています" : "退出しました");
     } catch {
       setError("退出に失敗しました");
@@ -198,14 +211,14 @@ export function JoinForm() {
           <button
             className="w-fit rounded bg-zinc-900 px-4 py-2 text-sm text-white disabled:opacity-50"
             type="submit"
-            disabled={pending}
+            disabled={pending || botId !== null}
           >
             参加
           </button>
           <button
             className="w-fit rounded border border-zinc-300 px-4 py-2 text-sm disabled:opacity-50"
             type="button"
-            disabled={pending}
+            disabled={pending || botId === null}
             onClick={() => {
               void leave();
             }}
