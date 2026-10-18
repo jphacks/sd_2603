@@ -1,12 +1,14 @@
 import { z } from "zod";
+import policy from "./jev-policy.json" with { type: "json" };
+import tunedQuestions from "./jev-questions.json" with { type: "json" };
 import type { JudgeInput, JudgeProvider, JudgeResult } from "./types";
 
 const GATEWAY_URL = "https://ai-gateway.vercel.sh/typesafe/v1/systemone";
-const DEFAULT_MODEL = "typesafe-ai/jev";
-const QUESTION_VERSION = "v2";
+const DEFAULT_MODEL = "typesafe-ai/jev-1.14.0";
+const QUESTION_VERSION = policy.questionVersion;
 const TIMEOUT_MS = 5000;
-const INTERVENTION_THRESHOLD = 0.6;
-const UNCERTAIN_THRESHOLD = 0.4;
+const INTERVENTION_THRESHOLD = policy.interventionThreshold;
+const UNCERTAIN_THRESHOLD = policy.uncertainThreshold;
 
 const AnswerSchema = z.object({ type: z.literal("noul"), noul: z.number().min(0).max(1) });
 const ResponseSchema = z.object({
@@ -32,32 +34,9 @@ export class JevError extends Error {
   }
 }
 
-function questions() {
+export function questions() {
   return {
-    drifted: {
-      type: "noul",
-      instructions: "Have the recent utterances moved away from the meeting agenda to a topic that does not help accomplish it?",
-      criteria: {
-        true: "The current topic is unrelated to the agenda and is not supplying a useful fact, risk, or constraint.",
-        false: "The discussion is on the agenda or is a useful temporary detour that will feed back into it.",
-      },
-    },
-    stalled: {
-      type: "noul",
-      instructions: "Are participants repeating the same points without new information, options, or progress toward the agenda?",
-      criteria: {
-        true: "The same arguments recur without progress toward a decision.",
-        false: "New information, options, or decisions are emerging, or a decision is not yet being sought.",
-      },
-    },
-    tangentIsRelevant: {
-      type: "noul",
-      instructions: "Does the current side topic directly help the meeting agenda?",
-      criteria: {
-        true: "The side topic checks a relevant fact, risk, dependency, or past example and should be allowed to continue.",
-        false: "The side topic does not help accomplish the agenda.",
-      },
-    },
+    ...tunedQuestions,
     interveneNow: {
       type: "noul",
       instructions: "Would a brief facilitator remark help the meeting right now, rather than interrupt a useful or harmless moment?",
@@ -70,10 +49,10 @@ function questions() {
 }
 
 export function decideFromScores(scores: Scores): JudgeResult {
-  if (scores.stalled >= INTERVENTION_THRESHOLD && scores.interveneNow >= INTERVENTION_THRESHOLD) {
+  if (scores.stalled >= policy.stallThreshold && scores.interveneNow >= INTERVENTION_THRESHOLD) {
     return { action: "INTERVENE", reason: "Discussion appears stalled", message: "一度、ここまでの意見を整理してみませんか？" };
   }
-  if (scores.drifted >= INTERVENTION_THRESHOLD && scores.tangentIsRelevant < INTERVENTION_THRESHOLD && scores.interveneNow >= INTERVENTION_THRESHOLD) {
+  if (scores.drifted >= policy.driftThreshold && scores.tangentIsRelevant < policy.relevanceThreshold && scores.interveneNow >= INTERVENTION_THRESHOLD) {
     return { action: "INTERVENE", reason: "Discussion appears off agenda", message: "そろそろ議題に戻りませんか？" };
   }
   if (scores.drifted >= UNCERTAIN_THRESHOLD || scores.stalled >= UNCERTAIN_THRESHOLD) {
