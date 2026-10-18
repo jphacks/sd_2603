@@ -1,12 +1,15 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { setTimeout } from 'node:timers/promises';
+import { randomBytes, randomUUID } from 'node:crypto';
 
 const base = 'http://127.0.0.1:3100';
+const controlToken = randomBytes(32).toString('hex');
+const deviceToken = randomBytes(32).toString('hex');
 const server = spawn(process.execPath, [
   'node_modules/next/dist/bin/next', 'start', '--hostname', '127.0.0.1', '--port', '3100',
 ], {
-  env: { ...process.env, AI_PROVIDER: 'mock', ALLOW_PAID_AI: 'false', PORT: '3100' },
+  env: { ...process.env, AI_PROVIDER: 'mock', ALLOW_PAID_AI: 'false', PORT: '3100', RECALL_CONTROL_TOKEN: controlToken, DEVICE_TOKEN: deviceToken, ENABLE_REALTIME_TRANSCRIPTION: 'false' },
   stdio: ['ignore', 'pipe', 'pipe'],
 });
 let output = '';
@@ -54,7 +57,37 @@ try {
       expected === 'INTERVENE' ? 'string' : null);
   }
   assert.equal((await request('/api/test-ai')).status, 403);
-  console.log('PASS: app startup, Mock SILENCE/WAIT/INTERVENE, paid AI blocked.');
+  const botId = randomUUID();
+  const agenda = 'Synthetic device integration';
+  const postControl = body => request('/api/recall/video', {
+    method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${controlToken}` },
+    body: JSON.stringify({ botId, ...body }),
+  });
+  const event = type => request(`/api/device/${botId}/event`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${deviceToken}` },
+    body: JSON.stringify({ type }),
+  });
+  const snapshotResponse = await postControl({ mode: 'agenda', agenda });
+  assert.equal(snapshotResponse.status, 200);
+  const snapshot = await snapshotResponse.json();
+  const evaluate = { mode: 'evaluate', ...snapshot, transcript: ['a', 'b', 'c'], secondsSinceLastIntervention: 0 };
+  assert.equal((await event('back')).status, 200);
+  assert.equal((await postControl({ ...evaluate, agendaVersion: 'stale-test-version' })).status, 409);
+  const manualResponse = await postControl(evaluate);
+  assert.equal(manualResponse.status, 200);
+  const manual = await manualResponse.json();
+  assert.equal(manual.action, 'INTERVENE');
+  assert.equal(manual.manual, true);
+  const consumed = await (await postControl(evaluate)).json();
+  assert.equal(consumed.action, 'SILENCE');
+  assert.equal(consumed.manual, false);
+  assert.equal((await event('tangent_ok')).status, 200);
+  const muted = await (await postControl({ ...evaluate, secondsSinceLastIntervention: 60 })).json();
+  assert.equal(muted.action, 'WAIT');
+  assert.equal(muted.manual, false);
+  assert.equal((await event('unmute')).status, 200);
+  assert.equal((await (await postControl({ ...evaluate, secondsSinceLastIntervention: 60 })).json()).action, 'INTERVENE');
+  console.log('PASS: app startup, Mock SILENCE/WAIT/INTERVENE, device manual/mute, stale agenda cancellation, paid AI blocked.');
 } finally {
   server.kill('SIGTERM');
   await Promise.race([exited, setTimeout(5000)]);

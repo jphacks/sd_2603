@@ -2,6 +2,8 @@ import { z } from "zod";
 import { AGENDA_CHAR_LIMIT, AgendaChangedError, assertAgendaSnapshot, getAgendaSnapshot, withAgendaSnapshot } from "@/lib/agenda/agenda";
 import { monitoredJudge } from "@/lib/monitor/judge";
 import { monitorStore } from "@/lib/monitor/store";
+import { withDeviceControls } from "@/lib/device/judge";
+import { deviceStore } from "@/lib/device/state";
 import { JevError } from "@/lib/judge/jev";
 import { applyVideoDecision, authorizedControl, displayVideoResult, restoreIdleVideo } from "@/lib/recall/controller";
 import { outputVideo, RecallVideoError, renderVideoJpeg } from "@/lib/recall/video";
@@ -90,15 +92,19 @@ export async function POST(request: Request) {
       const { agenda, agendaVersion } = getAgendaSnapshot(input.botId, input.agenda);
       const validate = () => assertAgendaSnapshot(input.botId, agenda, agendaVersion);
       const result = await applyVideoDecision({ ...input, agenda }, {
-        judge: (value) => monitoredJudge(input.botId, value, validate),
+        judge: withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value, validate)),
         ...videoDependencies,
         guard: async () => validate(),
-        onIntervened: (id) => monitorStore.intervened(id),
+        onIntervened: (id, kind) => {
+          monitorStore.intervened(id);
+          deviceStore.intervened(id, kind);
+        },
       });
       return Response.json({ ...result, agenda });
     }
     if (input.mode === "evaluate") {
-      return Response.json(await monitoredJudge(input.botId, input, () => assertAgendaSnapshot(input.botId, input.agenda, input.agendaVersion)));
+      const judge = withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value, () => assertAgendaSnapshot(input.botId, input.agenda, input.agendaVersion)));
+      return Response.json(await judge(input));
     }
     if (input.mode === "display") {
       const key = `${input.botId}:${input.requestId}`;
@@ -110,7 +116,10 @@ export async function POST(request: Request) {
       const task = displayVideoResult(input, {
         ...videoDependencies,
         guard: () => withAgendaSnapshot(input, () => confirmQuiet(input.botId, input.generation)),
-        onIntervened: (id) => monitorStore.intervened(id),
+        onIntervened: (id, kind) => {
+          monitorStore.intervened(id);
+          deviceStore.intervened(id, kind);
+        },
       });
       displaying.set(key, task);
       let result;

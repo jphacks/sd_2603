@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { audioJoinTimedOut, createResampler, readRecallAudio, recordingConfig } from './audio.mjs';
 import { createInterventionGate, isVoicedPcm, streamMeetingAudio, MODEL } from './pipeline.mjs';
+import { withDeviceControls } from '../../lib/device/judge.ts';
+import { createDeviceStore } from '../../lib/device/state.ts';
 
 const voiced = Buffer.alloc(6400);
 for (let i = 0; i < voiced.length; i += 2) voiced.writeInt16LE(1000, i);
@@ -380,6 +382,88 @@ test('speech resuming while display waits behind idle is checked again before di
 // off-agenda recommendation rather than pretend the model became more accurate.
 const offAgenda = { action: 'INTERVENE', reason: 'Discussion appears off agenda', message: 'return',
   diagnostic: { drifted: 0.95, stalled: 0.1, tangentIsRelevant: 0.1, interveneNow: 0.73 } };
+
+test('one trusted manual device event displays once and restores idle without two AI recommendations', async () => {
+  const clock = fakeClock();
+  const store = createDeviceStore(clock.now);
+  const calls = [];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: withDeviceControls('bot', async () => ({ action: 'SILENCE', reason: 'Cooldown active', message: null }), store),
+    display: async input => { calls.push(input.result.reason); },
+    restoreIdle: async () => { calls.push('idle'); },
+  });
+  store.requestManual('bot');
+  utterance(gate); await clock.advance(1499);
+  assert.deepEqual(calls, [], 'manual still waits for silence');
+  await clock.advance(1);
+  assert.deepEqual(calls, ['Manual request']);
+  await clock.advance(8000);
+  assert.deepEqual(calls, ['Manual request', 'idle']);
+  utterance(gate); await clock.advance(1500);
+  assert.equal(calls.length, 2, 'the device event is consumed only once');
+  gate.stop();
+});
+
+test('a model manual-looking reason and flag cannot skip the two-recommendation confirmation', async () => {
+  const clock = fakeClock();
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: withDeviceControls('bot', async () => ({ ...offAgenda, reason: 'Manual request', manual: true }), createDeviceStore(clock.now)),
+    display: async () => { displays++; },
+  });
+  utterance(gate); await clock.advance(1500);
+  assert.equal(displays, 0);
+  utterance(gate); await clock.advance(1500);
+  assert.equal(displays, 1);
+  gate.stop();
+});
+
+test('device mute clears a held AI off-agenda candidate before unmuted confirmation', async () => {
+  const clock = fakeClock();
+  const store = createDeviceStore(clock.now);
+  let displays = 0;
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: withDeviceControls('bot', async () => offAgenda, store), display: async () => { displays++; },
+  });
+  utterance(gate); await clock.advance(1500);
+  store.mute('bot');
+  utterance(gate); await clock.advance(1500);
+  store.unmute('bot');
+  utterance(gate); await clock.advance(1500);
+  assert.equal(displays, 0);
+  utterance(gate); await clock.advance(1500);
+  assert.equal(displays, 1);
+  gate.stop();
+});
+
+test('manual device control never bypasses stale speech or stop', async () => {
+  for (const cancellation of ['speech', 'stop']) {
+    const clock = fakeClock();
+    const store = createDeviceStore(clock.now);
+    let complete;
+    let displays = 0;
+    const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+      decide: withDeviceControls('bot', () => new Promise(resolve => { complete = resolve; }), store),
+      display: async () => { displays++; },
+    });
+    store.requestManual('bot');
+    utterance(gate); await clock.advance(1500);
+    if (cancellation === 'speech') gate.onAudio(voiced);
+    if (cancellation === 'stop') gate.stop();
+    complete({ action: 'SILENCE', reason: 'Cooldown active', message: null });
+    await tick(); await clock.advance(1500);
+    assert.equal(displays, 0, cancellation);
+    gate.stop();
+  }
+});
+
+test('an agenda validation failure cannot become a manual intervention or consume its event', async () => {
+  const store = createDeviceStore();
+  store.requestManual('bot');
+  const judge = withDeviceControls('bot', async () => { throw new Error('agenda changed'); }, store);
+  await assert.rejects(judge({}), /agenda changed/);
+  assert.equal(store.takeManual('bot'), true);
+});
 
 test('a brief aside followed by on-track conversation is held and clears confirmation', async () => {
   const clock = fakeClock();

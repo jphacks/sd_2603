@@ -116,7 +116,7 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, d
   // A model recommendation is not a display instruction. Off-agenda cards need
   // confirmation on a later final revision; repeating the same context cannot vote twice.
   const confirmsDisplay = (result, revision) => {
-    if (result.reason === 'Discussion appears stalled') {
+    if (result.manual === true || result.reason === 'Discussion appears stalled') {
       offAgendaCandidate = undefined;
       return true;
     }

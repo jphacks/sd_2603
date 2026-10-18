@@ -16,7 +16,7 @@ type Dependencies = {
   render: (view: VideoView) => Promise<Buffer>;
   output: (botId: string, jpeg: Buffer) => Promise<void>;
   guard?: () => Promise<void>;
-  onIntervened?: (botId: string) => void;
+  onIntervened?: (botId: string, kind: Exclude<VideoView["kind"], "idle">) => void;
 };
 
 export async function applyVideoDecision(
@@ -41,7 +41,7 @@ export async function displayVideoResult(
   const jpeg = await dependencies.render(view);
   await dependencies.guard?.();
   await dependencies.output(input.botId, jpeg);
-  dependencies.onIntervened?.(input.botId);
+  dependencies.onIntervened?.(input.botId, view.kind);
   return { ...result, video: view.kind };
 }
 
