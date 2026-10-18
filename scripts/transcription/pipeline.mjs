@@ -56,7 +56,7 @@ export function isVoicedPcm(pcm, threshold = 300) {
 }
 
 /** Evaluate new finals during speech; deliver a fresh recommendation only at a quiet boundary. */
-export function createInterventionGate({ agenda, botId, resolveAgenda, decide, nudge, display, restoreIdle, onError = () => {}, now = Date.now, schedule = setTimeout, unschedule = clearTimeout, quietMs = 1500, displayMs = 8000, decisionIntervalMs = 10000, candidateTtlMs = 20000, silenceMs = 20000, cooldownMs = 60000, holdAcrossSpeech = false, offAgendaConfirmations = 2 }) {
+export function createInterventionGate({ agenda, botId, resolveAgenda, decide, nudge, display, restoreIdle, onError = () => {}, onDecisionError, now = Date.now, schedule = setTimeout, unschedule = clearTimeout, quietMs = 1500, displayMs = 8000, decisionIntervalMs = 10000, candidateTtlMs = 20000, silenceMs = 20000, cooldownMs = 60000, holdAcrossSpeech = false, offAgendaConfirmations = 2 }) {
   if (!Number.isFinite(displayMs) || displayMs <= 0) throw new RangeError('Invalid intervention display duration');
   if (!Number.isFinite(silenceMs) || silenceMs <= 0) throw new RangeError('Invalid silence duration');
   if (!Number.isFinite(decisionIntervalMs) || decisionIntervalMs < 0 || !Number.isFinite(candidateTtlMs) || candidateTtlMs <= 0) throw new RangeError('Invalid decision timing');
@@ -272,7 +272,18 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
       const transcriptBudget = Math.min(8_000, 10_000 - Buffer.byteLength(JSON.stringify(currentAgenda)));
       while (next.length > 1 && Buffer.byteLength(JSON.stringify(next)) > transcriptBudget) next.shift();
       transcript.splice(0, transcript.length, ...next);
-      const result = await decide({ botId, agenda: currentAgenda, agendaVersion: currentAgendaVersion, transcript: next, secondsSinceLastIntervention: Number.isFinite(lastIntervention) ? Math.max(0, (now() - lastIntervention) / 1000) : 60 });
+      let result;
+      try {
+        result = await decide({ botId, agenda: currentAgenda, agendaVersion: currentAgendaVersion, transcript: next, secondsSinceLastIntervention: Number.isFinite(lastIntervention) ? Math.max(0, (now() - lastIntervention) / 1000) : 60 });
+      } catch (error) {
+        // A failed judgement changed nothing in the meeting, unlike an ambiguous
+        // display. When the caller opts in, skip it (no retry) and judge the next final.
+        if (!onDecisionError || stopped) throw error;
+        recommendation = undefined;
+        offAgendaCandidate = undefined;
+        onDecisionError(error);
+        return;
+      }
       if (generation === currentGeneration && !finalQueue.length) hasSpeech = false;
       if (stopped) return;
       if (result?.cancelled || generation !== currentGeneration || staleRevision(currentRevision)) {

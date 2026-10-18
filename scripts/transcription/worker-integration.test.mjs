@@ -96,7 +96,7 @@ async function setup(transcripts, action = 'WAIT') {
     socket.on('error', () => {});
     await once(socket, 'open');
     const push = pcm => socket.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id: botId }, data: { buffer: pcm.toString('base64') } } }));
-    return { requests, requestTimes, recommendationIds, socket, startupIdles: () => startupIdles, setAgenda(value) { agendaSnapshot = value; }, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
+    return { requests, requestTimes, recommendationIds, socket, audioPort, directory, startupIdles: () => startupIdles, setAgenda(value) { agendaSnapshot = value; }, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
   } catch (error) { await cleanup(); throw error; }
 }
 
@@ -172,5 +172,36 @@ test('real worker refreshes agenda and cannot confirm the old agenda recommendat
     const evaluationTimes = trial.requests.flatMap((request, index) => request.mode === 'evaluate' ? [trial.requestTimes[index]] : []);
     for (let i = 1; i < evaluationTimes.length; i++) assert.ok(evaluationTimes[i] - evaluationTimes[i - 1] >= 9900, 'agenda changes do not bypass the evaluation cadence');
     assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());
+  } finally { await trial.cleanup(); }
+});
+
+test('after a bot leaves, the worker takes the next bot without a restart and refuses the old one', async () => {
+  const trial = await setup(['first meeting', 'second meeting']);
+  const connect = async (id, pcm) => {
+    const socket = new WebSocket(`ws://127.0.0.1:${trial.audioPort}/recall/audio/?token=${audioToken}`);
+    socket.on('error', () => {});
+    await once(socket, 'open');
+    socket.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id }, data: { buffer: pcm.toString('base64') } } }));
+    return socket;
+  };
+  const healthy = async () => (await fetch(`http://127.0.0.1:${trial.audioPort}/health`)).status === 200;
+  try {
+    trial.utterance();
+    await waitFor(() => trial.requests.some(request => request.mode === 'evaluate'), 'No evaluation for the first bot');
+    trial.socket.close();
+    let ready = false;
+    await waitFor(() => { healthy().then(value => { ready = value; }); return ready; }, 'Worker did not become ready after the bot left');
+    const next = '9b2f6f3e-2b7e-4c55-9d0a-6f1e8c2d4a10';
+    await writeFile(join(trial.directory, '.recall/current.json'), JSON.stringify({ id: next, agenda: 'Next meeting agenda', audioEnabled: true, createdAt: new Date().toISOString() }));
+    const second = await connect(next, voiced);
+    for (let i = 0; i < 6; i++) second.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id: next }, data: { buffer: silent.toString('base64') } } }));
+    await waitFor(() => trial.requests.some(request => request.mode === 'agenda' && request.botId === next), 'The next bot was not accepted', 13000);
+    second.close();
+    ready = false;
+    await waitFor(() => { healthy().then(value => { ready = value; }); return ready; }, 'Worker did not become ready after the second bot left');
+    const stale = await connect(botId, voiced);
+    await waitFor(() => trial.output().includes('already ended was refused'), 'The ended bot was not refused');
+    assert.equal(trial.requests.filter(request => request.botId === botId && request.mode === 'agenda').length, 1, 'no new requests for the ended bot');
+    stale.close();
   } finally { await trial.cleanup(); }
 });

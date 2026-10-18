@@ -183,6 +183,7 @@ export async function POST(request: Request) {
     }
     if (error instanceof JevError) {
       const status = error.kind === "rate_limit" ? 429 : error.kind === "timeout" ? 504 : 502;
+      console.error("Judge failed", { kind: error.kind });
       return Response.json({ error: "Judge failed", kind: error.kind }, { status });
     }
     console.error("Recall video control failed:", error);

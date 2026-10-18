@@ -163,6 +163,24 @@ test('decision failure stops the gate and reports degradation', async () => {
   assert.equal(errors, 1);
 });
 
+test('with onDecisionError a failed judgement is skipped without retry and the next final is judged', async () => {
+  const clock = fakeClock();
+  const skipped = [];
+  let calls = 0;
+  const displays = [];
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => { calls++; if (calls === 1) throw new Error('upstream'); return intervention; },
+    display: async input => { displays.push(input); }, onDecisionError: error => skipped.push(error.message) });
+  utterance(gate, 'first'); await clock.advance(1500);
+  assert.equal(gate.stopped, false);
+  assert.deepEqual(skipped, ['upstream']);
+  assert.equal(calls, 1, 'no retry of the failed request');
+  utterance(gate, 'second'); await clock.advance(1500);
+  assert.equal(calls, 2);
+  assert.equal(displays.length, 1);
+  gate.stop();
+});
+
 const intervention = { action: 'INTERVENE', reason: 'Discussion appears stalled', message: 'return' };
 const tick = () => new Promise(resolve => setImmediate(resolve));
 function utterance(gate, text = 'confirmed') {
