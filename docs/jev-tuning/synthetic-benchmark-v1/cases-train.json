@@ -13604,7 +13604,9 @@
         6
       ],
       "alternativeStatus": "OK",
-      "reviewed": false
+      "reviewed": true,
+      "reviewStatus": "INTERVENE_STALLED",
+      "reviewDisagreement": false
     }
   },
   {

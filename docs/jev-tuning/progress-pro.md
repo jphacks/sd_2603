@@ -114,3 +114,5 @@
 - 10:13 JST: generated435 / labeled300 / audited300 / re-reviewed19; label distribution{'INTERVENE_DRIFT': 90, 'OK': 120, 'INTERVENE_STALLED': 90}; uncertain2; intent differences0; duplicate/near cross-group0. Latest Push73e121c; next300-case checkpoint follows.
 
 - 10:15 JST: labeled/audited375, actual{'OK': 150, 'INTERVENE_DRIFT': 112, 'INTERVENE_STALLED': 113}, re-reviewed19, uncertain2. Latest Push6312559; next375-case checkpoint. Conditional extension authorD started in a fresh context, no core Test input; core500 remains priority.
+
+- 10:19 JST: generated500 / labeled-audited435 / reviewed20; actual{'OK': 174, 'INTERVENE_DRIFT': 130, 'INTERVENE_STALLED': 131}; uncertain2. Latest Push1a554ce; next435-case checkpoint; remaining primary packet65 ready for next increment.

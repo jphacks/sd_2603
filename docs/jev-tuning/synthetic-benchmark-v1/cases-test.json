@@ -56,6 +56,114 @@
     }
   },
   {
+    "id": "synbench-08ddb1c0008043",
+    "agenda": "共同購入の最低成立人数を、受取場所の扱いも含めて検討する。",
+    "phase": "成立条件の検討",
+    "transcript": [
+      "B: 前のサークルの合宿では、宿の最低泊数と参加人数を別に数えてた。",
+      "C: 今回の人数とどこが似てるの？",
+      "B: 一人が二泊なら一人でも二枠になる。こっちも一人で二箱買う人がいるよね。",
+      "A: 送料は箱数で決まるから、人数だけを条件にするとずれるね。",
+      "C: 受取場所は人数で混む。送料は箱数で計算する方がよさそう。",
+      "A: 募集条件を最低十二箱、受取は一枠六人に分ける案にする？",
+      "B: そうしよう。人数と注文箱数を別の欄で受け付ければ計算できる。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-009",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-009",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "合宿の人数と泊数を分ける例から送料の箱数と受取の人数を区別し、最低十二箱と一枠六人、受付欄の分離へ条件を具体化している。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-0aa35200c30cd9",
+    "agenda": "備品の共同購入に参加するため、数量と保管場所の条件を比較する。",
+    "phase": "参加条件の比較",
+    "transcript": [
+      "C: 届く箱の図を見ると、学生時代の倉庫の壁を思い出します。",
+      "B: あの壁は色違いの箱を並べて絵にしていましたね。",
+      "A: その話は後にして、今回は何箱を置けるか確認しましょう。",
+      "D: 空き棚には六箱までです。全部で十箱買う案では入りません。",
+      "C: 四箱は別部署がすぐ使うと確認できたので、納品先を分けられます。",
+      "B: 配送を分けた場合の追加料金は二千円です。",
+      "A: 保管六箱と即使用四箱に分けた合計費を、個別購入の額と比べます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-030",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-030",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "箱の思い出から保管数へ戻り、空き六箱と即使用四箱の情報、分割配送費二千円を加えて、個別購入と比較する具体案へ進んでいる。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-10d5bf79d5ad9c",
     "agenda": "共同スペースの重複予約を変更する権限と連絡担当を決める。 現在は予約変更の責任分担。",
     "phase": "予約変更の責任分担",
@@ -272,6 +380,116 @@
     }
   },
   {
+    "id": "synbench-1cb3b322276a10",
+    "agenda": "運送費値上げ後の価格表で、同梱数による差をどう示すか比較する。",
+    "phase": "価格表の検討",
+    "transcript": [
+      "B: 同じ箱で送れる数に応じて、価格を分ける案です。",
+      "C: 箱の写真の影が、うちの犬の耳みたいに見える。",
+      "A: その犬、耳だけ黒かったよね。最近の写真ある？",
+      "B: 影は仮写真だから、同梱数の欄を見よう。",
+      "C: 最近寝方が変わったんだ。両耳を折って寝るの。",
+      "A: 耳を立ててる写真と比べたいな。子犬の頃のもある？",
+      "C: 年ごとのアルバムを開くよ。どの顔がいちばん似てるか見よう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-029",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-029",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "同梱数の欄を求めても仮写真の影から犬の耳、寝方、昔のアルバムへ会話が広がり、販売価格表をどう示すかの検討を離れている。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-1f4ae167dfe73d",
+    "agenda": "備品の共同購入の参加判断で、納品日が確定しているかを確認する。",
+    "phase": "納品条件の確認",
+    "transcript": [
+      "B: 納品日は何日ですか。",
+      "D: 業者の回答待ちです。まだ確定日を受け取っていません。",
+      "A: 確定している日だけ知りたいのですが。",
+      "D: 確定していないので、日付はお伝えできません。",
+      "C: では、いま決まっている納品日を出していただけますか。",
+      "D: 回答待ちという状況のままです。決まった日はありません。",
+      "B: こちらは日付だけ必要なので、その日を教えてください。",
+      "A: 同じく、確定日を一ついただければ判断できます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-030",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-030",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "納品日は業者回答待ちで未確定と繰り返し答えても確定日を要求し続け、確認手段や待つ条件が増えず、同じ問いが残っている。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-22fc0c3766ef44",
     "agenda": "実験記録を細かくするか短くするかの共通方針を選ぶ。 現在は記載粒度の選択。",
     "phase": "記載粒度の選択",
@@ -382,6 +600,58 @@
     }
   },
   {
+    "id": "synbench-2fdf3cdb25c646",
+    "agenda": "共同編集で変更が衝突した場合の表示と、変更を選ぶ手順を確定する。",
+    "phase": "衝突表示の確定",
+    "transcript": [
+      "B: 試用では黄色い印だけだと、何が重なったか分からない方がいました。",
+      "A: では印を押すと二つの文章を並べ、変更箇所に線を引きます。",
+      "B: 自分の文は消さず、下書きに残す仕様でよろしいですか。",
+      "A: はい。どちらかを採るまで、共有版の上書きはしません。",
+      "B: 選んだ後は、相手にも採用結果が分かる通知を出します。",
+      "A: 二人での試験でも両案が残ることを確認しました。この手順を説明へ入れます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-020",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-020",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "試用で印だけでは不明という結果から両文と差分を表示し、下書き保全、共有版の上書き停止、採用通知まで手順と試験結果が具体化している。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-2fe764f83e3edd",
     "agenda": "地域展示の作品を搬入してから設営まで保管する方法を決める。 現在は搬入と保管の調整。",
     "phase": "搬入と保管の調整",
@@ -486,6 +756,114 @@
         5,
         6,
         7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-38f267af015128",
+    "agenda": "共同購入を成立させる最低人数を決めるため、送料と注文数を比較する。",
+    "phase": "最低人数の比較",
+    "transcript": [
+      "C: 十二人なら送料が一人二百円、十八人なら百円になるよ。",
+      "B: 十二って、昔集めたカードのチーム人数だね。",
+      "A: あれは背番号が十二だったんじゃない？　家にまだある。",
+      "C: カードじゃなく、注文を何人から受けるかの話をしよう。",
+      "B: 背番号の違う版もあるよ。金色のは珍しいんだ。",
+      "A: 光るカードの写真を見たい。何年版なの？",
+      "B: 年代ごとの印刷を比べよう。まず最初の箱を開けてみるね。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-009",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-009",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "注文を何人から受けるかという問いを置き、昔のカードの背番号、金色版や印刷年代を比べる話が続いて成立人数の比較へ戻らない。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-3bc4bd6ea4d2c8",
+    "agenda": "共同購入の最低人数について、人数別の採算と不参加発生時の条件を比較する。",
+    "phase": "採算条件の比較",
+    "transcript": [
+      "C: 部活の遠征って、人数が減ると残りの人のバス代が増えるよね。",
+      "A: 今回も申込後に二人抜けたら、送料を残りで割り直すことになる。",
+      "B: バスの予約では、決済日を過ぎたら席を譲る方式にしてたよ。",
+      "C: それなら購入も、決済済みの箱数で成立を判定できる。",
+      "A: 人数見込みで発注せず、最低額に達した時点で注文する案だね。",
+      "B: 未決済の人は人数から外そう。締切までの支払額で試算するよ。",
+      "C: キャンセルの負担が誰に残るかも先に書ける。この条件で募集文を作ろう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-009",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-009",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "遠征の決済済み人数で判断する例を共同購入へ接続し、支払額で成立を判定し未決済を除外する条件とキャンセル負担の説明へ進む。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
       ],
       "alternativeStatus": null,
       "reviewed": false
@@ -818,6 +1196,62 @@
     }
   },
   {
+    "id": "synbench-4ee43bde47006c",
+    "agenda": "雨天時だけ増える貸出傘への対応で、追加の回収袋を誰が発注するか決める。",
+    "phase": "追加備品の発注担当",
+    "transcript": [
+      "C: 雨予報なので回収袋を二十枚追加したいですが、発注担当はどちらですか。",
+      "A: 運用で使いますが、購買権限は営業側だと思います。",
+      "B: 販売品ではないので、運用側の費用で頼んでください。",
+      "D: 私は回収作業だけで、発注用の口座を持っていません。",
+      "A: 私にも口座がないので、営業へ頼みたいです。",
+      "B: 販売以外は処理できません。運用へ返します。",
+      "C: どこにも発注できる人がいないと、二十枚は未手配のままですね。",
+      "A: こちらでは処理できないため、また営業へ依頼を送ります。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-010",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-010",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "回収袋を発注する口座や権限がないとして運用と営業が依頼を押し返し、別の発注者へつなぐ次手もないため二十枚が未手配のまま残る。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-54282cb1a7049b",
     "agenda": "終了後アンケートの配布方法と紙の回収場所を確定する。 現在は実施方法の確定。",
     "phase": "実施方法の確定",
@@ -1086,6 +1520,114 @@
     }
   },
   {
+    "id": "synbench-638201f648e81c",
+    "agenda": "雨の日だけ増える貸出傘の回収場所を、誰が決定して申請するか決める。",
+    "phase": "雨天対応の責任分担",
+    "transcript": [
+      "D: 駅前の回収箱を増やす許可を、営業で取っていただけますか。",
+      "B: 私は利用店を募る担当なので、設置は運用側でお願いします。",
+      "A: 運用は許可済みの場所へ運ぶだけです。申請は施設側では。",
+      "C: 施設側の連絡窓口ですが、設置する責任者から申請してほしいと言われています。",
+      "D: 私も現地整理の担当なので、責任者にはなれません。",
+      "B: それでは運用へ申請書を戻します。",
+      "A: こちらでは出せないので、同じ申請書を営業へ返します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-010",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-010",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "申請主体の権限や責任を各自が持てないとして運用と営業が申請書を戻す。責任者の特定や施設への解決依頼を進める担当が決まらない。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-715604142dd867",
+    "agenda": "共同購入の最低成立人数を試算し、不足したときの扱いを決める。",
+    "phase": "購入成立の試算",
+    "transcript": [
+      "A: 送料表のここ、あと六人必要だね。",
+      "C: 六人といえば、先週の劇の出演者が六人だったよ。",
+      "B: 一人が何役もやる公演かな。最後は誰が主役だった？",
+      "A: その話は終わってから聞くよ。足りない人数をどう募るか見たい。",
+      "C: 主役が途中で替わるんだ。衣装を脱ぐところがよくて。",
+      "B: 同じ演出家の前の作品もあったよ。台詞がつながってた。",
+      "C: どの台詞か順に出してみよう。公演の年表も欲しいな。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-009",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-009",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "不足人数への対処を求めても劇の役や台詞と演出家の過去公演をたどる話が続き、共同購入の成立条件への寄与は示されない。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-76bba9b4ecd3f7",
     "agenda": "避難訓練の振り返りで誘導と点呼の問題を分け、改善の対象を決める。 現在は問題の分類。",
     "phase": "問題の分類",
@@ -1122,6 +1664,222 @@
     },
     "annotation": {
       "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-84be627a897dc6",
+    "agenda": "長時間使う工具の握り方を試験し、持ち替えの頻度を比較する。梱包箱の印刷は対象外。",
+    "phase": "使用試験の比較",
+    "transcript": [
+      "D: 二十分の試験で、持ち替えは何回ありましたか。",
+      "A: 箱の横の動物、この長い鼻が気になります。",
+      "E: 象ではなくアリクイ、でしょうか。商品とは関係ない絵ですね。",
+      "B: 図鑑なら前脚を見ると分かるらしいです。",
+      "C: 梱包の絵は変えません。手元の試験結果を見たいです。",
+      "A: 前脚の爪は三つですか。拡大すると四つにも見えます。",
+      "D: 動物園の写真と比べてみましょう。鼻の形が違う種類もいます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-019",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-019",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "梱包の動物の鼻や爪を比べる話が続き、試験結果へ戻す依頼後も動物園の写真探索へ進んで、持ち替え回数の比較を置き去りにする。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-8670f6a57ef5a7",
+    "agenda": "雨天時の傘貸出と返却需要に備え、追加配置と回収の手順を確定する。",
+    "phase": "雨天運用の確定",
+    "transcript": [
+      "C: 明日は朝だけ雨で、夕方は降らない予報です。",
+      "B: 駅前二店の貸出希望は合計四十本、返却は夕方に集中します。",
+      "A: 四十本を朝七時に補充し、夕方は二回回収します。",
+      "D: 回収箱は荷受け場所へ仮置きできると、施設の許可を取りました。",
+      "B: 店への連絡は私が行い、箱の位置も写真で送ります。",
+      "A: 雨がやんでも回収は残します。十九時に残数を確認します。",
+      "D: 私が残数を報告し、ゼロを確認してから箱を撤去します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-010",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-010",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "予報と貸出返却需要を基に補充と二便回収を決め、仮置きの許可、店への連絡、残数確認と撤去条件まで担当付きで確定している。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-86c3fe0479d55e",
+    "agenda": "運送費の値上げを販売価格へ反映する方法を検討中。四分の個人試算を合意し、今は開始二分後。",
+    "phase": "合意した試算時間",
+    "transcript": [
+      "A: 四分取って、売価に含めた場合の利益を各自で計算しよう。",
+      "C: 私は二個入りと六個入りの箱を別に出すね。",
+      "B: 送料別の場合も、自分の紙に書いて比べたい。",
+      "A: それも含めていいよ。数字の説明は四分後にまとめよう。",
+      "C: 今二分だね。六個入りの計算がもう少しかかりそう。",
+      "B: まだ時間内だから、そのまま各自で続けよう。",
+      "A: 私も別料金の表を確認する。共有は合図の後にしよう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-029",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-029",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "四分の個人試算を合意し末尾は二分経過と明示され、箱数別利益と送料別の計算が進んでいる。共有を後にする計画的作業である。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-8980aa4ded11e9",
+    "agenda": "長時間使う工具の握り方を比較する。試験用の色札は分類の仮表示で、選定には使わない。",
+    "phase": "握り方の比較",
+    "transcript": [
+      "A: 親指を添える案と、全体で握る案の負担を比べます。",
+      "D: 色札の紫、ぶどうの品種でいうとどれに近いでしょう。",
+      "B: あ、色の名前を決める会議ではなく、仮の分類です。",
+      "C: 品種なら黒に近い物もありますよ。房の形も違います。",
+      "E: この紫の房は粒が縦長ですね。",
+      "D: 粒の数は一房にいくつあるんでしょう。",
+      "A: 写真を全部集めて数えてみます。大きい房から順に見たいです。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-019",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-019",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "仮の分類色をきっかけにぶどうの品種、房と粒の数の比較が続き、握り方の試験結果ではなく写真収集を進める状態になっている。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
       "confidence": "high",
       "uncertain": false,
       "humanReviewed": false,
@@ -1298,6 +2056,114 @@
         5,
         6,
         7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-92d675addfe21a",
+    "agenda": "共同編集の衝突を知らせる方法として、中央の警告と欄内表示を比較して決める。",
+    "phase": "通知方式の比較",
+    "transcript": [
+      "B: 中央の警告にしたいです。気付いていただけますので。",
+      "A: 欄内の表示がよいです。作業を邪魔しませんから。",
+      "B: 気付いていただくためには、中央で止める方です。",
+      "A: 作業を邪魔したくありませんので、欄内を選びます。",
+      "B: それでも気付かなければ意味がありません。中央の案を残します。",
+      "A: 邪魔をしない方という理由で、私も欄内を残します。",
+      "B: 私の希望は同じです。中央の警告を採用していただきたいです。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-020",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-020",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "気付く中央警告と邪魔しない欄内表示という理由が反復し、通知の状況や比較方法を具体化する情報が加わらず、相手へ採用を求め続ける。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-96881bffa7a081",
+    "agenda": "共同編集の衝突通知について、今は採否を決めず通知の方法を広く集める。",
+    "phase": "通知方法の発散",
+    "transcript": [
+      "A: 文字の警告以外も含めて、今日は案を広げたいです。",
+      "B: 変更した行の横に、別案がある数を出す方法はいかがでしょう。",
+      "A: 行ごとに候補を開けますね。音で知らせる案も残します。",
+      "B: 音を出せない環境向けに、画面の端へ短く光る表示も作れます。",
+      "A: 保存時だけ変更差分を並べる案もあります。",
+      "B: すぐ気付きたい人には行表示、後で見たい人には差分一覧を選ばせる案も出せますね。",
+      "A: 四種類と選択式の案が増えました。次は通知が続く場合の工夫を出しましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-020",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-020",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "通知方法を発散する現在のフェーズに沿い、行表示、音、点滅、保存時差分、選択式と異なる案を増やし、連続通知の工夫へ進んでいる。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
       ],
       "alternativeStatus": null,
       "reviewed": false
@@ -1520,6 +2386,60 @@
     }
   },
   {
+    "id": "synbench-aeedd9c9c5be49",
+    "agenda": "備品の共同購入へ参加するため、最低発注額を担当間で共有する。",
+    "phase": "購入条件の確認",
+    "transcript": [
+      "D: 最低額は五万円でしたか。",
+      "A: 八万円です。今日届いた条件表で確認しました。",
+      "B: では参加する最低の金額はいくらでしょう。",
+      "A: 八万円です。送料を含まない商品の合計です。",
+      "C: 商品だけなのは理解しました。それで最低額は決まりましたか。",
+      "A: 八万円と決まっています。条件表にも同じ数値があります。",
+      "D: 条件表は読みました。参加に必要な金額を教えてください。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-030",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-030",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "八万円という条件表に基づく回答後も最低金額の問いが再発し、送料を含まない説明を加えても共通理解が成立していない。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-af3e3dca53461d",
     "agenda": "終了後アンケートの配布を紙かオンラインかで比較する。 現在は配布案の検討。",
     "phase": "配布案の検討",
@@ -1682,6 +2602,168 @@
     }
   },
   {
+    "id": "synbench-be77f92fa2eb82",
+    "agenda": "運送費値上げの価格反映を話し合う会議で、八分の休憩を合意した。観測末尾は休憩開始五分後。",
+    "phase": "合意した休憩",
+    "transcript": [
+      "C: 次の価格表を見る前に、八分だけ休みにしよう。",
+      "A: 賛成。戻ったら同梱数の案を二つ並べようね。",
+      "B: 私は廊下を歩いてくる。肩が固まったな。",
+      "C: 壁の写真、今年の山の風景に替わってる。",
+      "A: 秋の写真だね。私はこの湖に行ったことがある。",
+      "B: 時計は五分経ったところ。残り三分はまだ休みだね。",
+      "C: 湖の話を少し聞きたいな。戻る時刻の音は設定してあるよ。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-029",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-029",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "八分の休憩を合意して末尾は五分と明示され、再開する案と時刻の合図も共有されている。山の写真や湖の話は休憩内である。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-c7092d2a180da2",
+    "agenda": "備品の共同購入に参加するかを、納期と最低発注額の条件で決める。",
+    "phase": "共同購入条件の選定",
+    "transcript": [
+      "A: 納期が月末でよければ、共同購入へ参加できます。",
+      "B: 広報としては、備品を買うより独自ブランドを売りたいですね。",
+      "D: 参加条件を見る会議ですが、販売の話になるのですか。",
+      "C: 独自品なら包装を新しく設計できます。",
+      "B: 今の備品調達はいったん置いて、ブランドの名前を出しましょう。",
+      "A: 名前なら海外でも読みやすい物がよさそうです。",
+      "C: 商標案を三つ描きます。販売サイトの顔もそろえましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-030",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-030",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "共同購入への参加条件を見る会議という確認を置き、備品の調達を後にして独自ブランド名と包装、販売サイトの企画へ目的が変わっている。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-cc09acedc1cbe2",
+    "agenda": "共同購入の最低成立人数の案を、誰が作って了承を取るか決める。",
+    "phase": "成立条件の決裁",
+    "transcript": [
+      "A: 最低人数を主催側で出してほしい。私は集金だけの担当だよ。",
+      "B: 主催は募集だけなので、支払いを扱う人に任せたい。",
+      "C: 私は受取場所を出すだけ。人数の責任までは持てないよ。",
+      "A: 集金する私も送料を決められないから、主催へ戻すね。",
+      "B: でも集金の見通しがないと作れない。そちらから案を出して。",
+      "C: 決定者もまだ分からないから、場所の方も確約できない。",
+      "A: 私の担当外なので、人数の欄は主催へ送り返すよ。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-009",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-009",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "最低人数案を主催と集金が互いの見通し待ちとして押し返し、決定者も不明のまま、条件案や了承を得る担当が成立しない。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-d1020df3173bf7",
     "agenda": "中間報告までに終わらせる分析と担当の期限を確定する。 現在は作業の割り当て。",
     "phase": "作業の割り当て",
@@ -1718,6 +2800,60 @@
     },
     "annotation": {
       "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-d2e95646377fe3",
+    "agenda": "共同編集で同じ箇所の変更が衝突したことを知らせる方法を決める。画面の背景色は確定済み。",
+    "phase": "衝突通知の選定",
+    "transcript": [
+      "A: 同じ段落を同時に直したとき、変更候補を並べたいです。",
+      "B: 先に背景色をもう一度見たいです。青より茶色はどうでしょう。",
+      "A: 背景色は確定しています。今回は衝突を知らせる方法です。",
+      "B: 茶色なら、古い洋館の壁紙の色に合うと思いまして。",
+      "A: 壁紙には金の線も入っていましたね。",
+      "B: その線を四隅へ伸ばす図を描きました。館の写真と並べます。",
+      "A: 応接室の模様も見たいです。次はそちらの写真をお願いします。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-020",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-020",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "確定した背景色へ戻った後、壁紙の線や洋館写真の比較が継続している。変更衝突の通知方法を決める問いには復帰していない。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
       "confidence": "high",
       "uncertain": false,
       "humanReviewed": false,
@@ -1786,6 +2922,60 @@
         5,
         6,
         7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-d54672a2084be2",
+    "agenda": "長時間使う工具の握り方を、試験で得た時間と作業回数の意味をそろえて比較する。",
+    "phase": "測定値の整理",
+    "transcript": [
+      "E: 十分の案の方が、十五分の案より短く持てたということですか。",
+      "B: いえ、十分は作業終了までの時間です。握り続けた限界ではありません。",
+      "C: 同じ二十個を処理した時間、という理解で合いますか。",
+      "A: そうです。片方は途中で持ち替えた回数も記録しています。",
+      "D: なら作業時間と持ち替え回数を別に見たいですね。",
+      "E: 短いほど疲れにくいと決めるのではなく、両方で比べるんですね。",
+      "B: 表の見出しを処理時間に直し、回数の列と並べます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-019",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-019",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "十分が限界時間でなく同じ個数の処理時間と修復し、持ち替え回数も別に比べる意味をそろえて、見出しと列を直している。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
       ],
       "alternativeStatus": null,
       "reviewed": false
@@ -1956,6 +3146,60 @@
     }
   },
   {
+    "id": "synbench-df52e7f6a5e454",
+    "agenda": "運送費の値上げを商品の販売価格へどう反映するか比較する。",
+    "phase": "値上げ反映の比較",
+    "transcript": [
+      "A: 一箱あたり六十円上がるので、価格に含めるか別料金か考えよう。",
+      "B: 六十って、昔のラジオ番組の放送回数と同じだね。",
+      "C: あの番組は途中で司会が替わったよ。",
+      "A: 番組の話は今度でいいよ。商品ごとの箱数を見たい。",
+      "B: 替わった回だけ録音がないんだ。何を話したのかな。",
+      "C: 雑誌の予告欄なら残っているかも。古い号を探すね。",
+      "B: 前後の週も並べよう。投稿者の名前が同じかも見たい。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-029",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-029",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "商品ごとの箱数へ戻す問いの後も昔のラジオ番組の録音と雑誌予告を探す話が続き、運送費の価格反映を比較する目的に戻らない。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-e1cfb5e0dd946f",
     "agenda": "実験記録に残す操作と数値の粒度を決める。 現在は記録項目の選定。",
     "phase": "記録項目の選定",
@@ -1992,6 +3236,168 @@
     },
     "annotation": {
       "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-e27fb0ddc58763",
+    "agenda": "共同編集の衝突時に保存を止めるか、保存してから確認するか決める。",
+    "phase": "衝突時の動作決定",
+    "transcript": [
+      "A: 保存を止めたいです。他人の変更が消えると困ります。",
+      "B: 止めない方がよいです。自分の作業が失われるのは困りますから。",
+      "A: 他人の変更が消えることを考えると、止める案です。",
+      "B: 自分の作業を残したいので、保存する案をお願いします。",
+      "A: 私は他人の変更を守りたいので、同じ停止案を出します。",
+      "B: 私も自分の作業を守りたい、という同じ返答です。",
+      "A: その返答でも、私の案は止める方から動かせません。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-020",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-020",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "他人の変更を守る停止案と自分の作業を守る保存案が同じ理由のまま往復し、両方を残す手段や比較基準が出ず、意見が固定している。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-e29be21a85173e",
+    "agenda": "雨の日だけ増える傘の短期貸出需要へ対応するため、貸出と回収の案を選ぶ。",
+    "phase": "雨天需要への対応選定",
+    "transcript": [
+      "A: 雨の日は駅前の返却が増えるので、回収箱を増やす案です。",
+      "B: 営業としては晴れの日にも傘を売る常設店を出したいです。",
+      "C: 貸出の回収とは別の事業になりますね。",
+      "D: 雨天の置き場所を先に確保しないと、通路が埋まります。",
+      "B: 回収箱は後で。常設店の看板と売り物を決めましょう。",
+      "A: 店なら傘以外の雑貨も並べた方が目立ちますね。",
+      "C: 棚の台数を描きます。雨の日の返却より通年販売の陳列を考えます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-010",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-010",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "雨天の回収場所を先にという指摘を扱わず、常設店の販売品や棚配置へ目的を変え、短期返却需要への対応に戻らない。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-e44e2d35609d27",
+    "agenda": "長時間利用する工具の握り方の試験結果を、左右の手と手袋条件に分けて整理する。",
+    "phase": "使用条件の整理",
+    "transcript": [
+      "C: この人は細い案を推していますが、別の欄では太い案ですね。",
+      "A: 左右、いや、同じ右手です。作業用手袋の有無が違います。",
+      "E: 素手では細い方、手袋ありだと太い方を選んだのですね。",
+      "D: 握りにくい理由には、表面が滑るとも書いてあります。",
+      "B: 厚さの影響と表面の影響は、まだ同じ欄に混ざっています。",
+      "A: 手袋条件で表を二つに分け、滑りの理由を別列にします。",
+      "C: これなら全員が同じ条件だったか確認できます。先に欠けた条件を聞き直しましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-019",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-019",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "握りの選好差が左右でなく手袋条件だと確認し、太さと滑りの理由も別列に分け、不足条件を聞き直す次手へ進んでいる。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
       "confidence": "high",
       "uncertain": false,
       "humanReviewed": false,
@@ -2120,6 +3526,116 @@
     }
   },
   {
+    "id": "synbench-f45f09321620dd",
+    "agenda": "長時間使う工具を、細くつまむ形と太く握る形のどちらにするか比較する。",
+    "phase": "握り方式の選定",
+    "transcript": [
+      "C: 細い方が扱いやすいです。指で調整できますから。",
+      "A: 太い方がいいです。しっかり握れますので。",
+      "D: 指で調整できる方なら、細い案を選びます。",
+      "B: しっかり握る方を重視して、太い案を残したいです。",
+      "E: どちらの良さも出ていますが、どう比較しますか。",
+      "C: 私からは指で調整できる、という同じ理由です。",
+      "A: 私もしっかり握れるという理由で太い方を希望します。",
+      "D: 細い方という答えは変えません。調整できるので。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-019",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-019",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "指で調整できる細さと握れる太さという既出の長所を反復し、比較方法を問われても同じ理由を戻して、使用条件や試験の観点が増えない。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-f87db7f57b3452",
+    "agenda": "備品の共同購入への参加条件を、最低額・納期・保管費で確認して結論を出す。",
+    "phase": "参加条件の確定",
+    "transcript": [
+      "D: 必要品の合計は九万円で、最低発注額の八万円を超えます。",
+      "A: 納品は月末で確定です。今ある在庫は翌月五日まで持ちます。",
+      "C: 保管棚の六箱に収まり、追加の場所代は掛かりません。",
+      "B: 個別購入より一万二千円安く、配送費を足しても差が残ります。",
+      "D: ではこの数量で参加します。私が今日中に発注票を送ります。",
+      "A: 条件が変わった場合は自動承諾せず、再見積もりを取る欄も加えました。",
+      "C: 到着前日に棚を空ける担当も決まりました。この条件で受け入れます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-030",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-030",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "最低額、納期、在庫持続、保管と価格差を照合して参加を決め、発注担当、条件変更時の再見積もり、棚の準備まで確定している。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
     "id": "synbench-fa234f07abb6e6",
     "agenda": "実験記録の粒度を話し合う前に、各自で前回のノートを読み直す。 現在は合意した黙読。",
     "phase": "合意した黙読",
@@ -2166,6 +3682,114 @@
         3,
         4,
         5
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-fc8e7f1f9ba74e",
+    "agenda": "運送費値上げの販売価格への反映を決めるため、値上げ幅を共有する。",
+    "phase": "運送費の確認",
+    "transcript": [
+      "C: 値上げはいくらになったの？",
+      "B: 一箱六十円増だよ。さっきの通知に書いてある。",
+      "A: それで、値上げの額はいくらだった？",
+      "B: 一箱で六十円。商品一個の額ではないよ。",
+      "C: 箱単位というのは分かったけど、増える額を知りたい。",
+      "B: その増える額も六十円だよ。",
+      "A: では最初の質問に戻って、何円上がるか教えて。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-029",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-029",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "一箱六十円増という回答を単位も説明して繰り返すが、値上げ額の同じ問いに戻り続け、価格反映の前提共有が進まない。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-feea642b973de6",
+    "agenda": "雨天時に集中する貸出傘の返却需要へ、回収箱か巡回で対応する案を比較する。",
+    "phase": "回収案の比較",
+    "transcript": [
+      "D: 現場では巡回を増やしたいです。箱を置く幅がありません。",
+      "B: 営業では回収箱を推します。返す人が待たずに済みますから。",
+      "C: 雨量別の記録では、五十本のうち三十本が十八時前後に集中しています。",
+      "A: 巡回一回では二十本しか運べません。",
+      "B: それなら常設箱ではなく、その一時間だけ折り畳み箱を置くのはどうでしょう。",
+      "D: 入口横の荷受け場所なら、その時間は空いています。",
+      "A: 回収を二便に分ける案と、仮箱案で滞留本数を試算します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-010",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-010",
+      "author": "author_a",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "幅不足と待ち時間という対立に返却集中と運搬上限のデータが加わり、一時間の仮箱と二便回収を比べる具体的な代替案が生まれている。"
+    },
+    "annotation": {
+      "annotator": "judge_b",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
       ],
       "alternativeStatus": null,
       "reviewed": false
