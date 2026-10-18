@@ -1,3 +1,4 @@
+import { monitorRuntime } from "@/lib/monitor/runtime";
 import { meetingOwner } from "@/lib/recall/browser-session";
 import { ownedMeetings } from "@/lib/recall/owned-meetings";
 import { connection } from "next/server";
@@ -23,6 +24,7 @@ export async function GET(request: Request) {
   return Response.json(
     {
       sessionId,
+      runtime: monitorRuntime(process.env),
       ...(sessionId
         ? monitorStore.read(sessionId)
         : { snapshot: null, history: [], expectedIntervalMs: null }),

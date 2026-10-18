@@ -10,7 +10,7 @@ import { monitorCss } from "./styles";
 import policy from "../../lib/judge/jev-policy.json";
 
 export type Connection =
-  "connecting" | "connected" | "disconnected" | "invalid";
+  "connecting" | "connected" | "disconnected" | "invalid" | "forbidden";
 const descriptions = {
   COOLDOWN: "介入後のクールダウン",
   INSUFFICIENT_CONTEXT: "会話の蓄積を待つ",
@@ -129,7 +129,9 @@ export function ScoreMonitor({
     envelope?.expectedIntervalMs != null &&
     age > envelope.expectedIntervalMs * 3;
   const label =
-    connection === "invalid"
+    connection === "forbidden"
+      ? "この会議の表示権限がありません"
+      : connection === "invalid"
       ? "入力エラー"
       : connection === "disconnected"
         ? "切断・再接続待ち"
@@ -138,7 +140,7 @@ export function ScoreMonitor({
           : stale
             ? "更新停止"
             : !snapshot?.scores
-              ? "実スコア未取得"
+              ? "モニター接続済み · 判定待ち"
               : "接続済み";
   return (
     <section className="jev-monitor">

@@ -75,19 +75,24 @@ try {
     sessionId: "another-session", snapshot: null, history: [], expectedIntervalMs: null,
   } }));
   await page.goto(baseUrl + "/monitor?session=another-session");
-  await page.getByText("● 実スコア未取得").waitFor();
+  await page.getByText("● モニター接続済み · 判定待ち").waitFor();
   assert.equal(await page.locator(".jm-fill").count(), 0);
 
-  let current = { sessionId: null, snapshot: null, history: [], expectedIntervalMs: null };
+  let current = { sessionId: null, snapshot: null, history: [], expectedIntervalMs: null,
+    runtime: { jev: "ready", audio: "disabled", canProbe: false } };
   await page.route("**/api/monitor", route => route.fulfill({ json: current }));
   await page.goto(baseUrl + "/monitor");
-  await page.getByText("● 実スコア未取得").waitFor();
+  await page.getByText("● モニター接続済み · 判定待ち").waitFor();
+  await page.getByText("モニターAPI: 接続済み", { exact: true }).waitFor();
+  await page.getByText("Jev: 設定済み（API疎通は未確認）", { exact: true }).waitFor();
+  await page.getByText("会議音声の自動判定: 無効", { exact: false }).waitFor();
+  assert.equal(await page.getByRole("button", { name: "JevのAPI疎通を確認" }).count(), 0);
   current = data;
   await page.clock.runFor(2500);
   await page.getByText("72.5%", { exact: true }).waitFor();
   current = { sessionId: "meeting-b", snapshot: null, history: [], expectedIntervalMs: null };
   await page.clock.runFor(2500);
-  await page.getByText("● 実スコア未取得").waitFor();
+  await page.getByText("● モニター接続済み · 判定待ち").waitFor();
   assert.equal(await page.locator(".jm-fill").count(), 0);
   current = { ...data, sessionId: "meeting-b", snapshot: { ...snapshot, sessionId: "meeting-b", scores: { ...scores, drifted: 0.2 } } };
   await page.clock.runFor(2500);
@@ -95,8 +100,19 @@ try {
   assert.equal(await page.getByText("72.5%", { exact: true }).count(), 0);
   current = { sessionId: null, snapshot: null, history: [], expectedIntervalMs: null };
   await page.clock.runFor(2500);
-  await page.getByText("● 実スコア未取得").waitFor();
+  await page.getByText("● モニター接続済み · 判定待ち").waitFor();
   assert.equal(await page.locator(".jm-fill").count(), 0);
+
+  let forbidden = true;
+  await page.route("**/api/monitor/permission-test", route => route.fulfill(forbidden
+    ? { status: 403, json: { error: "Forbidden" } }
+    : { json: { sessionId: "permission-test", snapshot: null, history: [], expectedIntervalMs: null } }));
+  await page.goto(baseUrl + "/monitor?session=permission-test");
+  await page.getByText("モニターAPI: 表示権限なし", { exact: true }).waitFor();
+  await page.getByText("この会議を表示できません。会議に参加した同じブラウザで開いてください。", { exact: true }).waitFor();
+  forbidden = false;
+  await page.clock.runFor(2500);
+  await page.getByText("● モニター接続済み · 判定待ち").waitFor();
 
   // The same pasted Meet URL and its short code must resolve to the Bot ID API response.
   await page.route("**/api/monitor?meeting=*", route => {

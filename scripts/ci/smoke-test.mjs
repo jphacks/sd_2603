@@ -57,6 +57,11 @@ try {
       expected === 'INTERVENE' ? 'string' : null);
   }
   assert.equal((await request('/api/test-ai')).status, 403);
+  const deniedProbe = await request('/api/monitor/check', { method: 'POST' });
+  assert.equal(deniedProbe.status, 401);
+  const disabledProbe = await request('/api/monitor/check', { method: 'POST', headers: { Authorization: `Bearer ${controlToken}` } });
+  assert.equal(disabledProbe.status, 503);
+  assert.equal((await disabledProbe.json()).kind, 'config');
   for (const path of ['/api/recall/join', '/api/recall/leave']) {
     const missing = await request(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
     assert.equal(missing.status, 401);
@@ -70,6 +75,7 @@ try {
 
   const initialMonitor = await (await request('/api/monitor')).json();
   assert.equal(initialMonitor.sessionId, 'judge');
+  assert.deepEqual(initialMonitor.runtime, { jev: 'mock', audio: 'disabled', canProbe: false });
   const missingMeeting = await (await request('/api/monitor?meeting=https%3A%2F%2Fmeet.google.com%2Fabc-defg-hij')).json();
   assert.equal(missingMeeting.sessionId, null);
   assert.equal(missingMeeting.snapshot, null);

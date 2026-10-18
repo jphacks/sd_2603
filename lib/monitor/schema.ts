@@ -39,7 +39,13 @@ export const EnvelopeSchema = z.object({
   history: z.array(PointSchema).max(240),
   expectedIntervalMs: z.number().finite().positive().nullable(),
 });
+export const MonitorRuntimeSchema = z.object({
+  jev: z.enum(["ready", "mock", "blocked", "missing_key", "unknown_provider"]),
+  audio: z.enum(["enabled", "disabled"]),
+  canProbe: z.boolean(),
+});
 export const MonitorResponseSchema = EnvelopeSchema.extend({
+  runtime: MonitorRuntimeSchema.optional(),
   sessionId: z.string().regex(/^[A-Za-z0-9_-]{1,128}$/).nullable(),
 }).refine((data) =>
   data.sessionId === null
@@ -110,5 +116,5 @@ export function acceptMonitorResponse(
     incoming,
     incoming.sessionId,
   );
-  return { sessionId: incoming.sessionId, ...(envelope ?? incoming) };
+  return { ...(envelope ?? incoming), sessionId: incoming.sessionId, runtime: incoming.runtime };
 }
