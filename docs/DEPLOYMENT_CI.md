@@ -183,6 +183,25 @@ GitHub公式ActionsはコミットSHA、開発・CIのNode.jsは `.nvmrc` の24.
 
 `.node-version` も `.nvmrc` と同じ値に揃え、`@types/node` は24系を使います。Windowsのnvm-windowsでは `nvm install 24.22.0` → `nvm use 24.22.0` を実行し、新しいターミナルで `node --version` と `npm run check:runtime` を確認してください。常駐ワーカーも切り替えたNodeで再起動が必要です。npmの開発・ビルド・起動・Lint・テストは24系以外で早期停止します。OS全体のNodeを自動で入れ替える処理はありません。
 
+### Windows local activation
+
+バージョン管理ツールを使わず、OS全体やPowerShellプロファイルを変更したくない場合は、プロジェクト専用のportable Nodeを使えます。この補助スクリプトは自動ダウンロード・インストールをしません。
+
+1. `.nvmrc` の厳密なバージョンを確認し、[Node.js公式リリース一覧](https://nodejs.org/dist/)から対応するWindows x64のZIPと`SHASUMS256.txt`を取得します。現在は`node-v24.22.0-win-x64.zip`です。
+2. `Get-FileHash -Algorithm SHA256`の結果を公式のチェックサムと照合してから展開し、`.recall/runtime/node-v24.22.0-win-x64/node.exe`と同じフォルダーの`npm.cmd`が存在する配置にします。`.recall/`はGit対象外です。バイナリやダウンロードした環境ファイルをコミットしないでください。
+3. プロジェクトルートのPowerShellで、先頭のドットを含めて実行します。
+
+```powershell
+. .\scripts\use-node24.ps1
+node --version
+npm.cmd --version
+npm.cmd run check:runtime
+```
+
+実行したターミナルのPATHだけを切り替えます。新しいターミナルでは再実行してください。別のカレントディレクトリから絶対パスでdot-sourceしても、スクリプトの所在からプロジェクトを特定します。繰り返しても同じPATHを重複登録せず、版の違う実体・未配置・`node`の別名による上書きがある場合はエラーになり、システムのNodeへ黙ってフォールバックしません。`-File`による別プロセス実行では現在のターミナルを変更できないため、dot-source以外の呼び出しもエラーにします。
+
+切り替え後の初回やlock更新時は、同じターミナルで`npm.cmd ci`を実行します。npmのPowerShellスクリプト実行ポリシーに依存しないよう、ここでは`npm.cmd`を使います。稼働中のアプリ・ワーカーが同じ`node_modules`を使用している場合は、先にその所有者と停止タイミングを確認し、依存更新を並行実行しないでください。既に整備済みのローカル`.recall/use-node24.ps1`はそのまま利用できますが、共有される手順は上記の`scripts/use-node24.ps1`です。
+
 CIは外部AIを使わない `npm run test:meeting-regression` も実行します。固定した音声・認識結果・判定による配線の回帰テストであり、モデル精度を測るものではありません。
 
 
