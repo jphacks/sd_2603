@@ -20,6 +20,13 @@ const controlToken = env.RECALL_CONTROL_TOKEN;
 const port = Number(env.RECALL_AUDIO_PORT ?? 8787);
 const silenceSeconds = Number(env.SILENCE_NUDGE_SECONDS ?? 20);
 if (!Number.isFinite(silenceSeconds) || silenceSeconds < 0) throw new Error('SILENCE_NUDGE_SECONDS must be a non-negative number (0 disables the silence nudge)');
+// Faster interventions: keep a confirmed card through ongoing talk and show it at
+// the next short pause. Defaults keep the original wait-for-quiet behaviour.
+const holdAcrossSpeech = env.INTERVENE_DURING_CONVERSATION === 'true';
+const quietMs = Number(env.INTERVENTION_QUIET_MS ?? 1500);
+if (!Number.isFinite(quietMs) || quietMs < 300 || quietMs > 5000) throw new Error('INTERVENTION_QUIET_MS must be between 300 and 5000');
+const offAgendaConfirmations = Number(env.OFF_AGENDA_CONFIRMATIONS ?? 2);
+if (![1, 2].includes(offAgendaConfirmations)) throw new Error('OFF_AGENDA_CONFIRMATIONS must be 1 or 2');
 const controlUrl = new URL(env.VIDEO_CONTROL_URL ?? 'http://127.0.0.1:3000/api/recall/video');
 if (env.ENABLE_REALTIME_TRANSCRIPTION !== 'true' || env.AI_PROVIDER !== 'jev' || env.ALLOW_PAID_AI !== 'true' || !env.AI_GATEWAY_API_KEY || !token || token.length < 32 || !controlToken || controlToken.length < 32 || !Number.isInteger(port) || port < 1 || port > 65535) {
   throw new Error('Audio worker requires paid-AI opt-in, Gateway key, control token, audio token, and valid port');
@@ -141,6 +148,9 @@ wss.on('connection', socket => {
       gate = createInterventionGate({
         botId: id,
         agenda: session.agenda,
+        holdAcrossSpeech,
+        quietMs,
+        offAgendaConfirmations,
         resolveAgenda: ({ botId, agenda, signal }) => videoRequest({ mode: 'agenda', botId, agenda }, signal),
         decide: input => { counts.evaluations++; return videoRequest({ mode: 'evaluate', ...input }); },
         // Silence is timed here; the server applies cooldown/mute and owns the card.

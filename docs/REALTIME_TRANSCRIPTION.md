@@ -12,6 +12,8 @@ The worker applies a separate display safety policy: an off-agenda card requires
 
 The API also issues a short-lived, bot/agenda-bound recommendation identifier and uses its server-owned result when displaying. A newer evaluation invalidates the old identifier, and the display guard rechecks current device mute and successful-output cooldown as well as agenda and worker quiet/pending state. A caller-supplied manual flag cannot grant an override. This authorization store is process-local, so evaluation and display must reach the same Next.js instance; restart discards pending recommendations.
 
+By default a card waits for a quiet window after recognition has finished, and any new speech or final discards a pending recommendation, so in a continuous conversation the card often appears only when the talk stops. Three optional settings make it intervene sooner without speaking over anyone. `INTERVENE_DURING_CONVERSATION=true` keeps a confirmed recommendation through new speech and finals (until it expires after 20 seconds or the next judgement replaces it) and no longer waits for pending recognition, so the card appears at the next pause between speakers. `INTERVENTION_QUIET_MS` (default 1500, 300–5000) sets how long a pause must be; 800 catches turn changes while ignoring most breaths. `OFF_AGENDA_CONFIRMATIONS=1` shows an off-agenda card on the first recommendation instead of waiting for a second one about ten seconds later, at the cost of stopping some short detours. Voiced audio still always blocks the card.
+
 The worker also nudges a meeting that has gone quiet. After at least one accepted final since the bot joined or since the last displayed card, no further final for `SILENCE_NUDGE_SECONDS` (default 20; `0` disables it) counts as a stall. Silence is decided from timing alone; Jev is not called. The worker refreshes the agenda and sends `mode: "silence"` to the video API, which applies the server-side cooldown and device mute (a pending manual device request is left for the next real judgement), records the result in the monitor (`Meeting has gone silent`, reason code `SILENT`), and issues a recommendation identifier just like `evaluate`. The card is then delivered through the same queue, quiet/pending gate, and guarded `display` step, so the caller never supplies the card's reason or text. It uses the `stalled` card and nudge face with the question 「ここまでで、気になる点はありますか？」 (M5: 「何か気になる点は？」 with the summarize cue). Voiced audio or pending recognition when the timer fires defers it; speech arriving while the nudge is in flight cancels its card. If the local 60-second cooldown is still running, the nudge waits until it ends. Each silence gets at most one attempt, whether it is displayed, suppressed by mute/cooldown, or cancelled; the next accepted final re-arms the timer.
 
 After a successful intervention image response, the worker waits eight seconds and sends an authenticated `idle` request automatically, without another judge call. This image-only restore does not wait for silence. The worker serializes its display and restore operations; a newer successful card replaces the older deadline, and a cancelled card does not cancel the existing deadline. Closing the audio session or stopping the worker cancels pending timers and aborts its in-flight video requests. A restore failure stops processing without a retry, so the operator may still need to restore the card manually or leave the bot. The timer lives in the always-on worker, not in a Vercel Function.
@@ -35,6 +37,10 @@ RECALL_AUDIO_PUBLIC_URL=wss://your-public-tunnel.example
 RECALL_AUDIO_PORT=8787
 # Optional: seconds without a final before the silence nudge (0 disables).
 SILENCE_NUDGE_SECONDS=20
+# Optional: intervene during ongoing talk (see below)
+# INTERVENE_DURING_CONVERSATION=true
+# INTERVENTION_QUIET_MS=800
+# OFF_AGENDA_CONFIRMATIONS=1
 VIDEO_CONTROL_URL=http://127.0.0.1:3000/api/recall/video
 ```
 

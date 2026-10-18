@@ -56,10 +56,14 @@ export function isVoicedPcm(pcm, threshold = 300) {
 }
 
 /** Evaluate new finals during speech; deliver a fresh recommendation only at a quiet boundary. */
-export function createInterventionGate({ agenda, botId, resolveAgenda, decide, nudge, display, restoreIdle, onError = () => {}, now = Date.now, schedule = setTimeout, unschedule = clearTimeout, quietMs = 1500, displayMs = 8000, decisionIntervalMs = 10000, candidateTtlMs = 20000, silenceMs = 20000, cooldownMs = 60000 }) {
+export function createInterventionGate({ agenda, botId, resolveAgenda, decide, nudge, display, restoreIdle, onError = () => {}, now = Date.now, schedule = setTimeout, unschedule = clearTimeout, quietMs = 1500, displayMs = 8000, decisionIntervalMs = 10000, candidateTtlMs = 20000, silenceMs = 20000, cooldownMs = 60000, holdAcrossSpeech = false, offAgendaConfirmations = 2 }) {
   if (!Number.isFinite(displayMs) || displayMs <= 0) throw new RangeError('Invalid intervention display duration');
   if (!Number.isFinite(silenceMs) || silenceMs <= 0) throw new RangeError('Invalid silence duration');
   if (!Number.isFinite(decisionIntervalMs) || decisionIntervalMs < 0 || !Number.isFinite(candidateTtlMs) || candidateTtlMs <= 0) throw new RangeError('Invalid decision timing');
+  if (!Number.isFinite(quietMs) || quietMs <= 0 || ![1, 2].includes(offAgendaConfirmations)) throw new RangeError('Invalid intervention timing');
+  // holdAcrossSpeech keeps a confirmed recommendation through new speech and finals
+  // (until it expires or the next judgement replaces it), so the card can appear at
+  // the next short pause instead of after the conversation stops.
   const transcript = [];
   let finalQueue = [];
   let speaking = false;
@@ -122,11 +126,13 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
       }).catch(fail);
     }, displayMs);
   };
-  const canDisplay = value => !stopped && !pendingAudio && !speaking && generation === value && now() - lastVoice >= quietMs;
+  const awaitingRecognition = () => pendingAudio && !holdAcrossSpeech;
+  const canDisplay = value => !stopped && !awaitingRecognition() && !speaking && generation === value && now() - lastVoice >= quietMs;
+  const staleRevision = revision => !holdAcrossSpeech && revision !== finalRevision;
   // A model recommendation is not a display instruction. Off-agenda cards need
   // confirmation on a later final revision; repeating the same context cannot vote twice.
   const confirmsDisplay = (result, revision) => {
-    if (result.manual === true || result.reason === 'Discussion appears stalled') {
+    if (result.manual === true || result.reason === 'Discussion appears stalled' || offAgendaConfirmations === 1) {
       offAgendaCandidate = undefined;
       return true;
     }
@@ -143,7 +149,7 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
     deliveryTimer = undefined;
     const candidate = recommendation;
     if (!candidate || stopped) return;
-    if (now() - candidate.createdAt >= candidateTtlMs || candidate.revision !== finalRevision || candidate.generation !== generation) {
+    if (now() - candidate.createdAt >= candidateTtlMs || staleRevision(candidate.revision) || candidate.generation !== generation) {
       recommendation = undefined;
       return;
     }
@@ -151,7 +157,7 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
     // The queue and remote display route both recheck quiet, agenda and device
     // controls. A context change while waiting can never resurrect this card.
     await changeVideo(async () => {
-      if (recommendation !== candidate || !canDisplay(candidate.generation) || candidate.revision !== finalRevision || now() - candidate.createdAt >= candidateTtlMs) return { cancelled: true };
+      if (recommendation !== candidate || !canDisplay(candidate.generation) || staleRevision(candidate.revision) || now() - candidate.createdAt >= candidateTtlMs) return { cancelled: true };
       recommendation = undefined;
       const displayed = await display({ botId, agenda: candidate.agenda, agendaVersion: candidate.agendaVersion, result: candidate.result, generation: candidate.generation, signal: videoAbort.signal });
       if (displayed?.cancelled) offAgendaCandidate = undefined;
@@ -172,7 +178,7 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
     const remaining = candidateTtlMs - (now() - recommendation.createdAt);
     // While audio is pending or voiced, only schedule expiry. Audio/STT state
     // changes wake delivery without polling or another model request.
-    const delay = pendingAudio || speaking ? remaining : Math.min(remaining, Math.max(0, quietMs - (now() - lastVoice)));
+    const delay = awaitingRecognition() || speaking ? remaining : Math.min(remaining, Math.max(0, quietMs - (now() - lastVoice)));
     deliveryTimer = schedule(() => { void deliver().catch(fail); }, Math.max(0, delay));
   };
 
@@ -262,7 +268,7 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
       const result = await decide({ botId, agenda: currentAgenda, agendaVersion: currentAgendaVersion, transcript: next, secondsSinceLastIntervention: Number.isFinite(lastIntervention) ? Math.max(0, (now() - lastIntervention) / 1000) : 60 });
       if (generation === currentGeneration && !finalQueue.length) hasSpeech = false;
       if (stopped) return;
-      if (result?.cancelled || generation !== currentGeneration || currentRevision !== finalRevision) {
+      if (result?.cancelled || generation !== currentGeneration || staleRevision(currentRevision)) {
         recommendation = undefined;
         offAgendaCandidate = undefined;
       } else if (result.action !== 'INTERVENE') {
@@ -299,7 +305,7 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
     onAudio(pcm) {
       if (stopped) return;
       if (isVoicedPcm(pcm)) {
-        if (!speaking) { generation++; recommendation = undefined; }
+        if (!speaking && !holdAcrossSpeech) { generation++; recommendation = undefined; }
         speaking = true;
         hasSpeech = true;
         lastVoice = now();
@@ -318,8 +324,10 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
       finalRevision++;
       // The remote quiet check carries this generation too: a final arriving
       // while the video route renders must invalidate that older display.
-      generation++;
-      recommendation = undefined;
+      if (!holdAcrossSpeech) {
+        generation++;
+        recommendation = undefined;
+      }
       finalQueue.push(text.slice(0, 1000));
       if (finalQueue.length > 30) finalQueue = finalQueue.slice(-30);
       lastFinalAt = now();
@@ -330,7 +338,7 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, n
     get stopped() { return stopped; },
     get transcript() { return [...transcript]; },
     get partial() { return partial; },
-    isQuiet(value) { return !stopped && !pendingAudio && !speaking && generation === value && now() - lastVoice >= quietMs; },
+    isQuiet(value) { return canDisplay(value); },
     stop,
   };
 }
