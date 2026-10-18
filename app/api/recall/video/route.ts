@@ -7,7 +7,7 @@ import { withDeviceControls } from "@/lib/device/judge";
 import { deviceStore } from "@/lib/device/state";
 import { JevError } from "@/lib/judge/jev";
 import { applyVideoDecision, authorizedControl, displayVideoResult, restoreIdleVideo } from "@/lib/recall/controller";
-import { outputVideo, RecallVideoError, renderVideoJpeg } from "@/lib/recall/video";
+import { outputMeetingView, RecallVideoError, renderVideoJpeg } from "@/lib/recall/video";
 import { assertDisplayControls, RecommendationCancelledError, recommendationStore } from "@/lib/recall/recommendation";
 
 const MAX_REQUEST_BYTES = 12_000;
@@ -38,7 +38,7 @@ const DisplayRequestSchema = z.object({
 });
 const ResetRequestSchema = z.object({ mode: z.literal("idle"), botId: BotIdSchema });
 const InputSchema = z.discriminatedUnion("mode", [JudgeRequestSchema, EvaluateRequestSchema, DisplayRequestSchema, ResetRequestSchema, AgendaRequestSchema]);
-const videoDependencies = { render: renderVideoJpeg, output: outputVideo };
+const videoDependencies = { render: renderVideoJpeg, output: outputMeetingView };
 const displayed = new Set<string>();
 const displaying = new Map<string, Promise<unknown>>();
 class SpeechResumedError extends Error {}

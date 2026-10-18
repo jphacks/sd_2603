@@ -37,7 +37,7 @@ export function controlAccessError(request: Request, secret: string | undefined)
 type Dependencies = {
   judge: (input: JudgeInput) => Promise<JudgeResult>;
   render: (view: VideoView) => Promise<Buffer>;
-  output: (botId: string, jpeg: Buffer) => Promise<void>;
+  output: (botId: string, jpeg: Buffer, view: VideoView) => Promise<void>;
   guard?: () => Promise<void>;
   onIntervened?: (botId: string, kind: Exclude<VideoView["kind"], "idle">) => void;
 };
@@ -63,7 +63,7 @@ export async function displayVideoResult(
     : { kind: "off_agenda", agenda: input.agenda };
   const jpeg = await dependencies.render(view);
   await dependencies.guard?.();
-  await dependencies.output(input.botId, jpeg);
+  await dependencies.output(input.botId, jpeg, view);
   dependencies.onIntervened?.(input.botId, view.kind);
   return { ...result, video: view.kind };
 }
@@ -72,6 +72,6 @@ export async function restoreIdleVideo(
   botId: string,
   dependencies: Pick<Dependencies, "render" | "output">,
 ) {
-  await dependencies.output(botId, await dependencies.render({ kind: "idle" }));
+  await dependencies.output(botId, await dependencies.render({ kind: "idle" }), { kind: "idle" });
   return { video: "idle" as const };
 }
