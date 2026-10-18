@@ -1,0 +1,1809 @@
+{
+  "datasetHash": "00f480a9493577386289dd3571c2b8d3f201852b153a37e16fc04e6ab9f76f5a",
+  "splitManifestHash": "5b7a3dfc4e806be76773901135d2cdd4629ceb2ff9ac34fb0cff8325a2239eb7",
+  "protocolHash": "42ba9394d64e0fb473dc20b1433b0016cfa941e65b4a1cd853e9528001c9ca56",
+  "inputLabelHash": "25547f2663972122ccc50daca1360b5ab935407e1daee98a676580328d53ebb1",
+  "count": 500,
+  "splits": {
+    "train": 300,
+    "validation": 100,
+    "test": 100
+  },
+  "createdAt": "2026-10-18T01:36:52.335Z",
+  "protocol": {
+    "version": "synthetic-campaign-v1",
+    "model": "typesafe-ai/jev-1.14.0",
+    "versions": [
+      "v2",
+      "v3",
+      "v4"
+    ],
+    "baseline": {
+      "questionVersion": "v3",
+      "driftThreshold": 0.6,
+      "stallThreshold": 0.6,
+      "relevanceThreshold": 0.6,
+      "uncertainThreshold": 0.4
+    },
+    "questionHash": "3bdf938989153aa259e7ed8dbce0fad441b005e11ed44de4ed888dc3ef1c2aaa",
+    "trainMetric": "fivefold group OOF semantic Macro-F1",
+    "validationRule": "choose among two Train-CV finalists and unchanged v3 baseline by semantic Macro-F1, then accuracy, then baseline proximity",
+    "inputComposition": "agenda plus explicit phase supplied to model; annotation/intents excluded",
+    "testRule": "baseline and selected policy only; never reselect",
+    "minimumCases": 500
+  },
+  "cv": {
+    "folds": [
+      {
+        "fold": 0,
+        "n": 60,
+        "holdoutGroups": [
+          "scenario-family-006",
+          "scenario-family-015",
+          "scenario-family-024",
+          "scenario-family-074",
+          "scenario-family-092",
+          "scenario-family-056",
+          "scenario-family-051",
+          "scenario-family-042",
+          "scenario-family-083",
+          "scenario-family-033",
+          "scenario-family-001",
+          "scenario-family-065"
+        ],
+        "fitGroups": [
+          "scenario-family-085",
+          "scenario-family-023",
+          "scenario-family-091",
+          "scenario-family-062",
+          "scenario-family-073",
+          "scenario-family-012",
+          "scenario-family-011",
+          "scenario-family-004",
+          "scenario-family-003",
+          "scenario-family-014",
+          "scenario-family-063",
+          "scenario-family-021",
+          "scenario-family-066",
+          "scenario-family-093",
+          "scenario-family-041",
+          "scenario-family-052",
+          "scenario-family-061",
+          "scenario-family-032",
+          "scenario-family-022",
+          "scenario-family-054",
+          "scenario-family-053",
+          "scenario-family-095",
+          "scenario-family-031",
+          "scenario-family-082",
+          "scenario-family-044",
+          "scenario-family-035",
+          "scenario-family-026",
+          "scenario-family-081",
+          "scenario-family-071",
+          "scenario-family-086",
+          "scenario-family-094",
+          "scenario-family-036",
+          "scenario-family-005",
+          "scenario-family-046",
+          "scenario-family-043",
+          "scenario-family-055",
+          "scenario-family-045",
+          "scenario-family-013",
+          "scenario-family-002",
+          "scenario-family-034",
+          "scenario-family-072",
+          "scenario-family-075",
+          "scenario-family-084",
+          "scenario-family-076",
+          "scenario-family-096",
+          "scenario-family-016",
+          "scenario-family-064",
+          "scenario-family-025"
+        ],
+        "byVersion": [
+          {
+            "version": "v2",
+            "policy": {
+              "questionVersion": "v2",
+              "driftThreshold": 0.6,
+              "stallThreshold": 0.7,
+              "relevanceThreshold": 0.6,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 59,
+              "errors": 0,
+              "accuracy": 0.9833333333333333,
+              "macroF1": 0.9836734693877552,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9114466177322051,
+                0.9970519161391262
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 0.9444444444444444,
+                  "f1": 0.9714285714285714,
+                  "support": 18,
+                  "predicted": 17
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "OK": {
+                  "precision": 0.96,
+                  "recall": 1,
+                  "f1": 0.9795918367346939,
+                  "support": 24,
+                  "predicted": 25
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 17,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 1
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          },
+          {
+            "version": "v3",
+            "policy": {
+              "questionVersion": "v3",
+              "driftThreshold": 0.5,
+              "stallThreshold": 0.7,
+              "relevanceThreshold": 0.6,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 59,
+              "errors": 0,
+              "accuracy": 0.9833333333333333,
+              "macroF1": 0.9836734693877552,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9114466177322051,
+                0.9970519161391262
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 0.9444444444444444,
+                  "f1": 0.9714285714285714,
+                  "support": 18,
+                  "predicted": 17
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "OK": {
+                  "precision": 0.96,
+                  "recall": 1,
+                  "f1": 0.9795918367346939,
+                  "support": 24,
+                  "predicted": 25
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 17,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 1
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          },
+          {
+            "version": "v4",
+            "policy": {
+              "questionVersion": "v4",
+              "driftThreshold": 0.5,
+              "stallThreshold": 0.6,
+              "relevanceThreshold": 0.6,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 59,
+              "errors": 0,
+              "accuracy": 0.9833333333333333,
+              "macroF1": 0.9836734693877552,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9114466177322051,
+                0.9970519161391262
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 0.9444444444444444,
+                  "f1": 0.9714285714285714,
+                  "support": 18,
+                  "predicted": 17
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "OK": {
+                  "precision": 0.96,
+                  "recall": 1,
+                  "f1": 0.9795918367346939,
+                  "support": 24,
+                  "predicted": 25
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 17,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 1
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          }
+        ]
+      },
+      {
+        "fold": 1,
+        "n": 60,
+        "holdoutGroups": [
+          "scenario-family-011",
+          "scenario-family-066",
+          "scenario-family-093",
+          "scenario-family-052",
+          "scenario-family-061",
+          "scenario-family-043",
+          "scenario-family-002",
+          "scenario-family-034",
+          "scenario-family-075",
+          "scenario-family-084",
+          "scenario-family-016",
+          "scenario-family-025"
+        ],
+        "fitGroups": [
+          "scenario-family-085",
+          "scenario-family-023",
+          "scenario-family-091",
+          "scenario-family-062",
+          "scenario-family-073",
+          "scenario-family-012",
+          "scenario-family-006",
+          "scenario-family-015",
+          "scenario-family-004",
+          "scenario-family-003",
+          "scenario-family-024",
+          "scenario-family-014",
+          "scenario-family-063",
+          "scenario-family-021",
+          "scenario-family-041",
+          "scenario-family-032",
+          "scenario-family-022",
+          "scenario-family-054",
+          "scenario-family-074",
+          "scenario-family-092",
+          "scenario-family-056",
+          "scenario-family-053",
+          "scenario-family-095",
+          "scenario-family-051",
+          "scenario-family-031",
+          "scenario-family-082",
+          "scenario-family-044",
+          "scenario-family-035",
+          "scenario-family-026",
+          "scenario-family-081",
+          "scenario-family-071",
+          "scenario-family-086",
+          "scenario-family-094",
+          "scenario-family-042",
+          "scenario-family-036",
+          "scenario-family-005",
+          "scenario-family-046",
+          "scenario-family-083",
+          "scenario-family-055",
+          "scenario-family-033",
+          "scenario-family-045",
+          "scenario-family-013",
+          "scenario-family-072",
+          "scenario-family-076",
+          "scenario-family-096",
+          "scenario-family-064",
+          "scenario-family-001",
+          "scenario-family-065"
+        ],
+        "byVersion": [
+          {
+            "version": "v2",
+            "policy": {
+              "questionVersion": "v2",
+              "driftThreshold": 0.6,
+              "stallThreshold": 0.7,
+              "relevanceThreshold": 0.7,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 60,
+              "errors": 0,
+              "accuracy": 1,
+              "macroF1": 1,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9398260695220669,
+                0.9999999999999999
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "OK": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 24,
+                  "predicted": 24
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 18,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          },
+          {
+            "version": "v3",
+            "policy": {
+              "questionVersion": "v3",
+              "driftThreshold": 0.4,
+              "stallThreshold": 0.8,
+              "relevanceThreshold": 0.7,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 59,
+              "errors": 0,
+              "accuracy": 0.9833333333333333,
+              "macroF1": 0.9836734693877552,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9114466177322051,
+                0.9970519161391262
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 0.9444444444444444,
+                  "f1": 0.9714285714285714,
+                  "support": 18,
+                  "predicted": 17
+                },
+                "OK": {
+                  "precision": 0.96,
+                  "recall": 1,
+                  "f1": 0.9795918367346939,
+                  "support": 24,
+                  "predicted": 25
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 18,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 17,
+                  "OK": 1
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          },
+          {
+            "version": "v4",
+            "policy": {
+              "questionVersion": "v4",
+              "driftThreshold": 0.5,
+              "stallThreshold": 0.6,
+              "relevanceThreshold": 0.8,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 60,
+              "errors": 0,
+              "accuracy": 1,
+              "macroF1": 1,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9398260695220669,
+                0.9999999999999999
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "OK": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 24,
+                  "predicted": 24
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 18,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          }
+        ]
+      },
+      {
+        "fold": 2,
+        "n": 60,
+        "holdoutGroups": [
+          "scenario-family-085",
+          "scenario-family-062",
+          "scenario-family-012",
+          "scenario-family-003",
+          "scenario-family-021",
+          "scenario-family-053",
+          "scenario-family-044",
+          "scenario-family-035",
+          "scenario-family-026",
+          "scenario-family-071",
+          "scenario-family-094",
+          "scenario-family-076"
+        ],
+        "fitGroups": [
+          "scenario-family-023",
+          "scenario-family-091",
+          "scenario-family-073",
+          "scenario-family-006",
+          "scenario-family-011",
+          "scenario-family-015",
+          "scenario-family-004",
+          "scenario-family-024",
+          "scenario-family-014",
+          "scenario-family-063",
+          "scenario-family-066",
+          "scenario-family-093",
+          "scenario-family-041",
+          "scenario-family-052",
+          "scenario-family-061",
+          "scenario-family-032",
+          "scenario-family-022",
+          "scenario-family-054",
+          "scenario-family-074",
+          "scenario-family-092",
+          "scenario-family-056",
+          "scenario-family-095",
+          "scenario-family-051",
+          "scenario-family-031",
+          "scenario-family-082",
+          "scenario-family-081",
+          "scenario-family-086",
+          "scenario-family-042",
+          "scenario-family-036",
+          "scenario-family-005",
+          "scenario-family-046",
+          "scenario-family-083",
+          "scenario-family-043",
+          "scenario-family-055",
+          "scenario-family-033",
+          "scenario-family-045",
+          "scenario-family-013",
+          "scenario-family-002",
+          "scenario-family-034",
+          "scenario-family-072",
+          "scenario-family-075",
+          "scenario-family-084",
+          "scenario-family-096",
+          "scenario-family-016",
+          "scenario-family-064",
+          "scenario-family-025",
+          "scenario-family-001",
+          "scenario-family-065"
+        ],
+        "byVersion": [
+          {
+            "version": "v2",
+            "policy": {
+              "questionVersion": "v2",
+              "driftThreshold": 0.6,
+              "stallThreshold": 0.7,
+              "relevanceThreshold": 0.7,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 59,
+              "errors": 0,
+              "accuracy": 0.9833333333333333,
+              "macroF1": 0.9836734693877552,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9114466177322051,
+                0.9970519161391262
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 0.9444444444444444,
+                  "f1": 0.9714285714285714,
+                  "support": 18,
+                  "predicted": 17
+                },
+                "OK": {
+                  "precision": 0.96,
+                  "recall": 1,
+                  "f1": 0.9795918367346939,
+                  "support": 24,
+                  "predicted": 25
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 18,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 17,
+                  "OK": 1
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          },
+          {
+            "version": "v3",
+            "policy": {
+              "questionVersion": "v3",
+              "driftThreshold": 0.4,
+              "stallThreshold": 0.8,
+              "relevanceThreshold": 0.7,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 59,
+              "errors": 0,
+              "accuracy": 0.9833333333333333,
+              "macroF1": 0.9836734693877552,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9114466177322051,
+                0.9970519161391262
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 0.9444444444444444,
+                  "f1": 0.9714285714285714,
+                  "support": 18,
+                  "predicted": 17
+                },
+                "OK": {
+                  "precision": 0.96,
+                  "recall": 1,
+                  "f1": 0.9795918367346939,
+                  "support": 24,
+                  "predicted": 25
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 18,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 17,
+                  "OK": 1
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          },
+          {
+            "version": "v4",
+            "policy": {
+              "questionVersion": "v4",
+              "driftThreshold": 0.5,
+              "stallThreshold": 0.6,
+              "relevanceThreshold": 0.8,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 59,
+              "errors": 0,
+              "accuracy": 0.9833333333333333,
+              "macroF1": 0.9814671814671815,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9114466177322051,
+                0.9970519161391262
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 0.9444444444444444,
+                  "f1": 0.9714285714285714,
+                  "support": 18,
+                  "predicted": 17
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 0.9473684210526315,
+                  "recall": 1,
+                  "f1": 0.972972972972973,
+                  "support": 18,
+                  "predicted": 19
+                },
+                "OK": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 24,
+                  "predicted": 24
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 17,
+                  "INTERVENE_STALLED": 1,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          }
+        ]
+      },
+      {
+        "fold": 3,
+        "n": 60,
+        "holdoutGroups": [
+          "scenario-family-004",
+          "scenario-family-063",
+          "scenario-family-022",
+          "scenario-family-054",
+          "scenario-family-095",
+          "scenario-family-031",
+          "scenario-family-081",
+          "scenario-family-086",
+          "scenario-family-036",
+          "scenario-family-045",
+          "scenario-family-013",
+          "scenario-family-072"
+        ],
+        "fitGroups": [
+          "scenario-family-085",
+          "scenario-family-023",
+          "scenario-family-091",
+          "scenario-family-062",
+          "scenario-family-073",
+          "scenario-family-012",
+          "scenario-family-006",
+          "scenario-family-011",
+          "scenario-family-015",
+          "scenario-family-003",
+          "scenario-family-024",
+          "scenario-family-014",
+          "scenario-family-021",
+          "scenario-family-066",
+          "scenario-family-093",
+          "scenario-family-041",
+          "scenario-family-052",
+          "scenario-family-061",
+          "scenario-family-032",
+          "scenario-family-074",
+          "scenario-family-092",
+          "scenario-family-056",
+          "scenario-family-053",
+          "scenario-family-051",
+          "scenario-family-082",
+          "scenario-family-044",
+          "scenario-family-035",
+          "scenario-family-026",
+          "scenario-family-071",
+          "scenario-family-094",
+          "scenario-family-042",
+          "scenario-family-005",
+          "scenario-family-046",
+          "scenario-family-083",
+          "scenario-family-043",
+          "scenario-family-055",
+          "scenario-family-033",
+          "scenario-family-002",
+          "scenario-family-034",
+          "scenario-family-075",
+          "scenario-family-084",
+          "scenario-family-076",
+          "scenario-family-096",
+          "scenario-family-016",
+          "scenario-family-064",
+          "scenario-family-025",
+          "scenario-family-001",
+          "scenario-family-065"
+        ],
+        "byVersion": [
+          {
+            "version": "v2",
+            "policy": {
+              "questionVersion": "v2",
+              "driftThreshold": 0.6,
+              "stallThreshold": 0.7,
+              "relevanceThreshold": 0.7,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 60,
+              "errors": 0,
+              "accuracy": 1,
+              "macroF1": 1,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9398260695220669,
+                0.9999999999999999
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "OK": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 24,
+                  "predicted": 24
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 18,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          },
+          {
+            "version": "v3",
+            "policy": {
+              "questionVersion": "v3",
+              "driftThreshold": 0.4,
+              "stallThreshold": 0.7,
+              "relevanceThreshold": 0.7,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 59,
+              "errors": 0,
+              "accuracy": 0.9833333333333333,
+              "macroF1": 0.9814671814671815,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9114466177322051,
+                0.9970519161391262
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 0.9444444444444444,
+                  "f1": 0.9714285714285714,
+                  "support": 18,
+                  "predicted": 17
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 0.9473684210526315,
+                  "recall": 1,
+                  "f1": 0.972972972972973,
+                  "support": 18,
+                  "predicted": 19
+                },
+                "OK": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 24,
+                  "predicted": 24
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 17,
+                  "INTERVENE_STALLED": 1,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          },
+          {
+            "version": "v4",
+            "policy": {
+              "questionVersion": "v4",
+              "driftThreshold": 0.5,
+              "stallThreshold": 0.6,
+              "relevanceThreshold": 0.8,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 60,
+              "errors": 0,
+              "accuracy": 1,
+              "macroF1": 1,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9398260695220669,
+                0.9999999999999999
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "OK": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 24,
+                  "predicted": 24
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 18,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          }
+        ]
+      },
+      {
+        "fold": 4,
+        "n": 60,
+        "holdoutGroups": [
+          "scenario-family-023",
+          "scenario-family-091",
+          "scenario-family-073",
+          "scenario-family-014",
+          "scenario-family-041",
+          "scenario-family-032",
+          "scenario-family-082",
+          "scenario-family-005",
+          "scenario-family-046",
+          "scenario-family-055",
+          "scenario-family-096",
+          "scenario-family-064"
+        ],
+        "fitGroups": [
+          "scenario-family-085",
+          "scenario-family-062",
+          "scenario-family-012",
+          "scenario-family-006",
+          "scenario-family-011",
+          "scenario-family-015",
+          "scenario-family-004",
+          "scenario-family-003",
+          "scenario-family-024",
+          "scenario-family-063",
+          "scenario-family-021",
+          "scenario-family-066",
+          "scenario-family-093",
+          "scenario-family-052",
+          "scenario-family-061",
+          "scenario-family-022",
+          "scenario-family-054",
+          "scenario-family-074",
+          "scenario-family-092",
+          "scenario-family-056",
+          "scenario-family-053",
+          "scenario-family-095",
+          "scenario-family-051",
+          "scenario-family-031",
+          "scenario-family-044",
+          "scenario-family-035",
+          "scenario-family-026",
+          "scenario-family-081",
+          "scenario-family-071",
+          "scenario-family-086",
+          "scenario-family-094",
+          "scenario-family-042",
+          "scenario-family-036",
+          "scenario-family-083",
+          "scenario-family-043",
+          "scenario-family-033",
+          "scenario-family-045",
+          "scenario-family-013",
+          "scenario-family-002",
+          "scenario-family-034",
+          "scenario-family-072",
+          "scenario-family-075",
+          "scenario-family-084",
+          "scenario-family-076",
+          "scenario-family-016",
+          "scenario-family-025",
+          "scenario-family-001",
+          "scenario-family-065"
+        ],
+        "byVersion": [
+          {
+            "version": "v2",
+            "policy": {
+              "questionVersion": "v2",
+              "driftThreshold": 0.6,
+              "stallThreshold": 0.7,
+              "relevanceThreshold": 0.7,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 60,
+              "errors": 0,
+              "accuracy": 1,
+              "macroF1": 1,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9398260695220669,
+                0.9999999999999999
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "OK": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 24,
+                  "predicted": 24
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 18,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          },
+          {
+            "version": "v3",
+            "policy": {
+              "questionVersion": "v3",
+              "driftThreshold": 0.4,
+              "stallThreshold": 0.7,
+              "relevanceThreshold": 0.7,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 60,
+              "errors": 0,
+              "accuracy": 1,
+              "macroF1": 1,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9398260695220669,
+                0.9999999999999999
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "OK": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 24,
+                  "predicted": 24
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 18,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 0
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          },
+          {
+            "version": "v4",
+            "policy": {
+              "questionVersion": "v4",
+              "driftThreshold": 0.6,
+              "stallThreshold": 0.6,
+              "relevanceThreshold": 0.8,
+              "uncertainThreshold": 0.4
+            },
+            "metrics": {
+              "n": 60,
+              "correct": 59,
+              "errors": 0,
+              "accuracy": 0.9833333333333333,
+              "macroF1": 0.9836734693877552,
+              "majorityBaseline": 0.4,
+              "wilson95": [
+                0.9114466177322051,
+                0.9970519161391262
+              ],
+              "perClass": {
+                "INTERVENE_DRIFT": {
+                  "precision": 1,
+                  "recall": 0.9444444444444444,
+                  "f1": 0.9714285714285714,
+                  "support": 18,
+                  "predicted": 17
+                },
+                "INTERVENE_STALLED": {
+                  "precision": 1,
+                  "recall": 1,
+                  "f1": 1,
+                  "support": 18,
+                  "predicted": 18
+                },
+                "OK": {
+                  "precision": 0.96,
+                  "recall": 1,
+                  "f1": 0.9795918367346939,
+                  "support": 24,
+                  "predicted": 25
+                }
+              },
+              "matrix": {
+                "INTERVENE_DRIFT": {
+                  "INTERVENE_DRIFT": 17,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 1
+                },
+                "INTERVENE_STALLED": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 18,
+                  "OK": 0
+                },
+                "OK": {
+                  "INTERVENE_DRIFT": 0,
+                  "INTERVENE_STALLED": 0,
+                  "OK": 24
+                }
+              },
+              "falseInterventionRate": 0,
+              "exactActionMetrics": null,
+              "actionLabelCoverage": 0
+            }
+          }
+        ]
+      }
+    ],
+    "rankedVersions": [
+      {
+        "version": "v2",
+        "metrics": {
+          "n": 300,
+          "correct": 298,
+          "errors": 0,
+          "accuracy": 0.9933333333333333,
+          "macroF1": 0.9935207842775137,
+          "majorityBaseline": 0.4,
+          "wilson95": [
+            0.9760219257685385,
+            0.9981698899670288
+          ],
+          "perClass": {
+            "INTERVENE_DRIFT": {
+              "precision": 1,
+              "recall": 0.9888888888888889,
+              "f1": 0.9944134078212291,
+              "support": 90,
+              "predicted": 89
+            },
+            "INTERVENE_STALLED": {
+              "precision": 1,
+              "recall": 0.9888888888888889,
+              "f1": 0.9944134078212291,
+              "support": 90,
+              "predicted": 89
+            },
+            "OK": {
+              "precision": 0.9836065573770492,
+              "recall": 1,
+              "f1": 0.9917355371900827,
+              "support": 120,
+              "predicted": 122
+            }
+          },
+          "matrix": {
+            "INTERVENE_DRIFT": {
+              "INTERVENE_DRIFT": 89,
+              "INTERVENE_STALLED": 0,
+              "OK": 1
+            },
+            "INTERVENE_STALLED": {
+              "INTERVENE_DRIFT": 0,
+              "INTERVENE_STALLED": 89,
+              "OK": 1
+            },
+            "OK": {
+              "INTERVENE_DRIFT": 0,
+              "INTERVENE_STALLED": 0,
+              "OK": 120
+            }
+          },
+          "falseInterventionRate": 0
+        },
+        "policy": {
+          "questionVersion": "v2",
+          "driftThreshold": 0.6,
+          "stallThreshold": 0.7,
+          "relevanceThreshold": 0.7,
+          "uncertainThreshold": 0.4
+        }
+      },
+      {
+        "version": "v4",
+        "metrics": {
+          "n": 300,
+          "correct": 297,
+          "errors": 0,
+          "accuracy": 0.99,
+          "macroF1": 0.9897538409230856,
+          "majorityBaseline": 0.4,
+          "wilson95": [
+            0.9710159953649371,
+            0.9965934432372818
+          ],
+          "perClass": {
+            "INTERVENE_DRIFT": {
+              "precision": 1,
+              "recall": 0.9666666666666667,
+              "f1": 0.983050847457627,
+              "support": 90,
+              "predicted": 87
+            },
+            "INTERVENE_STALLED": {
+              "precision": 0.989010989010989,
+              "recall": 1,
+              "f1": 0.994475138121547,
+              "support": 90,
+              "predicted": 91
+            },
+            "OK": {
+              "precision": 0.9836065573770492,
+              "recall": 1,
+              "f1": 0.9917355371900827,
+              "support": 120,
+              "predicted": 122
+            }
+          },
+          "matrix": {
+            "INTERVENE_DRIFT": {
+              "INTERVENE_DRIFT": 87,
+              "INTERVENE_STALLED": 1,
+              "OK": 2
+            },
+            "INTERVENE_STALLED": {
+              "INTERVENE_DRIFT": 0,
+              "INTERVENE_STALLED": 90,
+              "OK": 0
+            },
+            "OK": {
+              "INTERVENE_DRIFT": 0,
+              "INTERVENE_STALLED": 0,
+              "OK": 120
+            }
+          },
+          "falseInterventionRate": 0
+        },
+        "policy": {
+          "questionVersion": "v4",
+          "driftThreshold": 0.5,
+          "stallThreshold": 0.6,
+          "relevanceThreshold": 0.8,
+          "uncertainThreshold": 0.4
+        }
+      },
+      {
+        "version": "v3",
+        "metrics": {
+          "n": 300,
+          "correct": 296,
+          "errors": 0,
+          "accuracy": 0.9866666666666667,
+          "macroF1": 0.9865528631317205,
+          "majorityBaseline": 0.4,
+          "wilson95": [
+            0.9662239391535502,
+            0.9948031223153205
+          ],
+          "perClass": {
+            "INTERVENE_DRIFT": {
+              "precision": 1,
+              "recall": 0.9777777777777777,
+              "f1": 0.9887640449438202,
+              "support": 90,
+              "predicted": 88
+            },
+            "INTERVENE_STALLED": {
+              "precision": 0.9887640449438202,
+              "recall": 0.9777777777777777,
+              "f1": 0.9832402234636872,
+              "support": 90,
+              "predicted": 89
+            },
+            "OK": {
+              "precision": 0.975609756097561,
+              "recall": 1,
+              "f1": 0.9876543209876543,
+              "support": 120,
+              "predicted": 123
+            }
+          },
+          "matrix": {
+            "INTERVENE_DRIFT": {
+              "INTERVENE_DRIFT": 88,
+              "INTERVENE_STALLED": 1,
+              "OK": 1
+            },
+            "INTERVENE_STALLED": {
+              "INTERVENE_DRIFT": 0,
+              "INTERVENE_STALLED": 88,
+              "OK": 2
+            },
+            "OK": {
+              "INTERVENE_DRIFT": 0,
+              "INTERVENE_STALLED": 0,
+              "OK": 120
+            }
+          },
+          "falseInterventionRate": 0
+        },
+        "policy": {
+          "questionVersion": "v3",
+          "driftThreshold": 0.4,
+          "stallThreshold": 0.7,
+          "relevanceThreshold": 0.7,
+          "uncertainThreshold": 0.4
+        }
+      }
+    ],
+    "finalists": [
+      {
+        "policy": {
+          "questionVersion": "v2",
+          "driftThreshold": 0.6,
+          "stallThreshold": 0.7,
+          "relevanceThreshold": 0.7,
+          "uncertainThreshold": 0.4
+        },
+        "cvMetrics": {
+          "n": 300,
+          "correct": 298,
+          "errors": 0,
+          "accuracy": 0.9933333333333333,
+          "macroF1": 0.9935207842775137,
+          "majorityBaseline": 0.4,
+          "wilson95": [
+            0.9760219257685385,
+            0.9981698899670288
+          ],
+          "perClass": {
+            "INTERVENE_DRIFT": {
+              "precision": 1,
+              "recall": 0.9888888888888889,
+              "f1": 0.9944134078212291,
+              "support": 90,
+              "predicted": 89
+            },
+            "INTERVENE_STALLED": {
+              "precision": 1,
+              "recall": 0.9888888888888889,
+              "f1": 0.9944134078212291,
+              "support": 90,
+              "predicted": 89
+            },
+            "OK": {
+              "precision": 0.9836065573770492,
+              "recall": 1,
+              "f1": 0.9917355371900827,
+              "support": 120,
+              "predicted": 122
+            }
+          },
+          "matrix": {
+            "INTERVENE_DRIFT": {
+              "INTERVENE_DRIFT": 89,
+              "INTERVENE_STALLED": 0,
+              "OK": 1
+            },
+            "INTERVENE_STALLED": {
+              "INTERVENE_DRIFT": 0,
+              "INTERVENE_STALLED": 89,
+              "OK": 1
+            },
+            "OK": {
+              "INTERVENE_DRIFT": 0,
+              "INTERVENE_STALLED": 0,
+              "OK": 120
+            }
+          },
+          "falseInterventionRate": 0
+        }
+      },
+      {
+        "policy": {
+          "questionVersion": "v4",
+          "driftThreshold": 0.5,
+          "stallThreshold": 0.6,
+          "relevanceThreshold": 0.8,
+          "uncertainThreshold": 0.4
+        },
+        "cvMetrics": {
+          "n": 300,
+          "correct": 297,
+          "errors": 0,
+          "accuracy": 0.99,
+          "macroF1": 0.9897538409230856,
+          "majorityBaseline": 0.4,
+          "wilson95": [
+            0.9710159953649371,
+            0.9965934432372818
+          ],
+          "perClass": {
+            "INTERVENE_DRIFT": {
+              "precision": 1,
+              "recall": 0.9666666666666667,
+              "f1": 0.983050847457627,
+              "support": 90,
+              "predicted": 87
+            },
+            "INTERVENE_STALLED": {
+              "precision": 0.989010989010989,
+              "recall": 1,
+              "f1": 0.994475138121547,
+              "support": 90,
+              "predicted": 91
+            },
+            "OK": {
+              "precision": 0.9836065573770492,
+              "recall": 1,
+              "f1": 0.9917355371900827,
+              "support": 120,
+              "predicted": 122
+            }
+          },
+          "matrix": {
+            "INTERVENE_DRIFT": {
+              "INTERVENE_DRIFT": 87,
+              "INTERVENE_STALLED": 1,
+              "OK": 2
+            },
+            "INTERVENE_STALLED": {
+              "INTERVENE_DRIFT": 0,
+              "INTERVENE_STALLED": 90,
+              "OK": 0
+            },
+            "OK": {
+              "INTERVENE_DRIFT": 0,
+              "INTERVENE_STALLED": 0,
+              "OK": 120
+            }
+          },
+          "falseInterventionRate": 0
+        }
+      }
+    ],
+    "criterion": "training-only grouped fivefold semantic Macro-F1"
+  },
+  "trainScoresHash": "a4c4bd3bf9001b75197df1bb8ac412217e7efed94ef8c23772416ffd599539ae",
+  "finalists": [
+    {
+      "policy": {
+        "questionVersion": "v2",
+        "driftThreshold": 0.6,
+        "stallThreshold": 0.7,
+        "relevanceThreshold": 0.7,
+        "uncertainThreshold": 0.4
+      },
+      "cvMetrics": {
+        "n": 300,
+        "correct": 298,
+        "errors": 0,
+        "accuracy": 0.9933333333333333,
+        "macroF1": 0.9935207842775137,
+        "majorityBaseline": 0.4,
+        "wilson95": [
+          0.9760219257685385,
+          0.9981698899670288
+        ],
+        "perClass": {
+          "INTERVENE_DRIFT": {
+            "precision": 1,
+            "recall": 0.9888888888888889,
+            "f1": 0.9944134078212291,
+            "support": 90,
+            "predicted": 89
+          },
+          "INTERVENE_STALLED": {
+            "precision": 1,
+            "recall": 0.9888888888888889,
+            "f1": 0.9944134078212291,
+            "support": 90,
+            "predicted": 89
+          },
+          "OK": {
+            "precision": 0.9836065573770492,
+            "recall": 1,
+            "f1": 0.9917355371900827,
+            "support": 120,
+            "predicted": 122
+          }
+        },
+        "matrix": {
+          "INTERVENE_DRIFT": {
+            "INTERVENE_DRIFT": 89,
+            "INTERVENE_STALLED": 0,
+            "OK": 1
+          },
+          "INTERVENE_STALLED": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 89,
+            "OK": 1
+          },
+          "OK": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 0,
+            "OK": 120
+          }
+        },
+        "falseInterventionRate": 0
+      }
+    },
+    {
+      "policy": {
+        "questionVersion": "v4",
+        "driftThreshold": 0.5,
+        "stallThreshold": 0.6,
+        "relevanceThreshold": 0.8,
+        "uncertainThreshold": 0.4
+      },
+      "cvMetrics": {
+        "n": 300,
+        "correct": 297,
+        "errors": 0,
+        "accuracy": 0.99,
+        "macroF1": 0.9897538409230856,
+        "majorityBaseline": 0.4,
+        "wilson95": [
+          0.9710159953649371,
+          0.9965934432372818
+        ],
+        "perClass": {
+          "INTERVENE_DRIFT": {
+            "precision": 1,
+            "recall": 0.9666666666666667,
+            "f1": 0.983050847457627,
+            "support": 90,
+            "predicted": 87
+          },
+          "INTERVENE_STALLED": {
+            "precision": 0.989010989010989,
+            "recall": 1,
+            "f1": 0.994475138121547,
+            "support": 90,
+            "predicted": 91
+          },
+          "OK": {
+            "precision": 0.9836065573770492,
+            "recall": 1,
+            "f1": 0.9917355371900827,
+            "support": 120,
+            "predicted": 122
+          }
+        },
+        "matrix": {
+          "INTERVENE_DRIFT": {
+            "INTERVENE_DRIFT": 87,
+            "INTERVENE_STALLED": 1,
+            "OK": 2
+          },
+          "INTERVENE_STALLED": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 90,
+            "OK": 0
+          },
+          "OK": {
+            "INTERVENE_DRIFT": 0,
+            "INTERVENE_STALLED": 0,
+            "OK": 120
+          }
+        },
+        "falseInterventionRate": 0
+      }
+    }
+  ]
+}
