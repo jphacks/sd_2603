@@ -112,7 +112,7 @@ export async function POST(request: Request) {
     if (input.mode === "judge") {
       const { agenda, agendaVersion } = getAgendaSnapshot(input.botId, input.agenda);
       const validate = () => assertAgendaSnapshot(input.botId, agenda, agendaVersion);
-      const result = await applyVideoDecision({ ...input, agenda }, {
+      const result = await applyVideoDecision({ ...input, agenda, holding: deviceStore.read(input.botId).showing }, {
         judge: withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value, validate)),
         ...videoDependencies,
         guard: async () => validate(),
@@ -129,7 +129,8 @@ export async function POST(request: Request) {
       // the new result is WAIT/SILENCE or evaluation fails.
       const recommendationId = recommendationStore.begin(input);
       const judge = withDeviceControls(input.botId, (value) => monitoredJudge(input.botId, value, () => assertAgendaSnapshot(input.botId, input.agenda, input.agendaVersion)));
-      const result = await judge(input);
+      // With a card up, a shorter transcript is judged so a return shows sooner.
+      const result = await judge({ ...input, holding: deviceStore.read(input.botId).showing });
       recommendationStore.complete(input, recommendationId, result);
       return Response.json({ ...result, recommendationId, resolved: noteResolution(input.botId, result) });
     }

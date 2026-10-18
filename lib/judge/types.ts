@@ -2,6 +2,8 @@ export type JudgeInput = {
   agenda: string;
   transcript: string[];
   secondsSinceLastIntervention: number;
+  /** Set by the server while a card is on the camera, never trusted from a request. */
+  holding?: boolean;
 };
 
 export type JudgeResult = {

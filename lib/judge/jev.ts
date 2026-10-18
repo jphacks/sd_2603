@@ -9,6 +9,9 @@ const TIMEOUT_MS = 5000;
 export const INTERVENTION_THRESHOLD = 0.6;
 export const UNCERTAIN_THRESHOLD = 0.4;
 export const COOLDOWN_REASON = "Cooldown active";
+const MIN_TRANSCRIPT = 3;
+// With a card up, this many new finals are enough to see the meeting return.
+const HOLDING_MIN_TRANSCRIPT = 2;
 
 const AnswerSchema = z.object({ type: z.literal("noul"), noul: z.number().min(0).max(1) });
 const ResponseSchema = z.object({
@@ -128,7 +131,7 @@ export async function requestJevScores(
 }
 
 export const jevJudge: JudgeProvider = async (input) => {
-  if (input.transcript.length < 3) {
+  if (input.transcript.length < (input.holding ? HOLDING_MIN_TRANSCRIPT : MIN_TRANSCRIPT)) {
     return { action: "WAIT", reason: "Not enough conversation", message: null };
   }
   // Jev still runs during the cooldown so a held card can see the meeting
@@ -136,6 +139,10 @@ export const jevJudge: JudgeProvider = async (input) => {
   const decision = await requestJevScores(input);
   const diagnostic = { ...decision.scores, model: decision.model, latencyMs: decision.latencyMs, questionVersion: QUESTION_VERSION };
   const result = decideFromScores(decision.scores);
+  // A short transcript may take a card down, but never puts up a new one.
+  if (input.transcript.length < MIN_TRANSCRIPT && result.action === "INTERVENE") {
+    return { action: "WAIT", reason: "Not enough conversation", message: null, diagnostic };
+  }
   if (input.secondsSinceLastIntervention < 60 && result.action === "INTERVENE") {
     return { action: "SILENCE", reason: COOLDOWN_REASON, message: null, diagnostic };
   }
