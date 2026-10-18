@@ -84,7 +84,14 @@ async function batch(tasks){
 }
 function requireScores(set,vs){if(set.some(c=>vs.some(v=>!cache[key(c,v)]?.scores)))throw new Error('Incomplete scores: rerun the same scoring stage to retry failed requests');}
 const allScores=(set,vs=versions)=>Object.fromEntries(vs.map(v=>[v,scored(set,v)]));
-const measure=(set,p)=>evaluate(set,scored(set,p.questionVersion),p);
+const measure=(set,p)=>{
+  const m=evaluate(set,scored(set,p.questionVersion),p),labels=['INTERVENE_DRIFT','INTERVENE_STALLED'];
+  const tp=labels.reduce((n,g)=>n+labels.reduce((a,d)=>a+m.matrix[g][d],0),0);
+  const positives=labels.reduce((n,g)=>n+m.perClass[g].support,0);
+  const predicted=labels.reduce((n,g)=>n+m.perClass[g].predicted,0);
+  const precision=predicted?tp/predicted:null,recall=positives?tp/positives:null;
+  return {...m,intervention:{tp,fp:predicted-tp,fn:positives-tp,precision,recall,f1:precision!=null&&recall!=null&&precision+recall?2*precision*recall/(precision+recall):0}};
+};
 const distance=p=>Math.abs(p.driftThreshold-.6)+Math.abs(p.stallThreshold-.6)+Math.abs(p.relevanceThreshold-.6);
 function winner(rows){return rows.slice().sort((a,b)=>b.metrics.macroF1-a.metrics.macroF1||b.metrics.accuracy-a.metrics.accuracy||distance(a.policy)-distance(b.policy)||versions.indexOf(a.policy.questionVersion)-versions.indexOf(b.policy.questionVersion))[0];}
 function groupBootstrap(set,p){
@@ -163,6 +170,8 @@ function render(t,s,f){
   }
   if(f){md+='\n## Frozen final Test — synthetic only\n\n| Setting | Correct / n | Accuracy | Macro-F1 | Majority | OKへの誤介入 |\n| --- | ---: | ---: | ---: | ---: | ---: |\n';
     for(const [name,m]of [['Baseline v3',f.before],['Selected',f.after]])md+=`| ${name} | ${m.correct}/${m.n} | ${pct(m.accuracy)} | ${m.macroF1.toFixed(3)} | ${pct(m.majorityBaseline)} | ${m.falseInterventionRate==null?'N/A':pct(m.falseInterventionRate)} |\n`;
+    md+='\nBinary intervention diagnostics (does not check correct intervention reason):\n\n| Setting | Precision | Recall | F1 | TP | FP | FN |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: |\n';
+    for(const [name,m]of [['Baseline v3',f.before],['Selected',f.after]]){const i=m.intervention;md+=`| ${name} | ${i.precision==null?'N/A':pct(i.precision)} | ${i.recall==null?'N/A':pct(i.recall)} | ${i.f1.toFixed(3)} | ${i.tp} | ${i.fp} | ${i.fn} |\n`;}
     md+=`\nFamily bootstrap95% accuracy interval: ${f.bootstrap.accuracy95.map(pct).join('–')} (${f.bootstrap.series} groups;1000 replicates; seed20261018).\n`;
     for(const [name,m]of [['Baseline',f.before],['Selected',f.after]]){
       md+=`\n### ${name} confusion\n\n| Gold / Predicted | Drift | Stalled | OK |\n| --- | ---: | ---: | ---: |\n`;

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,writeFileSync,readFileSync,existsSync,rmSync} from 'node:fs';
+import {mkdtempSync,writeFileSync,readFileSync,existsSync,rmSync,mkdirSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -29,8 +29,8 @@ function fixture(t,count=500){
   const s={drifted:kind==='INTERVENE_DRIFT'?.85:.1,stalled:kind==='INTERVENE_STALLED'?.85:.1,tangentIsRelevant:.1};
   return new Response(JSON.stringify({model:b.model,answers:Object.fromEntries(Object.entries(s).map(([k,noul])=>[k,{type:'noul',noul}])),usage:{input_tokens:42}}),{status:200});
  };`);
- const run=(command,ok=true)=>{
-  const result=spawnSync(process.execPath,['--import',preload,cli,command,`--data=${data}`,`--split-manifest=${splitPath}`,`--out=${out}`,`--campaign=${campaign}`,'--concurrency=4','--budget-usd=5'],{env:{...process.env,AI_GATEWAY_API_KEY:'offline-mock-only',MOCK_REQUESTS:requests,MOCK_LOCK:join(out,'test-lock.json')},encoding:'utf8',timeout:120000});
+ const run=(command,ok=true,extra=[])=>{
+  const result=spawnSync(process.execPath,['--import',preload,cli,command,`--data=${data}`,`--split-manifest=${splitPath}`,`--out=${out}`,`--campaign=${campaign}`,'--concurrency=4','--budget-usd=5',...extra],{env:{...process.env,AI_GATEWAY_API_KEY:'offline-mock-only',MOCK_REQUESTS:requests,MOCK_LOCK:join(out,'test-lock.json')},encoding:'utf8',timeout:120000});
   assert.ifError(result.error);if(ok)assert.equal(result.status,0,result.stderr);else assert.notEqual(result.status,0,result.stdout);return result;
  };
  const calls=()=>existsSync(requests)?readFileSync(requests,'utf8').trim().split('\n').filter(Boolean).map(JSON.parse):[];
@@ -70,4 +70,22 @@ test('partial declared dataset cannot run final or cross-validation',t=>{
  assert.match(f.run('cross-validate',false).stderr,/>=500/);
  assert.equal(f.calls().length,0);
  assert.equal(existsSync(join(f.out,'test-lock.json')),false);
+});
+
+
+test('campaign lock protects another writer and is not removed by a rejected process', t=>{
+ const f=fixture(t);mkdirSync(f.campaign,{recursive:true});
+ const lock=join(f.campaign,'.runner.lock');writeFileSync(lock,JSON.stringify({owner:'another-writer'}));
+ assert.match(f.run('validate',false).stderr,/Campaign already locked/);
+ assert.equal(read(lock).owner,'another-writer');assert.equal(f.calls().length,0);
+});
+
+test('new campaign attempt cap preserves successful cache and blocks further paid calls',t=>{
+ const f=fixture(t);
+ assert.match(f.run('pilot',false,['--max-calls=2']).stderr,/Budget envelope exhausted/);
+ assert.equal(f.calls().length,2);assert.equal(read(join(f.campaign,'spend.json')).attempts,2);
+ assert.equal(Object.keys(read(join(f.campaign,'cache.json'))).length,2);
+ assert.equal(existsSync(join(f.out,'pilot.json')),false);
+ assert.match(f.run('pilot',false,['--max-calls=2']).stderr,/Budget envelope exhausted/);
+ assert.equal(f.calls().length,2);
 });

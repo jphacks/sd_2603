@@ -1,0 +1,7212 @@
+{
+  "version": "synthetic-benchmark-v1",
+  "groups": [
+    {
+      "familyId": "scenario-family-001",
+      "split": "train",
+      "fold": 0,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-002",
+      "split": "train",
+      "fold": 1,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-003",
+      "split": "train",
+      "fold": 2,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-004",
+      "split": "train",
+      "fold": 3,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-005",
+      "split": "train",
+      "fold": 4,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-006",
+      "split": "train",
+      "fold": 0,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-007",
+      "split": "validation",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-008",
+      "split": "validation",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-009",
+      "split": "test",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-010",
+      "split": "test",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-011",
+      "split": "train",
+      "fold": 1,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-012",
+      "split": "train",
+      "fold": 2,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-013",
+      "split": "train",
+      "fold": 3,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-014",
+      "split": "train",
+      "fold": 4,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-015",
+      "split": "train",
+      "fold": 0,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-016",
+      "split": "train",
+      "fold": 1,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-017",
+      "split": "validation",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-018",
+      "split": "validation",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-019",
+      "split": "test",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-020",
+      "split": "test",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-021",
+      "split": "train",
+      "fold": 2,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-022",
+      "split": "train",
+      "fold": 3,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-023",
+      "split": "train",
+      "fold": 4,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-024",
+      "split": "train",
+      "fold": 0,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-025",
+      "split": "train",
+      "fold": 1,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-026",
+      "split": "train",
+      "fold": 2,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-027",
+      "split": "validation",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-028",
+      "split": "validation",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-029",
+      "split": "test",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-030",
+      "split": "test",
+      "fold": null,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-031",
+      "split": "train",
+      "fold": 3,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-032",
+      "split": "train",
+      "fold": 4,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-033",
+      "split": "train",
+      "fold": 0,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-034",
+      "split": "train",
+      "fold": 1,
+      "author": "author_a"
+    },
+    {
+      "familyId": "scenario-family-035",
+      "split": "train",
+      "fold": 2,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-036",
+      "split": "train",
+      "fold": 3,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-037",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-038",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-039",
+      "split": "test",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-040",
+      "split": "test",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-041",
+      "split": "train",
+      "fold": 4,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-042",
+      "split": "train",
+      "fold": 0,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-043",
+      "split": "train",
+      "fold": 1,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-044",
+      "split": "train",
+      "fold": 2,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-045",
+      "split": "train",
+      "fold": 3,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-046",
+      "split": "train",
+      "fold": 4,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-047",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-048",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-049",
+      "split": "test",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-050",
+      "split": "test",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-051",
+      "split": "train",
+      "fold": 0,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-052",
+      "split": "train",
+      "fold": 1,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-053",
+      "split": "train",
+      "fold": 2,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-054",
+      "split": "train",
+      "fold": 3,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-055",
+      "split": "train",
+      "fold": 4,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-056",
+      "split": "train",
+      "fold": 0,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-057",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-058",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-059",
+      "split": "test",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-060",
+      "split": "test",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-061",
+      "split": "train",
+      "fold": 1,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-062",
+      "split": "train",
+      "fold": 2,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-063",
+      "split": "train",
+      "fold": 3,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-064",
+      "split": "train",
+      "fold": 4,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-065",
+      "split": "train",
+      "fold": 0,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-066",
+      "split": "train",
+      "fold": 1,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-067",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b"
+    },
+    {
+      "familyId": "scenario-family-068",
+      "split": "validation",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-069",
+      "split": "test",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-070",
+      "split": "test",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-071",
+      "split": "train",
+      "fold": 2,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-072",
+      "split": "train",
+      "fold": 3,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-073",
+      "split": "train",
+      "fold": 4,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-074",
+      "split": "train",
+      "fold": 0,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-075",
+      "split": "train",
+      "fold": 1,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-076",
+      "split": "train",
+      "fold": 2,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-077",
+      "split": "validation",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-078",
+      "split": "validation",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-079",
+      "split": "test",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-080",
+      "split": "test",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-081",
+      "split": "train",
+      "fold": 3,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-082",
+      "split": "train",
+      "fold": 4,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-083",
+      "split": "train",
+      "fold": 0,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-084",
+      "split": "train",
+      "fold": 1,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-085",
+      "split": "train",
+      "fold": 2,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-086",
+      "split": "train",
+      "fold": 3,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-087",
+      "split": "validation",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-088",
+      "split": "validation",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-089",
+      "split": "test",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-090",
+      "split": "test",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-091",
+      "split": "train",
+      "fold": 4,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-092",
+      "split": "train",
+      "fold": 0,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-093",
+      "split": "train",
+      "fold": 1,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-094",
+      "split": "train",
+      "fold": 2,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-095",
+      "split": "train",
+      "fold": 3,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-096",
+      "split": "train",
+      "fold": 4,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-097",
+      "split": "validation",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-098",
+      "split": "validation",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-099",
+      "split": "test",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-100",
+      "split": "test",
+      "fold": null,
+      "author": "author_c"
+    },
+    {
+      "familyId": "scenario-family-101",
+      "split": "train",
+      "fold": 0,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-102",
+      "split": "train",
+      "fold": 1,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-103",
+      "split": "train",
+      "fold": 2,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-104",
+      "split": "train",
+      "fold": 3,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-105",
+      "split": "train",
+      "fold": 4,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-106",
+      "split": "train",
+      "fold": 0,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-107",
+      "split": "validation",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-108",
+      "split": "validation",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-109",
+      "split": "test",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-110",
+      "split": "test",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-111",
+      "split": "train",
+      "fold": 1,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-112",
+      "split": "train",
+      "fold": 2,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-113",
+      "split": "train",
+      "fold": 3,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-114",
+      "split": "train",
+      "fold": 4,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-115",
+      "split": "train",
+      "fold": 0,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-116",
+      "split": "train",
+      "fold": 1,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-117",
+      "split": "validation",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-118",
+      "split": "validation",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-119",
+      "split": "test",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-120",
+      "split": "test",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-121",
+      "split": "train",
+      "fold": 2,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-122",
+      "split": "train",
+      "fold": 3,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-123",
+      "split": "train",
+      "fold": 4,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-124",
+      "split": "train",
+      "fold": 0,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-125",
+      "split": "train",
+      "fold": 1,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-126",
+      "split": "train",
+      "fold": 2,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-127",
+      "split": "validation",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-128",
+      "split": "validation",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-129",
+      "split": "test",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-130",
+      "split": "test",
+      "fold": null,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-131",
+      "split": "train",
+      "fold": 3,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-132",
+      "split": "train",
+      "fold": 4,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-133",
+      "split": "train",
+      "fold": 0,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-134",
+      "split": "train",
+      "fold": 1,
+      "author": "author_d"
+    },
+    {
+      "familyId": "scenario-family-135",
+      "split": "train",
+      "fold": 2,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-136",
+      "split": "train",
+      "fold": 3,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-137",
+      "split": "validation",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-138",
+      "split": "validation",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-139",
+      "split": "test",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-140",
+      "split": "test",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-141",
+      "split": "train",
+      "fold": 4,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-142",
+      "split": "train",
+      "fold": 0,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-143",
+      "split": "train",
+      "fold": 1,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-144",
+      "split": "train",
+      "fold": 2,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-145",
+      "split": "train",
+      "fold": 3,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-146",
+      "split": "train",
+      "fold": 4,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-147",
+      "split": "validation",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-148",
+      "split": "validation",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-149",
+      "split": "test",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-150",
+      "split": "test",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-151",
+      "split": "train",
+      "fold": 0,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-152",
+      "split": "train",
+      "fold": 1,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-153",
+      "split": "train",
+      "fold": 2,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-154",
+      "split": "train",
+      "fold": 3,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-155",
+      "split": "train",
+      "fold": 4,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-156",
+      "split": "train",
+      "fold": 0,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-157",
+      "split": "validation",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-158",
+      "split": "validation",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-159",
+      "split": "test",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-160",
+      "split": "test",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-161",
+      "split": "train",
+      "fold": 1,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-162",
+      "split": "train",
+      "fold": 2,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-163",
+      "split": "train",
+      "fold": 3,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-164",
+      "split": "train",
+      "fold": 4,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-165",
+      "split": "train",
+      "fold": 0,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-166",
+      "split": "train",
+      "fold": 1,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-167",
+      "split": "validation",
+      "fold": null,
+      "author": "author_e"
+    },
+    {
+      "familyId": "scenario-family-168",
+      "split": "validation",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-169",
+      "split": "test",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-170",
+      "split": "test",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-171",
+      "split": "train",
+      "fold": 2,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-172",
+      "split": "train",
+      "fold": 3,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-173",
+      "split": "train",
+      "fold": 4,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-174",
+      "split": "train",
+      "fold": 0,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-175",
+      "split": "train",
+      "fold": 1,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-176",
+      "split": "train",
+      "fold": 2,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-177",
+      "split": "validation",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-178",
+      "split": "validation",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-179",
+      "split": "test",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-180",
+      "split": "test",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-181",
+      "split": "train",
+      "fold": 3,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-182",
+      "split": "train",
+      "fold": 4,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-183",
+      "split": "train",
+      "fold": 0,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-184",
+      "split": "train",
+      "fold": 1,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-185",
+      "split": "train",
+      "fold": 2,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-186",
+      "split": "train",
+      "fold": 3,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-187",
+      "split": "validation",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-188",
+      "split": "validation",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-189",
+      "split": "test",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-190",
+      "split": "test",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-191",
+      "split": "train",
+      "fold": 4,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-192",
+      "split": "train",
+      "fold": 0,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-193",
+      "split": "train",
+      "fold": 1,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-194",
+      "split": "train",
+      "fold": 2,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-195",
+      "split": "train",
+      "fold": 3,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-196",
+      "split": "train",
+      "fold": 4,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-197",
+      "split": "validation",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-198",
+      "split": "validation",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-199",
+      "split": "test",
+      "fold": null,
+      "author": "author_f"
+    },
+    {
+      "familyId": "scenario-family-200",
+      "split": "test",
+      "fold": null,
+      "author": "author_f"
+    }
+  ],
+  "caseAssignments": [
+    {
+      "id": "synbench-f5bc769877985b",
+      "sourceGroup": "scenario-family-001",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-dd32e4f6259c0d",
+      "sourceGroup": "scenario-family-001",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-8a637947e4b682",
+      "sourceGroup": "scenario-family-001",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-bc7bfc7ce86559",
+      "sourceGroup": "scenario-family-001",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-80e63edc208bb6",
+      "sourceGroup": "scenario-family-001",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-59eaf1e509adee",
+      "sourceGroup": "scenario-family-002",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-578be442ea9e4b",
+      "sourceGroup": "scenario-family-002",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-ec06bd6174f3df",
+      "sourceGroup": "scenario-family-002",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-ebf919c9f57824",
+      "sourceGroup": "scenario-family-002",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-5e2522dae69272",
+      "sourceGroup": "scenario-family-002",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-4515e24af3d6fd",
+      "sourceGroup": "scenario-family-003",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-28de008646ff0f",
+      "sourceGroup": "scenario-family-003",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-87b4fcea7419de",
+      "sourceGroup": "scenario-family-003",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-1cd12a35afad5e",
+      "sourceGroup": "scenario-family-003",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-07f0d268cccaa6",
+      "sourceGroup": "scenario-family-003",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-5d4b1838fe25e3",
+      "sourceGroup": "scenario-family-004",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-07d588ac40e891",
+      "sourceGroup": "scenario-family-004",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-a572844de70c05",
+      "sourceGroup": "scenario-family-004",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-3bc1e5ed8c5b60",
+      "sourceGroup": "scenario-family-004",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-b59a9b24444103",
+      "sourceGroup": "scenario-family-004",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-7802aebe535d61",
+      "sourceGroup": "scenario-family-005",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-338e55fae42f98",
+      "sourceGroup": "scenario-family-005",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-8b489b70d9ea5f",
+      "sourceGroup": "scenario-family-005",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-5b66e438ee4891",
+      "sourceGroup": "scenario-family-005",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-dd58b7df2ccde2",
+      "sourceGroup": "scenario-family-005",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-04dd0642570ffe",
+      "sourceGroup": "scenario-family-006",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-514e7e8ba9c847",
+      "sourceGroup": "scenario-family-006",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-d8c34f065ba5af",
+      "sourceGroup": "scenario-family-006",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-5a5d3dcdd441d6",
+      "sourceGroup": "scenario-family-006",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-8c6fedfc93dde5",
+      "sourceGroup": "scenario-family-006",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-9eb7512e7cfb25",
+      "sourceGroup": "scenario-family-007",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-92be54ab6e6ce7",
+      "sourceGroup": "scenario-family-007",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-9ad1d0b9ca99b7",
+      "sourceGroup": "scenario-family-007",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-0edfe86d6a8056",
+      "sourceGroup": "scenario-family-007",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2bc540e37708d7",
+      "sourceGroup": "scenario-family-007",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-7aded4c0c232d3",
+      "sourceGroup": "scenario-family-008",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a9eb372e8a6ed2",
+      "sourceGroup": "scenario-family-008",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-7d93e516e5aa79",
+      "sourceGroup": "scenario-family-008",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-9dc37b1fe785cb",
+      "sourceGroup": "scenario-family-008",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-853700fea9d6ca",
+      "sourceGroup": "scenario-family-008",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-38f267af015128",
+      "sourceGroup": "scenario-family-009",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-cc09acedc1cbe2",
+      "sourceGroup": "scenario-family-009",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-08ddb1c0008043",
+      "sourceGroup": "scenario-family-009",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-715604142dd867",
+      "sourceGroup": "scenario-family-009",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-3bc4bd6ea4d2c8",
+      "sourceGroup": "scenario-family-009",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e29be21a85173e",
+      "sourceGroup": "scenario-family-010",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-638201f648e81c",
+      "sourceGroup": "scenario-family-010",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-feea642b973de6",
+      "sourceGroup": "scenario-family-010",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-4ee43bde47006c",
+      "sourceGroup": "scenario-family-010",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-8670f6a57ef5a7",
+      "sourceGroup": "scenario-family-010",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-0c74d0b436b1fb",
+      "sourceGroup": "scenario-family-011",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-34fbccb4e8f46d",
+      "sourceGroup": "scenario-family-011",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-35d2120baacd28",
+      "sourceGroup": "scenario-family-011",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-71feabfa4db112",
+      "sourceGroup": "scenario-family-011",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-065ecf64e1591a",
+      "sourceGroup": "scenario-family-011",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-a71b7ba1a12a86",
+      "sourceGroup": "scenario-family-012",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-04b18bd1eaa3df",
+      "sourceGroup": "scenario-family-012",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-8800b3f0030f45",
+      "sourceGroup": "scenario-family-012",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-f2b5c18d1e5c29",
+      "sourceGroup": "scenario-family-012",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-b831dd418c8e1e",
+      "sourceGroup": "scenario-family-012",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-530215da69ba1b",
+      "sourceGroup": "scenario-family-013",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-84133f5018badf",
+      "sourceGroup": "scenario-family-013",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-a19c9464f22bf9",
+      "sourceGroup": "scenario-family-013",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-8a0041004e7d73",
+      "sourceGroup": "scenario-family-013",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-e910bf5ee0f2da",
+      "sourceGroup": "scenario-family-013",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-26caf0bdb58771",
+      "sourceGroup": "scenario-family-014",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-79f86f702af506",
+      "sourceGroup": "scenario-family-014",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-dae5e1b9d95d22",
+      "sourceGroup": "scenario-family-014",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-ea25bd06506160",
+      "sourceGroup": "scenario-family-014",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-08a70dff0b61b3",
+      "sourceGroup": "scenario-family-014",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-9e01ba48b8ecb9",
+      "sourceGroup": "scenario-family-015",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-076ddccb38a1d0",
+      "sourceGroup": "scenario-family-015",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-f37246b466b1b6",
+      "sourceGroup": "scenario-family-015",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-1e0d7045ca048c",
+      "sourceGroup": "scenario-family-015",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-351b93c4ffa2aa",
+      "sourceGroup": "scenario-family-015",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-fd8becc1174f08",
+      "sourceGroup": "scenario-family-016",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-c6bbbb62dfab0f",
+      "sourceGroup": "scenario-family-016",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-bb6fb01b01113e",
+      "sourceGroup": "scenario-family-016",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-63306e68af0338",
+      "sourceGroup": "scenario-family-016",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-8c17ed0981b75f",
+      "sourceGroup": "scenario-family-016",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-92a4ecd18fa1be",
+      "sourceGroup": "scenario-family-017",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-ffa1d33e96a345",
+      "sourceGroup": "scenario-family-017",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-ebe93047b8ebf2",
+      "sourceGroup": "scenario-family-017",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-e29530e9d9a7e0",
+      "sourceGroup": "scenario-family-017",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-ed82c7ed6282ef",
+      "sourceGroup": "scenario-family-017",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-b805c60515eed8",
+      "sourceGroup": "scenario-family-018",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-f2b19c0c7aac6a",
+      "sourceGroup": "scenario-family-018",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-4439ab73b8c39c",
+      "sourceGroup": "scenario-family-018",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-ff05300672444c",
+      "sourceGroup": "scenario-family-018",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-d7f495657bddb0",
+      "sourceGroup": "scenario-family-018",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-8980aa4ded11e9",
+      "sourceGroup": "scenario-family-019",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-f45f09321620dd",
+      "sourceGroup": "scenario-family-019",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-d54672a2084be2",
+      "sourceGroup": "scenario-family-019",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-84be627a897dc6",
+      "sourceGroup": "scenario-family-019",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e44e2d35609d27",
+      "sourceGroup": "scenario-family-019",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-d2e95646377fe3",
+      "sourceGroup": "scenario-family-020",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-92d675addfe21a",
+      "sourceGroup": "scenario-family-020",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-96881bffa7a081",
+      "sourceGroup": "scenario-family-020",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e27fb0ddc58763",
+      "sourceGroup": "scenario-family-020",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-2fdf3cdb25c646",
+      "sourceGroup": "scenario-family-020",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-0b3bdedba3ed1a",
+      "sourceGroup": "scenario-family-021",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-cfd522d1acb48c",
+      "sourceGroup": "scenario-family-021",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-9f2b066ac07995",
+      "sourceGroup": "scenario-family-021",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-bb8f1c223e00ce",
+      "sourceGroup": "scenario-family-021",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-defd10f023bc7b",
+      "sourceGroup": "scenario-family-021",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-1a95587f411014",
+      "sourceGroup": "scenario-family-022",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-db014ed54193fa",
+      "sourceGroup": "scenario-family-022",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-4b6e81d6f2864e",
+      "sourceGroup": "scenario-family-022",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-8689fe20242fec",
+      "sourceGroup": "scenario-family-022",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-4cc8772593ddf3",
+      "sourceGroup": "scenario-family-022",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-01da34e580c250",
+      "sourceGroup": "scenario-family-023",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-3221931fb3301a",
+      "sourceGroup": "scenario-family-023",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-f15922d825c4fe",
+      "sourceGroup": "scenario-family-023",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-ba2cd3cb3c2892",
+      "sourceGroup": "scenario-family-023",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-b2bfd5579ea052",
+      "sourceGroup": "scenario-family-023",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-3112aee80e1609",
+      "sourceGroup": "scenario-family-024",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-23e36a92e38b75",
+      "sourceGroup": "scenario-family-024",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-8ef8812bb27c37",
+      "sourceGroup": "scenario-family-024",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-952a7a67060a7e",
+      "sourceGroup": "scenario-family-024",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-088c56af789b8d",
+      "sourceGroup": "scenario-family-024",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-93225f3b8f960f",
+      "sourceGroup": "scenario-family-025",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-6e700f5a240efe",
+      "sourceGroup": "scenario-family-025",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-77fd6d17400008",
+      "sourceGroup": "scenario-family-025",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-6eb8dcfbb1369e",
+      "sourceGroup": "scenario-family-025",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-727bb88c47f57e",
+      "sourceGroup": "scenario-family-025",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-d121f43007586a",
+      "sourceGroup": "scenario-family-026",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-518de6f9173fe8",
+      "sourceGroup": "scenario-family-026",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-dcd242100a6f21",
+      "sourceGroup": "scenario-family-026",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-29aba655300fd7",
+      "sourceGroup": "scenario-family-026",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-d59adfdc862bf7",
+      "sourceGroup": "scenario-family-026",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-4607fea541ae70",
+      "sourceGroup": "scenario-family-027",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-ea3d3c49c92acd",
+      "sourceGroup": "scenario-family-027",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-4b8a3eec3e454b",
+      "sourceGroup": "scenario-family-027",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a1f170759a9372",
+      "sourceGroup": "scenario-family-027",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-0d8c408fb8d07a",
+      "sourceGroup": "scenario-family-027",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-5f70d443fad884",
+      "sourceGroup": "scenario-family-028",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a47861c0219278",
+      "sourceGroup": "scenario-family-028",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-8cde55fccb4ae1",
+      "sourceGroup": "scenario-family-028",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2d715ff4e1e242",
+      "sourceGroup": "scenario-family-028",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-463175eb371446",
+      "sourceGroup": "scenario-family-028",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-df52e7f6a5e454",
+      "sourceGroup": "scenario-family-029",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-fc8e7f1f9ba74e",
+      "sourceGroup": "scenario-family-029",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-86c3fe0479d55e",
+      "sourceGroup": "scenario-family-029",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-1cb3b322276a10",
+      "sourceGroup": "scenario-family-029",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-be77f92fa2eb82",
+      "sourceGroup": "scenario-family-029",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-c7092d2a180da2",
+      "sourceGroup": "scenario-family-030",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-aeedd9c9c5be49",
+      "sourceGroup": "scenario-family-030",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-0aa35200c30cd9",
+      "sourceGroup": "scenario-family-030",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-1f4ae167dfe73d",
+      "sourceGroup": "scenario-family-030",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-f87db7f57b3452",
+      "sourceGroup": "scenario-family-030",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-56ea1dbf1700a3",
+      "sourceGroup": "scenario-family-031",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-2be328427c6dd0",
+      "sourceGroup": "scenario-family-031",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-ed5ce571f7bf7d",
+      "sourceGroup": "scenario-family-031",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-22e06ffdf459d7",
+      "sourceGroup": "scenario-family-031",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-a91846b5e5e055",
+      "sourceGroup": "scenario-family-031",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-184ddec6ca9dfb",
+      "sourceGroup": "scenario-family-032",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-68eca5c2a60236",
+      "sourceGroup": "scenario-family-032",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-52734dc8aeaf1e",
+      "sourceGroup": "scenario-family-032",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-258971126efda2",
+      "sourceGroup": "scenario-family-032",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-a2b2aa5d17211d",
+      "sourceGroup": "scenario-family-032",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-40a7d1e51bb7c0",
+      "sourceGroup": "scenario-family-033",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-ff231534e1dfe5",
+      "sourceGroup": "scenario-family-033",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-94a3596fc93416",
+      "sourceGroup": "scenario-family-033",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-812a9ce2297b16",
+      "sourceGroup": "scenario-family-033",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-87aa033dc7d4bc",
+      "sourceGroup": "scenario-family-033",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-7d2fb51f036766",
+      "sourceGroup": "scenario-family-034",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-5a301673dd4ed4",
+      "sourceGroup": "scenario-family-034",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-f94e28f3718536",
+      "sourceGroup": "scenario-family-034",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-89211727fcbbeb",
+      "sourceGroup": "scenario-family-034",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-a8ab49a8b823dc",
+      "sourceGroup": "scenario-family-034",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-325bca3a737859",
+      "sourceGroup": "scenario-family-035",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-4f9c5f0b838d88",
+      "sourceGroup": "scenario-family-035",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-2933a5059eadd8",
+      "sourceGroup": "scenario-family-035",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-f7dc2c1db2e091",
+      "sourceGroup": "scenario-family-035",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-44e458a77b4cdc",
+      "sourceGroup": "scenario-family-035",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-3834684e061a09",
+      "sourceGroup": "scenario-family-036",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-b18f3efe069886",
+      "sourceGroup": "scenario-family-036",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-3323c14b2fe842",
+      "sourceGroup": "scenario-family-036",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-9cc1705b3988b0",
+      "sourceGroup": "scenario-family-036",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-43b33ae85e4282",
+      "sourceGroup": "scenario-family-036",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-3f3133cb74d1c6",
+      "sourceGroup": "scenario-family-037",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-14efb9b94f4391",
+      "sourceGroup": "scenario-family-037",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-133b8d7b948856",
+      "sourceGroup": "scenario-family-037",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-90edfa1be5d435",
+      "sourceGroup": "scenario-family-037",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-fb675612e3dec2",
+      "sourceGroup": "scenario-family-037",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-f091dc33512aa6",
+      "sourceGroup": "scenario-family-038",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-852c24429d8e13",
+      "sourceGroup": "scenario-family-038",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-30be9a114a5fc9",
+      "sourceGroup": "scenario-family-038",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-0d595d02a3a916",
+      "sourceGroup": "scenario-family-038",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-388e9755ea466c",
+      "sourceGroup": "scenario-family-038",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-cbc82130d01f6f",
+      "sourceGroup": "scenario-family-039",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-5dbf5beaa3744e",
+      "sourceGroup": "scenario-family-039",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-0c4e0c7cbccb6f",
+      "sourceGroup": "scenario-family-039",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-ec033475f1fed4",
+      "sourceGroup": "scenario-family-039",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e50796d44cfc30",
+      "sourceGroup": "scenario-family-039",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-3273744b9a9172",
+      "sourceGroup": "scenario-family-040",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-6ad35b3406a55f",
+      "sourceGroup": "scenario-family-040",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-cbdaa9da3c8de3",
+      "sourceGroup": "scenario-family-040",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-317f70ede09d1d",
+      "sourceGroup": "scenario-family-040",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-42567b5b899d66",
+      "sourceGroup": "scenario-family-040",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-149055406508d2",
+      "sourceGroup": "scenario-family-041",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-807b3caa931521",
+      "sourceGroup": "scenario-family-041",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-4bfbeff2f66583",
+      "sourceGroup": "scenario-family-041",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-9fda992e20fa05",
+      "sourceGroup": "scenario-family-041",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-1cabea0f4cbce9",
+      "sourceGroup": "scenario-family-041",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-c955333ca2b8a6",
+      "sourceGroup": "scenario-family-042",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-c315466b39afa5",
+      "sourceGroup": "scenario-family-042",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-32a3abed900657",
+      "sourceGroup": "scenario-family-042",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-c1d1b9ed273c15",
+      "sourceGroup": "scenario-family-042",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-700f725869a0e9",
+      "sourceGroup": "scenario-family-042",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-3787bc6743de95",
+      "sourceGroup": "scenario-family-043",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-a201e1b31b5877",
+      "sourceGroup": "scenario-family-043",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-bba90aa1e8a63c",
+      "sourceGroup": "scenario-family-043",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-9cdb6d777533c0",
+      "sourceGroup": "scenario-family-043",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-bce78dec484436",
+      "sourceGroup": "scenario-family-043",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-375696db56c9a0",
+      "sourceGroup": "scenario-family-044",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-532ce626b864ab",
+      "sourceGroup": "scenario-family-044",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-5304e6ee004889",
+      "sourceGroup": "scenario-family-044",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-3692b84e40a571",
+      "sourceGroup": "scenario-family-044",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-265685271dd609",
+      "sourceGroup": "scenario-family-044",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-e037c9ba68014c",
+      "sourceGroup": "scenario-family-045",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-655547a947821f",
+      "sourceGroup": "scenario-family-045",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-432f100b9634e2",
+      "sourceGroup": "scenario-family-045",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-9b686394ba416a",
+      "sourceGroup": "scenario-family-045",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-fd6e61426a8b36",
+      "sourceGroup": "scenario-family-045",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-35c22639225c00",
+      "sourceGroup": "scenario-family-046",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-c569bfc2a898e1",
+      "sourceGroup": "scenario-family-046",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-e58501faf4d041",
+      "sourceGroup": "scenario-family-046",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-a82cbe2e3186ab",
+      "sourceGroup": "scenario-family-046",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-e2c1a540dfae7f",
+      "sourceGroup": "scenario-family-046",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-364ef1ce0fe132",
+      "sourceGroup": "scenario-family-047",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-8bd59911a5388f",
+      "sourceGroup": "scenario-family-047",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-36c13be7b7ecc8",
+      "sourceGroup": "scenario-family-047",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2f646cdbbd1577",
+      "sourceGroup": "scenario-family-047",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-c917fa644bc42f",
+      "sourceGroup": "scenario-family-047",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-9837cc5cf99b2f",
+      "sourceGroup": "scenario-family-048",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-e6db2bca7a725d",
+      "sourceGroup": "scenario-family-048",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-8cb08e32bd55fd",
+      "sourceGroup": "scenario-family-048",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-23caa58ef225c8",
+      "sourceGroup": "scenario-family-048",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-74c3a6fdbd66f8",
+      "sourceGroup": "scenario-family-048",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-5ea8c854de7626",
+      "sourceGroup": "scenario-family-049",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-c02e568db4112b",
+      "sourceGroup": "scenario-family-049",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-beb2cb490993f2",
+      "sourceGroup": "scenario-family-049",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-20744dce846b94",
+      "sourceGroup": "scenario-family-049",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-a3bdb7b9e4de2f",
+      "sourceGroup": "scenario-family-049",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-13c3097b866310",
+      "sourceGroup": "scenario-family-050",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-fd535bd7287947",
+      "sourceGroup": "scenario-family-050",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-1ccd0cbb911b4a",
+      "sourceGroup": "scenario-family-050",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-52f6b77d44db38",
+      "sourceGroup": "scenario-family-050",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-cc7c404554a946",
+      "sourceGroup": "scenario-family-050",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-4604030295aa09",
+      "sourceGroup": "scenario-family-051",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-224cf2d908859d",
+      "sourceGroup": "scenario-family-051",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-706e8618b09ce4",
+      "sourceGroup": "scenario-family-051",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-3bdb7628f9ec97",
+      "sourceGroup": "scenario-family-051",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-e26257ef288714",
+      "sourceGroup": "scenario-family-051",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-9e6db6d9e93d96",
+      "sourceGroup": "scenario-family-052",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-15f5d2e190d93a",
+      "sourceGroup": "scenario-family-052",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-16d219c0250ebe",
+      "sourceGroup": "scenario-family-052",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-3c59edd83ddfce",
+      "sourceGroup": "scenario-family-052",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-5bb963ad7e8e67",
+      "sourceGroup": "scenario-family-052",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-3f4c847b1d3ccb",
+      "sourceGroup": "scenario-family-053",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-43ecb4c7883b43",
+      "sourceGroup": "scenario-family-053",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-5f1d92ac4cabfa",
+      "sourceGroup": "scenario-family-053",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-8d2f59744125af",
+      "sourceGroup": "scenario-family-053",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-1f2b5ac44e2bc8",
+      "sourceGroup": "scenario-family-053",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-1ab4e17a7d143a",
+      "sourceGroup": "scenario-family-054",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-a8465b9ff4cb98",
+      "sourceGroup": "scenario-family-054",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-48dc30114fe171",
+      "sourceGroup": "scenario-family-054",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-553df131c51f03",
+      "sourceGroup": "scenario-family-054",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-c0ca71593bfdec",
+      "sourceGroup": "scenario-family-054",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-bc58f940a04425",
+      "sourceGroup": "scenario-family-055",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-ca5844d257d101",
+      "sourceGroup": "scenario-family-055",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-7dd70ba905fc02",
+      "sourceGroup": "scenario-family-055",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-9b219f2a1fc3db",
+      "sourceGroup": "scenario-family-055",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-3ca542537b2e19",
+      "sourceGroup": "scenario-family-055",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-4876f9d6d23b4e",
+      "sourceGroup": "scenario-family-056",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-1eab26641109fb",
+      "sourceGroup": "scenario-family-056",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-82e629556acb93",
+      "sourceGroup": "scenario-family-056",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-40f722a8514be1",
+      "sourceGroup": "scenario-family-056",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-45a045a25db697",
+      "sourceGroup": "scenario-family-056",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-d1aee3d6dc3b68",
+      "sourceGroup": "scenario-family-057",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2ed67923444c1b",
+      "sourceGroup": "scenario-family-057",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-0d3d3865fcdd37",
+      "sourceGroup": "scenario-family-057",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-4d336c45ae455e",
+      "sourceGroup": "scenario-family-057",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-b70207fd786a99",
+      "sourceGroup": "scenario-family-057",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-d82a7df08fe0a2",
+      "sourceGroup": "scenario-family-058",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-210be68217a950",
+      "sourceGroup": "scenario-family-058",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-93936b590e2bb7",
+      "sourceGroup": "scenario-family-058",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-778b873a888a34",
+      "sourceGroup": "scenario-family-058",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-ee0d234103375a",
+      "sourceGroup": "scenario-family-058",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-c25b70a250055c",
+      "sourceGroup": "scenario-family-059",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-50d00380c22fae",
+      "sourceGroup": "scenario-family-059",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-d9a6f29bb3b314",
+      "sourceGroup": "scenario-family-059",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-796f752c61fd91",
+      "sourceGroup": "scenario-family-059",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-2119b7d44fc116",
+      "sourceGroup": "scenario-family-059",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-8b6131db4d5491",
+      "sourceGroup": "scenario-family-060",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e4414eed0636a1",
+      "sourceGroup": "scenario-family-060",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e907d93a97d78b",
+      "sourceGroup": "scenario-family-060",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-cf5046facf0daa",
+      "sourceGroup": "scenario-family-060",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-5e72866b9bdfc8",
+      "sourceGroup": "scenario-family-060",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-2555b98587be63",
+      "sourceGroup": "scenario-family-061",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-b19479432c353a",
+      "sourceGroup": "scenario-family-061",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-1844bc0254ca32",
+      "sourceGroup": "scenario-family-061",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-e6a79f33b2fff5",
+      "sourceGroup": "scenario-family-061",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-f1e9e096e5306a",
+      "sourceGroup": "scenario-family-061",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-02e8c7cda9301f",
+      "sourceGroup": "scenario-family-062",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-a48415c725971b",
+      "sourceGroup": "scenario-family-062",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-a7305f5bbfd701",
+      "sourceGroup": "scenario-family-062",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-13087b11481d02",
+      "sourceGroup": "scenario-family-062",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-7957f04bfb824f",
+      "sourceGroup": "scenario-family-062",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-d721b35a7b2c4d",
+      "sourceGroup": "scenario-family-063",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-6d9daca1d726c8",
+      "sourceGroup": "scenario-family-063",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-0934143e9b8f92",
+      "sourceGroup": "scenario-family-063",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-3fc5c72b0e4b47",
+      "sourceGroup": "scenario-family-063",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-81ae228fc0f989",
+      "sourceGroup": "scenario-family-063",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-6b224e4771c9b0",
+      "sourceGroup": "scenario-family-064",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-dbaadf5dd48d9a",
+      "sourceGroup": "scenario-family-064",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-8943aef28afede",
+      "sourceGroup": "scenario-family-064",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-a759fc9f73428f",
+      "sourceGroup": "scenario-family-064",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-b74701373aa2ab",
+      "sourceGroup": "scenario-family-064",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-ac5cb0f89baaba",
+      "sourceGroup": "scenario-family-065",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-cf19a7ccc94b8e",
+      "sourceGroup": "scenario-family-065",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-d161a236344935",
+      "sourceGroup": "scenario-family-065",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-e7c2808da98140",
+      "sourceGroup": "scenario-family-065",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-b3b680db7413b1",
+      "sourceGroup": "scenario-family-065",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-5ecf1b8599d89e",
+      "sourceGroup": "scenario-family-066",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-6c09ff5ed02a7c",
+      "sourceGroup": "scenario-family-066",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-22d78fb1a87df1",
+      "sourceGroup": "scenario-family-066",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-cf1a7f4b84bd7a",
+      "sourceGroup": "scenario-family-066",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-11ad514d7f574a",
+      "sourceGroup": "scenario-family-066",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-6c87919ea3d025",
+      "sourceGroup": "scenario-family-067",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-ef5aaff07673b0",
+      "sourceGroup": "scenario-family-067",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-c69874f7dfb08b",
+      "sourceGroup": "scenario-family-067",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-0808665439cea1",
+      "sourceGroup": "scenario-family-067",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-522825120d1ed3",
+      "sourceGroup": "scenario-family-067",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-d220b7e16cc99c",
+      "sourceGroup": "scenario-family-068",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-44945503f7dfab",
+      "sourceGroup": "scenario-family-068",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-3c5b8e1752751e",
+      "sourceGroup": "scenario-family-068",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-4b0e3589fc273d",
+      "sourceGroup": "scenario-family-068",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a1b847e57c0971",
+      "sourceGroup": "scenario-family-068",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-dd4e0299b15f6c",
+      "sourceGroup": "scenario-family-069",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-22fc0c3766ef44",
+      "sourceGroup": "scenario-family-069",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-fa234f07abb6e6",
+      "sourceGroup": "scenario-family-069",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e1cfb5e0dd946f",
+      "sourceGroup": "scenario-family-069",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-450209fd7677f4",
+      "sourceGroup": "scenario-family-069",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-ee446d4ff13123",
+      "sourceGroup": "scenario-family-070",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-3f6b9167d9814a",
+      "sourceGroup": "scenario-family-070",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-a79393f385ce35",
+      "sourceGroup": "scenario-family-070",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-de0b178273bd1c",
+      "sourceGroup": "scenario-family-070",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-d1020df3173bf7",
+      "sourceGroup": "scenario-family-070",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-a1f767a1cbbe07",
+      "sourceGroup": "scenario-family-071",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-5b4e67e6558de9",
+      "sourceGroup": "scenario-family-071",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-308ed1172f0cea",
+      "sourceGroup": "scenario-family-071",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-30728d7cec8a4d",
+      "sourceGroup": "scenario-family-071",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-a4d7c365a71d9a",
+      "sourceGroup": "scenario-family-071",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-820568880bae7e",
+      "sourceGroup": "scenario-family-072",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-5d6ba01c0ae48b",
+      "sourceGroup": "scenario-family-072",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-b48eb9213273e4",
+      "sourceGroup": "scenario-family-072",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-de840cf0bdfc04",
+      "sourceGroup": "scenario-family-072",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-8f687688c6fa83",
+      "sourceGroup": "scenario-family-072",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-93350301dbb472",
+      "sourceGroup": "scenario-family-073",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-7893e49c948ae1",
+      "sourceGroup": "scenario-family-073",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-bc8e69bb750c54",
+      "sourceGroup": "scenario-family-073",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-03f69077ee1fc2",
+      "sourceGroup": "scenario-family-073",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-6f47e9c6bdce46",
+      "sourceGroup": "scenario-family-073",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-1c32075ca4a28c",
+      "sourceGroup": "scenario-family-074",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-df472deca5a2b5",
+      "sourceGroup": "scenario-family-074",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-dbe33ee1577825",
+      "sourceGroup": "scenario-family-074",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-ed85a6ac5ac7d0",
+      "sourceGroup": "scenario-family-074",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-73b60c8908bb7e",
+      "sourceGroup": "scenario-family-074",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-c8a36e7fece41a",
+      "sourceGroup": "scenario-family-075",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-f53f0d19d7e72c",
+      "sourceGroup": "scenario-family-075",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-618efb9c7c18f8",
+      "sourceGroup": "scenario-family-075",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-beafe14120d9a4",
+      "sourceGroup": "scenario-family-075",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-e960d3f1c723b6",
+      "sourceGroup": "scenario-family-075",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-c3bad7f791ccfd",
+      "sourceGroup": "scenario-family-076",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-62a311819b656e",
+      "sourceGroup": "scenario-family-076",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-864f9ab75198bb",
+      "sourceGroup": "scenario-family-076",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-c13820b439583e",
+      "sourceGroup": "scenario-family-076",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-76e2f6c9f1faba",
+      "sourceGroup": "scenario-family-076",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-2f7fb28bdc55a5",
+      "sourceGroup": "scenario-family-077",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-42220fc4b84f35",
+      "sourceGroup": "scenario-family-077",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-806bb70210aa60",
+      "sourceGroup": "scenario-family-077",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-6bb6cd0dc448c7",
+      "sourceGroup": "scenario-family-077",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-6c74c3c19fdde4",
+      "sourceGroup": "scenario-family-077",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-0eef28e40a9ff5",
+      "sourceGroup": "scenario-family-078",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-8e949f77619a0e",
+      "sourceGroup": "scenario-family-078",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-f9159531cd8b59",
+      "sourceGroup": "scenario-family-078",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-054f54861e9196",
+      "sourceGroup": "scenario-family-078",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-55ea295dda8cbb",
+      "sourceGroup": "scenario-family-078",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-5fd856fca42911",
+      "sourceGroup": "scenario-family-079",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-d535d89f1a03b2",
+      "sourceGroup": "scenario-family-079",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-12507cb65c3c89",
+      "sourceGroup": "scenario-family-079",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-b6936509c3f02e",
+      "sourceGroup": "scenario-family-079",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-121faa73bc888f",
+      "sourceGroup": "scenario-family-079",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-3d792cae7d17e0",
+      "sourceGroup": "scenario-family-080",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-149c39e764f9ec",
+      "sourceGroup": "scenario-family-080",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-af3e3dca53461d",
+      "sourceGroup": "scenario-family-080",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-91ae0299b24bf3",
+      "sourceGroup": "scenario-family-080",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-54282cb1a7049b",
+      "sourceGroup": "scenario-family-080",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-bc82aa0a598a2d",
+      "sourceGroup": "scenario-family-081",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-db229d7304e675",
+      "sourceGroup": "scenario-family-081",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-2aba2c7115e025",
+      "sourceGroup": "scenario-family-081",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-455b1bb834b17f",
+      "sourceGroup": "scenario-family-081",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-38d6be36890b86",
+      "sourceGroup": "scenario-family-081",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-df07ffee38cc38",
+      "sourceGroup": "scenario-family-082",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-a48c35c34c1954",
+      "sourceGroup": "scenario-family-082",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-84b84534e2a679",
+      "sourceGroup": "scenario-family-082",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-25c720e5df85e0",
+      "sourceGroup": "scenario-family-082",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-2862ac2485ddc8",
+      "sourceGroup": "scenario-family-082",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-7fb97f31e97936",
+      "sourceGroup": "scenario-family-083",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-3761718e61d881",
+      "sourceGroup": "scenario-family-083",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-9e2f7ea3ec7e86",
+      "sourceGroup": "scenario-family-083",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-5976c32f85039f",
+      "sourceGroup": "scenario-family-083",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-452cc837d12a32",
+      "sourceGroup": "scenario-family-083",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-aed019a40fac71",
+      "sourceGroup": "scenario-family-084",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-61ffdd8987eb50",
+      "sourceGroup": "scenario-family-084",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-c49c2c543daca3",
+      "sourceGroup": "scenario-family-084",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-88adc1eff5f2e7",
+      "sourceGroup": "scenario-family-084",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-61cbcf8e5791f0",
+      "sourceGroup": "scenario-family-084",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-005d7a88f6e94f",
+      "sourceGroup": "scenario-family-085",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-67cc5eb09b054c",
+      "sourceGroup": "scenario-family-085",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-b13a1122589e49",
+      "sourceGroup": "scenario-family-085",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-703a0852ad58c8",
+      "sourceGroup": "scenario-family-085",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-0fba6caaf3e873",
+      "sourceGroup": "scenario-family-085",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-c9f20cb7aa681d",
+      "sourceGroup": "scenario-family-086",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-c10d0adb9c7ad6",
+      "sourceGroup": "scenario-family-086",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-7afd5c5ae0367b",
+      "sourceGroup": "scenario-family-086",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-dda71ea64fe7fa",
+      "sourceGroup": "scenario-family-086",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-307e1262856a3d",
+      "sourceGroup": "scenario-family-086",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-3ee2a9c4d4414a",
+      "sourceGroup": "scenario-family-087",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a5f235acf5a804",
+      "sourceGroup": "scenario-family-087",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2b4c92d3f2a634",
+      "sourceGroup": "scenario-family-087",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-39e12b73091534",
+      "sourceGroup": "scenario-family-087",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-003567fdfe1e3e",
+      "sourceGroup": "scenario-family-087",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-be6658b246fc71",
+      "sourceGroup": "scenario-family-088",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-8091e603566202",
+      "sourceGroup": "scenario-family-088",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-b6d292cbc7f5c5",
+      "sourceGroup": "scenario-family-088",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-86349c49f87530",
+      "sourceGroup": "scenario-family-088",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-fbed669c51ae89",
+      "sourceGroup": "scenario-family-088",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-9e8b370525e040",
+      "sourceGroup": "scenario-family-089",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-10d5bf79d5ad9c",
+      "sourceGroup": "scenario-family-089",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-460fd42a8fade1",
+      "sourceGroup": "scenario-family-089",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-56d8228d44ba2e",
+      "sourceGroup": "scenario-family-089",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-8ed0f2add585e7",
+      "sourceGroup": "scenario-family-089",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-4e20fa13f4b728",
+      "sourceGroup": "scenario-family-090",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-006c6e4e69a932",
+      "sourceGroup": "scenario-family-090",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-5ad4eece2f9aab",
+      "sourceGroup": "scenario-family-090",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-4e2aa53bd6b3f8",
+      "sourceGroup": "scenario-family-090",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-8cc5c89d79fd6b",
+      "sourceGroup": "scenario-family-090",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-1eb3f6379c0cde",
+      "sourceGroup": "scenario-family-091",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-4616b90c30415e",
+      "sourceGroup": "scenario-family-091",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-e58636fe4a69f6",
+      "sourceGroup": "scenario-family-091",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-e807fd8fe81189",
+      "sourceGroup": "scenario-family-091",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-02d525cb8e3dac",
+      "sourceGroup": "scenario-family-091",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-402ad7105d2115",
+      "sourceGroup": "scenario-family-092",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-1dadb3a982dfc0",
+      "sourceGroup": "scenario-family-092",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-4269227433d2eb",
+      "sourceGroup": "scenario-family-092",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-52c4f2c3d7509e",
+      "sourceGroup": "scenario-family-092",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-fdcbba0f2903ab",
+      "sourceGroup": "scenario-family-092",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-f5e600e1218e77",
+      "sourceGroup": "scenario-family-093",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-11c73ddf85bc53",
+      "sourceGroup": "scenario-family-093",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-2001f5af7abf76",
+      "sourceGroup": "scenario-family-093",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-9af7d6aba1791d",
+      "sourceGroup": "scenario-family-093",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-a47e88f391f3d7",
+      "sourceGroup": "scenario-family-093",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-8ef1bac3ebae0b",
+      "sourceGroup": "scenario-family-094",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-a029c68e0508f0",
+      "sourceGroup": "scenario-family-094",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-ceba20ce2cc99f",
+      "sourceGroup": "scenario-family-094",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-ad07251e51234d",
+      "sourceGroup": "scenario-family-094",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-30d859dfcb0a46",
+      "sourceGroup": "scenario-family-094",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-5022550970d45d",
+      "sourceGroup": "scenario-family-095",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-c7e1a4c054efa1",
+      "sourceGroup": "scenario-family-095",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-f032570c190eac",
+      "sourceGroup": "scenario-family-095",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-e3faba617237d7",
+      "sourceGroup": "scenario-family-095",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-219bfa9f29bef0",
+      "sourceGroup": "scenario-family-095",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-62e0d56268e9af",
+      "sourceGroup": "scenario-family-096",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-b7dc139fa2b90b",
+      "sourceGroup": "scenario-family-096",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-62b897d8367318",
+      "sourceGroup": "scenario-family-096",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-cf0a17caef2382",
+      "sourceGroup": "scenario-family-096",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-badd08fdf4b310",
+      "sourceGroup": "scenario-family-096",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-83861c462e749b",
+      "sourceGroup": "scenario-family-097",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-5e42d968744c54",
+      "sourceGroup": "scenario-family-097",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-d10b937379d549",
+      "sourceGroup": "scenario-family-097",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-8c7632e5d94e70",
+      "sourceGroup": "scenario-family-097",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-fab07d6df9150c",
+      "sourceGroup": "scenario-family-097",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-082cfb11157b6c",
+      "sourceGroup": "scenario-family-098",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-d9630f04cc2256",
+      "sourceGroup": "scenario-family-098",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-fff15319ceccb6",
+      "sourceGroup": "scenario-family-098",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-9cae0b0753065f",
+      "sourceGroup": "scenario-family-098",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-e3c071c3105c54",
+      "sourceGroup": "scenario-family-098",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-d88e9bfc90d882",
+      "sourceGroup": "scenario-family-099",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-34851424f03c45",
+      "sourceGroup": "scenario-family-099",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-ad73c6ccfb2422",
+      "sourceGroup": "scenario-family-099",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-245c571497165c",
+      "sourceGroup": "scenario-family-099",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-76bba9b4ecd3f7",
+      "sourceGroup": "scenario-family-099",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-2fe764f83e3edd",
+      "sourceGroup": "scenario-family-100",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-b5805f90b4b586",
+      "sourceGroup": "scenario-family-100",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-55380de1d867e4",
+      "sourceGroup": "scenario-family-100",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e61e64937d7ef3",
+      "sourceGroup": "scenario-family-100",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-a092cb357dd7ca",
+      "sourceGroup": "scenario-family-100",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-575d02cfa9cdf5",
+      "sourceGroup": "scenario-family-101",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-aa9ad37b20a7fe",
+      "sourceGroup": "scenario-family-101",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-1283dc09fb1141",
+      "sourceGroup": "scenario-family-101",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-78f3cfa232333d",
+      "sourceGroup": "scenario-family-101",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-5d599e84f0da57",
+      "sourceGroup": "scenario-family-101",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-d928c5313c079e",
+      "sourceGroup": "scenario-family-102",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-36cfd4665181e0",
+      "sourceGroup": "scenario-family-102",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-c2931a626bbb1d",
+      "sourceGroup": "scenario-family-102",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-76305b91ed11aa",
+      "sourceGroup": "scenario-family-102",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-00bb3b9103421e",
+      "sourceGroup": "scenario-family-102",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-7fa4a410a348e0",
+      "sourceGroup": "scenario-family-103",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-68228fae4f1879",
+      "sourceGroup": "scenario-family-103",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-7de347c9a8e971",
+      "sourceGroup": "scenario-family-103",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-906f679e42917c",
+      "sourceGroup": "scenario-family-103",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-5415b87d3e7ee1",
+      "sourceGroup": "scenario-family-103",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-f0f7c212aab9bd",
+      "sourceGroup": "scenario-family-104",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-57db0f0ab0aaed",
+      "sourceGroup": "scenario-family-104",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-a9c567472e39c5",
+      "sourceGroup": "scenario-family-104",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-2c143f517ccf02",
+      "sourceGroup": "scenario-family-104",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-591bd3a7e22e8a",
+      "sourceGroup": "scenario-family-104",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-1a864378c15728",
+      "sourceGroup": "scenario-family-105",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-ee988160be4708",
+      "sourceGroup": "scenario-family-105",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-a4f33b7167200b",
+      "sourceGroup": "scenario-family-105",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-9d79398fcfc914",
+      "sourceGroup": "scenario-family-105",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-99b7f9e62126a2",
+      "sourceGroup": "scenario-family-105",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-ee32de593597ce",
+      "sourceGroup": "scenario-family-106",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-252af99320754d",
+      "sourceGroup": "scenario-family-106",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-8289db77bfe3b3",
+      "sourceGroup": "scenario-family-106",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-0fb681927f613c",
+      "sourceGroup": "scenario-family-106",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-e540ac2f5d1396",
+      "sourceGroup": "scenario-family-106",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-6ba2f8cd133d9b",
+      "sourceGroup": "scenario-family-107",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-c36494959c62f6",
+      "sourceGroup": "scenario-family-107",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2869df63ccdff9",
+      "sourceGroup": "scenario-family-107",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-02ef2e1e69aa29",
+      "sourceGroup": "scenario-family-107",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-e884c54fb40fb8",
+      "sourceGroup": "scenario-family-107",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-34868cb1fe9886",
+      "sourceGroup": "scenario-family-108",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-fdb4b774e2236e",
+      "sourceGroup": "scenario-family-108",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-d151016e32cc48",
+      "sourceGroup": "scenario-family-108",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-3c519cda54f2fd",
+      "sourceGroup": "scenario-family-108",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-4723464d496665",
+      "sourceGroup": "scenario-family-108",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-e7cf4b301c6f12",
+      "sourceGroup": "scenario-family-109",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-a4203bd2c2b59e",
+      "sourceGroup": "scenario-family-109",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-969fadd96712a8",
+      "sourceGroup": "scenario-family-109",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-43df45c7795bfe",
+      "sourceGroup": "scenario-family-109",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-2a32db1b5f4fb7",
+      "sourceGroup": "scenario-family-109",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-164c6518a79c5c",
+      "sourceGroup": "scenario-family-110",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-6b4d2131e6ba1a",
+      "sourceGroup": "scenario-family-110",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-04c2098c2e845b",
+      "sourceGroup": "scenario-family-110",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-da142f76ac21fc",
+      "sourceGroup": "scenario-family-110",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-64315cfaf3963d",
+      "sourceGroup": "scenario-family-110",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-754417d71a067b",
+      "sourceGroup": "scenario-family-111",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-c4242675233174",
+      "sourceGroup": "scenario-family-111",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-9bdf0ba0a76871",
+      "sourceGroup": "scenario-family-111",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-871ebc3671b724",
+      "sourceGroup": "scenario-family-111",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-39e3482cc7358a",
+      "sourceGroup": "scenario-family-111",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-958c5de8e3ab9b",
+      "sourceGroup": "scenario-family-112",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-b91c2ceb001b21",
+      "sourceGroup": "scenario-family-112",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-824edd7af95f69",
+      "sourceGroup": "scenario-family-112",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-cee369d3b740c2",
+      "sourceGroup": "scenario-family-112",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-ce0a3725333511",
+      "sourceGroup": "scenario-family-112",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-9d9e69614741d5",
+      "sourceGroup": "scenario-family-113",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-88f791d5ea9adb",
+      "sourceGroup": "scenario-family-113",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-8b54680201d1a0",
+      "sourceGroup": "scenario-family-113",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-ec8ea7755d156b",
+      "sourceGroup": "scenario-family-113",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-4b92eb858f2f71",
+      "sourceGroup": "scenario-family-113",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-b723903c7b6d55",
+      "sourceGroup": "scenario-family-114",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-0d75fb740c157a",
+      "sourceGroup": "scenario-family-114",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-cd5faf5ca289e4",
+      "sourceGroup": "scenario-family-114",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-a5fc09ddffcd91",
+      "sourceGroup": "scenario-family-114",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-ef0946dd22cec3",
+      "sourceGroup": "scenario-family-114",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-44b706df432088",
+      "sourceGroup": "scenario-family-115",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-2e83a7e1b66742",
+      "sourceGroup": "scenario-family-115",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-edc981759dc720",
+      "sourceGroup": "scenario-family-115",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-70449828ee480c",
+      "sourceGroup": "scenario-family-115",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-7ff1aaa9f6f340",
+      "sourceGroup": "scenario-family-115",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-2f5f9bdff97bf9",
+      "sourceGroup": "scenario-family-116",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-3393fddfb37c23",
+      "sourceGroup": "scenario-family-116",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-a1ead63dc8f63d",
+      "sourceGroup": "scenario-family-116",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-75eb0430acfdc4",
+      "sourceGroup": "scenario-family-116",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-d2577e9109076a",
+      "sourceGroup": "scenario-family-116",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-261cc217cea042",
+      "sourceGroup": "scenario-family-117",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-f08a26cd6af963",
+      "sourceGroup": "scenario-family-117",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-da6a3049b75c04",
+      "sourceGroup": "scenario-family-117",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-0a872cff91c330",
+      "sourceGroup": "scenario-family-117",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2904cfedd5ef34",
+      "sourceGroup": "scenario-family-117",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-aefcb62a61fbe0",
+      "sourceGroup": "scenario-family-118",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-7a14a410bb2bd2",
+      "sourceGroup": "scenario-family-118",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-b772530965d727",
+      "sourceGroup": "scenario-family-118",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-427209b0fe39aa",
+      "sourceGroup": "scenario-family-118",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-17247dfb91fbab",
+      "sourceGroup": "scenario-family-118",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-bbb076d8c55308",
+      "sourceGroup": "scenario-family-119",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-9edbcf701cdc60",
+      "sourceGroup": "scenario-family-119",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-28a4b676dc104d",
+      "sourceGroup": "scenario-family-119",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-1f81bd1df9137a",
+      "sourceGroup": "scenario-family-119",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-1077676b72bb8c",
+      "sourceGroup": "scenario-family-119",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-ca214c1bdedf55",
+      "sourceGroup": "scenario-family-120",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-920105dd7dab9d",
+      "sourceGroup": "scenario-family-120",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-8ef7a24e4020fb",
+      "sourceGroup": "scenario-family-120",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-4b277fbe503f77",
+      "sourceGroup": "scenario-family-120",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-cf75e7b591e68a",
+      "sourceGroup": "scenario-family-120",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e760eb3331d674",
+      "sourceGroup": "scenario-family-121",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-f7fd1bbff84816",
+      "sourceGroup": "scenario-family-121",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-9ddfcd8510013a",
+      "sourceGroup": "scenario-family-121",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-096c11b5828e6b",
+      "sourceGroup": "scenario-family-121",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-c99a9ac832d3c1",
+      "sourceGroup": "scenario-family-121",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-4f1ded93cf7a85",
+      "sourceGroup": "scenario-family-122",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-30eeb79d35e577",
+      "sourceGroup": "scenario-family-122",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-6ff15a9a70013f",
+      "sourceGroup": "scenario-family-122",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-a6ec1d85555485",
+      "sourceGroup": "scenario-family-122",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-6ca66266f95b27",
+      "sourceGroup": "scenario-family-122",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-26d54f09b44815",
+      "sourceGroup": "scenario-family-123",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-88a1e3557c074a",
+      "sourceGroup": "scenario-family-123",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-08b00bda1b17f1",
+      "sourceGroup": "scenario-family-123",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-3ebfba754b38cb",
+      "sourceGroup": "scenario-family-123",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-2ef7276c09d626",
+      "sourceGroup": "scenario-family-123",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-341f7629e47cf7",
+      "sourceGroup": "scenario-family-124",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-7b9e4be94b06c8",
+      "sourceGroup": "scenario-family-124",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-836decb36a9221",
+      "sourceGroup": "scenario-family-124",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-617933937abc0f",
+      "sourceGroup": "scenario-family-124",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-3e050ad16984e1",
+      "sourceGroup": "scenario-family-124",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-adb513d6dc9a4e",
+      "sourceGroup": "scenario-family-125",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-57971837f9d6eb",
+      "sourceGroup": "scenario-family-125",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-5a1af5e901bc0c",
+      "sourceGroup": "scenario-family-125",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-1d50a5289968e4",
+      "sourceGroup": "scenario-family-125",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-19b22156e3f943",
+      "sourceGroup": "scenario-family-125",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-1e37ad8b317e80",
+      "sourceGroup": "scenario-family-126",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-f2f00a1521a689",
+      "sourceGroup": "scenario-family-126",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-0391584fc7bc8a",
+      "sourceGroup": "scenario-family-126",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-6d0c0e93f81162",
+      "sourceGroup": "scenario-family-126",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-98344e57a96d98",
+      "sourceGroup": "scenario-family-126",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-57d24c3258f2b1",
+      "sourceGroup": "scenario-family-127",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-0f4a2e1730ff4d",
+      "sourceGroup": "scenario-family-127",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-ab1cf147ec2a5d",
+      "sourceGroup": "scenario-family-127",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-9b0831cfa21abf",
+      "sourceGroup": "scenario-family-127",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-d36cfd9cdeed0d",
+      "sourceGroup": "scenario-family-127",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a05b8c2f059a35",
+      "sourceGroup": "scenario-family-128",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-52834b74cdcb20",
+      "sourceGroup": "scenario-family-128",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-028d8c0f674ec9",
+      "sourceGroup": "scenario-family-128",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2e2066189f405f",
+      "sourceGroup": "scenario-family-128",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-fd29902cecdad5",
+      "sourceGroup": "scenario-family-128",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a457ba9afbf4c5",
+      "sourceGroup": "scenario-family-129",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-91526b70b6707a",
+      "sourceGroup": "scenario-family-129",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e48e7d12070c4a",
+      "sourceGroup": "scenario-family-129",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-35d28983d8c647",
+      "sourceGroup": "scenario-family-129",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-acec7064a07c93",
+      "sourceGroup": "scenario-family-129",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-7e0d7ed3470f43",
+      "sourceGroup": "scenario-family-130",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-78cef9c10be7a9",
+      "sourceGroup": "scenario-family-130",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-9e39892c600354",
+      "sourceGroup": "scenario-family-130",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-5be89c010e70d5",
+      "sourceGroup": "scenario-family-130",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-da96af569d4a37",
+      "sourceGroup": "scenario-family-130",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-a0e1f7586a1292",
+      "sourceGroup": "scenario-family-131",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-6f9e3e90595884",
+      "sourceGroup": "scenario-family-131",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-0fa2d0c958c9fa",
+      "sourceGroup": "scenario-family-131",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-12bf8dcc6626d3",
+      "sourceGroup": "scenario-family-131",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-acc23ce963403d",
+      "sourceGroup": "scenario-family-131",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-9e5f42f02e9035",
+      "sourceGroup": "scenario-family-132",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-11e97c2fba6446",
+      "sourceGroup": "scenario-family-132",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-e4598ad7b2a3d8",
+      "sourceGroup": "scenario-family-132",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-d3be8a7427d984",
+      "sourceGroup": "scenario-family-132",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-012164ee9254e1",
+      "sourceGroup": "scenario-family-132",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-1aa65be81893c9",
+      "sourceGroup": "scenario-family-133",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-1f2c3cb608d41f",
+      "sourceGroup": "scenario-family-133",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-e1def6353892f4",
+      "sourceGroup": "scenario-family-133",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-5d3851654e5e3d",
+      "sourceGroup": "scenario-family-133",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-78c59ce3803845",
+      "sourceGroup": "scenario-family-133",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-705dbdbb77c7c6",
+      "sourceGroup": "scenario-family-134",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-9a72484818324d",
+      "sourceGroup": "scenario-family-134",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-b0950f3bd37257",
+      "sourceGroup": "scenario-family-134",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-614f023f075b70",
+      "sourceGroup": "scenario-family-134",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-d57c34ea93812d",
+      "sourceGroup": "scenario-family-134",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-c9dc528b581226",
+      "sourceGroup": "scenario-family-135",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-3c5f240106dfbe",
+      "sourceGroup": "scenario-family-135",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-8cd1561ffb5b59",
+      "sourceGroup": "scenario-family-135",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-393ebae092ac75",
+      "sourceGroup": "scenario-family-135",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-dd7e6026d33822",
+      "sourceGroup": "scenario-family-135",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-cb0a73639968b5",
+      "sourceGroup": "scenario-family-136",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-04ada2ce3c2d34",
+      "sourceGroup": "scenario-family-136",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-0e6a6174229df5",
+      "sourceGroup": "scenario-family-136",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-08b7bfc9d5b428",
+      "sourceGroup": "scenario-family-136",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-b050fbf3040625",
+      "sourceGroup": "scenario-family-136",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-1b354f48445dd7",
+      "sourceGroup": "scenario-family-137",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-bc0b74f9aa54b2",
+      "sourceGroup": "scenario-family-137",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-7bb2bfda4dd358",
+      "sourceGroup": "scenario-family-137",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-cdc9cd1c46e586",
+      "sourceGroup": "scenario-family-137",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-513717c69be052",
+      "sourceGroup": "scenario-family-137",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-ccc1943043b4c1",
+      "sourceGroup": "scenario-family-138",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-ed4e885611c722",
+      "sourceGroup": "scenario-family-138",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-b6822e5ffc5652",
+      "sourceGroup": "scenario-family-138",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-4dc01d2b2b0251",
+      "sourceGroup": "scenario-family-138",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-f4f47bba4380ff",
+      "sourceGroup": "scenario-family-138",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-57614c0dfa92f6",
+      "sourceGroup": "scenario-family-139",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-aa136445ba5d7d",
+      "sourceGroup": "scenario-family-139",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-c7521e88f51bfc",
+      "sourceGroup": "scenario-family-139",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-92755956fc6888",
+      "sourceGroup": "scenario-family-139",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-d828ac11b5a73b",
+      "sourceGroup": "scenario-family-139",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-afffa7d262853b",
+      "sourceGroup": "scenario-family-140",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-554403d11bf6a1",
+      "sourceGroup": "scenario-family-140",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-2cb671e9addb55",
+      "sourceGroup": "scenario-family-140",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-63e1d5d50344fd",
+      "sourceGroup": "scenario-family-140",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-946a084d40e026",
+      "sourceGroup": "scenario-family-140",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-10d2a82a0da17b",
+      "sourceGroup": "scenario-family-141",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-4bdac0b474ba86",
+      "sourceGroup": "scenario-family-141",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-a580c60a157aaa",
+      "sourceGroup": "scenario-family-141",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-ff6f619c9f7a19",
+      "sourceGroup": "scenario-family-141",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-1974a63b864aae",
+      "sourceGroup": "scenario-family-141",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-4e856f3dba8ffa",
+      "sourceGroup": "scenario-family-142",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-54d2ac8a3adf4c",
+      "sourceGroup": "scenario-family-142",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-ed47f714531b43",
+      "sourceGroup": "scenario-family-142",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-ff95da30cbb313",
+      "sourceGroup": "scenario-family-142",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-fb991381f7c66a",
+      "sourceGroup": "scenario-family-142",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-2cb3fccdb681bb",
+      "sourceGroup": "scenario-family-143",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-8051b31f6678b6",
+      "sourceGroup": "scenario-family-143",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-9fcfafde221170",
+      "sourceGroup": "scenario-family-143",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-fa3227addbdbc9",
+      "sourceGroup": "scenario-family-143",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-61a7b69c6f5cc0",
+      "sourceGroup": "scenario-family-143",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-e0cee81906697f",
+      "sourceGroup": "scenario-family-144",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-e2bc9f0248ad54",
+      "sourceGroup": "scenario-family-144",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-8632a3a8366181",
+      "sourceGroup": "scenario-family-144",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-4da2b23f125414",
+      "sourceGroup": "scenario-family-144",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-583ceccbe8f741",
+      "sourceGroup": "scenario-family-144",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-e4886f778304b4",
+      "sourceGroup": "scenario-family-145",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-281def6e14a34e",
+      "sourceGroup": "scenario-family-145",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-2da5a65ced73bd",
+      "sourceGroup": "scenario-family-145",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-8bc4ac7bcdc808",
+      "sourceGroup": "scenario-family-145",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-e56d303594873d",
+      "sourceGroup": "scenario-family-145",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-c212ab971cd60e",
+      "sourceGroup": "scenario-family-146",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-e40cb728ffadc0",
+      "sourceGroup": "scenario-family-146",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-3c1fd29133ff00",
+      "sourceGroup": "scenario-family-146",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-69fec28e1aaa47",
+      "sourceGroup": "scenario-family-146",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-2d71211fabdd6d",
+      "sourceGroup": "scenario-family-146",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-2d5d3c6d30b4c3",
+      "sourceGroup": "scenario-family-147",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-29c9bdcf83d349",
+      "sourceGroup": "scenario-family-147",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-b6bf0993e89aa1",
+      "sourceGroup": "scenario-family-147",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-4dffcd66b1098b",
+      "sourceGroup": "scenario-family-147",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-bb3628bf067db9",
+      "sourceGroup": "scenario-family-147",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-5ac2667be8ed0e",
+      "sourceGroup": "scenario-family-148",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-7e670bfc4a6f7b",
+      "sourceGroup": "scenario-family-148",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-e1bdec02080983",
+      "sourceGroup": "scenario-family-148",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-59d195de5ab05f",
+      "sourceGroup": "scenario-family-148",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a5d059551138bf",
+      "sourceGroup": "scenario-family-148",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-3ffe3356dad1fb",
+      "sourceGroup": "scenario-family-149",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-19bfe049f3c042",
+      "sourceGroup": "scenario-family-149",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-6cd2952c1324c2",
+      "sourceGroup": "scenario-family-149",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-480a8c5636fb86",
+      "sourceGroup": "scenario-family-149",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e9a81c6a1c7305",
+      "sourceGroup": "scenario-family-149",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-9e018ba248d42a",
+      "sourceGroup": "scenario-family-150",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-8f9bd99e831d78",
+      "sourceGroup": "scenario-family-150",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-63a205c7fcf2be",
+      "sourceGroup": "scenario-family-150",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-a90a13bd05d3b6",
+      "sourceGroup": "scenario-family-150",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-79de71c6fcea67",
+      "sourceGroup": "scenario-family-150",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-63c3f609de0cf1",
+      "sourceGroup": "scenario-family-151",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-8d4d786f4ca317",
+      "sourceGroup": "scenario-family-151",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-cea1ec513bb9b6",
+      "sourceGroup": "scenario-family-151",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-9ece99f478bd7c",
+      "sourceGroup": "scenario-family-151",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-af0253effc6118",
+      "sourceGroup": "scenario-family-151",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-18ccccf7a90a79",
+      "sourceGroup": "scenario-family-152",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-9d65edadeb9532",
+      "sourceGroup": "scenario-family-152",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-5d7fde7cc8f10b",
+      "sourceGroup": "scenario-family-152",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-1626bd0d041aaa",
+      "sourceGroup": "scenario-family-152",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-bcd896f86ecc57",
+      "sourceGroup": "scenario-family-152",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-264a3dfc15bbc5",
+      "sourceGroup": "scenario-family-153",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-22a668b844f62b",
+      "sourceGroup": "scenario-family-153",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-f626cc07d12853",
+      "sourceGroup": "scenario-family-153",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-4c63220a725875",
+      "sourceGroup": "scenario-family-153",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-df402b7d607ab3",
+      "sourceGroup": "scenario-family-153",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-2c29f8c7eec9d4",
+      "sourceGroup": "scenario-family-154",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-1f67d4920d3c6d",
+      "sourceGroup": "scenario-family-154",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-b663f61e55dd0e",
+      "sourceGroup": "scenario-family-154",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-feb8e5fda9abed",
+      "sourceGroup": "scenario-family-154",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-535aa3c4f5ddbb",
+      "sourceGroup": "scenario-family-154",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-e9fe5f14c550a3",
+      "sourceGroup": "scenario-family-155",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-f04fb359f4bd0f",
+      "sourceGroup": "scenario-family-155",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-31d6c1b6ddb350",
+      "sourceGroup": "scenario-family-155",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-ec01880501bac1",
+      "sourceGroup": "scenario-family-155",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-01272f11c7e59c",
+      "sourceGroup": "scenario-family-155",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-2a101df3990830",
+      "sourceGroup": "scenario-family-156",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-37dbc3aa005371",
+      "sourceGroup": "scenario-family-156",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-495bdc6388015b",
+      "sourceGroup": "scenario-family-156",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-caf3bbb3dae91b",
+      "sourceGroup": "scenario-family-156",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-3738e9932eb1d1",
+      "sourceGroup": "scenario-family-156",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-c058ff7cbb9e02",
+      "sourceGroup": "scenario-family-157",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-10b0edcebf790d",
+      "sourceGroup": "scenario-family-157",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-139bf19c784e3c",
+      "sourceGroup": "scenario-family-157",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-f5bfd02539c154",
+      "sourceGroup": "scenario-family-157",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-6c130a883f7f4c",
+      "sourceGroup": "scenario-family-157",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a17ba3fd0e8f92",
+      "sourceGroup": "scenario-family-158",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-f57023105a8770",
+      "sourceGroup": "scenario-family-158",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2e5dd18eac262d",
+      "sourceGroup": "scenario-family-158",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-3018379420cb0a",
+      "sourceGroup": "scenario-family-158",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2c8675c4fb1840",
+      "sourceGroup": "scenario-family-158",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-92ab77e36e9566",
+      "sourceGroup": "scenario-family-159",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-000c865d95c2b1",
+      "sourceGroup": "scenario-family-159",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-804b7b8555bda1",
+      "sourceGroup": "scenario-family-159",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-0c6980b3967b14",
+      "sourceGroup": "scenario-family-159",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-b2711472f871b5",
+      "sourceGroup": "scenario-family-159",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-719b2ec5a7a48c",
+      "sourceGroup": "scenario-family-160",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-45f18d7572123a",
+      "sourceGroup": "scenario-family-160",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-63c4024d6f40a9",
+      "sourceGroup": "scenario-family-160",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-517b47230e9f6f",
+      "sourceGroup": "scenario-family-160",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-71f39f74eedbc4",
+      "sourceGroup": "scenario-family-160",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-f729bd10e084f7",
+      "sourceGroup": "scenario-family-161",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-b373f01b825071",
+      "sourceGroup": "scenario-family-161",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-44e3f8ee53d903",
+      "sourceGroup": "scenario-family-161",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-a2d35979f51ec8",
+      "sourceGroup": "scenario-family-161",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-c8a1f84dfbadba",
+      "sourceGroup": "scenario-family-161",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-afe2e79e46571f",
+      "sourceGroup": "scenario-family-162",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-614019a3c6db39",
+      "sourceGroup": "scenario-family-162",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-e0e6ad06a97e1d",
+      "sourceGroup": "scenario-family-162",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-b2783bebee4511",
+      "sourceGroup": "scenario-family-162",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-def56c54dd57c7",
+      "sourceGroup": "scenario-family-162",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-d78de7421db2ec",
+      "sourceGroup": "scenario-family-163",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-e6e1d61c2eb50d",
+      "sourceGroup": "scenario-family-163",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-b0b79ea43e19d9",
+      "sourceGroup": "scenario-family-163",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-e0aef1713f5935",
+      "sourceGroup": "scenario-family-163",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-d85c4f8befa13d",
+      "sourceGroup": "scenario-family-163",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-8393557bdeec3a",
+      "sourceGroup": "scenario-family-164",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-e1bb8950f5c3f0",
+      "sourceGroup": "scenario-family-164",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-b21d03b4981e23",
+      "sourceGroup": "scenario-family-164",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-5775a9901d1440",
+      "sourceGroup": "scenario-family-164",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-0d2c65d3aa0689",
+      "sourceGroup": "scenario-family-164",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-24e6769fb01612",
+      "sourceGroup": "scenario-family-165",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-9f7fe69883e3d6",
+      "sourceGroup": "scenario-family-165",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-8b953786502c0f",
+      "sourceGroup": "scenario-family-165",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-de5f5d96061fe3",
+      "sourceGroup": "scenario-family-165",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-7d1de08c9a2832",
+      "sourceGroup": "scenario-family-165",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-80de729cd4b87e",
+      "sourceGroup": "scenario-family-166",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-6282cec018c174",
+      "sourceGroup": "scenario-family-166",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-d342b3c796bdb5",
+      "sourceGroup": "scenario-family-166",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-0d3f77280636de",
+      "sourceGroup": "scenario-family-166",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-3e40004419d101",
+      "sourceGroup": "scenario-family-166",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-2f02f501abb12e",
+      "sourceGroup": "scenario-family-167",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-e4ece2c5178691",
+      "sourceGroup": "scenario-family-167",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-5e0bdb9133206b",
+      "sourceGroup": "scenario-family-167",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-20681c080d9071",
+      "sourceGroup": "scenario-family-167",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-fba2ecd09c32ee",
+      "sourceGroup": "scenario-family-167",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-28705aa874c269",
+      "sourceGroup": "scenario-family-168",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-0feb2c669cc725",
+      "sourceGroup": "scenario-family-168",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-21d04cdcc93654",
+      "sourceGroup": "scenario-family-168",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-5708412b436db4",
+      "sourceGroup": "scenario-family-168",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-66fece379ad2c9",
+      "sourceGroup": "scenario-family-168",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-139b12c41d5062",
+      "sourceGroup": "scenario-family-169",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-aedb1a89c38f04",
+      "sourceGroup": "scenario-family-169",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-8fe4adb8584983",
+      "sourceGroup": "scenario-family-169",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-321dc11abc10e8",
+      "sourceGroup": "scenario-family-169",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-94ddfdb917d167",
+      "sourceGroup": "scenario-family-169",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-be6f69a6bcf22f",
+      "sourceGroup": "scenario-family-170",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-9edaf25b5e5565",
+      "sourceGroup": "scenario-family-170",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-733f4127f4861e",
+      "sourceGroup": "scenario-family-170",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-46c497bb776a48",
+      "sourceGroup": "scenario-family-170",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-991a82a1b2b16d",
+      "sourceGroup": "scenario-family-170",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-2c025101b8f5a8",
+      "sourceGroup": "scenario-family-171",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-aae14a00a89872",
+      "sourceGroup": "scenario-family-171",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-cd44151f7cfa54",
+      "sourceGroup": "scenario-family-171",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-190045140cc975",
+      "sourceGroup": "scenario-family-171",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-f19bc9efba81a9",
+      "sourceGroup": "scenario-family-171",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-352fcd18519aef",
+      "sourceGroup": "scenario-family-172",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-398a719cec1c67",
+      "sourceGroup": "scenario-family-172",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-b32004d7c7ac72",
+      "sourceGroup": "scenario-family-172",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-44756b59be52fd",
+      "sourceGroup": "scenario-family-172",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-5ab4cd6a514d21",
+      "sourceGroup": "scenario-family-172",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-0881041ef1541e",
+      "sourceGroup": "scenario-family-173",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-86c0729e020186",
+      "sourceGroup": "scenario-family-173",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-729aa7ee8e1244",
+      "sourceGroup": "scenario-family-173",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-f580bcc29ea5f7",
+      "sourceGroup": "scenario-family-173",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-8ebacfb40515d4",
+      "sourceGroup": "scenario-family-173",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-a27c69f0008d3d",
+      "sourceGroup": "scenario-family-174",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-ee57b29b0b7faf",
+      "sourceGroup": "scenario-family-174",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-42f582dd3169a9",
+      "sourceGroup": "scenario-family-174",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-9dc165426ff865",
+      "sourceGroup": "scenario-family-174",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-6f9dccc764d55b",
+      "sourceGroup": "scenario-family-174",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-391d3d9382c684",
+      "sourceGroup": "scenario-family-175",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-ced3cea49262b0",
+      "sourceGroup": "scenario-family-175",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-c993ff8a497cd5",
+      "sourceGroup": "scenario-family-175",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-9686da7e74833f",
+      "sourceGroup": "scenario-family-175",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-ac9212df229e9f",
+      "sourceGroup": "scenario-family-175",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-ead68992553050",
+      "sourceGroup": "scenario-family-176",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-cfe7d996afee66",
+      "sourceGroup": "scenario-family-176",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-cb5d3e1c45492d",
+      "sourceGroup": "scenario-family-176",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-e1974701d6b605",
+      "sourceGroup": "scenario-family-176",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-c74c5ca7f8faf4",
+      "sourceGroup": "scenario-family-176",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-f8228292f47bf3",
+      "sourceGroup": "scenario-family-177",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-32d3ae2c814f07",
+      "sourceGroup": "scenario-family-177",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-fa7f9a58c0e706",
+      "sourceGroup": "scenario-family-177",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a055e1025f6714",
+      "sourceGroup": "scenario-family-177",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-4d06cc6b5de3c7",
+      "sourceGroup": "scenario-family-177",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-01a2d03bf19e6a",
+      "sourceGroup": "scenario-family-178",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-9968f49d19cc77",
+      "sourceGroup": "scenario-family-178",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-1aacbb9861556f",
+      "sourceGroup": "scenario-family-178",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-4168ac35c3aff6",
+      "sourceGroup": "scenario-family-178",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-7f774ca9213d96",
+      "sourceGroup": "scenario-family-178",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-5a712e58b017d9",
+      "sourceGroup": "scenario-family-179",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-0a4c0a22c36984",
+      "sourceGroup": "scenario-family-179",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-74b2f96afe658e",
+      "sourceGroup": "scenario-family-179",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-fa533f471562ca",
+      "sourceGroup": "scenario-family-179",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-33d427452d5b90",
+      "sourceGroup": "scenario-family-179",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-c1404af6c494d7",
+      "sourceGroup": "scenario-family-180",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-a919f5fbe1f66e",
+      "sourceGroup": "scenario-family-180",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-de1adf94833002",
+      "sourceGroup": "scenario-family-180",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-5f9ebbb5ef91c3",
+      "sourceGroup": "scenario-family-180",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-ce284f9bd85bbc",
+      "sourceGroup": "scenario-family-180",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-023e780f6f6978",
+      "sourceGroup": "scenario-family-181",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-4aadb84be82e87",
+      "sourceGroup": "scenario-family-181",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-e93c9180305487",
+      "sourceGroup": "scenario-family-181",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-512ac3e7fa63cf",
+      "sourceGroup": "scenario-family-181",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-10a6ed79740221",
+      "sourceGroup": "scenario-family-181",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-350f3e2dab2a54",
+      "sourceGroup": "scenario-family-182",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-efdc28bc97c3d2",
+      "sourceGroup": "scenario-family-182",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-5c31868ffda7d5",
+      "sourceGroup": "scenario-family-182",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-00421c1a7999c4",
+      "sourceGroup": "scenario-family-182",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-d714dd900e1232",
+      "sourceGroup": "scenario-family-182",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-e2844e08e7bb7a",
+      "sourceGroup": "scenario-family-183",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-45ec29150fd563",
+      "sourceGroup": "scenario-family-183",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-f2b5dac155139d",
+      "sourceGroup": "scenario-family-183",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-d54268af2c52ad",
+      "sourceGroup": "scenario-family-183",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-16d9c8f40af74d",
+      "sourceGroup": "scenario-family-183",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-dab2f1644bca1e",
+      "sourceGroup": "scenario-family-184",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-02657999d79036",
+      "sourceGroup": "scenario-family-184",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-46bf7b0f786c0c",
+      "sourceGroup": "scenario-family-184",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-364866cfc0e9cf",
+      "sourceGroup": "scenario-family-184",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-8acb9d25306df3",
+      "sourceGroup": "scenario-family-184",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-c3af04ed95dca5",
+      "sourceGroup": "scenario-family-185",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-f7284fc1a57b5a",
+      "sourceGroup": "scenario-family-185",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-cf9d3e097dbe64",
+      "sourceGroup": "scenario-family-185",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-857561c07cef4e",
+      "sourceGroup": "scenario-family-185",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-dffc4c59b80bfa",
+      "sourceGroup": "scenario-family-185",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-a49689f1da7e87",
+      "sourceGroup": "scenario-family-186",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-2fd3c46cc93502",
+      "sourceGroup": "scenario-family-186",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-939372f0421eef",
+      "sourceGroup": "scenario-family-186",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-fa69c2efdbe179",
+      "sourceGroup": "scenario-family-186",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-3bd91e806f60db",
+      "sourceGroup": "scenario-family-186",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-f9119de2bf6926",
+      "sourceGroup": "scenario-family-187",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-fe11751efb6dc6",
+      "sourceGroup": "scenario-family-187",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-efa89a24fa187f",
+      "sourceGroup": "scenario-family-187",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-1fef31fc77c093",
+      "sourceGroup": "scenario-family-187",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-77e6d09de97e16",
+      "sourceGroup": "scenario-family-187",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-943c41e774aeea",
+      "sourceGroup": "scenario-family-188",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-0f95c7d87871b4",
+      "sourceGroup": "scenario-family-188",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2ea851246f025c",
+      "sourceGroup": "scenario-family-188",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-680805e26e66c8",
+      "sourceGroup": "scenario-family-188",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2f43303eff5841",
+      "sourceGroup": "scenario-family-188",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-7d3c68662ad7d1",
+      "sourceGroup": "scenario-family-189",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-873d805c5b0517",
+      "sourceGroup": "scenario-family-189",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-8654b2b456fd6f",
+      "sourceGroup": "scenario-family-189",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-7508d5d225bf83",
+      "sourceGroup": "scenario-family-189",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-7e73dca5c33133",
+      "sourceGroup": "scenario-family-189",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-a1cddb682317d0",
+      "sourceGroup": "scenario-family-190",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-ba8c60ac18e61f",
+      "sourceGroup": "scenario-family-190",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-98e430ed4a9414",
+      "sourceGroup": "scenario-family-190",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-2bb62f0d701027",
+      "sourceGroup": "scenario-family-190",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-c4d96726147fcc",
+      "sourceGroup": "scenario-family-190",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-6083f971bcceed",
+      "sourceGroup": "scenario-family-191",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-4d98b2e922da09",
+      "sourceGroup": "scenario-family-191",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-2f5aa9bac61cce",
+      "sourceGroup": "scenario-family-191",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-174169f1706332",
+      "sourceGroup": "scenario-family-191",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-93918d8f31a72e",
+      "sourceGroup": "scenario-family-191",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-6ec69ab57f860a",
+      "sourceGroup": "scenario-family-192",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-a24a6afafa868c",
+      "sourceGroup": "scenario-family-192",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-c489c5cfe22b77",
+      "sourceGroup": "scenario-family-192",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-fd9f0e19e4d892",
+      "sourceGroup": "scenario-family-192",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-81a9370bee9b96",
+      "sourceGroup": "scenario-family-192",
+      "split": "train",
+      "fold": 0
+    },
+    {
+      "id": "synbench-9a739b8bd5b018",
+      "sourceGroup": "scenario-family-193",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-9c2b313a1992d6",
+      "sourceGroup": "scenario-family-193",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-b0a4822a731b59",
+      "sourceGroup": "scenario-family-193",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-92e72d263470cb",
+      "sourceGroup": "scenario-family-193",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-2d81cedc4cbda1",
+      "sourceGroup": "scenario-family-193",
+      "split": "train",
+      "fold": 1
+    },
+    {
+      "id": "synbench-581bcc0b9c40c2",
+      "sourceGroup": "scenario-family-194",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-f4ee3c7db87851",
+      "sourceGroup": "scenario-family-194",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-d74209b70fe06a",
+      "sourceGroup": "scenario-family-194",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-685a601b958a47",
+      "sourceGroup": "scenario-family-194",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-3b502d082563d4",
+      "sourceGroup": "scenario-family-194",
+      "split": "train",
+      "fold": 2
+    },
+    {
+      "id": "synbench-b97ace994e5e46",
+      "sourceGroup": "scenario-family-195",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-0601ab8e6c14d0",
+      "sourceGroup": "scenario-family-195",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-b94bda4dc2cdd1",
+      "sourceGroup": "scenario-family-195",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-ae219a36ac626b",
+      "sourceGroup": "scenario-family-195",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-2137981b009a29",
+      "sourceGroup": "scenario-family-195",
+      "split": "train",
+      "fold": 3
+    },
+    {
+      "id": "synbench-66a85a591b45be",
+      "sourceGroup": "scenario-family-196",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-cc1af01fd9c68c",
+      "sourceGroup": "scenario-family-196",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-f46427abfba56c",
+      "sourceGroup": "scenario-family-196",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-d48858905c0452",
+      "sourceGroup": "scenario-family-196",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-6e5cfa791dcda0",
+      "sourceGroup": "scenario-family-196",
+      "split": "train",
+      "fold": 4
+    },
+    {
+      "id": "synbench-680d22a7fd0bdd",
+      "sourceGroup": "scenario-family-197",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-460d2f71267eaa",
+      "sourceGroup": "scenario-family-197",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-f7d3b356a006ef",
+      "sourceGroup": "scenario-family-197",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-2067703feaf4c6",
+      "sourceGroup": "scenario-family-197",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-9d6add7e52a5b0",
+      "sourceGroup": "scenario-family-197",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-aa2d4311c1d423",
+      "sourceGroup": "scenario-family-198",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-d040f95cf65851",
+      "sourceGroup": "scenario-family-198",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-4eb4dc98c43150",
+      "sourceGroup": "scenario-family-198",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-a480510f0a749d",
+      "sourceGroup": "scenario-family-198",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-39c8fa529d89b8",
+      "sourceGroup": "scenario-family-198",
+      "split": "validation",
+      "fold": null
+    },
+    {
+      "id": "synbench-d87f871c28d163",
+      "sourceGroup": "scenario-family-199",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-b89318f96addeb",
+      "sourceGroup": "scenario-family-199",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-95651fe09411b7",
+      "sourceGroup": "scenario-family-199",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-7763c479054fd8",
+      "sourceGroup": "scenario-family-199",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-f097400689e1cb",
+      "sourceGroup": "scenario-family-199",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-b8a8d18521d0f4",
+      "sourceGroup": "scenario-family-200",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-8706f64674c3c6",
+      "sourceGroup": "scenario-family-200",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e7b8ba37d24951",
+      "sourceGroup": "scenario-family-200",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-4a23af95a52a90",
+      "sourceGroup": "scenario-family-200",
+      "split": "test",
+      "fold": null
+    },
+    {
+      "id": "synbench-e1f2126a7c0070",
+      "sourceGroup": "scenario-family-200",
+      "split": "test",
+      "fold": null
+    }
+  ],
+  "provenance": {
+    "coreSha256": "22e6dc4a51a95556aba7c65431682d3127a3089e3e6e8f0de0f749f8c8a0aa31",
+    "extensionSha256": "09afea5aba84dbc2ed591028885901f9c6bbef1377e7d84c378655ba94007082",
+    "note": "Concatenation only; original group/id/split/fold assignments unchanged"
+  }
+}
