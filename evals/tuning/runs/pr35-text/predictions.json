@@ -1,0 +1,6440 @@
+[
+  {
+    "policy": {
+      "name": "current-v3",
+      "questionVersion": "v3",
+      "driftThreshold": 0.6,
+      "stallThreshold": 0.6,
+      "relevanceThreshold": 0.6,
+      "uncertainThreshold": 0.4
+    },
+    "rows": [
+      {
+        "id": "blind-00d50d91b9ad",
+        "sourceDataset": "derail-hard",
+        "sourceId": "pt-affects-agenda",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.86
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 748
+      },
+      {
+        "id": "blind-018be073ef8a",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-brainstorm",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.23
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 681
+      },
+      {
+        "id": "blind-01f1a8b77853",
+        "sourceDataset": "canvas",
+        "sourceId": "dedup-flow-changed",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.47
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 687
+      },
+      {
+        "id": "blind-01f9c9f7d32a",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-competitor-funding",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.25,
+          "tangentIsRelevant": 0.15
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 481
+      },
+      {
+        "id": "blind-029087d09008",
+        "sourceDataset": "derail-multi",
+        "sourceId": "c2-logistics",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.32
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 479
+      },
+      {
+        "id": "blind-04e3ce624cd4",
+        "sourceDataset": "canvas",
+        "sourceId": "dedup-flow-same",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.22
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 429
+      },
+      {
+        "id": "blind-08e20f1f367c",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-scheduling-grind",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.7,
+          "tangentIsRelevant": 0.21
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 342
+      },
+      {
+        "id": "blind-09436dbfff3d",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-ads",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.18,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 352
+      },
+      {
+        "id": "blind-0c7f7d228301",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g3-index-rebuild@7",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.66,
+          "tangentIsRelevant": 0.36
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 474
+      },
+      {
+        "id": "blind-0d4b63d3ca75",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-boss-monologue",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.16,
+          "tangentIsRelevant": 0.26
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 333
+      },
+      {
+        "id": "blind-0f39853d46cc",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-hotfix",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.23
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 556
+      },
+      {
+        "id": "blind-0f3f36183ff9",
+        "sourceDataset": "derail-hard",
+        "sourceId": "ot-decision-buried",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.29
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 429
+      },
+      {
+        "id": "blind-0fb0413ee3f9",
+        "sourceDataset": "derail-multi",
+        "sourceId": "d1-sync@35",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.27,
+          "tangentIsRelevant": 0.88
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 595
+      },
+      {
+        "id": "blind-0fd27946e9c4",
+        "sourceDataset": "derail",
+        "sourceId": "dr-budget-hr-mid",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.19,
+          "tangentIsRelevant": 0.14
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 355
+      },
+      {
+        "id": "blind-12283bfff86e",
+        "sourceDataset": "derail",
+        "sourceId": "st-kickoff-date",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.92,
+          "tangentIsRelevant": 0.23
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 485
+      },
+      {
+        "id": "blind-13685c1a7022",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g5-catering-to-lunch@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.83
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 372
+      },
+      {
+        "id": "blind-14f7943415ee",
+        "sourceDataset": "derail",
+        "sourceId": "ot-budget",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.34
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 472
+      },
+      {
+        "id": "blind-17086a0fd4a4",
+        "sourceDataset": "derail",
+        "sourceId": "am-icebreaker",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.11,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.07
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 466
+      },
+      {
+        "id": "blind-174cc2059c3d",
+        "sourceDataset": "derail-multi",
+        "sourceId": "e1-layout@full",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.49,
+          "tangentIsRelevant": 0.22
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 466
+      },
+      {
+        "id": "blind-18a3f369ab93",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a4-complaint",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.37,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 459
+      },
+      {
+        "id": "blind-1d2ba3b5e35b",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-decision-recheck",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.45
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 472
+      },
+      {
+        "id": "blind-1d450cc03e1b",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-vendor@67",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.27
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 452
+      },
+      {
+        "id": "blind-1dd9c91470cf",
+        "sourceDataset": "derail",
+        "sourceId": "ot-incident",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 399
+      },
+      {
+        "id": "blind-1f2ea6e31efb",
+        "sourceDataset": "derail",
+        "sourceId": "dr-hiring-drama-early",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.98,
+          "stalled": 0.38,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 458
+      },
+      {
+        "id": "blind-20a8878514c5",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-decided",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.16
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 497
+      },
+      {
+        "id": "blind-20d58e8c2f21",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-vendor",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.28
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 486
+      },
+      {
+        "id": "blind-21f2911b5fb6",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g2-referral-bonus@7",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.8,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.13
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 545
+      },
+      {
+        "id": "blind-26639961f27b",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a2-health",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.18,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 429
+      },
+      {
+        "id": "blind-2a216eb8c4ef",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-status",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.2
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 363
+      },
+      {
+        "id": "blind-2bb690a508b6",
+        "sourceDataset": "derail-multi",
+        "sourceId": "f1-train@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.11,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.09
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 444
+      },
+      {
+        "id": "blind-2d3c6372b2dd",
+        "sourceDataset": "derail-hard",
+        "sourceId": "dr-org-gossip",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.19,
+          "tangentIsRelevant": 0.38
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 445
+      },
+      {
+        "id": "blind-2f167320ad9e",
+        "sourceDataset": "derail",
+        "sourceId": "st-venue",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.93,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 464
+      },
+      {
+        "id": "blind-3287e10d6299",
+        "sourceDataset": "derail-hard",
+        "sourceId": "ot-steer-back-done",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.08,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 468
+      },
+      {
+        "id": "blind-33a36db5e8d2",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-approval@67",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.22
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 447
+      },
+      {
+        "id": "blind-341eb1163463",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-venue@27",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 441
+      },
+      {
+        "id": "blind-36634dbfab6e",
+        "sourceDataset": "derail",
+        "sourceId": "pt-budget-actuals",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.88
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 477
+      },
+      {
+        "id": "blind-38ff2da71a55",
+        "sourceDataset": "derail-multi",
+        "sourceId": "e2-booth",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.89,
+          "tangentIsRelevant": 0.19
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 431
+      },
+      {
+        "id": "blind-390fc7de8984",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-deploy@62",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 437
+      },
+      {
+        "id": "blind-3a47f458463d",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-interleaved-lunch",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.23,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.2
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 359
+      },
+      {
+        "id": "blind-3b65e563de7c",
+        "sourceDataset": "derail-multi",
+        "sourceId": "b2-son",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.4,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 425
+      },
+      {
+        "id": "blind-3beb08985f28",
+        "sourceDataset": "derail-multi",
+        "sourceId": "e1-layout@65",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.08,
+          "stalled": 0.85,
+          "tangentIsRelevant": 0.23
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 430
+      },
+      {
+        "id": "blind-3f25073b9a39",
+        "sourceDataset": "canvas",
+        "sourceId": "wait-compare-two-of-three",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.3
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 351
+      },
+      {
+        "id": "blind-40380b8abe79",
+        "sourceDataset": "derail",
+        "sourceId": "dr-trip-late",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 456
+      },
+      {
+        "id": "blind-40a802f855a6",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-shared-context",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.23,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.34
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 460
+      },
+      {
+        "id": "blind-45740c0839a3",
+        "sourceDataset": "derail-multi",
+        "sourceId": "i1-delay@65",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.44,
+          "tangentIsRelevant": 0.41
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 493
+      },
+      {
+        "id": "blind-464a9337461a",
+        "sourceDataset": "derail-hard",
+        "sourceId": "ot-jargon",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.21
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 475
+      },
+      {
+        "id": "blind-46737018b270",
+        "sourceDataset": "derail-multi",
+        "sourceId": "c1-pricing@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.45
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 446
+      },
+      {
+        "id": "blind-486e99aea111",
+        "sourceDataset": "derail-multi",
+        "sourceId": "e1-layout@35",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.6,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 453
+      },
+      {
+        "id": "blind-49e9f8a60ac9",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a3-oldwar@65",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.95,
+          "stalled": 0.21,
+          "tangentIsRelevant": 0.05
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 459
+      },
+      {
+        "id": "blind-4b7ed1cb840c",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-ab",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.33
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 456
+      },
+      {
+        "id": "blind-4be692686d53",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-refund",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.21
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 431
+      },
+      {
+        "id": "blind-4c057179aee9",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-wrapup-chat",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.91,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.09
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 343
+      },
+      {
+        "id": "blind-4dcae47eea2d",
+        "sourceDataset": "derail",
+        "sourceId": "st-pricing",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.93,
+          "tangentIsRelevant": 0.2
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 340
+      },
+      {
+        "id": "blind-4f03900587da",
+        "sourceDataset": "derail",
+        "sourceId": "ot-hackathon",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.27
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 742
+      },
+      {
+        "id": "blind-4fca17297765",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g7-template-loop@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.37,
+          "tangentIsRelevant": 0.33
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 377
+      },
+      {
+        "id": "blind-5001671b49a8",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-morale-in-kpi",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.38,
+          "stalled": 0.54,
+          "tangentIsRelevant": 0.77
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 500
+      },
+      {
+        "id": "blind-535cb11e9484",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-heated",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.37,
+          "tangentIsRelevant": 0.22
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 323
+      },
+      {
+        "id": "blind-54abd8d7853d",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g2-referral-bonus@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.94,
+          "stalled": 0.27,
+          "tangentIsRelevant": 0.1
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 465
+      },
+      {
+        "id": "blind-54defe8d671a",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-todos",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.19
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 431
+      },
+      {
+        "id": "blind-5549f8638973",
+        "sourceDataset": "derail-hard",
+        "sourceId": "st-priority-rephrased",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.87,
+          "tangentIsRelevant": 0.29
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 423
+      },
+      {
+        "id": "blind-5a07e056a59a",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-escalation",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 342
+      },
+      {
+        "id": "blind-5ac0e514df05",
+        "sourceDataset": "derail-multi",
+        "sourceId": "f1-train@65",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.32,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.06
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 441
+      },
+      {
+        "id": "blind-5b08ef9b7b07",
+        "sourceDataset": "derail-multi",
+        "sourceId": "i1-delay@35",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.37,
+          "stalled": 0.84,
+          "tangentIsRelevant": 0.32
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 326
+      },
+      {
+        "id": "blind-5b3a46067292",
+        "sourceDataset": "derail-multi",
+        "sourceId": "h1-gonogo",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.31
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 506
+      },
+      {
+        "id": "blind-5dd3b9cc2f95",
+        "sourceDataset": "derail",
+        "sourceId": "st-ads-vs-event",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.93,
+          "tangentIsRelevant": 0.28
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 474
+      },
+      {
+        "id": "blind-62cf687728f7",
+        "sourceDataset": "derail-hard",
+        "sourceId": "pt-deep-dive-long",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.75
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 459
+      },
+      {
+        "id": "blind-6540a744a6f2",
+        "sourceDataset": "derail",
+        "sourceId": "am-dependency",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.38,
+          "tangentIsRelevant": 0.83
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 464
+      },
+      {
+        "id": "blind-67d40c5f66ed",
+        "sourceDataset": "canvas",
+        "sourceId": "dedup-minor-edit",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.37
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 463
+      },
+      {
+        "id": "blind-6969cf1381ac",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-vendor@25",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.27
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 433
+      },
+      {
+        "id": "blind-6ac83c03d10d",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g6-release-scope@7",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.39
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 526
+      },
+      {
+        "id": "blind-6f9f3641eddd",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-cloud",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.35,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 461
+      },
+      {
+        "id": "blind-72280ea5a987",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a1-golf@35",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.22,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.06
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 441
+      },
+      {
+        "id": "blind-7278656dbd9d",
+        "sourceDataset": "derail-multi",
+        "sourceId": "b1-trip@65",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.21,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 358
+      },
+      {
+        "id": "blind-74c4729a1854",
+        "sourceDataset": "canvas",
+        "sourceId": "wait-criteria-not-yet",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.17,
+          "tangentIsRelevant": 0.26
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 365
+      },
+      {
+        "id": "blind-74f8e121d7a4",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-schedule",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.12,
+          "tangentIsRelevant": 0.29
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 432
+      },
+      {
+        "id": "blind-7564c55d983a",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g8-self-correct@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.1,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.15
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 427
+      },
+      {
+        "id": "blind-7695388877ce",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g7-template-loop@7",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.78,
+          "tangentIsRelevant": 0.35
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 337
+      },
+      {
+        "id": "blind-78f45450a5b0",
+        "sourceDataset": "derail",
+        "sourceId": "ot-share-link",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.23
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 452
+      },
+      {
+        "id": "blind-7922c4538722",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-incident@58",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 333
+      },
+      {
+        "id": "blind-7d9a5798ea50",
+        "sourceDataset": "derail-multi",
+        "sourceId": "c1-pricing@35",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.3
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 499
+      },
+      {
+        "id": "blind-7e5c895fb5e8",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-chitchat",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.29,
+          "stalled": 0.13,
+          "tangentIsRelevant": 0.08
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 336
+      },
+      {
+        "id": "blind-8015631355e8",
+        "sourceDataset": "derail",
+        "sourceId": "pt-hackathon-wifi",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.9
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 334
+      },
+      {
+        "id": "blind-802dd4effcbe",
+        "sourceDataset": "derail-multi",
+        "sourceId": "b1-trip@35",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.86,
+          "stalled": 0.12,
+          "tangentIsRelevant": 0.03
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 459
+      },
+      {
+        "id": "blind-8277b536b2a6",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-deploy",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 474
+      },
+      {
+        "id": "blind-856c75dcd6fe",
+        "sourceDataset": "derail",
+        "sourceId": "pt-hiring-others",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.79
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 438
+      },
+      {
+        "id": "blind-8623c8a9dfe6",
+        "sourceDataset": "derail-hard",
+        "sourceId": "st-ad-budget",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.69,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 430
+      },
+      {
+        "id": "blind-86a30cdf441a",
+        "sourceDataset": "derail",
+        "sourceId": "st-interviewers",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.95,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 364
+      },
+      {
+        "id": "blind-8843e62f58bb",
+        "sourceDataset": "derail-multi",
+        "sourceId": "g1-lunch",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.22,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.08
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 375
+      },
+      {
+        "id": "blind-89aa8b26c956",
+        "sourceDataset": "canvas",
+        "sourceId": "amb-recap",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.17
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 341
+      },
+      {
+        "id": "blind-8a1ace2dac3b",
+        "sourceDataset": "derail",
+        "sourceId": "pt-share-expiry",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.9
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 621
+      },
+      {
+        "id": "blind-8bfa1671b76a",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g1-office-move@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.91,
+          "stalled": 0.12,
+          "tangentIsRelevant": 0.05
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 430
+      },
+      {
+        "id": "blind-8e43527657d4",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a1-golf@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.12,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 341
+      },
+      {
+        "id": "blind-9037262b7dd7",
+        "sourceDataset": "derail",
+        "sourceId": "ot-design",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.21
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 425
+      },
+      {
+        "id": "blind-910796f5ef8b",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g5-catering-to-lunch@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.92,
+          "stalled": 0.13,
+          "tangentIsRelevant": 0.14
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 464
+      },
+      {
+        "id": "blind-9489e1934380",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-laptop",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.15,
+          "tangentIsRelevant": 0.2
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 442
+      },
+      {
+        "id": "blind-94903947b6fe",
+        "sourceDataset": "derail",
+        "sourceId": "st-oncall-owner",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.89,
+          "tangentIsRelevant": 0.2
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 355
+      },
+      {
+        "id": "blind-96d9862a74df",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-silent-thinking",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.6,
+          "tangentIsRelevant": 0.15
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 486
+      },
+      {
+        "id": "blind-97c736af9bd8",
+        "sourceDataset": "derail-multi",
+        "sourceId": "f1-train@35",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.26
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 335
+      },
+      {
+        "id": "blind-97e6d910a4c1",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g4-encoding-detour@7",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.08,
+          "stalled": 0.19,
+          "tangentIsRelevant": 0.92
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 451
+      },
+      {
+        "id": "blind-9a056efc95d1",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g4-encoding-detour@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.66
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 452
+      },
+      {
+        "id": "blind-9a49b15ac486",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-yesno",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.18
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 328
+      },
+      {
+        "id": "blind-9ab13b6decee",
+        "sourceDataset": "derail-hard",
+        "sourceId": "st-oncall-newbie",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.85,
+          "tangentIsRelevant": 0.27
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 443
+      },
+      {
+        "id": "blind-9f3b0dc7cc2c",
+        "sourceDataset": "canvas",
+        "sourceId": "wait-flow-unknown-step",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.19,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 431
+      },
+      {
+        "id": "blind-a369b7dbf06f",
+        "sourceDataset": "canvas",
+        "sourceId": "amb-two-options",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.51,
+          "tangentIsRelevant": 0.36
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 339
+      },
+      {
+        "id": "blind-a58fea25e145",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-newbie-lecture",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.9,
+          "stalled": 0.24,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 446
+      },
+      {
+        "id": "blind-a6882a75068b",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a3-oldwar@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.24,
+          "tangentIsRelevant": 0.05
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 326
+      },
+      {
+        "id": "blind-a6a703a80538",
+        "sourceDataset": "derail",
+        "sourceId": "dr-design-baseball",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.13,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 427
+      },
+      {
+        "id": "blind-a78406778474",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-agency",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 355
+      },
+      {
+        "id": "blind-a789e4f2307d",
+        "sourceDataset": "derail-hard",
+        "sourceId": "pt-license-check",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.27,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.9
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 431
+      },
+      {
+        "id": "blind-a7bf0fbdc86b",
+        "sourceDataset": "derail",
+        "sourceId": "dr-incident-lunch",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.91,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.05
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 433
+      },
+      {
+        "id": "blind-a83f073f29e1",
+        "sourceDataset": "derail-multi",
+        "sourceId": "d2-rain",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.92
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 358
+      },
+      {
+        "id": "blind-aaeb838f3397",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g4-encoding-detour@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.9
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 445
+      },
+      {
+        "id": "blind-ac565261728f",
+        "sourceDataset": "derail",
+        "sourceId": "pt-sprint-velocity",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.86
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 346
+      },
+      {
+        "id": "blind-ac8e6d3f876a",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g1-office-move@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.17,
+          "tangentIsRelevant": 0.3
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 346
+      },
+      {
+        "id": "blind-b27c414ecac9",
+        "sourceDataset": "derail",
+        "sourceId": "am-competitor-gossip",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.85,
+          "stalled": 0.45,
+          "tangentIsRelevant": 0.21
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 428
+      },
+      {
+        "id": "blind-b29228dface4",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-order",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.21
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 431
+      },
+      {
+        "id": "blind-b4b70eb9df64",
+        "sourceDataset": "derail",
+        "sourceId": "dr-hackathon-otherproj",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.12,
+          "tangentIsRelevant": 0.07
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 449
+      },
+      {
+        "id": "blind-b4cbaecc6d2d",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g3-index-rebuild@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.24,
+          "tangentIsRelevant": 0.47
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 340
+      },
+      {
+        "id": "blind-b5f749b3d787",
+        "sourceDataset": "canvas",
+        "sourceId": "amb-flow-or-table",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.36
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 339
+      },
+      {
+        "id": "blind-b81119063236",
+        "sourceDataset": "derail",
+        "sourceId": "st-button-color",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.22
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 462
+      },
+      {
+        "id": "blind-b9864e7c62a1",
+        "sourceDataset": "derail",
+        "sourceId": "am-low-energy",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.17,
+          "tangentIsRelevant": 0.15
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 426
+      },
+      {
+        "id": "blind-b9b86a324112",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-hiring",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.2
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 441
+      },
+      {
+        "id": "blind-ba77c91bcc97",
+        "sourceDataset": "derail",
+        "sourceId": "am-deep-dive",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.59,
+          "tangentIsRelevant": 0.6
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 451
+      },
+      {
+        "id": "blind-bbf2d47b5728",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-onboarding",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.28
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 439
+      },
+      {
+        "id": "blind-bccaf37d8a58",
+        "sourceDataset": "derail",
+        "sourceId": "dr-sprint-moving",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.05
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 441
+      },
+      {
+        "id": "blind-bd2befe2b2c8",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a1-golf@65",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 454
+      },
+      {
+        "id": "blind-be2972b9e0ae",
+        "sourceDataset": "derail-hard",
+        "sourceId": "dr-ai-at-home",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.9,
+          "stalled": 0.29,
+          "tangentIsRelevant": 0.12
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 627
+      },
+      {
+        "id": "blind-bff4c8cad478",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a3-oldwar@35",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.39,
+          "stalled": 0.16,
+          "tangentIsRelevant": 0.11
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 344
+      },
+      {
+        "id": "blind-c04873a114cb",
+        "sourceDataset": "derail",
+        "sourceId": "ot-hiring",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.27
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 446
+      },
+      {
+        "id": "blind-c0a957c882b4",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-ab@17",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": true,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": null,
+        "error": null,
+        "actualModel": null,
+        "latencyMs": null
+      },
+      {
+        "id": "blind-c0f9186be450",
+        "sourceDataset": "derail",
+        "sourceId": "am-recap",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.35,
+          "tangentIsRelevant": 0.18
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 700
+      },
+      {
+        "id": "blind-c75c5d249849",
+        "sourceDataset": "derail",
+        "sourceId": "st-release-date",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.9,
+          "tangentIsRelevant": 0.22
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 517
+      },
+      {
+        "id": "blind-c8fe17d13773",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g2-referral-bonus@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.28
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 343
+      },
+      {
+        "id": "blind-ce077de10e75",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-approval@33",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.15,
+          "tangentIsRelevant": 0.2
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 339
+      },
+      {
+        "id": "blind-cf542346f2d8",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-deploy@23",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.33,
+          "tangentIsRelevant": 0.16
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 430
+      },
+      {
+        "id": "blind-cf5e7a331c28",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-numbers",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.19
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 348
+      },
+      {
+        "id": "blind-d2bf9d313154",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-plan",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 436
+      },
+      {
+        "id": "blind-d301be62a467",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-venue@64",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.27
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 459
+      },
+      {
+        "id": "blind-d351ed8c6f19",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g7-template-loop@full",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.9,
+          "tangentIsRelevant": 0.27
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 438
+      },
+      {
+        "id": "blind-d355315132b4",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-ab@50",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.28
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 320
+      },
+      {
+        "id": "blind-d67510c4ca93",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-incident@25",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 329
+      },
+      {
+        "id": "blind-d8e99c05df1e",
+        "sourceDataset": "derail-hard",
+        "sourceId": "ot-heated-substantive",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.74,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 454
+      },
+      {
+        "id": "blind-daab412656b0",
+        "sourceDataset": "derail",
+        "sourceId": "pt-incident-monitor",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.16,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.7
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 447
+      },
+      {
+        "id": "blind-db7fc7a79ecb",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-qa",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.37
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 452
+      },
+      {
+        "id": "blind-dc9016881e66",
+        "sourceDataset": "derail-multi",
+        "sourceId": "i1-delay@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.12,
+          "tangentIsRelevant": 0.43
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 482
+      },
+      {
+        "id": "blind-dcde3fcf7d3f",
+        "sourceDataset": "derail-multi",
+        "sourceId": "d1-sync@65",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.19,
+          "tangentIsRelevant": 0.9
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 453
+      },
+      {
+        "id": "blind-dd3129f01d6a",
+        "sourceDataset": "derail",
+        "sourceId": "ot-sprint",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.27
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 466
+      },
+      {
+        "id": "blind-dd4500942716",
+        "sourceDataset": "derail",
+        "sourceId": "dr-onboarding-otherproj",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.95,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.41
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 326
+      },
+      {
+        "id": "blind-def9c58a07e1",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g8-self-correct@7",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.65,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.15
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 455
+      },
+      {
+        "id": "blind-df1819095dbe",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g6-release-scope@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.23,
+          "tangentIsRelevant": 0.29
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 458
+      },
+      {
+        "id": "blind-e234bdcb3c96",
+        "sourceDataset": "derail-multi",
+        "sourceId": "d1-sync@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.88
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 344
+      },
+      {
+        "id": "blind-e4512670d73c",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g1-office-move@7",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.62,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 445
+      },
+      {
+        "id": "blind-e5b158538284",
+        "sourceDataset": "derail-multi",
+        "sourceId": "b1-trip@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.42,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 438
+      },
+      {
+        "id": "blind-e5bb11302972",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g5-catering-to-lunch@7",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.13,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.7
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 461
+      },
+      {
+        "id": "blind-e8d2e1478d94",
+        "sourceDataset": "canvas",
+        "sourceId": "wait-steps-incomplete",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.15,
+          "tangentIsRelevant": 0.17
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 331
+      },
+      {
+        "id": "blind-eb2d94138914",
+        "sourceDataset": "derail-hard",
+        "sourceId": "dr-slide-commute",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.93,
+          "stalled": 0.56,
+          "tangentIsRelevant": 0.16
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 326
+      },
+      {
+        "id": "blind-ebb6307601f1",
+        "sourceDataset": "canvas",
+        "sourceId": "wait-options-listing",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.13,
+          "tangentIsRelevant": 0.19
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 404
+      },
+      {
+        "id": "blind-ed56155e9787",
+        "sourceDataset": "derail-hard",
+        "sourceId": "pt-customer-complaint",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.09,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.87
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 347
+      },
+      {
+        "id": "blind-f275fa8c1aef",
+        "sourceDataset": "derail-multi",
+        "sourceId": "c1-pricing@65",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.48
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 435
+      },
+      {
+        "id": "blind-f29ac32a69e8",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g3-index-rebuild@full",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.87,
+          "tangentIsRelevant": 0.28
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 497
+      },
+      {
+        "id": "blind-f31be311b0fd",
+        "sourceDataset": "canvas",
+        "sourceId": "dedup-table-same",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.23,
+          "tangentIsRelevant": 0.24
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 351
+      },
+      {
+        "id": "blind-f400e84d4edb",
+        "sourceDataset": "derail",
+        "sourceId": "ot-onboarding",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.21
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 459
+      },
+      {
+        "id": "blind-f69325e65c35",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g8-self-correct@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.23
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 329
+      },
+      {
+        "id": "blind-f813ef33d771",
+        "sourceDataset": "derail-hard",
+        "sourceId": "pt-past-lesson",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.41,
+          "tangentIsRelevant": 0.86
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 341
+      },
+      {
+        "id": "blind-fd460facfecd",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-approval",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.22
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 321
+      },
+      {
+        "id": "blind-fd974f026bfa",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-incident",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.22
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 434
+      },
+      {
+        "id": "blind-fe31d09f97ad",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-venue",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.23
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 339
+      },
+      {
+        "id": "blind-fe97170aaf06",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-schedule-tidbit",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.18
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 368
+      },
+      {
+        "id": "blind-febc633d1252",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g6-release-scope@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 454
+      }
+    ]
+  },
+  {
+    "policy": {
+      "name": "frozen-selected-v4",
+      "questionVersion": "v4",
+      "driftThreshold": 0.5,
+      "stallThreshold": 0.6,
+      "relevanceThreshold": 0.8,
+      "uncertainThreshold": 0.4
+    },
+    "rows": [
+      {
+        "id": "blind-00d50d91b9ad",
+        "sourceDataset": "derail-hard",
+        "sourceId": "pt-affects-agenda",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.15,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.94
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 371
+      },
+      {
+        "id": "blind-018be073ef8a",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-brainstorm",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.48
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 427
+      },
+      {
+        "id": "blind-01f1a8b77853",
+        "sourceDataset": "canvas",
+        "sourceId": "dedup-flow-changed",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.79
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 352
+      },
+      {
+        "id": "blind-01f9c9f7d32a",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-competitor-funding",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.21
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 460
+      },
+      {
+        "id": "blind-029087d09008",
+        "sourceDataset": "derail-multi",
+        "sourceId": "c2-logistics",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.69
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 477
+      },
+      {
+        "id": "blind-04e3ce624cd4",
+        "sourceDataset": "canvas",
+        "sourceId": "dedup-flow-same",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.61
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 434
+      },
+      {
+        "id": "blind-08e20f1f367c",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-scheduling-grind",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.55,
+          "tangentIsRelevant": 0.75
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 466
+      },
+      {
+        "id": "blind-09436dbfff3d",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-ads",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.17,
+          "tangentIsRelevant": 0.59
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 462
+      },
+      {
+        "id": "blind-0c7f7d228301",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g3-index-rebuild@7",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.46,
+          "tangentIsRelevant": 0.78
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 486
+      },
+      {
+        "id": "blind-0d4b63d3ca75",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-boss-monologue",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.44
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 431
+      },
+      {
+        "id": "blind-0f39853d46cc",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-hotfix",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.53
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 343
+      },
+      {
+        "id": "blind-0f3f36183ff9",
+        "sourceDataset": "derail-hard",
+        "sourceId": "ot-decision-buried",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.66
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 435
+      },
+      {
+        "id": "blind-0fb0413ee3f9",
+        "sourceDataset": "derail-multi",
+        "sourceId": "d1-sync@35",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.93
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 435
+      },
+      {
+        "id": "blind-0fd27946e9c4",
+        "sourceDataset": "derail",
+        "sourceId": "dr-budget-hr-mid",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.09
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 466
+      },
+      {
+        "id": "blind-12283bfff86e",
+        "sourceDataset": "derail",
+        "sourceId": "st-kickoff-date",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.91,
+          "tangentIsRelevant": 0.6
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 459
+      },
+      {
+        "id": "blind-13685c1a7022",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g5-catering-to-lunch@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.87
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 334
+      },
+      {
+        "id": "blind-14f7943415ee",
+        "sourceDataset": "derail",
+        "sourceId": "ot-budget",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.55
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 456
+      },
+      {
+        "id": "blind-17086a0fd4a4",
+        "sourceDataset": "derail",
+        "sourceId": "am-icebreaker",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.13
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 616
+      },
+      {
+        "id": "blind-174cc2059c3d",
+        "sourceDataset": "derail-multi",
+        "sourceId": "e1-layout@full",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.4,
+          "tangentIsRelevant": 0.35
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 435
+      },
+      {
+        "id": "blind-18a3f369ab93",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a4-complaint",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.91,
+          "stalled": 0.45,
+          "tangentIsRelevant": 0.22
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 456
+      },
+      {
+        "id": "blind-1d2ba3b5e35b",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-decision-recheck",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.78
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 342
+      },
+      {
+        "id": "blind-1d450cc03e1b",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-vendor@67",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.81
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 475
+      },
+      {
+        "id": "blind-1dd9c91470cf",
+        "sourceDataset": "derail",
+        "sourceId": "ot-incident",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.51
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 364
+      },
+      {
+        "id": "blind-1f2ea6e31efb",
+        "sourceDataset": "derail",
+        "sourceId": "dr-hiring-drama-early",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.98,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.03
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 446
+      },
+      {
+        "id": "blind-20a8878514c5",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-decided",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.2
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 420
+      },
+      {
+        "id": "blind-20d58e8c2f21",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-vendor",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.67
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 455
+      },
+      {
+        "id": "blind-21f2911b5fb6",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g2-referral-bonus@7",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.84,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.08
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 429
+      },
+      {
+        "id": "blind-26639961f27b",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a2-health",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.05
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 464
+      },
+      {
+        "id": "blind-2a216eb8c4ef",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-status",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.26
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 348
+      },
+      {
+        "id": "blind-2bb690a508b6",
+        "sourceDataset": "derail-multi",
+        "sourceId": "f1-train@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.06
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 445
+      },
+      {
+        "id": "blind-2d3c6372b2dd",
+        "sourceDataset": "derail-hard",
+        "sourceId": "dr-org-gossip",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.31
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 494
+      },
+      {
+        "id": "blind-2f167320ad9e",
+        "sourceDataset": "derail",
+        "sourceId": "st-venue",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.94,
+          "tangentIsRelevant": 0.46
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 499
+      },
+      {
+        "id": "blind-3287e10d6299",
+        "sourceDataset": "derail-hard",
+        "sourceId": "ot-steer-back-done",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 440
+      },
+      {
+        "id": "blind-33a36db5e8d2",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-approval@67",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.62
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 427
+      },
+      {
+        "id": "blind-341eb1163463",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-venue@27",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.58
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 564
+      },
+      {
+        "id": "blind-36634dbfab6e",
+        "sourceDataset": "derail",
+        "sourceId": "pt-budget-actuals",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.91
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 455
+      },
+      {
+        "id": "blind-38ff2da71a55",
+        "sourceDataset": "derail-multi",
+        "sourceId": "e2-booth",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.79,
+          "tangentIsRelevant": 0.27
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 442
+      },
+      {
+        "id": "blind-390fc7de8984",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-deploy@62",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.66
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 340
+      },
+      {
+        "id": "blind-3a47f458463d",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-interleaved-lunch",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.11,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.23
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 338
+      },
+      {
+        "id": "blind-3b65e563de7c",
+        "sourceDataset": "derail-multi",
+        "sourceId": "b2-son",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.18,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 439
+      },
+      {
+        "id": "blind-3beb08985f28",
+        "sourceDataset": "derail-multi",
+        "sourceId": "e1-layout@65",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.8,
+          "tangentIsRelevant": 0.34
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 344
+      },
+      {
+        "id": "blind-3f25073b9a39",
+        "sourceDataset": "canvas",
+        "sourceId": "wait-compare-two-of-three",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.6
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 452
+      },
+      {
+        "id": "blind-40380b8abe79",
+        "sourceDataset": "derail",
+        "sourceId": "dr-trip-late",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.03
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 337
+      },
+      {
+        "id": "blind-40a802f855a6",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-shared-context",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.3,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.36
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 476
+      },
+      {
+        "id": "blind-45740c0839a3",
+        "sourceDataset": "derail-multi",
+        "sourceId": "i1-delay@65",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.08,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.89
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 465
+      },
+      {
+        "id": "blind-464a9337461a",
+        "sourceDataset": "derail-hard",
+        "sourceId": "ot-jargon",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.59
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 429
+      },
+      {
+        "id": "blind-46737018b270",
+        "sourceDataset": "derail-multi",
+        "sourceId": "c1-pricing@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.62
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 462
+      },
+      {
+        "id": "blind-486e99aea111",
+        "sourceDataset": "derail-multi",
+        "sourceId": "e1-layout@35",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.44,
+          "tangentIsRelevant": 0.32
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 4641
+      },
+      {
+        "id": "blind-49e9f8a60ac9",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a3-oldwar@65",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.05
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 436
+      },
+      {
+        "id": "blind-4b7ed1cb840c",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-ab",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.71
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 431
+      },
+      {
+        "id": "blind-4be692686d53",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-refund",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.6
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 434
+      },
+      {
+        "id": "blind-4c057179aee9",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-wrapup-chat",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.06
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 433
+      },
+      {
+        "id": "blind-4dcae47eea2d",
+        "sourceDataset": "derail",
+        "sourceId": "st-pricing",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.91,
+          "tangentIsRelevant": 0.43
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 438
+      },
+      {
+        "id": "blind-4f03900587da",
+        "sourceDataset": "derail",
+        "sourceId": "ot-hackathon",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.54
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 354
+      },
+      {
+        "id": "blind-4fca17297765",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g7-template-loop@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.15,
+          "tangentIsRelevant": 0.74
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 468
+      },
+      {
+        "id": "blind-5001671b49a8",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-morale-in-kpi",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.4,
+          "stalled": 0.43,
+          "tangentIsRelevant": 0.77
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 451
+      },
+      {
+        "id": "blind-535cb11e9484",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-heated",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.16,
+          "tangentIsRelevant": 0.62
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 465
+      },
+      {
+        "id": "blind-54abd8d7853d",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g2-referral-bonus@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.95,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.08
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 341
+      },
+      {
+        "id": "blind-54defe8d671a",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-todos",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.36
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 425
+      },
+      {
+        "id": "blind-5549f8638973",
+        "sourceDataset": "derail-hard",
+        "sourceId": "st-priority-rephrased",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.79,
+          "tangentIsRelevant": 0.73
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 444
+      },
+      {
+        "id": "blind-5a07e056a59a",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-escalation",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.57
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 443
+      },
+      {
+        "id": "blind-5ac0e514df05",
+        "sourceDataset": "derail-multi",
+        "sourceId": "f1-train@65",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 341
+      },
+      {
+        "id": "blind-5b08ef9b7b07",
+        "sourceDataset": "derail-multi",
+        "sourceId": "i1-delay@35",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.54,
+          "stalled": 0.85,
+          "tangentIsRelevant": 0.31
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 355
+      },
+      {
+        "id": "blind-5b3a46067292",
+        "sourceDataset": "derail-multi",
+        "sourceId": "h1-gonogo",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.69
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 434
+      },
+      {
+        "id": "blind-5dd3b9cc2f95",
+        "sourceDataset": "derail",
+        "sourceId": "st-ads-vs-event",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.89,
+          "tangentIsRelevant": 0.65
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 344
+      },
+      {
+        "id": "blind-62cf687728f7",
+        "sourceDataset": "derail-hard",
+        "sourceId": "pt-deep-dive-long",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.08,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.9
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 433
+      },
+      {
+        "id": "blind-6540a744a6f2",
+        "sourceDataset": "derail",
+        "sourceId": "am-dependency",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.17,
+          "tangentIsRelevant": 0.9
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 429
+      },
+      {
+        "id": "blind-67d40c5f66ed",
+        "sourceDataset": "canvas",
+        "sourceId": "dedup-minor-edit",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.67
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 427
+      },
+      {
+        "id": "blind-6969cf1381ac",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-vendor@25",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.03,
+          "tangentIsRelevant": 0.67
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 332
+      },
+      {
+        "id": "blind-6ac83c03d10d",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g6-release-scope@7",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.85
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 474
+      },
+      {
+        "id": "blind-6f9f3641eddd",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-cloud",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.31,
+          "tangentIsRelevant": 0.57
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 467
+      },
+      {
+        "id": "blind-72280ea5a987",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a1-golf@35",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.09,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 434
+      },
+      {
+        "id": "blind-7278656dbd9d",
+        "sourceDataset": "derail-multi",
+        "sourceId": "b1-trip@65",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.17,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 447
+      },
+      {
+        "id": "blind-74c4729a1854",
+        "sourceDataset": "canvas",
+        "sourceId": "wait-criteria-not-yet",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.63
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 460
+      },
+      {
+        "id": "blind-74f8e121d7a4",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-schedule",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.56
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 337
+      },
+      {
+        "id": "blind-7564c55d983a",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g8-self-correct@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.12
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 454
+      },
+      {
+        "id": "blind-7695388877ce",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g7-template-loop@7",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.54,
+          "tangentIsRelevant": 0.79
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 445
+      },
+      {
+        "id": "blind-78f45450a5b0",
+        "sourceDataset": "derail",
+        "sourceId": "ot-share-link",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.47
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 489
+      },
+      {
+        "id": "blind-7922c4538722",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-incident@58",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.47
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 334
+      },
+      {
+        "id": "blind-7d9a5798ea50",
+        "sourceDataset": "derail-multi",
+        "sourceId": "c1-pricing@35",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.66
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 454
+      },
+      {
+        "id": "blind-7e5c895fb5e8",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-chitchat",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.1,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.06
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 457
+      },
+      {
+        "id": "blind-8015631355e8",
+        "sourceDataset": "derail",
+        "sourceId": "pt-hackathon-wifi",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.91
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 436
+      },
+      {
+        "id": "blind-802dd4effcbe",
+        "sourceDataset": "derail-multi",
+        "sourceId": "b1-trip@35",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.95,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 349
+      },
+      {
+        "id": "blind-8277b536b2a6",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-deploy",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.63
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 459
+      },
+      {
+        "id": "blind-856c75dcd6fe",
+        "sourceDataset": "derail",
+        "sourceId": "pt-hiring-others",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.92
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 604
+      },
+      {
+        "id": "blind-8623c8a9dfe6",
+        "sourceDataset": "derail-hard",
+        "sourceId": "st-ad-budget",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.63,
+          "tangentIsRelevant": 0.58
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 341
+      },
+      {
+        "id": "blind-86a30cdf441a",
+        "sourceDataset": "derail",
+        "sourceId": "st-interviewers",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.93,
+          "tangentIsRelevant": 0.66
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 441
+      },
+      {
+        "id": "blind-8843e62f58bb",
+        "sourceDataset": "derail-multi",
+        "sourceId": "g1-lunch",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.09,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.1
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 446
+      },
+      {
+        "id": "blind-89aa8b26c956",
+        "sourceDataset": "canvas",
+        "sourceId": "amb-recap",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.17
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 475
+      },
+      {
+        "id": "blind-8a1ace2dac3b",
+        "sourceDataset": "derail",
+        "sourceId": "pt-share-expiry",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.9
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 456
+      },
+      {
+        "id": "blind-8bfa1671b76a",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g1-office-move@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.05
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 435
+      },
+      {
+        "id": "blind-8e43527657d4",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a1-golf@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.05
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 429
+      },
+      {
+        "id": "blind-9037262b7dd7",
+        "sourceDataset": "derail",
+        "sourceId": "ot-design",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.45
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 354
+      },
+      {
+        "id": "blind-910796f5ef8b",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g5-catering-to-lunch@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.08
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 436
+      },
+      {
+        "id": "blind-9489e1934380",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-laptop",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.56
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 439
+      },
+      {
+        "id": "blind-94903947b6fe",
+        "sourceDataset": "derail",
+        "sourceId": "st-oncall-owner",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.79,
+          "tangentIsRelevant": 0.56
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 482
+      },
+      {
+        "id": "blind-96d9862a74df",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-silent-thinking",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.42,
+          "tangentIsRelevant": 0.23
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 338
+      },
+      {
+        "id": "blind-97c736af9bd8",
+        "sourceDataset": "derail-multi",
+        "sourceId": "f1-train@35",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.64
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 461
+      },
+      {
+        "id": "blind-97e6d910a4c1",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g4-encoding-detour@7",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.23,
+          "stalled": 0.14,
+          "tangentIsRelevant": 0.93
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 452
+      },
+      {
+        "id": "blind-9a056efc95d1",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g4-encoding-detour@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.88
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 333
+      },
+      {
+        "id": "blind-9a49b15ac486",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-yesno",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.31
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 459
+      },
+      {
+        "id": "blind-9ab13b6decee",
+        "sourceDataset": "derail-hard",
+        "sourceId": "st-oncall-newbie",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.77,
+          "tangentIsRelevant": 0.66
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 468
+      },
+      {
+        "id": "blind-9f3b0dc7cc2c",
+        "sourceDataset": "canvas",
+        "sourceId": "wait-flow-unknown-step",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.17,
+          "tangentIsRelevant": 0.54
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 459
+      },
+      {
+        "id": "blind-a369b7dbf06f",
+        "sourceDataset": "canvas",
+        "sourceId": "amb-two-options",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.09,
+          "stalled": 0.16,
+          "tangentIsRelevant": 0.68
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 453
+      },
+      {
+        "id": "blind-a58fea25e145",
+        "sourceDataset": "derail-hard",
+        "sourceId": "am-newbie-lecture",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.85,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.16
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 456
+      },
+      {
+        "id": "blind-a6882a75068b",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a3-oldwar@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.06
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 456
+      },
+      {
+        "id": "blind-a6a703a80538",
+        "sourceDataset": "derail",
+        "sourceId": "dr-design-baseball",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 450
+      },
+      {
+        "id": "blind-a78406778474",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-agency",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.53
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 497
+      },
+      {
+        "id": "blind-a789e4f2307d",
+        "sourceDataset": "derail-hard",
+        "sourceId": "pt-license-check",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.53,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.94
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 330
+      },
+      {
+        "id": "blind-a7bf0fbdc86b",
+        "sourceDataset": "derail",
+        "sourceId": "dr-incident-lunch",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.95,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 343
+      },
+      {
+        "id": "blind-a83f073f29e1",
+        "sourceDataset": "derail-multi",
+        "sourceId": "d2-rain",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.89
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 506
+      },
+      {
+        "id": "blind-aaeb838f3397",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g4-encoding-detour@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.89
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 438
+      },
+      {
+        "id": "blind-ac565261728f",
+        "sourceDataset": "derail",
+        "sourceId": "pt-sprint-velocity",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.06,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.88
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 489
+      },
+      {
+        "id": "blind-ac8e6d3f876a",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g1-office-move@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.7
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 437
+      },
+      {
+        "id": "blind-b27c414ecac9",
+        "sourceDataset": "derail",
+        "sourceId": "am-competitor-gossip",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.88,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.29
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 447
+      },
+      {
+        "id": "blind-b29228dface4",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-order",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.5
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 430
+      },
+      {
+        "id": "blind-b4b70eb9df64",
+        "sourceDataset": "derail",
+        "sourceId": "dr-hackathon-otherproj",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.06
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 440
+      },
+      {
+        "id": "blind-b4cbaecc6d2d",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g3-index-rebuild@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.86
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 433
+      },
+      {
+        "id": "blind-b5f749b3d787",
+        "sourceDataset": "canvas",
+        "sourceId": "amb-flow-or-table",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.7
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 435
+      },
+      {
+        "id": "blind-b81119063236",
+        "sourceDataset": "derail",
+        "sourceId": "st-button-color",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.89,
+          "tangentIsRelevant": 0.54
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 427
+      },
+      {
+        "id": "blind-b9864e7c62a1",
+        "sourceDataset": "derail",
+        "sourceId": "am-low-energy",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.18
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 328
+      },
+      {
+        "id": "blind-b9b86a324112",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-hiring",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.56
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 446
+      },
+      {
+        "id": "blind-ba77c91bcc97",
+        "sourceDataset": "derail",
+        "sourceId": "am-deep-dive",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.07,
+          "stalled": 0.16,
+          "tangentIsRelevant": 0.84
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 465
+      },
+      {
+        "id": "blind-bbf2d47b5728",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-onboarding",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.57
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 458
+      },
+      {
+        "id": "blind-bccaf37d8a58",
+        "sourceDataset": "derail",
+        "sourceId": "dr-sprint-moving",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 432
+      },
+      {
+        "id": "blind-bd2befe2b2c8",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a1-golf@65",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.97,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 457
+      },
+      {
+        "id": "blind-be2972b9e0ae",
+        "sourceDataset": "derail-hard",
+        "sourceId": "dr-ai-at-home",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.93,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.08
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 449
+      },
+      {
+        "id": "blind-bff4c8cad478",
+        "sourceDataset": "derail-multi",
+        "sourceId": "a3-oldwar@35",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.16,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.08
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 470
+      },
+      {
+        "id": "blind-c04873a114cb",
+        "sourceDataset": "derail",
+        "sourceId": "ot-hiring",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.53
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 454
+      },
+      {
+        "id": "blind-c0a957c882b4",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-ab@17",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": true,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": null,
+        "error": null,
+        "actualModel": null,
+        "latencyMs": null
+      },
+      {
+        "id": "blind-c0f9186be450",
+        "sourceDataset": "derail",
+        "sourceId": "am-recap",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.27,
+          "tangentIsRelevant": 0.37
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 446
+      },
+      {
+        "id": "blind-c75c5d249849",
+        "sourceDataset": "derail",
+        "sourceId": "st-release-date",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.87,
+          "tangentIsRelevant": 0.5
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 461
+      },
+      {
+        "id": "blind-c8fe17d13773",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g2-referral-bonus@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.61
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 496
+      },
+      {
+        "id": "blind-ce077de10e75",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-approval@33",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.59
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 428
+      },
+      {
+        "id": "blind-cf542346f2d8",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-deploy@23",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.21,
+          "tangentIsRelevant": 0.41
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 482
+      },
+      {
+        "id": "blind-cf5e7a331c28",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-numbers",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.35
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 423
+      },
+      {
+        "id": "blind-d2bf9d313154",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-plan",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.55
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 454
+      },
+      {
+        "id": "blind-d301be62a467",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-venue@64",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.53
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 438
+      },
+      {
+        "id": "blind-d351ed8c6f19",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g7-template-loop@full",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.88,
+          "tangentIsRelevant": 0.61
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 432
+      },
+      {
+        "id": "blind-d355315132b4",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-ab@50",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.83
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 435
+      },
+      {
+        "id": "blind-d67510c4ca93",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-incident@25",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.59
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 431
+      },
+      {
+        "id": "blind-d8e99c05df1e",
+        "sourceDataset": "derail-hard",
+        "sourceId": "ot-heated-substantive",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_STALLED",
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.63,
+          "tangentIsRelevant": 0.78
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 442
+      },
+      {
+        "id": "blind-daab412656b0",
+        "sourceDataset": "derail",
+        "sourceId": "pt-incident-monitor",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.22,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.72
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 452
+      },
+      {
+        "id": "blind-db7fc7a79ecb",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-qa",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.75
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 447
+      },
+      {
+        "id": "blind-dc9016881e66",
+        "sourceDataset": "derail-multi",
+        "sourceId": "i1-delay@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.82
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 449
+      },
+      {
+        "id": "blind-dcde3fcf7d3f",
+        "sourceDataset": "derail-multi",
+        "sourceId": "d1-sync@65",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.18,
+          "tangentIsRelevant": 0.89
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 437
+      },
+      {
+        "id": "blind-dd3129f01d6a",
+        "sourceDataset": "derail",
+        "sourceId": "ot-sprint",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.66
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 430
+      },
+      {
+        "id": "blind-dd4500942716",
+        "sourceDataset": "derail",
+        "sourceId": "dr-onboarding-otherproj",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": true,
+        "alternativeStatus": "OK",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.21
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 457
+      },
+      {
+        "id": "blind-def9c58a07e1",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g8-self-correct@7",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.92,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.12
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 432
+      },
+      {
+        "id": "blind-df1819095dbe",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g6-release-scope@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.11,
+          "tangentIsRelevant": 0.62
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 479
+      },
+      {
+        "id": "blind-e234bdcb3c96",
+        "sourceDataset": "derail-multi",
+        "sourceId": "d1-sync@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.08,
+          "tangentIsRelevant": 0.85
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 432
+      },
+      {
+        "id": "blind-e4512670d73c",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g1-office-move@7",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.88,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.04
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 461
+      },
+      {
+        "id": "blind-e5b158538284",
+        "sourceDataset": "derail-multi",
+        "sourceId": "b1-trip@full",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.96,
+          "stalled": 0.27,
+          "tangentIsRelevant": 0.05
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 481
+      },
+      {
+        "id": "blind-e5bb11302972",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g5-catering-to-lunch@7",
+        "gold": "OK",
+        "uncertain": true,
+        "alternativeStatus": "INTERVENE_DRIFT",
+        "gated": false,
+        "actual": "OK",
+        "action": "WAIT",
+        "scores": {
+          "drifted": 0.4,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.44
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 463
+      },
+      {
+        "id": "blind-e8d2e1478d94",
+        "sourceDataset": "canvas",
+        "sourceId": "wait-steps-incomplete",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.15,
+          "tangentIsRelevant": 0.54
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 429
+      },
+      {
+        "id": "blind-eb2d94138914",
+        "sourceDataset": "derail-hard",
+        "sourceId": "dr-slide-commute",
+        "gold": "INTERVENE_DRIFT",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_DRIFT",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.93,
+          "stalled": 0.19,
+          "tangentIsRelevant": 0.13
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 478
+      },
+      {
+        "id": "blind-ebb6307601f1",
+        "sourceDataset": "canvas",
+        "sourceId": "wait-options-listing",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.09,
+          "tangentIsRelevant": 0.44
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 460
+      },
+      {
+        "id": "blind-ed56155e9787",
+        "sourceDataset": "derail-hard",
+        "sourceId": "pt-customer-complaint",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.05,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.91
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 464
+      },
+      {
+        "id": "blind-f275fa8c1aef",
+        "sourceDataset": "derail-multi",
+        "sourceId": "c1-pricing@65",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.7
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 436
+      },
+      {
+        "id": "blind-f29ac32a69e8",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g3-index-rebuild@full",
+        "gold": "INTERVENE_STALLED",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "INTERVENE_STALLED",
+        "action": "INTERVENE",
+        "scores": {
+          "drifted": 0.03,
+          "stalled": 0.85,
+          "tangentIsRelevant": 0.7
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 476
+      },
+      {
+        "id": "blind-f31be311b0fd",
+        "sourceDataset": "canvas",
+        "sourceId": "dedup-table-same",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.1,
+          "tangentIsRelevant": 0.57
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 435
+      },
+      {
+        "id": "blind-f400e84d4edb",
+        "sourceDataset": "derail",
+        "sourceId": "ot-onboarding",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.38
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 461
+      },
+      {
+        "id": "blind-f69325e65c35",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g8-self-correct@4",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.52
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 442
+      },
+      {
+        "id": "blind-f813ef33d771",
+        "sourceDataset": "derail-hard",
+        "sourceId": "pt-past-lesson",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.04,
+          "stalled": 0.13,
+          "tangentIsRelevant": 0.92
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 538
+      },
+      {
+        "id": "blind-fd460facfecd",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-approval",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.06,
+          "tangentIsRelevant": 0.58
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 440
+      },
+      {
+        "id": "blind-fd974f026bfa",
+        "sourceDataset": "canvas",
+        "sourceId": "flow-incident",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.07,
+          "tangentIsRelevant": 0.44
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 442
+      },
+      {
+        "id": "blind-fe31d09f97ad",
+        "sourceDataset": "canvas",
+        "sourceId": "tbl-venue",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.12,
+          "tangentIsRelevant": 0.49
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 326
+      },
+      {
+        "id": "blind-fe97170aaf06",
+        "sourceDataset": "canvas",
+        "sourceId": "sil-schedule-tidbit",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.04,
+          "tangentIsRelevant": 0.25
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 446
+      },
+      {
+        "id": "blind-febc633d1252",
+        "sourceDataset": "derail-hard",
+        "sourceId": "g6-release-scope@full",
+        "gold": "OK",
+        "uncertain": false,
+        "alternativeStatus": null,
+        "gated": false,
+        "actual": "OK",
+        "action": "SILENCE",
+        "scores": {
+          "drifted": 0.02,
+          "stalled": 0.05,
+          "tangentIsRelevant": 0.68
+        },
+        "error": null,
+        "actualModel": "typesafe-ai/jev-1.14.0",
+        "latencyMs": 326
+      }
+    ]
+  }
+]

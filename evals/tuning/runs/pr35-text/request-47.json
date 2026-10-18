@@ -1,0 +1,62 @@
+{
+  "attempt": 47,
+  "key": "a108437ff8d7c947b13a903301b20e6acd7930b3db6e37d85c0b2ae3a754b05f",
+  "inputId": "blind-46737018b270",
+  "questionVersion": "v3",
+  "bytes": 4685,
+  "reservedMicroUSD": 1203,
+  "payload": {
+    "model": "typesafe-ai/jev-1.14.0",
+    "state": {
+      "agenda": "値上げの是非と顧客への説明方針",
+      "conversation": [
+        "竹田: 値上げの是非と、お客様への説明方針を決めたいです。矢野さん、現状を。",
+        "矢野: 原価が上がって、粗利が先期から3ポイント下がっています。",
+        "中島: 営業としては、既存顧客の解約が怖いです。",
+        "福島: 問い合わせも、値上げ報道のたびに増えます。",
+        "松尾: 他社は、すでに5〜8%上げています。",
+        "森田: うん、整理しよう。値上げは、やる。ただし一律ではなく、使用量の多い顧客から段階的に上げる。理由は三つある。一つ目は、使用量の多い顧客ほど原価の増加分を負担してもらう筋が通ること。二つ目は、小口の顧客は解約リスクが高く、ここで失うと損失が大きいこと。三つ目は、競合の動きを見ながら調整できることだ。",
+        "中島: なるほど、それなら説明しやすいです。",
+        "金井: 段階の区切りはどうしますか？",
+        "森田: まず月間利用量で三段階。上位20%を第一弾、次の30%を第二弾にする。時期は第一弾を来月、第二弾を再来月。",
+        "小山: 第二弾は、お客様への事前通知が要りますよね。",
+        "福島: 通知文のひな形は、CSで作ります。",
+        "森田: それと、通知は必ず担当営業から先に電話で伝えること。メールだけで済ませると、反発が出る。昔、別の商材で値上げをしたときに、メールだけで通知して、解約が三倍になった。その時の反省だ。",
+        "中島: 了解です、電話を先にします。",
+        "松尾: その場合、トークスクリプトが要りますね。",
+        "矢野: 作ります。明日までに叩き台を出します。",
+        "岸: あの、値上げ幅はどのくらいに…",
+        "森田: 第一弾は6%、第二弾は4%。これで粗利は2ポイント戻る計算だ。",
+        "竹田: では、それで決定ということで。",
+        "金井: スケジュールに落とします。",
+        "森田: うん、頼む。"
+      ]
+    },
+    "questions": {
+      "drifted": {
+        "type": "noul",
+        "instructions": "Evaluate the recent conversation against the explicit agenda and meeting phase. Score topical departure, separately from whether the departure is useful. A new speaker or long utterance alone is not drift. Examples: budget meeting shifts into several turns about weekend movies => high; budget discussion compares supplier costs => low; team returns from movies to the budget => judge the return, low.",
+        "criteria": {
+          "true": "Several recent turns sustain a different topic without returning to the current agenda. Judge the latest state, not a historical detour already resolved.",
+          "false": "Participants address the agenda, clarify its scope, or have already returned to it. An explicitly permitted short break or icebreaker is not problematic departure."
+        }
+      },
+      "stalled": {
+        "type": "noul",
+        "instructions": "Evaluate lack of progress within the current meeting phase, independently of topical drift. Require observable repetition, unresolved blockage, or explicit prolonged unproductive silence; never infer silence duration from missing text. Examples: repeated A-versus-B preferences with no criteria or next step => high; participants add different prototype ideas during brainstorming => low; a stated two-minute calculation pause => low.",
+        "criteria": {
+          "true": "Repeated claims or questions add no information, alternatives, criteria, decisions or next steps; the same unresolved obstacle recurs without a plan.",
+          "false": "Brainstorming adds distinct options; summarizing clarifies an issue; disagreement compares evidence; a scheduled thinking pause, fact check, or assigned follow-up advances the process."
+        }
+      },
+      "tangentIsRelevant": {
+        "type": "noul",
+        "instructions": "Evaluate the instrumental usefulness of a side topic to this agenda: identify a concrete link to a decision, risk, dependency, constraint, or next step. Do not confuse shared vocabulary with usefulness. Examples: release-date meeting checks a previous outage to decide readiness => high; discusses a movie with no decision link => low; checks an API dependency and states how it changes the release date => high.",
+        "criteria": {
+          "true": "The detour supplies actionable evidence, a relevant analogy, a dependency or risk, or a bounded exploration with an explicit return path to the agenda.",
+          "false": "The side topic has no concrete benefit to the agenda; personal chat, a settled issue or excessive detail crowds out the current objective. If no side topic exists, use low relevance; low relevance alone must not imply intervention."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "attempt": 122,
+  "key": "939b4a15b8fcaa128ae96735fd3370c9339a47a0637b679376f463d614400133",
+  "inputId": "blind-b9b86a324112",
+  "questionVersion": "v3",
+  "bytes": 3257,
+  "reservedMicroUSD": 1031,
+  "payload": {
+    "model": "typesafe-ai/jev-1.14.0",
+    "state": {
+      "agenda": "今期の選考フローの確認",
+      "conversation": [
+        "人事 西田: 採用の選考フロー、今期の分を確認します",
+        "本部長: お願い",
+        "人事 西田: 書類選考のあとに一次面接、ここは現場のリーダー",
+        "リーダー 森: はい",
+        "人事 西田: 一次を通ったら適性検査",
+        "リーダー 加藤: オンラインですよね",
+        "人事 西田: そうです。で、そのあとが最終面接、本部長と役員",
+        "本部長: 私と専務ね",
+        "人事 西田: 最終を通過したら内定、条件面談はそのあとです",
+        "リーダー 森: 内定承諾までの期限は？",
+        "人事 西田: 1週間です",
+        "本部長: OK"
+      ]
+    },
+    "questions": {
+      "drifted": {
+        "type": "noul",
+        "instructions": "Evaluate the recent conversation against the explicit agenda and meeting phase. Score topical departure, separately from whether the departure is useful. A new speaker or long utterance alone is not drift. Examples: budget meeting shifts into several turns about weekend movies => high; budget discussion compares supplier costs => low; team returns from movies to the budget => judge the return, low.",
+        "criteria": {
+          "true": "Several recent turns sustain a different topic without returning to the current agenda. Judge the latest state, not a historical detour already resolved.",
+          "false": "Participants address the agenda, clarify its scope, or have already returned to it. An explicitly permitted short break or icebreaker is not problematic departure."
+        }
+      },
+      "stalled": {
+        "type": "noul",
+        "instructions": "Evaluate lack of progress within the current meeting phase, independently of topical drift. Require observable repetition, unresolved blockage, or explicit prolonged unproductive silence; never infer silence duration from missing text. Examples: repeated A-versus-B preferences with no criteria or next step => high; participants add different prototype ideas during brainstorming => low; a stated two-minute calculation pause => low.",
+        "criteria": {
+          "true": "Repeated claims or questions add no information, alternatives, criteria, decisions or next steps; the same unresolved obstacle recurs without a plan.",
+          "false": "Brainstorming adds distinct options; summarizing clarifies an issue; disagreement compares evidence; a scheduled thinking pause, fact check, or assigned follow-up advances the process."
+        }
+      },
+      "tangentIsRelevant": {
+        "type": "noul",
+        "instructions": "Evaluate the instrumental usefulness of a side topic to this agenda: identify a concrete link to a decision, risk, dependency, constraint, or next step. Do not confuse shared vocabulary with usefulness. Examples: release-date meeting checks a previous outage to decide readiness => high; discusses a movie with no decision link => low; checks an API dependency and states how it changes the release date => high.",
+        "criteria": {
+          "true": "The detour supplies actionable evidence, a relevant analogy, a dependency or risk, or a bounded exploration with an explicit return path to the agenda.",
+          "false": "The side topic has no concrete benefit to the agenda; personal chat, a settled issue or excessive detail crowds out the current objective. If no side topic exists, use low relevance; low relevance alone must not imply intervention."
+        }
+      }
+    }
+  }
+}

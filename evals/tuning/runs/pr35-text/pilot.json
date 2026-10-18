@@ -1,0 +1,9 @@
+{
+  "n": 10,
+  "successes": 10,
+  "ledger": {
+    "attempts": 10,
+    "reservedMicroUSD": 10383
+  },
+  "stopped": false
+}

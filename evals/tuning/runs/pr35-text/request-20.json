@@ -1,0 +1,62 @@
+{
+  "attempt": 20,
+  "key": "6ff0a45dce49aa0c72f73084c51e951f769d03c2cbcb460adabd2468c35b4f99",
+  "inputId": "blind-18a3f369ab93",
+  "questionVersion": "v3",
+  "bytes": 4422,
+  "reservedMicroUSD": 1171,
+  "payload": {
+    "model": "typesafe-ai/jev-1.14.0",
+    "state": {
+      "agenda": "システム障害の再発防止策の合意",
+      "conversation": [
+        "武田: 障害の再発防止策、まず原因の整理からいきます。石原さんお願いします。",
+        "石原: はい、直接の原因は、DBのコネクション枯渇です。",
+        "吉岡: デプロイ直後にアクセスが集中して、プールの上限を超えました。",
+        "宮内: 弊社のドライバのバージョンも、一因かもしれません。",
+        "近藤: うん。で、対策は？",
+        "石原: 上限の引き上げと、アラートの閾値見直しを考えてます。",
+        "近藤: そうね。…それにしてもさ、営業部は本当に勝手なんだよな。",
+        "前田: え？",
+        "近藤: 先月も、こっちに相談なく客に納期を約束してきてさ。あとで開発が地獄を見るんだよ。",
+        "前田: いえ、あれは、お客様の要望が先で…",
+        "近藤: 言い訳はいいんだよ。だいたい営業はいつもそうなんだ。去年の案件だって…",
+        "北村: うわ…",
+        "近藤: CSもCSでさ、すぐ開発に丸投げするでしょ。切り分けしてから回してほしいんだよ。",
+        "渡部: はい、すみません…",
+        "近藤: 経営企画も現場を知らないで数字ばかり言うし、本当にもう。",
+        "中西: ご意見として承ります。",
+        "近藤: そうだろ？だから俺は前から言ってるんだ、部署間のルールをだな、きちんと決めて、責任の所在をはっきりさせないとだめだと。去年の組織変更からこっち、どこも自分の持ち場しか見なくなってる。誰も全体を見ていないんだよ、全体を。",
+        "石原: 確かに、連携は課題ですね。",
+        "近藤: だろ？だいたい去年の組織変更から連携がおかしくなったんだよ。",
+        "武田: …そうですね。"
+      ]
+    },
+    "questions": {
+      "drifted": {
+        "type": "noul",
+        "instructions": "Evaluate the recent conversation against the explicit agenda and meeting phase. Score topical departure, separately from whether the departure is useful. A new speaker or long utterance alone is not drift. Examples: budget meeting shifts into several turns about weekend movies => high; budget discussion compares supplier costs => low; team returns from movies to the budget => judge the return, low.",
+        "criteria": {
+          "true": "Several recent turns sustain a different topic without returning to the current agenda. Judge the latest state, not a historical detour already resolved.",
+          "false": "Participants address the agenda, clarify its scope, or have already returned to it. An explicitly permitted short break or icebreaker is not problematic departure."
+        }
+      },
+      "stalled": {
+        "type": "noul",
+        "instructions": "Evaluate lack of progress within the current meeting phase, independently of topical drift. Require observable repetition, unresolved blockage, or explicit prolonged unproductive silence; never infer silence duration from missing text. Examples: repeated A-versus-B preferences with no criteria or next step => high; participants add different prototype ideas during brainstorming => low; a stated two-minute calculation pause => low.",
+        "criteria": {
+          "true": "Repeated claims or questions add no information, alternatives, criteria, decisions or next steps; the same unresolved obstacle recurs without a plan.",
+          "false": "Brainstorming adds distinct options; summarizing clarifies an issue; disagreement compares evidence; a scheduled thinking pause, fact check, or assigned follow-up advances the process."
+        }
+      },
+      "tangentIsRelevant": {
+        "type": "noul",
+        "instructions": "Evaluate the instrumental usefulness of a side topic to this agenda: identify a concrete link to a decision, risk, dependency, constraint, or next step. Do not confuse shared vocabulary with usefulness. Examples: release-date meeting checks a previous outage to decide readiness => high; discusses a movie with no decision link => low; checks an API dependency and states how it changes the release date => high.",
+        "criteria": {
+          "true": "The detour supplies actionable evidence, a relevant analogy, a dependency or risk, or a bounded exploration with an explicit return path to the agenda.",
+          "false": "The side topic has no concrete benefit to the agenda; personal chat, a settled issue or excessive detail crowds out the current objective. If no side topic exists, use low relevance; low relevance alone must not imply intervention."
+        }
+      }
+    }
+  }
+}

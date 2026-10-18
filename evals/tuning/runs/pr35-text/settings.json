@@ -1,0 +1,9 @@
+{
+  "model": "typesafe-ai/jev-1.14.0",
+  "questionHash": "eda50bb8dd7133c19be87cfd944ff27bbdb4ff7121a7ca579178515eac54e8d3",
+  "endpoint": "https://ai-gateway.vercel.sh/typesafe/v1/systemone",
+  "maxAttempts": 400,
+  "reservationMicroUSD": 1000000,
+  "maxPayloadBytes": 28000,
+  "concurrency": 3
+}

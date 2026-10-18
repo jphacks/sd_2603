@@ -1,0 +1,42 @@
+[
+  {
+    "inputId": "blind-00d50d91b9ad",
+    "latencyMs": 748
+  },
+  {
+    "inputId": "blind-018be073ef8a",
+    "latencyMs": 681
+  },
+  {
+    "inputId": "blind-01f1a8b77853",
+    "latencyMs": 687
+  },
+  {
+    "inputId": "blind-01f9c9f7d32a",
+    "latencyMs": 481
+  },
+  {
+    "inputId": "blind-029087d09008",
+    "latencyMs": 479
+  },
+  {
+    "inputId": "blind-04e3ce624cd4",
+    "latencyMs": 429
+  },
+  {
+    "inputId": "blind-08e20f1f367c",
+    "latencyMs": 342
+  },
+  {
+    "inputId": "blind-09436dbfff3d",
+    "latencyMs": 352
+  },
+  {
+    "inputId": "blind-0c7f7d228301",
+    "latencyMs": 474
+  },
+  {
+    "inputId": "blind-0d4b63d3ca75",
+    "latencyMs": 333
+  }
+]

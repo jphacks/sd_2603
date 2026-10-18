@@ -1,0 +1,60 @@
+{
+  "attempt": 28,
+  "key": "a6bea5271b3ec5d7b596370d5a810b471079eeebfe5705e7b56711fe3ab580e9",
+  "inputId": "blind-26639961f27b",
+  "questionVersion": "v3",
+  "bytes": 4092,
+  "reservedMicroUSD": 1132,
+  "payload": {
+    "model": "typesafe-ai/jev-1.14.0",
+    "state": {
+      "agenda": "大口顧客向け新プランの提案内容の確定",
+      "conversation": [
+        "野口: 新プランの提案内容、価格と契約期間から詰めたいんですけど。",
+        "原田: 価格は月額で、年間契約なら10%引きの案です。",
+        "山岸: 先方は2年契約を望まれてるので、そこは柔軟にいけると。",
+        "東: 2年だと、途中解約の条項を入れないと法務的には厳しいです。",
+        "西村: うん、それは入れよう。",
+        "松井: ところでさ、みんな健康診断どうだった？",
+        "西村: あ、私はちょっと数値が…",
+        "松井: 俺なんか、去年から尿酸値がやばくてさ、医者にプリン体控えろって言われて。",
+        "清水: えっ、そうなんですか。",
+        "松井: ビールやめられないんだよ。でも最近は糖質ゼロのやつ飲んでるから、まあ大丈夫でしょ。",
+        "今井: それ、効くんですかね。",
+        "松井: 知らない。でもさ、朝のウォーキングも始めたんだよ。毎朝6時に起きて、近所の公園を3周。いやあ、気持ちいいよ。みんなも始めたほうがいい。",
+        "小川: すごいです、尊敬します。",
+        "菅原: あはは。",
+        "松井: 血圧も下がったって言われてね。先生が驚いてたよ。",
+        "野口: それは良かったですねえ。",
+        "松井: そうそう、そのサプリがさ、友達に勧められたやつなんだけど、",
+        "山岸: あ、あの、そのサプリ、どちらのですか？"
+      ]
+    },
+    "questions": {
+      "drifted": {
+        "type": "noul",
+        "instructions": "Evaluate the recent conversation against the explicit agenda and meeting phase. Score topical departure, separately from whether the departure is useful. A new speaker or long utterance alone is not drift. Examples: budget meeting shifts into several turns about weekend movies => high; budget discussion compares supplier costs => low; team returns from movies to the budget => judge the return, low.",
+        "criteria": {
+          "true": "Several recent turns sustain a different topic without returning to the current agenda. Judge the latest state, not a historical detour already resolved.",
+          "false": "Participants address the agenda, clarify its scope, or have already returned to it. An explicitly permitted short break or icebreaker is not problematic departure."
+        }
+      },
+      "stalled": {
+        "type": "noul",
+        "instructions": "Evaluate lack of progress within the current meeting phase, independently of topical drift. Require observable repetition, unresolved blockage, or explicit prolonged unproductive silence; never infer silence duration from missing text. Examples: repeated A-versus-B preferences with no criteria or next step => high; participants add different prototype ideas during brainstorming => low; a stated two-minute calculation pause => low.",
+        "criteria": {
+          "true": "Repeated claims or questions add no information, alternatives, criteria, decisions or next steps; the same unresolved obstacle recurs without a plan.",
+          "false": "Brainstorming adds distinct options; summarizing clarifies an issue; disagreement compares evidence; a scheduled thinking pause, fact check, or assigned follow-up advances the process."
+        }
+      },
+      "tangentIsRelevant": {
+        "type": "noul",
+        "instructions": "Evaluate the instrumental usefulness of a side topic to this agenda: identify a concrete link to a decision, risk, dependency, constraint, or next step. Do not confuse shared vocabulary with usefulness. Examples: release-date meeting checks a previous outage to decide readiness => high; discusses a movie with no decision link => low; checks an API dependency and states how it changes the release date => high.",
+        "criteria": {
+          "true": "The detour supplies actionable evidence, a relevant analogy, a dependency or risk, or a bounded exploration with an explicit return path to the agenda.",
+          "false": "The side topic has no concrete benefit to the agenda; personal chat, a settled issue or excessive detail crowds out the current objective. If no side topic exists, use low relevance; low relevance alone must not imply intervention."
+        }
+      }
+    }
+  }
+}

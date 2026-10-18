@@ -50,6 +50,12 @@
 
 [結果・限界・再現手順](docs/jev-tuning/synthetic-results.md) · [自動実験ログ・混同行列](evals/tuning/runs/synthetic-v1/core500-frozen/REPORT.md) · [選択設定JSON](evals/tuning/runs/synthetic-v1/core500-frozen/selected-policy.json) · [逐次進捗](docs/jev-tuning/progress-synthetic.md) · [固定データと出典](docs/jev-tuning/synthetic-benchmark-v1/README.md) · [事前登録](docs/jev-tuning/synthetic-evaluation-plan.md)
 
+## PR #35の台本textでの追加評価
+
+別担当によるラベル付け→固定→別エージェントによるテストの順で、PR #35の169台本を再チューニングなしで評価しました。現行v3は159/169（94.08%）、前回選択v4は162/169（95.86%）、Macro-F1は0.9131/0.9389。GPT参照ラベルとの一致で、人間goldやASR精度ではありません。不確実24件を含み、常にOKなら73.37%です。
+
+v4は誤介入9→5件、停滞の見逃し1→2件というトレードオフがあり、正解数の差は不確実ラベル内で生じています。アプリ既定設定は変更していません。[手順・結果・限界・再現](docs/jev-tuning/pr35-text/README.md) · [不一致一覧](docs/jev-tuning/pr35-text/ERRORS.md)
+
 ## 旧実録コーパスでの評価（同日・別実験）
 
 公開会議コーパスの実録100件と、日本語の合成訓練例36件を用意しました。会議系列単位で分割し、独立したGPTラベル、3種類の質問、648通りの閾値設定を比較しています。Testは設定固定後に採点し、探索では保存済みスコアを再利用しました。

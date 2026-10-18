@@ -1,0 +1,58 @@
+{
+  "attempt": 5,
+  "key": "f5461c6334b491991d93ddbf6cfb4ec8c9f3833235c3a1bc67bf8e2c3b45d282",
+  "inputId": "blind-029087d09008",
+  "questionVersion": "v3",
+  "bytes": 4268,
+  "reservedMicroUSD": 1153,
+  "payload": {
+    "model": "typesafe-ai/jev-1.14.0",
+    "state": {
+      "agenda": "物流委託先の見直し",
+      "conversation": [
+        "沢田: 物流委託先の見直しです。現状の課題から共有します。",
+        "田村: 現行のA社は、繁忙期に出荷遅延が月平均12件出ています。",
+        "大森: コストはA社が安いんですが、遅延の補償は薄いです。",
+        "川上: 品質面では、破損クレームがB社の方が半分です。",
+        "滝沢: B社の立場で言うと、繁忙期の増員は事前にご連絡いただければ対応できます。",
+        "吉川: 判断の軸を整理しておく。コストだけでA社を選ぶと、遅延による機会損失が見えなくなる。逆に品質だけでB社に寄せると、単価が上がって粗利を圧迫する。だから、総コストで比べる。単価、遅延による損失、破損の補償、この三つを一年分に換算して並べてほしい。その上で、差が5%以内ならB社、それ以上ならA社を継続する。基準を先に決めておけば、あとで揉めない。",
+        "浅野: 換算の前提は、昨年実績でいいですか？",
+        "吉川: 実績でいい。ただし繁忙期の増加分は、今年の見込みで補正すること。",
+        "野村: 補正係数は、営業の予測に合わせます。",
+        "大森: A社に、価格改定の可能性を確認しておきます。",
+        "田村: B社への見積もり依頼は、私の方から出します。",
+        "滝沢: 来週水曜までにお出しできます。",
+        "吉川: じゃあ、来週金曜に結果を持ち寄って決めよう。",
+        "沢田: 承知しました。",
+        "横田: 資料の形式は、どうしましょうか。",
+        "吉川: A4一枚で、比較表だけでいい。"
+      ]
+    },
+    "questions": {
+      "drifted": {
+        "type": "noul",
+        "instructions": "Evaluate the recent conversation against the explicit agenda and meeting phase. Score topical departure, separately from whether the departure is useful. A new speaker or long utterance alone is not drift. Examples: budget meeting shifts into several turns about weekend movies => high; budget discussion compares supplier costs => low; team returns from movies to the budget => judge the return, low.",
+        "criteria": {
+          "true": "Several recent turns sustain a different topic without returning to the current agenda. Judge the latest state, not a historical detour already resolved.",
+          "false": "Participants address the agenda, clarify its scope, or have already returned to it. An explicitly permitted short break or icebreaker is not problematic departure."
+        }
+      },
+      "stalled": {
+        "type": "noul",
+        "instructions": "Evaluate lack of progress within the current meeting phase, independently of topical drift. Require observable repetition, unresolved blockage, or explicit prolonged unproductive silence; never infer silence duration from missing text. Examples: repeated A-versus-B preferences with no criteria or next step => high; participants add different prototype ideas during brainstorming => low; a stated two-minute calculation pause => low.",
+        "criteria": {
+          "true": "Repeated claims or questions add no information, alternatives, criteria, decisions or next steps; the same unresolved obstacle recurs without a plan.",
+          "false": "Brainstorming adds distinct options; summarizing clarifies an issue; disagreement compares evidence; a scheduled thinking pause, fact check, or assigned follow-up advances the process."
+        }
+      },
+      "tangentIsRelevant": {
+        "type": "noul",
+        "instructions": "Evaluate the instrumental usefulness of a side topic to this agenda: identify a concrete link to a decision, risk, dependency, constraint, or next step. Do not confuse shared vocabulary with usefulness. Examples: release-date meeting checks a previous outage to decide readiness => high; discusses a movie with no decision link => low; checks an API dependency and states how it changes the release date => high.",
+        "criteria": {
+          "true": "The detour supplies actionable evidence, a relevant analogy, a dependency or risk, or a bounded exploration with an explicit return path to the agenda.",
+          "false": "The side topic has no concrete benefit to the agenda; personal chat, a settled issue or excessive detail crowds out the current objective. If no side topic exists, use low relevance; low relevance alone must not imply intervention."
+        }
+      }
+    }
+  }
+}

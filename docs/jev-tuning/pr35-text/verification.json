@@ -1,0 +1,19 @@
+{
+  "n": 169,
+  "requests": 336,
+  "allAPIPayloadsExactlyAgendaTranscriptAndFrozenQuestions": true,
+  "allRequestsAfterLabelFreeze": true,
+  "independentRecomputationOfClassificationsCountsMatricesMacroF1": "passed",
+  "allSuccessfulRawAnswerTypesNoul": true,
+  "offlineReportLedgerAttempts": 336,
+  "noLabelOrProtocolChanges": {
+    "blind-inputs.json": true,
+    "primary-labels.json": true,
+    "protocol.json": true,
+    "questions.json": true,
+    "source-manifest.json": true,
+    "source-map.json": true
+  },
+  "reportSHA256": "89af062674de9b280c9856d74ef028bc37234e49adaec531ad3aa54cd372f99c",
+  "cacheSHA256": "a6038a57529c13bf95d25a39792a8455299a88fc1018874c8fd6f1e7a4f99ba6"
+}
