@@ -21,12 +21,14 @@
 | `label` | 意味 | `isOffTopic` |
 | --- | --- | --- |
 | `on_track` | 議題に沿っている | `false` |
-| `productive_tangent` | 議題に役立つ寄り道 | `false` |
+| `productive_tangent` | 短く本筋を外れるが、議題に役立つ寄り道 | `false` |
 | `drift` | 脱線している | `true` |
 | `stalled` | 議題は変わっていないが停滞している | `false` |
 | `ambiguous` | 判断が分かれる | `null` |
 
-ラベルは台本JSONの `label` にも保存されています。`isOffTopic` は上記の意味を明示した項目です。介入の要否を表す `expectedNudge` とは別です。途中で切った台本のラベルや判断の補足も保持しています。Canvas用54ケースのラベルは図表提示の判定を表すため、この脱線ラベル一覧には含めていません。
+ラベルは台本JSONの `label` にも保存されています。`isOffTopic` は無関係な話への脱線かを表し、介入の要否とは別です。`expectedIntervention` は、指定された `expectedNudge` を優先し、未指定の場合は `drift` / `stalled` を `true`、`on_track` / `productive_tangent` を `false`、`ambiguous` を `null` とした項目です。途中で切った台本のラベルや判断の補足も保持しています。
+
+`ambiguous` は状態判定の精度集計から除外し、介入の評価は `humanAgreement` の `clear` / `split` を別集計します。Canvas用54ケースのラベルは図表提示の判定を表すため、この脱線ラベル一覧には含めていません。ラベルの定義・集計ルール・音声条件は [評価データの使い方](EVAL_DATA_GUIDE.md) を参照してください。
 
 ```javascript
 import { readFileSync } from "node:fs";

@@ -4,10 +4,10 @@ import { fileURLToPath } from "node:url";
 
 const root = new URL("./", import.meta.url);
 const descriptions = {
-  on_track: "脱線していない（議題に沿っている）",
-  productive_tangent: "脱線していない（有益な寄り道）",
-  drift: "脱線している",
-  stalled: "脱線していない（停滞している）",
+  on_track: "議題を進めている",
+  productive_tangent: "議題に役立つ寄り道",
+  drift: "無関係な話への脱線",
+  stalled: "議題内での停滞",
   ambiguous: "判断が分かれる",
 };
 const sets = [
@@ -35,10 +35,19 @@ const cases = sets.flatMap(([name, audioDirs]) => {
       label: row.label,
       labelText: descriptions[row.label],
       isOffTopic: row.label === "ambiguous" ? null : row.label === "drift",
+      expectedIntervention: row.expectedNudge ?? (
+        row.label === "ambiguous" ? null : ["drift", "stalled"].includes(row.label)
+      ),
+      interventionExpectationBasis: Object.hasOwn(row, "expectedNudge")
+        ? "expectedNudge"
+        : row.label === "ambiguous" ? "undetermined" : "label",
+      excludeFromStateAccuracy: row.label === "ambiguous",
       ...(Object.hasOwn(row, "expectedNudge") ? { expectedNudge: row.expectedNudge } : {}),
       ...(row.humanAgreement ? { humanAgreement: row.humanAgreement } : {}),
       ...(row.group ? { group: row.group } : {}),
       ...(row.cutAt !== undefined ? { cutAt: row.cutAt } : {}),
+      ...(row.phase ? { phase: row.phase } : {}),
+      ...(row.cutPct !== undefined ? { cutPct: row.cutPct } : {}),
       ...(row.note ? { note: row.note } : {}),
       audioFiles,
     };
@@ -54,9 +63,11 @@ const sections = sets.map(([name]) => {
   const rows = cases.filter((row) => row.dataset === `datasets/${name}.json`);
   const lines = rows.map((row) => {
     const audio = row.audioFiles.map((file) => `[${file.slice(6)}](${file})`).join("<br>") || "—";
-    return `| ${cell(row.id)} | ${row.labelText} | ${cell(row.agenda)} | ${audio} |`;
+    const intervention = row.expectedIntervention === null ? "未指定" : row.expectedIntervention ? "声をかける" : "黙る";
+    const agreement = row.humanAgreement || "未指定";
+    return `| ${cell(row.id)} | ${row.labelText} | ${intervention} | ${agreement} | ${cell(row.agenda)} | ${audio} |`;
   });
-  return `## ${name}\n\n| ID | 正解ラベル | 議題 | 対応する音声 |\n| --- | --- | --- | --- |\n${lines.join("\n")}`;
+  return `## ${name}\n\n| ID | 状態の正解ラベル | 介入の期待値 | 意見の一致見込み | 議題 | 対応する音声 |\n| --- | --- | --- | --- | --- | --- |\n${lines.join("\n")}`;
 });
 const markdown = `# 脱線判定の正解ラベル一覧
 
@@ -64,9 +75,13 @@ const markdown = `# 脱線判定の正解ラベル一覧
 
 ${counts}
 
-<code>labels.json</code> の <code>isOffTopic</code> は、脱線なら <code>true</code>、議題に沿った会話・有益な寄り道・停滞なら <code>false</code>、判断が分かれる場合は <code>null</code> です。停滞は脱線と別の状態です。
+<code>isOffTopic</code> は「無関係な話への脱線」を表し、<code>drift</code> だけが <code>true</code>、<code>ambiguous</code> は <code>null</code>、それ以外は <code>false</code> です。有益な寄り道も短く本筋を外れますが、無関係な脱線とは区別します。
 
 <code>label</code>、<code>expectedNudge</code>（指定がある場合）、<code>humanAgreement</code>、補足 <code>note</code> は台本の値を保持しています。<code>isOffTopic</code> はこの一覧で追加した上記ルールによる表現です。脱線の有無と介入すべきかどうかは別です。
+
+介入の期待値 <code>expectedIntervention</code> は、指定された <code>expectedNudge</code> を優先します。未指定なら <code>drift</code> / <code>stalled</code> は声をかけ、<code>on_track</code> / <code>productive_tangent</code> は黙り、<code>ambiguous</code> は未指定のままにします。根拠は <code>interventionExpectationBasis</code> に記録しています。
+
+<code>ambiguous</code> は状態判定の精度集計から除外します（<code>excludeFromStateAccuracy: true</code>）。介入の評価は <code>humanAgreement</code> の clear / split を別集計してください。これは実際の評価者の一致率ではなく、意見が揃いそうかの注釈です。詳細は [評価データの使い方](EVAL_DATA_GUIDE.md) を参照してください。
 
 ラベルは各台本の末尾時点の会話の状態を表します。途中で切ったケースは切り出しごとに異なるラベルを持ちます。下記の音声リンクは台本と同じ会話全体に対応するものだけです。短いサンプル・発言単位の音声・ノイズには、会話全体のラベルを自動では割り当てていません。
 
