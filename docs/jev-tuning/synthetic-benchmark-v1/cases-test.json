@@ -1,1 +1,2174 @@
-[]
+[
+  {
+    "id": "synbench-006c6e4e69a932",
+    "agenda": "夕方に一人になる窓口へ応援を出す判断者と担当者を決める。 現在は応援体制の決定。",
+    "phase": "応援体制の決定",
+    "transcript": [
+      "窓口: 行列ができた時、どなたが応援に来ると決めればよいですか。",
+      "管理: 受付で空いている人を選んでください。",
+      "受付: 受付から別係の職員は動かせません。管理側の判断が必要です。",
+      "広報: 私は案内表示を変えられますが、職員の配置は決められません。",
+      "管理: 現場を見ていないので、受付に任せるしかありません。",
+      "受付: 任されても権限がないので、判断を返します。",
+      "窓口: 呼ぶ先がまだ空欄ですが、どこを記入すればよいですか。",
+      "管理: そこは受付から人名を出してもらう形でお願いします。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-090",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-090",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "応援者を動かす権限を管理と受付が互いに求め、権限不足の指摘後も同じ人名依頼へ戻り、呼ぶ先の空欄が埋まらない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-10d5bf79d5ad9c",
+    "agenda": "共同スペースの重複予約を変更する権限と連絡担当を決める。 現在は予約変更の責任分担。",
+    "phase": "予約変更の責任分担",
+    "transcript": [
+      "C: 二団体のどちらへ変更をお願いするか、管理側で決めてくれる。",
+      "A: 私は鍵を預かるだけ。予約係で決めてほしい。",
+      "B: 予約係も決まったことを入力するだけだから、管理側へ戻すよ。",
+      "C: 管理といっても私に団体を選ぶ権限はないんだ。",
+      "A: だったら予約係の判断を待つしかない。",
+      "B: こちらは管理側が選んだ結果を待ってるんだけど。",
+      "C: その結果はこちらでは出せないので、同じ依頼を返すね。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-089",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-089",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "管理・鍵の保管・予約入力の担当が予約変更の判断を戻し合い、権限のある人や確認手順が定まらず同じ依頼を返している。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-121faa73bc888f",
+    "agenda": "撮影許可区域を示すデータと掲示用の原稿を一致させる。 現在は表示データの修復。",
+    "phase": "表示データの修復",
+    "transcript": [
+      "D: 撮影不可の文字が、印刷すると可だけになっています。",
+      "A: 文字の左、いえ枠の左側で切れていますね。",
+      "B: 画面より印刷の幅が小さかったです。余白を広げてみます。",
+      "E: 文字は全部出ました。ただ第二展示室の番号が旧版のままです。",
+      "C: 部屋番号だけ最新の平面図へ合わせて差し替えます。",
+      "D: 第二が不可、廊下が可と読めるようになりました。",
+      "A: その二つを現地の入口で照合してから、必要枚数を刷りましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-079",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-079",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "印刷で不可の文字が切れる問題を余白で直し、旧部屋番号も最新図へ修復して、現地照合後に必要数を印刷する手順へ進む。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-12507cb65c3c89",
+    "agenda": "会場の撮影可能区域を示す地図の向きを現地の入口に合わせる。 現在は地図表示の修復。",
+    "phase": "地図表示の修復",
+    "transcript": [
+      "C: 入口に立つと撮影可の部屋が左ですが、図では右です。",
+      "A: 左、ですか。あ、図の入口が下ではなく上にありますね。",
+      "E: 北が上の図をそのまま使っていました。入口からの視点へ回せます。",
+      "D: 回す前に部屋番号も読みます。撮影可は第一だけです。",
+      "B: 回した図なら第一が左になりました。番号も一致しています。",
+      "C: これなら案内の左という言葉とそろいます。",
+      "A: 現地の柱に置く向きも決まりました。この向きで印刷に進めます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-079",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-079",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "北を上にした図と入口視点の左右差を特定し、部屋番号と撮影許可を照合してから図を回し、現地へ置く向きも決めている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-149c39e764f9ec",
+    "agenda": "終了後アンケートを何枚用意するか決めるため参加人数を確認する。 現在は配布数の決定。",
+    "phase": "配布数の決定",
+    "transcript": [
+      "B: 参加者は四十名で、申込名簿も確定しました。",
+      "A: アンケートを何人へ渡すのでしたか。",
+      "B: 四十名です。参加者全員へ渡します。",
+      "A: 全員ということは分かりました。人数を教えていただけますか。",
+      "B: 四十名と申し上げています。名簿の一番下にも合計があります。",
+      "A: 名簿の場所ではなく、実際に渡す人数を知りたいです。",
+      "B: 実際にも四十名です。同じ四十を枚数へ使ってください。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-080",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-080",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "四十名と複数回回答し名簿でも示しているが、実際に渡す人数の同じ問いへ戻り、配布数の理解が成立しないまま終わる。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-22fc0c3766ef44",
+    "agenda": "実験記録を細かくするか短くするかの共通方針を選ぶ。 現在は記載粒度の選択。",
+    "phase": "記載粒度の選択",
+    "transcript": [
+      "B: 私は細かい記録の方に丸を付けた。",
+      "C: 自分は短い方。今の二択ならそっちだな。",
+      "A: 理由を比べる項目は何か決まってたっけ。",
+      "B: まだないけど、細かい方という希望はそのままだよ。",
+      "C: それなら自分も短い方のままで。",
+      "A: 私が細かい方を選ぶと決まりにしていい。",
+      "C: 票で決めるとは聞いてないから、短い方をもう一回選ぶ。",
+      "B: じゃあ私は細かい方を選び直すね。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-069",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-069",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "記録を細かくするか短くするかを基準なしの選好と丸付けで反復し、投票の合意もないまま選び直すだけになっている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-245c571497165c",
+    "agenda": "避難訓練の改善案を、観察した問題に基づいて一つ選ぶ。 現在は改善箇所の決定。",
+    "phase": "改善箇所の決定",
+    "transcript": [
+      "E: 点呼で名簿を探した所が長かったので、そこを改善したいです。",
+      "A: この記録のはんこ、周りの線が二本なんですね。",
+      "D: 二本、いや文字の枠も数えると三本かもしれません。",
+      "B: はんこの見た目は点呼に影響しません。名簿の置き方を見ませんか。",
+      "C: でも昔の町内会の印はもっと太い線でしたよ。",
+      "E: 当時の紙を出すと比べられそうです。年ごとの違いがあるのかな。",
+      "A: 朱色にも濃淡がありますね。古い印の一覧を表示します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-099",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-099",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "点呼名簿の探し方を改善する話から記録の印影の線・朱色・年代の比較へ移り、改善箇所の選択に戻っていない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-2fe764f83e3edd",
+    "agenda": "地域展示の作品を搬入してから設営まで保管する方法を決める。 現在は搬入と保管の調整。",
+    "phase": "搬入と保管の調整",
+    "transcript": [
+      "A: 招待状は印刷へ出しました。今回は作品の搬入順を決めます。",
+      "B: 招待状の切手風の飾り、丸より三角がよくありませんか。",
+      "A: その意匠は了承済みです。最初に届く立体作品の置き場を見たいです。",
+      "B: 三角は山を表せますし、四角なら窓に見えます。図をお送りしました。",
+      "A: 図は拝見しました。形の大きさも違うのでしょうか。",
+      "B: はい。三つを並べて、端の細い線も比較していただきたいです。",
+      "A: 細い線だけ色を変えたものも見てみたいですね。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-100",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-100",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "印刷・了承済み招待状の飾りへ戻り、搬入作品の保管場所を扱わず形や線の色の比較に話が広がる。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-34851424f03c45",
+    "agenda": "避難訓練の放送を大きくするか、落ち着いた声へ変えるか決定する。 現在は放送の改善方針。",
+    "phase": "放送の改善方針",
+    "transcript": [
+      "B: 大きい声でないと聞こえないので、声を大きくしたいです。",
+      "C: 大声では焦ります。落ち着いた声に変えるべきです。",
+      "A: 二つの案のどこを測るか、確認項目を作りたいです。",
+      "D: 私も大きい声がよいです。聞こえないと意味がありません。",
+      "E: 私は落ち着いた声です。焦ってしまうと動けません。",
+      "B: やはり聞こえないと困るので、大きい声です。",
+      "C: やはり焦らせたくないので、落ち着いた声です。",
+      "A: 測る項目を決めたかったのですが、まだその二案のままですね。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-099",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-099",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "聞こえる大声と焦らない声という同じ賛否を返し、測る確認項目を求められても新しい基準や試験に進めない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-3d792cae7d17e0",
+    "agenda": "終了後アンケートを参加者へ配る方法を選ぶ。 現在は配布経路の選定。",
+    "phase": "配布経路の選定",
+    "transcript": [
+      "A: 記念品は確定したので、次はアンケートをどう渡すか決めます。",
+      "B: 記念品のしおり、ひもを別素材に変えられませんか。",
+      "A: 納品も終わっています。紙か二次元コードかを選びたいです。",
+      "B: 紙のしおりには麻のひもが合います。色見本があります。",
+      "A: 麻の茶色は何種類もあるんですね。太さも選べるのでしょうか。",
+      "B: はい。結び目の形が分かる写真を順にお見せします。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-080",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-080",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "確定・納品済みの記念品のひもの素材・色・結び目を比較する話へ戻り、アンケートを紙かコードで配るかという目的を扱わない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-3f6b9167d9814a",
+    "agenda": "中間報告に含める分析を二案から一つ選ぶ。 現在は優先分析の選定。",
+    "phase": "優先分析の選定",
+    "transcript": [
+      "研究: 群間比較から先に終えたいです。今回はそちらを選びます。",
+      "統計: 私は相関の方を選びたいです。",
+      "管理: どこで優先順位を付けているのでしょう。判断表は空欄です。",
+      "補助: 私も相関に印を付けました。基準は特にまだないです。",
+      "研究: それでも群間比較を残したいです。",
+      "統計: 私も相関の欄は消しません。それを先にしてください。",
+      "管理: ではどちらの名称を締切表へ入れますか。",
+      "補助: 自分からはまた相関とお伝えします。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-070",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-070",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "群間比較と相関の優先を基準なしに希望・印だけで選び直し、締切表へ一つ入れる要求にも同じ名称を返して分析範囲が絞れない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-450209fd7677f4",
+    "agenda": "実験記録の書式を照合する会議で、資料交換の前に短い休憩を取る。 現在は了承済みの休憩。",
+    "phase": "了承済みの休憩",
+    "transcript": [
+      "C: 二冊見比べて疲れたね。四分休んでから交換しよう。",
+      "A: うん。十時十四分から次の組を読むことにしよう。",
+      "B: 今は十時十一分だね。お菓子の袋を開けていい。",
+      "C: どうぞ。私は少し席を立って肩を回す。",
+      "A: そのお菓子、塩味もあるんだ。休憩中に一つもらうね。",
+      "B: 交換するノートは机に置いた。十四分になったら声を掛けるよ。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-069",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-069",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "四分休憩と十時十四分の再開が合意され、十一分の菓子やストレッチの会話は資料交換前の許可された休憩内にある。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-460fd42a8fade1",
+    "agenda": "共同スペースの予約を使いやすくする条件を考える。 現在は予約単位の比較。",
+    "phase": "予約単位の比較",
+    "transcript": [
+      "B: 使用は終わったのに、次の人が入れないことがあるんだよね。",
+      "A: 診療所の予約で、診察の後に器具を替える時間を取ってたよ。",
+      "C: ここでも同じような時間が必要ってこと。",
+      "A: 机を戻す作業を使用時間の外にしてるから、次の枠へはみ出すのかも。",
+      "B: それなら片付け十分を含む長さで予約してもらう案にできる。",
+      "C: 後ろに一律十分を付ける方法と、自分で含める方法を比較しよう。",
+      "A: 過去の重なった五件で、その十分が足りるかも確かめるよ。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-089",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-089",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "診療後の器具交換の類推から片付け時間の枠外扱いが原因という仮説を出し、十分を含む二方式と過去五件での確認へ進んでいる。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-4e20fa13f4b728",
+    "agenda": "人手が少ない夕方にも窓口を維持できる対応範囲を決める。 現在は少人数運用の設計。",
+    "phase": "少人数運用の設計",
+    "transcript": [
+      "窓口: 十六時以降は一人です。案内と手続きのどこまで続けますか。",
+      "管理: 本人確認が要る手続きは、別の職員を呼べる形にしたいです。",
+      "広報: 窓口の存在自体を知らない方が多いので、動画にしませんか。",
+      "受付: 来客の対応方法が先です。撮影では人数不足は解消しません。",
+      "広報: ただ、今回は案内手順より再生される映像を作りたいです。",
+      "管理: 職員の紹介場面を入れたら、親しみが出そうですね。",
+      "窓口: では撮影する服装をそろえますか。制服の写真を出します。",
+      "広報: 次は動画につける音楽です。明るい曲をいくつか聞きましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-090",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-090",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "夕方一人の業務範囲を決める話から、人数不足を解消しない職員紹介動画の服装・音楽選びへ目標が変わっている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-4e2aa53bd6b3f8",
+    "agenda": "人手が少ない窓口の長時間対応を別窓口へ引き継ぐ手順を決める。 現在は引き継ぎ責任の割り当て。",
+    "phase": "引き継ぎ責任の割り当て",
+    "transcript": [
+      "受付: 時間のかかる相談は、管理側へ引き取っていただけますか。",
+      "管理: 相談がこちらの担当と分かるまで受けられません。受付で分類を。",
+      "窓口: 分類に専門知識が要るので、一人の職員ではできません。",
+      "広報: 私は番号札の表示担当なので、中身を判断する役ではないです。",
+      "受付: それでは管理で最初に話を聞いてから分類してください。",
+      "管理: 受付の分類結果が先です。確認前には引受けを決められません。",
+      "窓口: このままだと相談者が同じ席に残ります。どちらへお通ししますか。",
+      "受付: 管理へお願いしたいです。こちらから出せる答えはそれです。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-090",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-090",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "専門知識が必要な分類を受付と管理が互いに先に求め、相談者が残っていると指摘しても最初に聞く担当が決まらない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-54282cb1a7049b",
+    "agenda": "終了後アンケートの配布方法と紙の回収場所を確定する。 現在は実施方法の確定。",
+    "phase": "実施方法の確定",
+    "transcript": [
+      "B: 携帯を使わない方が六名いると、受付で確認できました。",
+      "A: では紙も用意し、退場口でコードの案内と一緒に選んでいただきます。",
+      "B: 紙の回収箱は出口の机に置けば、逆戻りしなくて済みます。",
+      "A: 受付係が渡し、出口係が記入場所と箱を案内する分担です。",
+      "B: 紙は予備を含め十枚、オンラインは会場の整理番号を入力してもらいます。",
+      "A: 番号で重複を確認できることも説明します。この手順を係へ渡します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-080",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-080",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "携帯を使わない六人の情報を踏まえ紙とコードを併用し、配布・記入案内・回収場所・整理番号による重複確認まで具体化している。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-55380de1d867e4",
+    "agenda": "地域展示の作品を傷めず搬入するための方法を広く集める。 現在は許可された搬入案の発散。",
+    "phase": "許可された搬入案の発散",
+    "transcript": [
+      "B: 最初の五分は難しさで落とさず、傷を防ぐ案を出しましょう。",
+      "A: 作品ごとに箱の底へ持つ場所を描く方法はいかがでしょうか。",
+      "B: 運ぶ向きを写真で示す案も追加します。言葉だけより分かりやすいです。",
+      "A: 梱包したまま作者と受取係が一緒に状態を確認する案もあります。",
+      "B: 受取時の写真を同じ角度で残す方法と組み合わせられますね。",
+      "A: 大きな作品だけ先に試し搬入をする案も書いておきます。",
+      "B: まだ選ばず残します。次は雨の場合の保護を考えてみましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-100",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-100",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "五分は実現性で落とさない発散として、持つ場所・運搬方向・作者との受取確認・同角度写真・試し搬入という新しい具体案を増やしている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-56d8228d44ba2e",
+    "agenda": "共同スペースの予約受付を二重登録しない仕組みに変える。 現在は受付運用の選定。",
+    "phase": "受付運用の選定",
+    "transcript": [
+      "C: 電話で受けた分が画面へ入るまで、別の人が同じ枠を取れるね。",
+      "A: 電話といえば、家の受話器が最近光らなくなった。",
+      "B: 電池を替えると直る型。うちも似たのを使ってる。",
+      "A: 型番を見てくるよ。壁に付ける台も替えたいんだ。",
+      "C: 壁付けなら配線を隠せる棚があるよ。写真探そうか。",
+      "B: あ、その棚なら木の色が三種類選べるよ。",
+      "A: カタログ送って。居間の壁紙と合うものを見たい。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-089",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-089",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "電話受付の二重登録防止から個人宅の受話器・取付け棚・壁紙への相談へ話が展開し、受付運用へ戻らない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-5ad4eece2f9aab",
+    "agenda": "少人数の夕方窓口で維持する業務と後日に回す業務を選ぶ。 現在は業務範囲の比較。",
+    "phase": "業務範囲の比較",
+    "transcript": [
+      "管理: 一人では確認ができないので、夕方の手続きを止めたいです。",
+      "窓口: 全て止めると、仕事帰りの方が案内も受けられません。",
+      "受付: 先週の夕方二十件では、場所の案内が十四件でした。",
+      "広報: 残り六件のうち、二件は書類を受け取るだけだったとあります。",
+      "管理: 受け取るだけなら処理は翌朝にできます。可否の判断は待っていただきます。",
+      "窓口: それなら案内と預かりは続け、本人確認を伴う処理だけ予約にできます。",
+      "受付: 二分類した案で、待ち時間がどう変わるか来週記録します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-090",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-090",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "一人では全停止か案内継続かという対立に、二十件の内訳を加えて案内・預かりと本人確認処理を分け、来週の待ち時間検証へ進む。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-5fd856fca42911",
+    "agenda": "会場内の撮影可能区域を来場者が迷わず分かるよう表示する。 現在は区域表示の確定。",
+    "phase": "区域表示の確定",
+    "transcript": [
+      "A: 撮影できる線を、この平面図に引きたいです。",
+      "C: このカメラの金属、鏡みたいに映りますね。",
+      "B: 金属、ではなくメッキですかね。白いモデルもあります。",
+      "E: 機材を選ぶ話ではないので、まず撮影可の境界を確認したいです。",
+      "D: 白だと取っ手の黒が目立ちますね。黒い方も見たいです。",
+      "A: 黒ならネジも同じ色の方がきれいでしょうか。",
+      "C: 歴代のモデルを並べます。光沢の変化を見てみましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-079",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-079",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "撮影可能区域の境界決めを離れ、選定対象でないカメラの色・ネジ・歴代モデルの光沢比較へ移っている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-76bba9b4ecd3f7",
+    "agenda": "避難訓練の振り返りで誘導と点呼の問題を分け、改善の対象を決める。 現在は問題の分類。",
+    "phase": "問題の分類",
+    "transcript": [
+      "A: 迷った人が五人、点呼が合わなかった人が五人と報告されています。",
+      "C: 合計十人、でよかったですか。",
+      "D: 同じ五人です。誘導で別の列へ入って、点呼の班もずれました。",
+      "B: あ、別々の問題、というより誘導から続いた一つの経路なんですね。",
+      "E: はい。途中の分岐に班の番号がなかったと、五人とも話しています。",
+      "A: 人数は五人に統一し、分岐の番号表示を改善対象にします。",
+      "C: 次回はその場所で、班を見失わず進めたか記録しましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-099",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-099",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "二種類の五人を同じ人だと確認して二重計上を修復し、誘導から点呼へ続く経路を特定して分岐の番号表示と次回の記録へ進めている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-8cc5c89d79fd6b",
+    "agenda": "一人当番の時間帯にも必要な窓口を維持する連絡手順を確定する。 現在は少人数対応の確定。",
+    "phase": "少人数対応の確定",
+    "transcript": [
+      "管理: 夕方は案内と書類の預かりを続けます。処理の確約はしません。",
+      "窓口: 内容を判断できない場合は、当番管理者へ内線します。",
+      "受付: 内線中も来客が増えたら、私が案内だけ補助します。",
+      "広報: 掲示には受付できることと、翌日の処理になることを分けます。",
+      "管理: 三組以上待っている時は、番号札の発券前に私を呼んでください。",
+      "窓口: 内線番号と三組の条件を、机の手順書へ貼りました。",
+      "受付: 明日の一人当番から使い、呼出し回数を一週間記録します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-090",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-090",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "夕方に続ける案内と預かり、確約しない条件、内線先、三組待ちで呼ぶ基準を決め、明日から使い回数を記録する具体策へ進んでいる。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-8ed0f2add585e7",
+    "agenda": "共同スペースの無断キャンセルを減らす予約運用を検討する。 現在は利用確認方法の比較。",
+    "phase": "利用確認方法の比較",
+    "transcript": [
+      "A: 予約されてるのに空室のまま、という日が多かったね。",
+      "C: 体育館のコートは、前日に利用確認が来て返答しないと連絡が入った。",
+      "B: ここでも返答だけで取り消すと、メールを見ない人が困るかも。",
+      "C: そう。体育館も最後は電話で確認してから待機組へ渡してた。",
+      "A: なら前日確認、電話、待機組への連絡を分ける案が使えそう。",
+      "B: 全員の電話番号があるか、私は登録表を確認する。",
+      "C: 私は待機を希望した三団体に、前日連絡で来られるか聞いておくよ。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-089",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-089",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "体育館の例を参考に前日確認から電話、待機団体への連絡を分ける案を作り、電話番号と待機側の参加可否を確認する担当も定めている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-91ae0299b24bf3",
+    "agenda": "終了後アンケートを配布する担当者と配布のタイミングを決める。 現在は配布の実施手順。",
+    "phase": "配布の実施手順",
+    "transcript": [
+      "A: 退場時に誰が渡すかを決めたいです。",
+      "B: アンケートは参加者へ渡します。",
+      "A: 受け取る方は承知しています。渡す側の担当はどなたでしょう。",
+      "B: 全参加者が対象ということです。",
+      "A: はい。対象ではなく、配る人と時刻を聞いています。",
+      "B: 参加者に行き渡らなければ意味がありません。",
+      "A: そのための担当を選びたいのですが、候補をお願いできますか。",
+      "B: まず全員へ渡すという点をお忘れにならないでください。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-080",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-080",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "配布担当と時刻を尋ねても全参加者が対象という情報だけを返し続け、実施に必要な人とタイミングが増えない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-9e8b370525e040",
+    "agenda": "共同スペースの利用予約で重なる枠を調整する。 現在は予約重複の調整。",
+    "phase": "予約重複の調整",
+    "transcript": [
+      "A: 土曜の午後が二団体で重なってる。どちらか動かせるかな。",
+      "B: 土曜は旅行に出るんだ。朝の空港バスって混むかな。",
+      "C: 私は先月一本乗れなかったよ。早めがいい。",
+      "A: 空港で朝食を食べるなら、何時のバスにするつもり。",
+      "B: 店の開く時間を調べたいね。展望台も寄ってみたい。",
+      "C: 展望台から撮れる場所を地図で送るよ。",
+      "A: 二人の旅の写真も見てみたい。予約表の画面は小さくしておくね。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-089",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-089",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "二団体の予約重複調整から、個人旅行の空港バス・朝食・展望台の相談へ移り、予約表を小さくして写真を見る話を続けている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-a092cb357dd7ca",
+    "agenda": "地域展示の作品の搬入時刻と保管場所を確定する。 現在は搬入保管手順の合意。",
+    "phase": "搬入保管手順の合意",
+    "transcript": [
+      "A: 額入り十点は前日夕方、立体三点は当日朝に届くと確認しました。",
+      "B: 額は施錠室の立て掛け棚へ置けます。作品番号順に区切ります。",
+      "A: 立体は箱を重ねられないので、設営室の中央を空けておきます。",
+      "B: 前日の受取は私が担当し、番号と外装の写真を残します。",
+      "A: 当日の三点は私が作者と開封して、そのまま展示台へ運びます。",
+      "B: 受領表に二人の連絡先と二つの到着時刻を入れました。",
+      "A: 作者へ渡す案内も同じ内容です。この版で送付します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-100",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-100",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "額と立体の搬入時刻・保管条件を分け、受取と開封の担当・番号と写真・作者への同内容の案内まで具体的に確定する。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-a79393f385ce35",
+    "agenda": "中間報告に載せる分析を実行可能な量へ絞る。 現在は必要作業の比較。",
+    "phase": "必要作業の比較",
+    "transcript": [
+      "広報: 報告会場の近くに新しい喫茶店ができたんですね。",
+      "研究: ポスターを見ました。珈琲の器が面白かったです。",
+      "管理: お店は報告後にして、金曜までの作業時間を合わせましょう。",
+      "統計: 群間比較は整形済みなので半日、相関は欠測の処理に一日必要です。",
+      "研究: 欠測を含む結果は誤解されやすいです。先に処理の説明が欲しいです。",
+      "広報: 報告資料では欠測の注意書きを先に置けます。",
+      "管理: 今日欠測の分類、明日群間比較という二段階案で時間を積みます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-070",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-070",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "喫茶店の寄り道から作業時間へ戻り、欠測処理の制約を踏まえ注意書きと二段階の作業案へ具体化している。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-ad73c6ccfb2422",
+    "agenda": "避難訓練の所要時間を正しく解釈して改善箇所を選ぶ。 現在は記録の整理。",
+    "phase": "記録の整理",
+    "transcript": [
+      "C: 二階は八分、一階は三分です。二階の動きを早める必要がありますか。",
+      "B: 八分は校庭集合までです。一階の三分は建物を出るまででした。",
+      "E: あ、出口、ではなく校庭の旗まででそろえないと比べられませんね。",
+      "D: 一階も旗までなら七分でした。校庭で四分かかっています。",
+      "A: それなら建物内より、出口から集合までの誘導を見た方がよさそうです。",
+      "C: 記録を建物内と校庭に分けます。八と三の単純比較は外します。",
+      "B: 校庭の曲がり角の誘導案を、次に図へ入れて検討しましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-099",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-099",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "建物出口と校庭集合という終点の差を修復し、一階の校庭所要時間を把握して改善対象を出口後の誘導へ絞る材料を得ている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-af3e3dca53461d",
+    "agenda": "終了後アンケートの配布を紙かオンラインかで比較する。 現在は配布案の検討。",
+    "phase": "配布案の検討",
+    "transcript": [
+      "A: オンラインだけでは、携帯を持たない方が答えられません。",
+      "B: 紙だけですと、会場を出た後に答えたい方が困りますね。",
+      "A: 二つを併用すると重複回答をどう扱うかが残ります。",
+      "B: 整理番号を両方へ付けられるか、フォーム担当へ聞きます。",
+      "A: 私は紙を持ち帰った時の返送先を確保できるか確認します。",
+      "B: 結論はまだですが、重複と持ち帰りという二条件で比べられますね。",
+      "A: その回答を明日そろえて、単独か併用かを選びましょう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-080",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-080",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "紙とオンラインの弱点を重複回答と持帰り条件へ分解し、フォームの整理番号と返送先を確認する担当を決め、未決でも比較を進めている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-b5805f90b4b586",
+    "agenda": "地域展示の作品を施錠室か設営室へ保管するか決める。 現在は保管場所の比較。",
+    "phase": "保管場所の比較",
+    "transcript": [
+      "A: 作品を守りたいので、施錠室へまとめるべきです。",
+      "B: 設営へ運びやすい方がよいので、設営室に置きたいです。",
+      "A: 守ることが先ですから、施錠室でお願いします。",
+      "B: 運ぶことが必要ですから、設営室でお願いします。",
+      "A: 私の理由は変わりません。守りたいということです。",
+      "B: 私の理由も同じです。運びやすいことが大切です。",
+      "A: それでしたら施錠室という案を、もう一度お返しします。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-100",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-100",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "作品保護の施錠室と運びやすい設営室を同じ理由で往復し、安全・移動の条件を具体化する情報や手順が増えない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-b6936509c3f02e",
+    "agenda": "来場者へ撮影できる区域とできない区域を掲示する。 現在は掲示内容の確定。",
+    "phase": "掲示内容の確定",
+    "transcript": [
+      "E: 撮影不可の札を二枚、第一と第二の境へ置く案です。",
+      "B: 紙の端が細かく波打っていますね。これは切り方の違いかな。",
+      "C: 波、というより繊維が出てるのかもしれません。",
+      "A: 表示は読めますし、境界を先に決めてよいですか。",
+      "D: ただ昔のはもっと鋭く切ってありましたね。道具の違いでしょうか。",
+      "B: 古い裁断機の写真を出します。刃の形から調べられそうです。",
+      "E: 私の家にも似た機械がありました。型番の一覧を見せてください。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-079",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-079",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "区域表示が読めるのに紙端の繊維や裁断機の写真・型番を調べる話へ移り、撮影可能区域の境界決定を進めない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-d1020df3173bf7",
+    "agenda": "中間報告までに終わらせる分析と担当の期限を確定する。 現在は作業の割り当て。",
+    "phase": "作業の割り当て",
+    "transcript": [
+      "管理: 中間報告は金曜午前です。使える作業日は三日あります。",
+      "統計: モデル比較は前処理に四日必要なので、今回の完了は難しいです。",
+      "研究: では基本集計と欠測の分布を報告範囲にします。",
+      "補助: 私が今日中に基本集計の表を作れます。",
+      "統計: その表を受けて、明日夕方までに欠測の群別分布を出します。",
+      "研究: モデル比較は次回と明示し、今回の結果から言える範囲を私が書きます。",
+      "管理: 三人の期限を表に入れました。木曜は読み合わせに空けます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-070",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-070",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "三日の制約と前処理四日の情報からモデル比較を次回へ回し、基本集計と欠測分布を担当・期限付きで割り当て、読み合わせも確保する。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-d535d89f1a03b2",
+    "agenda": "撮影可能な区画を案内図へ表示するため、展示室ごとの許可を確認する。 現在は許可区域の読み合わせ。",
+    "phase": "許可区域の読み合わせ",
+    "transcript": [
+      "D: 第二展示室は撮影不可です。主催者から確認を取りました。",
+      "B: 第二は撮ってよい部屋でしたか。",
+      "A: いえ、不可です。図ではこの斜線の所です。",
+      "C: 文字にも撮影不可と入れました。",
+      "B: 図の説明は分かりました。それで第二は撮れますか。",
+      "E: 実際の許可も不可です。写真は撮らない部屋になります。",
+      "B: その点を知りたいので、第二の撮影について教えてください。",
+      "D: 今お伝えした不可と同じです。ほかの条件はありません。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-079",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-079",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "第二展示室は撮影不可と許可確認・図の斜線・文字で伝えても、同じ可否の質問へ戻り、読み合わせの理解が進んでいない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-d88e9bfc90d882",
+    "agenda": "避難訓練の振り返りから、次回までに行う改善を選ぶ。 現在は改善案の選定。",
+    "phase": "改善案の選定",
+    "transcript": [
+      "A: 出口で列が重なった点を、次回どう変えるか選びたいです。",
+      "D: 係の帽子、つばの裏だけ別の縫い方なんですね。",
+      "B: 裏、いえ端のステッチのことですか。",
+      "C: 帽子は同じ物を使います。今日は列の分け方を決めませんか。",
+      "E: でもこの縫い目、昔の作業帽と似ています。",
+      "D: 昔の写真を探しました。糸の間隔を並べると面白そうです。",
+      "A: つばの曲がり方も違うので、横向きの写真を出してみます。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-099",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-099",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "出口の列の重なりを改善する会議で、変更しない帽子の縫い目・年代写真・つばの形の観察を続け、列の分け方を決めない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-dd4e0299b15f6c",
+    "agenda": "実験を再現できるよう記録する操作の細かさをそろえる。 現在は記録粒度の調整。",
+    "phase": "記録粒度の調整",
+    "transcript": [
+      "C: 撹拌を止めた時刻は、秒まで残す必要があるかな。",
+      "A: 時計といえば、祖父の腕時計を修理に出したんだ。",
+      "B: ゼンマイ式。音を聞くと落ち着くよね。",
+      "A: そう。裏の歯車が見えるように加工してもらった。",
+      "C: 実験の記録を先にしたかったけど、その加工はいくらぐらい。",
+      "B: 私の持ってるのも裏が透明だよ。二つの動きを比べてみよう。",
+      "A: 動画を送るね。ベルトの柄も選び直そうかと思ってる。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-069",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-069",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "実験の撹拌停止時刻の精度を決める問いが、私物の腕時計の修理・歯車・ベルトの話に置き換わり記録粒度を扱わない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-de0b178273bd1c",
+    "agenda": "中間報告の分析範囲を記述統計かモデル分析かから選ぶ。 現在は報告項目の決定。",
+    "phase": "報告項目の決定",
+    "transcript": [
+      "統計: モデル分析の付箋を報告欄へ移しました。",
+      "研究: その欄は記述統計にしたいので、こちらの付箋を置きます。",
+      "補助: 二枚になりました。どちらの付箋を採用しますか。",
+      "管理: 私はモデル分析の方を選びます。",
+      "研究: 選んだだけではこちらも変えられません。記述統計を戻します。",
+      "統計: でしたらモデル分析も戻します。私の選択はそれです。",
+      "補助: 二枚とも同じ位置のままですね。",
+      "管理: ではモデル分析へもう一票を書き足します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-070",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-070",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "記述統計とモデル分析の付箋を戻し合い、根拠や比較方法を増やさず同じ欄へ票を足すだけで報告項目を絞れない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-e1cfb5e0dd946f",
+    "agenda": "実験記録に残す操作と数値の粒度を決める。 現在は記録項目の選定。",
+    "phase": "記録項目の選定",
+    "transcript": [
+      "B: 試料の仮名は月の名前なんだね。何を残すかを決めよう。",
+      "C: 月といえば、昨日の映画は月面の場面がきれいだったよ。",
+      "A: あれ見たんだ。監督の前の作品も好き。",
+      "B: 前作の衣装、展示が来てるらしいね。",
+      "C: 開催場所を探すよ。週末なら三人で行けるかな。",
+      "A: 映画館の方も限定の入場券が出てる。絵柄を全部見たい。",
+      "B: 席の種類も比べよう。音のいい館はどっちかな。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-069",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-069",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "実験記録の項目を決める話から月面の映画・衣装展・限定券・映画館の席へ逸れ、記録の操作や数値を扱わない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-e61e64937d7ef3",
+    "agenda": "地域展示へ届く作品を当日受け取るか前日に預かるか決める。 現在は受け取り日の決定。",
+    "phase": "受け取り日の決定",
+    "transcript": [
+      "B: 前日なら余裕があるので、前日に受け取りたいです。",
+      "A: 当日でないと保管する日が増えます。当日にしましょう。",
+      "B: 余裕を持って受けたいので、やはり前日です。",
+      "A: 保管日を増やしたくないので、やはり当日です。",
+      "B: 私からは余裕が必要だとしか申し上げられません。",
+      "A: 私も保管する日を増やせないというお答えになります。",
+      "B: それでも前日を予定欄へ入れたいです。",
+      "A: いえ、同じ理由で当日を残してください。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-100",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-100",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_STALLED",
+      "reason": "前日の余裕と当日の保管日削減という同じ理由を往復し、保管可否や搬入時間の具体化なく受取日が決まらない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-ee446d4ff13123",
+    "agenda": "中間報告までに完了させる分析を選んで担当を割り振る。 現在は分析範囲の決定。",
+    "phase": "分析範囲の決定",
+    "transcript": [
+      "研究: 金曜の中間報告には、欠測率と主要結果をそろえたいです。",
+      "統計: 欠測率は今日集計できます。残りをどこまで比較しますか。",
+      "広報: せっかくなら研究室の紹介動画を作った方が注目されます。",
+      "管理: 動画は今回の報告には含まれません。終える分析を決めませんか。",
+      "広報: 分析表より再生数を狙いましょう。先生の紹介から始めたいです。",
+      "研究: 紹介なら実験室も映したいですね。撮る部屋を選びますか。",
+      "統計: グラフを動く背景にすると派手です。タイトルの候補を出します。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-070",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-070",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "INTERVENE_DRIFT",
+      "reason": "中間報告までに終える分析の選定から、報告範囲外と指摘された研究室紹介動画の部屋・背景・題名選びへ目標が移っている。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  },
+  {
+    "id": "synbench-fa234f07abb6e6",
+    "agenda": "実験記録の粒度を話し合う前に、各自で前回のノートを読み直す。 現在は合意した黙読。",
+    "phase": "合意した黙読",
+    "transcript": [
+      "A: 三分だけ前回のノートを読もう。抜けてる操作に線を引きたい。",
+      "B: 了解。自分は添加した量の単位を追ってみる。",
+      "C: 私は試料を移した所を見る。途中で質問は出さずに読むね。",
+      "A: まだ一分だから、残り二分はそれぞれ続けて。",
+      "B: ページの裏にも記録があった。そこまで見ておく。",
+      "C: 線を引き終えても、ほかの人が終わるまでは表に移す時間にしよう。"
+    ],
+    "secondsSinceLastIntervention": 120,
+    "split": "test",
+    "sourceGroup": "scenario-family-069",
+    "cvFold": null,
+    "dataKind": "synthetic",
+    "generation": {
+      "version": "synthetic-benchmark-v1",
+      "familyId": "scenario-family-069",
+      "author": "author_c",
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ]
+    },
+    "gold": {
+      "status": "OK",
+      "reason": "三分の個別黙読を合意しており、一分経過後も各自が操作や単位の記録を読む時間として使っている。共有未了だけで停滞とはしない。"
+    },
+    "annotation": {
+      "annotator": "judge_a",
+      "confidence": "high",
+      "uncertain": false,
+      "humanReviewed": false,
+      "labelSource": "independent_gpt_silver",
+      "evidenceTurns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "alternativeStatus": null,
+      "reviewed": false
+    }
+  }
+]

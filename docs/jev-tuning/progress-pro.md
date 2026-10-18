@@ -112,3 +112,5 @@
 - 10:11 JST: generated300 / labeled250 / audited250 / re-reviewed19; labels{'INTERVENE_DRIFT': 75, 'OK': 100, 'INTERVENE_STALLED': 75}; uncertain1, intent differences0. Latest Push63dfeff; next250-case checkpoint follows. All own Train authored before own heldout; no Test text fed to unfinished Train authors.
 
 - 10:13 JST: generated435 / labeled300 / audited300 / re-reviewed19; label distribution{'INTERVENE_DRIFT': 90, 'OK': 120, 'INTERVENE_STALLED': 90}; uncertain2; intent differences0; duplicate/near cross-group0. Latest Push73e121c; next300-case checkpoint follows.
+
+- 10:15 JST: labeled/audited375, actual{'OK': 150, 'INTERVENE_DRIFT': 112, 'INTERVENE_STALLED': 113}, re-reviewed19, uncertain2. Latest Push6312559; next375-case checkpoint. Conditional extension authorD started in a fresh context, no core Test input; core500 remains priority.
