@@ -36,6 +36,9 @@ static bool showScores = false;
 static bool dirty = true;
 static String toast;
 static uint32_t toastUntil = 0;
+// When AIDA starts speaking, the face appears first and the notice lines follow.
+static const uint32_t NOTICE_DELAY_MS = 200;
+static uint32_t noticeAt = 0;
 
 static String url(const char *suffix) {
   return String(SERVER_BASE) + "/api/device/" + SESSION_ID + suffix;
@@ -113,6 +116,7 @@ static void poll() {
     lastCueSeq = next.cueSeq;
     playCue(next.cueId);
   }
+  if (next.face != current.face && next.face != "watching") noticeAt = millis() + NOTICE_DELAY_MS;
   current = next;
   dirty = true;
 }
@@ -155,7 +159,7 @@ static void drawNotice(const FacePen &p) {
   faceLine(p, 336.7, 39.4, 371.7, 26, 20);
 }
 
-static void drawFace(const String &face, float x, float y, float s, uint16_t ink) {
+static void drawFace(const String &face, float x, float y, float s, uint16_t ink, bool notice = true) {
   auto &d = M5.Display;
   FacePen p{x, y, s, ink};
   // Frame: outer edge 314x309 with radius 74, stroke 22.
@@ -166,7 +170,7 @@ static void drawFace(const String &face, float x, float y, float s, uint16_t ink
     faceLine(p, 219.5, 116, 219.5, 145.5, 24);
     d.fillSmoothCircle(px(x + 156.5 * s), px(y + 209 * s), px(33 * s), ink);
     d.fillSmoothCircle(px(x + 156.5 * s), px(y + 209 * s), px(17 * s), PAPER);
-    drawNotice(p);
+    if (notice) drawNotice(p);
   } else if (face == "redirect") {
     faceLine(p, 68.7, 108, 112.5, 133, 16.3);
     faceLine(p, 112.5, 133, 68.8, 158.7, 16.3);
@@ -185,7 +189,7 @@ static void drawFace(const String &face, float x, float y, float s, uint16_t ink
       py = ny;
     }
     faceLine(p, 193.5, 215.5, 193.5, 238.5, 17.5);
-    drawNotice(p);
+    if (notice) drawNotice(p);
   } else {
     faceLine(p, 65.8, 141, 119.8, 141, 22);
     faceLine(p, 191.7, 141, 246.9, 141, 22);
@@ -206,7 +210,7 @@ static void drawStatus(bool connected) {
     d.drawString("接続待ち", d.width() / 2, CAPTION_Y);
     return;
   }
-  drawFace(current.face, faceX, faceY, FACE_SCALE, INK);
+  drawFace(current.face, faceX, faceY, FACE_SCALE, INK, millis() >= noticeAt);
   d.setTextColor(INK, PAPER);
   String caption = current.view == "idle" && current.muted ? String("寄り道OK・介入停止中") : current.title;
   d.drawString(caption.c_str(), d.width() / 2, CAPTION_Y);
@@ -294,6 +298,10 @@ void loop() {
   }
   if (toast.length() && millis() >= toastUntil) {
     toast = "";
+    dirty = true;
+  }
+  if (noticeAt && millis() >= noticeAt) {
+    noticeAt = 0;
     dirty = true;
   }
   if (dirty) render();

@@ -126,7 +126,7 @@ AIDA が会議で返す一言と、資料やUIの文言のルール。
 | 本文 | Regular（400） | |
 | 小さな英字ラベル | Medium（500） | すべて大文字、字間 0.15em |
 
-Web では Google Fonts の Noto Sans JP を読み込む。代わりの書体は `"Hiragino Sans", "Yu Gothic", sans-serif` の順にする。
+Web では Google Fonts の Noto Sans JP を読み込む。サーバーで描く画像（Meet のカメラカード）は、`lib/brand/fonts/NotoSansJP-Bold.otf` から文字をアウトライン化して描き、サーバーのフォントに頼らない。代わりの書体は `"Hiragino Sans", "Yu Gothic", sans-serif` の順にする。
 
 ## 形とレイアウト
 
@@ -138,7 +138,7 @@ Web では Google Fonts の Noto Sans JP を読み込む。代わりの書体は
 ## 動き
 
 - 「見守る」は動かさない。まばたきを足すときも、数秒に1回の短いものにする。
-- 話しかけるとき: 表情を切り替え、合図の2本線を 150〜250ms で出す。
+- 話しかけるとき: 表情を切り替え、合図の2本線を 150〜250ms 遅れて出す（M5 は 200ms）。Meet のカメラカードは静止画なので、合図の線は最初から出す。
 - 声をかけ終わったら「見守る」に戻す。ずっと動いている状態をつくらない。
 
 ## 使用例
