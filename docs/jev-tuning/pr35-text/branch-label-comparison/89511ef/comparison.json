@@ -1,0 +1,433 @@
+{
+  "pr": "https://github.com/jphacks/sd_2603/pull/35",
+  "branchCommit": "89511efa21568b57f2ac86a8b0e1c019ee830281",
+  "priorTextCommit": "90d82bd6968b4d2163c01a72319003869df2b7b7",
+  "allFourDatasetsByteIdentical": true,
+  "branchLabelsSHA256": "f54ca64245de6b54d8b121c27eb84360e9872f715a5cc193c5bcefceecf12045",
+  "frozenPrimaryLabelsSHA256": "813854262b30fbbcc142c56633b3a9348693a5f6bdf6ad5464d1f2921cdf235c",
+  "mapping": {
+    "on_track": "OK",
+    "productive_tangent": "OK",
+    "drift": "INTERVENE_DRIFT",
+    "stalled": "INTERVENE_STALLED"
+  },
+  "branchRows": 115,
+  "stateComparable": 92,
+  "stateAmbiguousExcluded": 23,
+  "canvasExcludedDifferentTask": 54,
+  "interventionComparable": 100,
+  "interventionUnspecified": 15,
+  "newGatewayCalls": 0,
+  "noRelabelingOrRetuning": true,
+  "comparisons": {
+    "independent-labels": {
+      "state": {
+        "correct": 91,
+        "n": 92,
+        "agreement": 0.9891304347826086
+      },
+      "byDataset": {
+        "derail": {
+          "correct": 30,
+          "n": 30,
+          "agreement": 1.0
+        },
+        "derail-hard": {
+          "correct": 36,
+          "n": 36,
+          "agreement": 1.0
+        },
+        "derail-multi": {
+          "correct": 25,
+          "n": 26,
+          "agreement": 0.9615384615384616
+        }
+      },
+      "stateMatrix": {
+        "INTERVENE_DRIFT": {
+          "INTERVENE_DRIFT": 24,
+          "INTERVENE_STALLED": 0,
+          "OK": 0
+        },
+        "INTERVENE_STALLED": {
+          "INTERVENE_DRIFT": 0,
+          "INTERVENE_STALLED": 16,
+          "OK": 0
+        },
+        "OK": {
+          "INTERVENE_DRIFT": 0,
+          "INTERVENE_STALLED": 1,
+          "OK": 51
+        }
+      },
+      "stateDisagreements": [
+        {
+          "dataset": "derail-multi",
+          "sourceId": "i1-delay@35",
+          "branchLabel": "on_track",
+          "branchStatus": "OK",
+          "comparedStatus": "INTERVENE_STALLED",
+          "independentUncertain": true
+        }
+      ],
+      "intervention": {
+        "correct": 97,
+        "n": 100,
+        "agreement": 0.97
+      },
+      "interventionByDeclaredAgreement": {
+        "clear": {
+          "correct": 56,
+          "n": 58,
+          "agreement": 0.9655172413793104
+        },
+        "split": {
+          "correct": 11,
+          "n": 12,
+          "agreement": 0.9166666666666666
+        },
+        "unspecified": {
+          "correct": 30,
+          "n": 30,
+          "agreement": 1.0
+        }
+      },
+      "interventionDisagreements": [
+        {
+          "dataset": "derail-multi",
+          "sourceId": "b1-trip@35",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "e1-layout@35",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "split",
+          "basis": "expectedNudge"
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "i1-delay@35",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        }
+      ]
+    },
+    "current-v3": {
+      "state": {
+        "correct": 87,
+        "n": 92,
+        "agreement": 0.9456521739130435
+      },
+      "byDataset": {
+        "derail": {
+          "correct": 30,
+          "n": 30,
+          "agreement": 1.0
+        },
+        "derail-hard": {
+          "correct": 33,
+          "n": 36,
+          "agreement": 0.9166666666666666
+        },
+        "derail-multi": {
+          "correct": 24,
+          "n": 26,
+          "agreement": 0.9230769230769231
+        }
+      },
+      "stateMatrix": {
+        "INTERVENE_DRIFT": {
+          "INTERVENE_DRIFT": 24,
+          "INTERVENE_STALLED": 0,
+          "OK": 0
+        },
+        "INTERVENE_STALLED": {
+          "INTERVENE_DRIFT": 0,
+          "INTERVENE_STALLED": 15,
+          "OK": 1
+        },
+        "OK": {
+          "INTERVENE_DRIFT": 0,
+          "INTERVENE_STALLED": 4,
+          "OK": 48
+        }
+      },
+      "stateDisagreements": [
+        {
+          "dataset": "derail-hard",
+          "sourceId": "g3-index-rebuild@7",
+          "branchLabel": "on_track",
+          "branchStatus": "OK",
+          "comparedStatus": "INTERVENE_STALLED",
+          "independentUncertain": true
+        },
+        {
+          "dataset": "derail-hard",
+          "sourceId": "g7-template-loop@7",
+          "branchLabel": "on_track",
+          "branchStatus": "OK",
+          "comparedStatus": "INTERVENE_STALLED",
+          "independentUncertain": true
+        },
+        {
+          "dataset": "derail-hard",
+          "sourceId": "ot-heated-substantive",
+          "branchLabel": "on_track",
+          "branchStatus": "OK",
+          "comparedStatus": "INTERVENE_STALLED",
+          "independentUncertain": true
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "e1-layout@full",
+          "branchLabel": "stalled",
+          "branchStatus": "INTERVENE_STALLED",
+          "comparedStatus": "OK",
+          "independentUncertain": false
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "i1-delay@35",
+          "branchLabel": "on_track",
+          "branchStatus": "OK",
+          "comparedStatus": "INTERVENE_STALLED",
+          "independentUncertain": true
+        }
+      ],
+      "intervention": {
+        "correct": 91,
+        "n": 100,
+        "agreement": 0.91
+      },
+      "interventionByDeclaredAgreement": {
+        "clear": {
+          "correct": 52,
+          "n": 58,
+          "agreement": 0.896551724137931
+        },
+        "split": {
+          "correct": 9,
+          "n": 12,
+          "agreement": 0.75
+        },
+        "unspecified": {
+          "correct": 30,
+          "n": 30,
+          "agreement": 1.0
+        }
+      },
+      "interventionDisagreements": [
+        {
+          "dataset": "derail-hard",
+          "sourceId": "g3-index-rebuild@7",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "clear",
+          "basis": "label"
+        },
+        {
+          "dataset": "derail-hard",
+          "sourceId": "g7-template-loop@7",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "split",
+          "basis": "label"
+        },
+        {
+          "dataset": "derail-hard",
+          "sourceId": "ot-heated-substantive",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "split",
+          "basis": "label"
+        },
+        {
+          "dataset": "derail-hard",
+          "sourceId": "am-silent-thinking",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        },
+        {
+          "dataset": "derail-hard",
+          "sourceId": "am-wrapup-chat",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "b1-trip@35",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "e1-layout@35",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "split",
+          "basis": "expectedNudge"
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "e1-layout@full",
+          "branchExpected": true,
+          "comparedIntervention": false,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "i1-delay@35",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        }
+      ]
+    },
+    "frozen-selected-v4": {
+      "state": {
+        "correct": 89,
+        "n": 92,
+        "agreement": 0.967391304347826
+      },
+      "byDataset": {
+        "derail": {
+          "correct": 30,
+          "n": 30,
+          "agreement": 1.0
+        },
+        "derail-hard": {
+          "correct": 35,
+          "n": 36,
+          "agreement": 0.9722222222222222
+        },
+        "derail-multi": {
+          "correct": 24,
+          "n": 26,
+          "agreement": 0.9230769230769231
+        }
+      },
+      "stateMatrix": {
+        "INTERVENE_DRIFT": {
+          "INTERVENE_DRIFT": 24,
+          "INTERVENE_STALLED": 0,
+          "OK": 0
+        },
+        "INTERVENE_STALLED": {
+          "INTERVENE_DRIFT": 0,
+          "INTERVENE_STALLED": 15,
+          "OK": 1
+        },
+        "OK": {
+          "INTERVENE_DRIFT": 0,
+          "INTERVENE_STALLED": 2,
+          "OK": 50
+        }
+      },
+      "stateDisagreements": [
+        {
+          "dataset": "derail-hard",
+          "sourceId": "ot-heated-substantive",
+          "branchLabel": "on_track",
+          "branchStatus": "OK",
+          "comparedStatus": "INTERVENE_STALLED",
+          "independentUncertain": true
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "e1-layout@full",
+          "branchLabel": "stalled",
+          "branchStatus": "INTERVENE_STALLED",
+          "comparedStatus": "OK",
+          "independentUncertain": false
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "i1-delay@35",
+          "branchLabel": "on_track",
+          "branchStatus": "OK",
+          "comparedStatus": "INTERVENE_STALLED",
+          "independentUncertain": true
+        }
+      ],
+      "intervention": {
+        "correct": 95,
+        "n": 100,
+        "agreement": 0.95
+      },
+      "interventionByDeclaredAgreement": {
+        "clear": {
+          "correct": 54,
+          "n": 58,
+          "agreement": 0.9310344827586207
+        },
+        "split": {
+          "correct": 11,
+          "n": 12,
+          "agreement": 0.9166666666666666
+        },
+        "unspecified": {
+          "correct": 30,
+          "n": 30,
+          "agreement": 1.0
+        }
+      },
+      "interventionDisagreements": [
+        {
+          "dataset": "derail-hard",
+          "sourceId": "ot-heated-substantive",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "split",
+          "basis": "label"
+        },
+        {
+          "dataset": "derail-hard",
+          "sourceId": "am-wrapup-chat",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "b1-trip@35",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "e1-layout@full",
+          "branchExpected": true,
+          "comparedIntervention": false,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        },
+        {
+          "dataset": "derail-multi",
+          "sourceId": "i1-delay@35",
+          "branchExpected": false,
+          "comparedIntervention": true,
+          "humanAgreement": "clear",
+          "basis": "expectedNudge"
+        }
+      ]
+    }
+  }
+}
