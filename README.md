@@ -6,9 +6,10 @@
 
 ### *Ambient Intelligence, Discreet Agent.*
 
-[デモ（URL未設定）](#) · [LP（URL未設定）](#)
+https://www.youtube.com/watch?v=t5-KOYChHzg
 
-[Jevチューニングの手法・最終評価](docs/jev-tuning/timeline.md)
+ [スライド](https://docs.google.com/presentation/d/1MYe5R_gOezwBCerSCQ0umttwZnOfwg8j0fbe0uMLkHI/edit?slide=id.h29d553f4c0943f52_1_17#slide=id.h29d553f4c0943f52_1_17)
+
 
 ## 目次
 
@@ -46,7 +47,10 @@
 
 ### 製品説明
 
-AIDA（Ambient Intelligence, Discreet Agent）は、必要なときだけ議論を戻す AI ファシリテーターです。
+
+**AIDA（Ambient Intelligence, Discreet Agent）は、必要なときだけ議論を戻す AI ファシリテーターです**
+
+
 空気のように会議に同席し、必要なときだけ手を貸します。
 それ以外は端にいて、誰の出番も奪わず、有益な寄り道は止めず、進行の役を、特定の参加者には任せません。
 参加者の心理的な負担を減らし、会議の邪魔をせず、そっと流れを整えることを目指します。
