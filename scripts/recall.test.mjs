@@ -529,6 +529,35 @@ test('audio mode fails before creating a bot when worker is unavailable', async 
   } finally { box.cleanup(); }
 });
 
+test('Vercel audio checks remote readiness and registers bot without local session state', async () => {
+  const calls = [];
+  const { io } = capture({ statePath: null, env: {
+    VERCEL: '1', ENABLE_REALTIME_TRANSCRIPTION: 'true', AI_PROVIDER: 'jev', ALLOW_PAID_AI: 'true',
+    AI_GATEWAY_API_KEY: 'test', RECALL_CONTROL_TOKEN: 'c'.repeat(40), RECALL_AUDIO_TOKEN: 'a'.repeat(40),
+    RECALL_AUDIO_PUBLIC_URL: 'wss://worker.example.test', RECALL_AUDIO_WORKER_URL: 'https://worker.example.test',
+  }, fetch: async (url, options) => {
+    calls.push([String(url), options]);
+    return jsonResponse(200, String(url).endsWith('/bot/') ? { id: 'bot-remote' } : { ready: true });
+  } });
+  await sendBot('https://meet.google.com/abc-defg-hij', io, 'Remote agenda', { multiple: true });
+  assert.deepEqual(calls.map(([url]) => new URL(url).pathname), ['/ready', '/api/v1/bot/', '/sessions']);
+  assert.equal(JSON.parse(calls[2][1].body).agenda, 'Remote agenda');
+});
+
+test('remote registration failure compensates by leaving only the bot it created', async () => {
+  const calls = [];
+  const { io } = capture({ statePath: null, env: {
+    VERCEL: '1', ENABLE_REALTIME_TRANSCRIPTION: 'true', AI_PROVIDER: 'jev', ALLOW_PAID_AI: 'true',
+    AI_GATEWAY_API_KEY: 'test', RECALL_CONTROL_TOKEN: 'c'.repeat(40), RECALL_AUDIO_TOKEN: 'a'.repeat(40),
+    RECALL_AUDIO_PUBLIC_URL: 'wss://worker.example.test', RECALL_AUDIO_WORKER_URL: 'https://worker.example.test',
+  }, fetch: async url => {
+    calls.push(String(url));
+    return jsonResponse(String(url).endsWith('/sessions') ? 503 : 200, String(url).endsWith('/bot/') ? { id: 'created-remote-bot' } : {});
+  } });
+  await assert.rejects(sendBot('https://meet.google.com/abc-defg-hij', io, 'Agenda', { multiple: true }), error => error.status === 503);
+  assert.ok(calls.at(-1).endsWith('/bot/created-remote-bot/leave_call/'));
+});
+
 
 test('Vercel state uses writable temporary storage while local CLI keeps its existing path', () => {
   assert.equal(localRecallIo({ VERCEL: '1' }).statePath, path.join(tmpdir(), 'meeting-facilitator-recall', 'current.json'));

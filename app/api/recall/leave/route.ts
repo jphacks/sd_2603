@@ -3,6 +3,7 @@ import { meetingOwner } from "@/lib/recall/browser-session";
 import { invalidateOwnedMeetings } from "@/lib/recall/owned-meetings";
 import { monitorStore } from "@/lib/monitor/store";
 import { controlAccessError } from "@/lib/recall/controller";
+import { remoteAudioEnabled, stopRemoteAudio } from "@/lib/recall/audio-bridge";
 
 export async function POST(request: Request) {
   const denied = controlAccessError(request, process.env.RECALL_CONTROL_TOKEN);
@@ -20,6 +21,7 @@ export async function POST(request: Request) {
     await verifyMeetingBot(io, id, owner);
     const result = await removeBot(io, id);
     if (result.left) {
+      if (remoteAudioEnabled()) await stopRemoteAudio(id);
       invalidateOwnedMeetings(owner);
       monitorStore.deactivate(id);
       return Response.json({

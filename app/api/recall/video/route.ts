@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { audioBridge, remoteAudioEnabled } from "@/lib/recall/audio-bridge";
 import { AGENDA_CHAR_LIMIT, AgendaChangedError, assertAgendaSnapshot, getAgendaSnapshot, withAgendaSnapshot } from "@/lib/agenda/agenda";
 import { monitoredJudge } from "@/lib/monitor/judge";
 import { monitorStore } from "@/lib/monitor/store";
@@ -87,6 +88,7 @@ export async function POST(request: Request) {
 
   try {
     const input = InputSchema.parse(await readBoundedJson(request));
+    if (remoteAudioEnabled()) return audioBridge(input.botId, "/api/recall/video", { body: input });
     if (input.mode === "agenda") {
       return Response.json(getAgendaSnapshot(input.botId, input.agenda));
     }

@@ -1,6 +1,7 @@
 import { meetingOwner } from "@/lib/recall/browser-session";
 import { ownedMeetings } from "@/lib/recall/owned-meetings";
 import { z } from "zod";
+import { audioBridge, remoteAudioEnabled } from "@/lib/recall/audio-bridge";
 import { MAX_MATERIAL_BYTES, MAX_MATERIAL_UPLOADS, ingestJoinMaterials } from "@/lib/agenda/materials";
 
 const BotIdSchema = z.string().uuid();
@@ -32,6 +33,9 @@ export async function POST(request: Request) {
       : { name: entry.name, bytes: new Uint8Array(await entry.arrayBuffer()) });
   }
 
+  if (remoteAudioEnabled()) return audioBridge(botId, "/api/recall/materials", {
+    files: files.filter(file => file.bytes !== null).map(file => ({ name: file.name, base64: Buffer.from(file.bytes!).toString("base64") })),
+  });
   const result = await ingestJoinMaterials({ botId, files });
   return Response.json({ saved: result.saved, items: result.items });
 }

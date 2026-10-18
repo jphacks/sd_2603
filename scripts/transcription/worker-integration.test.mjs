@@ -27,12 +27,13 @@ async function waitFor(predicate, message, ms = 8000) {
   }
 }
 
-async function setup(transcripts, action = 'WAIT') {
+async function setup(transcripts, action = 'WAIT', remote = false) {
   const directory = await mkdtemp(join(tmpdir(), 'meeting-worker-test-'));
   await mkdir(join(directory, '.recall/bots'), { recursive: true });
   await writeFile(join(directory, `.recall/bots/${botId}.json`), JSON.stringify({ id: botId, agenda: 'Synthetic integration agenda' }));
   await writeFile(join(directory, '.recall/bots/meeting-b.json'), JSON.stringify({ id: 'meeting-b', agenda: 'Meeting B agenda' }));
   await writeFile(join(directory, '.recall/current.json'), JSON.stringify({ id: botId, agenda: 'Synthetic integration agenda', audioEnabled: true, createdAt: new Date().toISOString() }));
+  if (remote) await rm(join(directory, '.recall'), { recursive: true, force: true });
   const requests = [];
   const requestTimes = [];
   const recommendationIds = [];
@@ -67,6 +68,7 @@ async function setup(transcripts, action = 'WAIT') {
       RECALL_CONTROL_TOKEN: controlToken, RECALL_AUDIO_PORT: String(audioPort),
       VIDEO_CONTROL_URL: `http://127.0.0.1:${controlPort}/api/recall/video`,
       TEST_GATEWAY_TRANSCRIPTS: JSON.stringify(transcripts),
+      RECALL_AUDIO_BRIDGE_MODE: remote ? 'true' : 'false',
     },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
@@ -91,6 +93,10 @@ async function setup(transcripts, action = 'WAIT') {
     await waitFor(() => output.includes('Recall audio worker ready') || worker.exitCode !== null, 'Worker startup timed out');
     assert.equal(worker.exitCode, null, output);
     assert.equal((await fetch(`http://127.0.0.1:${audioPort}/health`)).status, 200);
+    if (remote) {
+      const response = await fetch(`http://127.0.0.1:${audioPort}/sessions`, { method: 'POST', headers: { Authorization: `Bearer ${audioToken}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ id: botId, agenda: 'Remote staging agenda' }) });
+      assert.equal(response.status, 200);
+    }
     socket = new WebSocket(`ws://127.0.0.1:${audioPort}/recall/audio/?token=${audioToken}`);
     socket.on('error', () => {});
     await once(socket, 'open');
@@ -102,6 +108,16 @@ async function setup(transcripts, action = 'WAIT') {
     }, requests, requestTimes, recommendationIds, socket, setAgenda(value) { agendaSnapshot = value; }, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
   } catch (error) { await cleanup(); throw error; }
 }
+
+test('staging-registered bot reaches evaluation through real worker without any local session file', { timeout: 15000 }, async () => {
+  const trial = await setup(['remote transcript'], 'WAIT', true);
+  try {
+    trial.utterance();
+    await waitFor(() => trial.requests.some(request => request.mode === 'evaluate'), 'Remote session did not reach evaluation');
+    assert.equal(trial.requests[0].agenda, 'Remote staging agenda');
+    assert.deepEqual(trial.requests[1].transcript, ['remote transcript']);
+  } finally { await trial.cleanup(); }
+});
 
 test('real worker routes Recall PCM through SDK final and quiet gate to local WAIT API', { timeout: 15000 }, async () => {
   const trial = await setup(['synthetic first utterance']);

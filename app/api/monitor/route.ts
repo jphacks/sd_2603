@@ -4,6 +4,7 @@ import { connection } from "next/server";
 import { parseMeetingSelection } from "@/lib/monitor/meeting";
 import { resolveMeetingSession } from "@/lib/monitor/resolve-meeting";
 import { monitorStore } from "@/lib/monitor/store";
+import { audioBridge, remoteAudioEnabled } from "@/lib/recall/audio-bridge";
 
 export async function GET(request: Request) {
   await connection();
@@ -20,6 +21,7 @@ export async function GET(request: Request) {
   } else {
     sessionId = meeting !== null ? await resolveMeetingSession(meeting) : monitorStore.activeSession();
   }
+  if (sessionId && remoteAudioEnabled()) return audioBridge(sessionId, `/api/monitor/${sessionId}`);
   return Response.json(
     {
       sessionId,
