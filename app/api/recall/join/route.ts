@@ -1,4 +1,5 @@
 import { RecallCliError, localRecallIo, sendBot } from "@/scripts/recall.mjs";
+import { monitorStore } from "@/lib/monitor/store";
 import { authorizedControl } from "@/lib/recall/controller";
 
 export async function POST(request: Request) {
@@ -19,6 +20,7 @@ export async function POST(request: Request) {
 
   try {
     const sent = await sendBot(meetingUrl, localRecallIo(), agenda);
+    monitorStore.activate(sent.id);
     return Response.json(sent);
   } catch (error) {
     if (error instanceof RecallCliError) {

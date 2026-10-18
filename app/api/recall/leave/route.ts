@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { localRecallIo, removeBot } from "@/scripts/recall.mjs";
+import { monitorStore } from "@/lib/monitor/store";
 import { authorizedControl } from "@/lib/recall/controller";
 
 export async function POST(request: Request) {
@@ -21,6 +22,7 @@ export async function POST(request: Request) {
   try {
     const result = await removeBot(io, id);
     if (result.left) {
+      monitorStore.deactivate(id);
       return Response.json({
         id: result.id,
         left: true,

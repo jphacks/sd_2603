@@ -6,7 +6,7 @@ export async function GET(
   const { sessionId } = await context.params;
   if (!/^[A-Za-z0-9_-]{1,128}$/.test(sessionId))
     return Response.json({ error: "Invalid session" }, { status: 400 });
-  return Response.json(monitorStore.read(sessionId), {
+  return Response.json({ sessionId, ...monitorStore.read(sessionId) }, {
     headers: { "Cache-Control": "no-store" },
   });
 }
