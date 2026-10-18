@@ -1,0 +1,11 @@
+{
+  "title": "sample-smalltalk",
+  "agenda": "来週の定例ミーティングの日程",
+  "utterances": [
+    { "speaker": "A", "text": "おつかれさまです。今日はお昼どうしました？", "delayMs": 500 },
+    { "speaker": "B", "text": "駅前の定食屋に行きました。混んでましたね。", "delayMs": 2000 },
+    { "speaker": "A", "text": "ところで来週の定例、水曜で大丈夫ですか？", "delayMs": 2000 },
+    { "speaker": "B", "text": "水曜の午後なら空いています。", "delayMs": 2000 },
+    { "speaker": "A", "text": "じゃあ水曜の14時にしましょう。", "delayMs": 2000 }
+  ]
+}

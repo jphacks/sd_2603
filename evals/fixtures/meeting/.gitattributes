@@ -1,0 +1,4 @@
+# Preserve fixture bytes so manifest SHA-256 values survive checkout.
+audio/** -text
+replays/** -text
+source/** -text whitespace=cr-at-eol
