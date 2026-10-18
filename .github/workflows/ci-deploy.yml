@@ -19,9 +19,9 @@ env:
   NEXT_TELEMETRY_DISABLED: '1'
   AI_PROVIDER: mock
   ALLOW_PAID_AI: 'false'
-  # Only staging runs real Jev; checks and other environments keep their existing policy.
-  DEPLOY_AI_PROVIDER: ${{ github.ref == 'refs/heads/staging' && 'jev' || 'mock' }}
-  DEPLOY_ALLOW_PAID_AI: ${{ github.ref == 'refs/heads/staging' && 'true' || 'false' }}
+  # Staging and Production run verified Jev; CI checks remain Mock.
+  DEPLOY_AI_PROVIDER: ${{ (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main') && 'jev' || 'mock' }}
+  DEPLOY_ALLOW_PAID_AI: ${{ (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main') && 'true' || 'false' }}
   # Owner-approved: staging UI visitors may join/leave without entering the server token.
   DEPLOY_BROWSER_CONTROL_ENABLED: ${{ github.ref == 'refs/heads/staging' && 'true' || 'false' }}
   # PRs and manual runs always validate without deployment credentials.
