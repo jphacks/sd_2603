@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 
   try {
     const sent = await sendBot(meetingUrl, localRecallIo(), agenda);
-    monitorStore.activate(sent.id);
+    monitorStore.activate(sent.id, meetingUrl);
     return Response.json(sent);
   } catch (error) {
     if (error instanceof RecallCliError) {

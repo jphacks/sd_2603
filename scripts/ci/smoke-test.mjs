@@ -59,6 +59,10 @@ try {
   assert.equal((await request('/api/test-ai')).status, 403);
   const initialMonitor = await (await request('/api/monitor')).json();
   assert.equal(initialMonitor.sessionId, 'judge');
+  const missingMeeting = await (await request('/api/monitor?meeting=https%3A%2F%2Fmeet.google.com%2Fabc-defg-hij')).json();
+  assert.equal(missingMeeting.sessionId, null);
+  assert.equal(missingMeeting.snapshot, null);
+  assert.equal((await request('/api/monitor?meeting=https%3A%2F%2Fexample.com%2Fabc-defg-hij')).status, 400);
   const botId = randomUUID();
   const agenda = 'Synthetic device integration';
   const postControl = body => request('/api/recall/video', {

@@ -5,7 +5,7 @@ import type { MonitorResponse } from "../../lib/monitor/schema";
 import { ScoreMonitor } from "./ScoreMonitor";
 import type { Connection } from "./ScoreMonitor";
 
-export function MonitorConnection({ sessionId }: { sessionId?: string }) {
+export function MonitorConnection({ sessionId, meetingUrl }: { sessionId?: string; meetingUrl?: string }) {
   const [data, setData] = useState<MonitorResponse | null>(null);
   const [connection, setConnection] = useState<Connection>("connecting");
   useEffect(() => {
@@ -17,7 +17,7 @@ export function MonitorConnection({ sessionId }: { sessionId?: string }) {
       if (!document.hidden) {
         try {
           const response = await fetch(
-            sessionId ? `/api/monitor/${encodeURIComponent(sessionId)}` : "/api/monitor",
+            sessionId ? `/api/monitor/${encodeURIComponent(sessionId)}` : meetingUrl ? `/api/monitor?meeting=${encodeURIComponent(meetingUrl)}` : "/api/monitor",
             { cache: "no-store", signal: abort.signal },
           );
           if (!response.ok) throw new Error("Monitor unavailable");
@@ -40,12 +40,12 @@ export function MonitorConnection({ sessionId }: { sessionId?: string }) {
       abort.abort();
       clearTimeout(timer);
     };
-  }, [sessionId]);
+  }, [sessionId, meetingUrl]);
   return (
     <div style={{ width: "100%", maxWidth: 560 }}>
       <p style={{ color: "#afc3cd", fontSize: 13, margin: "0 0 12px", overflowWrap: "anywhere" }}>
-        {sessionId ? "選択した会議" : "参加中の会議を自動表示"}
-        {data?.sessionId ? ` · MTG ID: ${data.sessionId}` : " · 会議への参加を待っています"}
+        {meetingUrl ? `会議: ${meetingUrl}` : sessionId ? "選択した会議" : "参加中の会議を自動表示"}
+        {data?.sessionId ? ` · MTG ID: ${data.sessionId}` : meetingUrl ? " · この会議の参加情報を待っています" : " · 会議への参加を待っています"}
         <br />会議でJevが判定するたびに更新します（2秒ごとに取得）。
       </p>
       <ScoreMonitor envelope={data} connection={connection} />
