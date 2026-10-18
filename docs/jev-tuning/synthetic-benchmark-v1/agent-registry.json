@@ -1,0 +1,18 @@
+{
+  "author_a": {
+    "agent": "/root/rubric",
+    "primaryJudge": "judge_b",
+    "judgeAgent": "/root/train_labels"
+  },
+  "author_b": {
+    "agent": "/root/train_labels",
+    "primaryJudge": "judge_c",
+    "judgeAgent": "/root/corpus_research"
+  },
+  "author_c": {
+    "agent": "/root/corpus_research",
+    "primaryJudge": "judge_a",
+    "judgeAgent": "/root/rubric"
+  },
+  "reviewer": "root or third subagent with no authorship of the reviewed family"
+}

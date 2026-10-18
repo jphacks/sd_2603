@@ -1,0 +1,43 @@
+{
+  "state": "incomplete",
+  "generated": 150,
+  "primaryLabeled": 50,
+  "packaged": 50,
+  "reviewed": 0,
+  "uncertain": 0,
+  "designCountsForPackaged": {
+    "drift": 15,
+    "stalled": 15,
+    "clear_ok": 5,
+    "borderline_ok": 15
+  },
+  "actualLabels": {
+    "INTERVENE_DRIFT": 15,
+    "INTERVENE_STALLED": 15,
+    "OK": 20
+  },
+  "intentLabelDifferences": [],
+  "splits": {
+    "train": {
+      "n": 50,
+      "labels": {
+        "INTERVENE_DRIFT": 15,
+        "INTERVENE_STALLED": 15,
+        "OK": 20
+      }
+    },
+    "validation": {
+      "n": 0,
+      "labels": {}
+    },
+    "test": {
+      "n": 0,
+      "labels": {}
+    }
+  },
+  "warnings": [
+    "Synthetic evaluation only; not real meetings, human gold or measured Jev accuracy.",
+    "secondsSinceLastIntervention=120 is a fixed synthetic input, not a measured time.",
+    "Primary judges received no author intent or Jev predictions."
+  ]
+}

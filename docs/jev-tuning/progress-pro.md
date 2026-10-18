@@ -95,3 +95,14 @@
 - Next.js feedback pass: no qualifying Next.js behavior issue encountered in this data-only extension.
 
 - Supplemental CaSiNo2 candidates also checked against the fixed1030-dialogue JSON: source SHA, dialogue ID, 1-based range, speaker and text all match.
+
+## Synthetic benchmark v1 — new task (2026-10-18 09:48 JST start)
+
+- New directory: `synthetic-benchmark-v1/`; previous datasets preserved. Existing8997c70/96102b3 reused, no research restart.
+- Specification/split checkpoint21c6e7e, research-map checkpoint4cf3744 pushed before bulk conversation writing.
+- Target500 (design D150/S150/borderlineOK150/clearOK50), 100 new scenario families, Train300/Validation100/Test100, stable Train group folds0–4. Extension to1000 only if quality and time permit; frozen500 splits must not move.
+- AuthorA=rubric, AuthorB=train_labels, AuthorC=corpus_research. Each first writes50 Train cases, then judges another author's blind packet. No judge sees their own authored cases or other-author intention.
+- Generated0 / labeled0 / audited0 at specification freeze. Expected500 by11:00 if first batches maintain pace;1000 is conditional, not promised. Next10:30 checkpoint.
+- No Gateway, paid model API, Jev predictions, application/runner/policy changes, staging merge. Synthetic Test remains explicitly synthetic for integration owner to support.
+
+- Core500 first labeled checkpoint: completed generation=150, primary labels=50, packaged/structurally audited=50; split={'train': {'n': 50, 'labels': {'INTERVENE_DRIFT': 15, 'INTERVENE_STALLED': 15, 'OK': 20}}, 'validation': {'n': 0, 'labels': {}}, 'test': {'n': 0, 'labels': {}}}; intent differences=0. Previous Push=6b42921. Still incomplete; remaining author/judge packets underway.

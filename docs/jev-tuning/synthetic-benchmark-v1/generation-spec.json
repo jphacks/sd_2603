@@ -1,6 +1,6 @@
 {
   "version": "synthetic-benchmark-v1",
-  "createdJST": "2026-10-18T09:53:00+09:00",
+  "createdJST": "2026-10-18T09:50:48+09:00",
   "minimum": 500,
   "target": 1000,
   "core500": {
@@ -5034,5 +5034,6 @@
       ],
       "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
     }
-  ]
+  ],
+  "timestampNote": "Metadata timestamp corrected to actual first specification commit time before text authoring; assignments unchanged."
 }
