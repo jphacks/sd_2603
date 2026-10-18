@@ -1,0 +1,1656 @@
+{
+  "version": "synthetic-benchmark-v1",
+  "instructions": "Read only this author plan for own families; never read other author plans or generation-spec full while serving as judge. Write every utterance in full; no name-only swaps.",
+  "families": [
+    {
+      "familyId": "scenario-family-035",
+      "ordinal": 35,
+      "domain": "障害対応",
+      "scene": "一部利用者だけログインできない原因を絞る",
+      "split": "train",
+      "fold": 2,
+      "author": "author_b",
+      "style": "軽微な言い直し・聞き間違い",
+      "participants": 5,
+      "driftPhenomenon": "意思決定に影響しない細部が中心になる",
+      "stallPhenomenon": "同じ主張が根拠追加なく往復する",
+      "normalCounterexample": "情報を整理して相互理解をそろえる",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-325bca3a737859"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-4f9c5f0b838d88"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-2933a5059eadd8"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-f7dc2c1db2e091"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-44e458a77b4cdc"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-036",
+      "ordinal": 36,
+      "domain": "障害対応",
+      "scene": "在庫数のずれが起きる条件を検証する",
+      "split": "train",
+      "fold": 3,
+      "author": "author_b",
+      "style": "丁寧語中心",
+      "participants": 2,
+      "driftPhenomenon": "解決済みの別論点へ逆戻りする",
+      "stallPhenomenon": "同じ主張が根拠追加なく往復する",
+      "normalCounterexample": "合意された発散段階",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-3834684e061a09"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-b18f3efe069886"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-3323c14b2fe842"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-9cc1705b3988b0"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-43b33ae85e4282"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-037",
+      "ordinal": 37,
+      "domain": "障害対応",
+      "scene": "監視アラートの担当引き継ぎを決める",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b",
+      "style": "口語中心",
+      "participants": 3,
+      "driftPhenomenon": "無関係な雑談が連鎖する",
+      "stallPhenomenon": "比較基準がないまま選択だけを繰り返す",
+      "normalCounterexample": "許可された休憩または明示的な思考時間",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-3f3133cb74d1c6"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-14efb9b94f4391"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-133b8d7b948856"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-90edfa1be5d435"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-fb675612e3dec2"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-038",
+      "ordinal": 38,
+      "domain": "障害対応",
+      "scene": "録画データの欠落に対する調査順を決める",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b",
+      "style": "職種混在の言い回し",
+      "participants": 4,
+      "driftPhenomenon": "議題の目的が別の目標にすり替わる",
+      "stallPhenomenon": "比較基準がないまま選択だけを繰り返す",
+      "normalCounterexample": "一度逸れたが観測末尾までに復帰",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-f091dc33512aa6"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-852c24429d8e13"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-30be9a114a5fc9"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-0d595d02a3a916"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-388e9755ea466c"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-039",
+      "ordinal": 39,
+      "domain": "障害対応",
+      "scene": "接続断が続く計測器の代替運用を決める",
+      "split": "test",
+      "fold": null,
+      "author": "author_b",
+      "style": "軽微な言い直し・聞き間違い",
+      "participants": 5,
+      "driftPhenomenon": "意思決定に影響しない細部が中心になる",
+      "stallPhenomenon": "比較基準がないまま選択だけを繰り返す",
+      "normalCounterexample": "障害を段階的に修復中",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-cbc82130d01f6f"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-5dbf5beaa3744e"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-0c4e0c7cbccb6f"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-ec033475f1fed4"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-e50796d44cfc30"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-040",
+      "ordinal": 40,
+      "domain": "障害対応",
+      "scene": "再発防止策が守られているか点検する",
+      "split": "test",
+      "fold": null,
+      "author": "author_b",
+      "style": "丁寧語中心",
+      "participants": 2,
+      "driftPhenomenon": "解決済みの別論点へ逆戻りする",
+      "stallPhenomenon": "比較基準がないまま選択だけを繰り返す",
+      "normalCounterexample": "結論は未定だが比較軸または担当が増える",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-3273744b9a9172"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-6ad35b3406a55f"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-cbdaa9da3c8de3"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-317f70ede09d1d"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-42567b5b899d66"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-041",
+      "ordinal": 41,
+      "domain": "営業",
+      "scene": "短期契約の顧客へ更新提案する条件を決める",
+      "split": "train",
+      "fold": 4,
+      "author": "author_b",
+      "style": "口語中心",
+      "participants": 3,
+      "driftPhenomenon": "無関係な雑談が連鎖する",
+      "stallPhenomenon": "担当と決定権が不在のまま押し戻し合う",
+      "normalCounterexample": "判断へ役立つ寄り道",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-149055406508d2"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-807b3caa931521"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-4bfbeff2f66583"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-9fda992e20fa05"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-1cabea0f4cbce9"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-042",
+      "ordinal": 42,
+      "domain": "営業",
+      "scene": "複数拠点導入の見積もり範囲をそろえる",
+      "split": "train",
+      "fold": 0,
+      "author": "author_b",
+      "style": "職種混在の言い回し",
+      "participants": 4,
+      "driftPhenomenon": "議題の目的が別の目標にすり替わる",
+      "stallPhenomenon": "担当と決定権が不在のまま押し戻し合う",
+      "normalCounterexample": "根拠が増える建設的対立",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-c955333ca2b8a6"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-c315466b39afa5"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-32a3abed900657"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-c1d1b9ed273c15"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-700f725869a0e9"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-043",
+      "ordinal": 43,
+      "domain": "営業",
+      "scene": "失注理由を次の提案へ反映する",
+      "split": "train",
+      "fold": 1,
+      "author": "author_b",
+      "style": "軽微な言い直し・聞き間違い",
+      "participants": 5,
+      "driftPhenomenon": "意思決定に影響しない細部が中心になる",
+      "stallPhenomenon": "担当と決定権が不在のまま押し戻し合う",
+      "normalCounterexample": "情報を整理して相互理解をそろえる",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-3787bc6743de95"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-a201e1b31b5877"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-bba90aa1e8a63c"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-9cdb6d777533c0"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-bce78dec484436"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-044",
+      "ordinal": 44,
+      "domain": "営業",
+      "scene": "代理店と自社の問い合わせ窓口を分ける",
+      "split": "train",
+      "fold": 2,
+      "author": "author_b",
+      "style": "丁寧語中心",
+      "participants": 2,
+      "driftPhenomenon": "解決済みの別論点へ逆戻りする",
+      "stallPhenomenon": "担当と決定権が不在のまま押し戻し合う",
+      "normalCounterexample": "合意された発散段階",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-375696db56c9a0"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-532ce626b864ab"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-5304e6ee004889"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-3692b84e40a571"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-265685271dd609"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-045",
+      "ordinal": 45,
+      "domain": "営業",
+      "scene": "急ぎの見積もりで省略できない確認を決める",
+      "split": "train",
+      "fold": 3,
+      "author": "author_b",
+      "style": "口語中心",
+      "participants": 3,
+      "driftPhenomenon": "無関係な雑談が連鎖する",
+      "stallPhenomenon": "回答済みまたは未解決の問いが更新なく循環する",
+      "normalCounterexample": "許可された休憩または明示的な思考時間",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-e037c9ba68014c"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-655547a947821f"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-432f100b9634e2"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-9b686394ba416a"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-fd6e61426a8b36"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-046",
+      "ordinal": 46,
+      "domain": "営業",
+      "scene": "新規顧客向け実演の構成を選ぶ",
+      "split": "train",
+      "fold": 4,
+      "author": "author_b",
+      "style": "職種混在の言い回し",
+      "participants": 4,
+      "driftPhenomenon": "議題の目的が別の目標にすり替わる",
+      "stallPhenomenon": "回答済みまたは未解決の問いが更新なく循環する",
+      "normalCounterexample": "一度逸れたが観測末尾までに復帰",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-35c22639225c00"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-c569bfc2a898e1"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-e58501faf4d041"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-a82cbe2e3186ab"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-e2c1a540dfae7f"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-047",
+      "ordinal": 47,
+      "domain": "営業",
+      "scene": "値引きと納期短縮のどちらを提案するか決める",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b",
+      "style": "軽微な言い直し・聞き間違い",
+      "participants": 5,
+      "driftPhenomenon": "意思決定に影響しない細部が中心になる",
+      "stallPhenomenon": "回答済みまたは未解決の問いが更新なく循環する",
+      "normalCounterexample": "障害を段階的に修復中",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-364ef1ce0fe132"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-8bd59911a5388f"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-36c13be7b7ecc8"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-2f646cdbbd1577"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-c917fa644bc42f"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-048",
+      "ordinal": 48,
+      "domain": "営業",
+      "scene": "利用が少ない顧客への聞き取りを設計する",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b",
+      "style": "丁寧語中心",
+      "participants": 2,
+      "driftPhenomenon": "解決済みの別論点へ逆戻りする",
+      "stallPhenomenon": "回答済みまたは未解決の問いが更新なく循環する",
+      "normalCounterexample": "結論は未定だが比較軸または担当が増える",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-9837cc5cf99b2f"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-e6db2bca7a725d"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-8cb08e32bd55fd"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-23caa58ef225c8"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-74c3a6fdbd66f8"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-049",
+      "ordinal": 49,
+      "domain": "営業",
+      "scene": "導入前に必要な顧客データを確認する",
+      "split": "test",
+      "fold": null,
+      "author": "author_b",
+      "style": "口語中心",
+      "participants": 3,
+      "driftPhenomenon": "無関係な雑談が連鎖する",
+      "stallPhenomenon": "同じ主張が根拠追加なく往復する",
+      "normalCounterexample": "判断へ役立つ寄り道",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-5ea8c854de7626"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-c02e568db4112b"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-beb2cb490993f2"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-20744dce846b94"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-a3bdb7b9e4de2f"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-050",
+      "ordinal": 50,
+      "domain": "営業",
+      "scene": "追加発注の数量条件をすり合わせる",
+      "split": "test",
+      "fold": null,
+      "author": "author_b",
+      "style": "職種混在の言い回し",
+      "participants": 4,
+      "driftPhenomenon": "議題の目的が別の目標にすり替わる",
+      "stallPhenomenon": "同じ主張が根拠追加なく往復する",
+      "normalCounterexample": "根拠が増える建設的対立",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-13c3097b866310"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-fd535bd7287947"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-1ccd0cbb911b4a"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-52f6b77d44db38"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-cc7c404554a946"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-051",
+      "ordinal": 51,
+      "domain": "採用",
+      "scene": "面接で確かめたい業務上の判断力を定義する",
+      "split": "train",
+      "fold": 0,
+      "author": "author_b",
+      "style": "軽微な言い直し・聞き間違い",
+      "participants": 5,
+      "driftPhenomenon": "意思決定に影響しない細部が中心になる",
+      "stallPhenomenon": "同じ主張が根拠追加なく往復する",
+      "normalCounterexample": "情報を整理して相互理解をそろえる",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-4604030295aa09"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-224cf2d908859d"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-706e8618b09ce4"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-3bdb7628f9ec97"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-e26257ef288714"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-052",
+      "ordinal": 52,
+      "domain": "採用",
+      "scene": "候補者への課題提出の負担を見直す",
+      "split": "train",
+      "fold": 1,
+      "author": "author_b",
+      "style": "丁寧語中心",
+      "participants": 2,
+      "driftPhenomenon": "解決済みの別論点へ逆戻りする",
+      "stallPhenomenon": "同じ主張が根拠追加なく往復する",
+      "normalCounterexample": "合意された発散段階",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-9e6db6d9e93d96"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-15f5d2e190d93a"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-16d219c0250ebe"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-3c59edd83ddfce"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-5bb963ad7e8e67"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-053",
+      "ordinal": 53,
+      "domain": "採用",
+      "scene": "配属希望と受け入れ部署の条件を調整する",
+      "split": "train",
+      "fold": 2,
+      "author": "author_b",
+      "style": "口語中心",
+      "participants": 3,
+      "driftPhenomenon": "無関係な雑談が連鎖する",
+      "stallPhenomenon": "比較基準がないまま選択だけを繰り返す",
+      "normalCounterexample": "許可された休憩または明示的な思考時間",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-3f4c847b1d3ccb"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-43ecb4c7883b43"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-5f1d92ac4cabfa"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-8d2f59744125af"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-1f2b5ac44e2bc8"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-054",
+      "ordinal": 54,
+      "domain": "採用",
+      "scene": "採用説明会で現場を紹介する方法を決める",
+      "split": "train",
+      "fold": 3,
+      "author": "author_b",
+      "style": "職種混在の言い回し",
+      "participants": 4,
+      "driftPhenomenon": "議題の目的が別の目標にすり替わる",
+      "stallPhenomenon": "比較基準がないまま選択だけを繰り返す",
+      "normalCounterexample": "一度逸れたが観測末尾までに復帰",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-1ab4e17a7d143a"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-a8465b9ff4cb98"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-48dc30114fe171"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-553df131c51f03"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-c0ca71593bfdec"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-055",
+      "ordinal": 55,
+      "domain": "採用",
+      "scene": "面接担当者ごとの評価のずれを整える",
+      "split": "train",
+      "fold": 4,
+      "author": "author_b",
+      "style": "軽微な言い直し・聞き間違い",
+      "participants": 5,
+      "driftPhenomenon": "意思決定に影響しない細部が中心になる",
+      "stallPhenomenon": "比較基準がないまま選択だけを繰り返す",
+      "normalCounterexample": "障害を段階的に修復中",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-bc58f940a04425"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-ca5844d257d101"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-7dd70ba905fc02"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-9b219f2a1fc3db"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-3ca542537b2e19"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-056",
+      "ordinal": 56,
+      "domain": "採用",
+      "scene": "新入社員の初月研修の順序を決める",
+      "split": "train",
+      "fold": 0,
+      "author": "author_b",
+      "style": "丁寧語中心",
+      "participants": 2,
+      "driftPhenomenon": "解決済みの別論点へ逆戻りする",
+      "stallPhenomenon": "比較基準がないまま選択だけを繰り返す",
+      "normalCounterexample": "結論は未定だが比較軸または担当が増える",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-4876f9d6d23b4e"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-1eab26641109fb"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-82e629556acb93"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-40f722a8514be1"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-45a045a25db697"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-057",
+      "ordinal": 57,
+      "domain": "採用",
+      "scene": "繁忙期に選考が止まらない日程を組む",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b",
+      "style": "口語中心",
+      "participants": 3,
+      "driftPhenomenon": "無関係な雑談が連鎖する",
+      "stallPhenomenon": "担当と決定権が不在のまま押し戻し合う",
+      "normalCounterexample": "判断へ役立つ寄り道",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-d1aee3d6dc3b68"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-2ed67923444c1b"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-0d3d3865fcdd37"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-4d336c45ae455e"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-b70207fd786a99"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-058",
+      "ordinal": 58,
+      "domain": "採用",
+      "scene": "候補者からの質問への回答窓口を決める",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b",
+      "style": "職種混在の言い回し",
+      "participants": 4,
+      "driftPhenomenon": "議題の目的が別の目標にすり替わる",
+      "stallPhenomenon": "担当と決定権が不在のまま押し戻し合う",
+      "normalCounterexample": "根拠が増える建設的対立",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-d82a7df08fe0a2"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-210be68217a950"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-93936b590e2bb7"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-778b873a888a34"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-ee0d234103375a"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-059",
+      "ordinal": 59,
+      "domain": "採用",
+      "scene": "職務内容の説明文を実際の業務へ合わせる",
+      "split": "test",
+      "fold": null,
+      "author": "author_b",
+      "style": "軽微な言い直し・聞き間違い",
+      "participants": 5,
+      "driftPhenomenon": "意思決定に影響しない細部が中心になる",
+      "stallPhenomenon": "担当と決定権が不在のまま押し戻し合う",
+      "normalCounterexample": "情報を整理して相互理解をそろえる",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-c25b70a250055c"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-50d00380c22fae"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-d9a6f29bb3b314"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-796f752c61fd91"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-2119b7d44fc116"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-060",
+      "ordinal": 60,
+      "domain": "採用",
+      "scene": "辞退後の聞き取り項目を決める",
+      "split": "test",
+      "fold": null,
+      "author": "author_b",
+      "style": "丁寧語中心",
+      "participants": 2,
+      "driftPhenomenon": "解決済みの別論点へ逆戻りする",
+      "stallPhenomenon": "担当と決定権が不在のまま押し戻し合う",
+      "normalCounterexample": "合意された発散段階",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-8b6131db4d5491"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-e4414eed0636a1"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-e907d93a97d78b"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-cf5046facf0daa"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-5e72866b9bdfc8"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-061",
+      "ordinal": 61,
+      "domain": "研究",
+      "scene": "予備実験の失敗原因と次の条件を整理する",
+      "split": "train",
+      "fold": 1,
+      "author": "author_b",
+      "style": "口語中心",
+      "participants": 3,
+      "driftPhenomenon": "無関係な雑談が連鎖する",
+      "stallPhenomenon": "回答済みまたは未解決の問いが更新なく循環する",
+      "normalCounterexample": "許可された休憩または明示的な思考時間",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-2555b98587be63"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-b19479432c353a"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-1844bc0254ca32"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-e6a79f33b2fff5"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-f1e9e096e5306a"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-062",
+      "ordinal": 62,
+      "domain": "研究",
+      "scene": "共同実験で測定器の校正手順をそろえる",
+      "split": "train",
+      "fold": 2,
+      "author": "author_b",
+      "style": "職種混在の言い回し",
+      "participants": 4,
+      "driftPhenomenon": "議題の目的が別の目標にすり替わる",
+      "stallPhenomenon": "回答済みまたは未解決の問いが更新なく循環する",
+      "normalCounterexample": "一度逸れたが観測末尾までに復帰",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-02e8c7cda9301f"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-a48415c725971b"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-a7305f5bbfd701"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-13087b11481d02"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-7957f04bfb824f"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-063",
+      "ordinal": 63,
+      "domain": "研究",
+      "scene": "欠損値を含む観測の扱いを決める",
+      "split": "train",
+      "fold": 3,
+      "author": "author_b",
+      "style": "軽微な言い直し・聞き間違い",
+      "participants": 5,
+      "driftPhenomenon": "意思決定に影響しない細部が中心になる",
+      "stallPhenomenon": "回答済みまたは未解決の問いが更新なく循環する",
+      "normalCounterexample": "障害を段階的に修復中",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-d721b35a7b2c4d"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-6d9daca1d726c8"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-0934143e9b8f92"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-3fc5c72b0e4b47"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-81ae228fc0f989"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-064",
+      "ordinal": 64,
+      "domain": "研究",
+      "scene": "発表資料で主張できる範囲を絞る",
+      "split": "train",
+      "fold": 4,
+      "author": "author_b",
+      "style": "丁寧語中心",
+      "participants": 2,
+      "driftPhenomenon": "解決済みの別論点へ逆戻りする",
+      "stallPhenomenon": "回答済みまたは未解決の問いが更新なく循環する",
+      "normalCounterexample": "結論は未定だが比較軸または担当が増える",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-6b224e4771c9b0"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-dbaadf5dd48d9a"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-8943aef28afede"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-a759fc9f73428f"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-b74701373aa2ab"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-065",
+      "ordinal": 65,
+      "domain": "研究",
+      "scene": "追試へ使う限られた試料を配分する",
+      "split": "train",
+      "fold": 0,
+      "author": "author_b",
+      "style": "口語中心",
+      "participants": 3,
+      "driftPhenomenon": "無関係な雑談が連鎖する",
+      "stallPhenomenon": "同じ主張が根拠追加なく往復する",
+      "normalCounterexample": "判断へ役立つ寄り道",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-ac5cb0f89baaba"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-cf19a7ccc94b8e"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-d161a236344935"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-e7c2808da98140"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-b3b680db7413b1"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-066",
+      "ordinal": 66,
+      "domain": "研究",
+      "scene": "新しい仮説と既存結果を比較する",
+      "split": "train",
+      "fold": 1,
+      "author": "author_b",
+      "style": "職種混在の言い回し",
+      "participants": 4,
+      "driftPhenomenon": "議題の目的が別の目標にすり替わる",
+      "stallPhenomenon": "同じ主張が根拠追加なく往復する",
+      "normalCounterexample": "根拠が増える建設的対立",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-5ecf1b8599d89e"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-6c09ff5ed02a7c"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-22d78fb1a87df1"
+        },
+        {
+          "slot": 4,
+          "designIntent": "stalled",
+          "id": "synbench-cf1a7f4b84bd7a"
+        },
+        {
+          "slot": 5,
+          "designIntent": "clear_ok",
+          "id": "synbench-11ad514d7f574a"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    },
+    {
+      "familyId": "scenario-family-067",
+      "ordinal": 67,
+      "domain": "研究",
+      "scene": "データ収集の順序による偏りを点検する",
+      "split": "validation",
+      "fold": null,
+      "author": "author_b",
+      "style": "軽微な言い直し・聞き間違い",
+      "participants": 5,
+      "driftPhenomenon": "意思決定に影響しない細部が中心になる",
+      "stallPhenomenon": "同じ主張が根拠追加なく往復する",
+      "normalCounterexample": "情報を整理して相互理解をそろえる",
+      "designSlots": [
+        {
+          "slot": 1,
+          "designIntent": "drift",
+          "id": "synbench-6c87919ea3d025"
+        },
+        {
+          "slot": 2,
+          "designIntent": "stalled",
+          "id": "synbench-ef5aaff07673b0"
+        },
+        {
+          "slot": 3,
+          "designIntent": "borderline_ok",
+          "id": "synbench-c69874f7dfb08b"
+        },
+        {
+          "slot": 4,
+          "designIntent": "drift",
+          "id": "synbench-0808665439cea1"
+        },
+        {
+          "slot": 5,
+          "designIntent": "borderline_ok",
+          "id": "synbench-522825120d1ed3"
+        }
+      ],
+      "researchReferences": [
+        "DR01",
+        "DR02",
+        "ST08",
+        "ST10",
+        "ST12",
+        "ST13"
+      ],
+      "provenance": "new_scenario_from_research_principles_only; no existing conversation parent"
+    }
+  ]
+}

@@ -1,4 +1,6 @@
 {
-  "generation-spec.json": "396ecb9aac3374c6b5b5418e4adaaa9cb7edcbc8ca0dcd8c88c62ab6f197b5fd",
-  "split-manifest.json": "22e6dc4a51a95556aba7c65431682d3127a3089e3e6e8f0de0f749f8c8a0aa31"
+  "generation-spec.json": "4fab0630c59d189a3d9fce2026747b77b8c4f33e79655db6781b8b4c7ac9a257",
+  "split-manifest.json": "22e6dc4a51a95556aba7c65431682d3127a3089e3e6e8f0de0f749f8c8a0aa31",
+  "annotation-rubric.md": "0438e216cce86456436a59104d5755c389ee8c252133804ced9064c3bafde61f",
+  "research-map.md": "fe477b27a9fad6bbd847425ba2bc947330a63474d8749781eade921b76f35666"
 }
