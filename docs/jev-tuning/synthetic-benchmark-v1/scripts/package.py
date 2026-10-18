@@ -10,8 +10,10 @@ def write(p,o):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dump
 def jsonl(p,rs):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rs))
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--expect',type=int);a=ap.parse_args();spec=json.loads((ROOT/'generation-spec.json').read_text());planned={s['id']:(f,s) for f in spec['families'] for s in f['designSlots']}
+ ready=json.loads((ROOT/'raw/completed-packets.json').read_text())
+ paths=[ROOT/'raw'/name for name in ready]
  raw={};intents={};labels={};reviews={}
- for p in sorted((ROOT/'raw').glob('*.jsonl')):
+ for p in [q for packet in paths for q in [packet,packet.with_name(packet.stem+'-intents.jsonl')]]:
   target=intents if p.stem.endswith('-intents') else raw
   for r in read(p):
    assert r['id'] not in target,'duplicate raw ID '+r['id'];target[r['id']]=r
@@ -19,11 +21,18 @@ def main():
   for r in read(p):assert r['id'] not in labels,'duplicate primary ID';labels[r['id']]=r
  for p in sorted((ROOT/'annotations').glob('review-*.jsonl')):
   for r in read(p):assert r['id'] not in reviews,'duplicate secondary ID';reviews[r['id']]=r
+ assert set(labels)<=set(raw),'annotation without authored case'
  for id,c in raw.items():
   assert id in planned and id in intents,(id,'plan/intent missing');f,s=planned[id];assert c['familyId']==f['familyId'];assert c['author']==f['author'];assert 6<=len(c['transcript'])<=12;assert all(isinstance(t,str) and re.match(r'[^:：]{1,20}[:：].+',t) for t in c['transcript']);assert c['agenda'] and c['phase'];assert intents[id]['designIntent']==s['designIntent']
- for p in sorted((ROOT/'raw').glob('*.jsonl')):
-  if p.stem.endswith('-intents'):continue
-  records=read(p);blind=[{k:r[k] for k in ['id','agenda','phase','transcript']} for r in records];blind.sort(key=lambda r:hashlib.sha256(('blind-v1:'+r['id']).encode()).hexdigest());jsonl(ROOT/'blind'/p.name,blind)
+ frozen_path=ROOT/'blind/packet-hashes.json';frozen=json.loads(frozen_path.read_text()) if frozen_path.exists() else {}
+ for p in paths:
+  records=read(p);blind=[{k:r[k] for k in ['id','agenda','phase','transcript']} for r in records];blind.sort(key=lambda r:hashlib.sha256(('blind-v1:'+r['id']).encode()).hexdigest());target=ROOT/'blind'/p.name;payload=''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in blind)
+  if target.exists():assert target.read_text()==payload,'frozen blind input changed: '+p.name
+  else:target.write_text(payload)
+  item={'sha256':hashlib.sha256(payload.encode()).hexdigest(),'cases':{r['id']:sha({k:r[k] for k in ['agenda','phase','transcript']}) for r in blind}}
+  if p.name in frozen:assert frozen[p.name]==item,'frozen packet hash mismatch'
+  else:frozen[p.name]=item
+ write(frozen_path,frozen)
  cases=[];links=[];adoptions=[]
  for id,c in sorted(raw.items()):
   if id not in labels:continue

@@ -29,10 +29,18 @@ def main():
   f=old/name
   if f.exists():
    z=json.loads(f.read_text());z=z if isinstance(z,list) else z.get('cases',[]);legacy.extend(c for c in z if 'transcript' in c)
- legacy_norm={norm(c) for c in legacy};assert all(s not in legacy_norm for s in norms),'exact reused old Test text'
+ legacy={c.get('id',sha(c)):c for c in legacy};legacy=list(legacy.values());legacy_norm={norm(c) for c in legacy};assert all(s not in legacy_norm for s in norms),'exact reused old Test text'
+ legacy_near=[]
+ for c,text,ng in zip(cases,norms,gs):
+  for oldcase in legacy:
+   oldtext=norm(oldcase);og=grams(oldtext);jac=len(ng&og)/max(1,len(ng|og))
+   if jac>=.30:
+    ratio=difflib.SequenceMatcher(None,text,oldtext,autojunk=False).ratio()
+    if jac>=.55 or ratio>=.80:legacy_near.append({'newId':c['id'],'oldId':oldcase.get('id'),'split':c['split'],'char4Jaccard':round(jac,4),'sequenceRatio':round(ratio,4)})
+ assert not legacy_near,'near reuse of legacy Test requires investigation '+str(legacy_near[:3])
  design=collections.Counter()
  for f in spec['families']:
   for s in f['designSlots']:design[s['designIntent']]+=1
- report={'state':'complete_core500' if len(cases)==500 else 'incomplete','cases':len(cases),'independentScenarioGroups':len(group),'splitCounts':dict(collections.Counter(c['split'] for c in cases)),'trainFoldCounts':dict(collections.Counter(c['cvFold'] for c in cases if c['split']=='train')),'plannedDesignCounts':dict(design),'sourceGroupSplitLeaks':0,'sourceGroupFoldLeaks':0,'exactNormalizedDuplicates':0,'nearPairsWithinGroup':pairs,'nearCrossGroupDuplicates':0,'legacyTestExactReuse':0,'legacyTestRecordsScanned':len(legacy),'nearThresholds':{'char4Jaccard':.55,'sequenceRatio':.80,'sequenceCandidateJaccard':.30},'limitations':['Lexical neighborhoods do not prove semantic/template independence; author instructions and manual sampling also matter.','This scan checks exact reuse against legacy Test; no legacy labels or Jev predictions are used.'],'casesHash':sha(cases),'specHashes':expected}
+ report={'state':'complete_core500' if len(cases)==500 else 'incomplete','cases':len(cases),'independentScenarioGroups':len(group),'splitCounts':dict(collections.Counter(c['split'] for c in cases)),'trainFoldCounts':dict(collections.Counter(c['cvFold'] for c in cases if c['split']=='train')),'plannedDesignCounts':dict(design),'sourceGroupSplitLeaks':0,'sourceGroupFoldLeaks':0,'exactNormalizedDuplicates':0,'nearPairsWithinGroup':pairs,'nearCrossGroupDuplicates':0,'legacyTestExactReuse':0,'legacyTestNearReuse':0,'legacyTestRecordsScanned':len(legacy),'nearThresholds':{'char4Jaccard':.55,'sequenceRatio':.80,'sequenceCandidateJaccard':.30},'limitations':['Lexical neighborhoods do not prove semantic/template independence; author instructions and manual sampling also matter.','This scan checks exact reuse against legacy Test; no legacy labels or Jev predictions are used.'],'casesHash':sha(cases),'specHashes':expected}
  write(ROOT/'duplicate-audit.json',report);print(json.dumps({k:v for k,v in report.items() if k!='nearPairsWithinGroup'},ensure_ascii=False,indent=2))
 if __name__=='__main__':main()
