@@ -106,16 +106,6 @@ jobs:
       - name: Smoke test built app and Mock Judge
         run: node scripts/ci/smoke-test.mjs
 
-      - name: Validate staging Jev credentials
-        if: env.DEPLOY_TARGET != '' && env.DEPLOY_AI_PROVIDER == 'jev'
-        env:
-          AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
-        run: |
-          if [ -z "$AI_GATEWAY_API_KEY" ]; then
-            echo "::error::AI_GATEWAY_API_KEY is required for staging Jev."
-            exit 1
-          fi
-
       - name: Deploy the tested artifact (links in Summary)
         id: deployment
         if: env.DEPLOY_TARGET != ''
@@ -123,16 +113,17 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
         run: |
           deploy_args=()
           if [ "$DEPLOY_AI_PROVIDER" = jev ]; then
-            deploy_args+=(--env "AI_GATEWAY_API_KEY=$AI_GATEWAY_API_KEY" --env JEV_MODEL_ID=typesafe-ai/jev)
+            deploy_args+=(--env JEV_MODEL_ID=typesafe-ai/jev)
           fi
           if [ "$DEPLOY_TARGET" = production ]; then
             deploy_args+=(--prod)
           fi
+          # Vercel supplies project environment variables, including its managed Jev key.
           vercel deploy --prebuilt --yes --json "${deploy_args[@]}" \
+            --meta "githubCommitRef=$GITHUB_REF_NAME" \
             --env "AI_PROVIDER=$DEPLOY_AI_PROVIDER" --env "ALLOW_PAID_AI=$DEPLOY_ALLOW_PAID_AI" \
             --token="$VERCEL_TOKEN" > "$RUNNER_TEMP/vercel-deployment.json"
           node scripts/ci/report-deployment.mjs "$RUNNER_TEMP/vercel-deployment.json"
