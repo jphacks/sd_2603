@@ -79,14 +79,15 @@ try {
   assert.equal(await page.locator(".jm-fill").count(), 0);
 
   let current = { sessionId: null, snapshot: null, history: [], expectedIntervalMs: null,
-    runtime: { jev: "ready", audio: "disabled", canProbe: false } };
+    runtime: { audio: "disabled" } };
   await page.route("**/api/monitor", route => route.fulfill({ json: current }));
   await page.goto(baseUrl + "/monitor");
   await page.getByText("● モニター接続済み · 判定待ち").waitFor();
-  await page.getByText("モニターAPI: 接続済み", { exact: true }).waitFor();
-  await page.getByText("Jev: 設定済み（API疎通は未確認）", { exact: true }).waitFor();
-  await page.getByText("会議音声の自動判定: 無効", { exact: false }).waitFor();
+  await page.getByText("音声自動判定（設定）: 無効", { exact: true }).waitFor();
   assert.equal(await page.getByRole("button", { name: "JevのAPI疎通を確認" }).count(), 0);
+  current = { ...current, runtime: { audio: "enabled" } };
+  await page.clock.runFor(2500);
+  await page.getByText("音声自動判定（設定）: 有効", { exact: true }).waitFor();
   current = data;
   await page.clock.runFor(2500);
   await page.getByText("72.5%", { exact: true }).waitFor();
@@ -108,7 +109,7 @@ try {
     ? { status: 403, json: { error: "Forbidden" } }
     : { json: { sessionId: "permission-test", snapshot: null, history: [], expectedIntervalMs: null } }));
   await page.goto(baseUrl + "/monitor?session=permission-test");
-  await page.getByText("モニターAPI: 表示権限なし", { exact: true }).waitFor();
+  await page.getByText("● この会議の表示権限がありません", { exact: true }).waitFor();
   await page.getByText("この会議を表示できません。会議に参加した同じブラウザで開いてください。", { exact: true }).waitFor();
   forbidden = false;
   await page.clock.runFor(2500);

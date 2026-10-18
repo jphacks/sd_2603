@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { acceptMonitorResponse, MonitorResponseSchema } from "../../lib/monitor/schema";
 import type { MonitorResponse } from "../../lib/monitor/schema";
-import { ConnectionStatus } from "./ConnectionStatus";
+import { AudioStatus } from "./AudioStatus";
 import { ScoreMonitor } from "./ScoreMonitor";
 import type { Connection } from "./ScoreMonitor";
 
@@ -62,7 +62,8 @@ export function MonitorConnection({ sessionId, meetingUrl }: { sessionId?: strin
         {data?.sessionId ? ` · MTG ID: ${data.sessionId}` : meetingUrl ? " · この会議の参加情報を待っています" : " · 会議への参加を待っています"}
         <br />会議でJevが判定するたびに更新します（2秒ごとに取得）。
       </p>
-      <ConnectionStatus data={data} connection={connection} problem={problem} />
+      <AudioStatus runtime={data?.runtime} />
+      {problem && <p role="alert" style={{ color: "#f29689", fontSize: 12 }}>{problem}</p>}
       <ScoreMonitor envelope={data} connection={connection} />
     </div>
   );

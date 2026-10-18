@@ -40,9 +40,7 @@ export const EnvelopeSchema = z.object({
   expectedIntervalMs: z.number().finite().positive().nullable(),
 });
 export const MonitorRuntimeSchema = z.object({
-  jev: z.enum(["ready", "mock", "blocked", "missing_key", "unknown_provider"]),
   audio: z.enum(["enabled", "disabled"]),
-  canProbe: z.boolean(),
 });
 export const MonitorResponseSchema = EnvelopeSchema.extend({
   runtime: MonitorRuntimeSchema.optional(),
