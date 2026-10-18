@@ -34,5 +34,57 @@
       "synbench-820568880bae7e"
     ],
     "selection": "2 per primary class C01; labels hidden from third reviewer"
+  },
+  "finalSelection": {
+    "c": {
+      "reviewer": "review_b",
+      "packet": "blind/review-b-final-on-c.jsonl",
+      "count": 6,
+      "selectionReasons": {
+        "synbench-3ee2a9c4d4414a": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-9cae0b0753065f": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-55ea295dda8cbb": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-245c571497165c": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-22fc0c3766ef44": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-ad73c6ccfb2422": [
+          "stable primary-class/split sample"
+        ]
+      }
+    },
+    "a": {
+      "reviewer": "review_c",
+      "packet": "blind/review-c-final-on-a.jsonl",
+      "count": 6,
+      "selectionReasons": {
+        "synbench-7aded4c0c232d3": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-ffa1d33e96a345": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-d7f495657bddb0": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-e29be21a85173e": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-e27fb0ddc58763": [
+          "stable primary-class/split sample"
+        ],
+        "synbench-be77f92fa2eb82": [
+          "stable primary-class/split sample"
+        ]
+      }
+    }
   }
 }

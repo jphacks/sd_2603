@@ -20,7 +20,9 @@ def main():
   target=intents if p.stem.endswith('-intents') else raw
   for r in read(p):
    assert r['id'] not in target,'duplicate raw ID '+r['id'];target[r['id']]=r
- for p in sorted((ROOT/'annotations').glob('primary-*.jsonl')):
+ primary_ready=ROOT/'annotations/completed-primary-packets.json'
+ primary_paths=[ROOT/'annotations'/n for n in json.loads(primary_ready.read_text())] if primary_ready.exists() else sorted((ROOT/'annotations').glob('primary-*.jsonl'))
+ for p in primary_paths:
   for r in read(p):assert r['id'] not in labels,'duplicate primary ID';labels[r['id']]=r
  for p in sorted((ROOT/'annotations').glob('review-*.jsonl')):
   for r in read(p):assert r['id'] not in reviews,'duplicate secondary ID';reviews[r['id']]=r

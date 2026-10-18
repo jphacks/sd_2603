@@ -1,9 +1,11 @@
 {
   "state": "incomplete",
-  "cases": 300,
-  "independentScenarioGroups": 60,
+  "cases": 435,
+  "independentScenarioGroups": 87,
   "splitCounts": {
-    "train": 300
+    "validation": 65,
+    "train": 300,
+    "test": 70
   },
   "trainFoldCounts": {
     "2": 60,
@@ -35,7 +37,7 @@
     "Lexical neighborhoods do not prove semantic/template independence; author instructions and manual sampling also matter.",
     "This scan checks exact reuse against legacy Test; no legacy labels or Jev predictions are used."
   ],
-  "casesHash": "3e3b411f5f3ddc59f00cf84f3ddee60ff222f91ec097d1f4325f47c5d9b70e2f",
+  "casesHash": "1dd2151fcb8fa50af7e270297c41a93ecdb8038e8d04798329e8819e13d4f172",
   "specHashes": {
     "generation-spec.json": "4fab0630c59d189a3d9fce2026747b77b8c4f33e79655db6781b8b4c7ac9a257",
     "split-manifest.json": "22e6dc4a51a95556aba7c65431682d3127a3089e3e6e8f0de0f749f8c8a0aa31",
