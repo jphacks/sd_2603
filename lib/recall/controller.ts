@@ -15,6 +15,7 @@ type Dependencies = {
   judge: (input: JudgeInput) => Promise<JudgeResult>;
   render: (view: VideoView) => Promise<Buffer>;
   output: (botId: string, jpeg: Buffer) => Promise<void>;
+  guard?: () => Promise<void>;
   onIntervened?: (botId: string, kind: Exclude<VideoView["kind"], "idle">) => void;
 };
 
@@ -23,13 +24,23 @@ export async function applyVideoDecision(
   dependencies: Dependencies,
 ) {
   const result = await dependencies.judge(input);
+  return displayVideoResult({ botId: input.botId, agenda: input.agenda, result }, dependencies);
+}
+
+export async function displayVideoResult(
+  input: { botId: string; agenda: string; result: JudgeResult },
+  dependencies: Pick<Dependencies, "render" | "output" | "guard" | "onIntervened">,
+) {
+  const { result } = input;
   if (result.action !== "INTERVENE") {
     return { ...result, video: "unchanged" as const };
   }
   const view: VideoView = result.reason === "Discussion appears stalled"
     ? { kind: "stalled" }
     : { kind: "off_agenda", agenda: input.agenda };
-  await dependencies.output(input.botId, await dependencies.render(view));
+  const jpeg = await dependencies.render(view);
+  await dependencies.guard?.();
+  await dependencies.output(input.botId, jpeg);
   dependencies.onIntervened?.(input.botId, view.kind);
   return { ...result, video: view.kind };
 }

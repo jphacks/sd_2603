@@ -1,7 +1,11 @@
 import { readFile } from "node:fs/promises";
 import { localRecallIo, removeBot } from "@/scripts/recall.mjs";
+import { authorizedControl } from "@/lib/recall/controller";
 
-export async function POST() {
+export async function POST(request: Request) {
+  if (!authorizedControl(request, process.env.RECALL_CONTROL_TOKEN)) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const io = localRecallIo();
   let id = "";
   try {

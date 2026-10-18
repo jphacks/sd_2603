@@ -12,6 +12,9 @@ const DebugSchema = z.object({
       drifted: z.number().min(0).max(1),
       stalled: z.number().min(0).max(1),
       tangentIsRelevant: z.number().min(0).max(1),
+      // Legacy device debug clients send three gauges; this synthetic-only
+      // value is never used to make a real intervention decision.
+      interveneNow: z.number().min(0).max(1).default(0),
     })
     .optional(),
   cue: z.enum(["off_agenda", "stalled"]).optional(),

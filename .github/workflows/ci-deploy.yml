@@ -47,11 +47,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate Node.js runtime alignment
+        run: npm run check:runtime
+
       - name: Lint
         run: npm run lint
 
-      - name: Test CI helpers and decision/video controls
-        run: node --test scripts/ci/helpers.test.mjs scripts/recall.test.mjs lib/judge/jev.test.mjs lib/recall/controller.test.mjs lib/recall/video.test.mjs lib/agenda/agenda.test.mjs lib/agenda/materials.test.mjs lib/monitor/*.test.mjs
+      - name: Test CI, Recall, decision/video controls and transcription
+        run: npm test
+
+      - name: Offline meeting regression (no paid APIs)
+        run: npm run test:meeting-regression
 
       - name: Validate deployment configuration
         if: env.DEPLOY_TARGET != ''

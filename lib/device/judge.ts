@@ -7,11 +7,13 @@ type Judge = (input: JudgeInput) => Promise<JudgeResult>;
 // intervention, and a muted tangent downgrades one to WAIT. Scores stay real.
 export function withDeviceControls(sessionId: string, judge: Judge, store = deviceStore): Judge {
   return async (input) => {
-    const result = await judge(input);
+    // Only a consumed device event may grant the worker's manual-display bypass.
+    const result = { ...await judge(input), manual: false };
     if (store.takeManual(sessionId)) {
       return {
         ...result,
         action: "INTERVENE",
+        manual: true,
         reason: result.reason === "Discussion appears stalled" ? result.reason : "Manual request",
         message: result.message ?? "そろそろ議題に戻りませんか？",
       };

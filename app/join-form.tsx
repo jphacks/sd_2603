@@ -8,6 +8,8 @@ const MAX_SELECTED_FILES = 5;
 
 export function JoinForm() {
   const [meetingUrl, setMeetingUrl] = useState("");
+  const [agenda, setAgenda] = useState("");
+  const [controlToken, setControlToken] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [fileLimitNote, setFileLimitNote] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -43,8 +45,8 @@ export function JoinForm() {
     try {
       const response = await fetch("/api/recall/join", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ meetingUrl }),
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken}` },
+        body: JSON.stringify({ meetingUrl, agenda }),
       });
       const body = (await response.json()) as { id?: string; error?: string };
       if (!response.ok || !body.id) {
@@ -93,7 +95,7 @@ export function JoinForm() {
     setMaterialNotes([]);
     setPending(true);
     try {
-      const response = await fetch("/api/recall/leave", { method: "POST" });
+      const response = await fetch("/api/recall/leave", { method: "POST", headers: { Authorization: `Bearer ${controlToken}` } });
       const body = (await response.json()) as {
         left?: boolean;
         alreadyGone?: boolean;
@@ -133,6 +135,28 @@ export function JoinForm() {
             value={meetingUrl}
             placeholder="https://meet.google.com/abc-defg-hij"
             onChange={(event) => setMeetingUrl(event.target.value)}
+          />
+        </label>
+        <label className="grid gap-1 text-sm">
+          アジェンダ（音声モードで必須）
+          <input
+            className="rounded border border-zinc-300 bg-white px-3 py-2 text-zinc-950"
+            value={agenda}
+            maxLength={500}
+            onChange={(event) => setAgenda(event.target.value)}
+          />
+        </label>
+        <p className="text-xs text-zinc-600">
+          最初は上のアジェンダを使い、議案書やMeetチャットから取り込んだアジェンダも次の音声判定に反映します。更新中は介入を保留します。
+        </p>
+        <label className="grid gap-1 text-sm">
+          操作トークン
+          <input
+            type="password"
+            autoComplete="off"
+            className="rounded border border-zinc-300 bg-white px-3 py-2 text-zinc-950"
+            value={controlToken}
+            onChange={(event) => setControlToken(event.target.value)}
           />
         </label>
         <label className="grid gap-1 text-sm">

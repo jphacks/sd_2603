@@ -102,5 +102,6 @@ M5 が 2 秒ごとに読む。`Authorization: Bearer <DEVICE_TOKEN>` を付け�
 - `app/api/device/[sessionId]` と `.../event`。`DEVICE_TOKEN`（32 文字以上）が必要。
 - `/api/recall/video` の判定にボタン状態を反映し、介入成功時に M5 の音の合図を更新する。
 - `back` は次の判定呼び出しで効く。判定の呼び出し元（文字起こしワーカー）の間隔だけ遅れる。
+- 自動文字起こし経路でもボタン状態を反映する。`back` による明示操作だけは AI の脱線判定の二回確認を待たないが、発言再開・議題変更・停止時の取消は維持する。表示成功時だけ合図を更新し、Meet のカードはワーカーが 8 秒後に待機表示へ戻す。
 - `POST /api/device/{sessionId}/debug`: 開発用。`NODE_ENV=development` のときだけ動き、疑似の判定結果と介入の合図を入れて、画面・ゲージ・音を確認できる。本番では 404。
 - `firmware/`: PlatformIO の雛形。実機（M5StickS3、2.4GHz Wi-Fi）で、取得・色・ボタン送信・ゲージ・介入の音を確認済み。Recall の実会議を通した確認は未実施。

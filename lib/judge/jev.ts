@@ -3,7 +3,7 @@ import type { JudgeInput, JudgeProvider, JudgeResult } from "./types";
 
 const GATEWAY_URL = "https://ai-gateway.vercel.sh/typesafe/v1/systemone";
 const DEFAULT_MODEL = "typesafe-ai/jev";
-const QUESTION_VERSION = "v1";
+const QUESTION_VERSION = "v2";
 const TIMEOUT_MS = 5000;
 const INTERVENTION_THRESHOLD = 0.6;
 const UNCERTAIN_THRESHOLD = 0.4;
@@ -15,9 +15,10 @@ const ResponseSchema = z.object({
     drifted: AnswerSchema,
     stalled: AnswerSchema,
     tangentIsRelevant: AnswerSchema,
+    interveneNow: AnswerSchema,
   }),
 });
-type Scores = { drifted: number; stalled: number; tangentIsRelevant: number };
+type Scores = { drifted: number; stalled: number; tangentIsRelevant: number; interveneNow: number };
 
 export class JevError extends Error {
   readonly kind: "config" | "auth" | "rate_limit" | "timeout" | "upstream" | "invalid_response";
@@ -57,14 +58,22 @@ function questions() {
         false: "The side topic does not help accomplish the agenda.",
       },
     },
+    interveneNow: {
+      type: "noul",
+      instructions: "Would a brief facilitator remark help the meeting right now, rather than interrupt a useful or harmless moment?",
+      criteria: {
+        true: "The discussion has stayed off agenda or stuck across multiple turns without progress, and a short nudge would help it move forward.",
+        false: "A side topic has only just begun, is useful to the agenda, or follows a completed decision or agreed break; there is no need to speak yet.",
+      },
+    },
   } as const;
 }
 
 export function decideFromScores(scores: Scores): JudgeResult {
-  if (scores.stalled >= INTERVENTION_THRESHOLD) {
+  if (scores.stalled >= INTERVENTION_THRESHOLD && scores.interveneNow >= INTERVENTION_THRESHOLD) {
     return { action: "INTERVENE", reason: "Discussion appears stalled", message: "一度、ここまでの意見を整理してみませんか？" };
   }
-  if (scores.drifted >= INTERVENTION_THRESHOLD && scores.tangentIsRelevant < INTERVENTION_THRESHOLD) {
+  if (scores.drifted >= INTERVENTION_THRESHOLD && scores.tangentIsRelevant < INTERVENTION_THRESHOLD && scores.interveneNow >= INTERVENTION_THRESHOLD) {
     return { action: "INTERVENE", reason: "Discussion appears off agenda", message: "そろそろ議題に戻りませんか？" };
   }
   if (scores.drifted >= UNCERTAIN_THRESHOLD || scores.stalled >= UNCERTAIN_THRESHOLD) {
@@ -110,7 +119,7 @@ export async function requestJevScores(
   if (!parsed.success) throw new JevError("invalid_response", "Jev response has an unexpected shape");
   const { answers } = parsed.data;
   return {
-    scores: { drifted: answers.drifted.noul, stalled: answers.stalled.noul, tangentIsRelevant: answers.tangentIsRelevant.noul },
+    scores: { drifted: answers.drifted.noul, stalled: answers.stalled.noul, tangentIsRelevant: answers.tangentIsRelevant.noul, interveneNow: answers.interveneNow.noul },
     model: parsed.data.model,
     latencyMs: Math.round(performance.now() - started),
   };

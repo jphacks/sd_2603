@@ -1,6 +1,7 @@
 import {
   MAX_AGENDAS,
   SOURCE_CHAR_LIMIT,
+  beginAgendaUpdate,
   getAgenda,
   saveAgenda,
   type MeetingAgenda,
@@ -80,6 +81,7 @@ export async function ingestJoinMaterials(
       items.push({ name: source.name, saved: false, message: "5件までです" });
       continue;
     }
+    const finishUpdate = beginAgendaUpdate(input.botId);
     try {
       const raw = await source.load();
       saveAgenda(input.botId, await organize(raw.slice(0, SOURCE_CHAR_LIMIT)));
@@ -88,6 +90,8 @@ export async function ingestJoinMaterials(
     } catch (error) {
       console.error("Join material skipped:", error instanceof Error ? error.name : "error");
       items.push({ name: source.name, saved: false, message: itemMessage(error) });
+    } finally {
+      finishUpdate();
     }
   }
   return { saved, agenda: getAgenda(input.botId), items };
