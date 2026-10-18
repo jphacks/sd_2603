@@ -34,6 +34,7 @@ async function setup(transcripts, action = 'WAIT') {
   const requests = [];
   const requestTimes = [];
   const recommendationIds = [];
+  let startupIdles = 0;
   let agendaSnapshot;
   const control = createServer((request, response) => {
     if (request.url !== '/api/recall/video' || request.headers.authorization !== `Bearer ${controlToken}`) { response.writeHead(401); response.end(); return; }
@@ -41,8 +42,12 @@ async function setup(transcripts, action = 'WAIT') {
     request.on('data', chunk => { body += chunk; });
     request.on('end', () => {
       const input = JSON.parse(body);
-      requests.push(input);
-      requestTimes.push(Date.now());
+      // The idle face sent when audio first arrives precedes any card.
+      if (input.mode === 'idle' && !requests.some(earlier => earlier.mode === 'display')) startupIdles++;
+      else {
+        requests.push(input);
+        requestTimes.push(Date.now());
+      }
       const recommendationId = input.mode === 'evaluate' ? randomUUID() : undefined;
       if (recommendationId) recommendationIds.push(recommendationId);
       response.writeHead(200, { 'Content-Type': 'application/json' });
@@ -91,7 +96,7 @@ async function setup(transcripts, action = 'WAIT') {
     socket.on('error', () => {});
     await once(socket, 'open');
     const push = pcm => socket.send(JSON.stringify({ event: 'audio_mixed_raw.data', data: { bot: { id: botId }, data: { buffer: pcm.toString('base64') } } }));
-    return { requests, requestTimes, recommendationIds, socket, setAgenda(value) { agendaSnapshot = value; }, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
+    return { requests, requestTimes, recommendationIds, socket, startupIdles: () => startupIdles, setAgenda(value) { agendaSnapshot = value; }, output: () => output, utterance() { push(voiced); for (let i = 0; i < 6; i++) push(silent); }, cleanup };
   } catch (error) { await cleanup(); throw error; }
 }
 
@@ -101,6 +106,7 @@ test('real worker routes Recall PCM through SDK final and quiet gate to local WA
     trial.utterance();
     await waitFor(() => trial.requests.some(request => request.mode === 'evaluate') || trial.socket.readyState !== WebSocket.OPEN, 'No WAIT evaluation after final');
     assert.deepEqual(trial.requests.map(request => request.mode), ['agenda', 'evaluate'], trial.output());
+    assert.equal(trial.startupIdles(), 1, 'the idle face is shown once when audio first arrives');
     assert.deepEqual(trial.requests[1].transcript, ['synthetic first utterance']);
     assert.equal(trial.requests[1].agendaVersion, 'test-v1');
     assert.equal(trial.socket.readyState, WebSocket.OPEN, trial.output());

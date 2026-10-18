@@ -190,14 +190,17 @@ export async function runReplayCase(scenario) {
       if (!(scenario.resumeDuringJudgment && index === 2)) await pause(100);
     }
     if (scenario.expectedDisplays) {
-      await waitFor(() => requests.some(request => request.mode === 'idle') || failure || socket.readyState !== WebSocket.OPEN, 'No automatic idle restoration', scenario.continuous ? 24000 : 13000);
+      await waitFor(() => requests.some((request, index) => request.mode === 'idle' && requests.slice(0, index).some(earlier => earlier.mode === 'display')) || failure || socket.readyState !== WebSocket.OPEN, 'No automatic idle restoration', scenario.continuous ? 24000 : 13000);
     } else {
       // Also observe the entire idle timer window: delayed erroneous displays count.
       await pause(8300);
     }
     checkWorker();
     const displays = requests.filter(request => request.mode === 'display');
-    const idles = requests.filter(request => request.mode === 'idle');
+    // The idle face sent when audio first arrives is not a restoration after a card.
+    const firstDisplayAt = displays[0]?.at ?? Infinity;
+    const startupIdles = requests.filter(request => request.mode === 'idle' && request.at < firstDisplayAt);
+    const idles = requests.filter(request => request.mode === 'idle' && request.at >= firstDisplayAt);
     const metrics = {
       id: scenario.id, passed: true, pcmFrames,
       finalizedTurns: Math.max(...requests.filter(request => request.mode === 'evaluate').map(request => request.transcript.length)), evaluations: evaluation,
@@ -213,6 +216,7 @@ export async function runReplayCase(scenario) {
     };
     assert.equal(displays.length, scenario.expectedDisplays, JSON.stringify(metrics));
     assert.equal(idles.length, scenario.expectedDisplays, JSON.stringify(metrics));
+    assert.equal(startupIdles.length, 1, 'the idle face is shown once when audio first arrives');
     assert.equal(metrics.speakingViolations, 0, JSON.stringify(metrics));
     if (scenario.continuous) {
       assert.equal(metrics.finalizedTurns, 6, 'Ten-second production segments must finalize all 57.4 seconds');
