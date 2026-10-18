@@ -106,3 +106,5 @@
 - No Gateway, paid model API, Jev predictions, application/runner/policy changes, staging merge. Synthetic Test remains explicitly synthetic for integration owner to support.
 
 - Core500 first labeled checkpoint: completed generation=150, primary labels=50, packaged/structurally audited=50; split={'train': {'n': 50, 'labels': {'INTERVENE_DRIFT': 15, 'INTERVENE_STALLED': 15, 'OK': 20}}, 'validation': {'n': 0, 'labels': {}}, 'test': {'n': 0, 'labels': {}}}; intent differences=0. Previous Push=6b42921. Still incomplete; remaining author/judge packets underway.
+
+- 10:01 JST checkpoint: generated150 / labeled150 / audited150; Train only, actual labels{'INTERVENE_DRIFT': 45, 'INTERVENE_STALLED': 45, 'OK': 60}; uncertain1; duplicates/near cross-family0, intent-label differences0. Latest data Push6052e88; next150-case checkpoint follows. Remaining150 Train and200 heldout are still planned;500 remains on track before11:00,1000 to assess after core quality.

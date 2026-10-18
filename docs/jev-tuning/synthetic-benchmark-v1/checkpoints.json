@@ -1,0 +1,14 @@
+[
+  {
+    "packaged": 50,
+    "commit": "6052e88",
+    "state": "incomplete",
+    "casesHash": "3c281db3c914e88fac4b0763c54ffa7bca9f70879218c368f3bebb3912d044c5"
+  },
+  {
+    "packaged": 150,
+    "state": "incomplete",
+    "casesHash": "777704bb37dcf1f51579a74c7f464b65a23290e08c615594718cdc09cc503631",
+    "note": "Commit for this checkpoint is next Push; see git log and chat."
+  }
+]

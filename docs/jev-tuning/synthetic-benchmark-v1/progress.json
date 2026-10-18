@@ -1,29 +1,29 @@
 {
   "state": "incomplete",
   "generated": 150,
-  "primaryLabeled": 50,
-  "packaged": 50,
+  "primaryLabeled": 150,
+  "packaged": 150,
   "reviewed": 0,
-  "uncertain": 0,
+  "uncertain": 1,
   "designCountsForPackaged": {
-    "drift": 15,
-    "stalled": 15,
-    "clear_ok": 5,
-    "borderline_ok": 15
+    "drift": 45,
+    "stalled": 45,
+    "borderline_ok": 45,
+    "clear_ok": 15
   },
   "actualLabels": {
-    "INTERVENE_DRIFT": 15,
-    "INTERVENE_STALLED": 15,
-    "OK": 20
+    "INTERVENE_DRIFT": 45,
+    "INTERVENE_STALLED": 45,
+    "OK": 60
   },
   "intentLabelDifferences": [],
   "splits": {
     "train": {
-      "n": 50,
+      "n": 150,
       "labels": {
-        "INTERVENE_DRIFT": 15,
-        "INTERVENE_STALLED": 15,
-        "OK": 20
+        "INTERVENE_DRIFT": 45,
+        "INTERVENE_STALLED": 45,
+        "OK": 60
       }
     },
     "validation": {
