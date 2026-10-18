@@ -21,6 +21,7 @@ export function JoinForm({ serverManagedControl = false }: { serverManagedContro
   const [materialNotes, setMaterialNotes] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const [botId, setBotId] = useState<string | null>(null);
 
   function replaceFiles(next: File[], limitNote: string | null) {
     setFiles(next);
@@ -58,6 +59,7 @@ export function JoinForm({ serverManagedControl = false }: { serverManagedContro
         return;
       }
       sentId = body.id;
+      setBotId(body.id);
       setMonitorSessionId(body.id);
       if (files.length === 0) {
         setNotice(`ボットを送信しました ${body.id}`);
@@ -100,7 +102,11 @@ export function JoinForm({ serverManagedControl = false }: { serverManagedContro
     setMaterialNotes([]);
     setPending(true);
     try {
-      const response = serverManagedControl ? await leaveMeeting().then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/leave", { method: "POST", headers: { Authorization: `Bearer ${controlToken.trim()}` } });
+      const response = serverManagedControl ? await leaveMeeting(botId ?? undefined).then(result => ({ ok: result.ok, json: async () => result.data })) : await fetch("/api/recall/leave", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${controlToken.trim()}` },
+        body: JSON.stringify(botId ? { id: botId } : {}),
+      });
       const body = (await response.json()) as {
         left?: boolean;
         alreadyGone?: boolean;
@@ -110,6 +116,7 @@ export function JoinForm({ serverManagedControl = false }: { serverManagedContro
         setError(body.error ?? "退出に失敗しました");
         return;
       }
+      setBotId(null);
       setMonitorSessionId(null);
       setNotice(body.alreadyGone ? "すでに退出しています" : "退出しました");
     } catch {

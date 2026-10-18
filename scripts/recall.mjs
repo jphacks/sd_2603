@@ -1,11 +1,18 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { recordingConfig } from './transcription/audio.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const STATE_PATH = path.join(ROOT, '.recall', 'current.json');
+
+export function recallStatePath(env = process.env) {
+  const directory = env.VERCEL
+    ? path.join(tmpdir(), 'aida-recall')
+    : path.join(ROOT, '.recall');
+  return path.join(directory, 'current.json');
+}
 const USAGE = `使い方:
   npm run recall -- join --url https://meet.google.com/abc-defg-hij
   npm run recall -- status
@@ -351,7 +358,7 @@ export function localRecallIo(env = process.env, fetchImpl = globalThis.fetch) {
   return {
     env,
     fetch: fetchImpl,
-    statePath: STATE_PATH,
+    statePath: recallStatePath(env),
     now: () => Date.now(),
     sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
     pollMs: 3000,
@@ -488,6 +495,25 @@ async function status(flags, io) {
   return 0;
 }
 
+export async function findLiveBotId(io) {
+  try {
+    const body = await recallFetch(io, '/bot/?limit=20');
+    const results = Array.isArray(body?.results) ? body.results : Array.isArray(body) ? body : [];
+    for (const bot of results) {
+      if (LIVE.has(latestChange(bot)?.code) && typeof bot.id === 'string') return bot.id;
+    }
+  } catch {
+    return '';
+  }
+  return '';
+}
+
+export async function releaseBot(io, id) {
+  const result = await requestLeave(io, id);
+  await clearState(io, id);
+  return { id, left: true, alreadyGone: Boolean(result.alreadyGone), status: result.status ?? null, code: null };
+}
+
 export async function removeBot(io, id) {
   const result = await requestLeave(io, id);
   if (result.alreadyGone) {
@@ -547,7 +573,7 @@ async function leave(flags, io) {
 function ioWithDefaults(io) {
   return {
     fetch: globalThis.fetch,
-    statePath: STATE_PATH,
+    statePath: recallStatePath(),
     stdout: (line) => console.log(line),
     stderr: (line) => console.error(line),
     env: process.env,

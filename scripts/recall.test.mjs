@@ -1,9 +1,44 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { run, removeBot, sendBot } from './recall.mjs';
+import { findLiveBotId, recallStatePath, releaseBot, removeBot, run, sendBot } from './recall.mjs';
+
+test('serverless bot state is stored in the writable temp directory', () => {
+  const serverless = recallStatePath({ VERCEL: '1' });
+  assert.equal(serverless.startsWith(path.join(tmpdir(), 'aida-recall')), true);
+  const local = recallStatePath({});
+  assert.equal(local.endsWith(path.join('.recall', 'current.json')), true);
+});
+
+test('findLiveBotId returns a bot that is still in the call', async () => {
+  const id = '11111111-1111-4111-8111-111111111111';
+  const found = await findLiveBotId({
+    env: { RECALL_API_KEY: 'secret-key', RECALL_REGION: 'ap-northeast-1' },
+    fetch: async () => jsonResponse(200, { results: [{ id, status_changes: [{ created_at: '1', code: 'in_waiting_room' }] }] }),
+  });
+  assert.equal(found, id);
+});
+
+test('releaseBot asks the bot to leave without waiting for call_ended', async () => {
+  const box = fixture();
+  writeFileSync(box.statePath, JSON.stringify({ id: 'bot-1' }));
+  const calls = [];
+  const result = await releaseBot({
+    statePath: box.statePath,
+    env: { RECALL_API_KEY: 'secret-key', RECALL_REGION: 'ap-northeast-1' },
+    fetch: async (url, options) => {
+      calls.push({ url, method: options?.method });
+      return jsonResponse(200, {});
+    },
+  }, 'bot-1');
+  assert.equal(result.left, true);
+  assert.equal(calls.length, 1);
+  assert.match(calls[0].url, /\/bot\/bot-1\/leave_call\/$/);
+  assert.equal(existsSync(box.statePath), false);
+  box.cleanup();
+});
 
 function fixture() {
   const dir = mkdtempSync(path.join(tmpdir(), 'recall-cli-'));

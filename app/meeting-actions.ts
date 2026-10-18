@@ -20,8 +20,8 @@ export async function joinMeeting(meetingUrl: string, agenda: string) {
   } };
 }
 
-export async function leaveMeeting() {
-  const result = await invokeBrowserControl(process.env.BROWSER_CONTROL_ENABLED === "true", postLeave, {}, process.env.RECALL_CONTROL_TOKEN);
+export async function leaveMeeting(id?: string) {
+  const result = await invokeBrowserControl(process.env.BROWSER_CONTROL_ENABLED === "true", postLeave, id ? { id } : {}, process.env.RECALL_CONTROL_TOKEN);
   return { ...result, data: {
     left: result.data.left === true,
     alreadyGone: result.data.alreadyGone === true,
