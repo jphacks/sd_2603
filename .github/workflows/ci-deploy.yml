@@ -116,20 +116,9 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          AUDIO_TEST_RUNTIME: ${{ github.ref == 'refs/heads/feature/staging-meet-transcription' && secrets.AUDIO_TEST_RUNTIME || '' }}
         run: |
-          deploy_args=()
-          if [ "$DEPLOY_AI_PROVIDER" = jev ]; then
-            deploy_args+=(--env JEV_MODEL_ID=typesafe-ai/jev-1.14.0)
-          fi
-          if [ "$DEPLOY_TARGET" = production ]; then
-            deploy_args+=(--prod)
-          fi
-          # Vercel supplies project environment variables, including its managed Jev key.
-          vercel deploy --prebuilt --yes --json "${deploy_args[@]}" \
-            --meta "githubCommitRef=$GITHUB_REF_NAME" \
-            --env "AI_PROVIDER=$DEPLOY_AI_PROVIDER" --env "ALLOW_PAID_AI=$DEPLOY_ALLOW_PAID_AI" \
-            --env "BROWSER_CONTROL_ENABLED=$DEPLOY_BROWSER_CONTROL_ENABLED" \
-            --token="$VERCEL_TOKEN" > "$RUNNER_TEMP/vercel-deployment.json"
+          node scripts/ci/deploy-vercel.mjs "$RUNNER_TEMP/vercel-deployment.json"
           node scripts/ci/report-deployment.mjs "$RUNNER_TEMP/vercel-deployment.json"
 
       - name: Update branch Preview URL (link in Summary)

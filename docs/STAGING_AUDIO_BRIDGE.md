@@ -2,7 +2,15 @@
 
 `feature/staging-meet-transcription` のPreviewは利用者承認により操作トークン入力不要。
 サーバーが既存の秘密値を内部利用する。ほかのfeature・mainの設定やVercel Protectionは変更しない。
-この変更だけでは音声接続や有料Jevを有効化しない（featureのAI設定はMockのまま）。
+このブランチのPushでは `scripts/ci/deploy-vercel.mjs` が専用Secret
+`AUDIO_TEST_RUNTIME` を使用し、実Jev・有料AI許可・音声接続を同時に有効化する。
+Secretや必要設定がない場合はデプロイを失敗させ、Mockへ黙って切り替えない。
+PRの検査ではこのSecretを使用せず、外部AIを呼ばない。
+他ブランチやstagingのデプロイ設定は変更しない。
+
+一時トンネルのホスト名が変わった場合、同じ専用Secretの接続先を更新して再Pushする。
+設定の有効化と実際の接続成功は別。workerまでの外向き7844番通信が到達しない場合、
+参加処理は準備エラーでBot作成前に止まる。回線を変更するか、管理者による通信許可が必要。
 
 この構成は常時起動の音声worker＋同一ホストのNextアプリを判定の所有者にする。
 Vercel Functionsのローカルファイルやメモリを別インスタンスと共有しない。
