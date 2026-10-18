@@ -1,6 +1,8 @@
 import { timingSafeEqual } from "node:crypto";
 import type { JudgeInput, JudgeResult } from "../judge/types";
+import { SILENCE_REASON, STALLED_REASON } from "../judge/silence.ts";
 import type { VideoView } from "./video";
+import type { StallCause } from "../device/state.ts";
 
 export function authorizedControl(request: Request, secret: string | undefined) {
   if (!secret || secret.length < 32) return false;
@@ -16,7 +18,7 @@ type Dependencies = {
   render: (view: VideoView) => Promise<Buffer>;
   output: (botId: string, jpeg: Buffer) => Promise<void>;
   guard?: () => Promise<void>;
-  onIntervened?: (botId: string, kind: Exclude<VideoView["kind"], "idle">) => void;
+  onIntervened?: (botId: string, kind: Exclude<VideoView["kind"], "idle">, cause?: StallCause) => void;
 };
 
 export async function applyVideoDecision(
@@ -35,13 +37,15 @@ export async function displayVideoResult(
   if (result.action !== "INTERVENE") {
     return { ...result, video: "unchanged" as const };
   }
-  const view: VideoView = result.reason === "Discussion appears stalled"
-    ? { kind: "stalled" }
-    : { kind: "off_agenda", agenda: input.agenda };
+  const view: VideoView = result.reason === SILENCE_REASON
+    ? { kind: "stalled", cause: "silence" }
+    : result.reason === STALLED_REASON
+      ? { kind: "stalled" }
+      : { kind: "off_agenda", agenda: input.agenda };
   const jpeg = await dependencies.render(view);
   await dependencies.guard?.();
   await dependencies.output(input.botId, jpeg);
-  dependencies.onIntervened?.(input.botId, view.kind);
+  dependencies.onIntervened?.(input.botId, view.kind, view.kind === "stalled" ? view.cause : undefined);
   return { ...result, video: view.kind };
 }
 

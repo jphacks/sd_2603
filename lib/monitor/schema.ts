@@ -25,6 +25,7 @@ export const SnapshotSchema = z.object({
     "COOLDOWN",
     "INSUFFICIENT_CONTEXT",
     "STALLED",
+    "SILENT",
     "DRIFTED_IRRELEVANT",
     "OBSERVE",
     "ON_TOPIC",

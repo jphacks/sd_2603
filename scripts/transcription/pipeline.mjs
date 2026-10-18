@@ -56,8 +56,9 @@ export function isVoicedPcm(pcm, threshold = 300) {
 }
 
 /** Evaluate new finals during speech; deliver a fresh recommendation only at a quiet boundary. */
-export function createInterventionGate({ agenda, botId, resolveAgenda, decide, display, restoreIdle, onError = () => {}, now = Date.now, schedule = setTimeout, unschedule = clearTimeout, quietMs = 1500, displayMs = 8000, decisionIntervalMs = 10000, candidateTtlMs = 20000 }) {
+export function createInterventionGate({ agenda, botId, resolveAgenda, decide, nudge, display, restoreIdle, onError = () => {}, now = Date.now, schedule = setTimeout, unschedule = clearTimeout, quietMs = 1500, displayMs = 8000, decisionIntervalMs = 10000, candidateTtlMs = 20000, silenceMs = 20000, cooldownMs = 60000 }) {
   if (!Number.isFinite(displayMs) || displayMs <= 0) throw new RangeError('Invalid intervention display duration');
+  if (!Number.isFinite(silenceMs) || silenceMs <= 0) throw new RangeError('Invalid silence duration');
   if (!Number.isFinite(decisionIntervalMs) || decisionIntervalMs < 0 || !Number.isFinite(candidateTtlMs) || candidateTtlMs <= 0) throw new RangeError('Invalid decision timing');
   const transcript = [];
   let finalQueue = [];
@@ -80,6 +81,10 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, d
   let recommendation;
   let offAgendaCandidate;
   let agendaVersion;
+  // Silence nudge: armed by an accepted final, consumed by one nudge or any card.
+  let conversation = false;
+  let lastFinalAt = -Infinity;
+  let silenceTimer;
   let videoQueue = Promise.resolve();
   const videoAbort = new AbortController();
 
@@ -88,8 +93,8 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, d
     displayEpoch++;
     offAgendaCandidate = undefined;
     recommendation = undefined;
-    for (const timer of [decisionTimer, deliveryTimer, speakingTimer, idleTimer]) if (timer !== undefined) unschedule(timer);
-    decisionTimer = deliveryTimer = speakingTimer = idleTimer = undefined;
+    for (const timer of [decisionTimer, deliveryTimer, speakingTimer, idleTimer, silenceTimer]) if (timer !== undefined) unschedule(timer);
+    decisionTimer = deliveryTimer = speakingTimer = idleTimer = silenceTimer = undefined;
     videoAbort.abort();
   };
   const fail = error => {
@@ -153,6 +158,8 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, d
       if (!stopped && !displayed?.cancelled) {
         offAgendaCandidate = undefined;
         lastIntervention = now();
+        conversation = false;
+        armSilence();
         armIdle();
       }
       return displayed;
@@ -169,6 +176,65 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, d
     deliveryTimer = schedule(() => { void deliver().catch(fail); }, Math.max(0, delay));
   };
 
+  // Adopts the server's latest agenda; a changed version starts a new generation.
+  const refreshAgenda = async expected => {
+    if (!resolveAgenda) return { generation: expected };
+    const snapshot = await resolveAgenda({ botId, agenda, signal: videoAbort.signal });
+    if (snapshot?.cancelled) {
+      offAgendaCandidate = undefined;
+      return { cancelled: true, updating: true };
+    }
+    if (!snapshot || typeof snapshot.agenda !== 'string' || !snapshot.agenda.trim() || snapshot.agenda.length > 2000 || typeof snapshot.agendaVersion !== 'string' || !snapshot.agendaVersion || snapshot.agendaVersion.length > 128) throw new Error('Invalid agenda snapshot');
+    if (stopped || generation !== expected) { offAgendaCandidate = undefined; return { cancelled: true }; }
+    if (agendaVersion !== snapshot.agendaVersion || agenda !== snapshot.agenda) {
+      offAgendaCandidate = undefined;
+      agenda = snapshot.agenda;
+      agendaVersion = snapshot.agendaVersion;
+      return { generation: ++generation };
+    }
+    return { generation: expected };
+  };
+
+  // After conversation, no accepted final for silenceMs is a stall. Timing
+  // alone decides it (no model call); the server still owns the result and the
+  // display guard. One nudge per silence: the next final re-arms it.
+  const armSilence = (delay = silenceMs) => {
+    if (silenceTimer !== undefined) unschedule(silenceTimer);
+    silenceTimer = undefined;
+    if (stopped || !nudge || !conversation) return;
+    silenceTimer = schedule(() => { void checkSilence().catch(() => {}); }, Math.max(0, delay));
+  };
+  const checkSilence = async () => {
+    silenceTimer = undefined;
+    if (stopped || !conversation) return;
+    // Speech still being recognized, or an evaluation in flight, is not silence yet.
+    if (processing || finalQueue.length || pendingAudio || speaking) { armSilence(quietMs); return; }
+    const wait = Math.max(silenceMs - (now() - lastFinalAt), cooldownMs - (now() - lastIntervention));
+    if (wait > 0) { armSilence(wait); return; }
+    conversation = false;
+    if (!transcript.length) return;
+    processing = true;
+    const evaluatedAt = now();
+    const currentRevision = finalRevision;
+    try {
+      const refreshed = await refreshAgenda(generation);
+      if (refreshed.cancelled) return;
+      const currentGeneration = refreshed.generation;
+      const currentAgenda = agenda;
+      const currentAgendaVersion = agendaVersion;
+      const result = await nudge({ botId, agenda: currentAgenda, agendaVersion: currentAgendaVersion, transcript: [...transcript], secondsSinceLastIntervention: Number.isFinite(lastIntervention) ? Math.max(0, (now() - lastIntervention) / 1000) : 60 });
+      if (stopped || result?.cancelled || result?.action !== 'INTERVENE' || generation !== currentGeneration || currentRevision !== finalRevision || now() - evaluatedAt >= candidateTtlMs) return;
+      recommendation = { result, revision: currentRevision, generation: currentGeneration, agenda: currentAgenda, agendaVersion: currentAgendaVersion, createdAt: evaluatedAt };
+      armDelivery();
+    } catch (error) {
+      fail(error);
+      throw error;
+    } finally {
+      processing = false;
+      if (finalQueue.length && !stopped) arm();
+    }
+  };
+
   const run = async () => {
     decisionTimer = undefined;
     if (stopped || !finalQueue.length || processing) return;
@@ -182,22 +248,12 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, d
     const currentRevision = finalRevision;
     transcript.splice(0, transcript.length, ...next);
     try {
-      if (resolveAgenda) {
-        const snapshot = await resolveAgenda({ botId, agenda, signal: videoAbort.signal });
-        if (snapshot?.cancelled) {
-          offAgendaCandidate = undefined;
-          if (generation === currentGeneration && !finalQueue.length) hasSpeech = false;
-          return;
-        }
-        if (!snapshot || typeof snapshot.agenda !== 'string' || !snapshot.agenda.trim() || snapshot.agenda.length > 2000 || typeof snapshot.agendaVersion !== 'string' || !snapshot.agendaVersion || snapshot.agendaVersion.length > 128) throw new Error('Invalid agenda snapshot');
-        if (stopped || generation !== currentGeneration) { offAgendaCandidate = undefined; return; }
-        if (agendaVersion !== snapshot.agendaVersion || agenda !== snapshot.agenda) {
-          offAgendaCandidate = undefined;
-          agenda = snapshot.agenda;
-          agendaVersion = snapshot.agendaVersion;
-          currentGeneration = ++generation;
-        }
+      const refreshed = await refreshAgenda(currentGeneration);
+      if (refreshed.cancelled) {
+        if (refreshed.updating && generation === currentGeneration && !finalQueue.length) hasSpeech = false;
+        return;
       }
+      currentGeneration = refreshed.generation;
       const currentAgenda = agenda;
       const currentAgendaVersion = agendaVersion;
       const transcriptBudget = Math.min(8_000, 10_000 - Buffer.byteLength(JSON.stringify(currentAgenda)));
@@ -266,6 +322,9 @@ export function createInterventionGate({ agenda, botId, resolveAgenda, decide, d
       recommendation = undefined;
       finalQueue.push(text.slice(0, 1000));
       if (finalQueue.length > 30) finalQueue = finalQueue.slice(-30);
+      lastFinalAt = now();
+      conversation = true;
+      armSilence();
       arm();
     },
     get stopped() { return stopped; },

@@ -1,5 +1,5 @@
 import type { Envelope } from "../monitor/schema.ts";
-import type { CueId, InterventionKind } from "./state.ts";
+import type { CueId, InterventionKind, StallCause } from "./state.ts";
 
 // How long the intervention view stays on the device before it returns to idle.
 const VIEW_HOLD_MS = 30_000;
@@ -7,6 +7,7 @@ const AGENDA_SHORT_CHARS = 12;
 
 type DeviceStateView = {
   lastKind: InterventionKind | null;
+  lastCause?: StallCause | null;
   lastAt: number | null;
   cue: { id: CueId; seq: number } | null;
   mutedUntil: number | null;
@@ -17,6 +18,8 @@ const TITLES = {
   off_agenda: "議題に戻りませんか？",
   stalled: "意見を整理しませんか？",
 } as const;
+// Silence asks for a voice instead of a summary; same nudge face.
+const SILENCE_TITLE = "何か気になる点は？";
 
 // The same faces as the Meet camera card (lib/recall/video.ts).
 const FACES = {
@@ -64,7 +67,7 @@ export function buildDevicePayload(
     state: stateFor(snapshot?.decision ?? null, view),
     view,
     face: FACES[view],
-    title: TITLES[view],
+    title: view === "stalled" && device.lastCause === "silence" ? SILENCE_TITLE : TITLES[view],
     agendaShort: shortAgenda(agenda),
     // Missing scores stay null; never show them as 0.
     scores: snapshot?.scores

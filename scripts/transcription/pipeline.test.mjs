@@ -4,6 +4,7 @@ import { audioJoinTimedOut, createResampler, readRecallAudio, recordingConfig } 
 import { createInterventionGate as createGate, isVoicedPcm, streamMeetingAudio, MODEL } from './pipeline.mjs';
 import { withDeviceControls } from '../../lib/device/judge.ts';
 import { createDeviceStore } from '../../lib/device/state.ts';
+import { silenceJudge } from '../../lib/judge/silence.ts';
 
 const voiced = Buffer.alloc(6400);
 for (let i = 0; i < voiced.length; i += 2) voiced.writeInt16LE(1000, i);
@@ -790,4 +791,175 @@ test('a final arriving during remote rendering invalidates its quiet generation'
   assert.equal(gate.isQuiet(displayGeneration), false, 'even after STT pending clears, the old request stays stale');
   finishDisplay({ cancelled: true }); await tick();
   gate.stop();
+});
+
+const silenceNudge = { action: 'INTERVENE', reason: 'Meeting has gone silent', message: 'ここまでで、気になる点はありますか？', recommendationId: '00000000-0000-4000-8000-000000000001' };
+const keepWatching = { action: 'WAIT', reason: 'Not enough conversation', message: null };
+function silenceGate(clock, overrides = {}) {
+  const calls = { decide: 0, nudges: [], displays: [] };
+  const gate = createInterventionGate({ agenda: 'agenda', botId: 'bot', ...clock,
+    decide: async () => { calls.decide++; return keepWatching; },
+    nudge: async input => { calls.nudges.push(input); return silenceNudge; },
+    display: async input => { calls.displays.push(input.result.reason); },
+    ...overrides,
+  });
+  return { gate, calls };
+}
+
+test('silence after conversation nudges once at the threshold, without a model call', async () => {
+  const clock = fakeClock();
+  const { gate, calls } = silenceGate(clock);
+  utterance(gate, 'first point');
+  await clock.advance(0);
+  await clock.advance(1500);
+  await clock.advance(18_499);
+  assert.equal(calls.nudges.length, 0, 'not before the threshold');
+  await clock.advance(1);
+  assert.equal(calls.nudges.length, 1);
+  assert.deepEqual(calls.nudges[0].transcript, ['first point']);
+  assert.equal(calls.nudges[0].secondsSinceLastIntervention, 60);
+  assert.equal(calls.decide, 1, 'silence never asks the judge');
+  assert.deepEqual(calls.displays, ['Meeting has gone silent']);
+  await clock.advance(120_000);
+  assert.equal(calls.nudges.length, 1, 'one long silence nudges only once');
+  gate.stop();
+});
+
+test('no silence nudge before any conversation, or for audio without a final', async () => {
+  const clock = fakeClock();
+  const { gate, calls } = silenceGate(clock);
+  gate.onAudio(silent);
+  await clock.advance(60_000);
+  gate.onAudio(voiced);
+  await clock.advance(1500);
+  await clock.advance(60_000);
+  assert.equal(calls.nudges.length, 0);
+  assert.equal(calls.displays.length, 0);
+  gate.stop();
+});
+
+test('a new final re-arms the silence timer and allows the next nudge', async () => {
+  const clock = fakeClock();
+  const { gate, calls } = silenceGate(clock, { cooldownMs: 0 });
+  utterance(gate, 'one');
+  await clock.advance(0);
+  await clock.advance(10_000);
+  utterance(gate, 'two');
+  await clock.advance(0);
+  await clock.advance(1500);
+  await clock.advance(18_000);
+  assert.equal(calls.nudges.length, 0, 'the timer restarts at the latest final');
+  await clock.advance(500);
+  assert.equal(calls.nudges.length, 1);
+  utterance(gate, 'three');
+  await clock.advance(0);
+  await clock.advance(1500);
+  await clock.advance(18_500);
+  assert.equal(calls.nudges.length, 2);
+  assert.deepEqual(calls.displays, ['Meeting has gone silent', 'Meeting has gone silent']);
+  gate.stop();
+});
+
+test('silence waits out the intervention cooldown and needs speech after the last card', async () => {
+  const clock = fakeClock();
+  let first = true;
+  const { gate, calls } = silenceGate(clock, {
+    decide: async () => { calls.decide++; if (first) { first = false; return intervention; } return keepWatching; },
+  });
+  utterance(gate, 'repeating');
+  await clock.advance(0);
+  await clock.advance(1500);
+  assert.deepEqual(calls.displays, ['Discussion appears stalled']);
+  await clock.advance(60_000);
+  assert.equal(calls.nudges.length, 0, 'a card consumes the conversation that preceded it');
+  // t=61500: speech again, then silence while still close to a newer card.
+  const { gate: second, calls: secondCalls } = silenceGate(clock, {
+    decide: async () => { secondCalls.decide++; return secondCalls.decide === 1 ? intervention : keepWatching; },
+  });
+  utterance(second, 'a');
+  await clock.advance(0);
+  await clock.advance(1500); // card at 63000
+  await clock.advance(2000);
+  utterance(second, 'b'); // 65000
+  await clock.advance(0);
+  await clock.advance(1500);
+  await clock.advance(18_500); // 85000: silent for 20s, but only 22s since the card
+  assert.equal(secondCalls.nudges.length, 0, 'cooldown blocks the nudge');
+  await clock.advance(37_999);
+  assert.equal(secondCalls.nudges.length, 0);
+  await clock.advance(1); // 123000 = card + 60s
+  assert.equal(secondCalls.nudges.length, 1);
+  assert.equal(secondCalls.nudges[0].secondsSinceLastIntervention, 60);
+  assert.deepEqual(secondCalls.displays, ['Discussion appears stalled', 'Meeting has gone silent']);
+  gate.stop();
+  second.stop();
+});
+
+test('device mute suppresses the silence nudge on the server path and it is not retried in the same silence', async () => {
+  const clock = fakeClock();
+  const store = createDeviceStore(clock.now);
+  const server = withDeviceControls('bot', silenceJudge, store, { manual: false });
+  const { gate, calls } = silenceGate(clock, {
+    nudge: async input => { calls.nudges.push(input); return server(input); },
+  });
+  store.mute('bot');
+  utterance(gate, 'tangent');
+  await clock.advance(0);
+  await clock.advance(1500);
+  await clock.advance(18_500);
+  assert.equal(calls.nudges.length, 1);
+  assert.equal(calls.displays.length, 0, 'muted: no card');
+  await clock.advance(60_000);
+  assert.equal(calls.nudges.length, 1, 'no repeat during the same silence');
+  store.unmute('bot');
+  utterance(gate, 'back');
+  await clock.advance(0);
+  await clock.advance(1500);
+  await clock.advance(18_500);
+  assert.deepEqual(calls.displays, ['Meeting has gone silent']);
+  gate.stop();
+});
+
+test('speech or pending recognition defers the silence nudge, and speech during the nudge cancels its card', async () => {
+  const clock = fakeClock();
+  let release;
+  const { gate, calls } = silenceGate(clock, {
+    nudge: input => { calls.nudges.push(input); return new Promise(resolve => { release = resolve; }); },
+  });
+  utterance(gate, 'one');
+  await clock.advance(0);
+  await clock.advance(1500);
+  await clock.advance(17_500);
+  gate.setPendingAudio(true);
+  await clock.advance(1000);
+  assert.equal(calls.nudges.length, 0, 'recognition still pending');
+  gate.setPendingAudio(false);
+  await clock.advance(1500);
+  assert.equal(calls.nudges.length, 1);
+  gate.onAudio(voiced);
+  release(silenceNudge);
+  await clock.advance(30_000);
+  assert.equal(calls.displays.length, 0, 'speech resumed while the nudge was in flight');
+  gate.stop();
+});
+
+test('silence nudge follows the latest agenda version', async () => {
+  const clock = fakeClock();
+  let version = 'v1';
+  const { gate, calls } = silenceGate(clock, {
+    resolveAgenda: async () => ({ agenda: 'agenda', agendaVersion: version }),
+  });
+  utterance(gate, 'one');
+  await clock.advance(0);
+  version = 'v2';
+  await clock.advance(1500);
+  await clock.advance(18_500);
+  assert.equal(calls.nudges.length, 1);
+  assert.equal(calls.nudges[0].agendaVersion, 'v2');
+  assert.deepEqual(calls.displays, ['Meeting has gone silent']);
+  gate.stop();
+});
+
+test('an invalid silence duration is rejected', () => {
+  assert.throws(() => createInterventionGate({ agenda: 'a', botId: 'b', decide: async () => keepWatching, display: async () => {}, silenceMs: 0 }), RangeError);
 });

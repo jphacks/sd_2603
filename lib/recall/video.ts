@@ -31,7 +31,7 @@ const MAX_IMAGE_BYTES = 1_300_000;
 export type VideoView =
   | { kind: "idle" }
   | { kind: "off_agenda"; agenda: string }
-  | { kind: "stalled" };
+  | { kind: "stalled"; cause?: "silence" | "repetition" };
 
 function escapeXml(value: string) {
   return value.replace(/[&<>"']/g, (character) => ({
@@ -64,6 +64,10 @@ const FACE_TEXT_GAP = 60;
 
 export function videoCopy(view: VideoView): { message: string | null; lines: string[] } {
   if (view.kind === "idle") return { message: null, lines: [] };
+  if (view.kind === "stalled" && view.cause === "silence") {
+    // Invite someone to speak rather than summarize.
+    return { message: "ここまでで、気になる点はありますか？", lines: ["ここまでで、", "気になる点はありますか？"] };
+  }
   if (view.kind === "stalled") {
     const message = "ここまでの意見を、整理しませんか？";
     return { message, lines: [message] };
