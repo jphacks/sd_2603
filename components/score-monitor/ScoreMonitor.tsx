@@ -6,6 +6,8 @@ import {
   remainingCooldown,
 } from "../../lib/monitor/schema";
 import type { Envelope, Snapshot } from "../../lib/monitor/schema";
+import { AidaFace, expressionLabel } from "./AidaFace";
+import type { AidaExpression } from "./AidaFace";
 import { monitorCss } from "./styles";
 import policy from "../../lib/judge/jev-policy.json";
 
@@ -31,7 +33,7 @@ export function MeterView({ snapshot }: { snapshot: Snapshot | null }) {
             : key === "stalled" ? policy.stallThreshold : policy.relevanceThreshold;
           return (
             <div key={key} className="jm-channel">
-              <strong style={{ color: SCORE_META[key].color }}>
+              <strong>
                 {score == null ? "—" : `${(score * 100).toFixed(1)}%`}
               </strong>
               <div
@@ -44,6 +46,7 @@ export function MeterView({ snapshot }: { snapshot: Snapshot | null }) {
                     style={{
                       height: `${score * 100}%`,
                       background: SCORE_META[key].color,
+                      borderTop: "2px solid #000",
                     }}
                   />
                 )}
@@ -69,6 +72,12 @@ export function MeterView({ snapshot }: { snapshot: Snapshot | null }) {
   );
 }
 
+// 判定は AIDA の行動で見せる（DESIGN.md「表情」）。WAIT も SILENCE と同じ「見守る」。
+function expressionFor(snapshot: Snapshot | null): AidaExpression {
+  if (snapshot?.decision !== "INTERVENE") return "watching";
+  return snapshot.reasonCode === "DRIFTED_IRRELEVANT" ? "redirect" : "nudge";
+}
+
 export function DecisionView({
   snapshot,
   now,
@@ -76,22 +85,20 @@ export function DecisionView({
   snapshot: Snapshot | null;
   now: number;
 }) {
-  const color =
-    snapshot?.decision === "INTERVENE"
-      ? "#f29689"
-      : snapshot?.decision === "WAIT"
-        ? "#e8bc69"
-        : "#83d5b9";
+  const expression = expressionFor(snapshot);
   return (
     <section className="jm-decision" aria-live="polite">
       <div className="jm-eyebrow">CURRENT DECISION</div>
       <div className="jm-decision-row">
-        <strong style={{ color }}>{snapshot?.decision ?? "未取得"}</strong>
-        <span>
-          {snapshot
-            ? descriptions[snapshot.reasonCode]
-            : "Jevの評価を待っています"}
-        </span>
+        <AidaFace expression={expression} />
+        <div>
+          <strong>{snapshot ? expressionLabel(expression) : "未取得"}</strong>
+          <span>
+            {snapshot
+              ? descriptions[snapshot.reasonCode]
+              : "Jevの評価を待っています"}
+          </span>
+        </div>
       </div>
       <p>{snapshot?.reason ?? "まだ判定データはありません"}</p>
       <div className="jm-footer">
@@ -146,7 +153,9 @@ export function ScoreMonitor({
       <header className="jm-header">
         <div>
           <div className="jm-eyebrow">JEV SIGNAL MONITOR</div>
-          <span className="jm-status">● {label}</span>
+          <span className="jm-status" data-live={label === "接続済み"}>
+            {label}
+          </span>
         </div>
       </header>
       <div className="jm-score-heading">

@@ -18,7 +18,7 @@ Companion device for the meeting facilitator. It polls the server every 2 second
 | B click | `tangent_ok` — stay quiet for a while |
 | B hold | toggle status view / score gauges |
 
-The screen is green / yellow / red for SILENCE / WAIT / INTERVENE and gray when there is no data or the connection is stale.
+The screen follows [`../DESIGN.md`](../DESIGN.md): a white screen with the AIDA face mark. The expression comes from `view` (`idle` = watching, `stalled` = nudge, `off_agenda` = redirect). Only the cooldown countdown and the "useful tangent" mute notice are shown as text. With no data or a stale connection the screen turns light gray with a gray face and "接続待ち".
 
 ## Status
 
